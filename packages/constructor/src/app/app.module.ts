@@ -16,6 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
 
+// pipe
+import { UpperCasePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { RouterOutlet } from '@angular/router';
     NotFoundComponent,
     HomeComponent,
     AppItemComponent,
+    // UpperCasePipe,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
     MatButtonModule,
     MatIconModule,
+    UpperCasePipe,
   ],
   providers: [],
   bootstrap: [AppComponent]
