@@ -10,11 +10,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AppItemComponent } from './app-item/app-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterOutlet } from '@angular/router';
 
 // angular material
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterOutlet } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
@@ -38,6 +40,8 @@ import { UpperCasePipe } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     UpperCasePipe,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

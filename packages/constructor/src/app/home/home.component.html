@@ -6,21 +6,36 @@
     </section>
     <section class="right">
         <section class="login_box">
-            <header>
+            <header class="header">
                 <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
                     <mat-icon>arrow_forward</mat-icon>
                 </button>
             </header>
+            <section>
+                <mat-form-field appearance="fill">
+                    <mat-label>name</mat-label>
+                    <input matInput placeholder="name">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>password</mat-label>
+                    <input matInput placeholder="password" ngModel>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                <section>
+                    <button mat-raised-button color="accent">reset</button>
+                    <button mat-raised-button color="primary">submit</button>
+                </section>
+            </section>
         </section>
-        <section class="sign_box">
+        <!-- <section class="sign_box">
             <header>
                 <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
             </header>
-        </section>
-        <section>
-
-        </section>
+        </section> -->
     </section>
 </section>
