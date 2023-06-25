@@ -1,0 +1,17 @@
+[
+    {
+    "name": "one",
+    "age": 30,
+    "color": "red"
+},
+{
+    "name": "two",
+    "age": 32,
+    "color": "red"
+},
+{
+    "name": "three",
+    "age": 23,
+    "color": "black"
+}
+]

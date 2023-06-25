@@ -6,5 +6,10 @@
   ],
   "devDependencies": {
     "lerna": "^6.4.1"
+  },
+  "scripts": {
+    "ds": "cd packages/server && yarn start",
+    "dc": "cd packages/constructor && yarn start",
+    "dr": "cd packages/renderer && yarn start"
   }
 }
