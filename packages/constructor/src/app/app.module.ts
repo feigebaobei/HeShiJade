@@ -11,12 +11,16 @@ import { HomeComponent } from './home/home.component';
 import { AppItemComponent } from './app-item/app-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 // angular material
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatIconModule } from '@angular/material/icon';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MatInputModule } from '@angular/material/input'
+
+// devui
+import { DevUIModule } from 'ng-devui';
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
@@ -37,11 +41,13 @@ import { UpperCasePipe } from '@angular/common';
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterOutlet,
-    MatButtonModule,
-    MatIconModule,
     UpperCasePipe,
-    MatFormFieldModule,
-    MatInputModule,
+    // MatButtonModule,
+    // MatIconModule,
+    // MatFormFieldModule,
+    // MatInputModule,
+    DevUIModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
