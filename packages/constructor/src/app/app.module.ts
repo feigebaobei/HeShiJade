@@ -12,6 +12,7 @@ import { AppItemComponent } from './app-item/app-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // angular material
 // import { MatButtonModule } from '@angular/material/button';
@@ -48,6 +49,7 @@ import { UpperCasePipe } from '@angular/common';
     // MatInputModule,
     DevUIModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

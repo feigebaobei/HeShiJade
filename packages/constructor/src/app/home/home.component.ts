@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { MatIconModule } from '@angular/material/icon';
 import { FormLayout } from 'ng-devui/form';
@@ -10,11 +11,11 @@ let clog = console.log
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   isCollapsed: boolean
   layoutDirection: FormLayout = FormLayout.Vertical;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this.isCollapsed = false
   }
   formData = {
@@ -23,18 +24,20 @@ export class HomeComponent {
     // account: '',
   }
 
-  // loginClickH() {
-  //   this.router.navigate(['/login' ]);
-  // }
   listClickH() {
     this.router.navigate(['/list' ]);
-    // this.route
   }
-  // submitForm({valid, direction}) {
-  //   clog(valid, direction)
-  // }
   submitForm(a: any) {
     clog(a)
+    this.http.get('http://localhost:5000/first')
+    // this.http.get('/first')
+    .subscribe((res) => {
+      clog(res)
+    })
+  }
+  
+  ngOnInit(): void {
+  //   this.http.get('/first')
   }
 
 }
