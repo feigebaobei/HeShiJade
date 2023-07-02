@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
   submitForm(a: any) {
     clog(a)
-    this.http.get('http://localhost:5000/first')
+    this.http.get('http://localhost:5000/users/login')
     // this.http.get('/first')
     .subscribe((res) => {
       clog(res)
