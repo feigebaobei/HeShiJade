@@ -1,41 +1,57 @@
 <section class="box">
-    <section class="left">
+    <!-- <section class="left">
         <p class="welcome">{{'welcome' | uppercase}}</p>
         <p class="welcome">{{'to' | uppercase }}</p>
         <p class="welcome">{{'lowcode' | uppercase}}</p>
-    </section>
+    </section> -->
     <section class="right">
         <section class="login_box">
             <header class="header">
-                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                    <mat-icon>arrow_forward</mat-icon>
-                </button>
+                <!-- <d-button id="primaryBtn" style="margin-right: 8px">Primary</d-button>
+                <d-button [disabled]="true">Disabled</d-button>
+                <d-button bsStyle="common" style="margin-right: 8px">Common</d-button>
+                <d-button bsStyle="common" [disabled]="true">Disabled</d-button> -->
             </header>
             <section>
-                <mat-form-field appearance="fill">
-                    <mat-label>name</mat-label>
-                    <input matInput placeholder="name">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                    <mat-hint>Hint</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>password</mat-label>
-                    <input matInput placeholder="password" ngModel>
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                    <mat-hint>Hint</mat-hint>
-                </mat-form-field>
-                <section>
-                    <button mat-raised-button color="accent">reset</button>
-                    <button mat-raised-button color="primary">submit</button>
-                </section>
+              <form dForm
+                (dSubmit)="submitForm($event)"
+              >
+                <d-form-item>
+                  <d-form-label>账号</d-form-label>
+                  <d-form-control>
+                    <input dTextInput autocomplete="off" name="account"
+                      [(ngModel)]="formData.account"
+                      placeholder="邮箱、昵称、账号"
+                    />
+                  </d-form-control>
+                </d-form-item>
+                <d-form-item>
+                  <d-form-label>密码</d-form-label>
+                  <d-form-control>
+                    <input
+                      dTextInput
+                      type="password"
+                      name="password"
+                      [(ngModel)]="formData.password"
+                      placeholder="Enter a password of 6 to 15 characters"
+                    />
+                  </d-form-control>
+                </d-form-item>
+                <d-form-operation>
+                  <d-button class="mr-element-spacing" 
+                    [title]="'sti'" 
+                    circled="true" 
+                    style="margin-right: 8px" 
+                    dFormSubmit
+                    >登录</d-button
+                  >
+                  <d-button bsStyle="common" circled="true" 
+                  dFormReset>重置</d-button>
+                </d-form-operation>
+              </form>
+              <section>
+              </section>
             </section>
         </section>
-        <!-- <section class="sign_box">
-            <header>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-            </header>
-        </section> -->
     </section>
 </section>
