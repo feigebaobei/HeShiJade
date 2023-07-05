@@ -1,20 +1,3 @@
-// var express = require('express');
-// var router = express.Router();
-
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
-// module.exports = router;
-
-
-
-
-
-
-
-
 var express = require('express');
 var cors = require('./cors')
 var router = express.Router();
@@ -24,6 +7,11 @@ const fsPromises = require('fs/promises')
 const path = require('path')
 // const FormData = require('form-data')
 // const { instance } = require('../utils');
+let {usersDb} = require('../mongodb')
+let { required } = require('../helper/index')
+// let { required } = require('../helper')
+let clog = console.log
+// clog('allDb', allDb)
 
 router.use(bodyParser.json())
 
@@ -63,12 +51,25 @@ router.route('/login')
     data: {}
   })
 })
-.post(cors.corsWithOptions, (req, res) => {
-  res.status(200).json({
-    code: 0,
-    message: "ok",
-    data: {},
-  })
+.post(cors.corsWithOptions, async (req, res) => {
+  // clog('req', req.body)
+  if (required(req.body.account) && required(req.body.password)) {
+    let result = await usersDb.collection('users').insertOne({
+      account: req.body.account,
+      password: req.body.password,
+    })
+    res.status(200).json({
+      code: 0,
+      message: "ok",
+      data: result,
+    })
+  } else {
+    res.status(200).json({
+      code: 1,
+      message: "参数出错",
+      data: result,
+    })
+  }
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
