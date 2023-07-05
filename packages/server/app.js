@@ -3,6 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let { MongoClient } = require('mongodb')
+let clog = console.log
+
+// let uri = 'mongosh "mongodb+srv://feigebaobei.ojo8z3u.mongodb.net/" --apiVersion 1 --username feigebaobei'
+let uri = 'mongodb+srv://feigebaobei:1qaz2wsx@feigebaobei.ojo8z3u.mongodb.net/?retryWrites=true&w=majority'
+let client = new MongoClient(uri)
+try {
+  let database = client.db('sample_mflix')
+  let movies = database.collection('movies')
+  let query = { title: 'Back to the Future' };
+  let movie
+  movies.findOne(query).then((...res) => {
+    movie = res
+    clog('res', res)
+  }).catch(error => {
+    clog('error', error)
+  })
+} finally {
+  clog('连接成功')
+}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
