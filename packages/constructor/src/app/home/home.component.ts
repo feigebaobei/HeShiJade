@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) {
     this.isCollapsed = false
-    this.status = 0 // 0 注册 1 登录
+    this.status = 1 // 0 注册 1 登录
     this.msg = []
   }
   formData = {
