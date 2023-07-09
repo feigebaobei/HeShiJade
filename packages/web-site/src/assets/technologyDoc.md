@@ -223,6 +223,19 @@ ulid / prev / next
 2. 后端散列p后比对。若一致则登录成功，否则提示失败原因。
 3. 若成功则进入应用列表页面。否则提示失败原因。
 
+```
+npm i express-session
+```
+```js
+// app.js
+let session = require('express-sesssion')
+app.use(session({
+  secret: 'xx',
+  resave: false,
+  saveUninitialized: false
+}))
+```
+
 ### 创建应用
 
 ### title
