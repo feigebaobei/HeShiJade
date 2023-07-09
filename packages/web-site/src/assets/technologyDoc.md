@@ -127,6 +127,7 @@ users/login
 post
 account / password
 
+
 users/sign
 注册
 post
@@ -211,9 +212,37 @@ ulid / prev / next
 
 ### web-site 官网
 
-## title
+## 流程图
+### 注册
+1. 前端提交account / password。
+2. 后端散列password后写入数据库。给前端回馈code：0.
+3. 前端进入应用列表页面。
+   
+### 登录
+1. 前端提交account / password。
+2. 后端散列p后比对。若一致则登录成功，否则提示失败原因。
+3. 若成功则进入应用列表页面。否则提示失败原因。
 
-## title
+### 创建应用
+
+### title
+### title
+### title
+### title
+### title
+### title
+
+## 错误码值
+||||
+|-|-|-|
+|0|无错误||
+|100000|请求参数错误||
+计划每2个数字一组。三组数字分级表示错误。
+
+||12|34|56||
+|-|-|-|-|-|
+||10 请求参数||||
+||20 数据库||||
 
 ## title
 
