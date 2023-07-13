@@ -220,8 +220,10 @@ ulid / prev / next
    
 ### 登录
 1. 前端提交account / password。
-2. 后端散列p后比对。若一致则登录成功，否则提示失败原因。
-3. 若成功则进入应用列表页面。否则提示失败原因。
+2. 后端散列p后比对。若一致则登录成功，否则提示失败原因，回馈前端code:非0。
+3. 若成功则保存用户信息在session.user中。回馈前端code:0.
+4. 以后从session.user中取当前用户信息。
+5. 进入应用列表页面。否则提示失败原因。
 
 ```
 npm i express-session
@@ -264,4 +266,9 @@ app.use(session({
 
 ## title
 
-## title
+## todo
+- jwt vs. session
+- express + ts
+
+express-session set-cookie无效
+3. 服务器返回的Set-Cookie头部信息的配置。在Express-session中，可以通过设置cookie的一些属性来保证cookie的有效性，其中包括cookie的过期时间，以及cookie的domain，path，secure等属性。如果设置不当，也会导致浏览器未成功设置cookie。

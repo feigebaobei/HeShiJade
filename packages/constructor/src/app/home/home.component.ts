@@ -4,16 +4,9 @@ import { Router } from '@angular/router';
 // import { MatIconModule } from '@angular/material/icon';
 import { FormLayout } from 'ng-devui/form';
 // import { Observable } from 'rxjs';
+import type { ResponseData } from 'src/types';
 
 let clog = console.log
-type S = string
-type N = number
-type A = any
-interface ResponseData {
-  code: N
-  data: A
-  message: S
-}
 
 @Component({
   selector: 'app-home',
@@ -32,10 +25,9 @@ export class HomeComponent implements OnInit {
     this.msg = []
   }
   formData = {
-    account: '',
-    password: '',
-    confirmPassword: '',
-    // account: '',
+    account: '12@qq.com', // for dev
+    password: '12',
+    confirmPassword: '12',
   }
 
   listClickH() {

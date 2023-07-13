@@ -1,7 +1,13 @@
 <!-- header -->
-<header>header</header>
+<header>header
+    <d-button (click)="logoutBtClickH()">logout</d-button>
+    <d-button (click)="userInfoBtClickH()">get userInfo</d-button>
+    <d-button (click)="gotoHomeInfoBtClickH()">home</d-button>
+</header>
 <!-- main -->
-<main>main</main>
+<main>main
+    <p>{{user | json}}</p>
+</main>
 <!-- {{item | json}} -->
 <!-- <app-app-item *ngFor="let item of appList">
 </app-app-item> -->
