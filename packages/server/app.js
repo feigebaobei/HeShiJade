@@ -10,9 +10,9 @@ let clog = console.log
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var appsRouter = require('./routes/apps');
 
 var app = express();
-
 
 let store = new MongoDBStore({
   uri: 'mongodb+srv://feigebaobei:1qaz2wsx@feigebaobei.ojo8z3u.mongodb.net/?retryWrites=true&w=majority',
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
   name: 'user',
   secret: '1234567890', // 必填
-  saveUninitialized: true, // 有它才能设置成功cookie
+  saveUninitialized: true, // 为true才能设置成功cookie
   resave: true,
   // cookie: {
   //   maxAge: 1000 * 60 * 60 * 24 * 30,
@@ -46,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/apps', appsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

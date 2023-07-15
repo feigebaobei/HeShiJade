@@ -119,7 +119,7 @@ router.route('/login')
     }).catch(error => {
       res.status(200).json({
         code: 200200,
-        message: "ok",
+        message: "数据库出错",
         data: error,
       })
     })

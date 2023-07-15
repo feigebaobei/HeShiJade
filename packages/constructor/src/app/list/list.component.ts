@@ -76,7 +76,7 @@ export class ListComponent implements OnInit {
         // address: 'Chengdu',
         key: 'key',
         name: 'name',
-        members: 'members',
+        members: ['members'],
       },
       // dialogtype: 'standard',
       // showAnimation: showAnimation,

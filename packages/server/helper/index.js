@@ -11,6 +11,9 @@ let rules = {
         let r = reg.test(str) 
         console.log('r', r)
         return r
+    },
+    isArray: (p) => {
+        return Array.isArray(p)
     }
 }
 module.exports = {
