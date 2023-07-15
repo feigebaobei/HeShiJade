@@ -275,8 +275,29 @@ app.use(session({
 
 ### express-session set-cookie无效 
   saveUninitialized:true可解决
+
+  1.前后端必须要同等域名下，application才能存入cookie（如果是ng做转发应该就不存在这种必要条件吧）
+2.前后端不同域下进行请求，application不能存入cookie，但是不应该后面的接口进行请求
+浏览器同源策略
+
+
+#### 后端 
+corsOptions = {
+      origin: true,
+      optionsSuccessStatus: 200,
+      credentials: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      allowdHeaders: ['Content-Type', 'Authorization'],
+      exposedHeaders: ['Content-Type', 'X-Content-Range']
+    }
+#### 前端
+withCredentials: true
+
+
 ### 验证logout.cookie是否清除。
 ### 应用列表
 ### curd app
 ### 如何参与开源项目
 https://xbeibeix.com/video/BV1GU4y1N7eC
+

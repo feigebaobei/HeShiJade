@@ -44,9 +44,10 @@ export class ListComponent implements OnInit {
     this.init()
   }
   init(): void {
-    // this.http.get<ResponseData>('http://localhost:5000/users/login', {}).subscribe((res) => {
-    //   this.user = res
-    // })
+    this.http.get<ResponseData>('http://localhost:5000/apps').subscribe((res) => {
+      // this.user = res
+      clog('res', res)
+    })
   }
   logoutBtClickH()  {
     this.http.post<ResponseData>('http://localhost:5000/users/logout', {}).subscribe((res) => {

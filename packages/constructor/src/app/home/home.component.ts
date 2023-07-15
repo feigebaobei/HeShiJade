@@ -33,20 +33,22 @@ export class HomeComponent implements OnInit {
   listClickH() {
     this.router.navigate(['/list' ]);
   }
+  // 登录
   submitForm(a: any) {
-    // clog(a)
-    // this.http.get('http://localhost:5000/users/login')
     this.http.post<ResponseData>('http://localhost:5000/users/login', {
       account: this.formData.account,
       password: this.formData.password,
+    }, {
+      withCredentials: true,
     })
     .subscribe((res) => {
       if (res.code === 0) {
-        this.listClickH()
+        // this.listClickH()
       }
     })
   }
-  submitLoginForm(e: Event) {
+  // 注册
+  submitSignForm(e: Event) {
     if (!this.formData.account || !this.formData.password) {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '不能为空' }];
       return
@@ -57,7 +59,7 @@ export class HomeComponent implements OnInit {
         password: this.formData.password,
       }).subscribe((res) => {
         if (res.code === 0) {
-          this.listClickH()
+          // this.listClickH()
         }
       })
     } else {
@@ -71,6 +73,9 @@ export class HomeComponent implements OnInit {
   setStatus(value: number) {
     // clog('gotoRegiste')
     this.status = value
+  }
+  gotoLinkButtonClickH() {
+    this.listClickH()
   }
 
 }

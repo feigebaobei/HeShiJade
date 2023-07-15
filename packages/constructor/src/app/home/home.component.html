@@ -55,7 +55,7 @@
             <ng-template #loginSection>
               <section>
                 <form dForm
-                  (dSubmit)="submitLoginForm($event)"
+                  (dSubmit)="submitSignForm($event)"
                 >
                   <d-form-item>
                     <d-form-label>账号</d-form-label>
@@ -105,6 +105,9 @@
                 <d-toast [value]="msg"></d-toast>
               </section>
             </ng-template>
+            <!-- for dev -->
+            <d-button bsStyle="common" circled="true" 
+            (click)="gotoLinkButtonClickH()">goto list</d-button>
         </section>
     </section>
 </section>
