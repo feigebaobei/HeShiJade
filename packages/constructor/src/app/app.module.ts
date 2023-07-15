@@ -25,6 +25,8 @@ import { DevUIModule } from 'ng-devui';
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
+import { DialogComponent } from './list/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { UpperCasePipe } from '@angular/common';
     NotFoundComponent,
     HomeComponent,
     AppItemComponent,
-    // UpperCasePipe,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { UpperCasePipe } from '@angular/common';
     BrowserAnimationsModule,
     RouterOutlet,
     UpperCasePipe,
+    JsonPipe,
     // MatButtonModule,
     // MatIconModule,
     // MatFormFieldModule,

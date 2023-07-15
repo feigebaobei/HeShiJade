@@ -10,6 +10,7 @@ let componentsDb = client.db('components')
 // let usersCollection = database.collection('users')
 
 module.exports = {
+    client,
     usersDb,
     appsDb,
     pagesDb,

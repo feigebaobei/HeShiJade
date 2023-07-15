@@ -1,18 +1,19 @@
 <section class="box">
-    <!-- <section class="left">
-        <p class="welcome">{{'welcome' | uppercase}}</p>
+    <section class="left">
+        <!-- <p class="welcome">{{'welcome' | uppercase}}</p>
         <p class="welcome">{{'to' | uppercase }}</p>
-        <p class="welcome">{{'lowcode' | uppercase}}</p>
-    </section> -->
+        <p class="welcome">{{'HeShiJade' | uppercase}}</p> -->
+    </section>
     <section class="right">
         <section class="login_box">
-            <header class="header">
-                <!-- <d-button id="primaryBtn" style="margin-right: 8px">Primary</d-button>
-                <d-button [disabled]="true">Disabled</d-button>
-                <d-button bsStyle="common" style="margin-right: 8px">Common</d-button>
-                <d-button bsStyle="common" [disabled]="true">Disabled</d-button> -->
+            <header class="header" [ngClass]="{left: status, right: !status}">
+              <d-button *ngIf="status; else loginBt" icon="icon-arrow-right" bsStyle="primary" (click)="setStatus(0)"> 注册 </d-button>
+              <ng-template #loginBt>
+                <d-button icon="icon-arrow-left" bsStyle="primary" (click)="setStatus(1)"> 登录 </d-button>
+              </ng-template>
             </header>
-            <section>
+            <!-- 登录 -->
+            <section *ngIf="status; else loginSection">
               <form dForm
                 (dSubmit)="submitForm($event)"
               >
@@ -21,7 +22,7 @@
                   <d-form-control>
                     <input dTextInput autocomplete="off" name="account"
                       [(ngModel)]="formData.account"
-                      placeholder="邮箱、昵称、账号"
+                      placeholder="邮箱"
                     />
                   </d-form-control>
                 </d-form-item>
@@ -33,7 +34,7 @@
                       type="password"
                       name="password"
                       [(ngModel)]="formData.password"
-                      placeholder="Enter a password of 6 to 15 characters"
+                      placeholder="password"
                     />
                   </d-form-control>
                 </d-form-item>
@@ -49,9 +50,64 @@
                   dFormReset>重置</d-button>
                 </d-form-operation>
               </form>
-              <section>
-              </section>
             </section>
+            <!-- 注册 -->
+            <ng-template #loginSection>
+              <section>
+                <form dForm
+                  (dSubmit)="submitSignForm($event)"
+                >
+                  <d-form-item>
+                    <d-form-label>账号</d-form-label>
+                    <d-form-control>
+                      <input dTextInput autocomplete="off" name="account"
+                        [(ngModel)]="formData.account"
+                        placeholder="邮箱"
+                      />
+                    </d-form-control>
+                  </d-form-item>
+                  <d-form-item>
+                    <d-form-label>密码</d-form-label>
+                    <d-form-control>
+                      <input
+                        dTextInput
+                        type="password"
+                        name="password"
+                        [(ngModel)]="formData.password"
+                        placeholder="password"
+                      />
+                    </d-form-control>
+                  </d-form-item>
+                  <d-form-item>
+                    <d-form-label>确认密码</d-form-label>
+                    <d-form-control>
+                      <input
+                        dTextInput
+                        type="password"
+                        name="confirmPassword"
+                        [(ngModel)]="formData.confirmPassword"
+                        placeholder="password"
+                      />
+                    </d-form-control>
+                  </d-form-item>
+                  <d-form-operation>
+                    <d-button class="mr-element-spacing" 
+                      [title]="'sti'" 
+                      circled="true" 
+                      style="margin-right: 8px" 
+                      dFormSubmit
+                      >注册</d-button
+                    >
+                    <d-button bsStyle="common" circled="true" 
+                    dFormReset>重置</d-button>
+                  </d-form-operation>
+                </form>
+                <d-toast [value]="msg"></d-toast>
+              </section>
+            </ng-template>
+            <!-- for dev -->
+            <d-button bsStyle="common" circled="true" 
+            (click)="gotoLinkButtonClickH()">goto list</d-button>
         </section>
     </section>
 </section>
