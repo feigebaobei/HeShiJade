@@ -5,9 +5,17 @@
     <d-button (click)="gotoHomeInfoBtClickH()">home</d-button>
 </header>
 <!-- main -->
-<main>main
-    <p>{{user | json}}</p>
+<main>
+    main
+    <!-- <p>{{user | json}}</p> -->
+    <!-- 添加 -->
+    <div>
+        <d-button (click)="openModalBtClickH()">创建新应用</d-button>
+        <!-- <d-button (click)="creatAppBtClickH()">创建新应用</d-button> -->
+    </div>
+    <!-- 列表 -->
 </main>
+<d-toast [value]="msg"></d-toast>
 <!-- {{item | json}} -->
 <!-- <app-app-item *ngFor="let item of appList">
 </app-app-item> -->

@@ -147,6 +147,7 @@ cookie
 apps
 创建应用
 post
+key / name / ulid / members
 
 apps
 修改应用
@@ -225,6 +226,8 @@ ulid / prev / next
 4. 以后从session.user中取当前用户信息。
 5. 进入应用列表页面。否则提示失败原因。
 
+`saveUninitialized: true`才能正常set-cookie.
+
 ```
 npm i express-session
 ```
@@ -270,5 +273,10 @@ app.use(session({
 - jwt vs. session
 - express + ts
 
-express-session set-cookie无效
-3. 服务器返回的Set-Cookie头部信息的配置。在Express-session中，可以通过设置cookie的一些属性来保证cookie的有效性，其中包括cookie的过期时间，以及cookie的domain，path，secure等属性。如果设置不当，也会导致浏览器未成功设置cookie。
+### express-session set-cookie无效 
+  saveUninitialized:true可解决
+### 验证logout.cookie是否清除。
+### 应用列表
+### curd app
+### 如何参与开源项目
+https://xbeibeix.com/video/BV1GU4y1N7eC

@@ -19,10 +19,12 @@ router.route('/')
 // 得到指定用户的信息。
 // 默认是当前用户。
 .get(cors.corsWithOptions, (req, res) => {
+  // clog('req', req.session)
   res.status(200).json({
     code: 0,
     message: '',
-    data: req.session
+    // data: req.session
+    data: {}
   })
 })
 .post(cors.corsWithOptions, (req, res) => {

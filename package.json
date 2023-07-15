@@ -8,8 +8,8 @@
     "lerna": "^6.4.1"
   },
   "scripts": {
-    "ds": "cd packages/server && yarn dev",
-    "dc": "cd packages/constructor && yarn start",
-    "dr": "cd packages/renderer && yarn start"
+    "ds": "cd packages/server && pnpm dev",
+    "dc": "cd packages/constructor && pnpm start",
+    "dr": "cd packages/renderer && pnpm start"
   }
 }

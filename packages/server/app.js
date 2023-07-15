@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+
 let store = new MongoDBStore({
   uri: 'mongodb+srv://feigebaobei:1qaz2wsx@feigebaobei.ojo8z3u.mongodb.net/?retryWrites=true&w=majority',
   databaseName: 'session',
@@ -27,7 +28,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-  name: 'hi4',
+  name: 'user',
   secret: '1234567890', // 必填
   saveUninitialized: true, // 有它才能设置成功cookie
   resave: true,

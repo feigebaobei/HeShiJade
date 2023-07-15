@@ -1,0 +1,49 @@
+<!-- <p>dialog works!</p> -->
+
+
+<!-- (dSubmit)="submitForm($event)" -->
+<form dForm
+    >
+    <d-form-item>
+        <d-form-label>key</d-form-label>
+        <d-form-control>
+        <input dTextInput autocomplete="off" name="ke"
+            [(ngModel)]="data.key"
+            placeholder="创建成功后不可修改"
+        />
+        </d-form-control>
+    </d-form-item>
+    <d-form-item>
+        <d-form-label>应用名称</d-form-label>
+        <d-form-control>
+        <input dTextInput autocomplete="off" name="name"
+            [(ngModel)]="data.name"
+            placeholder="应用名称"
+        />
+        </d-form-control>
+    </d-form-item>
+    <d-form-item>
+        <d-form-label>成员</d-form-label>
+        <d-form-control>
+            <textarea dTextarea
+            name="members"
+            [(ngModel)]="data.members"
+            placeholder="成员之间使用英文逗号分割"
+            ></textarea>
+        </d-form-control>
+    </d-form-item>
+        <!-- 
+    <d-form-operation>
+        <d-button class="mr-element-spacing" 
+        [title]="'sti'" 
+        circled="true" 
+        style="margin-right: 8px" 
+        dFormSubmit
+        (click)="createBtClickH()"
+        >创建</d-button
+        >
+        <d-button bsStyle="common" circled="true" 
+        dFormReset>重置</d-button>
+    </d-form-operation> -->
+</form>
+<d-toast [value]="msg"></d-toast>
