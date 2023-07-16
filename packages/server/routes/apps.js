@@ -15,16 +15,31 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-// 得到指定用户的信息。
-// 默认是当前用户。
 .get(cors.corsWithOptions, (req, res) => {
-  // clog('req', req.session)
-  res.status(200).json({
-    code: 0,
-    message: '',
-    // data: req.session
-    data: {}
-  })
+  if (req.session.isAuth) {
+    let {user} = req.session
+    clog('user', user)
+    let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
+    result.toArray().then(r => {
+      res.status(200).json({
+          code: 0,
+          message: '',
+          data: r
+      })
+    }).catch(error => {
+      res.status(200).json({
+        code: 200200,
+        message: "数据库出错",
+        data: error,
+      })
+    })
+  } else {
+    res.status(401).json({
+      code: 300000,
+      message: '用户未登录',
+      data: {}
+    })
+  }
 })
 .post(cors.corsWithOptions, (req, res) => {
     if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.isArray(req.body.members)) {

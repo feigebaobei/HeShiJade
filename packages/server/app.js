@@ -27,21 +27,25 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session({
-  name: 'user',
-  secret: '1234567890', // 必填
-  saveUninitialized: true, // 为true才能设置成功cookie
-  resave: true,
-  // cookie: {
-  //   maxAge: 1000 * 60 * 60 * 24 * 30,
-  //   // path: '',
-  //   secure: false,
-  //   sameSite: true,
-  //   httpOnly: true,
-  // },
-  store,
-}))
 app.use(cookieParser());
+app.use(session({
+  // name: 'user',
+  // secret: '1234567890', // 必填
+  // saveUninitialized: true, // 为true才能设置成功cookie
+  // resave: true,
+
+  name: "user",
+  secret: '1234',
+  saveUninitialized: false,
+  resave: false,
+  cookie: {
+    // sameSite: 'none',
+    // secure: true,
+    // domain: '127.0.0.1',
+    // domain: 'http://127.0.0.1',
+    // maxAge: 1000 * 60 * 60 * 24 * 30,
+  }
+}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

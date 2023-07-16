@@ -113,8 +113,8 @@ router.route('/login')
       res.status(200).json({
         code: 0,
         message: "ok",
-        // data: req.session,
-        data: {}
+        data: req.session,
+        // data: {}
       })
     }).catch(error => {
       res.status(200).json({

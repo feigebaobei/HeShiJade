@@ -5,6 +5,11 @@ import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
 import type { ResponseData } from 'src/types';
 import type { A, B, S } from 'src/types/base';
+interface FormData {
+  key: S
+  name: S
+  members: S
+}
 
 let clog = console.log
 
@@ -44,7 +49,12 @@ export class ListComponent implements OnInit {
     this.init()
   }
   init(): void {
-    this.http.get<ResponseData>('http://localhost:5000/apps').subscribe((res) => {
+    this.sqlBtClickH()
+  }
+  sqlBtClickH() {
+    this.http.get<ResponseData>('http://localhost:5000/apps', {
+      withCredentials: true
+    }).subscribe((res) => {
       // this.user = res
       clog('res', res)
     })
@@ -77,8 +87,8 @@ export class ListComponent implements OnInit {
         // address: 'Chengdu',
         key: 'key',
         name: 'name',
-        members: ['members'],
-      },
+        members: 'members',
+      }, // as FormData,
       // dialogtype: 'standard',
       // showAnimation: showAnimation,
       // buttons: [],
@@ -88,10 +98,12 @@ export class ListComponent implements OnInit {
           text: '创建',
           disabled: false,
           handler: ($event: Event) => {
-            let {key, name, members} = results.modalContentInstance.data
+            let data: FormData = results.modalContentInstance.data
+            // let {key, name} = data
+            let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             this.http.post<ResponseData>('http://localhost:5000/apps', {
-              key,
-              name,
+              key: data.key,
+              name: data.name,
               ulid: '1234567',
               members,
             }).subscribe((res) => {
