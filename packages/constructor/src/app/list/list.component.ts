@@ -10,6 +10,13 @@ interface FormData {
   name: S
   members: S
 }
+interface App {
+  key: S
+  name: S
+  ulid: S
+  members: S[]
+  // theme: S
+}
 
 let clog = console.log
 
@@ -19,31 +26,33 @@ let clog = console.log
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  appList: {
-    name: string
-    key: string
-    theme: string
-    id: number
-  }[]
+  // appList: {
+  //   name: string
+  //   key: string
+  //   theme: string
+  //   id: number
+  // }[]
+  appList: App[]
   user: A
   msg: {}[]
   constructor(private router: Router, private http: HttpClient, private dialogService: DialogService) {
     this.user = {}
-    this.appList = [
-      {
-        name: 'name',
-        key: 'key',
-        theme: 'theme',
-        id: 1,
-      },
-      {
-        name: 'name',
-        key: 'key',
-        theme: 'theme',
-        id: 2,
-      },
-    ]
+    // this.appList = [
+    //   {
+    //     name: 'name',
+    //     key: 'key',
+    //     theme: 'theme',
+    //     id: 1,
+    //   },
+    //   {
+    //     name: 'name',
+    //     key: 'key',
+    //     theme: 'theme',
+    //     id: 2,
+    //   },
+    // ]
     this.msg = []
+    this.appList = []
   }
   ngOnInit(): void {
     this.init()
@@ -56,7 +65,15 @@ export class ListComponent implements OnInit {
       withCredentials: true
     }).subscribe((res) => {
       // this.user = res
-      clog('res', res)
+      // clog('res', res)
+      this.appList = res.data.map((item: App) => {
+        return {
+          key: item.key,
+          name: item.name,
+          ulid: item.ulid,
+          members: item.members,
+        }
+      })
     })
   }
   logoutBtClickH()  {

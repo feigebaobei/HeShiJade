@@ -15,6 +15,22 @@
         <!-- <d-button (click)="creatAppBtClickH()">创建新应用</d-button> -->
     </div>
     <!-- 列表 -->
+    <section class="app_section">
+        <div *ngFor="let app of appList" class="app_box">
+            <p>
+                <span>key</span>
+                <span>{{app.key}}</span>
+            </p>
+            <p>
+                <span>name</span>
+                <span>{{app.name}}</span>
+            </p>
+            <!-- <p>
+                <span>theme</span>
+                <span></span>
+            </p> -->
+        </div>
+    </section>
 </main>
 <d-toast [value]="msg"></d-toast>
 <!-- {{item | json}} -->
