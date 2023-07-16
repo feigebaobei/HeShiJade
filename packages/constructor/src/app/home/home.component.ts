@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     })
     .subscribe((res) => {
       if (res.code === 0) {
-        // this.listClickH()
+        this.listClickH()
       }
     })
   }
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
         password: this.formData.password,
       }).subscribe((res) => {
         if (res.code === 0) {
-          // this.listClickH()
+          this.listClickH()
         }
       })
     } else {

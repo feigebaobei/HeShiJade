@@ -5,6 +5,18 @@ import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
 import type { ResponseData } from 'src/types';
 import type { A, B, S } from 'src/types/base';
+interface FormData {
+  key: S
+  name: S
+  members: S
+}
+interface App {
+  key: S
+  name: S
+  ulid: S
+  members: S[]
+  // theme: S
+}
 
 let clog = console.log
 
@@ -14,39 +26,54 @@ let clog = console.log
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  appList: {
-    name: string
-    key: string
-    theme: string
-    id: number
-  }[]
+  // appList: {
+  //   name: string
+  //   key: string
+  //   theme: string
+  //   id: number
+  // }[]
+  appList: App[]
   user: A
   msg: {}[]
   constructor(private router: Router, private http: HttpClient, private dialogService: DialogService) {
     this.user = {}
-    this.appList = [
-      {
-        name: 'name',
-        key: 'key',
-        theme: 'theme',
-        id: 1,
-      },
-      {
-        name: 'name',
-        key: 'key',
-        theme: 'theme',
-        id: 2,
-      },
-    ]
+    // this.appList = [
+    //   {
+    //     name: 'name',
+    //     key: 'key',
+    //     theme: 'theme',
+    //     id: 1,
+    //   },
+    //   {
+    //     name: 'name',
+    //     key: 'key',
+    //     theme: 'theme',
+    //     id: 2,
+    //   },
+    // ]
     this.msg = []
+    this.appList = []
   }
   ngOnInit(): void {
     this.init()
   }
   init(): void {
-    this.http.get<ResponseData>('http://localhost:5000/apps').subscribe((res) => {
+    this.sqlBtClickH()
+  }
+  sqlBtClickH() {
+    this.http.get<ResponseData>('http://localhost:5000/apps', {
+      withCredentials: true
+    }).subscribe((res) => {
       // this.user = res
-      clog('res', res)
+      // clog('res', res)
+      this.appList = res.data.map((item: App) => {
+        return {
+          key: item.key,
+          name: item.name,
+          ulid: item.ulid,
+          members: item.members,
+        }
+      })
     })
   }
   logoutBtClickH()  {
@@ -77,8 +104,8 @@ export class ListComponent implements OnInit {
         // address: 'Chengdu',
         key: 'key',
         name: 'name',
-        members: ['members'],
-      },
+        members: 'members',
+      }, // as FormData,
       // dialogtype: 'standard',
       // showAnimation: showAnimation,
       // buttons: [],
@@ -88,10 +115,12 @@ export class ListComponent implements OnInit {
           text: '创建',
           disabled: false,
           handler: ($event: Event) => {
-            let {key, name, members} = results.modalContentInstance.data
+            let data: FormData = results.modalContentInstance.data
+            // let {key, name} = data
+            let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             this.http.post<ResponseData>('http://localhost:5000/apps', {
-              key,
-              name,
+              key: data.key,
+              name: data.name,
               ulid: '1234567',
               members,
             }).subscribe((res) => {
