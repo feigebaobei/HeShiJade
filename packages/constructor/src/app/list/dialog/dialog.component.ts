@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import type { ResponseData } from 'src/types';
+// import type { ResponseData } from 'src/types';
 import type { A } from 'src/types/base';
 
 let clog = console.log
@@ -11,14 +11,8 @@ let clog = console.log
   styleUrls: ['./dialog.component.sass']
 })
 export class DialogComponent {
-  // formdata: {
-  //   key: S
-  // }
   msg: {}[]
   constructor(private http: HttpClient) {
-    // this.formData = {
-    //   key: ''
-    // }
     this.msg = []
   }
   @Input() data: A

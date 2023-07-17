@@ -30,6 +30,7 @@ import { UpperCasePipe } from '@angular/common';
 import { JsonPipe } from '@angular/common';
 import { DialogComponent } from './list/dialog/dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
+import { ComponentListComponent } from './setup/component-list/component-list.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PageListComponent } from './setup/page-list/page-list.component';
     AppItemComponent,
     DialogComponent,
     PageListComponent,
+    ComponentListComponent,
   ],
   imports: [
     BrowserModule,

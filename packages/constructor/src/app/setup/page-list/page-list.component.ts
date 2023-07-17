@@ -16,6 +16,7 @@ export class PageListComponent implements OnInit {
     this.init()
   }
   init() {
+    // 日后从service中取得
     this.pageList = [
       { name: 'first', key: 'first', ulid: '1234567890qwertyuiopasdfga'},
       { name: 'second', key: 'second', ulid: '1234567890qwertyuiopasdfgb'},
