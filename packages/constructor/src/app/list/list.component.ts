@@ -77,6 +77,8 @@ export class ListComponent implements OnInit {
     })
   }
   logoutBtClickH()  {
+    // todo 验证登出。
+    // 应该传递cookie
     this.http.post<ResponseData>('http://localhost:5000/users/logout', {}).subscribe((res) => {
       this.router.navigate(['/'])
     })
@@ -87,7 +89,7 @@ export class ListComponent implements OnInit {
     })
   }
   gotoHomeInfoBtClickH() {
-    this.router.navigate(['/' ]);
+    this.router.navigate([ '/' ]);
   }
   openModalBtClickH() {
     let results = this.dialogService.open({
@@ -156,4 +158,7 @@ export class ListComponent implements OnInit {
   //     members,
   //   })
   // }
+  appBoxClickH() {
+    this.router.navigate([ '/setup' ]);
+  }
 }

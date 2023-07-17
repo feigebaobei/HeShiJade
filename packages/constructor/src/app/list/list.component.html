@@ -16,7 +16,7 @@
     </div>
     <!-- 列表 -->
     <section class="app_section">
-        <div *ngFor="let app of appList" class="app_box">
+        <div *ngFor="let app of appList" class="app_box" (click)="appBoxClickH()">
             <p>
                 <span>key</span>
                 <span>{{app.key}}</span>

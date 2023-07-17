@@ -21,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
 // import { MatInputModule } from '@angular/material/input'
 
 // devui
-import { DevUIModule } from 'ng-devui';
+import { DevUIModule, 
+  // LayoutModule
+} from 'ng-devui';
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
@@ -53,6 +55,7 @@ import { DialogComponent } from './list/dialog/dialog.component';
     DevUIModule,
     FormsModule,
     HttpClientModule,
+    // LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
