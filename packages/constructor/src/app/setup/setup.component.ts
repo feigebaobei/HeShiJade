@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { A, S, N } from 'src/types/base';
+import type{ A, S, N } from 'src/types/base';
 
 @Component({
   selector: 'app-setup',

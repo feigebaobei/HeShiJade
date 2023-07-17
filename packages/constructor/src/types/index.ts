@@ -5,6 +5,16 @@ interface ResponseData {
   data: A
   message: S
 }
+
+interface Page {
+  name: S
+  key: S
+  ulid: S
+}
+
+
+
 export type {
-    ResponseData
+    ResponseData,
+    Page,
 }
