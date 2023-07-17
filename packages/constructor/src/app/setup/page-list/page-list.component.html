@@ -1,9 +1,8 @@
-<div dDroppable>
+<div dDroppable (dropEvent)="onDrop($event, pageList)">
     <ul dSortable>
         <li dDraggable
         *ngFor="let page of pageList"
         >
-            <!-- {{page | json}} -->
             {{page.name}}
         </li>
     </ul>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import type { Page } from 'src/types';
+import type { A } from 'src/types/base'
 
 @Component({
   selector: 'app-page-list',
@@ -20,5 +21,9 @@ export class PageListComponent implements OnInit {
       { name: 'second', key: 'second', ulid: '1234567890qwertyuiopasdfgb'},
       { name: 'third', key: 'third', ulid: '1234567890qwertyuiopasdfgc'},
     ]
+  }
+  onDrop(dropEvent : A, arr: Page[]) {
+    let {dragFromIndex, dropIndex} = dropEvent
+    arr.splice(dropIndex, 0, ...arr.splice(dragFromIndex, 1))
   }
 }
