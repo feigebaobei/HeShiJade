@@ -1,2 +1,3 @@
-<p>component-list works!</p>
-<p>{{componentList | json}}</p>
+<div *ngFor="let comp of componentList" class="component_item">
+    <span>{{ comp.name }}</span>
+</div>
