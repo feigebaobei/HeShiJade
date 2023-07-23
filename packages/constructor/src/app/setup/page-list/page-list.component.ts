@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import type { Page } from 'src/types';
 import type { A } from 'src/types/base'
 
@@ -8,21 +8,22 @@ import type { A } from 'src/types/base'
   styleUrls: ['./page-list.component.sass']
 })
 export class PageListComponent implements OnInit {
-  pageList: Page[]
+  // pageList: Page[]
+  @Input() pageList: Page[]
   constructor() {
     this.pageList = []
   }
   ngOnInit(): void {
-    this.init()
+    // this.init()
   }
-  init() {
-    // 日后从service中取得
-    this.pageList = [
-      { name: 'first', key: 'first', ulid: '1234567890qwertyuiopasdfga'},
-      { name: 'second', key: 'second', ulid: '1234567890qwertyuiopasdfgb'},
-      { name: 'third', key: 'third', ulid: '1234567890qwertyuiopasdfgc'},
-    ]
-  }
+  // init() {
+  //   // 日后从service中取得
+  //   // this.pageList = [
+  //   //   { name: 'first', key: 'first', ulid: '1234567890qwertyuiopasdfga'},
+  //   //   { name: 'second', key: 'second', ulid: '1234567890qwertyuiopasdfgb'},
+  //   //   { name: 'third', key: 'third', ulid: '1234567890qwertyuiopasdfgc'},
+  //   // ]
+  // }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent
     arr.splice(dropIndex, 0, ...arr.splice(dragFromIndex, 1))

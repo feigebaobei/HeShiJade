@@ -11,10 +11,13 @@ let clog = console.log
 })
 export class ComponentService {
   componentList: Observable<Component[]>
+  curComponent: Component | null
   constructor(private http: HttpClient) {
     this.componentList = of([])
+    // 组件种类应该从前端取得，不应该从后端接口取得。
+    this.curComponent = null
   }
-  getComponent() {
+  getComponentList() {
     return new Promise<Component[]>((s, j) => {
       this.http.get<ResponseData>('http://localhost:5000/components', {
         withCredentials: true

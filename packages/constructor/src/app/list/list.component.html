@@ -6,17 +6,13 @@
 </header>
 <!-- main -->
 <main>
-    main
-    <!-- <p>{{user | json}}</p> -->
-    <!-- 添加 -->
     <div>
         <d-button (click)="openModalBtClickH()">创建新应用</d-button>
         <d-button (click)="sqlBtClickH()">查询应用列表</d-button>
-        <!-- <d-button (click)="creatAppBtClickH()">创建新应用</d-button> -->
     </div>
     <!-- 列表 -->
     <section class="app_section">
-        <div *ngFor="let app of appList" class="app_box" (click)="appBoxClickH()">
+        <div *ngFor="let app of appList" class="app_box" (click)="appBoxClickH(app.ulid)">
             <p>
                 <span>key</span>
                 <span>{{app.key}}</span>
