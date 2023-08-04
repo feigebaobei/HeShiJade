@@ -1,20 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Subject, } from 'rxjs';
 import type { ResponseData } from 'src/types';
 import type { Page } from 'src/types/page';
 import { AppService } from './app.service';
+import { S } from 'src/types/base';
+
+type PageOrUn = Page | undefined
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageService {
-  pageList: Observable<Page[]>
+  pageList: Page[]
+  _find: (p: S) => PageOrUn
+  pageSubject$: Subject<PageOrUn>
+  _curPage: PageOrUn
   constructor(
     private http: HttpClient,
     private appService: AppService,
   ) {
-    this.pageList = of([])
+    this.pageList = []
+    this.pageSubject$ = new Subject<PageOrUn>()
+    this._find = (pageUlid: S) => {
+      return this._curPage = this.pageList.find(item => item.ulid === pageUlid)
+    }
   }
   getPageList() {
     return new Promise<Page[]>((s, j) => {
@@ -29,5 +39,11 @@ export class PageService {
         }
       })
     })
+  }
+  curPage() {
+    return this._curPage
+  }
+  setCurPage(pageUlid: S) {
+    this.pageSubject$.next(this._find(pageUlid))
   }
 }

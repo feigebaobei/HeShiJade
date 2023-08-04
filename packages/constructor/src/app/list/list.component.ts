@@ -29,12 +29,6 @@ let clog = console.log
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  // appList: {
-  //   name: string
-  //   key: string
-  //   theme: string
-  //   id: number
-  // }[]
   appList: App[]
   user: A
   msg: {}[]
@@ -45,47 +39,17 @@ export class ListComponent implements OnInit {
     private appService: AppService,
   ) {
     this.user = {}
-    // this.appList = [
-    //   {
-    //     name: 'name',
-    //     key: 'key',
-    //     theme: 'theme',
-    //     id: 1,
-    //   },
-    //   {
-    //     name: 'name',
-    //     key: 'key',
-    //     theme: 'theme',
-    //     id: 2,
-    //   },
-    // ]
     this.msg = []
     this.appList = []
   }
   ngOnInit(): void {
     // this.init()
-    this.appService.getApp().then(res => {
+    this.appService.reqAppList().then(res => {
       this.appList = res
     })
   }
   // init(): void {
   //   this.sqlBtClickH()
-  // }
-  // sqlBtClickH() {
-  //   this.http.get<ResponseData>('http://localhost:5000/apps', {
-  //     withCredentials: true
-  //   }).subscribe((res) => {
-  //     // this.user = res
-  //     // clog('res', res)
-  //     this.appList = res.data.map((item: App) => {
-  //       return {
-  //         key: item.key,
-  //         name: item.name,
-  //         ulid: item.ulid,
-  //         members: item.members,
-  //       }
-  //     })
-  //   })
   // }
   logoutBtClickH()  {
     // todo 验证登出。
@@ -161,14 +125,6 @@ export class ListComponent implements OnInit {
       ],
     })
   }
-  // creatAppBtClickH({key: S, name: S, members: S[]}) {
-  //   this.http.post<ResponseData>('http://localhost:5000/apps', {
-  //     key,
-  //     name,
-  //     // ulid,
-  //     members,
-  //   })
-  // }
   appBoxClickH(appUlid: S) {
     this.appService.setCurApp(appUlid)
     this.router.navigate([ '/setup' ]);
