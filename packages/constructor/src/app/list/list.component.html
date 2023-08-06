@@ -12,7 +12,7 @@
     </div>
     <!-- 列表 -->
     <section class="app_section">
-        <div *ngFor="let app of appList" class="app_box" (click)="appBoxClickH(app.ulid)">
+        <div *ngFor="let app of appList" class="app_box" (click)="appItemClickH(app.ulid)">
             <p>
                 <span>key</span>
                 <span>{{app.key}}</span>

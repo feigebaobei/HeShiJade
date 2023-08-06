@@ -28,16 +28,21 @@ export class PageService {
   }
   getPageList() {
     return new Promise<Page[]>((s, j) => {
-      this.http.get<ResponseData>(`http://localhost:5000/page?appUlid=${this.appService.curApp?.ulid}`, {
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          this.pageList = res.data
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
+      let curApp = this.appService.curApp()
+      if (curApp) {
+        this.http.get<ResponseData>(`http://localhost:5000/page?appUlid=${curApp.ulid}`, {
+          withCredentials: true
+        }).subscribe(res => {
+          if (res.code === 0) {
+            this.pageList = res.data
+            s(res.data)
+          } else {
+            j(new Error(res.message))
+          }
+        })
+      } else {
+        s(this.pageList = [])
+      }
     })
   }
   curPage() {

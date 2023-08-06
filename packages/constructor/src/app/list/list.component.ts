@@ -44,9 +44,10 @@ export class ListComponent implements OnInit {
   }
   ngOnInit(): void {
     // this.init()
-    this.appService.reqAppList().then(res => {
-      this.appList = res
-    })
+    // this.appService.reqAppList().then(res => {
+    //   this.appList = res
+    // })
+      this.sqlBtClickH()
   }
   // init(): void {
   //   this.sqlBtClickH()
@@ -125,8 +126,16 @@ export class ListComponent implements OnInit {
       ],
     })
   }
-  appBoxClickH(appUlid: S) {
+  appItemClickH(appUlid: S) {
     this.appService.setCurApp(appUlid)
-    this.router.navigate([ '/setup' ]);
+    this.router.navigate([ '/setup' ], {
+      queryParams: {app: appUlid}
+    });
+  }
+  sqlBtClickH() {
+
+    this.appService.reqAppList().then(res => {
+      this.appList = res
+    })
   }
 }

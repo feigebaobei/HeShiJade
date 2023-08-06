@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import type { A, S, N } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Component as Comp } from 'src/types/component';
 import { PageService } from '../service/page.service';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 let clog = console.log
 
@@ -21,8 +23,12 @@ export class SetupComponent implements OnInit {
   componentList: Comp[]
   pageList: Page[]
   constructor(
-    private componentService: ComponentService,
+    private appService: AppService,
     private pageService: PageService,
+    private componentService: ComponentService,
+    private route: ActivatedRoute,
+    private router: Router,
+    // ActivatedRoute
   ) {
     this.pageKey = ''
     this.appKey = ''
@@ -30,6 +36,8 @@ export class SetupComponent implements OnInit {
     this.rightTabActive = 'props'
     this.componentList = []
     this.pageList = []
+    clog('this.router', this.router)
+    clog('this.route', this.route)
   }
   viewBtClickH() {}
 
@@ -37,6 +45,8 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
+    // 检查app
+    this.checkApp()
     // 请求pageList
     this.pageService.getPageList().then(res => {
       this.pageList = res
@@ -47,5 +57,13 @@ export class SetupComponent implements OnInit {
     }).catch(error => {
       clog('error', error)
     })
+  }
+  checkApp() {
+    if (this.appService.appList.length) {
+      return this.appService.appList.some(item => item.ulid === this.route.snapshot.queryParamMap.get('app'))
+    } else {
+      return false
+    }
+
   }
 }
