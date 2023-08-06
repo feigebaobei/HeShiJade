@@ -43,15 +43,13 @@ export class ListComponent implements OnInit {
     this.appList = []
   }
   ngOnInit(): void {
-    // this.init()
-    // this.appService.reqAppList().then(res => {
-    //   this.appList = res
-    // })
-      this.sqlBtClickH()
+    this.init()
   }
-  // init(): void {
-  //   this.sqlBtClickH()
-  // }
+  init(): void {
+    if (!this.appList.length) {
+      this.sqlBtClickH()
+    }
+  }
   logoutBtClickH()  {
     // todo 验证登出。
     // 应该传递cookie
@@ -133,7 +131,6 @@ export class ListComponent implements OnInit {
     });
   }
   sqlBtClickH() {
-
     this.appService.reqAppList().then(res => {
       this.appList = res
     })

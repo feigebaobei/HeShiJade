@@ -54,7 +54,10 @@
 |-|-|-|
 |login/sign|||
 |list|||
-|setup|||
+|setup|url通式 `http://$home:$port/setup?app=$appUlid`||
+
+
+
 
 ### server 服务侧
 
@@ -119,7 +122,7 @@
 
 #### routes
 在一个应用中，动态生成多个路由。
-url通式 `http://$home:$post/$appKey/$env/$page[]?$qs`
+url通式 `http://$home:$port/$appKey/$env/$page?$qs`
 
 ##### user
 users/login
