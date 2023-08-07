@@ -28,7 +28,7 @@ export class PageService {
   }
   getPageList() {
     return new Promise<Page[]>((s, j) => {
-      let curApp = this.appService.curApp()
+      let curApp = this.appService.getCurApp()
       if (curApp) {
         this.http.get<ResponseData>(`http://localhost:5000/page?appUlid=${curApp.ulid}`, {
           withCredentials: true

@@ -28,23 +28,6 @@ export class DialogComponent {
         this.msg = [
           { severity: 'info', summary: 'Absolute', content: 'str', myInfo: 'Devui' },
         ]
-
-
-    // this.http.post<ResponseData>('http://localhost:5000/apps', {
-    //   key: '',
-    //   name: '',
-    //   ulid: '',
-    //   members: '',
-    // }).subscribe((res) => {
-    //   if (res.code === 0) {
-    //     this.msg = [
-    //       { severity: 'info', summary: 'Relative', detail: `<a href="/home" target="_blank">Back to Home Page</a>` },
-    //       { severity: 'info', summary: 'Absolute', content: 'str', myInfo: 'Devui' },
-    //     ]
-    //   }
-    // })
-
-
   }
 
 }

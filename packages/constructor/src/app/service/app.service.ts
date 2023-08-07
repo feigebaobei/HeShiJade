@@ -21,7 +21,7 @@ export class AppService {
   _find(appUlid: S) {
     return this._curApp = this.appList.find(item => item.ulid === appUlid)
   }
-  curApp() {
+  getCurApp() {
     return this._curApp
   }
   reqAppList() {

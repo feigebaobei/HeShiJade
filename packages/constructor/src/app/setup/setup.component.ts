@@ -38,8 +38,8 @@ export class SetupComponent implements OnInit {
     this.componentList = []
     this.pageList = []
     this.msg = []
-    clog('this.router', this.router)
-    clog('this.route', this.route)
+    // clog('this.router', this.router)
+    // clog('this.route', this.route)
   }
   viewBtClickH() {}
 
@@ -48,33 +48,44 @@ export class SetupComponent implements OnInit {
   }
   ngOnInit(): void {
     // 检查app
-    this.checkApp().then(bool => {
+    this.checkApp().then((bool) => {
       if (bool) {
-        // 请求pageList
-        this.pageService.getPageList().then(res => {
-          this.pageList = res
-        })
-        // 请求componentList
-        this.componentService.getComponentList().then(res => {
-          this.componentList = res
-        }).catch(error => {
-          clog('error', error)
-        })
+        let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
+        this.appService.setCurApp(appUlid)
+        return
       } else {
-        this.msg = [
-          { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
-        ]
-        this.router.navigate(['/list'])
+        return Promise.reject()
       }
+    }).then(() => {
+      // 请求pageList
+      this.pageService.getPageList().then(res => {
+        this.pageList = res
+      })
+      // 请求componentList
+      this.componentService.getComponentList().then(res => {
+        this.componentList = res
+      }).catch(error => {
+        clog('error', error)
+      })
+    }).catch(() => {
+      this.msg = [
+        { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
+      ]
+      this.router.navigate(['/list'])
     })
   }
   checkApp(): Promise<B> {
-    // return new Promise()
     let appUlid = this.route.snapshot.queryParamMap.get('app')
+    // clog('appUlid', appUlid, this.appService.appList)
     if (this.appService.appList.length) {
+      // let bool = 
       return Promise.resolve(this.appService.appList.some(item => item.ulid === appUlid))
+      // .then()
+      // return {
+      //   bool
+      //   appUlid
+      // }
     } else {
-      // return this
       return this.appService.reqAppList().then(appList => {
         return appList.some(item => item.ulid === appUlid)
       })

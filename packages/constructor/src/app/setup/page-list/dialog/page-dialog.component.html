@@ -1,0 +1,21 @@
+<form dForm>
+    <d-form-item>
+        <d-form-label>key</d-form-label>
+        <d-form-control>
+        <input dTextInput autocomplete="off" name="key"
+            [(ngModel)]="data.key"
+            placeholder="创建成功后不可修改"
+        />
+        </d-form-control>
+    </d-form-item>
+    <d-form-item>
+        <d-form-label>页面名称</d-form-label>
+        <d-form-control>
+        <input dTextInput autocomplete="off" name="name"
+            [(ngModel)]="data.name"
+            placeholder="应用名称"
+        />
+        </d-form-control>
+    </d-form-item>
+</form>
+<!-- <d-toast [value]="msg"></d-toast> -->

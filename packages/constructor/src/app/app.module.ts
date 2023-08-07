@@ -29,6 +29,7 @@ import { DevUIModule,
 import { UpperCasePipe } from '@angular/common';
 import { JsonPipe } from '@angular/common';
 import { DialogComponent } from './list/dialog/dialog.component';
+import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
 
@@ -42,6 +43,7 @@ import { ComponentListComponent } from './setup/component-list/component-list.co
     HomeComponent,
     AppItemComponent,
     DialogComponent,
+    PageDialogComponent,
     PageListComponent,
     ComponentListComponent,
   ],
