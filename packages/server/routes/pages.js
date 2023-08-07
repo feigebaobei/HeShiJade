@@ -4,7 +4,7 @@ var router = express.Router();
 let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
-let {appsDb} = require('../mongodb');
+let {pagesDb} = require('../mongodb');
 const { rules } = require('../helper');
 // let md5 = require('md5');
 let clog = console.log
@@ -17,9 +17,8 @@ router.route('/')
 })
 .get(cors.corsWithOptions, (req, res) => {
   if (req.session.isAuth) {
-    let {user} = req.session
-    clog('user', user)
-    let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
+    // let {user} = req.session
+    let result = pagesDb.collection('pages').find({ appUlid: req.query.appUlid })
     result.toArray().then(r => {
       res.status(200).json({
           code: 0,
@@ -42,12 +41,13 @@ router.route('/')
   }
 })
 .post(cors.corsWithOptions, (req, res) => {
-    if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.isArray(req.body.members)) {
-        appsDb.collection('apps').insertOne({
+    if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.require(req.body.appUlid)) {
+        pagesDb.collection('pages').insertOne({
             key: req.body.key,
             name: req.body.name,
             ulid: req.body.ulid,
-            members: req.body.members,
+            appUlid: req.body.appUlid,
+            componentUlid: ''
         }).then((apps) => {
             res.status(200).json({
               code: 0,
