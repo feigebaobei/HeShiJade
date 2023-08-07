@@ -5,18 +5,21 @@ import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
 import type { ResponseData } from 'src/types';
 import type { A, B, S } from 'src/types/base';
+import type { App } from 'src/types/app';
+import { AppService } from '../service/app.service';
+
 interface FormData {
   key: S
   name: S
   members: S
 }
-interface App {
-  key: S
-  name: S
-  ulid: S
-  members: S[]
-  // theme: S
-}
+// interface App {
+//   key: S
+//   name: S
+//   ulid: S
+//   members: S[]
+//   // theme: S
+// }
 
 let clog = console.log
 
@@ -26,31 +29,16 @@ let clog = console.log
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  // appList: {
-  //   name: string
-  //   key: string
-  //   theme: string
-  //   id: number
-  // }[]
   appList: App[]
   user: A
   msg: {}[]
-  constructor(private router: Router, private http: HttpClient, private dialogService: DialogService) {
+  constructor(
+    private router: Router, 
+    private http: HttpClient, 
+    private dialogService: DialogService,
+    private appService: AppService,
+  ) {
     this.user = {}
-    // this.appList = [
-    //   {
-    //     name: 'name',
-    //     key: 'key',
-    //     theme: 'theme',
-    //     id: 1,
-    //   },
-    //   {
-    //     name: 'name',
-    //     key: 'key',
-    //     theme: 'theme',
-    //     id: 2,
-    //   },
-    // ]
     this.msg = []
     this.appList = []
   }
@@ -58,25 +46,13 @@ export class ListComponent implements OnInit {
     this.init()
   }
   init(): void {
-    this.sqlBtClickH()
-  }
-  sqlBtClickH() {
-    this.http.get<ResponseData>('http://localhost:5000/apps', {
-      withCredentials: true
-    }).subscribe((res) => {
-      // this.user = res
-      // clog('res', res)
-      this.appList = res.data.map((item: App) => {
-        return {
-          key: item.key,
-          name: item.name,
-          ulid: item.ulid,
-          members: item.members,
-        }
-      })
-    })
+    if (!this.appList.length) {
+      this.sqlBtClickH()
+    }
   }
   logoutBtClickH()  {
+    // todo 验证登出。
+    // 应该传递cookie
     this.http.post<ResponseData>('http://localhost:5000/users/logout', {}).subscribe((res) => {
       this.router.navigate(['/'])
     })
@@ -87,7 +63,7 @@ export class ListComponent implements OnInit {
     })
   }
   gotoHomeInfoBtClickH() {
-    this.router.navigate(['/' ]);
+    this.router.navigate([ '/' ]);
   }
   openModalBtClickH() {
     let results = this.dialogService.open({
@@ -148,12 +124,15 @@ export class ListComponent implements OnInit {
       ],
     })
   }
-  // creatAppBtClickH({key: S, name: S, members: S[]}) {
-  //   this.http.post<ResponseData>('http://localhost:5000/apps', {
-  //     key,
-  //     name,
-  //     // ulid,
-  //     members,
-  //   })
-  // }
+  appItemClickH(appUlid: S) {
+    this.appService.setCurApp(appUlid)
+    this.router.navigate([ '/setup' ], {
+      queryParams: {app: appUlid}
+    });
+  }
+  sqlBtClickH() {
+    this.appService.reqAppList().then(res => {
+      this.appList = res
+    })
+  }
 }

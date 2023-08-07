@@ -19,20 +19,46 @@ router.route('/')
   if (req.session.isAuth) {
     let {user} = req.session
     clog('user', user)
-    let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
-    result.toArray().then(r => {
-      res.status(200).json({
-          code: 0,
-          message: '',
-          data: r
-      })
-    }).catch(error => {
-      res.status(200).json({
-        code: 200200,
-        message: "数据库出错",
-        data: error,
-      })
+    res.status(200).json({
+        code: 0,
+        message: '',
+        data: [
+            {
+                name: 'button',
+                type: 'Button',
+                ulid: '12345asdfg'
+            },
+            {
+                name: 'model',
+                type: 'Model',
+                ulid: '12345asdfg2'
+            },
+            {
+                name: 'form',
+                type: 'Form',
+                ulid: '12345asdfge'
+            },
+            {
+                name: 'table',
+                type: 'Table',
+                ulid: '12345asdfgs'
+            },
+        ]
     })
+    // let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
+    // result.toArray().then(r => {
+    //   res.status(200).json({
+    //       code: 0,
+    //       message: '',
+    //       data: r
+    //   })
+    // }).catch(error => {
+    //   res.status(200).json({
+    //     code: 200200,
+    //     message: "数据库出错",
+    //     data: error,
+    //   })
+    // })
   } else {
     res.status(401).json({
       code: 300000,

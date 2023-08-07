@@ -1,0 +1,14 @@
+<div dDroppable (dropEvent)="onDrop($event, pageList)">
+    <ul dSortable>
+        <li dDraggable
+        *ngFor="let page of pageList"
+        class="page_item"
+        >
+            {{page.name}}
+        </li>
+        <li>
+            <d-button (click)="createPageButtonClickH()">创建新页面</d-button>
+        </li>
+    </ul>
+</div>
+<d-toast [value]="msg"></d-toast>

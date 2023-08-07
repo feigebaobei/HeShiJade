@@ -21,12 +21,17 @@ import { HttpClientModule } from '@angular/common/http';
 // import { MatInputModule } from '@angular/material/input'
 
 // devui
-import { DevUIModule } from 'ng-devui';
+import { DevUIModule, 
+  // LayoutModule
+} from 'ng-devui';
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
 import { JsonPipe } from '@angular/common';
 import { DialogComponent } from './list/dialog/dialog.component';
+import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
+import { PageListComponent } from './setup/page-list/page-list.component';
+import { ComponentListComponent } from './setup/component-list/component-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,9 @@ import { DialogComponent } from './list/dialog/dialog.component';
     HomeComponent,
     AppItemComponent,
     DialogComponent,
+    PageDialogComponent,
+    PageListComponent,
+    ComponentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +61,7 @@ import { DialogComponent } from './list/dialog/dialog.component';
     DevUIModule,
     FormsModule,
     HttpClientModule,
+    // LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

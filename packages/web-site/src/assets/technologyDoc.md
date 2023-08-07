@@ -54,7 +54,10 @@
 |-|-|-|
 |login/sign|||
 |list|||
-|setup|||
+|setup|url通式 `http://$home:$port/setup?app=$appUlid`||
+
+
+
 
 ### server 服务侧
 
@@ -85,9 +88,9 @@
 |key|页面的key，不可改|||
 |ulid|惟一键|||
 |name|名称|||
-|next|下一个页面的ulid|||
-|prev|上一个页面的ulid|||
-|component|每一个组件的ulid|||
+|next|下一个页面的ulid|暂未使用||
+|prev|上一个页面的ulid|暂未使用||
+|componentUlid|第一个组件的ulid|||
 |appUlid|属于哪个应用|||
 
 ##### comps 组件全量表
@@ -119,7 +122,7 @@
 
 #### routes
 在一个应用中，动态生成多个路由。
-url通式 `http://$home:$post/$appKey/$env/$page[]?$qs`
+url通式 `http://$home:$port/$appKey/$env/$page?$qs`
 
 ##### user
 users/login

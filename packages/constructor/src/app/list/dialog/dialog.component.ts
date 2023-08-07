@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import type { ResponseData } from 'src/types';
+// import type { ResponseData } from 'src/types';
 import type { A } from 'src/types/base';
 
 let clog = console.log
@@ -11,14 +11,8 @@ let clog = console.log
   styleUrls: ['./dialog.component.sass']
 })
 export class DialogComponent {
-  // formdata: {
-  //   key: S
-  // }
   msg: {}[]
   constructor(private http: HttpClient) {
-    // this.formData = {
-    //   key: ''
-    // }
     this.msg = []
   }
   @Input() data: A
@@ -34,23 +28,6 @@ export class DialogComponent {
         this.msg = [
           { severity: 'info', summary: 'Absolute', content: 'str', myInfo: 'Devui' },
         ]
-
-
-    // this.http.post<ResponseData>('http://localhost:5000/apps', {
-    //   key: '',
-    //   name: '',
-    //   ulid: '',
-    //   members: '',
-    // }).subscribe((res) => {
-    //   if (res.code === 0) {
-    //     this.msg = [
-    //       { severity: 'info', summary: 'Relative', detail: `<a href="/home" target="_blank">Back to Home Page</a>` },
-    //       { severity: 'info', summary: 'Absolute', content: 'str', myInfo: 'Devui' },
-    //     ]
-    //   }
-    // })
-
-
   }
 
 }
