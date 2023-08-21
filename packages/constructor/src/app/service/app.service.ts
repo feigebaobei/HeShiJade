@@ -18,7 +18,7 @@ export class AppService {
     this.appList = []
     this.appSubject$ = new Subject<AppOrUn>()
   }
-  _find(appUlid: S) {
+  _find(appUlid?: S) {
     return this._curApp = this.appList.find(item => item.ulid === appUlid)
   }
   getCurApp() {
@@ -40,7 +40,7 @@ export class AppService {
     })
   }
   // 根据ulid设置指定app为当前激活状态。
-  setCurApp(appUlid: S) {
+  setCurApp(appUlid?: S) {
     this.appSubject$.next(this._find(appUlid))
   }
 }
