@@ -16,9 +16,11 @@ router.route('/')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
+  clog('ses', req.session)
   if (req.session.isAuth) {
     // let {user} = req.session
     let result = pagesDb.collection('pages').find({ appUlid: req.query.appUlid })
+    clog('result', result)
     result.toArray().then(r => {
       res.status(200).json({
           code: 0,
@@ -41,7 +43,8 @@ router.route('/')
   }
 })
 .post(cors.corsWithOptions, (req, res) => {
-    if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.require(req.body.appUlid)) {
+    if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.required(req.body.appUlid)) {
+      clog('req.body', req.body)
         pagesDb.collection('pages').insertOne({
             key: req.body.key,
             name: req.body.name,

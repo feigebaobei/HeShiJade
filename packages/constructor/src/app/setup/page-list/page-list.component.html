@@ -1,13 +1,16 @@
 <div dDroppable (dropEvent)="onDrop($event, pageList)">
+    <!-- {{ pageList | json}} -->
     <ul dSortable>
         <li dDraggable
-        *ngFor="let page of pageList"
-        class="page_item"
+            *ngFor="let page of pageList"
+            class="page_item"
+            (click)="pageItemClickH(page.ulid)"    
         >
             {{page.name}}
         </li>
         <li>
             <d-button (click)="createPageButtonClickH()">创建新页面</d-button>
+            <d-button (click)="reReqPageButtonClickH()">刷新页面列表</d-button>
         </li>
     </ul>
 </div>

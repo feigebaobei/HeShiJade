@@ -38,6 +38,9 @@ dependencies:
   '@devui-design/icons':
     specifier: ^1.3.0
     version: 1.3.0
+  data-footstone:
+    specifier: 0.1.23-beta.1
+    version: 0.1.23-beta.1
   ng-devui:
     specifier: ^15.1.0
     version: 15.1.0(@angular/animations@16.0.0)(@angular/common@16.0.0)(@angular/core@16.0.0)(@angular/forms@16.0.0)(rxjs@7.8.0)
@@ -4118,6 +4121,10 @@ packages:
   /custom-event@1.0.1:
     resolution: {integrity: sha512-GAj5FOq0Hd+RsCGVJxZuKaIDXDf3h6GQoNEjFgbLLI/trgtavwUbSnZ5pVfg27DVCaWjIohryS0JFwIJyT2cMg==}
     dev: true
+
+  /data-footstone@0.1.23-beta.1:
+    resolution: {integrity: sha512-dtIOlCebszLKls4wr/meKqKu7eF/ZOgr9CUXnmcqk1kNGnUJKfQ6UVC3L1my6xoZt5rBfUS27TxMKBajdqZu6A==}
+    dev: false
 
   /date-fns@2.30.0:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}

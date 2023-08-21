@@ -57,10 +57,6 @@ export class SetupComponent implements OnInit {
         return Promise.reject()
       }
     }).then(() => {
-      // 请求pageList
-      this.pageService.getPageList().then(res => {
-        this.pageList = res
-      })
       // 请求componentList
       this.componentService.getComponentList().then(res => {
         this.componentList = res

@@ -108,8 +108,8 @@ router.route('/login')
     }).then((user) => {
       req.session.user = user
       req.session.isAuth = true
-      // clog('user', req.session)
       req.session.save()
+      clog('user session', req.session)
       res.status(200).json({
         code: 0,
         message: "ok",

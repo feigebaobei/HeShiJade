@@ -86,10 +86,11 @@
 |字段key|描述|||
 |-|-|-|-|
 |key|页面的key，不可改|||
-|ulid|惟一键|||
 |name|名称|||
+|ulid|惟一键|||
 |next|下一个页面的ulid|暂未使用||
 |prev|上一个页面的ulid|暂未使用||
+|child|当前页面的第一个子页面|暂未使用||
 |componentUlid|第一个组件的ulid|||
 |appUlid|属于哪个应用|||
 
@@ -303,4 +304,7 @@ withCredentials: true
 ### curd app
 ### 如何参与开源项目
 https://xbeibeix.com/video/BV1GU4y1N7eC
+
+
+验证页面的接口都没有问题了，发布dfs包.
 
