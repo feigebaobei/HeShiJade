@@ -73,14 +73,14 @@
 ##### apps 应用全量表
 |字段key|描述|||
 |-|-|-|-|
-|key|应用的key，不可改|||
-|ulid|惟一键|||
+|key|应用的key，不可改|后期可以增强为可修改的||
 |name|名称|||
-|version|版本|||
-|members|成员。最多4个。|||
+|ulid|惟一键|||
 |theme|主题|||
+|version|版本|||
 |owner|拥有者|||
-|page|第一个页面的ulid|||
+|members|成员。最多4个。|||
+|firstPage|第一个页面的ulid|||
 
 ##### pages 页面全量表
 |字段key|描述|||
@@ -306,5 +306,11 @@ withCredentials: true
 https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
-验证页面的接口都没有问题了，发布dfs包.
-
+创建正确数据结构的应用
+创建正确数据结构的页面
+创建正确数据结构的组件
+创建管理user的service
+注册、登录用户
+  123@qq.com
+  kevin@163.com
+  amanda@gmail.com

@@ -14,6 +14,12 @@ let rules = {
     },
     isArray: (p) => {
         return Array.isArray(p)
+    },
+    isVersion: () => {
+        return true
+    },
+    isNumber: (n) => {
+        return Number.isNumber(n)
     }
 }
 module.exports = {

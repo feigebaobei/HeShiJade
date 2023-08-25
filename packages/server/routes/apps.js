@@ -42,12 +42,36 @@ router.route('/')
   }
 })
 .post(cors.corsWithOptions, (req, res) => {
-    if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.isArray(req.body.members)) {
+  if (req.session.isAuth) {
+    if (rules.required(req.body.key) && 
+      rules.required(req.body.name) && 
+      rules.required(req.body.ulid) && 
+      rules.isArray(req.body.members)
+      // rules.required(req.body.version) && rules.isVersion(req.body.version)
+    ) {
+        let version = req.body.version || 0
+        clog('user', req.session)
+        clog('req', req.body, {
+          key: req.body.key,
+          name: req.body.name,
+          ulid: req.body.ulid,
+          theme: req.body.theme,
+          // version: req.body.version,
+          version,
+          owner: req.session.user.account,
+          members: req.body.members.slice(0, 4),
+          firstPage: '',
+      })
         appsDb.collection('apps').insertOne({
             key: req.body.key,
             name: req.body.name,
             ulid: req.body.ulid,
-            members: req.body.members,
+            theme: req.body.theme,
+            // version: req.body.version,
+            version,
+            owner: req.session.user.account,
+            members: req.body.members.slice(0, 4),
+            firstPage: '',
         }).then((apps) => {
             res.status(200).json({
               code: 0,
@@ -68,6 +92,13 @@ router.route('/')
           data: {},
         })
     }
+  } else {
+    res.status(401).json({
+      code: 300000,
+      message: '用户未登录',
+      data: {}
+    })
+  }
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
