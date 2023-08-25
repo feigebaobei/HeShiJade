@@ -17,11 +17,13 @@ export class DialogComponent {
   }
   @Input() data: A
   @Output() newEvent = new EventEmitter()
-  formData = {
-    key: '',
-    name: '',
-    members: '',
-  }
+  // 好像没用上
+  // formData = {
+  //   key: '',
+  //   name: '',
+  //   members: '',
+  //   theme: '',
+  // }
   createBtClickH() {
     this.newEvent.emit('str')
     clog('createBtClickH')

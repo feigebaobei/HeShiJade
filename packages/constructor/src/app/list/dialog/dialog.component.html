@@ -1,9 +1,4 @@
-<!-- <p>dialog works!</p> -->
-
-
-<!-- (dSubmit)="submitForm($event)" -->
-<form dForm
-    >
+<form dForm>
     <d-form-item>
         <d-form-label>key</d-form-label>
         <d-form-control>
@@ -22,6 +17,23 @@
         />
         </d-form-control>
     </d-form-item>
+    <d-form-item>
+        <d-form-label>主题</d-form-label>
+        <d-form-control>
+            <d-select [options]="data.selectOptions" name="theme" 
+            [filterKey]="'label'" 
+            [(ngModel)]="data.theme"></d-select>
+        </d-form-control>
+    </d-form-item>
+    <!-- 创建应用时无版本号。版本号都是0 -->
+    <!-- <d-form-item>
+        <d-form-label>版本号</d-form-label>
+        <d-form-control>
+            <d-select [options]="data.versionOptions" name="version" 
+            [filterKey]="'label'" 
+            [(ngModel)]="data.version"></d-select>
+        </d-form-control>
+    </d-form-item> -->
     <d-form-item>
         <d-form-label>成员</d-form-label>
         <d-form-control>

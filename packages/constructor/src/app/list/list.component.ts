@@ -78,9 +78,18 @@ export class ListComponent implements OnInit {
         // name: 'Tom',
         // age: 10,
         // address: 'Chengdu',
-        key: 'key',
-        name: 'name',
-        members: 'members',
+        key: 'one',
+        name: 'one',
+        members: 'kevin@163.com',
+        theme: 'blur',
+        selectOptions: [{
+          id: 'blur',
+          label: '蓝'
+        },
+        {
+          id: 'yellow',
+          label: '黄'
+        },],
       }, // as FormData,
       // dialogtype: 'standard',
       // showAnimation: showAnimation,
@@ -94,12 +103,20 @@ export class ListComponent implements OnInit {
             let data: FormData = results.modalContentInstance.data
             // let {key, name} = data
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
-            this.http.post<ResponseData>('http://localhost:5000/apps', {
+            members = [...new Set(members)]
+            // this.http.post<ResponseData>('http://localhost:5000/apps', {
+            //   key: data.key,
+            //   name: data.name,
+            //   ulid: '1234567',
+            //   members,
+            // })
+            this.appService.createApp({
               key: data.key,
               name: data.name,
-              ulid: '1234567',
+              // ulid: '1234567',
               members,
-            }).subscribe((res) => {
+            })
+            .subscribe((res) => {
               if (res.code === 0) {
                 this.msg = [
                   { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },

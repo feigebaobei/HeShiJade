@@ -4,8 +4,15 @@ import { Subject } from 'rxjs';
 import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
 import type { B, S } from 'src/types/base';
+import { ulid } from 'ulid';
 
 type AppOrUn = App | undefined
+interface ReqCreateData {
+  key: S,
+  name: S,
+  // ulid: S,
+  members: S[],
+}
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +49,13 @@ export class AppService {
   // 根据ulid设置指定app为当前激活状态。
   setCurApp(appUlid?: S) {
     this.appSubject$.next(this._find(appUlid))
+  }
+  createApp(data: ReqCreateData) {
+    return this.http.post<ResponseData>('http://localhost:5000/apps', {
+      ...data,
+      ulid: ulid()
+    }, {
+      withCredentials: true
+    })
   }
 }
