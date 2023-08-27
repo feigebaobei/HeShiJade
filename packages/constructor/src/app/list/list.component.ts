@@ -85,7 +85,7 @@ export class ListComponent implements OnInit {
         // address: 'Chengdu',
         key: 'one',
         name: 'one',
-        members: 'kevin@163.com',
+        members: '123@qq.com,kevin@163.com',
         theme: 'blur',
         selectOptions: [{
           id: 'blur',
@@ -127,6 +127,8 @@ export class ListComponent implements OnInit {
                   { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
                 ]
                 results.modalInstance.hide(); // 成功才关闭
+                // 刷新应用列表
+                this.reqAppList()
               } else {
                 this.msg = [
                   { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
@@ -153,6 +155,9 @@ export class ListComponent implements OnInit {
     });
   }
   sqlBtClickH() {
+    this.reqAppList()
+  }
+  reqAppList() {
     this.appService.reqAppList().then(res => {
       this.appList = res
     })
