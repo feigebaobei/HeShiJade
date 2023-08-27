@@ -21,20 +21,20 @@ router.route('/')
     clog('user', user)
     let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
     result.toArray().then(r => {
-      res.status(200).json({
+      return res.status(200).json({
           code: 0,
           message: '',
           data: r
       })
     }).catch(error => {
-      res.status(200).json({
+      return res.status(200).json({
         code: 200200,
         message: "数据库出错",
         data: error,
       })
     })
   } else {
-    res.status(401).json({
+    return res.status(401).json({
       code: 300000,
       message: '用户未登录',
       data: {}
@@ -50,18 +50,18 @@ router.route('/')
       // rules.required(req.body.version) && rules.isVersion(req.body.version)
     ) {
         let version = req.body.version || 0
-        clog('user', req.session)
-        clog('req', req.body, {
-          key: req.body.key,
-          name: req.body.name,
-          ulid: req.body.ulid,
-          theme: req.body.theme,
-          // version: req.body.version,
-          version,
-          owner: req.session.user.account,
-          members: req.body.members.slice(0, 4),
-          firstPage: '',
-      })
+      //   clog('user', req.session)
+      //   clog('req', req.body, {
+      //     key: req.body.key,
+      //     name: req.body.name,
+      //     ulid: req.body.ulid,
+      //     theme: req.body.theme,
+      //     // version: req.body.version,
+      //     version,
+      //     owner: req.session.user.account,
+      //     members: req.body.members.slice(0, 4),
+      //     firstPage: '',
+      // })
         appsDb.collection('apps').insertOne({
             key: req.body.key,
             name: req.body.name,

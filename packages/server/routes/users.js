@@ -51,34 +51,35 @@ router.route('/sign')
     // 是否已经注册
     usersDb.collection('users').findOne({
       account: req.body.account
-    }).then((userInfo) => {
-      res.status(200).json({
+    }).then(() => {
+      return res.status(200).json({
         code: 100100,
         message: "该用户已经存在",
         data: {},
       })
-      return
     })
     // 创建新用户
     let mdp = md5(req.body.password)
     usersDb.collection('users').insertOne({
       account: req.body.account,
       password: mdp,
+      applications: [],
     }).then(() => {
-      res.status(200).json({
+      return res.status(200).json({
         code: 0,
         message: "ok",
         data: {},
       })
     }).catch((error) => {
-      res.status(200).json({
+      clog('error', error)
+      return res.status(200).json({
         code: 200000,
         message: "保存数据时出错",
         data: error,
       })
     })
   } else {
-    res.status(200).json({
+    return res.status(200).json({
       code: 100100,
       message: "请求参数错误",
       data: {},
@@ -92,7 +93,7 @@ router.route('/login')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  res.status(200).json({
+  return res.status(200).json({
     code: 0,
     message: '',
     data: {}
@@ -102,6 +103,7 @@ router.route('/login')
   // clog('req', req.body)
   if (rules.email(req.body.account) && rules.required(req.body.password)) {
     let mdp = md5(req.body.password)
+    clog('start', new Date().getTime())
     usersDb.collection('users').findOne({
       account: req.body.account,
       password: mdp,
@@ -110,21 +112,33 @@ router.route('/login')
       req.session.isAuth = true
       req.session.save()
       clog('user session', req.session)
-      res.status(200).json({
-        code: 0,
-        message: "ok",
-        data: req.session,
-        // data: {}
-      })
+      clog('end', new Date().getTime())
+      if (user) {
+        return res.status(200).json({
+          code: 0,
+          message: "ok",
+          data: {
+            account: user.account,
+            applications: user.applications || [],
+          },
+          // data: {}
+        })
+      } else {
+        return res.status(200).json({
+          code: 100000,
+          message: '用户不存在',
+          data: '',
+        })
+      }
     }).catch(error => {
-      res.status(200).json({
+      return res.status(200).json({
         code: 200200,
         message: "数据库出错",
         data: error,
       })
     })
   } else {
-    res.status(200).json({
+    return res.status(200).json({
       code: 100100,
       message: "请求参数错误",
       data: {},
@@ -144,7 +158,7 @@ router.route('/logout')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  res.status(200).json({
+  return res.status(200).json({
     code: 0,
     message: '',
     data: {}
@@ -154,7 +168,7 @@ router.route('/logout')
   let user = req.session.user // for test
   clog('session', req.session)
   req.session.destroy();
-  res.status(200).json({
+  return res.status(200).json({
     code: 0,
     message: "ok",
     data: user,
