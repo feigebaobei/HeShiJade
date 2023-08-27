@@ -51,32 +51,34 @@ router.route('/sign')
     // 是否已经注册
     usersDb.collection('users').findOne({
       account: req.body.account
-    }).then(() => {
-      return res.status(200).json({
-        code: 100100,
-        message: "该用户已经存在",
-        data: {},
-      })
-    })
-    // 创建新用户
-    let mdp = md5(req.body.password)
-    usersDb.collection('users').insertOne({
-      account: req.body.account,
-      password: mdp,
-      applications: [],
-    }).then(() => {
-      return res.status(200).json({
-        code: 0,
-        message: "ok",
-        data: {},
-      })
-    }).catch((error) => {
-      clog('error', error)
-      return res.status(200).json({
-        code: 200000,
-        message: "保存数据时出错",
-        data: error,
-      })
+    }).then((user) => {
+      if (user) {
+        return res.status(200).json({
+          code: 100100,
+          message: "该用户已经存在",
+          data: user,
+        })
+      } else {
+        // 创建新用户
+        let mdp = md5(req.body.password)
+        usersDb.collection('users').insertOne({
+          account: req.body.account,
+          password: mdp,
+          applications: [],
+        }).then(() => {
+          return res.status(200).json({
+            code: 0,
+            message: "ok",
+            data: {},
+          })
+        }).catch((error) => {
+          return res.status(200).json({
+            code: 200000,
+            message: "保存数据时出错",
+            data: error,
+          })
+        })
+      }
     })
   } else {
     return res.status(200).json({
