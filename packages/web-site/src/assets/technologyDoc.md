@@ -312,7 +312,7 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
 
-注册时时会报sent后修改header的错误
+注册注册后进入list页面请求apps接口报未登录
 创建正确数据结构的页面
 创建正确数据结构的组件
 创建管理user的service

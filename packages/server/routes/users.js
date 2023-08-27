@@ -66,10 +66,18 @@ router.route('/sign')
           password: mdp,
           applications: [],
         }).then(() => {
-          return res.status(200).json({
-            code: 0,
-            message: "ok",
-            data: {},
+          usersDb.collection('users').findOne({
+            account: req.body.account,
+            password: mdp,
+          }).then(user => {
+            req.session.user = user
+            req.session.isAuth = true
+            req.session.save()
+            return res.status(200).json({
+              code: 0,
+              message: "ok",
+              data: {},
+            })
           })
         }).catch((error) => {
           return res.status(200).json({
@@ -113,8 +121,8 @@ router.route('/login')
       req.session.user = user
       req.session.isAuth = true
       req.session.save()
-      clog('user session', req.session)
-      clog('end', new Date().getTime())
+      // clog('user session', req.session)
+      // clog('end', new Date().getTime())
       if (user) {
         return res.status(200).json({
           code: 0,
