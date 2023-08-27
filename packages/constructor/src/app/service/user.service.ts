@@ -27,12 +27,6 @@ export class UserService {
     this.user = undefined
   }
   login(data: {account: S, password: S}) {
-    // return this.http.post<ResponseData>('http://localhost:5000/users/login', {
-    //   account: data.account,
-    //   password: data.password,
-    // }, {
-    //   withCredentials: true,
-    // })
     return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/login', {
         account: data.account,
         password: data.password,
@@ -43,12 +37,11 @@ export class UserService {
       })
   }
   logout() {
-    return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/sign', {}, {
+    return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/logout', {}, {
       withCredentials: true,
-    }))
-    // .then(data => {
-    //   // this.router.navigate(['/'])
-    // })
+    })).then(() => {
+      this.user = undefined // 可以优化为Observable
+    })
   }
   sign(data: {account: S, password: S}) {
     return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/sign', {

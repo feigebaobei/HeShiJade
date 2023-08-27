@@ -121,8 +121,6 @@ router.route('/login')
       req.session.user = user
       req.session.isAuth = true
       req.session.save()
-      // clog('user session', req.session)
-      // clog('end', new Date().getTime())
       if (user) {
         return res.status(200).json({
           code: 0,
@@ -177,6 +175,7 @@ router.route('/logout')
 .post(cors.corsWithOptions, (req, res) => {
   let user = req.session.user // for test
   clog('session', req.session)
+  res.clearCookie()
   req.session.destroy();
   return res.status(200).json({
     code: 0,

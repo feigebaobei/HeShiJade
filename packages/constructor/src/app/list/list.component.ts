@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
-import type { ResponseData } from 'src/types';
+import type { ResponseData, User } from 'src/types';
 import type { A, B, S } from 'src/types/base';
 import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
@@ -31,7 +31,7 @@ let clog = console.log
 })
 export class ListComponent implements OnInit {
   appList: App[]
-  user: A
+  user?: User
   msg: {}[]
   constructor(
     private router: Router, 
@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
     private appService: AppService,
     private userService: UserService,
   ) {
-    this.user = {}
+    this.user = this.userService.user
     this.msg = []
     this.appList = []
   }
