@@ -7,6 +7,7 @@ import type { ResponseData } from 'src/types';
 import type { A, B, S } from 'src/types/base';
 import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
+import { UserService } from '../service/user.service';
 
 interface FormData {
   key: S
@@ -37,6 +38,7 @@ export class ListComponent implements OnInit {
     private http: HttpClient, 
     private dialogService: DialogService,
     private appService: AppService,
+    private userService: UserService,
   ) {
     this.user = {}
     this.msg = []
@@ -53,14 +55,17 @@ export class ListComponent implements OnInit {
   logoutBtClickH()  {
     // todo 验证登出。
     // 应该传递cookie
-    this.http.post<ResponseData>('http://localhost:5000/users/logout', {}).subscribe((res) => {
+    // this.http.post<ResponseData>('http://localhost:5000/users/logout', {}).subscribe((res) => {
+    //   this.router.navigate(['/'])
+    // })
+    this.userService.logout().then(() => {
       this.router.navigate(['/'])
     })
   }
   userInfoBtClickH() {
-    this.http.get<ResponseData>('http://localhost:5000/users', {withCredentials: true}).subscribe((res) => {
-      clog('getUserInfo', res)
-    })
+    // this.http.get<ResponseData>('http://localhost:5000/users', {withCredentials: true}).subscribe((res) => {
+    //   clog('getUserInfo', res)
+    // })
   }
   gotoHomeInfoBtClickH() {
     this.router.navigate([ '/' ]);
