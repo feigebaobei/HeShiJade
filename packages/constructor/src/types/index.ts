@@ -12,9 +12,14 @@ interface Page {
   ulid: S
 }
 
+interface User {
+  account: S
+  applications: S[]
+}
 
 
 export type {
     ResponseData,
     Page,
+    User,
 }

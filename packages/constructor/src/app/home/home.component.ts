@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 // import { MatIconModule } from '@angular/material/icon';
 import { FormLayout } from 'ng-devui/form';
 // import { Observable } from 'rxjs';
-import type { ResponseData } from 'src/types';
+import type { ResponseData, User } from 'src/types';
+import { UserService } from '../service/user.service';
 
 let clog = console.log
 
@@ -18,16 +19,18 @@ export class HomeComponent implements OnInit {
   status: number
   layoutDirection: FormLayout = FormLayout.Vertical;
   msg: {}[]
-
-  constructor(private router: Router, private http: HttpClient) {
+  user?: User
+  constructor(private router: Router, private http: HttpClient,
+    private userService: UserService) {
     this.isCollapsed = false
     this.status = 1 // 0 注册 1 登录
     this.msg = []
+    this.user = this.userService.user
   }
   formData = {
-    account: '12@qq.com', // for dev
-    password: '12',
-    confirmPassword: '12',
+    account: '123@qq.com', // for dev
+    password: '123456',
+    confirmPassword: '123456',
   }
 
   listClickH() {
@@ -35,16 +38,10 @@ export class HomeComponent implements OnInit {
   }
   // 登录
   submitForm(a: any) {
-    this.http.post<ResponseData>('http://localhost:5000/users/login', {
-      account: this.formData.account,
-      password: this.formData.password,
-    }, {
-      withCredentials: true,
-    })
-    .subscribe((res) => {
-      if (res.code === 0) {
-        this.listClickH()
-      }
+    this.userService.login({account: this.formData.account,
+    password: this.formData.password}).then(() => {
+      this.router.navigate(['/list' ]);
+      this.user = this.userService.user
     })
   }
   // 注册
@@ -54,13 +51,11 @@ export class HomeComponent implements OnInit {
       return
     }
     if (this.formData.password === this.formData.confirmPassword && this.formData.password) {
-      this.http.post<ResponseData>('http://localhost:5000/users/sign', {
+      this.userService.sign({
         account: this.formData.account,
         password: this.formData.password,
-      }).subscribe((res) => {
-        if (res.code === 0) {
-          this.listClickH()
-        }
+      }).then(() => {
+        this.listClickH()
       })
     } else {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '二次输入的password不一致' }];

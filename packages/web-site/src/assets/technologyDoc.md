@@ -70,6 +70,11 @@
 |password|密码|||
 |applications|应用的ulid组成数组|||
 
+3个开发用的用户。密码都是123456.
+  123@qq.com
+  kevin@163.com
+  amanda@gmail.com
+
 ##### apps 应用全量表
 |字段key|描述|||
 |-|-|-|-|
@@ -306,11 +311,8 @@ withCredentials: true
 https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
-创建正确数据结构的应用
+
+注册时时会报sent后修改header的错误
 创建正确数据结构的页面
 创建正确数据结构的组件
 创建管理user的service
-注册、登录用户
-  123@qq.com
-  kevin@163.com
-  amanda@gmail.com
