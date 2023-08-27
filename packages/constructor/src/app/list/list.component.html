@@ -2,6 +2,7 @@
 <header>header
     <span>用户账号：{{user?.account}}</span>
     <d-button (click)="logoutBtClickH()">logout</d-button>
+    <d-button (click)="homeBtClickH()">home</d-button>
     <!-- <d-button (click)="userInfoBtClickH()">get userInfo</d-button>
     <d-button (click)="gotoHomeInfoBtClickH()">home</d-button> -->
 </header>
@@ -26,6 +27,9 @@
                 <span>theme</span>
                 <span></span>
             </p> -->
+            <p>
+                <d-button (click)="gotoPublishBtClickH">去发布</d-button>
+            </p>
         </div>
     </section>
 </main>

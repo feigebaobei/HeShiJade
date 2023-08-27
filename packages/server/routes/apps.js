@@ -19,7 +19,8 @@ router.route('/')
   if (req.session.isAuth) {
     let {user} = req.session
     clog('user', user)
-    let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
+    // let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
+    let result = appsDb.collection('apps').find({ulid: {$in: req.session.user.applications}})
     result.toArray().then(r => {
       return res.status(200).json({
           code: 0,

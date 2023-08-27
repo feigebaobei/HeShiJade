@@ -84,8 +84,10 @@
 |theme|主题|||
 |version|版本|||
 |owner|拥有者|||
-|members|成员。最多4个。|||
-|firstPage|第一个页面的ulid|||
+|members|成员。最多4个。|owner在第一个||
+|firstPageUlid|第一个页面的ulid|||
+|prevUlid|前一个页面的ulid|||
+|nextUlid|后一个页面的ulid|||
 
 ##### pages 页面全量表
 |字段key|描述|||
@@ -312,7 +314,5 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
 
-注册注册后进入list页面请求apps接口报未登录
 创建正确数据结构的页面
 创建正确数据结构的组件
-创建管理user的service

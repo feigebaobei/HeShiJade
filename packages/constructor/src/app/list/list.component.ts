@@ -109,12 +109,6 @@ export class ListComponent implements OnInit {
             // let {key, name} = data
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
-            // this.http.post<ResponseData>('http://localhost:5000/apps', {
-            //   key: data.key,
-            //   name: data.name,
-            //   ulid: '1234567',
-            //   members,
-            // })
             this.appService.createApp({
               key: data.key,
               name: data.name,
@@ -161,5 +155,12 @@ export class ListComponent implements OnInit {
     this.appService.reqAppList().then(res => {
       this.appList = res
     })
+  }
+  gotoPublishBtClickH() {
+    clog('gotoPublishBtClickH')
+    // let results = this.dialogService.open
+  }
+  homeBtClickH() {
+    this.router.navigate(['/home'])
   }
 }

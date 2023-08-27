@@ -6,7 +6,8 @@ import { PageDialogComponent } from './dialog/page-dialog.component'; // 以后�
 import { AppService } from 'src/app/service/app.service';
 import { PageService } from 'src/app/service/page.service';
 import { ulid } from 'ulid'
-import type { Page } from 'src/types';
+// import type { Page } from 'src/types';
+import type { Page } from 'src/types/page';
 import type { A, S } from 'src/types/base'
 import type { ResponseData } from 'src/types';
 

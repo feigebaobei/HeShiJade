@@ -6,11 +6,11 @@ interface ResponseData {
   message: S
 }
 
-interface Page {
-  name: S
-  key: S
-  ulid: S
-}
+// interface Page {
+//   name: S
+//   key: S
+//   ulid: S
+// }
 
 interface User {
   account: S
@@ -20,6 +20,6 @@ interface User {
 
 export type {
     ResponseData,
-    Page,
+    // Page
     User,
 }
