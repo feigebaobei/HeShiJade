@@ -17,23 +17,58 @@ router.route('/')
 })
 .get(cors.corsWithOptions, (req, res) => {
   if (req.session.isAuth) {
-    let {user} = req.session
-    clog('user', user)
-    // let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
-    let result = appsDb.collection('apps').find({ulid: {$in: req.session.user.applications}})
-    result.toArray().then(r => {
+    // let {user} = req.session
+    // clog('user', user)
+    // // let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
+    // let result = appsDb.collection('apps').find({ulid: {$in: req.session.user.applications}})
+    // 取出用户user
+    // 按user.applications取出应用
+    usersDb.collection('users').findOne({account: req.session.user.account}).then(user => {
+      if (user) {
+        clog(user.applications)
+        return appsDb.collection('apps').find({ulid: {$in: user.applications}}).toArray()
+      } else {
+        return Promise.reject({
+          code: 300000,
+          message: '用户不存在',
+          know: true
+        })
+      }
+    }).then(apps => {
+      clog('apps', apps)
       return res.status(200).json({
-          code: 0,
-          message: '',
-          data: r
+        code: 0,
+        message: '',
+        data: apps
       })
-    }).catch(error => {
-      return res.status(200).json({
-        code: 200200,
-        message: "数据库出错",
-        data: error,
-      })
+    }).catch(obj => {
+      if (obj.know) {
+        res.status(200).json({
+          code: obj.code,
+          message: obj.message,
+          data: {},
+        })
+      } else {
+        res.status(200).json({
+          code: 200200,
+          message: "数据库出错",
+          data: obj,
+        })
+      }
     })
+    // result.toArray().then(r => {
+    //   return res.status(200).json({
+    //       code: 0,
+    //       message: '',
+    //       data: r
+    //   })
+    // }).catch(error => {
+    //   return res.status(200).json({
+    //     code: 200200,
+    //     message: "数据库出错",
+    //     data: error,
+    //   })
+    // })
   } else {
     return res.status(401).json({
       code: 300000,

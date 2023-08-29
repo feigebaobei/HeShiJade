@@ -22,7 +22,29 @@ let rules = {
         return Number.isNumber(n)
     }
 }
+// let wrapCheck = (condition, res) => {
+//     return new Promise((s, j) => {
+//         if (condition) {
+//             s()
+//         } else {
+//             return res.status(200).json({
+//                 code: 100100,
+//                 message: "请求参数错误",
+//                 data: {},
+//               })
+//         }
+//     })
+// }
+let resParamsError = (res) => {
+    return res.status(200).json({
+        code: 100100,
+        message: "请求参数错误",
+        data: {},
+      })
+}
 module.exports = {
     // required,
-    rules
+    rules,
+    // wrapCheck,
+    resParamsError,
 }

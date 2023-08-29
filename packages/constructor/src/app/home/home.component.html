@@ -1,9 +1,4 @@
 <section class="box">
-    <section class="left">
-        <p class="welcome">{{'welcome' | uppercase}}</p>
-        <p class="welcome">{{'to' | uppercase }}</p>
-        <p class="welcome">{{'HeShiJade' | uppercase}}</p>
-    </section>
     <section class="right">
         <section class="login_box">
             <header class="header" [ngClass]="{left: status, right: !status}">
@@ -109,5 +104,10 @@
             <d-button bsStyle="common" circled="true" 
             (click)="gotoLinkButtonClickH()">goto list</d-button>
         </section>
+    </section>
+    <section class="left">
+        <p class="welcome">{{'welcome' | uppercase}}</p>
+        <p class="welcome">{{'to' | uppercase }}</p>
+        <p class="welcome">{{'HeShiJade' | uppercase}}</p>
     </section>
 </section>
