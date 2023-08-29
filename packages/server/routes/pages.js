@@ -4,8 +4,8 @@ var router = express.Router();
 let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
-let {pagesDb} = require('../mongodb');
-const { rules } = require('../helper');
+let {pagesDb, appsDb} = require('../mongodb');
+const { rules, resParamsError } = require('../helper');
 // let md5 = require('md5');
 let clog = console.log
 
@@ -45,24 +45,50 @@ router.route('/')
 .post(cors.corsWithOptions, (req, res) => {
     if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.required(req.body.appUlid)) {
       clog('req.body', req.body)
-        pagesDb.collection('pages').insertOne({
+      // 取出指定应用的数据app
+      // 使用app.lastPageUlid创建page
+        appsDb.collection('apps').findOne({ulid: req.body.appUlid}).then(app => {
+          if (app) {
+            return app
+          } else {
+            return Promise.reject({
+              code: 400000, message: '指定应用不存在', 
+              know: true // 是否已知
+            })
+          }
+        }).then(app => {
+          return pagesDb.collection('pages').insertOne({
             key: req.body.key,
             name: req.body.name,
             ulid: req.body.ulid,
+            prevUlid: app.lastPageUlid,
+            nextUlid: '',
+            childUlid: '',
+            firstComponentUlid: '',
+            lastComponentUlid: '',
             appUlid: req.body.appUlid,
-            componentUlid: ''
-        }).then((apps) => {
-            res.status(200).json({
+          })
+        })
+        .then(() => {
+            return res.status(200).json({
               code: 0,
               message: "ok",
               data: {},
             })
-        }).catch((error) => {
-        res.status(200).json({
-            code: 200200,
-            message: "数据库出错",
-            data: error,
-          })
+        }).catch((obj) => {
+          if (obj.know) {
+            res.status(200).json({
+              code: obj.code,
+              message: obj.message,
+              data: {},
+            })
+          } else {
+            res.status(200).json({
+              code: 200200,
+              message: "数据库出错",
+              data: obj,
+            })
+          }
         })
     } else {
         res.status(200).json({
@@ -77,6 +103,74 @@ router.route('/')
 })
 .delete(cors.corsWithOptions, (req, res) => {
   res.send('delete')
+  // 检验参数
+  // 是否有权限
+  // 删除
+  // if () {}
+  if(rules.required(req.body.appUlid) && req.body.pageUlid) {
+    if (req.session.user.applications.includes(req.body.appUlid)) {
+      appsDb.collection('apps').findOne({ulid: req.body.appUlid}).then(app => {
+        if (app) {
+          return pagesDb.collection('pages').findOne({ulid: req.body.pageUlid})
+        } else {
+          return Promise.reject({
+            code: 400000,
+            message: '应用不存在',
+            know: true,
+          })
+        }
+      }).then((page) => {
+        if (page) {
+          // 修改2个
+          // 删除1个
+          return pagesDb.collection('pages').bulkWrite({
+            updateOne: {
+              filter: {ulid: page.prevUlid},
+              update: {nextUlid: page.nextUlid}
+            },
+            updateOne: {
+              filter: {ulid: page.nextUlid},
+              update: {prevUlid: page.prevUlid}
+            },
+            deleteOne: {
+              filter: {ulid: pageUlid}
+            }
+          })
+        } else {
+          return Promise.reject({
+            code: 500000,
+            message: '页面不存在',
+            know: true,
+          })
+        }
+      }).then(() => {
+        return res.status(200).json({
+          code: 0,
+          message: '',
+          data: {}
+        })
+      }).catch(obj => {
+        if (obj.know) {
+          res.status(200).json({
+            code: obj.code,
+            message: obj.message,
+            data: {},
+          })
+        } else {
+          res.status(200).json({
+            code: 200200,
+            message: "数据库出错",
+            data: obj,
+          })
+        }
+      })
+    } else {
+      resParamsError(res)
+    }
+  } else {
+    resParamsError(res)
+  }
+
 })
 
 module.exports = router;

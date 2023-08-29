@@ -56,19 +56,6 @@ router.route('/')
         })
       }
     })
-    // result.toArray().then(r => {
-    //   return res.status(200).json({
-    //       code: 0,
-    //       message: '',
-    //       data: r
-    //   })
-    // }).catch(error => {
-    //   return res.status(200).json({
-    //     code: 200200,
-    //     message: "数据库出错",
-    //     data: error,
-    //   })
-    // })
   } else {
     return res.status(401).json({
       code: 300000,
@@ -87,18 +74,6 @@ router.route('/')
         // 保存应用
         let version = req.body.version || 0
         let members = req.body.members.slice(0, 4)
-        // let cApp = appsDb.collection('apps').insertOne({
-        //     key: req.body.key,
-        //     name: req.body.name,
-        //     ulid: req.body.ulid,
-        //     theme: req.body.theme,
-        //     version,
-        //     owner: req.session.user.account,
-        //     members: req.body.members.slice(0, 4), // 最多有4个人。可优化为配置项。
-        //     firstPageUlid: '',
-        //     prevUlid: req.session.user.applications[req.session.user.applications.length - 1] || '',
-        //     nextUlid: '',
-        // })
         let lastAppUlid = req.session.user.applications[req.session.user.applications.length - 1]
         let appObj = [
           {
@@ -120,6 +95,7 @@ router.route('/')
                 owner: req.body.owner,
                 members,
                 firstPageUlid: '',
+                lastPageUlid: '',
                 prevUlid: lastAppUlid,
                 nextUlid: ''
               }
@@ -128,10 +104,6 @@ router.route('/')
         ]
         let cApp = appsDb.collection('apps').bulkWrite(appObj)
         // 修改用户表中的数据
-        // let curUser = req.session.user
-        // let eUser = usersDb.collection('users').updateOne({
-        //   account: curUser.account,
-        // }, {$push: {applications: req.body.ulid}})
         // insertOne
         // replaceOne
         // updateOne

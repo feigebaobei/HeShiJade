@@ -71,8 +71,8 @@ export class PageListComponent implements OnInit {
       backdropCloseable: true,
       onClose: () => clog('close'),
       data: {
-        key: '',
-        name: '',
+        key: 'p0',
+        name: 'p0',
       },
       buttons: [
         {
