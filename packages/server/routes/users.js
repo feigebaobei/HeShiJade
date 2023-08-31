@@ -113,7 +113,7 @@ router.route('/login')
   // clog('req', req.body)
   if (rules.email(req.body.account) && rules.required(req.body.password)) {
     let mdp = md5(req.body.password)
-    clog('start', new Date().getTime())
+    // clog('start', new Date().getTime())
     usersDb.collection('users').findOne({
       account: req.body.account,
       password: mdp,
