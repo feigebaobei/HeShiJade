@@ -23,8 +23,6 @@ interface PageData {
   styleUrls: ['./page-list.component.sass']
 })
 export class PageListComponent implements OnInit {
-  // pageList: Page[]
-  // @Input() pageList: Page[]
   pageList: Page[]
   msg: {}[]
   // curPageUlid: S
@@ -33,29 +31,27 @@ export class PageListComponent implements OnInit {
     private http: HttpClient,
     private appService: AppService,
     private pageService: PageService,
-    ) {
+  ) {
     this.pageList = []
+    this.pageService.pageList$.subscribe(pl => {
+      this.pageList = pl
+    })
+    this.curPage = null
+    this.pageService.pageSubject$.subscribe(p => {
+      this.curPage = p
+    })
     this.msg = []
     // this.curPageUlid = ''
-    this.curPage = null
   }
   ngOnInit(): void {
     this.init()
   }
   init() {
-  //   // 日后从service中取得
-  //   // this.pageList = [
-  //   //   { name: 'first', key: 'first', ulid: '1234567890qwertyuiopasdfga'},
-  //   //   { name: 'second', key: 'second', ulid: '1234567890qwertyuiopasdfgb'},
-  //   //   { name: 'third', key: 'third', ulid: '1234567890qwertyuiopasdfgc'},
-  //   // ]
-    // this.pageService.pageSubject$.subscribe((page) => {
-    //   this.curPage = page
+    this.pageService.recast()
+    // .then(arr => {
+    //   this.pageList = arr
+    //   clog('this.pagelist', this.pageList, arr)
     // })
-    this.pageService.reqPageList().then(arr => {
-      this.pageList = arr
-      clog('this.pagelist', this.pageList, arr)
-    })
   }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent
@@ -81,29 +77,52 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            this.http.post<ResponseData>('http://localhost:5000/pages', {
-              key: data.key,
-              name: data.name,
-              ulid: ulid(),
-              appUlid: this.appService.getCurApp()?.ulid,
-            }).subscribe((res) => {
-              if (res.code === 0) {
-                this.msg = [
-                  { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
-                ]
-                results.modalInstance.hide(); // 成功才关闭
-                this.pageService.reqPageList().then(res => {
-                  this.pageList = res
-                  if (this.pageList.length) {
-                    this.pageService.setCurPage(this.pageList[this.pageList.length - 1].ulid)
-                  }
+            this.pageService.add(data).then((data) => {
+              // 提示
+              // 关闭
+              // 刷新页面列表
+              this.msg = [
+                { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
+              ]
+              results.modalInstance.hide(); // 成功才关闭
+              if (!this.appService.getCurApp()?.firstPageUlid) {
+                this.appService.recast().then(() => {
+                  this.pageService.recast()
                 })
               } else {
-                this.msg = [
-                  { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
-                ]
+                this.pageService.recast()
               }
+            }).catch(() => {
+              this.msg = [
+                { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
+              ]
             })
+            // this.http.post<ResponseData>('http://localhost:5000/pages', {
+            //   key: data.key,
+            //   name: data.name,
+            //   ulid: ulid(),
+            //   appUlid: this.appService.getCurApp()?.ulid,
+            // }).subscribe((res) => {
+            //   if (res.code === 0) {
+            //     this.msg = [
+            //       { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
+            //     ]
+            //     // 关闭
+            //     // 请求页面列表
+            //     results.modalInstance.hide(); // 成功才关闭
+            //     if (!this.appService.getCurApp()?.firstPageUlid) {
+            //       this.appService.recast().then(() => {
+            //         this.pageService.recast()
+            //       })
+            //     } else {
+            //       this.appService.recast()
+            //     }
+            //   } else {
+            //     this.msg = [
+            //       { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
+            //     ]
+            //   }
+            // })
           }
         },
         {
