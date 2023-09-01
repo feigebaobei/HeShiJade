@@ -48,25 +48,31 @@ router.route('/')
       // 取出指定应用的数据app
       // 使用app.lastPageUlid创建page
       // 更新app.firstPageUlid的数据
+      // 检查app是否存在
+      // 检查用户是否有权限
+      // 创建页面
+      // 修改前一个page的nextUlid
+      // 修改app中的firstPageUlid/lastPageUlid
       let curApp = null
         appsDb.collection('apps').findOne({ulid: req.body.appUlid}).then(app => {
-          clog('app', app, req.session)
+          // clog('app', app, req.session)
           if (app) {
-            // return app
-            if (
-              true
-              // app.owner === req.session.user.account 
-              // || app.members.includes(req.session.user.account)
-              ) {
-              curApp = app
-              return
-            } else {
-              return Promise.reject({
-                code: 400010,
-                message: '您无权限',
-                know: true
-              })
-            }
+            curApp = app
+            return
+            // if (
+            //   true
+            //   // app.owner === req.session.user.account 
+            //   // || app.members.includes(req.session.user.account)
+            //   ) {
+            //   curApp = app
+            //   return
+            // } else {
+            //   return Promise.reject({
+            //     code: 400010,
+            //     message: '您无权限',
+            //     know: true
+            //   })
+            // }
           } else {
             return Promise.reject({
               code: 400000, message: '指定应用不存在', 
@@ -74,7 +80,7 @@ router.route('/')
             })
           }
         }).then(() => {
-          clog('update firstPageUlid', curApp)
+          // clog('create page', curApp)
           return pagesDb.collection('pages').insertOne({
             key: req.body.key,
             name: req.body.name,
@@ -87,6 +93,18 @@ router.route('/')
             appUlid: req.body.appUlid,
           })
         }).then(() => {
+          // clog(123, curApp.lastPageUlid)
+          if (curApp.lastPageUlid) {
+            return pagesDb.collection('pages').updateOne({
+              ulid: curApp.lastPageUlid
+            }, {
+              $set: {nextUlid: req.body.ulid}
+            })
+          } else {
+            return
+          }
+        }).then(() => {
+          // clog('asd')
           if (!curApp.firstPageUlid && !curApp.lastPageUlid) {
             return appsDb.collection('apps').updateOne({
               ulid: curApp.ulid
@@ -105,7 +123,7 @@ router.route('/')
           }
         })
         .then(() => {
-          clog('created page')
+          // clog('created page')
             return res.status(200).json({
               code: 0,
               message: "ok",
