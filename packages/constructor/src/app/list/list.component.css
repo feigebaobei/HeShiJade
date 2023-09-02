@@ -6,4 +6,6 @@
     flex-basis: 360px;
     flex-grow: 0;
     flex-shrink: 1;
+    margin: 8px 16px;
+    cursor: pointer;
 }

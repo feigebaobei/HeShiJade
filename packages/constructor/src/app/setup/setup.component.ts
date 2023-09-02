@@ -73,14 +73,9 @@ export class SetupComponent implements OnInit {
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
     // clog('appUlid', appUlid, this.appService.appList)
-    if (this.appService.appList.length) {
-      // let bool = 
-      return Promise.resolve(this.appService.appList.some(item => item.ulid === appUlid))
-      // .then()
-      // return {
-      //   bool
-      //   appUlid
-      // }
+    let pl = this.appService.getAppList()
+    if (pl.length) {
+      return Promise.resolve(pl.some(item => item.ulid === appUlid))
     } else {
       return this.appService.reqAppList().then(appList => {
         return appList.some(item => item.ulid === appUlid)

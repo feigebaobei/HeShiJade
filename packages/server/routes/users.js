@@ -51,32 +51,42 @@ router.route('/sign')
     // 是否已经注册
     usersDb.collection('users').findOne({
       account: req.body.account
-    }).then(() => {
-      return res.status(200).json({
-        code: 100100,
-        message: "该用户已经存在",
-        data: {},
-      })
-    })
-    // 创建新用户
-    let mdp = md5(req.body.password)
-    usersDb.collection('users').insertOne({
-      account: req.body.account,
-      password: mdp,
-      applications: [],
-    }).then(() => {
-      return res.status(200).json({
-        code: 0,
-        message: "ok",
-        data: {},
-      })
-    }).catch((error) => {
-      clog('error', error)
-      return res.status(200).json({
-        code: 200000,
-        message: "保存数据时出错",
-        data: error,
-      })
+    }).then((user) => {
+      if (user) {
+        return res.status(200).json({
+          code: 100100,
+          message: "该用户已经存在",
+          data: user,
+        })
+      } else {
+        // 创建新用户
+        let mdp = md5(req.body.password)
+        usersDb.collection('users').insertOne({
+          account: req.body.account,
+          password: mdp,
+          applications: [],
+        }).then(() => {
+          usersDb.collection('users').findOne({
+            account: req.body.account,
+            password: mdp,
+          }).then(user => {
+            req.session.user = user
+            req.session.isAuth = true
+            req.session.save()
+            return res.status(200).json({
+              code: 0,
+              message: "ok",
+              data: {},
+            })
+          })
+        }).catch((error) => {
+          return res.status(200).json({
+            code: 200000,
+            message: "保存数据时出错",
+            data: error,
+          })
+        })
+      }
     })
   } else {
     return res.status(200).json({
@@ -103,7 +113,7 @@ router.route('/login')
   // clog('req', req.body)
   if (rules.email(req.body.account) && rules.required(req.body.password)) {
     let mdp = md5(req.body.password)
-    clog('start', new Date().getTime())
+    // clog('start', new Date().getTime())
     usersDb.collection('users').findOne({
       account: req.body.account,
       password: mdp,
@@ -111,8 +121,6 @@ router.route('/login')
       req.session.user = user
       req.session.isAuth = true
       req.session.save()
-      clog('user session', req.session)
-      clog('end', new Date().getTime())
       if (user) {
         return res.status(200).json({
           code: 0,
@@ -167,6 +175,7 @@ router.route('/logout')
 .post(cors.corsWithOptions, (req, res) => {
   let user = req.session.user // for test
   clog('session', req.session)
+  res.clearCookie()
   req.session.destroy();
   return res.status(200).json({
     code: 0,

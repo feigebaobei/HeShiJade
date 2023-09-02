@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
-import type { ResponseData } from 'src/types';
+import type { ResponseData, User } from 'src/types';
 import type { A, B, S } from 'src/types/base';
 import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
@@ -31,7 +31,7 @@ let clog = console.log
 })
 export class ListComponent implements OnInit {
   appList: App[]
-  user: A
+  user?: User
   msg: {}[]
   constructor(
     private router: Router, 
@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
     private appService: AppService,
     private userService: UserService,
   ) {
-    this.user = {}
+    this.user = this.userService.user
     this.msg = []
     this.appList = []
   }
@@ -85,7 +85,7 @@ export class ListComponent implements OnInit {
         // address: 'Chengdu',
         key: 'one',
         name: 'one',
-        members: 'kevin@163.com',
+        members: '123@qq.com,kevin@163.com',
         theme: 'blur',
         selectOptions: [{
           id: 'blur',
@@ -109,12 +109,6 @@ export class ListComponent implements OnInit {
             // let {key, name} = data
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
-            // this.http.post<ResponseData>('http://localhost:5000/apps', {
-            //   key: data.key,
-            //   name: data.name,
-            //   ulid: '1234567',
-            //   members,
-            // })
             this.appService.createApp({
               key: data.key,
               name: data.name,
@@ -127,6 +121,8 @@ export class ListComponent implements OnInit {
                   { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
                 ]
                 results.modalInstance.hide(); // 成功才关闭
+                // 刷新应用列表
+                this.reqAppList()
               } else {
                 this.msg = [
                   { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
@@ -153,8 +149,18 @@ export class ListComponent implements OnInit {
     });
   }
   sqlBtClickH() {
+    this.reqAppList()
+  }
+  reqAppList() {
     this.appService.reqAppList().then(res => {
       this.appList = res
     })
+  }
+  gotoPublishBtClickH() {
+    clog('gotoPublishBtClickH')
+    // let results = this.dialogService.open
+  }
+  homeBtClickH() {
+    this.router.navigate(['/home'])
   }
 }

@@ -84,8 +84,11 @@
 |theme|主题|||
 |version|版本|||
 |owner|拥有者|||
-|members|成员。最多4个。|||
-|firstPage|第一个页面的ulid|||
+|members|成员。最多4个。|owner在第一个||
+|firstPageUlid|第一个页面的ulid|||
+|lastPageUlid|最后一个页面的ulid|待开发||
+|prevUlid|前一个页面的ulid|||
+|nextUlid|后一个页面的ulid|||
 
 ##### pages 页面全量表
 |字段key|描述|||
@@ -93,10 +96,11 @@
 |key|页面的key，不可改|||
 |name|名称|||
 |ulid|惟一键|||
-|next|下一个页面的ulid|暂未使用||
-|prev|上一个页面的ulid|暂未使用||
-|child|当前页面的第一个子页面|暂未使用||
-|componentUlid|第一个组件的ulid|||
+|prevUlid|上一个页面的ulid|暂未使用||
+|nextUlid|下一个页面的ulid|暂未使用||
+|childUlid|当前页面的第一个子页面|暂未使用||
+|firstComponentUlid|第一个组件的ulid|||
+|lastComponentUlid|第一个组件的ulid|||
 |appUlid|属于哪个应用|||
 
 ##### comps 组件全量表
@@ -273,6 +277,10 @@ app.use(session({
 |||02 查询时出错|||
 |||03 修改时出错|||
 |||04 删除时出错|||
+||30 用户出错||||
+||40 应用出错||||
+||50 页面出错||||
+||60 组件出错||||
 
 ## title
 
@@ -312,7 +320,8 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
 
-注册时时会报sent后修改header的错误
-创建正确数据结构的页面
+
+选中页面
 创建正确数据结构的组件
-创建管理user的service
+去发布
+整理接口文档
