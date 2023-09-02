@@ -1,10 +1,12 @@
 <div dDroppable (dropEvent)="onDrop($event, pageList)">
     <!-- {{ pageList | json}} -->
+    <!-- {{ curPage | json}} -->
     <ul dSortable>
         <li dDraggable
             *ngFor="let page of pageList"
             class="page_item"
-            (click)="pageItemClickH(page.ulid)"    
+            [ngClass]="{selected: page.ulid === curPage?.ulid}"
+            (click)="pageItemClickH(page.ulid)"
         >
             {{page.name}}
         </li>

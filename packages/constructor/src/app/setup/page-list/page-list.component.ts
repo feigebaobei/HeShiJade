@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 // import { DialogComponent } from 'src/app/list/dialog/dialog.component';
@@ -9,7 +9,7 @@ import { ulid } from 'ulid'
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
 import type { A, S } from 'src/types/base'
-import type { ResponseData } from 'src/types';
+// import type { ResponseData } from 'src/types';
 
 let clog = console.log
 
@@ -28,7 +28,7 @@ export class PageListComponent implements OnInit {
   // curPageUlid: S
   curPage?: Page | null
   constructor(private dialogService: DialogService,
-    private http: HttpClient,
+    // private http: HttpClient,
     private appService: AppService,
     private pageService: PageService,
   ) {
@@ -77,7 +77,7 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            this.pageService.add(data).then((data) => {
+            this.pageService.add(data).then(() => {
               // 提示
               // 关闭
               // 刷新页面列表
@@ -92,37 +92,12 @@ export class PageListComponent implements OnInit {
               } else {
                 this.pageService.recast()
               }
+              this.pageService.setCurPage(this.pageList[this.pageList.length].ulid)
             }).catch(() => {
               this.msg = [
                 { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
               ]
             })
-            // this.http.post<ResponseData>('http://localhost:5000/pages', {
-            //   key: data.key,
-            //   name: data.name,
-            //   ulid: ulid(),
-            //   appUlid: this.appService.getCurApp()?.ulid,
-            // }).subscribe((res) => {
-            //   if (res.code === 0) {
-            //     this.msg = [
-            //       { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
-            //     ]
-            //     // 关闭
-            //     // 请求页面列表
-            //     results.modalInstance.hide(); // 成功才关闭
-            //     if (!this.appService.getCurApp()?.firstPageUlid) {
-            //       this.appService.recast().then(() => {
-            //         this.pageService.recast()
-            //       })
-            //     } else {
-            //       this.appService.recast()
-            //     }
-            //   } else {
-            //     this.msg = [
-            //       { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
-            //     ]
-            //   }
-            // })
           }
         },
         {
