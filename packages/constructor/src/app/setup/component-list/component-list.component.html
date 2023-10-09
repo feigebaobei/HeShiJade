@@ -1,3 +1,20 @@
-<div *ngFor="let comp of componentList" class="component_item">
+<div>
+    <!-- [dragScope]="'default-css'"
+    [dragData]="{item: comp, parent: componentList}" -->
+    <p>drag & drop</p>
+<div 
+    dDraggable
+    *ngFor="let comp of componentList" 
+    class="component_item"
+    [dragData]="{ item: comp, parent: componentList }"
+>
     <span>{{ comp.name }}</span>
+</div>
+<div
+dDroppable
+style="height: 130px; background: gray"
+(dropEvent)="onItemDrop($event)"
+>
+    str
+</div>
 </div>

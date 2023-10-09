@@ -32,6 +32,7 @@ import { DialogComponent } from './list/dialog/dialog.component';
 import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
+import { CompBoxComponent } from './setup/comp-box/comp-box.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ComponentListComponent } from './setup/component-list/component-list.co
     PageDialogComponent,
     PageListComponent,
     ComponentListComponent,
+    CompBoxComponent,
   ],
   imports: [
     BrowserModule,

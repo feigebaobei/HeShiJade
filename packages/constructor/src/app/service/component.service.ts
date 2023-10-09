@@ -13,8 +13,9 @@ type CompOrUn = Component | undefined
   providedIn: 'root'
 })
 export class ComponentService {
-  componentList: Component[]
+  componentList: Component[] // 这里应该使用组件种类的类型
   // curComponent: Component | null
+  componentListByPage: Component[] // 应该使用组件的类型
   compSubject$: Subject<CompOrUn>
   _curCompUlid: S
   _curComponent: CompOrUn
@@ -22,6 +23,7 @@ export class ComponentService {
     this.componentList = []
     // 组件种类应该从前端取得，不应该从后端接口取得。
     // this.curComponent = null
+    this.componentListByPage = []
     this.compSubject$ = new Subject<CompOrUn>()
     this._curCompUlid = ''
     this._curComponent = undefined
@@ -39,9 +41,23 @@ export class ComponentService {
           j(new Error(res.message))
         }
       })
-      
     })
     // return this.componentList
+  }
+  // 请求指定页面的组件
+  getCompListByPage() {
+    return new Promise<Component[]>((s, j) => {
+      this.http.get<ResponseData>('http://localhost:5000/components/listByPage', { // 日后改为接口重载
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          this.componentListByPage = res.data
+          s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
   }
   private _find(compUlid: S) {
     return this._curComponent = this.componentList.find(item => item.ulid === compUlid)

@@ -22,8 +22,16 @@
             </d-tabs>
         </d-col>
         <!-- stage -->
-        <d-col [dSpan]="8">
+        <d-col
+            [dSpan]="8"
+            dDroppable
+            (dropEvent)="onDrop($event, pageData)"
+        >
             stage
+            <app-comp-box
+                *ngFor="let comp of componentByPage"
+                [comp]="comp"
+            ></app-comp-box>
         </d-col>
         <!-- setter -->
         <d-col [dSpan]="8">

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
+import { PageService } from '../service/page.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Component as Comp } from 'src/types/component';
-import { PageService } from '../service/page.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import type { DropEvent } from 'ng-devui';
 
 let clog = console.log
 
@@ -21,8 +22,10 @@ export class SetupComponent implements OnInit {
   leftTabActive: S | N
   rightTabActive: S | N
   componentList: Comp[]
+  componentByPage: Comp[]
   pageList: Page[]
   msg: {}[]
+  pageData: A[]
   constructor(
     private appService: AppService,
     private pageService: PageService,
@@ -36,8 +39,10 @@ export class SetupComponent implements OnInit {
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
     this.componentList = []
+    this.componentByPage = []
     this.pageList = []
     this.msg = []
+    this.pageData = []
     // clog('this.router', this.router)
     // clog('this.route', this.route)
   }
@@ -57,11 +62,15 @@ export class SetupComponent implements OnInit {
         return Promise.reject()
       }
     }).then(() => {
-      // 请求componentList
+      // 请求组件的种类
       this.componentService.getComponentList().then(res => {
         this.componentList = res
       }).catch(error => {
         clog('error', error)
+      })
+      // 请求当前页面的组件
+      this.componentService.getCompListByPage().then(res => {
+        this.componentByPage = res
       })
     }).catch(() => {
       this.msg = [
@@ -72,15 +81,34 @@ export class SetupComponent implements OnInit {
   }
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
-    // clog('appUlid', appUlid, this.appService.appList)
     let pl = this.appService.getAppList()
+    // clog('appUlid', appUlid, pl)
     if (pl.length) {
       return Promise.resolve(pl.some(item => item.ulid === appUlid))
     } else {
       return this.appService.reqAppList().then(appList => {
+        // clog('appList', appList)
         return appList.some(item => item.ulid === appUlid)
       })
     }
+  }
+  onDrop(e: DropEvent, targetArray: A) {
+    clog('stage onDrop', e, targetArray)
 
+    // let index = e.dropIndex;
+    // const fromIndex = e.dragFromIndex;
+    // const item = e.dragData.item;
+    // if (-1 !== index) {
+    //   /* 修正同一个container排序，往下拖动index多了1个位置*/
+    //   if (-1 !== fromIndex && index > fromIndex) {
+    //     index--;
+    //   }
+    //   targetArray.splice(index, 0, fromIndex === -1 ? item : targetArray.splice(fromIndex, 1)[0]);
+    // } else {
+    //   targetArray.push(item);
+    // }
+    // if (fromIndex === -1) {
+    //   this.removeItem(item, e.dragData.parent);
+    // }
   }
 }
