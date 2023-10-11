@@ -94,6 +94,21 @@ export class SetupComponent implements OnInit {
   }
   onDrop(e: DropEvent, targetArray: A) {
     clog('stage onDrop', e, targetArray)
+    // this.componentByPage = [...this.componentByPage, ...this.componentByPage]
+    // 请求后端保存组件时保存到本地。
+    let curPage = this.pageService.getCurPage()
+    this.componentService.postCompListByPage({
+      ulid: '',
+      type: 'Button',
+      prev: '',
+      next: '',
+      props: {},
+      behaivor: {},
+      item: {},
+      slot: '',
+      appUlid: curPage!.appUlid,
+      pageUlid: curPage!.ulid,
+    })
 
     // let index = e.dropIndex;
     // const fromIndex = e.dragFromIndex;

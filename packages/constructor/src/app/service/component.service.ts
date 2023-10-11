@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
+import { DoublyChain } from 'data-footstone'
+import { PageService } from './page.service';
 import type { Component } from '../../types/component'
 import type { ResponseData } from '../../types/index'
-import { S } from 'src/types/base';
+import type { S, Ao, ULID } from 'src/types/base';
 
 let clog = console.log
 
@@ -19,7 +21,9 @@ export class ComponentService {
   compSubject$: Subject<CompOrUn>
   _curCompUlid: S
   _curComponent: CompOrUn
-  constructor(private http: HttpClient) {
+  _map: Map<ULID, DoublyChain<Component>>
+  // _chain: DoublyChain<Component>
+  constructor(private http: HttpClient, private pageService: PageService) {
     this.componentList = []
     // 组件种类应该从前端取得，不应该从后端接口取得。
     // this.curComponent = null
@@ -27,6 +31,7 @@ export class ComponentService {
     this.compSubject$ = new Subject<CompOrUn>()
     this._curCompUlid = ''
     this._curComponent = undefined
+    this._map = new Map()
   }
   getComponentList() {
     return new Promise<Component[]>((s, j) => {
@@ -58,6 +63,63 @@ export class ComponentService {
         }
       })
     })
+  }
+  // 创建组件
+  postCompListByPage(obj: Component) {
+    return new Promise((s, j) => {
+      this.http.post<ResponseData>('http://localhost:5000/components/listByPage', {
+        ...obj,
+      }, {
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          if (this._map.has(obj['pageUlid'])) {
+            this._map.get(obj['pageUlid'])!.append(obj)
+            this._opCompList(res.data)
+            s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
+          } else {
+            this._opCompList(res.data)
+            // this._map.set(obj['pageUlid']) = new DoublyChain().append(obj)
+            j()
+          }
+        }
+      })
+    })
+  }
+  // 重排序
+  // putCompListByPage(obj: Ao) {}
+  getComponentByPage(pageUlid?: ULID) {
+    if (pageUlid) {
+      return this._map.get(pageUlid)?.toArray()
+    } else {
+      return []
+    }
+  }
+  _opCompList(_compList: Component[]) {
+    let curPage = this.pageService.getCurPage()
+    let nextComponentUlid = curPage?.firstComponentUlid
+    while (nextComponentUlid) {
+      let comp = _compList.find(item => item.ulid === nextComponentUlid)
+      if (comp) {
+        this.pushComp(comp)
+        nextComponentUlid = comp.next
+      } else {
+        break
+      }
+    }
+  }
+  pushComp(component: Component) {
+    let curPage = this.pageService.getCurPage()
+    if (curPage) {
+      let _chain = this._map.get(curPage.ulid)
+      if (_chain) {
+        _chain.append(component)
+      } else {
+        let dc = new DoublyChain<Component>()
+        dc.append(component)
+        this._map.set(curPage.ulid, dc)
+      }
+    }
   }
   private _find(compUlid: S) {
     return this._curComponent = this.componentList.find(item => item.ulid === compUlid)
