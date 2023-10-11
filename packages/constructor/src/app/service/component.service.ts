@@ -15,7 +15,8 @@ type CompOrUn = Component | undefined
   providedIn: 'root'
 })
 export class ComponentService {
-  componentList: Component[] // 这里应该使用组件种类的类型
+  // 组件类型的类型不应该使用组件的类型
+  categoryList: Component[] // 这里应该使用组件种类的类型
   // curComponent: Component | null
   componentListByPage: Component[] // 应该使用组件的类型
   compSubject$: Subject<CompOrUn>
@@ -24,7 +25,7 @@ export class ComponentService {
   _map: Map<ULID, DoublyChain<Component>>
   // _chain: DoublyChain<Component>
   constructor(private http: HttpClient, private pageService: PageService) {
-    this.componentList = []
+    this.categoryList = []
     // 组件种类应该从前端取得，不应该从后端接口取得。
     // this.curComponent = null
     this.componentListByPage = []
@@ -33,21 +34,22 @@ export class ComponentService {
     this._curComponent = undefined
     this._map = new Map()
   }
-  getComponentList() {
+  getCategoryList() {
     return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components', {
+      // 日后改为从组件库中引入
+      this.http.get<ResponseData>('http://localhost:5000/components/category', {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          this.componentList = res.data
-          // clog(this.componentList)
+          this.categoryList = res.data
+          // clog(this.categoryList)
           s(res.data)
         } else {
           j(new Error(res.message))
         }
       })
     })
-    // return this.componentList
+    // return this.categoryList
   }
   // 请求指定页面的组件
   getCompListByPage() {
@@ -122,7 +124,7 @@ export class ComponentService {
     }
   }
   private _find(compUlid: S) {
-    return this._curComponent = this.componentList.find(item => item.ulid === compUlid)
+    return this._curComponent = this.categoryList.find(item => item.ulid === compUlid)
   }
   curComponent() {
     return this._curComponent

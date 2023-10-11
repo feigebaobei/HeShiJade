@@ -21,7 +21,7 @@ export class SetupComponent implements OnInit {
   pageKey: S
   leftTabActive: S | N
   rightTabActive: S | N
-  componentList: Comp[]
+  componentCategoryList: Comp[]
   componentByPage: Comp[]
   pageList: Page[]
   msg: {}[]
@@ -38,7 +38,7 @@ export class SetupComponent implements OnInit {
     this.appKey = ''
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
-    this.componentList = []
+    this.componentCategoryList = []
     this.componentByPage = []
     this.pageList = []
     this.msg = []
@@ -63,8 +63,8 @@ export class SetupComponent implements OnInit {
       }
     }).then(() => {
       // 请求组件的种类
-      this.componentService.getComponentList().then(res => {
-        this.componentList = res
+      this.componentService.getCategoryList().then(res => {
+        this.componentCategoryList = res
       }).catch(error => {
         clog('error', error)
       })
