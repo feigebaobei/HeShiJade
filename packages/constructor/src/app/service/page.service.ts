@@ -90,6 +90,8 @@ export class PageService {
     return this._curPage
   }
   setCurPage(pageUlid?: S) {
+    // this.setCurPage()
+    // this._curPage = 
     this.pageSubject$.next(this._find(pageUlid))
   }
   // 重铸

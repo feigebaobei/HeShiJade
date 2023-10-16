@@ -52,6 +52,8 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
+    // 处理page
+    this.pageService.recast()
     // 检查app
     this.checkApp().then((bool) => {
       if (bool) {
@@ -78,6 +80,7 @@ export class SetupComponent implements OnInit {
       ]
       this.router.navigate(['/list'])
     })
+
   }
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
@@ -97,6 +100,7 @@ export class SetupComponent implements OnInit {
     // this.componentByPage = [...this.componentByPage, ...this.componentByPage]
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
+    clog('curPage', curPage)
     this.componentService.postCompListByPage({
       ulid: '',
       type: 'Button',

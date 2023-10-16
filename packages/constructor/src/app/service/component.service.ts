@@ -22,7 +22,7 @@ export class ComponentService {
   compSubject$: Subject<CompOrUn>
   _curCompUlid: S
   _curComponent: CompOrUn
-  _map: Map<ULID, DoublyChain<Component>>
+  _map: Map<ULID, DoublyChain<Component>> // 日后改为4向的数据结构
   // _chain: DoublyChain<Component>
   constructor(private http: HttpClient, private pageService: PageService) {
     this.categoryList = []
@@ -33,6 +33,11 @@ export class ComponentService {
     this._curCompUlid = ''
     this._curComponent = undefined
     this._map = new Map()
+  }
+  initMap(appUlid: ULID, pageUlidList: ULID[]) {
+    pageUlidList.forEach(pu => {
+      this._map.set(`${appUlid}_${pu}`, new DoublyChain())
+    })
   }
   getCategoryList() {
     return new Promise<Component[]>((s, j) => {
