@@ -2,6 +2,7 @@ import { Component, Input, } from '@angular/core';
 // import { ComponentService } from 'src/app/service/component.service';
 // import type { A } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
+let clog = console.log
 
 @Component({
   selector: 'app-component-list',
@@ -19,4 +20,7 @@ export class ComponentListComponent{
   // ngOnInit() {
 
   // }
+  onItemDrop(...p: any[]) {
+    clog('onItemDrop', p)
+  }
 }

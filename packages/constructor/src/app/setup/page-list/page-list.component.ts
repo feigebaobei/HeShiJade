@@ -23,7 +23,8 @@ interface PageData {
   styleUrls: ['./page-list.component.sass']
 })
 export class PageListComponent implements OnInit {
-  pageList: Page[]
+  @Input() pageList: Page[]
+  // pageList: Page[]
   msg: {}[]
   // curPageUlid: S
   curPage?: Page | null
@@ -33,9 +34,9 @@ export class PageListComponent implements OnInit {
     private pageService: PageService,
   ) {
     this.pageList = []
-    this.pageService.pageList$.subscribe(pl => {
-      this.pageList = pl
-    })
+    // this.pageService.pageList$.subscribe(pl => {
+    //   this.pageList = pl
+    // })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
@@ -47,7 +48,7 @@ export class PageListComponent implements OnInit {
     this.init()
   }
   init() {
-    this.pageService.recast()
+    // this.pageService.recast()
     // .then(arr => {
     //   this.pageList = arr
     //   clog('this.pagelist', this.pageList, arr)

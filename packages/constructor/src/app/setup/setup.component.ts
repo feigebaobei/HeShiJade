@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
+import { PageService } from '../service/page.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Component as Comp } from 'src/types/component';
-import { PageService } from '../service/page.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import type { DropEvent } from 'ng-devui';
 
 let clog = console.log
 
@@ -20,9 +21,11 @@ export class SetupComponent implements OnInit {
   pageKey: S
   leftTabActive: S | N
   rightTabActive: S | N
-  componentList: Comp[]
+  componentCategoryList: Comp[]
+  componentByPage: Comp[]
   pageList: Page[]
   msg: {}[]
+  pageData: A[]
   constructor(
     private appService: AppService,
     private pageService: PageService,
@@ -35,9 +38,11 @@ export class SetupComponent implements OnInit {
     this.appKey = ''
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
-    this.componentList = []
+    this.componentCategoryList = []
+    this.componentByPage = []
     this.pageList = []
     this.msg = []
+    this.pageData = []
     // clog('this.router', this.router)
     // clog('this.route', this.route)
   }
@@ -47,6 +52,12 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
+    // 处理page
+    this.pageService.recast()
+    this.pageService.pageList$.subscribe(pl => {
+      this.pageList = pl
+      this.componentService.initMap(pl.map(item => item.ulid))
+    })
     // 检查app
     this.checkApp().then((bool) => {
       if (bool) {
@@ -57,11 +68,15 @@ export class SetupComponent implements OnInit {
         return Promise.reject()
       }
     }).then(() => {
-      // 请求componentList
-      this.componentService.getComponentList().then(res => {
-        this.componentList = res
+      // 请求组件的种类
+      this.componentService.getCategoryList().then(res => {
+        this.componentCategoryList = res
       }).catch(error => {
         clog('error', error)
+      })
+      // 请求当前页面的组件
+      this.componentService.getCompListByPage().then(res => {
+        this.componentByPage = res
       })
     }).catch(() => {
       this.msg = [
@@ -69,18 +84,38 @@ export class SetupComponent implements OnInit {
       ]
       this.router.navigate(['/list'])
     })
+
   }
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
-    // clog('appUlid', appUlid, this.appService.appList)
     let pl = this.appService.getAppList()
+    // clog('appUlid', appUlid, pl)
     if (pl.length) {
       return Promise.resolve(pl.some(item => item.ulid === appUlid))
     } else {
       return this.appService.reqAppList().then(appList => {
+        // clog('appList', appList)
         return appList.some(item => item.ulid === appUlid)
       })
     }
-
+  }
+  onDrop(e: DropEvent, targetArray: A) {
+    // clog('stage onDrop', e, targetArray)
+    // 请求后端保存组件时保存到本地。
+    let curPage = this.pageService.getCurPage()
+    let r = this.componentService.postCompListByPage({
+      ulid: '',
+      type: 'Button',
+      prev: '',
+      next: '',
+      props: {},
+      behaivor: {},
+      item: {},
+      slot: '',
+      appUlid: curPage!.appUlid,
+      pageUlid: curPage!.ulid,
+    }).then((res: Comp[]) => {
+      this.componentByPage = res
+    })
   }
 }

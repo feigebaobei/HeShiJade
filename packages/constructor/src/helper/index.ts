@@ -1,4 +1,4 @@
-import type { ResponseData } from '../types';
+import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 let reqToPromise = (fn: Observable<ResponseData>) => {
     return new Promise((s, j) => {
@@ -12,6 +12,11 @@ let reqToPromise = (fn: Observable<ResponseData>) => {
     })
   }
 
+// let createCompKey = (appUlid: ULID, pageUlid: ULID) => {
+//   return `${appUlid}_${pageUlid}`
+// }
+  
 export {
-    reqToPromise
+  reqToPromise,
+  // createCompKey,
 }
