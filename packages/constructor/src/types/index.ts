@@ -1,4 +1,4 @@
-import type {N, B, A, S} from './base'
+import type {N, B, A, S, ULID} from './base'
 
 interface ResponseData {
   code: N
@@ -21,5 +21,6 @@ interface User {
 export type {
     ResponseData,
     // Page
+    ULID,
     User,
 }

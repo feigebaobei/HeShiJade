@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
 import { PageService } from './page.service';
+// import { createCompKey } from 'src/helper/index'
 import type { Component } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 import type { S, Ao, ULID } from 'src/types/base';
@@ -34,9 +35,10 @@ export class ComponentService {
     this._curComponent = undefined
     this._map = new Map()
   }
-  initMap(appUlid: ULID, pageUlidList: ULID[]) {
+  initMap(pageUlidList: ULID[]) {
     pageUlidList.forEach(pu => {
-      this._map.set(`${appUlid}_${pu}`, new DoublyChain())
+      // this._map.set(createCompKey(appUlid, pu), new DoublyChain())
+      this._map.set(pu, new DoublyChain())
     })
   }
   getCategoryList() {
@@ -73,31 +75,35 @@ export class ComponentService {
   }
   // 创建组件
   postCompListByPage(obj: Component) {
-    return new Promise((s, j) => {
+    return new Promise<Component[]>((s, j) => {
       this.http.post<ResponseData>('http://localhost:5000/components/listByPage', {
         ...obj,
       }, {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          if (this._map.has(obj['pageUlid'])) {
-            this._map.get(obj['pageUlid'])!.append(obj)
-            this._opCompList(res.data)
+          let has = this._map.has((obj['pageUlid']))
+          if (has) {
+            this._map.get((obj['pageUlid']))!.append(obj)
+            // this._opCompList(res.data)
             s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
           } else {
             this._opCompList(res.data)
             // this._map.set(obj['pageUlid']) = new DoublyChain().append(obj)
-            j()
+            // j()
           }
+        } else {
+          j()
         }
       })
     })
   }
   // 重排序
   // putCompListByPage(obj: Ao) {}
-  getComponentByPage(pageUlid?: ULID) {
+  getComponentByPage(pageUlid?: ULID): Component[] {
     if (pageUlid) {
-      return this._map.get(pageUlid)?.toArray()
+      clog('chain', this._map.get(pageUlid)?.toArray())
+      return (this._map.get(pageUlid)?.toArray() as Component[])
     } else {
       return []
     }

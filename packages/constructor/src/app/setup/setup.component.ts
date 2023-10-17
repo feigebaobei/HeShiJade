@@ -54,6 +54,10 @@ export class SetupComponent implements OnInit {
   ngOnInit(): void {
     // 处理page
     this.pageService.recast()
+    this.pageService.pageList$.subscribe(pl => {
+      this.pageList = pl
+      this.componentService.initMap(pl.map(item => item.ulid))
+    })
     // 检查app
     this.checkApp().then((bool) => {
       if (bool) {
@@ -96,12 +100,10 @@ export class SetupComponent implements OnInit {
     }
   }
   onDrop(e: DropEvent, targetArray: A) {
-    clog('stage onDrop', e, targetArray)
-    // this.componentByPage = [...this.componentByPage, ...this.componentByPage]
+    // clog('stage onDrop', e, targetArray)
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    clog('curPage', curPage)
-    this.componentService.postCompListByPage({
+    let r = this.componentService.postCompListByPage({
       ulid: '',
       type: 'Button',
       prev: '',
@@ -112,22 +114,8 @@ export class SetupComponent implements OnInit {
       slot: '',
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
+    }).then((res: Comp[]) => {
+      this.componentByPage = res
     })
-
-    // let index = e.dropIndex;
-    // const fromIndex = e.dragFromIndex;
-    // const item = e.dragData.item;
-    // if (-1 !== index) {
-    //   /* 修正同一个container排序，往下拖动index多了1个位置*/
-    //   if (-1 !== fromIndex && index > fromIndex) {
-    //     index--;
-    //   }
-    //   targetArray.splice(index, 0, fromIndex === -1 ? item : targetArray.splice(fromIndex, 1)[0]);
-    // } else {
-    //   targetArray.push(item);
-    // }
-    // if (fromIndex === -1) {
-    //   this.removeItem(item, e.dragData.parent);
-    // }
   }
 }

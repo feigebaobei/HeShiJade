@@ -34,9 +34,9 @@ export class PageListComponent implements OnInit {
     private pageService: PageService,
   ) {
     this.pageList = []
-    this.pageService.pageList$.subscribe(pl => {
-      this.pageList = pl
-    })
+    // this.pageService.pageList$.subscribe(pl => {
+    //   this.pageList = pl
+    // })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
