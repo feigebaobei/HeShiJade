@@ -40,6 +40,11 @@ import { ComponentListComponent } from './setup/component-list/component-list.co
 import { CompBoxComponent } from './setup/comp-box/comp-box.component';
 import { CompItemComponent } from './setup/comp-item/comp-item.component';
 import { ButtonComponent } from './components/button/button.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { FormComponent } from './components/form/form.component';
+import { TableComponent } from './components/table/table.component';
+import { InputComponent } from './components/input/input.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +63,11 @@ import { ButtonComponent } from './components/button/button.component';
     AdDirective,
     CompItemComponent,
     ButtonComponent,
+    ModalComponent,
+    FormComponent,
+    TableComponent,
+    InputComponent,
+    SelectComponent,
     // IconModule,
   ],
   imports: [

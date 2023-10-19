@@ -63,8 +63,8 @@ export class ComponentService {
           ulid: '12345asdfg'
         },
         {
-            name: 'model',
-            type: 'Model',
+            name: 'modal',
+            type: 'Modal',
             ulid: '12345asdfg2'
         },
         {
