@@ -4,7 +4,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
 import { PageService } from './page.service';
 // import { createCompKey } from 'src/helper/index'
-import type { Component } from '../../types/component'
+import type { Component, Category } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 import type { S, Ao, ULID } from 'src/types/base';
 
@@ -42,19 +42,42 @@ export class ComponentService {
     })
   }
   getCategoryList() {
-    return new Promise<Component[]>((s, j) => {
+    return new Promise<Category[]>((s, j) => {
       // 日后改为从组件库中引入
-      this.http.get<ResponseData>('http://localhost:5000/components/category', {
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          this.categoryList = res.data
-          // clog(this.categoryList)
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
+      // this.http.get<ResponseData>('http://localhost:5000/components/category', {
+      //   withCredentials: true
+      // }).subscribe(res => {
+      //   if (res.code === 0) {
+      //     this.categoryList = res.data
+      //     // clog(this.categoryList)
+      //     s(res.data)
+      //   } else {
+      //     j(new Error(res.message))
+      //   }
+      // })
+
+      s([
+        {
+          name: 'button',
+          type: 'Button',
+          ulid: '12345asdfg'
+        },
+        {
+            name: 'model',
+            type: 'Model',
+            ulid: '12345asdfg2'
+        },
+        {
+            name: 'form',
+            type: 'Form',
+            ulid: '12345asdfge'
+        },
+        {
+            name: 'table',
+            type: 'Table',
+            ulid: '12345asdfgs'
+        },
+      ])
     })
     // return this.categoryList
   }

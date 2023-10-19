@@ -1,12 +1,10 @@
 <div>
-    <!-- [dragScope]="'default-css'"
-    [dragData]="{item: comp, parent: componentList}" -->
     <p>drag & drop</p>
 <div 
     dDraggable
-    *ngFor="let comp of componentList" 
+    *ngFor="let comp of componentCategoryList" 
     class="component_item"
-    [dragData]="{ item: comp, parent: componentList }"
+    [dragData]="{ item: comp, parent: componentCategoryList }"
 >
     <span>{{ comp.type }}</span>
 </div>

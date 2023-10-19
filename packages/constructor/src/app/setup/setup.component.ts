@@ -5,7 +5,7 @@ import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
-import type { Component as Comp } from 'src/types/component';
+import type { Category, Component as Comp } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 
 let clog = console.log
@@ -21,7 +21,7 @@ export class SetupComponent implements OnInit {
   pageKey: S
   leftTabActive: S | N
   rightTabActive: S | N
-  componentCategoryList: Comp[]
+  componentCategoryList: Category[]
   componentByPage: Comp[]
   pageList: Page[]
   msg: {}[]
@@ -100,12 +100,12 @@ export class SetupComponent implements OnInit {
     }
   }
   onDrop(e: DropEvent, targetArray: A) {
-    // clog('stage onDrop', e, targetArray)
+    clog('stage onDrop', e, targetArray)
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    let r = this.componentService.postCompListByPage({
+    this.componentService.postCompListByPage({
       ulid: '',
-      type: 'Button',
+      type: e.dragData.item.type, // 'Button',
       prev: '',
       next: '',
       props: {},
