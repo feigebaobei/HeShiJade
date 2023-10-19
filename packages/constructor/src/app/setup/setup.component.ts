@@ -3,6 +3,7 @@ import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ulid } from 'ulid';
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Category, Component as Comp } from 'src/types/component';
@@ -104,7 +105,7 @@ export class SetupComponent implements OnInit {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     this.componentService.postCompListByPage({
-      ulid: '',
+      ulid: ulid(),
       type: e.dragData.item.type, // 'Button',
       prev: '',
       next: '',

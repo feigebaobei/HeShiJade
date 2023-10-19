@@ -164,6 +164,7 @@ export class ComponentService {
     return this._curComponent
   }
   setCurComponent(compUlid: S) {
+    console.log('setCurComponent', compUlid)
     this.compSubject$.next(this._find(compUlid))
   }
 }
