@@ -13,6 +13,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+// import { PanelModule } from 'ng-devui';
+// import { IconModule } from 'ng-devui/icon';
+
+// 指令
+import { AdDirective } from './ad.directive';
 
 // angular material
 // import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +38,13 @@ import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.compon
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
 import { CompBoxComponent } from './setup/comp-box/comp-box.component';
+import { CompItemComponent } from './setup/comp-item/comp-item.component';
+import { ButtonComponent } from './components/button/button.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { FormComponent } from './components/form/form.component';
+import { TableComponent } from './components/table/table.component';
+import { InputComponent } from './components/input/input.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +60,15 @@ import { CompBoxComponent } from './setup/comp-box/comp-box.component';
     PageListComponent,
     ComponentListComponent,
     CompBoxComponent,
+    AdDirective,
+    CompItemComponent,
+    ButtonComponent,
+    ModalComponent,
+    FormComponent,
+    TableComponent,
+    InputComponent,
+    SelectComponent,
+    // IconModule,
   ],
   imports: [
     BrowserModule,

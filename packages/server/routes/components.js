@@ -101,58 +101,58 @@ router.route('/')
 .delete(cors.corsWithOptions, (req, res) => {
   res.send('delete')
 })
-
-router.route('/category')
-.options(cors.corsWithOptions, (req, res) => {
-  res.sendStatus(200)
-})
-.get(cors.corsWithOptions, (req, res) => {
-  if (req.session.isAuth) {
-    let {user} = req.session
-    clog('user', user)
-    res.status(200).json({
-        code: 0,
-        message: '',
-        data: [
-            {
-                name: 'button',
-                type: 'Button',
-                ulid: '12345asdfg'
-            },
-            {
-                name: 'model',
-                type: 'Model',
-                ulid: '12345asdfg2'
-            },
-            {
-                name: 'form',
-                type: 'Form',
-                ulid: '12345asdfge'
-            },
-            {
-                name: 'table',
-                type: 'Table',
-                ulid: '12345asdfgs'
-            },
-        ]
-    })
-  } else {
-    res.status(401).json({
-      code: 300000,
-      message: '用户未登录',
-      data: {}
-    })
-  }
-})
-.post(cors.corsWithOptions, (req, res) => {
-    res.send('post')
-})
-.put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
-})
-.delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
-})
+// 不再使用此接口了
+// router.route('/category')
+// .options(cors.corsWithOptions, (req, res) => {
+//   res.sendStatus(200)
+// })
+// .get(cors.corsWithOptions, (req, res) => {
+//   if (req.session.isAuth) {
+//     let {user} = req.session
+//     clog('user', user)
+//     res.status(200).json({
+//         code: 0,
+//         message: '',
+//         data: [
+//             {
+//                 name: 'button',
+//                 type: 'Button',
+//                 ulid: '12345asdfg'
+//             },
+//             {
+//                 name: 'model',
+//                 type: 'Model',
+//                 ulid: '12345asdfg2'
+//             },
+//             {
+//                 name: 'form',
+//                 type: 'Form',
+//                 ulid: '12345asdfge'
+//             },
+//             {
+//                 name: 'table',
+//                 type: 'Table',
+//                 ulid: '12345asdfgs'
+//             },
+//         ]
+//     })
+//   } else {
+//     res.status(401).json({
+//       code: 300000,
+//       message: '用户未登录',
+//       data: {}
+//     })
+//   }
+// })
+// .post(cors.corsWithOptions, (req, res) => {
+//     res.send('post')
+// })
+// .put(cors.corsWithOptions, (req, res) => {
+//   res.send('put')
+// })
+// .delete(cors.corsWithOptions, (req, res) => {
+//   res.send('delete')
+// })
 
 router.route('/listByPage')
 .options(cors.corsWithOptions, (req, res) => {

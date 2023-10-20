@@ -4,13 +4,14 @@ import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
 import { PageService } from './page.service';
 // import { createCompKey } from 'src/helper/index'
-import type { Component } from '../../types/component'
+import type { Component, Category } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 import type { S, Ao, ULID } from 'src/types/base';
 
 let clog = console.log
 
 type CompOrUn = Component | undefined
+type ComponentOrUn = Component | undefined
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,11 @@ export class ComponentService {
   categoryList: Component[] // 这里应该使用组件种类的类型
   // curComponent: Component | null
   componentListByPage: Component[] // 应该使用组件的类型
-  compSubject$: Subject<CompOrUn>
+  compSubject$: Subject<CompOrUn> // 组件的subject
+  categorySubject$: Subject<CompOrUn> // 组件的subject
   _curCompUlid: S
   _curComponent: CompOrUn
+  _curCategory: ComponentOrUn
   _map: Map<ULID, DoublyChain<Component>> // 日后改为4向的数据结构
   // _chain: DoublyChain<Component>
   constructor(private http: HttpClient, private pageService: PageService) {
@@ -31,8 +34,10 @@ export class ComponentService {
     // this.curComponent = null
     this.componentListByPage = []
     this.compSubject$ = new Subject<CompOrUn>()
+    this.categorySubject$ = new Subject<ComponentOrUn>()
     this._curCompUlid = ''
     this._curComponent = undefined
+    this._curCategory = undefined
     this._map = new Map()
   }
   initMap(pageUlidList: ULID[]) {
@@ -42,19 +47,42 @@ export class ComponentService {
     })
   }
   getCategoryList() {
-    return new Promise<Component[]>((s, j) => {
+    return new Promise<Category[]>((s, j) => {
       // 日后改为从组件库中引入
-      this.http.get<ResponseData>('http://localhost:5000/components/category', {
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          this.categoryList = res.data
-          // clog(this.categoryList)
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
+      // this.http.get<ResponseData>('http://localhost:5000/components/category', {
+      //   withCredentials: true
+      // }).subscribe(res => {
+      //   if (res.code === 0) {
+      //     this.categoryList = res.data
+      //     // clog(this.categoryList)
+      //     s(res.data)
+      //   } else {
+      //     j(new Error(res.message))
+      //   }
+      // })
+
+      s([
+        {
+          name: 'button',
+          type: 'Button',
+          ulid: '12345asdfg' // 用不到了。
+        },
+        {
+            name: 'modal',
+            type: 'Modal',
+            ulid: '12345asdfg2'
+        },
+        {
+            name: 'form',
+            type: 'Form',
+            ulid: '12345asdfge'
+        },
+        {
+            name: 'table',
+            type: 'Table',
+            ulid: '12345asdfgs'
+        },
+      ])
     })
     // return this.categoryList
   }
@@ -134,13 +162,49 @@ export class ComponentService {
       }
     }
   }
+  // 要修正
   private _find(compUlid: S) {
-    return this._curComponent = this.categoryList.find(item => item.ulid === compUlid)
+    // return this._curComponent = this.categoryList.find(item => item.ulid === compUlid)
+    let pageUlid = this.pageService.getCurPage()?.ulid
+    let res = undefined
+    if (pageUlid) {
+      let cur = this._map.get(pageUlid)?.head
+      while (cur) {
+        if (cur.value.ulid === compUlid) {
+          res = cur.value
+          break
+        }
+        cur = cur.next
+      }    
+    }
+    return res
+  }
+  private _findCategory(categoryUlid: ULID) {
+    // return this._curCategory = 
+    return this.categoryList.find(item => item.ulid === categoryUlid)
   }
   curComponent() {
     return this._curComponent
   }
-  setCurComponent(compUlid: S) {
-    this.compSubject$.next(this._find(compUlid))
+  curCategory() {
+    return this._curCategory
+  }
+  setCurComponent(compUlid?: S) {
+    if (compUlid) {
+      this._curComponent = this._find(compUlid)
+      this.compSubject$.next(this._curComponent)
+    } else {
+      this._curComponent = undefined
+      this.compSubject$.next(undefined)
+    }
+  }
+  setCurCategory(categoryUlid?: ULID) {
+    if (categoryUlid) {
+      this._curCategory = this._findCategory(categoryUlid)
+      this.categorySubject$.next(this._curCategory)
+    } else {
+      this._curCategory = undefined
+      this.categorySubject$.next(this._curCategory)
+    }
   }
 }

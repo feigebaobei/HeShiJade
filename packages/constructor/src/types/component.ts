@@ -14,7 +14,13 @@ interface Component {
   appUlid: ULID
   pageUlid: ULID
 }
+interface Category {
+  name: S
+  type: S
+  ulid: ULID
+}
 
 export type {
   Component,
+  Category,
 }

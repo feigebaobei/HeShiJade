@@ -1,2 +1,5 @@
-<p>comp-box works!</p>
-<d-button (click)="btClickH()">button</d-button>
+<div (click)="boxClickh()" class=""
+    [ngClass]="{selected: comp.ulid === curComp?.ulid}"
+>
+    <ng-template adHost></ng-template>
+</div>

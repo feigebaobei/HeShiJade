@@ -1,20 +1,18 @@
 <div>
-    <!-- [dragScope]="'default-css'"
-    [dragData]="{item: comp, parent: componentList}" -->
-    <p>drag & drop</p>
+    <p>组件类型</p>
 <div 
     dDraggable
-    *ngFor="let comp of componentList" 
+    *ngFor="let comp of componentCategoryList" 
     class="component_item"
-    [dragData]="{ item: comp, parent: componentList }"
+    [dragData]="{ item: comp, parent: componentCategoryList }"
 >
     <span>{{ comp.type }}</span>
 </div>
-<div
+<!-- <div
 dDroppable
 style="height: 130px; background: gray"
 (dropEvent)="onItemDrop($event)"
 >
     str
-</div>
+</div> -->
 </div>
