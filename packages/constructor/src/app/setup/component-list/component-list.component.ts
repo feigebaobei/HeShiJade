@@ -18,9 +18,8 @@ export class ComponentListComponent{
   }
   // ngOnInit
   // ngOnInit() {
-
   // }
-  onItemDrop(...p: any[]) {
-    clog('onItemDrop', p)
-  }
+  // onItemDrop(...p: any[]) {
+  //   clog('onItemDrop', p)
+  // }
 }

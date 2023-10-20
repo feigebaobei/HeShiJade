@@ -27,6 +27,7 @@
             dDroppable
             (dropEvent)="onDrop($event, pageData)"
             class="stage"
+            (click)="stageClickH($event)"
         >
             <p>stage</p>
             <app-comp-box

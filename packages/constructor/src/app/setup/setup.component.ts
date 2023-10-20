@@ -119,4 +119,9 @@ export class SetupComponent implements OnInit {
       this.componentByPage = res
     })
   }
+  stageClickH($event: A) {
+    if (Array.from($event.target.classList).includes('stage')) {
+      this.componentService.setCurComponent()
+    }
+  }
 }
