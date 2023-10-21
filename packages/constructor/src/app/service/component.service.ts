@@ -65,7 +65,7 @@ export class ComponentService {
         {
           name: 'button',
           type: 'Button',
-          ulid: '12345asdfg' // 用不到了。
+          ulid: '12345asdfg'
         },
         {
             name: 'modal',

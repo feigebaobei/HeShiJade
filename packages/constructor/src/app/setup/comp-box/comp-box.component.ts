@@ -80,7 +80,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy() {
-    this.clearTimer?.();
+    // this.clearTimer?.();
+    this.adHost.viewContainerRef.clear();
   }
 
 }
