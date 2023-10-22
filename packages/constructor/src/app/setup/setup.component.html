@@ -29,7 +29,8 @@
             class="stage"
             (click)="stageClickH($event)"
         >
-            <p>stage</p>
+            <p>stage {{componentByPage}}</p>
+
             <app-comp-box
                 *ngFor="let comp of componentByPage"
                 [comp]="comp"

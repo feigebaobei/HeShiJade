@@ -8,7 +8,7 @@ interface Component {
   next: ULID
   prev: ULID
   props: O
-  behaivor: O
+  behavior: O
   item: O
   slot: S
   appUlid: ULID
@@ -19,8 +19,15 @@ interface Category {
   type: S
   ulid: ULID
 }
+interface componentDefaultMeta {
+  props: O
+  behavior: O
+  item: O
+  slot: S
+}
 
 export type {
   Component,
   Category,
+  componentDefaultMeta,
 }

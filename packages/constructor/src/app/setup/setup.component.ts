@@ -4,12 +4,17 @@ import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
+// 数据
+import * as componentDefaultMeta from '../../helper/component'
+// 类型
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
-import type { Category, Component as Comp } from 'src/types/component';
+import type { Category, Component as Comp, componentDefaultMeta as componentDefaultMetaT } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 
+
 let clog = console.log
+let CDM: Record<S, componentDefaultMetaT> = componentDefaultMeta
 
 @Component({
   selector: 'app-setup',
@@ -45,7 +50,7 @@ export class SetupComponent implements OnInit {
     this.msg = []
     this.pageData = []
     // clog('this.router', this.router)
-    // clog('this.route', this.route)
+    // clog('this.route', componentDefaultMeta)
   }
   viewBtClickH() {}
 
@@ -77,7 +82,8 @@ export class SetupComponent implements OnInit {
       })
       // 请求当前页面的组件
       this.componentService.getCompListByPage().then(res => {
-        this.componentByPage = res
+        // this.componentByPage = res
+        this.componentByPage = []
       })
     }).catch(() => {
       this.msg = [
@@ -109,10 +115,18 @@ export class SetupComponent implements OnInit {
       type: e.dragData.item.type, // 'Button',
       prev: '',
       next: '',
-      props: {},
-      behaivor: {},
-      item: {},
-      slot: '',
+      // props: {},
+      // behavior: {},
+      // item: {},
+      // slot: '',
+      // props: (componentDefaultMeta[e.dragData.item.type] as componentDefaultMetaT).props,
+      // behavior: componentDefaultMeta[e.dragData.item.type].behavior,
+      // item: componentDefaultMeta[e.dragData.item.type].item,
+      // slot: componentDefaultMeta[e.dragData.item.type].slot,
+      props: (CDM[e.dragData.item.type].props),
+      behavior: (CDM[e.dragData.item.type].behavior),
+      item: (CDM[e.dragData.item.type].item),
+      slot: (CDM[e.dragData.item.type].slot),
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
     }).then((res: Comp[]) => {

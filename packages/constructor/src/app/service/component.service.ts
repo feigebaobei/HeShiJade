@@ -82,6 +82,16 @@ export class ComponentService {
             type: 'Table',
             ulid: '12345asdfgs'
         },
+        {
+            name: 'input',
+            type: 'Input',
+            ulid: '12345asdfga'
+        },
+        {
+            name: 'select',
+            type: 'Select',
+            ulid: '12345asdfgb'
+        },
       ])
     })
     // return this.categoryList

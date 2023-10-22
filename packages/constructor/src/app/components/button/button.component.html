@@ -1,1 +1,6 @@
-<d-button>{{data.slot}}</d-button>
+<d-button
+[type]="data.props.type"
+[bsSize]="data.props.bsSize"
+[bordered]="data.props.bordered"
+[disabled]="data.props.disabled"
+>{{data.slot}}</d-button>
