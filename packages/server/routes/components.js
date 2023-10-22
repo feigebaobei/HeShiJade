@@ -174,7 +174,7 @@ router.route('/listByPage')
               props: {
                 bsStyle: "danger"
               },
-              // behaivor: {
+              // behavior: {
               //   // click: ""
               // },
               // item: '',
@@ -201,7 +201,7 @@ router.route('/listByPage')
     next: '',
     prev: req.body.prev,
     props: req.body.props,
-    behaivor: req.body.behaivor,
+    behavior: req.body.behavior,
     item: req.body.item,
     slot: req.body.slot,
     appUlid: req.body.appUlid,
