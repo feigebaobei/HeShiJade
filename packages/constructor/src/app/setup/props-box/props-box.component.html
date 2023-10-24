@@ -1,6 +1,4 @@
-<p>props-box works!
-    {{componentPropsMeta | json}}
-</p>
-<div>
-    <ng-template propsHost></ng-template>
-</div>
+<app-props-item 
+*ngFor="let propItem of componentPropsList"
+[propItem]="propItem"
+></app-props-item>

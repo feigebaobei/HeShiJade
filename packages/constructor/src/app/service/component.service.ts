@@ -6,6 +6,7 @@ import { PageService } from './page.service';
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category } from '../../types/component'
 import type { ResponseData } from '../../types/index'
+import type { ComponentPropsMeta } from '../../types/props'
 import type { S, Ao, ULID } from 'src/types/base';
 
 let clog = console.log
@@ -23,6 +24,7 @@ export class ComponentService {
   componentListByPage: Component[] // 应该使用组件的类型
   compSubject$: Subject<CompOrUn> // 组件的subject
   categorySubject$: Subject<CompOrUn> // 组件的subject
+  curProps$: Subject<ComponentPropsMeta>
   _curCompUlid: S
   _curComponent: CompOrUn
   _curCategory: ComponentOrUn
@@ -35,6 +37,7 @@ export class ComponentService {
     this.componentListByPage = []
     this.compSubject$ = new Subject<CompOrUn>()
     this.categorySubject$ = new Subject<ComponentOrUn>()
+    this.curProps$ = new Subject() //
     this._curCompUlid = ''
     this._curComponent = undefined
     this._curCategory = undefined

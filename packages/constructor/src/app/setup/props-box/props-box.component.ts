@@ -1,9 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { PropsDirective } from 'src/app/props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 // type
 import type {Component as Comp} from 'src/types/component'
-import type {ComponentPropsMeta as CPM} from 'src/types/props'
+import type {
+  ComponentPropsMetaRaw as CPMR,
+  ComponentPropsMetaItemRaw as CPMIR,
+  ComponentPropsMetaItem as CPMI,
+} from 'src/types/props'
+// import type { A } from 'src/types/base';
 // data
 // import * as 
 import {
@@ -16,12 +21,15 @@ import {
   styleUrls: ['./props-box.component.sass']
 })
 export class PropsBoxComponent {
+  // @Input() data: A
   @ViewChild(PropsDirective, {static: true}) propsDirective!: PropsDirective
   curComp?: Comp | null
-  componentPropsMeta: CPM
+  componentPropsMeta: CPMR
+  componentPropsList: CPMI[]
   constructor(private componentService: ComponentService) {
     this.curComp = null
     this.componentPropsMeta = {}
+    this.componentPropsList = []
     this.componentService.compSubject$.subscribe(p => {
       this.curComp = p
       this.componentSelectedChange()
@@ -30,17 +38,27 @@ export class PropsBoxComponent {
   ngOnInit() {
   }
   componentSelectedChange() {
+    // 先清空
+    this.componentPropsList = []
+    // 再赋值
     switch(this.curComp?.type) {
       case 'Button':
-        // debugger
         this.componentPropsMeta = buttonPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid,
+          }
+          this.componentPropsList.push(o)
+        })
         break
-      case 'Modal':
-        break
-      case 'Table':
-        break
-      case 'Form':
-        break
+      // case 'Modal':
+      //   break
+      // case 'Table':
+      //   break
+      // case 'Form':
+      //   break
       default:
         this.componentPropsMeta = {}
         break
