@@ -3,9 +3,9 @@ let Button: ComponentPropsMetaRaw = {
     type: {
         type: 'select',
         options: [
-            {name: 'button', value: 'button'},
-            {name: 'submit', value: 'submit'},
-            {name: 'reset', value: 'reset'},
+            {label: 'button', value: 'button'},
+            {label: 'submit', value: 'submit'},
+            {label: 'reset', value: 'reset'},
         ],
         value: 'button',
         label: '类型',
@@ -13,10 +13,10 @@ let Button: ComponentPropsMetaRaw = {
     bsSize: {
         type: 'select',
         options: [
-            {name: 'lg', value: 'lg'},
-            {name: 'md', value: 'md'},
-            {name: 'sm', value: 'sm'},
-            {name: 'xs', value: 'xs'},
+            {label: 'lg', value: 'lg'},
+            {label: 'md', value: 'md'},
+            {label: 'sm', value: 'sm'},
+            {label: 'xs', value: 'xs'},
         ],
         value: 'md',
         label: '大小',
@@ -24,8 +24,8 @@ let Button: ComponentPropsMetaRaw = {
     bordered: {
         type: 'switch',
         options: [
-            {name: 'false', value: false},
-            {name: 'true', value: true},
+            {label: 'false', value: false},
+            {label: 'true', value: true},
         ],
         value: false,
         label: '边框',
@@ -33,8 +33,8 @@ let Button: ComponentPropsMetaRaw = {
     disabled: {
         type: 'switch',
         options: [
-            {name: 'false', value: false},
-            {name: 'true', value: true},
+            {label: 'false', value: false},
+            {label: 'true', value: true},
         ],
         value: false,
         label: '禁用',
@@ -45,6 +45,46 @@ let Button: ComponentPropsMetaRaw = {
         label: '宽度',
     }
 }
+let Input: ComponentPropsMetaRaw = {
+    error: {
+        type: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否出现错误状态'
+    },
+    size: {
+        type: 'select',
+        options: [
+            { label: 'sm', value: 'sm' },
+            { label: '""', value: '' },
+            { label: 'lg', value: 'lg' },
+        ],
+        value: '',
+        label: '尺寸'
+    },
+    // showGlowStyle: {
+    //     type: 'switch',
+    //     options: [
+    //         { label: 'false', value: false },
+    //         { label: 'true', value: true },
+    //     ],
+    //     value: true,
+    //     label: '发光效果'
+    // },
+    styleType: {
+        type: 'select',
+        options: [
+            { label: 'default', value: 'default' },
+            { label: 'grey', value: 'grey' },
+        ],
+        value: 'default',
+        label: '风格'
+    },
+}
 export {
-    Button
+    Button,
+    Input,
 }

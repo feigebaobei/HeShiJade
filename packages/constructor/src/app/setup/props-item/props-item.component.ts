@@ -28,6 +28,7 @@ export class PropsItemComponent implements OnInit {
     // viewContainerRef.createComponent(PropsInputComponent)
     // console.log('oninit', this, this.propItem)
     // componentRef.instance.data = this.propItem
+    // 根据type使用相应的表单元素渲染设置器
     switch(this.propItem.type) {
       case 'input':
       default:

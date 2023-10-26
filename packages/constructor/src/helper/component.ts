@@ -1,3 +1,4 @@
+// 它与组件配套。日后可以放在组件目录中。
 import type { componentDefaultMeta } from '../types/component'
 
 let Button: componentDefaultMeta = {
@@ -16,6 +17,8 @@ let Input: componentDefaultMeta = {
     props: {
         error: false,
         size: '',
+        showGlowStyle: true,
+        styleType: 'default',
     },
     behavior: {},
     item: {},
