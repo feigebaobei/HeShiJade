@@ -6,6 +6,7 @@ let Button: componentDefaultMeta = {
         bsSize: 'md',
         bordered: false,
         disabled: false,
+        width: '100px',
     },
     behavior: {},
     item: {},

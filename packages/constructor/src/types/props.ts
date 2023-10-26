@@ -7,7 +7,7 @@ interface ComponentPropsMetaRaw {
     [k: S]: ComponentPropsMetaItemRaw
 }
 interface SelectOptionsItem {
-    label: S
+    name: S
     value: A
 }
 interface ComponentPropsMetaItem extends ComponentPropsMetaItemRaw {

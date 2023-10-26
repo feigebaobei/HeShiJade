@@ -49,8 +49,12 @@ export class SetupComponent implements OnInit {
     this.pageList = []
     this.msg = []
     this.pageData = []
-    // clog('this.router', this.router)
-    // clog('this.route', componentDefaultMeta)
+
+    this.componentService.componentListByCurPage$.subscribe(compArr => {
+      this.componentByPage = []
+      this.componentByPage = compArr
+      clog('change', compArr, this.componentByPage)
+    })
   }
   viewBtClickH() {}
 
@@ -60,9 +64,9 @@ export class SetupComponent implements OnInit {
   ngOnInit(): void {
     // 处理page
     this.pageService.recast()
-    this.pageService.pageList$.subscribe(pl => {
-      this.pageList = pl
-      this.componentService.initMap(pl.map(item => item.ulid))
+    this.pageService.pageList$.subscribe(pageList => {
+      this.pageList = pageList
+      this.componentService.initMap(pageList.map(item => item.ulid))
     })
     // 检查app
     this.checkApp().then((bool) => {
@@ -81,10 +85,11 @@ export class SetupComponent implements OnInit {
         clog('error', error)
       })
       // 请求当前页面的组件
-      this.componentService.getCompListByPage().then(res => {
-        // this.componentByPage = res
-        this.componentByPage = []
-      })
+      // this.componentService.getCompListByPage().then(res => {
+      //   // this.componentByPage = res
+      //   this.componentByPage = []
+      // })
+      this.componentService.getCompListByPage()
     }).catch(() => {
       this.msg = [
         { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
@@ -129,9 +134,10 @@ export class SetupComponent implements OnInit {
       slot: (CDM[e.dragData.item.type].slot),
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
-    }).then((res: Comp[]) => {
-      this.componentByPage = res
     })
+    // .then((res: Comp[]) => {
+    //   this.componentByPage = res
+    // })
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {

@@ -3,9 +3,9 @@ let Button: ComponentPropsMetaRaw = {
     type: {
         type: 'select',
         options: [
-            {label: 'button', value: 'button'},
-            {label: 'submit', value: 'submit'},
-            {label: 'reset', value: 'reset'},
+            {name: 'button', value: 'button'},
+            {name: 'submit', value: 'submit'},
+            {name: 'reset', value: 'reset'},
         ],
         value: 'button',
         label: '类型',
@@ -13,10 +13,10 @@ let Button: ComponentPropsMetaRaw = {
     bsSize: {
         type: 'select',
         options: [
-            {label: 'lg', value: 'lg'},
-            {label: 'md', value: 'md'},
-            {label: 'sm', value: 'sm'},
-            {label: 'xs', value: 'xs'},
+            {name: 'lg', value: 'lg'},
+            {name: 'md', value: 'md'},
+            {name: 'sm', value: 'sm'},
+            {name: 'xs', value: 'xs'},
         ],
         value: 'md',
         label: '大小',
@@ -24,8 +24,8 @@ let Button: ComponentPropsMetaRaw = {
     bordered: {
         type: 'switch',
         options: [
-            {label: 'false', value: false},
-            {label: 'true', value: true},
+            {name: 'false', value: false},
+            {name: 'true', value: true},
         ],
         value: false,
         label: '边框',
@@ -33,8 +33,8 @@ let Button: ComponentPropsMetaRaw = {
     disabled: {
         type: 'switch',
         options: [
-            {label: 'false', value: false},
-            {label: 'true', value: true},
+            {name: 'false', value: false},
+            {name: 'true', value: true},
         ],
         value: false,
         label: '禁用',

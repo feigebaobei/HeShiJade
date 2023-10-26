@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ComponentService } from 'src/app/service/component.service';
 // type
-import type { A } from 'src/types/base';
+import type { A, S } from 'src/types/base';
+import type { ComponentPropsMetaItem } from 'src/types/props'
 
 @Component({
   selector: 'app-props-input',
@@ -8,11 +10,22 @@ import type { A } from 'src/types/base';
   styleUrls: ['./props-input.component.sass']
 })
 export class PropsInputComponent implements OnInit, OnChanges {
-  @Input() data: A
+  @Input() data!: ComponentPropsMetaItem
+  value: S
+  constructor(private componentService: ComponentService) {
+    this.value = this.data?.value
+  }
   ngOnInit(): void {
-    console.log('props input', this, this.data)
+    // console.log('props input', this, this.data)
   }
   ngOnChanges(...p: A) {
-    console.log('changie', p)
+    // console.log('changie', p)
+  }
+  ngModel(...p: A) {
+    console.log('ngModel', p)
+  }
+  change() {
+    this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
+    console.log('change', this.data.value)
   }
 }

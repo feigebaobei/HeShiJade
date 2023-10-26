@@ -1,5 +1,6 @@
 import type {N, B, A, S, ULID, O} from './base'
 
+type PropsValue = S | B | N | S[]
 interface Component {
   ulid: S
   // name: S
@@ -7,7 +8,9 @@ interface Component {
   type: S
   next: ULID
   prev: ULID
-  props: O
+  props: {
+    [k: S]: PropsValue
+  }
   behavior: O
   item: O
   slot: S
@@ -20,13 +23,18 @@ interface Category {
   ulid: ULID
 }
 interface componentDefaultMeta {
-  props: O
+  // props: O
+  props: {
+    // options?: S[]s
+    [k: S]: PropsValue,
+  },
   behavior: O
   item: O
   slot: S
 }
 
 export type {
+  PropsValue,
   Component,
   Category,
   componentDefaultMeta,
