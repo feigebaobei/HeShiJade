@@ -30,6 +30,7 @@
             (click)="stageClickH($event)"
         >
             <p>stage</p>
+
             <app-comp-box
                 *ngFor="let comp of componentByPage"
                 [comp]="comp"
@@ -39,10 +40,10 @@
         <d-col [dSpan]="8">
             <d-tabs [type]="'tabs'" [(activeTab)]="rightTabActive" (activeTabChange)="activeTabChange($event)">
                 <d-tab id="props" title="props">
-                  <p>props</p>
+                  <app-props-box></app-props-box>
                 </d-tab>
                 <d-tab id="behavior" title="behavior">
-                  <p>behavior</p>
+                  <app-behavior-box></app-behavior-box>
                 </d-tab>
             </d-tabs>
         </d-col>

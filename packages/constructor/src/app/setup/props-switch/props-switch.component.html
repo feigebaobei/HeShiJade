@@ -1,0 +1,10 @@
+<span>{{data.label}}</span>
+<!-- <d-toggle [checked]="true" [size]="'lg'"></d-toggle>
+<d-toggle [checked]="true" [size]="'lg'"></d-toggle> -->
+<!-- (change)="onChange($event)" -->
+<!-- [beforeChange]="beforeChange" -->
+<d-toggle
+[(ngModel)]="data.value"
+(ngModelChange)="change()"
+></d-toggle>
+<!-- <span>state: {{ enable }}</span> -->

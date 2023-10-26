@@ -111,7 +111,7 @@
 |next|下一个组件的ulid|||
 |prev|上一个组件的ulid|||
 |props|属性|||
-|behaivor|行为|||
+|behavior|行为|||
 |item|条目|||
 |slot|内置文本|||
 |appUlid|所属应用的ulid|||
@@ -203,7 +203,7 @@ appUlid / pageUlid
 components
 在指定应用下的指定页面下创建组件
 post
-appUlid / pageUlid / componentInfo:{type/ulid/next/prev/props/behaivor/item/slot}
+appUlid / pageUlid / componentInfo:{type/ulid/next/prev/props/behavior/item/slot}
 
 components
 修改指定应用下的指定页面下的指定组件

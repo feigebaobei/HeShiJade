@@ -1,0 +1,9 @@
+<!-- <span>{{data.label}}</span>
+<span>{{data | json}}</span> -->
+<!-- <input dTextInput placeholder="Please Enter" id="textInput" [ngModel]="data.value"/> -->
+<d-select [placeholder]="'Standard Input'"
+[options]="data.options"
+[(ngModel)]="data.value"
+[filterKey]="'name'"
+(ngModelChange)="change()"
+></d-select>

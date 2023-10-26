@@ -13,6 +13,14 @@ import { ComponentService } from 'src/app/service/component.service';
 // type
 import type { A, S, Ao } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
+// 数据
+import { Button as buttonDefaultData,
+  Input as inputDefaultData,
+Modal as modalDefaultData,
+Select as selectDefaultData,
+Form as formDefaultData,
+Table as tableDefaultData,
+ } from '../../../helper/component'
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所有我考虑使用封装全部devui的组件来实现.
@@ -36,7 +44,7 @@ let compMap: Ao = {
 export class CompBoxComponent implements OnInit, OnDestroy {
   @Input() comp: A
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
-  private clearTimer: VoidFunction | undefined;
+  // private clearTimer: VoidFunction | undefined;
   curComp?: Comp | null
   constructor(private componentService: ComponentService) {
     this.curComp = null
@@ -51,36 +59,53 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.init()
-    // clog('IconModule, CompItemComponent', IconModule, CompItemComponent, IconComponent, DevUIModule)
-    // clog('IconModule, CompItemComponent', DevUIModule)
   }
   init() {
-    clog(234, this.comp)
+    console.log('comp', this.comp)
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-
-    // const componentRef = viewContainerRef.createComponent(CompItemComponent);
-    // const componentRef = viewContainerRef.createComponent(IconComponent);
-    // const componentRef = viewContainerRef.createComponent(ButtonComponent);
-    const componentRef: A = viewContainerRef.createComponent(compMap[this.comp.type as S]);
+    // const componentRef: A = viewContainerRef.createComponent(compMap[this.comp.type as S]);
     // componentRef.instance.data = {
-    //   slot: 'hi'
-    // };
-    this.initProps(componentRef.instance)
-    clog('componentRef', componentRef)
-  }
-  initProps(instance: A) {
-    switch (this.comp.type) {
-      case 'Button':
-        instance.data = {
-          slot: this.comp.slot,
-          ...this.comp.props
-        }
-        break
+      //   slot: 'hi'
+      // };
+      let componentRef: A
+      componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
+      switch (this.comp.type) {
+        case 'Button':
+          componentRef.instance.data = {
+            props: buttonDefaultData.props,
+            slot: buttonDefaultData.slot,
+          }
+          break
+        case 'Input':
+          componentRef.instance.data = {
+            props: inputDefaultData.props
+          }
+          break
+        case 'Modal':
+          componentRef.instance.data = {
+            props: modalDefaultData.props
+          }
+          break
+        case 'Select':
+          componentRef.instance.data = {
+            props: selectDefaultData.props
+          }
+          break
+        case 'Form':
+          componentRef.instance.data = {
+            props: formDefaultData.props
+          }
+          break
+        case 'Table':
+          componentRef.instance.data = {
+            props: tableDefaultData.props
+          }
+          break
     }
   }
   ngOnDestroy() {
-    this.clearTimer?.();
+    this.adHost.viewContainerRef.clear();
   }
 
 }

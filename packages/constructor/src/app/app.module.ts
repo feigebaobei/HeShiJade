@@ -45,6 +45,13 @@ import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
+import { PropsBoxComponent } from './setup/props-box/props-box.component';
+import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
+import { PropsInputComponent } from './setup/props-input/props-input.component';
+import { PropsSelectComponent } from './setup/props-select/props-select.component';
+import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
+import { PropsDirective } from './props.directive';
+import { PropsItemComponent } from './setup/props-item/props-item.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +75,13 @@ import { SelectComponent } from './components/select/select.component';
     TableComponent,
     InputComponent,
     SelectComponent,
+    PropsBoxComponent,
+    BehaviorBoxComponent,
+    PropsInputComponent,
+    PropsSelectComponent,
+    PropsSwitchComponent,
+    PropsDirective,
+    PropsItemComponent,
     // IconModule,
   ],
   imports: [

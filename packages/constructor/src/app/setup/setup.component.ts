@@ -4,12 +4,17 @@ import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
+// 数据
+import * as componentDefaultMeta from '../../helper/component'
+// 类型
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
-import type { Category, Component as Comp } from 'src/types/component';
+import type { Category, Component as Comp, componentDefaultMeta as componentDefaultMetaT } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 
+
 let clog = console.log
+let CDM: Record<S, componentDefaultMetaT> = componentDefaultMeta
 
 @Component({
   selector: 'app-setup',
@@ -44,8 +49,12 @@ export class SetupComponent implements OnInit {
     this.pageList = []
     this.msg = []
     this.pageData = []
-    // clog('this.router', this.router)
-    // clog('this.route', this.route)
+
+    this.componentService.componentListByCurPage$.subscribe(compArr => {
+      this.componentByPage = []
+      this.componentByPage = compArr
+      clog('change', compArr, this.componentByPage)
+    })
   }
   viewBtClickH() {}
 
@@ -55,9 +64,9 @@ export class SetupComponent implements OnInit {
   ngOnInit(): void {
     // 处理page
     this.pageService.recast()
-    this.pageService.pageList$.subscribe(pl => {
-      this.pageList = pl
-      this.componentService.initMap(pl.map(item => item.ulid))
+    this.pageService.pageList$.subscribe(pageList => {
+      this.pageList = pageList
+      this.componentService.initMap(pageList.map(item => item.ulid))
     })
     // 检查app
     this.checkApp().then((bool) => {
@@ -76,9 +85,11 @@ export class SetupComponent implements OnInit {
         clog('error', error)
       })
       // 请求当前页面的组件
-      this.componentService.getCompListByPage().then(res => {
-        this.componentByPage = res
-      })
+      // this.componentService.getCompListByPage().then(res => {
+      //   // this.componentByPage = res
+      //   this.componentByPage = []
+      // })
+      this.componentService.getCompListByPage()
     }).catch(() => {
       this.msg = [
         { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
@@ -109,15 +120,24 @@ export class SetupComponent implements OnInit {
       type: e.dragData.item.type, // 'Button',
       prev: '',
       next: '',
-      props: {},
-      behaivor: {},
-      item: {},
-      slot: '',
+      // props: {},
+      // behavior: {},
+      // item: {},
+      // slot: '',
+      // props: (componentDefaultMeta[e.dragData.item.type] as componentDefaultMetaT).props,
+      // behavior: componentDefaultMeta[e.dragData.item.type].behavior,
+      // item: componentDefaultMeta[e.dragData.item.type].item,
+      // slot: componentDefaultMeta[e.dragData.item.type].slot,
+      props: (CDM[e.dragData.item.type].props),
+      behavior: (CDM[e.dragData.item.type].behavior),
+      item: (CDM[e.dragData.item.type].item),
+      slot: (CDM[e.dragData.item.type].slot),
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
-    }).then((res: Comp[]) => {
-      this.componentByPage = res
     })
+    // .then((res: Comp[]) => {
+    //   this.componentByPage = res
+    // })
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {

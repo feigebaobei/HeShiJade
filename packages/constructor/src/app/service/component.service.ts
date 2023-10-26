@@ -4,8 +4,9 @@ import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
 import { PageService } from './page.service';
 // import { createCompKey } from 'src/helper/index'
-import type { Component, Category } from '../../types/component'
+import type { Component, Category, PropsValue } from '../../types/component'
 import type { ResponseData } from '../../types/index'
+import type { ComponentPropsMeta } from '../../types/props'
 import type { S, Ao, ULID } from 'src/types/base';
 
 let clog = console.log
@@ -19,10 +20,10 @@ type ComponentOrUn = Component | undefined
 export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   categoryList: Component[] // 这里应该使用组件种类的类型
-  // curComponent: Component | null
-  componentListByPage: Component[] // 应该使用组件的类型
+  componentListByPage: Component[] // 应该使用组件的类型 // 考虑是否可删除
   compSubject$: Subject<CompOrUn> // 组件的subject
   categorySubject$: Subject<CompOrUn> // 组件的subject
+  componentListByCurPage$: Subject<Component[]> // 当前页面的组件
   _curCompUlid: S
   _curComponent: CompOrUn
   _curCategory: ComponentOrUn
@@ -31,41 +32,28 @@ export class ComponentService {
   constructor(private http: HttpClient, private pageService: PageService) {
     this.categoryList = []
     // 组件种类应该从前端取得，不应该从后端接口取得。
-    // this.curComponent = null
     this.componentListByPage = []
     this.compSubject$ = new Subject<CompOrUn>()
     this.categorySubject$ = new Subject<ComponentOrUn>()
+    this.componentListByCurPage$ = new Subject<Component[]>()
+    // this.curProps$ = new Subject() //
     this._curCompUlid = ''
     this._curComponent = undefined
     this._curCategory = undefined
     this._map = new Map()
   }
   initMap(pageUlidList: ULID[]) {
-    pageUlidList.forEach(pu => {
-      // this._map.set(createCompKey(appUlid, pu), new DoublyChain())
-      this._map.set(pu, new DoublyChain())
+    pageUlidList.forEach(pageUlid => {
+      this._map.set(pageUlid, new DoublyChain())
     })
   }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
-      // 日后改为从组件库中引入
-      // this.http.get<ResponseData>('http://localhost:5000/components/category', {
-      //   withCredentials: true
-      // }).subscribe(res => {
-      //   if (res.code === 0) {
-      //     this.categoryList = res.data
-      //     // clog(this.categoryList)
-      //     s(res.data)
-      //   } else {
-      //     j(new Error(res.message))
-      //   }
-      // })
-
       s([
         {
           name: 'button',
           type: 'Button',
-          ulid: '12345asdfg' // 用不到了。
+          ulid: '12345asdfg'
         },
         {
             name: 'modal',
@@ -82,9 +70,18 @@ export class ComponentService {
             type: 'Table',
             ulid: '12345asdfgs'
         },
+        {
+            name: 'input',
+            type: 'Input',
+            ulid: '12345asdfga'
+        },
+        {
+            name: 'select',
+            type: 'Select',
+            ulid: '12345asdfgb'
+        },
       ])
     })
-    // return this.categoryList
   }
   // 请求指定页面的组件
   getCompListByPage() {
@@ -114,6 +111,7 @@ export class ComponentService {
           if (has) {
             this._map.get((obj['pageUlid']))!.append(obj)
             // this._opCompList(res.data)
+            this.componentListByCurPage$.next(this._map.get((obj['pageUlid']))!.toArray())
             s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
           } else {
             this._opCompList(res.data)
@@ -130,7 +128,7 @@ export class ComponentService {
   // putCompListByPage(obj: Ao) {}
   getComponentByPage(pageUlid?: ULID): Component[] {
     if (pageUlid) {
-      clog('chain', this._map.get(pageUlid)?.toArray())
+      clog('getComponentByPage', this._map.get(pageUlid)?.toArray())
       return (this._map.get(pageUlid)?.toArray() as Component[])
     } else {
       return []
@@ -205,6 +203,25 @@ export class ComponentService {
     } else {
       this._curCategory = undefined
       this.categorySubject$.next(this._curCategory)
+    }
+  }
+  // 设置当前组件的prop
+  setCurComponentProp(key: S, value: PropsValue) {
+    // debugger
+    let curComp = this.curComponent()
+    let curPage = this.pageService.getCurPage()
+    if (curPage && curComp) {
+      let cur = this._map.get(curPage.ulid)?.head
+      while (cur) {
+        if (cur.value.ulid === curComp.ulid) {
+          cur.value.props[key] = value
+          break
+        }
+        cur = cur.next
+      }
+      let arr = this.getComponentByPage(curPage.ulid)
+      clog('new ', arr)
+      this.componentListByCurPage$.next(arr)
     }
   }
 }

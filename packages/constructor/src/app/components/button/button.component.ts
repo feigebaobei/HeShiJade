@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import type { A } from 'src/types/base';
 
 @Component({
@@ -6,7 +6,13 @@ import type { A } from 'src/types/base';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.sass']
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnInit {
   @Input() data: A
-  constructor() {}
+  constructor() {
+    
+  }
+  ngOnInit() {
+    console.log('button data', this)
+    
+  }
 }

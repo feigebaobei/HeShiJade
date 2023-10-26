@@ -1,0 +1,6 @@
+<span>{{data.label}}</span>
+<input dTextInput placeholder="Please Enter" id="textInput" 
+[(ngModel)]="data.value"
+(ngModelChange)="change()"
+/>
+<!-- ngModelChange 监听数据变化， -->
