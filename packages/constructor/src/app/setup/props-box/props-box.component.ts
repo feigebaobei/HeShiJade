@@ -48,22 +48,28 @@ export class PropsBoxComponent {
       case 'Button':
         this.componentPropsMeta = buttonPropsMeta
         Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o = {
+          let o: CPMI = {
             ...this.componentPropsMeta[key],
             propKey: key,
             componentUlid: this.curComp!.ulid,
           }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
           this.componentPropsList.push(o)
         })
         break
       case 'Input':
         this.componentPropsMeta = inputPropsMeta
         Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o = {
+          let o: CPMI = {
             ...this.componentPropsMeta[key],
             propKey: key,
             componentUlid: this.curComp!.ulid,
           }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
           this.componentPropsList.push(o)
         })
         break
@@ -74,16 +80,14 @@ export class PropsBoxComponent {
         // push到数组中
         this.componentPropsMeta = selectPropsMeta
         Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o: CPMI
-           = {
+          let o: CPMI = {
             ...this.componentPropsMeta[key],
-            // // 赋值
-            // options: (this.curComp?.props['options'] as SelectOptionsItem[]),
             propKey: key,
             componentUlid: this.curComp!.ulid
           }
+          // 赋值
           o.overFields.forEach(field => {
-            o[field] = this.curComp?.props[field]
+            o[field] = this.curComp?.props[key]
           })
           this.componentPropsList.push(o)
         })
