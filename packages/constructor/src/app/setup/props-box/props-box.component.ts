@@ -74,14 +74,17 @@ export class PropsBoxComponent {
         // push到数组中
         this.componentPropsMeta = selectPropsMeta
         Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o = {
+          let o: CPMI
+           = {
             ...this.componentPropsMeta[key],
-            // 赋值
-            options: (this.curComp?.props['options'] as SelectOptionsItem[]),
+            // // 赋值
+            // options: (this.curComp?.props['options'] as SelectOptionsItem[]),
             propKey: key,
             componentUlid: this.curComp!.ulid
           }
-          // let
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[field]
+          })
           this.componentPropsList.push(o)
         })
         break

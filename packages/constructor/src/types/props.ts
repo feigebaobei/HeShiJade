@@ -28,6 +28,9 @@ interface ComponentPropsMetaItemRaw {
     reducible?: B, // 是否可以减少
     maxLength?: N, // 最大长度
     minLength?: N, // 最小长度
+
+    overFields: S[] // 指定需要使用配置数据覆盖
+    [k: S]: A
 }
 export {
     ComponentPropsMeta,

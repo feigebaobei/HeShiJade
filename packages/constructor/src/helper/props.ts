@@ -9,6 +9,7 @@ let Button: ComponentPropsMetaRaw = {
         ],
         value: 'button',
         label: '类型',
+        overFields: ['value'],
     },
     bsSize: {
         type: 'select',
@@ -20,6 +21,7 @@ let Button: ComponentPropsMetaRaw = {
         ],
         value: 'md',
         label: '大小',
+        overFields: ['value'],
     },
     bordered: {
         type: 'switch',
@@ -29,6 +31,7 @@ let Button: ComponentPropsMetaRaw = {
         ],
         value: false,
         label: '边框',
+        overFields: ['value'],
     },
     disabled: {
         type: 'switch',
@@ -38,11 +41,13 @@ let Button: ComponentPropsMetaRaw = {
         ],
         value: false,
         label: '禁用',
+        overFields: ['value'],
     },
     width: {
         type: 'input',
         value: '',
         label: '宽度',
+        overFields: ['value'],
     }
 }
 let Input: ComponentPropsMetaRaw = {
@@ -53,7 +58,8 @@ let Input: ComponentPropsMetaRaw = {
             { label: 'true', value: true },
         ],
         value: false,
-        label: '是否出现错误状态'
+        label: '是否出现错误状态',
+        overFields: ['value'],
     },
     size: {
         type: 'select',
@@ -63,7 +69,8 @@ let Input: ComponentPropsMetaRaw = {
             { label: 'lg', value: 'lg' },
         ],
         value: '',
-        label: '尺寸'
+        label: '尺寸',
+        overFields: ['value'],
     },
     // showGlowStyle: {
     //     type: 'switch',
@@ -81,7 +88,8 @@ let Input: ComponentPropsMetaRaw = {
             { label: 'grey', value: 'grey' },
         ],
         value: 'default',
-        label: '风格'
+        label: '风格',
+        overFields: ['value'],
     },
 }
 let Select: ComponentPropsMetaRaw = {
@@ -92,7 +100,8 @@ let Select: ComponentPropsMetaRaw = {
             { label: 'grey', value: 'grey' },
         ],
         value: 'default',
-        label: '风格'
+        label: '风格',
+        overFields: ['value']
     },
     options: {
         type: 'option',
@@ -107,6 +116,7 @@ let Select: ComponentPropsMetaRaw = {
         reducible: true,
         maxLength: 5,
         minLength: 1,
+        overFields: ['options']
     }
 }
 export {
