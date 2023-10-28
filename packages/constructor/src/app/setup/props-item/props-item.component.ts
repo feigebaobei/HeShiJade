@@ -4,6 +4,7 @@ import { PropsDirective } from 'src/app/props.directive';
 import { PropsInputComponent } from '../props-input/props-input.component';
 import { PropsSelectComponent } from '../props-select/props-select.component';
 import { PropsSwitchComponent } from '../props-switch/props-switch.component';
+import { PropsOptionComponent } from '../props-option/props-option.component';
 // type
 import type { A } from 'src/types/base';
 import type { ComponentPropsMetaItem } from 'src/types/props'
@@ -41,6 +42,10 @@ export class PropsItemComponent implements OnInit {
         break
       case 'switch':
         componentRef = viewContainerRef.createComponent(PropsSwitchComponent)
+        componentRef.instance.data = this.propItem
+        break
+      case 'option':
+        componentRef = viewContainerRef.createComponent(PropsOptionComponent)
         componentRef.instance.data = this.propItem
         break
     }

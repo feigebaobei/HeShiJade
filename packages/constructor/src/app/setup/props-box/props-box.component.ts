@@ -14,6 +14,7 @@ import type {
 import {
   Button as buttonPropsMeta,
   Input as inputPropsMeta,
+  Select as selectPropsMeta,
 } from '../../../helper/props'
 
 @Component({
@@ -61,6 +62,17 @@ export class PropsBoxComponent {
             ...this.componentPropsMeta[key],
             propKey: key,
             componentUlid: this.curComp!.ulid,
+          }
+          this.componentPropsList.push(o)
+        })
+        break
+      case 'Select':
+        this.componentPropsMeta = selectPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid
           }
           this.componentPropsList.push(o)
         })

@@ -52,6 +52,7 @@ import { PropsSelectComponent } from './setup/props-select/props-select.componen
 import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
 import { PropsDirective } from './props.directive';
 import { PropsItemComponent } from './setup/props-item/props-item.component';
+import { PropsOptionComponent } from './setup/props-option/props-option.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { PropsItemComponent } from './setup/props-item/props-item.component';
     PropsSwitchComponent,
     PropsDirective,
     PropsItemComponent,
+    PropsOptionComponent,
     // IconModule,
   ],
   imports: [

@@ -1,6 +1,6 @@
-import type {N, B, A, S, ULID, O} from './base'
+import type {N, B, A, S, ULID, O, SelectOptionsItem} from './base'
 
-type PropsValue = S | B | N | S[]
+type PropsValue = S | B | N | S[] | SelectOptionsItem[]
 interface Component {
   ulid: S
   // name: S
@@ -22,10 +22,8 @@ interface Category {
   type: S
   ulid: ULID
 }
-interface componentDefaultMeta {
-  // props: O
+interface componentConfig {
   props: {
-    // options?: S[]s
     [k: S]: PropsValue,
   },
   behavior: O
@@ -37,5 +35,5 @@ export type {
   PropsValue,
   Component,
   Category,
-  componentDefaultMeta,
+  componentConfig,
 }

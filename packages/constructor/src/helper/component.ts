@@ -1,7 +1,9 @@
 // 它与组件配套。日后可以放在组件目录中。
-import type { componentDefaultMeta } from '../types/component'
+// component文件 定义数据。
+// props文件     定义结构
+import type { componentConfig } from '../types/component'
 
-let Button: componentDefaultMeta = {
+let Button: componentConfig = {
     props: {
         type: 'button',
         bsSize: 'md',
@@ -13,7 +15,7 @@ let Button: componentDefaultMeta = {
     item: {},
     slot: 'button',
 }
-let Input: componentDefaultMeta = {
+let Input: componentConfig = {
     props: {
         error: false,
         size: '',
@@ -24,15 +26,20 @@ let Input: componentDefaultMeta = {
     item: {},
     slot: '',
 }
-let Modal: componentDefaultMeta = {
+let Modal: componentConfig = {
     props: {},
     behavior: {},
     item: {},
     slot: '',
 }
-let Select: componentDefaultMeta = {
+let Select: componentConfig = {
     props: {
-        options: ['one', 'two', 'three'],
+        // options: ['one', 'two', 'three'],
+        options: [
+            {label: 'one', value: 'one',},
+            {label: 'two', value: 'two',},
+            {label: 'three', value: 'three',},
+        ],
         isSearch: false,
         size: '',
         placeholder: '',
@@ -41,13 +48,13 @@ let Select: componentDefaultMeta = {
     item: {},
     slot: '',
 }
-let Form: componentDefaultMeta = {
+let Form: componentConfig = {
     props: {},
     behavior: {},
     item: {},
     slot: '',
 }
-let Table: componentDefaultMeta = {
+let Table: componentConfig = {
     props: {},
     behavior: {},
     item: {},

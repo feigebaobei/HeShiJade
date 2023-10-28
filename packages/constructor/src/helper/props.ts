@@ -84,7 +84,32 @@ let Input: ComponentPropsMetaRaw = {
         label: '风格'
     },
 }
+let Select: ComponentPropsMetaRaw = {
+    styleType: {
+        type: 'select',
+        options: [
+            { label: 'default', value: 'default' },
+            { label: 'grey', value: 'grey' },
+        ],
+        value: 'default',
+        label: '风格'
+    },
+    options: {
+        type: 'option',
+        value: [
+            { label: 'oneLabel', value: 'oneVlaue' },
+            // { label: 'ones', value: 'one', disabled: true },
+        ],
+        valueType: 'string',
+        label: '选项',
+        addable: true,
+        reducible: true,
+        maxLength: 5,
+        minLength: 1,
+    }
+}
 export {
     Button,
     Input,
+    Select,
 }

@@ -5,16 +5,16 @@ import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
 // 数据
-import * as componentDefaultMeta from '../../helper/component'
+import * as componentConfig from '../../helper/component'
 // 类型
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
-import type { Category, Component as Comp, componentDefaultMeta as componentDefaultMetaT } from 'src/types/component';
+import type { Category, Component as Comp, componentConfig as componentConfigT } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 
 
 let clog = console.log
-let CDM: Record<S, componentDefaultMetaT> = componentDefaultMeta
+let CDM: Record<S, componentConfigT> = componentConfig
 
 @Component({
   selector: 'app-setup',
@@ -120,14 +120,6 @@ export class SetupComponent implements OnInit {
       type: e.dragData.item.type, // 'Button',
       prev: '',
       next: '',
-      // props: {},
-      // behavior: {},
-      // item: {},
-      // slot: '',
-      // props: (componentDefaultMeta[e.dragData.item.type] as componentDefaultMetaT).props,
-      // behavior: componentDefaultMeta[e.dragData.item.type].behavior,
-      // item: componentDefaultMeta[e.dragData.item.type].item,
-      // slot: componentDefaultMeta[e.dragData.item.type].slot,
       props: (CDM[e.dragData.item.type].props),
       behavior: (CDM[e.dragData.item.type].behavior),
       item: (CDM[e.dragData.item.type].item),
