@@ -21,7 +21,7 @@ interface ComponentPropsMetaItemRaw {
     type: S, // 使用哪种表单元素。可以写成枚举值
     options?: SelectOptionsItem[], // select/switch的枚举值
 
-    value: A , // 值
+    value?: A , // 值
     valueType?: S , // 值的类型
     label: S, // 文本
     addable?: B, // 是否可以增加

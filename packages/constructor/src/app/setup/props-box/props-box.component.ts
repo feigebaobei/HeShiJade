@@ -7,6 +7,7 @@ import type {
   ComponentPropsMetaRaw as CPMR,
   ComponentPropsMetaItemRaw as CPMIR,
   ComponentPropsMetaItem as CPMI,
+  SelectOptionsItem
 } from 'src/types/props'
 // import type { A } from 'src/types/base';
 // data
@@ -67,13 +68,20 @@ export class PropsBoxComponent {
         })
         break
       case 'Select':
+        // 读取数据结构
+        // 读取配置数据
+        // 为数据结构赋值
+        // push到数组中
         this.componentPropsMeta = selectPropsMeta
         Object.keys(this.componentPropsMeta).forEach((key) => {
           let o = {
             ...this.componentPropsMeta[key],
+            // 赋值
+            options: (this.curComp?.props['options'] as SelectOptionsItem[]),
             propKey: key,
             componentUlid: this.curComp!.ulid
           }
+          // let
           this.componentPropsList.push(o)
         })
         break

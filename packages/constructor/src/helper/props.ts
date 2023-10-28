@@ -96,7 +96,8 @@ let Select: ComponentPropsMetaRaw = {
     },
     options: {
         type: 'option',
-        value: [
+        // value: [
+        options: [
             { label: 'oneLabel', value: 'oneVlaue' },
             // { label: 'ones', value: 'one', disabled: true },
         ],
