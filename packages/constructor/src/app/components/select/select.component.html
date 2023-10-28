@@ -1,7 +1,7 @@
 <!-- [options]="options" -->
 {{data | json}}
 <d-select 
-  [options]="data.options"
+  [options]="data.props.options"
   [isSearch]="data.props.isSearch"
   [size]="data.props.size"
   [filterKey]="'label'"
