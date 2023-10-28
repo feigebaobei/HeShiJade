@@ -36,7 +36,6 @@ export class ComponentService {
     this.compSubject$ = new Subject<CompOrUn>()
     this.categorySubject$ = new Subject<ComponentOrUn>()
     this.componentListByCurPage$ = new Subject<Component[]>()
-    // this.curProps$ = new Subject() //
     this._curCompUlid = ''
     this._curComponent = undefined
     this._curCategory = undefined
@@ -134,6 +133,7 @@ export class ComponentService {
       return []
     }
   }
+  // 把当前页面的组件按结构顺序排列
   _opCompList(_compList: Component[]) {
     let curPage = this.pageService.getCurPage()
     let nextComponentUlid = curPage?.firstComponentUlid
@@ -220,7 +220,7 @@ export class ComponentService {
         cur = cur.next
       }
       let arr = this.getComponentByPage(curPage.ulid)
-      clog('new ', arr)
+      // clog('new ', arr)
       this.componentListByCurPage$.next(arr)
     }
   }

@@ -7,12 +7,15 @@ import type {
   ComponentPropsMetaRaw as CPMR,
   ComponentPropsMetaItemRaw as CPMIR,
   ComponentPropsMetaItem as CPMI,
+  SelectOptionsItem
 } from 'src/types/props'
 // import type { A } from 'src/types/base';
 // data
 // import * as 
 import {
-  Button as buttonPropsMeta
+  Button as buttonPropsMeta,
+  Input as inputPropsMeta,
+  Select as selectPropsMeta,
 } from '../../../helper/props'
 
 @Component({
@@ -45,11 +48,47 @@ export class PropsBoxComponent {
       case 'Button':
         this.componentPropsMeta = buttonPropsMeta
         Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o = {
+          let o: CPMI = {
             ...this.componentPropsMeta[key],
             propKey: key,
             componentUlid: this.curComp!.ulid,
           }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
+          this.componentPropsList.push(o)
+        })
+        break
+      case 'Input':
+        this.componentPropsMeta = inputPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o: CPMI = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid,
+          }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
+          this.componentPropsList.push(o)
+        })
+        break
+      case 'Select':
+        // 读取数据结构
+        // 读取配置数据
+        // 为数据结构赋值
+        // push到数组中
+        this.componentPropsMeta = selectPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o: CPMI = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid
+          }
+          // 赋值
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
           this.componentPropsList.push(o)
         })
         break

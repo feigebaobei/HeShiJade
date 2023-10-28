@@ -1,0 +1,20 @@
+<p>props-option works!</p>
+<!-- 日后做成可拖动排序的 -->
+<div>
+    <span>{{data.label}}</span>
+    <div class="row"
+        *ngFor="let optionItem of data.options; let i = index"
+    >
+    <input
+    dTextInput placeholder="Please Enter" id="textInput" 
+    [(ngModel)]="optionItem.label"
+    (ngModelChange)="labelChange(i)"
+    />
+    <input
+    dTextInput placeholder="Please Enter" id="textInput" 
+    [(ngModel)]="optionItem.value"
+    (ngModelChange)="valueChange(i)"
+    />
+    </div>
+        <!-- [optionItem]="optionItem" -->
+</div>

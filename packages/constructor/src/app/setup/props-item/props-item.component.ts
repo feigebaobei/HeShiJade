@@ -4,6 +4,7 @@ import { PropsDirective } from 'src/app/props.directive';
 import { PropsInputComponent } from '../props-input/props-input.component';
 import { PropsSelectComponent } from '../props-select/props-select.component';
 import { PropsSwitchComponent } from '../props-switch/props-switch.component';
+import { PropsOptionComponent } from '../props-option/props-option.component';
 // type
 import type { A } from 'src/types/base';
 import type { ComponentPropsMetaItem } from 'src/types/props'
@@ -28,6 +29,7 @@ export class PropsItemComponent implements OnInit {
     // viewContainerRef.createComponent(PropsInputComponent)
     // console.log('oninit', this, this.propItem)
     // componentRef.instance.data = this.propItem
+    // 根据type使用相应的表单元素渲染设置器
     switch(this.propItem.type) {
       case 'input':
       default:
@@ -40,6 +42,10 @@ export class PropsItemComponent implements OnInit {
         break
       case 'switch':
         componentRef = viewContainerRef.createComponent(PropsSwitchComponent)
+        componentRef.instance.data = this.propItem
+        break
+      case 'option':
+        componentRef = viewContainerRef.createComponent(PropsOptionComponent)
         componentRef.instance.data = this.propItem
         break
     }
