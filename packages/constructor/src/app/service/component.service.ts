@@ -86,6 +86,9 @@ export class ComponentService {
   getCompListByPage() {
     return new Promise<Component[]>((s, j) => {
       this.http.get<ResponseData>('http://localhost:5000/components/listByPage', { // 日后改为接口重载
+        params: {
+          pageUlid: String(this.pageService.getCurPage()?.ulid),
+        },
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
