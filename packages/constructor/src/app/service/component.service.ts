@@ -20,7 +20,7 @@ type ComponentOrUn = Component | undefined
 export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   categoryList: Component[] // 这里应该使用组件种类的类型
-  componentListByPage: Component[] // 应该使用组件的类型 // 考虑是否可删除
+  // componentListByPage: Component[] // 应该使用组件的类型 // 考虑是否可删除
   compSubject$: Subject<CompOrUn> // 组件的subject
   categorySubject$: Subject<CompOrUn> // 组件的subject
   componentListByCurPage$: Subject<Component[]> // 当前页面的组件
@@ -32,7 +32,7 @@ export class ComponentService {
   constructor(private http: HttpClient, private pageService: PageService) {
     this.categoryList = []
     // 组件种类应该从前端取得，不应该从后端接口取得。
-    this.componentListByPage = []
+    // this.componentListByPage = []
     this.compSubject$ = new Subject<CompOrUn>()
     this.categorySubject$ = new Subject<ComponentOrUn>()
     this.componentListByCurPage$ = new Subject<Component[]>()
@@ -89,7 +89,31 @@ export class ComponentService {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          this.componentListByPage = res.data
+          // clog('res', res.data)
+          // this.componentListByPage = res.data
+          let curPage = this.pageService.getCurPage()
+          if (curPage) {
+            let nextComponentUlid = curPage?.firstComponentUlid
+            while (nextComponentUlid) {
+              let comp = (res.data as Component[] || []).find((item: Component) => item.ulid === nextComponentUlid)
+              if (comp) {
+                let dc = this._map.get(String(curPage?.ulid))
+                if (dc) {
+                  dc.append(comp)
+                } else {
+                  let t = new DoublyChain<Component>()
+                  t.append(comp)
+                  this._map.set(String(curPage?.ulid), t)
+                }
+              }
+              nextComponentUlid = comp?.next
+            }
+            clog('init', this._map)
+            // this.componentListByCurPage$.next(res.data)
+            let arr = this._map.get(curPage.ulid)!.toArray()
+            // .toArray()
+            this.componentListByCurPage$.next(arr)
+          }
           s(res.data)
         } else {
           j(new Error(res.message))
@@ -106,11 +130,16 @@ export class ComponentService {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
+          clog('_map', this._map)
           let has = this._map.has((obj['pageUlid']))
           if (has) {
-            this._map.get((obj['pageUlid']))!.append(obj)
+            let d = this._map.get((obj['pageUlid']))
+            d!.append(obj)
+            clog('d', d)
             // this._opCompList(res.data)
-            this.componentListByCurPage$.next(this._map.get((obj['pageUlid']))!.toArray())
+            let arr = this._map.get((obj['pageUlid']))!.toArray()
+            clog('sarr', arr, this._map)
+            this.componentListByCurPage$.next(arr)
             s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
           } else {
             this._opCompList(res.data)
@@ -140,23 +169,21 @@ export class ComponentService {
     while (nextComponentUlid) {
       let comp = _compList.find(item => item.ulid === nextComponentUlid)
       if (comp) {
-        this.pushComp(comp)
+        // this.pushComp(comp)
+        // let curPage = this.pageService.getCurPage()
+        if (curPage) {
+          let _chain = this._map.get(curPage.ulid)
+          if (_chain) {
+            _chain.append(comp)
+          } else {
+            let dc = new DoublyChain<Component>()
+            dc.append(comp)
+            this._map.set(curPage.ulid, dc)
+          }
+        }
         nextComponentUlid = comp.next
       } else {
         break
-      }
-    }
-  }
-  pushComp(component: Component) {
-    let curPage = this.pageService.getCurPage()
-    if (curPage) {
-      let _chain = this._map.get(curPage.ulid)
-      if (_chain) {
-        _chain.append(component)
-      } else {
-        let dc = new DoublyChain<Component>()
-        dc.append(component)
-        this._map.set(curPage.ulid, dc)
       }
     }
   }

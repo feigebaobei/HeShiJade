@@ -51,9 +51,7 @@ export class SetupComponent implements OnInit {
     this.pageData = []
 
     this.componentService.componentListByCurPage$.subscribe(compArr => {
-      this.componentByPage = []
       this.componentByPage = compArr
-      clog('change', compArr, this.componentByPage)
     })
     this.pageService.pageList$.subscribe(p => {
       this.pageList = p
@@ -65,21 +63,8 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
-    clog('appList', this.appService.getAppList())
     // 当直接进入配置页面或在配置页面刷新时应用列表为空
     // 若应用列表为空，则请求应用列表。
-    if (this.appService.getAppList().length) {
-      // this.appService.reqAppList().then(() => {
-      //   this.appService.setCurApp(String(this.route.snapshot.queryParamMap.get('app')))
-      // })
-    }
-    // 处理page
-    // this.pageService.recast()
-    // this.pageService.pageList$.subscribe(pageList => {
-    //   this.pageList = pageList
-    //   this.componentService.initMap(pageList.map(item => item.ulid))
-    // })
-    // this.pageService.reqPageList()
     // 检查app
     this.checkApp().then((bool) => {
       // 设置当前应用
@@ -93,24 +78,23 @@ export class SetupComponent implements OnInit {
     }).then(() => {
       // 请求组件的种类
       this.componentService.getCategoryList().then(res => {
+        // clog('res comp', res)
         this.componentCategoryList = res
       }).catch(error => {
         clog('error', error)
       })
       // 请求当前应用的页面列表
-      return this.pageService.reqPageList() // .then()
+      return this.pageService.reqPageList()
     })
     .then(() => {
       // 设置no.1page为当前页面
       let pageList = this.pageService.getPageList()
       this.pageService.setCurPage(pageList[0].ulid)
-      // 
+      // init页面与组件的映射关系
+      this.componentService.initMap(this.pageService.getPageList().map(item => item.ulid))
       // 请求当前页面的组件
-      // this.componentService.getCompListByPage().then(res => {
-      //   // this.componentByPage = res
-      //   this.componentByPage = []
-      // })
       this.componentService.getCompListByPage()
+
     })
     .catch(() => {
       this.msg = [
@@ -126,11 +110,6 @@ export class SetupComponent implements OnInit {
     let appList = this.appService.getAppList()
     if (appList.length) {
       return Promise.resolve(appList.some(item => item.ulid === appUlid))
-      // if (b) {
-      //   this.appService.setCurApp(String(appUlid))
-      // }
-      // return b
-      // return Promise.resolve(true)
     } else {
       return this.appService.reqAppList().then(appList => {
         // clog('appList', appList)
@@ -140,13 +119,13 @@ export class SetupComponent implements OnInit {
     }
   }
   onDrop(e: DropEvent, targetArray: A) {
-    clog('stage onDrop', e, targetArray)
+    // clog('stage onDrop', e, targetArray)
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     this.componentService.postCompListByPage({
       ulid: ulid(),
-      type: e.dragData.item.type, // 'Button',
-      prev: '',
+      type: e.dragData.item.type,
+      prev: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
       next: '',
       props: (CDM[e.dragData.item.type].props),
       behavior: (CDM[e.dragData.item.type].behavior),

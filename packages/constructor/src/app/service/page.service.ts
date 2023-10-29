@@ -47,6 +47,7 @@ export class PageService {
           withCredentials: true
         }).subscribe(res => {
           if (res.code === 0) {
+            // clog('res page', res.data)
             this._pageList = res.data
             this._opPageList(res.data)
             let pl = this.getPageList()
@@ -64,16 +65,16 @@ export class PageService {
   private _opPageList(_pageList: Page[]) {
     this._chain.clear() // 清空
     let curApp = this.appService.getCurApp()
-    clog('_opPageList', _pageList, curApp)
+    // clog('_opPageList', _pageList, curApp)
     if (curApp) {
       let pageUlid: Page['nextUlid'] = curApp.firstPageUlid
-      clog('pageUlid', pageUlid)
+      // clog('pageUlid', pageUlid)
       while (pageUlid) {
         let page = _pageList.find(page => page.ulid === pageUlid)
         if (page) {
           this._chain.append(page)
-          clog('page', page)
-          clog('this._chain', this._chain)
+          // clog('page', page)
+          // clog('this._chain', this._chain)
           pageUlid = page.nextUlid
         } else {
           break
