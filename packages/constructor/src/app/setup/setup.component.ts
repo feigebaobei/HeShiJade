@@ -55,6 +55,9 @@ export class SetupComponent implements OnInit {
       this.componentByPage = compArr
       clog('change', compArr, this.componentByPage)
     })
+    this.pageService.pageList$.subscribe(p => {
+      this.pageList = p
+    })
   }
   viewBtClickH() {}
 
@@ -95,7 +98,7 @@ export class SetupComponent implements OnInit {
         clog('error', error)
       })
       // 请求当前应用的页面列表
-      return this.pageService.reqPageList()
+      return this.pageService.reqPageList() // .then()
     })
     .then(() => {
       // 设置no.1page为当前页面
