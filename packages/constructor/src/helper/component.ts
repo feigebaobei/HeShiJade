@@ -34,7 +34,6 @@ let Modal: componentConfig = {
 }
 let Select: componentConfig = {
     props: {
-        // options: ['one', 'two', 'three'],
         options: [
             {label: 'one', value: 'one',},
             {label: 'two', value: 'two',},

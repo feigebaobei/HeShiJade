@@ -6,19 +6,6 @@ import type { S } from 'src/types/base';
 import type { Observable } from 'rxjs';
 import type { User } from 'src/types';
 
-// 日后移入helper
-// let reqToPromise = (fn: Observable<ResponseData>) => {
-//   return new Promise((s, j) => {
-//     fn.subscribe(res => {
-//       if (res.code === 0) {
-//         s(res.data)
-//       } else {
-//         j(new Error(res.message))
-//       }
-//     })
-//   })
-// }
-
 @Injectable({
   providedIn: 'root'
 })

@@ -82,7 +82,7 @@ export class PageService {
     }
   }
   // 获取pageList
-  getPageList() {
+  getPageList(): Page[] {
     return this._chain.toArray()
   }
   // 对外不暴露set pageList的方法

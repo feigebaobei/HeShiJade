@@ -62,14 +62,24 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
+    clog('appList', this.appService.getAppList())
+    // 当直接进入配置页面或在配置页面刷新时应用列表为空
+    // 若应用列表为空，则请求应用列表。
+    if (this.appService.getAppList().length) {
+      // this.appService.reqAppList().then(() => {
+      //   this.appService.setCurApp(String(this.route.snapshot.queryParamMap.get('app')))
+      // })
+    }
     // 处理page
-    this.pageService.recast()
-    this.pageService.pageList$.subscribe(pageList => {
-      this.pageList = pageList
-      this.componentService.initMap(pageList.map(item => item.ulid))
-    })
+    // this.pageService.recast()
+    // this.pageService.pageList$.subscribe(pageList => {
+    //   this.pageList = pageList
+    //   this.componentService.initMap(pageList.map(item => item.ulid))
+    // })
+    // this.pageService.reqPageList()
     // 检查app
     this.checkApp().then((bool) => {
+      // 设置当前应用
       if (bool) {
         let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
         this.appService.setCurApp(appUlid)
@@ -84,13 +94,22 @@ export class SetupComponent implements OnInit {
       }).catch(error => {
         clog('error', error)
       })
+      // 请求当前应用的页面列表
+      return this.pageService.reqPageList()
+    })
+    .then(() => {
+      // 设置no.1page为当前页面
+      let pageList = this.pageService.getPageList()
+      this.pageService.setCurPage(pageList[0].ulid)
+      // 
       // 请求当前页面的组件
       // this.componentService.getCompListByPage().then(res => {
       //   // this.componentByPage = res
       //   this.componentByPage = []
       // })
       this.componentService.getCompListByPage()
-    }).catch(() => {
+    })
+    .catch(() => {
       this.msg = [
         { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
       ]
@@ -98,15 +117,21 @@ export class SetupComponent implements OnInit {
     })
 
   }
+  // 检查当前app是否在应用列表中
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
-    let pl = this.appService.getAppList()
-    // clog('appUlid', appUlid, pl)
-    if (pl.length) {
-      return Promise.resolve(pl.some(item => item.ulid === appUlid))
+    let appList = this.appService.getAppList()
+    if (appList.length) {
+      return Promise.resolve(appList.some(item => item.ulid === appUlid))
+      // if (b) {
+      //   this.appService.setCurApp(String(appUlid))
+      // }
+      // return b
+      // return Promise.resolve(true)
     } else {
       return this.appService.reqAppList().then(appList => {
         // clog('appList', appList)
+        // this.appService.setCurApp(String(appUlid))
         return appList.some(item => item.ulid === appUlid)
       })
     }
