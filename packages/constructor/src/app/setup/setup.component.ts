@@ -63,6 +63,25 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
+    // init()
+    this.opApp()
+  }
+  opApp() {
+    let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
+    let appList = this.appService.getAppList()
+    if (appList.length) {
+      this.appService.setCurApp(appUlid)
+    } else {
+      this.appService.reqAppList().then(appList => {
+        if (appList.some(item => item.ulid === appUlid)) {
+          this.appService.setCurApp(appUlid)
+        } else {
+          alert('您无此应用的权限')
+        }
+      })
+    }
+  }
+  init() {
     // 当直接进入配置页面或在配置页面刷新时应用列表为空
     // 若应用列表为空，则请求应用列表。
     // 检查app
@@ -84,7 +103,7 @@ export class SetupComponent implements OnInit {
         clog('error', error)
       })
       // 请求当前应用的页面列表
-      return this.pageService.reqPageList()
+      // return this.pageService.reqPageList()
     })
     .then(() => {
       // 设置no.1page为当前页面

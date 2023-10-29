@@ -1,5 +1,7 @@
 // import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, 
+  // Input
+   OnInit } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
 // import { DialogComponent } from 'src/app/list/dialog/dialog.component';
 import { PageDialogComponent } from './dialog/page-dialog.component'; // 以后要换
@@ -8,7 +10,7 @@ import { PageService } from 'src/app/service/page.service';
 import { ulid } from 'ulid'
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
-import type { A, S } from 'src/types/base'
+import type { A, S, ULID } from 'src/types/base'
 // import type { ResponseData } from 'src/types';
 
 let clog = console.log
@@ -23,26 +25,32 @@ interface PageData {
   styleUrls: ['./page-list.component.sass']
 })
 export class PageListComponent implements OnInit {
-  @Input() pageList: Page[]
-  // pageList: Page[]
+  // @Input() pageList: Page[]
+  pageList: Page[]
   msg: {}[]
   // curPageUlid: S
   curPage?: Page | null
-  constructor(private dialogService: DialogService,
-    // private http: HttpClient,
+  constructor(
+    private dialogService: DialogService,
     private appService: AppService,
     private pageService: PageService,
   ) {
     this.pageList = []
-    // this.pageService.pageList$.subscribe(pl => {
-    //   this.pageList = pl
-    // })
+    this.pageService.pageList$.subscribe(pl => {
+      this.pageList = pl
+    })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
     })
     this.msg = []
-    // this.curPageUlid = ''
+    // this.appService.appList$.subscribe(appList => {
+    //   this.opPageList(appList.map(item => item.ulid))
+    // })
+    // 移到page.service.ts中了
+    // this.appService.appSubject$.subscribe(curApp => {
+    //   this.opPageList(String(curApp?.ulid))
+    // })
   }
   ngOnInit(): void {
     this.init()
@@ -53,7 +61,20 @@ export class PageListComponent implements OnInit {
     //   this.pageList = arr
     //   clog('this.pagelist', this.pageList, arr)
     // })
+    
+
   }
+  // 设置应用ulid对应的page
+  // opPageList(appUlidList: ULID[]) {
+  //   if () {}
+  //   this.initMap(appUlidList)
+  // }
+  // opPageList(appUlid: ULID) {
+  //   let arr = this.pageService.getPageList(appUlid)
+  //   if (!arr.length) {
+  //     this.pageService.reqPageList(appUlid)
+  //   }
+  // }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent
     arr.splice(dropIndex, 0, ...arr.splice(dragFromIndex, 1))
@@ -86,13 +107,13 @@ export class PageListComponent implements OnInit {
                 { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
               ]
               results.modalInstance.hide(); // 成功才关闭
-              if (!this.appService.getCurApp()?.firstPageUlid) {
-                this.appService.recast().then(() => {
-                  this.pageService.recast()
-                })
-              } else {
-                this.pageService.recast()
-              }
+              // if (!this.appService.getCurApp()?.firstPageUlid) {
+              //   this.appService.recast().then(() => {
+              //     this.pageService.recast()
+              //   })
+              // } else {
+              //   this.pageService.recast()
+              // }
               this.pageService.setCurPage(this.pageList[this.pageList.length].ulid)
             }).catch(() => {
               this.msg = [

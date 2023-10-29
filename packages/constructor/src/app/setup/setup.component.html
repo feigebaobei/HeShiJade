@@ -15,7 +15,8 @@
             <d-tabs [type]="'tabs'" [(activeTab)]="leftTabActive" (activeTabChange)="activeTabChange($event)">
                 <d-tab id="page" title="页面">
                     <!-- {{pageList | json}} -->
-                    <app-page-list [pageList]="pageList"></app-page-list>
+                    <!-- <app-page-list [pageList]="pageList"></app-page-list> -->
+                    <app-page-list></app-page-list>
                 </d-tab>
                 <d-tab id="component" title="组件">
                     <app-component-list [componentCategoryList]="componentCategoryList"></app-component-list>

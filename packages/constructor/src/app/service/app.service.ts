@@ -30,8 +30,8 @@ export class AppService {
     // this.curApp = new Subject<AppOrUn>()
   }
   _find(appUlid?: S) {
-    return this._curApp = this._appList.find(item => item.ulid === appUlid)
-    // return this.appList$.to
+    // return this._curApp = 
+    return this._appList.find(item => item.ulid === appUlid)
   }
   getCurApp() {
     return this._curApp
@@ -39,6 +39,8 @@ export class AppService {
   getAppList() {
     return this._appList
   }
+  // 暂时不开发。设置方法在请求appList时设置。
+  // setAppList() {}
   // 获取应用列表
   reqAppList() {
     return new Promise<App[]>((s, j) => {
@@ -58,7 +60,8 @@ export class AppService {
   }
   // 根据ulid设置指定app为当前激活状态。
   setCurApp(appUlid?: S) {
-    this.appSubject$.next(this._find(appUlid))
+    this._curApp = this._find(appUlid)
+    this.appSubject$.next(this._curApp)
   }
   createApp(data: ReqCreateData) {
     return this.http.post<ResponseData>('http://localhost:5000/apps', {
