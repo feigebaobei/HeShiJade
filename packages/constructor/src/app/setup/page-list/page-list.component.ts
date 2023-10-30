@@ -37,6 +37,7 @@ export class PageListComponent implements OnInit {
   ) {
     this.pageList = []
     this.pageService.pageList$.subscribe(pl => {
+      clog('pl', pl)
       this.pageList = pl
     })
     this.curPage = null

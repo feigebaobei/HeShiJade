@@ -43,8 +43,8 @@ export class PageService {
     this.appService.appSubject$.subscribe(curApp => {
       let appUlid = curApp?.ulid
       if (appUlid) {
-        this._opPageList(appUlid).then(() => {
-          let arr = this._map.get(String(appUlid))?.toArray() || []
+        this._opPageList(appUlid).then((arr) => {
+          // let arr = this._map.get(String(appUlid))?.toArray() || []
           clog('arr', arr)
           this.pageList$.next(arr)
         })
@@ -149,7 +149,7 @@ export class PageService {
         let dc = new DoublyChain<Page>()
         let app = this.appService.getCurApp()
         let nextPageUlid = app?.firstPageUlid
-        if (nextPageUlid) {
+        while (nextPageUlid) {
           let page = pageList.find(item => item.ulid === nextPageUlid)
           if (page) {
             dc.append(page)
@@ -157,7 +157,7 @@ export class PageService {
           nextPageUlid = page?.nextUlid
         }
         this._map.set(appUlid, dc)
-        return this._map.get(appUlid)?.toArray() || []
+        return dc.toArray()
       })
     } else {
       return Promise.resolve(this._map.get(appUlid)?.toArray() || [])
