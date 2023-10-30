@@ -143,7 +143,7 @@ export class ListComponent implements OnInit {
     })
   }
   appItemClickH(appUlid: S) {
-    this.appService.setCurApp(appUlid)
+    // this.appService.setCurApp(appUlid)
     this.router.navigate([ '/setup' ], {
       queryParams: {app: appUlid}
     });
