@@ -116,9 +116,9 @@ export class SetupComponent implements OnInit {
       let pageList = this.pageService.getPageList()
       this.pageService.setCurPage(pageList[0].ulid)
       // init页面与组件的映射关系
-      this.componentService.initMap(this.pageService.getPageList().map(item => item.ulid))
+      // this.componentService.initMap(this.pageService.getPageList().map(item => item.ulid))
       // 请求当前页面的组件
-      this.componentService.getCompListByPage()
+      this.componentService.reqCompListByPage()
 
     })
     .catch(() => {

@@ -14,12 +14,9 @@
         <d-col [dSpan]="8">
             <d-tabs [type]="'tabs'" [(activeTab)]="leftTabActive" (activeTabChange)="activeTabChange($event)">
                 <d-tab id="page" title="页面">
-                    <!-- {{pageList | json}} -->
-                    <!-- <app-page-list [pageList]="pageList"></app-page-list> -->
                     <app-page-list></app-page-list>
                 </d-tab>
                 <d-tab id="component" title="组件">
-                    <!-- <app-component-list [componentCategoryList]="componentCategoryList"></app-component-list> -->
                     <app-component-list></app-component-list>
                 </d-tab>
             </d-tabs>
@@ -38,6 +35,7 @@
                 *ngFor="let comp of componentByPage"
                 [comp]="comp"
             ></app-comp-box>
+            <!-- <app-comp-box /> -->
         </d-col>
         <!-- setter -->
         <d-col [dSpan]="8">

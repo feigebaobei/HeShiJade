@@ -54,95 +54,6 @@ export class PageService {
       }
     })
   }
-  // 可能用不上
-  // initMap(appUlidList: ULID[]) {
-  //   this._map.clear()
-  //   appUlidList.forEach(appUlid => {
-  //     let t = new DoublyChain<Page>()
-  //     this._map.set(appUlid, t)
-  //   })
-  // }
-  // reqPageList() {
-  //   return new Promise<Page[]>((s, j) => {
-  //     let curApp = this.appService.getCurApp()
-  //     if (curApp) {
-  //       this.http.get<ResponseData>(`http://localhost:5000/pages?appUlid=${curApp.ulid}`, {
-  //         withCredentials: true
-  //       }).subscribe(res => {
-  //         if (res.code === 0) {
-  //           // clog('res page', res.data)
-  //           this._pageList = res.data
-  //           this._opPageList(res.data)
-  //           let pl = this.getPageList()
-  //           this.pageList$.next(pl)
-  //           s(pl)
-  //         } else {
-  //           j(new Error(res.message))
-  //         }
-  //       })
-  //     } else {
-  //       s(this._pageList = [])
-  //     }
-  //   })
-  // }
-  // reqPageList(appUlid: ULID) {
-  //   return new Promise<Page[]>((s, j) => {
-  //     // let curApp = this.appService.gt
-  //     this.http.get<ResponseData>('http://localhost:5000/pages', {
-  //       params: {
-  //         appUlid
-  //       },
-  //       withCredentials: true
-  //     }).subscribe(res => {
-  //       if (res.code === 0) {
-  //         this._opPageList(appUlid, res.data)
-  //         s(this.getPageList(appUlid))
-  //       } else {
-  //         j(new Error(res.message))
-  //       }
-  //     })
-  //   })
-  // }
-  // 请求指定应用的页面列表
-  // reqPageList(appUlid: ULID) {
-  //   return this._reqPageList(appUlid).then()
-  // }
-  // 把无序页面列表排序为有序
-  // private _opPageList(appUlid: ULID, _pageList: Page[]) {
-  //   let app = this.appService.getAppList().find(item => item.ulid === appUlid)
-  //   let nextPageUlid = app?.firstPageUlid
-  //   while (nextPageUlid) {
-  //     let curPage = _pageList.find(item => item.ulid === nextPageUlid)
-  //     if (curPage) {
-  //       let dc = this._map.get(appUlid)
-  //       if (dc) {
-  //         dc.append(curPage)
-  //       } else {
-  //         let t = new DoublyChain<Page>()
-  //         t.append(curPage)
-  //         this._map.set(appUlid, t)
-  //       }
-  //     }
-  //     nextPageUlid = curPage?.nextUlid
-  //   }
-
-  //   // this._chain.clear() // 清空
-  //   // let curApp = this.appService.getCurApp()
-  //   // // clog('_opPageList', _pageList, curApp)
-  //   // if (curApp) {
-  //   //   let pageUlid: Page['nextUlid'] = curApp.firstPageUlid
-  //   //   // clog('pageUlid', pageUlid)
-  //   //   while (pageUlid) {
-  //   //     let page = _pageList.find(page => page.ulid === pageUlid)
-  //   //     if (page) {
-  //   //       this._chain.append(page)
-  //   //       pageUlid = page.nextUlid
-  //   //     } else {
-  //   //       break
-  //   //     }
-  //   //   }
-  //   // }
-  // }
   // 把无序页面列表排序为有序
   // 返回指定应用的有序页面列表
   private _opPageList(appUlid: ULID) {
@@ -175,8 +86,6 @@ export class PageService {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          // this._opPageList(appUlid, res.data)
-          // s(this.getPageList(res.data))
           s(res.data)
         } else {
           j(new Error(res.message))
