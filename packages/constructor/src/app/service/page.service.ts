@@ -22,7 +22,7 @@ interface AddData {
 })
 export class PageService {
   _pageList: Page[]
-  _find: (p?: S) => PageOrUn
+  _find: (p: ULID, appUlid?: ULID) => PageOrUn
   pageSubject$: Subject<PageOrUn>
   _curPage: PageOrUn
   _chain: DoublyChain<Page> // 有_map，应该删除它。
@@ -34,8 +34,11 @@ export class PageService {
   ) {
     this._pageList = [] // 无顺序
     this.pageSubject$ = new Subject<PageOrUn>()
-    this._find = (pageUlid?: S) => {
-      return this._curPage = this._pageList.find(item => item.ulid === pageUlid)
+    this._find = (pageUlid: ULID, appUlid?: ULID) => {
+      appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
+      return this._map.get(appUlid)?.toArray().find(item => item.ulid === pageUlid)
+      // return this._curPage = this._pageList.find(item => item.ulid === pageUlid)
+
     }
     this._chain = new DoublyChain<Page>() // 有_map，应该删除它。
     this.pageList$ = new Subject<Page[]>()
@@ -190,10 +193,12 @@ export class PageService {
   getCurPage() {
     return this._curPage
   }
-  setCurPage(pageUlid?: S) {
+  setCurPage(pageUlid: ULID) {
     // this.setCurPage()
     // this._curPage = 
-    this.pageSubject$.next(this._find(pageUlid))
+    // clog('setCurApp', pageUlid)
+    this._curPage = this._find(pageUlid)
+    this.pageSubject$.next(this._curPage)
   }
   // 重铸
   // recast(): Promise<Page[]> {
