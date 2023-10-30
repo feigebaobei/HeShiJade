@@ -1,5 +1,7 @@
-import { Component, Input, } from '@angular/core';
-// import { ComponentService } from 'src/app/service/component.service';
+import { Component, 
+  // Input,
+  } from '@angular/core';
+import { ComponentService } from 'src/app/service/component.service';
 // import type { A } from 'src/types/base';
 import type { Category } from 'src/types/component';
 let clog = console.log
@@ -10,15 +12,22 @@ let clog = console.log
   styleUrls: ['./component-list.component.sass']
 })
 export class ComponentListComponent{
-  @Input() componentCategoryList: Category[]
+  // @Input() componentCategoryList: Category[]
+  componentCategoryList: Category[]
   constructor(
-    // private componentService: ComponentService
+    private componentService: ComponentService
     ) {
     this.componentCategoryList = []
   }
   // ngOnInit
-  // ngOnInit() {
-  // }
+  ngOnInit() {
+    this.init()
+  }
+  init() {
+    this.componentService.getCategoryList().then(res => {
+      this.componentCategoryList = res
+    })
+  }
   // onItemDrop(...p: any[]) {
   //   clog('onItemDrop', p)
   // }

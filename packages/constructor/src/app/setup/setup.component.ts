@@ -70,7 +70,7 @@ export class SetupComponent implements OnInit {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
     let appList = this.appService.getAppList()
     if (appList.length) {
-      let curApp = this.appService.getCurApp()
+      // let curApp = this.appService.getCurApp()
       // if (curApp?.ulid === appUlid) {
       // } else {
       //   this.appService.setCurApp(appUlid)
