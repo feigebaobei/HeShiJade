@@ -43,13 +43,16 @@ export class ListComponent implements OnInit {
     this.user = this.userService.user
     this.msg = []
     this.appList = []
+    this.appService.appList$.subscribe(arr => {
+      this.appList = arr
+    })
   }
   ngOnInit(): void {
     this.init()
   }
   init(): void {
     if (!this.appList.length) {
-      this.sqlBtClickH()
+      this.reqAppList()
     }
   }
   logoutBtClickH()  {
@@ -152,9 +155,10 @@ export class ListComponent implements OnInit {
     this.reqAppList()
   }
   reqAppList() {
-    this.appService.reqAppList().then(res => {
-      this.appList = res
-    })
+    this.appService.reqAppList()
+    // .then(res => {
+    //   this.appList = res
+    // })
   }
   gotoPublishBtClickH() {
     clog('gotoPublishBtClickH')

@@ -46,10 +46,16 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
   // private clearTimer: VoidFunction | undefined;
   curComp?: Comp | null
+  componentRef: A
   constructor(private componentService: ComponentService) {
     this.curComp = null
+    this.componentRef
     this.componentService.compSubject$.subscribe(p => {
       this.curComp = p
+      this.init()
+    })
+    this.componentService.componentProps$.subscribe(p => {
+      this.componentRef.instance.data.props = p
     })
   }
   boxClickh() {
@@ -61,49 +67,46 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.init()
   }
   init() {
-    console.log('comp', this.comp)
+    console.log('init comp', this.comp)
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-    // const componentRef: A = viewContainerRef.createComponent(compMap[this.comp.type as S]);
-    // componentRef.instance.data = {
-      //   slot: 'hi'
-      // };
-      let componentRef: A
-      componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
-      switch (this.comp.type) {
-        case 'Button':
-          componentRef.instance.data = {
-            props: buttonDefaultData.props,
-            slot: buttonDefaultData.slot,
-          }
-          break
-        case 'Input':
-          componentRef.instance.data = {
-            props: inputDefaultData.props
-          }
-          break
-        case 'Modal':
-          componentRef.instance.data = {
-            props: modalDefaultData.props
-          }
-          break
-        case 'Select':
-          componentRef.instance.data = {
-            props: selectDefaultData.props
-          }
-          break
-        case 'Form':
-          componentRef.instance.data = {
-            props: formDefaultData.props
-          }
-          break
-        case 'Table':
-          componentRef.instance.data = {
-            props: tableDefaultData.props
-          }
-          break
+    // let componentRef: A
+    this.componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
+    switch (this.comp.type) {
+      case 'Button':
+        this.componentRef.instance.data = {
+          props: buttonDefaultData.props,
+          slot: buttonDefaultData.slot,
+        }
+        break
+      case 'Input':
+        this.componentRef.instance.data = {
+          props: inputDefaultData.props
+        }
+        break
+      case 'Modal':
+        this.componentRef.instance.data = {
+          props: modalDefaultData.props
+        }
+        break
+      case 'Select':
+        this.componentRef.instance.data = {
+          props: selectDefaultData.props
+        }
+        break
+      case 'Form':
+        this.componentRef.instance.data = {
+          props: formDefaultData.props
+        }
+        break
+      case 'Table':
+        this.componentRef.instance.data = {
+          props: tableDefaultData.props
+        }
+        break
     }
   }
+  ngOnChange() {}
   ngOnDestroy() {
     this.adHost.viewContainerRef.clear();
   }

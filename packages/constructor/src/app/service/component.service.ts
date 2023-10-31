@@ -31,6 +31,7 @@ export class ComponentService {
   // _curCategory: ComponentOrUn
   _map: Map<ULID, DoublyChain<Component>> // 日后改为4向的数据结构
   // ulid是pageUlid
+  componentProps$: Subject<Component['props']>
 
   constructor(private http: HttpClient, private pageService: PageService) {
     this.categoryList = categoryList
@@ -39,6 +40,7 @@ export class ComponentService {
     this.compSubject$ = new Subject<CompOrUn>()
     // this.categorySubject$ = new Subject<ComponentOrUn>()
     this.componentListByCurPage$ = new Subject<Component[]>()
+    this.componentProps$ = new Subject<Component['props']>()
     this._curCompUlid = ''
     this._curComponent = undefined
     // this._curCategory = undefined
@@ -52,12 +54,6 @@ export class ComponentService {
       }
     })
   }
-  // 可能用不到
-  // initMap(pageUlidList: ULID[]) {
-  //   pageUlidList.forEach(pageUlid => {
-  //     this._map.set(pageUlid, new DoublyChain())
-  //   })
-  // }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
       s(this.categoryList)
@@ -264,9 +260,12 @@ export class ComponentService {
         }
         cur = cur.next
       }
-      let arr = this.getComponentByPage(curPage.ulid)
+      // let arr = this.getComponentByPage(curPage.ulid)
       // clog('new ', arr)
-      this.componentListByCurPage$.next(arr)
+      // this.componentListByCurPage$.next(arr)
+      if (cur) {
+        this.componentProps$.next(cur.value.props)
+      }
     }
   }
 }

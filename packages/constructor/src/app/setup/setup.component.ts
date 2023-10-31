@@ -53,9 +53,9 @@ export class SetupComponent implements OnInit {
     this.componentService.componentListByCurPage$.subscribe(compArr => {
       this.componentByPage = compArr
     })
-    this.pageService.pageList$.subscribe(p => {
-      this.pageList = p
-    })
+    // this.pageService.pageList$.subscribe(p => {
+    //   this.pageList = p
+    // })
   }
   viewBtClickH() {}
 
@@ -63,7 +63,6 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
-    // init()
     this.opApp()
   }
   opApp() {
@@ -71,11 +70,6 @@ export class SetupComponent implements OnInit {
     let appList = this.appService.getAppList()
     // clog('sdsd')
     if (appList.length) {
-      // let curApp = this.appService.getCurApp()
-      // if (curApp?.ulid === appUlid) {
-      // } else {
-      //   this.appService.setCurApp(appUlid)
-      // }
       this.appService.setCurApp(appUlid)
     } else {
       this.appService.reqAppList().then(appList => {
@@ -86,48 +80,6 @@ export class SetupComponent implements OnInit {
         }
       })
     }
-  }
-  init() {
-    // 当直接进入配置页面或在配置页面刷新时应用列表为空
-    // 若应用列表为空，则请求应用列表。
-    // 检查app
-    this.checkApp().then((bool) => {
-      // 设置当前应用
-      if (bool) {
-        let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
-        this.appService.setCurApp(appUlid)
-        return
-      } else {
-        return Promise.reject()
-      }
-    }).then(() => {
-      // 请求组件的种类
-      this.componentService.getCategoryList().then(res => {
-        // clog('res comp', res)
-        this.componentCategoryList = res
-      }).catch(error => {
-        clog('error', error)
-      })
-      // 请求当前应用的页面列表
-      // return this.pageService.reqPageList()
-    })
-    .then(() => {
-      // 设置no.1page为当前页面
-      let pageList = this.pageService.getPageList()
-      this.pageService.setCurPage(pageList[0].ulid)
-      // init页面与组件的映射关系
-      // this.componentService.initMap(this.pageService.getPageList().map(item => item.ulid))
-      // 请求当前页面的组件
-      this.componentService.reqCompListByPage()
-
-    })
-    .catch(() => {
-      this.msg = [
-        { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
-      ]
-      this.router.navigate(['/list'])
-    })
-
   }
   // 检查当前app是否在应用列表中
   checkApp(): Promise<B> {

@@ -27,10 +27,8 @@ export class AppService {
     this._appList = []
     this.appList$ = new Subject<App[]>()
     this.appSubject$ = new Subject<AppOrUn>()
-    // this.curApp = new Subject<AppOrUn>()
   }
   _find(appUlid?: S) {
-    // return this._curApp = 
     return this._appList.find(item => item.ulid === appUlid)
   }
   getCurApp() {
@@ -55,7 +53,6 @@ export class AppService {
           j(new Error(res.message))
         }
       })
-      // 可以使用 xx$.subscribe({next: fn0, error: fn1, complete: fn2})
     })
   }
   // 根据ulid设置指定app为当前激活状态。
@@ -73,6 +70,7 @@ export class AppService {
   }
   // 重铸
   // 获取应用列表+设置当前应用+返回应用列表
+  // 可能用不上
   recast(): Promise<App[]> {
     return this.reqAppList().then(() => {
       this.setCurApp(this.getCurApp()?.ulid)
