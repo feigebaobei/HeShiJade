@@ -9,7 +9,7 @@ import type {
   ComponentPropsMetaItem as CPMI,
   SelectOptionsItem
 } from 'src/types/props'
-// import type { A } from 'src/types/base';
+import { A } from 'src/types/base';
 // data
 // import * as 
 import {
@@ -17,6 +17,8 @@ import {
   Input as inputPropsMeta,
   Select as selectPropsMeta,
 } from '../../../helper/props'
+
+let clog = console.log
 
 @Component({
   selector: 'app-props-box',
@@ -29,10 +31,12 @@ export class PropsBoxComponent {
   curComp?: Comp | null
   componentPropsMeta: CPMR
   componentPropsList: CPMI[]
+  msg: {}[]
   constructor(private componentService: ComponentService) {
     this.curComp = null
     this.componentPropsMeta = {}
     this.componentPropsList = []
+    this.msg = []
     this.componentService.compSubject$.subscribe(p => {
       this.curComp = p
       this.componentSelectedChange()
@@ -103,6 +107,13 @@ export class PropsBoxComponent {
         break
     }
   }
-  
-
+  compUlidClickH (ref: HTMLElement) {
+    let range = document.createRange()
+    range.selectNode(ref)
+    window.getSelection()?.removeAllRanges()
+    window.getSelection()?.addRange(range)
+    document.execCommand('copy')
+    this.msg = [{ severity: 'success', summary: '', content: '已经复制' }];
+    window.getSelection()?.removeAllRanges()
+  }
 }

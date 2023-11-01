@@ -1,4 +1,12 @@
+<div *ngIf="curComp?.ulid"
+class="compUlidBox"
+(click)="compUlidClickH(ref)">
+    <span>组件标识</span>
+    <span #ref>{{curComp?.ulid}}</span>
+</div>
 <app-props-item 
 *ngFor="let propItem of componentPropsList"
 [propItem]="propItem"
 ></app-props-item>
+
+<d-toast [value]="msg"></d-toast>

@@ -52,7 +52,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.componentRef
     this.componentService.compSubject$.subscribe(p => {
       this.curComp = p
-      this.init()
+      // this.init()
     })
     this.componentService.componentProps$.subscribe(p => {
       this.componentRef.instance.data.props = p
