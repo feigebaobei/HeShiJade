@@ -150,22 +150,63 @@ router.route('/listByPage')
 .post(cors.corsWithOptions, (req, res) => {
   // res.send('post')
   // 先做成保存到数据库的。
-  componentsDb.collection('components').insertOne({
-    ulid: req.body.ulid,
-    type: req.body.type,
-    next: '',
-    prev: req.body.prev,
-    props: req.body.props,
-    behavior: req.body.behavior,
-    item: req.body.item,
-    slot: req.body.slot,
-    appUlid: req.body.appUlid,
-    pageUlid: req.body.pageUlid,
-  }).then(() => {
+  // 插入当前组件
+  // 修改前组件
+  // componentsDb.collection('components').insertOne({
+  //   ulid: req.body.ulid,
+  //   type: req.body.type,
+  //   next: '',
+  //   prev: req.body.prev,
+  //   props: req.body.props,
+  //   behavior: req.body.behavior,
+  //   item: req.body.item,
+  //   slot: req.body.slot,
+  //   appUlid: req.body.appUlid,
+  //   pageUlid: req.body.pageUlid,
+  // }).then(() => {
+  //   res.status(200).json({
+  //     code: 0,
+  //     message: 'ok',
+  //     data: {},
+  //   })
+  // }).catch(error => {
+  //   res.status(200).json({
+  //     code: 200200,
+  //     message: "保存时出错",
+  //     data: error
+  //   })
+  // })
+  // return 
+  componentsDb.collection('components').bulkWrite([
+    {
+      updateOne: {
+        filter: {ulid: req.body.prev},
+        update: {
+          $set: {next: req.body.ulid}
+        }
+      },
+    },
+    {
+      insertOne: {
+        document: {
+          ulid: req.body.ulid,
+          type: req.body.type,
+          next: '',
+          prev: req.body.prev,
+          props: req.body.props,
+          behavior: req.body.behavior,
+          item: req.body.item,
+          slot: req.body.slot,
+          appUlid: req.body.appUlid,
+          pageUlid: req.body.pageUlid,
+        }
+      }
+    }
+  ]).then((obj) => {
     res.status(200).json({
       code: 0,
       message: 'ok',
-      data: {},
+      data: {obj},
     })
   }).catch(error => {
     res.status(200).json({

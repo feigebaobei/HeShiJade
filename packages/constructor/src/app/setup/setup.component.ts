@@ -99,7 +99,7 @@ export class SetupComponent implements OnInit {
     // clog('stage onDrop', e, targetArray)
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    this.componentService.postCompListByPage({
+    let obj = {
       ulid: ulid(),
       type: e.dragData.item.type,
       prev: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
@@ -110,7 +110,9 @@ export class SetupComponent implements OnInit {
       slot: (CDM[e.dragData.item.type].slot),
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
-    })
+    }
+    // clog('obj', obj)
+    this.componentService.postCompListByPage(obj)
     // .then((res: Comp[]) => {
     //   this.componentByPage = res
     // })

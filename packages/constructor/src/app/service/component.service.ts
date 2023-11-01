@@ -129,12 +129,13 @@ export class ComponentService {
           if (has) {
             let d = this._map.get((obj['pageUlid']))
             d!.append(obj)
-            clog('d', d)
+            clog('添加组件后的组件链表', d)
             // this._opCompList(res.data)
             let arr = this._map.get((obj['pageUlid']))!.toArray()
-            clog('sarr', arr, this._map)
+            clog('添加组件后的组合列表', arr, this._map)
             this.componentListByCurPage$.next(arr)
-            s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
+            s(arr)
+            // s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
           } else {
             this._opCompList(res.data)
             // this._map.set(obj['pageUlid']) = new DoublyChain().append(obj)
@@ -156,31 +157,6 @@ export class ComponentService {
       return []
     }
   }
-  // 把当前页面的组件按结构顺序排列
-  // _opCompList(_compList: Component[]) {
-  //   let curPage = this.pageService.getCurPage()
-  //   let nextComponentUlid = curPage?.firstComponentUlid
-  //   while (nextComponentUlid) {
-  //     let comp = _compList.find(item => item.ulid === nextComponentUlid)
-  //     if (comp) {
-  //       // this.pushComp(comp)
-  //       // let curPage = this.pageService.getCurPage()
-  //       if (curPage) {
-  //         let _chain = this._map.get(curPage.ulid)
-  //         if (_chain) {
-  //           _chain.append(comp)
-  //         } else {
-  //           let dc = new DoublyChain<Component>()
-  //           dc.append(comp)
-  //           this._map.set(curPage.ulid, dc)
-  //         }
-  //       }
-  //       nextComponentUlid = comp.next
-  //     } else {
-  //       break
-  //     }
-  //   }
-  // }
   private _opCompList(pageUlid: ULID) {
     let dc = this._map.get(pageUlid)
     if (!dc) {
@@ -225,9 +201,6 @@ export class ComponentService {
   curComponent() {
     return this._curComponent
   }
-  // curCategory() {
-  //   return this._curCategory
-  // }
   setCurComponent(compUlid?: S) {
     if (compUlid) {
       this._curComponent = this._find(compUlid)
@@ -237,15 +210,6 @@ export class ComponentService {
       this.compSubject$.next(undefined)
     }
   }
-  // setCurCategory(categoryUlid?: ULID) {
-  //   if (categoryUlid) {
-  //     this._curCategory = this._findCategory(categoryUlid)
-  //     // this.categorySubject$.next(this._curCategory)
-  //   } else {
-  //     this._curCategory = undefined
-  //     // this.categorySubject$.next(this._curCategory)
-  //   }
-  // }
   // 设置当前组件的prop
   setCurComponentProp(key: S, value: PropsValue) {
     // debugger
