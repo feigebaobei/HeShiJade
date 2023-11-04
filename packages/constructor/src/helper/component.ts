@@ -11,7 +11,19 @@ let Button: componentConfig = {
         disabled: false,
         width: '100px',
     },
-    behavior: {},
+    // behavior: {
+        
+    // },
+    behavior: [
+        {
+            event: 'click',
+            type: 'relation',
+            target: 'ulid',
+            props: {
+                visible: true
+            }
+        }
+    ],
     item: {},
     slot: 'button',
 }
