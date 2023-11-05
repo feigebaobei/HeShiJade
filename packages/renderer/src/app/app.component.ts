@@ -22,4 +22,5 @@ export class AppComponent implements OnInit {
     //   clog('queryParamMap data', data)
     // })
   }
+  
 }
