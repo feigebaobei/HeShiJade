@@ -1,5 +1,9 @@
-<!-- <p>button works!</p> -->
-{{data | json}}
-<d-button>
-    str his
+<!-- {{data | json}} -->
+<d-button
+    [bordered]="data.props.bordered"
+    [bsSize]="data.props.bsSize.value"
+    [disabled]="data.props.disabled"
+    [type]="data.props.type.value"
+    [width]="data.props.width"
+>{{data.slot}}
 </d-button>

@@ -24,8 +24,14 @@ export class StackComponent {
     viewContainerRef.clear()
     this.componentRef = viewContainerRef.createComponent(ButtonComponent)
     this.componentRef.instance.data = {
-      props: {k: 'v'},
-      slot: {k: 'str'},
+      props: {
+        type: 'button',
+        bsSize: 'md',
+        bordered: true,
+        disabled: false,
+        width: '100px',
+    },
+      slot: 'button',
     }
   }
 }
