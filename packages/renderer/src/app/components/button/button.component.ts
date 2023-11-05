@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, } from '@angular/core';
+// type
+import type { A } from 'src/types/base';
 
 @Component({
   selector: 'app-button',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./button.component.sass']
 })
 export class ButtonComponent {
-
+  @Input() data: A
+  constructor() {}
+  
 }
