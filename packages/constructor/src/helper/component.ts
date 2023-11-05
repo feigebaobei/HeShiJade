@@ -1,6 +1,7 @@
 // 它与组件配套。日后可以放在组件目录中。
 // component文件 定义数据。
 // props文件     定义结构
+// 这是所有组件的默认配置数据
 import type { componentConfig } from '../types/component'
 
 let Button: componentConfig = {
@@ -11,7 +12,19 @@ let Button: componentConfig = {
         disabled: false,
         width: '100px',
     },
-    behavior: {},
+    // behavior: {
+        
+    // },
+    behavior: [
+        {
+            event: 'click',
+            type: 'relation',
+            target: 'ulid',
+            props: {
+                visible: true
+            }
+        }
+    ],
     item: {},
     slot: 'button',
 }
@@ -27,14 +40,18 @@ let Input: componentConfig = {
     slot: '',
 }
 let Modal: componentConfig = {
-    props: {},
+    props: {
+        title: 'str',
+        visible: false,
+        width: '',
+        placement: 'center',
+    },
     behavior: {},
     item: {},
     slot: '',
 }
 let Select: componentConfig = {
     props: {
-        // options: ['one', 'two', 'three'],
         options: [
             {label: 'one', value: 'one',},
             {label: 'two', value: 'two',},
@@ -67,4 +84,6 @@ export {
     Select,
     Form,
     Table,
+
+    // categoryList,
 }

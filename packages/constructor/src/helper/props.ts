@@ -119,8 +119,45 @@ let Select: ComponentPropsMetaRaw = {
         overFields: ['options']
     }
 }
+let Modal: ComponentPropsMetaRaw = {
+    title: {
+        type: 'input',
+        value: 'title',
+        label: 'title',
+        overFields: ['value'],
+    },
+    visible: {
+        type: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '是否显示',
+        overFields: ['value'],
+    },
+    width: {
+        type: 'input',
+        value: '',
+        label: '宽度',
+        overFields: ['value'],
+    },
+    placement: {
+        type: 'select',
+        options: [
+            {label: 'center', value: 'center'},
+            {label: 'top', value: 'top'},
+            {label: 'bottom', value: 'bottom'},
+        ],
+        // value: 'center',
+        value: '',
+        label: '宽度',
+        overFields: ['value'],
+    },
+}
 export {
     Button,
     Input,
     Select,
+    Modal,
 }

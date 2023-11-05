@@ -51,10 +51,11 @@ export class SetupComponent implements OnInit {
     this.pageData = []
 
     this.componentService.componentListByCurPage$.subscribe(compArr => {
-      this.componentByPage = []
       this.componentByPage = compArr
-      clog('change', compArr, this.componentByPage)
     })
+    // this.pageService.pageList$.subscribe(p => {
+    //   this.pageList = p
+    // })
   }
   viewBtClickH() {}
 
@@ -62,63 +63,46 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
-    // 处理page
-    this.pageService.recast()
-    this.pageService.pageList$.subscribe(pageList => {
-      this.pageList = pageList
-      this.componentService.initMap(pageList.map(item => item.ulid))
-    })
-    // 检查app
-    this.checkApp().then((bool) => {
-      if (bool) {
-        let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
-        this.appService.setCurApp(appUlid)
-        return
-      } else {
-        return Promise.reject()
-      }
-    }).then(() => {
-      // 请求组件的种类
-      this.componentService.getCategoryList().then(res => {
-        this.componentCategoryList = res
-      }).catch(error => {
-        clog('error', error)
-      })
-      // 请求当前页面的组件
-      // this.componentService.getCompListByPage().then(res => {
-      //   // this.componentByPage = res
-      //   this.componentByPage = []
-      // })
-      this.componentService.getCompListByPage()
-    }).catch(() => {
-      this.msg = [
-        { severity: 'error', summary: '提示', content: '您没有该应用的权限。'}
-      ]
-      this.router.navigate(['/list'])
-    })
-
+    this.opApp()
   }
+  opApp() {
+    let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
+    let appList = this.appService.getAppList()
+    // clog('sdsd')
+    if (appList.length) {
+      this.appService.setCurApp(appUlid)
+    } else {
+      this.appService.reqAppList().then(appList => {
+        if (appList.some(item => item.ulid === appUlid)) {
+          this.appService.setCurApp(appUlid)
+        } else {
+          alert('您无此应用的权限')
+        }
+      })
+    }
+  }
+  // 检查当前app是否在应用列表中
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
-    let pl = this.appService.getAppList()
-    // clog('appUlid', appUlid, pl)
-    if (pl.length) {
-      return Promise.resolve(pl.some(item => item.ulid === appUlid))
+    let appList = this.appService.getAppList()
+    if (appList.length) {
+      return Promise.resolve(appList.some(item => item.ulid === appUlid))
     } else {
       return this.appService.reqAppList().then(appList => {
         // clog('appList', appList)
+        // this.appService.setCurApp(String(appUlid))
         return appList.some(item => item.ulid === appUlid)
       })
     }
   }
   onDrop(e: DropEvent, targetArray: A) {
-    clog('stage onDrop', e, targetArray)
+    // clog('stage onDrop', e, targetArray)
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    this.componentService.postCompListByPage({
+    let obj = {
       ulid: ulid(),
-      type: e.dragData.item.type, // 'Button',
-      prev: '',
+      type: e.dragData.item.type,
+      prev: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
       next: '',
       props: (CDM[e.dragData.item.type].props),
       behavior: (CDM[e.dragData.item.type].behavior),
@@ -126,7 +110,9 @@ export class SetupComponent implements OnInit {
       slot: (CDM[e.dragData.item.type].slot),
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
-    })
+    }
+    clog('obj', obj)
+    this.componentService.postCompListByPage(obj)
     // .then((res: Comp[]) => {
     //   this.componentByPage = res
     // })

@@ -1,1 +1,16 @@
 <p>form</p>
+
+<form dForm [layout]="layoutDirection" ngForm>
+    <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
+        <d-form-control>
+        <div>
+            <input dTextInput autocomplete="off" name="userName" />
+        </div>
+        </d-form-control>
+    </d-form-item>
+    <d-form-operation>
+        <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px">Submit</d-button>
+        <d-button bsStyle="common" circled="true">Cancel</d-button>
+    </d-form-operation>
+</form>
