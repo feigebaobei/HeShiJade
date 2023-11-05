@@ -53,13 +53,13 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.componentService.compSubject$.subscribe(p => {
       this.curComp = p
       // this.init()
+      this.update()
     })
-    this.componentService.componentProps$.subscribe(p => {
-      this.componentRef.instance.data.props = p
-    })
+    // this.componentService.componentProps$.subscribe(p => {
+    //   this.componentRef.instance.data.props = p
+    // })
   }
   boxClickh() {
-    clog('boxClickh')
     // 选中组件
     this.componentService.setCurComponent(this.comp.ulid)
   }
@@ -67,6 +67,9 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.init()
   }
   init() {
+  //   this.update()
+  // }
+  // update() {
     console.log('init comp', this.comp)
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
@@ -75,8 +78,10 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     switch (this.comp.type) {
       case 'Button':
         this.componentRef.instance.data = {
-          props: buttonDefaultData.props,
-          slot: buttonDefaultData.slot,
+          // props: buttonDefaultData.props,
+          // slot: buttonDefaultData.slot,
+          props: this.comp.props,
+          slot: this.comp.slot,
         }
         break
       case 'Input':
@@ -86,7 +91,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
       case 'Modal':
         this.componentRef.instance.data = {
-          props: modalDefaultData.props
+          // props: modalDefaultData.props
+          props: this.comp.props
         }
         break
       case 'Select':
@@ -105,6 +111,14 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         }
         break
     }
+  }
+  update() {
+    if (this.comp.ulid === this.curComp?.ulid) {
+      this.init()
+    }
+    // this.componentRef.instance.data = {
+    //   props: data.props
+    // }
   }
   ngOnChange() {}
   ngOnDestroy() {

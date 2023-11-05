@@ -111,7 +111,7 @@ export class SetupComponent implements OnInit {
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
     }
-    // clog('obj', obj)
+    clog('obj', obj)
     this.componentService.postCompListByPage(obj)
     // .then((res: Comp[]) => {
     //   this.componentByPage = res

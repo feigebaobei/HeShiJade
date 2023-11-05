@@ -16,6 +16,7 @@ import {
   Button as buttonPropsMeta,
   Input as inputPropsMeta,
   Select as selectPropsMeta,
+  Modal as modalPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -96,8 +97,20 @@ export class PropsBoxComponent {
           this.componentPropsList.push(o)
         })
         break
-      // case 'Modal':
-      //   break
+      case 'Modal':
+        this.componentPropsMeta = modalPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o: CPMI = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid
+          }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
+          this.componentPropsList.push(o)
+        })
+        break
       // case 'Table':
       //   break
       // case 'Form':

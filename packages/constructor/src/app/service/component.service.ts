@@ -228,7 +228,9 @@ export class ComponentService {
       // clog('new ', arr)
       // this.componentListByCurPage$.next(arr)
       if (cur) {
-        this.componentProps$.next(cur.value.props)
+        // this.componentProps$.next(cur.value.props)
+        this.compSubject$.next(cur.value)
+        this.componentListByCurPage$.next(this._map.get(curPage.ulid)?.toArray() || [])
       }
     }
   }
