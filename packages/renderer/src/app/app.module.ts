@@ -11,6 +11,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { StackDirective } from './stack.directive';
 import { StackComponent } from './comp/stack/stack.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LayoutComponent } from './layout/layout.component';
+import { PageListComponent } from './page/page-list/page-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     NotFoundComponent,
     ButtonComponent,
     StackDirective,
-    StackComponent
+    StackComponent,
+    LayoutComponent,
+    PageListComponent
   ],
   imports: [
     BrowserModule,
