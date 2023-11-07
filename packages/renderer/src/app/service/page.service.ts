@@ -11,24 +11,31 @@ import { Subject } from 'rxjs';
 })
 export class PageService {
   list: Page[]
+  list$: Subject<Page[]>
   cur: Page | undefined
   cur$: Subject<Page | undefined>
   constructor(
     private http: HttpClient
   ) {
     this.list = []
+    this.list$ = new Subject()
     this.cur = undefined
     this.cur$ = new Subject()
   }
   setList(arr: Page[]) {
     this.list = arr
+    this.list$.next(this.list)
+    // 默认选中第一个页面
+    // if (this.list.length) {
+    //   this.setCur(this.list[0].ulid)
+    // }
   }
   // 请求页面列表
   reqList(appUlid: ULID) {
-    this._reqList(appUlid).then((pageList: Page[]) => {
-      this.list = pageList
-      // 可能需要做成响应式的
-    }).catch(() => {})
+    return this._reqList(appUlid).then((pageList: Page[]) => {
+      this.setList(pageList)
+      return pageList
+    })// .catch(() => {})
   }
   private _reqList(appUlid: ULID): Promise<Page[]> {
     return new Promise((s, j) => {
@@ -46,6 +53,7 @@ export class PageService {
       })
     })
   }
+  // 根据pageUlid设置当前页面
   setCur(pageUlid?: ULID) {
     this.cur = this.list.find(item => item.ulid === pageUlid)
     this.cur$.next(this.cur)

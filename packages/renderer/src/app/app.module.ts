@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ButtonComponent } from './components/button/button.component';
 import { StackDirective } from './stack.directive';
 import { StackComponent } from './comp/stack/stack.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { StackComponent } from './comp/stack/stack.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     DevUIModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

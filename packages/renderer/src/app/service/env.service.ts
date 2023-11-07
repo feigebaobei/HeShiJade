@@ -5,11 +5,15 @@ import type { S } from 'src/types/base';
   providedIn: 'root'
 })
 export class EnvService {
-  cur: S
+  private cur: S
   constructor() {
     this.cur = ''
   }
   setCur(v: S) {
     this.cur = v
+    // 有可能需要响应式的
+  }
+  getCur() {
+    return this.cur
   }
 }

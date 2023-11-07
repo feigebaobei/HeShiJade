@@ -73,6 +73,7 @@ export class ComponentService {
             }
             next = comp?.next
           }
+          this._map.set(curPage.ulid, doublyChain)
           this.setComponentList(doublyChain.toArray())
         })
       }

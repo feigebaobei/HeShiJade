@@ -4,7 +4,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: ':appKey/:env/:page', component: AppComponent, pathMatch: 'full' },
+  { path: ':appKey/:env/:pageKey', component: AppComponent, pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];
 
