@@ -39,18 +39,56 @@ export class PageService {
   }
   private _reqList(appUlid: ULID): Promise<Page[]> {
     return new Promise((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/pages', {
-        params: {
-          appUlid
+      // this.http.get<ResponseData>('http://localhost:5000/pages', {
+      //   params: {
+      //     appUlid
+      //   },
+      //   withCredentials: true
+      // }).subscribe(res => {
+      //   if (res.code === 0) {
+      //     s(res.data)
+      //   } else {
+      //     j(new Error(res.message))
+      //   }
+      // })
+      s([
+        {
+            // "_id": "64f20a5f371b34da631a9ac7",
+            "key": "p0",
+            "name": "p0",
+            "ulid": "01H98QH03RWN0PVN9Y7FFA81XJ",
+            "prevUlid": "",
+            "nextUlid": "01H98QJ0W5CMSSA3GE80MJH2N6",
+            "childUlid": "",
+            "firstComponentUlid": "01HDXS0S6860PYXHS9F712XSEP",
+            // "lastComponentUlid": "",
+            "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR"
         },
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          s(res.data)
-        } else {
-          j(new Error(res.message))
+        {
+            // "_id": "64f20a7f371b34da631a9ac8",
+            "key": "p1",
+            "name": "p1",
+            "ulid": "01H98QJ0W5CMSSA3GE80MJH2N6",
+            "prevUlid": "01H98QH03RWN0PVN9Y7FFA81XJ",
+            "nextUlid": "01H98QJ6PVGJDGYANZ6GPXENKS",
+            "childUlid": "",
+            "firstComponentUlid": "",
+            // "lastComponentUlid": "",
+            "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR"
+        },
+        {
+            // "_id": "64f20a85371b34da631a9ac9",
+            "key": "p2",
+            "name": "p2",
+            "ulid": "01H98QJ6PVGJDGYANZ6GPXENKS",
+            "prevUlid": "01H98QJ0W5CMSSA3GE80MJH2N6",
+            "nextUlid": "",
+            "childUlid": "",
+            "firstComponentUlid": "",
+            // "lastComponentUlid": "",
+            "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR"
         }
-      })
+    ])
     })
   }
   // 根据pageUlid设置当前页面

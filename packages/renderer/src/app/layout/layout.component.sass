@@ -1,0 +1,28 @@
+.box
+    width: 100vw
+    height: 100vh
+    display: flex
+    flex-direction: column
+
+    header
+        flex-basis: 120px
+        background: #ffcdcd
+
+    section
+        display: flex
+        flex-basis: 80%
+        flex-grow: 1
+        width: 100%
+        max-height: calc(100% - 120px)
+
+        aside
+            flex-basis: 200px
+            position: sticky
+            background: #c6ffee
+            overflow: auto
+        
+        main
+            flex-basis: 80%
+            flex-grow: 1
+            flex-shrink: 1
+            overflow: auto
