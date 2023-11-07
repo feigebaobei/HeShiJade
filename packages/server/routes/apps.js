@@ -16,12 +16,8 @@ router.route('/')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
+  // if (req.query.appKey && req.query.apul)
   if (req.session.isAuth) {
-    // let {user} = req.session
-    // clog('user', user)
-    // // let result = appsDb.collection('apps').find({ members: {$elemMatch: {$eq: user.account}} })
-    // let result = appsDb.collection('apps').find({ulid: {$in: req.session.user.applications}})
-    // 取出用户user
     // 按user.applications取出应用
     usersDb.collection('users').findOne({account: req.session.user.account}).then(user => {
       if (user) {
@@ -155,6 +151,36 @@ router.route('/')
       data: {}
     })
   }
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send('delete')
+})
+
+router.route('/detail')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  // res.send('put')
+  appsDb.collection('apps').findOne({key: req.query.appKey}).then((app) => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: app
+    })
+  }).catch(() => {
+    return res.status(200).json({
+      code: 200200,
+      message: "数据库出错",
+      data: obj,
+    })
+  })
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.send('post')
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')

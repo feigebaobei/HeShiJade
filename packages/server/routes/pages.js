@@ -16,31 +16,31 @@ router.route('/')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  clog('ses', req.session)
-  if (req.session.isAuth) {
-    // todo req.body.appUlid 必填
-    let result = pagesDb.collection('pages').find({ appUlid: req.query.appUlid })
-    clog('result', result)
-    result.toArray().then(r => {
-      res.status(200).json({
-          code: 0,
-          message: '',
-          data: r
-      })
-    }).catch(error => {
-      res.status(200).json({
-        code: 200200,
-        message: "数据库出错",
-        data: error,
-      })
+  // clog('ses', req.session)
+  let result = pagesDb.collection('pages').find({ appUlid: req.query.appUlid })
+  // clog('result', result)
+  result.toArray().then(r => {
+    res.status(200).json({
+        code: 0,
+        message: '',
+        data: r
     })
-  } else {
-    res.status(401).json({
-      code: 300000,
-      message: '用户未登录',
-      data: {}
+  }).catch(error => {
+    res.status(200).json({
+      code: 200200,
+      message: "数据库出错",
+      data: error,
     })
-  }
+  })
+  // if (req.session.isAuth) {
+  //   // todo req.body.appUlid 必填
+  // } else {
+  //   res.status(401).json({
+  //     code: 300000,
+  //     message: '用户未登录',
+  //     data: {}
+  //   })
+  // }
 })
 .post(cors.corsWithOptions, (req, res) => {
     if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.required(req.body.appUlid)) {
