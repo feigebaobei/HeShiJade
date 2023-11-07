@@ -1,8 +1,8 @@
 <header>
     <p>
-        <span>{{appKey}}</span>
-        <span *ngIf="pageKey">/</span>
-        <span>{{pageKey}}</span>
+        <span>{{curApp?.key}}</span>
+        <span *ngIf="curPage?.key">/</span>
+        <span>{{curPage?.key}}</span>
     </p>
     <aside>
         <d-button (click)="viewBtClickH()">预览</d-button>
