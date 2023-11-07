@@ -11,6 +11,7 @@ import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Category, Component as Comp, componentConfig as componentConfigT } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
+import type { App } from 'src/types/app';
 
 
 let clog = console.log
@@ -23,8 +24,10 @@ let CDM: Record<S, componentConfigT> = componentConfig
 })
 export class SetupComponent implements OnInit {
   // tabActiveId: string | number = 'tab2';
-  appKey: S
-  pageKey: S
+  // appKey: S
+  // pageKey: S
+  curApp: App | undefined
+  curPage: Page | undefined
   leftTabActive: S | N
   rightTabActive: S | N
   componentCategoryList: Category[]
@@ -40,8 +43,9 @@ export class SetupComponent implements OnInit {
     private router: Router,
     // ActivatedRoute
   ) {
-    this.pageKey = ''
-    this.appKey = ''
+    // this.pageKey = ''
+    // this.appKey = ''
+    // this.curApp
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
     this.componentCategoryList = []
@@ -50,6 +54,12 @@ export class SetupComponent implements OnInit {
     this.msg = []
     this.pageData = []
 
+    this.appService.appSubject$.subscribe(p => {
+      this.curApp = p
+    })
+    this.pageService.pageSubject$.subscribe(p => {
+      this.curPage = p
+    })
     this.componentService.componentListByCurPage$.subscribe(compArr => {
       this.componentByPage = compArr
     })
@@ -57,7 +67,9 @@ export class SetupComponent implements OnInit {
     //   this.pageList = p
     // })
   }
-  viewBtClickH() {}
+  viewBtClickH() {
+    window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
+  }
 
   activeTabChange(tab: A) {
     console.log(tab);
