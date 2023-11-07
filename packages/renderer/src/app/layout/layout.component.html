@@ -1,0 +1,13 @@
+<section class="box">
+    <header>header</header>
+    <section>
+        <aside>
+            <app-page-list></app-page-list>
+        </aside>
+        <main>
+            <app-stack *ngFor="let comp of componenntList" [data]="comp"></app-stack>
+        </main>
+    </section>
+</section>
+
+<!-- <router-outlet></router-outlet> -->
