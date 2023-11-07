@@ -6,6 +6,9 @@ import { EnvService } from '../service/env.service';
 import { PageService } from '../service/page.service';
 // type
 import { App } from 'src/types/app';
+import { Component as Comp } from 'src/types/component';
+import { ComponentService } from '../service/component.service';
+
 
 let clog = console.log
 
@@ -15,12 +18,15 @@ let clog = console.log
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
+  componenntList: Comp[]
   constructor(private route: ActivatedRoute,
     private appService: AppService,
     private envService: EnvService,
     private pageService: PageService,
-    ) {}
-  ngOnInit(): void {
+    private componentService: ComponentService,
+  ) {
+    this.componenntList = []
+
     this.route.paramMap.subscribe((data: any) => {
       // clog('paramMap data', data)
       clog('paramMap data', data.get('appKey'))
@@ -42,6 +48,11 @@ export class LayoutComponent implements OnInit {
         this.envService.setCur(data.get('env'))
       }
     })
+    this.componentService.componentList$.subscribe(p => {
+      this.componenntList = p
+    })
+  }
+  ngOnInit(): void {
     
   }
 }

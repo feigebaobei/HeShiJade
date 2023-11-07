@@ -13,6 +13,10 @@ import { StackComponent } from './comp/stack/stack.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponent } from './layout/layout.component';
 import { PageListComponent } from './page/page-list/page-list.component';
+import { FormComponent } from './components/form/form.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { PageListComponent } from './page/page-list/page-list.component';
     StackDirective,
     StackComponent,
     LayoutComponent,
-    PageListComponent
+    PageListComponent,
+    FormComponent,
+    ModalComponent,
+    InputComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,

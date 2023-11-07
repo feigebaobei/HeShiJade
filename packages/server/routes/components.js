@@ -91,61 +91,40 @@ router.route('/listByPage')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  if (req.session.isAuth) {
-    let {user} = req.session
-    clog('user', user)
-    // res.status(200).json({
-    //     code: 0,
-    //     message: '',
-    //     data: [
-    //         {
-    //           ulid: '01H98Q2H3ZRAZ83M8E33ERDMDA',
-    //           type: 'Button',
-    //           next: '',
-    //           prev: '',
-    //           props: {
-    //             bsStyle: "danger"
-    //           },
-    //           behavior: {},
-    //           item: '',
-    //           slot: '',
-    //           appUlid: '01H90VXCNB7SQZCTEQDTN06FPR',
-    //           pageUlid: '01H98QH03RWN0PVN9Y7FFA81XJ',
-    //         },
-    //     ]
-    // })
-    // clog(req)
-    if (rules.required(req.query.pageUlid)) {
-      let result = componentsDb.collection('components').find({
-        pageUlid: req.query.pageUlid
-      })
-      result.toArray().then(r => {
-        res.status(200).json({
-          code: 0,
-          message: '',
-          data: r,
-        })
-      }).catch(error => {
-        res.status(200).json({
-          code: 200200,
-          message: '数据库出错',
-          data: error,
-        })
-      })
-    } else {
+  let {user} = req.session
+  clog('user', user)
+  if (rules.required(req.query.pageUlid)) {
+    let result = componentsDb.collection('components').find({
+      pageUlid: req.query.pageUlid
+    })
+    result.toArray().then(r => {
       res.status(200).json({
-        code: 100100,
-        message: '请求参数错误',
-        data: {},
+        code: 0,
+        message: '',
+        data: r,
       })
-    }
+    }).catch(error => {
+      res.status(200).json({
+        code: 200200,
+        message: '数据库出错',
+        data: error,
+      })
+    })
   } else {
-    res.status(401).json({
-      code: 300000,
-      message: '用户未登录',
-      data: {}
+    res.status(200).json({
+      code: 100100,
+      message: '请求参数错误',
+      data: {},
     })
   }
+  // if (req.session.isAuth) {
+  // } else {
+  //   res.status(401).json({
+  //     code: 300000,
+  //     message: '用户未登录',
+  //     data: {}
+  //   })
+  // }
 })
 .post(cors.corsWithOptions, (req, res) => {
   // res.send('post')
