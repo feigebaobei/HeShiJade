@@ -38,8 +38,10 @@ export class HomeComponent implements OnInit {
   }
   // 登录
   submitForm(a: any) {
-    this.userService.login({account: this.formData.account,
-    password: this.formData.password}).then(() => {
+    this.userService.login({
+      account: this.formData.account,
+      password: this.formData.password
+    }).then(() => {
       this.router.navigate(['/list' ]);
       this.user = this.userService.user
     })
