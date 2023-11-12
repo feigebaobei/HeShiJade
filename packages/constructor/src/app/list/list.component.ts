@@ -44,7 +44,8 @@ export class ListComponent implements OnInit {
   ) {
     this.user = this.userService.getUser()
     this.msg = []
-    this.appList = this.appService.getAppList()
+    // this.appList = this.appService.getAppList()
+    this.appList = []
     // this.userService.user$.subscribe(u => {
     //   this.user = u
     //   this.reqAppList()
@@ -54,13 +55,13 @@ export class ListComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-    // this.init()
+    this.init()
   }
-  // init(): void {
-  //   if (!this.appList.length) {
-  //     this.reqAppList()
-  //   }
-  // }
+  init(): void {
+    if (!this.appList.length) {
+      this.reqAppList()
+    }
+  }
   logoutBtClickH()  {
     // todo 验证登出。
     // 应该传递cookie

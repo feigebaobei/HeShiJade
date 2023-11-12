@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   }
   // 登录
   submitForm(a: any) {
+    this.userService.clearUser()
     this.userService.login({
       account: this.formData.account,
       password: this.formData.password

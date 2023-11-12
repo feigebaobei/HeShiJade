@@ -57,7 +57,6 @@ export class AppService {
     this.appList$.next(this._appList)
   }
   // 暂时不开发。设置方法在请求appList时设置。
-  // setAppList() {}
   // 获取应用列表
   reqAppList() {
     return new Promise<App[]>((s, j) => {
@@ -65,10 +64,7 @@ export class AppService {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          // this._appList = res.data
-          // this.appList$.next(res.data)
-          this._updateAppList(res.data)
-          // this.setAppList(res.data)
+          this.setAppList(res.data)
           s(res.data)
         } else {
           j(new Error(res.message))
@@ -80,7 +76,7 @@ export class AppService {
     let curUser = this.userService.getUser()
     let nextUlid = curUser?.firstApplicationUlid
     while (nextUlid) {
-      let app = this._find(nextUlid)
+      let app = appList.find(app => app.ulid === nextUlid)
       if (app) {
         this.doublyChain.append(app)
       }

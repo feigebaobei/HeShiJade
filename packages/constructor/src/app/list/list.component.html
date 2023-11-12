@@ -14,7 +14,7 @@
         <d-button (click)="sqlBtClickH()">查询应用列表</d-button>
     </div>
     <!-- 列表 -->
-    {{appList | json}}
+    <!-- appList: {{appList | json}} -->
     <section class="app_section">
         <div *ngFor="let app of appList" class="app_box" (click)="appItemClickH(app.ulid)">
             <p>

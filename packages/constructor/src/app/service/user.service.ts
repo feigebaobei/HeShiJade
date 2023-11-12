@@ -74,6 +74,7 @@ export class UserService {
       this.setUser({
         account: data.account,
         firstApplicationUlid: '',
+        lastApplicationUlid: '',
       })
       return true
     })

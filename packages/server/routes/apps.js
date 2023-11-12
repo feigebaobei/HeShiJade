@@ -20,50 +20,6 @@ router.route('/')
 })
 // 取得应用列表
 .get(cors.corsWithOptions, (req, res) => {
-  // if (req.query.appKey && req.query.apul)
-  // if (req.session.isAuth) {
-  //   // 按user.applications取出应用
-  //   usersDb.collection('users').findOne({account: req.session.user.account}).then(user => {
-  //     if (user) {
-  //       clog(user.applications)
-  //       return appsDb.collection('apps').find({ulid: {$in: user.applications}}).toArray()
-  //     } else {
-  //       return Promise.reject({
-  //         code: 300000,
-  //         message: '用户不存在',
-  //         know: true
-  //       })
-  //     }
-  //   }).then(apps => {
-  //     clog('apps', apps)
-  //     return res.status(200).json({
-  //       code: 0,
-  //       message: '',
-  //       data: apps
-  //     })
-  //   }).catch(obj => {
-  //     if (obj.know) {
-  //       res.status(200).json({
-  //         code: obj.code,
-  //         message: obj.message,
-  //         data: {},
-  //       })
-  //     } else {
-  //       res.status(200).json({
-  //         code: 200200,
-  //         message: "数据库出错",
-  //         data: obj,
-  //       })
-  //     }
-  //   })
-  // } else {
-  //   return res.status(401).json({
-  //     code: 300000,
-  //     message: '用户未登录',
-  //     data: {}
-  //   })
-  // }
-  // 
   if (true) {
     // usersDb.collection('users').findOne({acco/unt: req.})
     let curUser = {
@@ -138,32 +94,24 @@ router.route('/')
           owner: curUser.account,
           collaborator: req.body.collaborator,
           firstPageUlid: '',
+          lastPageUlid: '',
           prevUlid: req.body.prevUlid,
           nextUlid: '',
         })
-        Promise.all(userP, appP)
-        // Promise.all(userP)
-        // Promise.all(appP)
+        Promise.all([userP, appP])
         .then((app) => {
-            return res.status(200).json({
-              code: 0,
-              message: "ok",
-              data: app,
-            })
-          }).catch((error) => {
-            // appsDb.collection('apps').deleteOne({ulid: req.body.ulid})
-            // // usersDb.collection('users').updateOne({account: req.session.user.account}, {
-            //   usersDb.collection('users').updateOne(
-            //     {account: curUser.account}, {
-            //   // $set: {applications: req.session.user.applications}
-            //   $set: {applications: req.session.user.applications}
-            // })
-            res.status(200).json({
-              code: 200200,
-              message: "数据库出错",
-              data: error,
-            })
+          return res.status(200).json({
+            code: 0,
+            message: "ok",
+            data: app,
           })
+        }).catch((error) => {
+          res.status(200).json({
+            code: 200200,
+            message: "数据库出错",
+            data: error,
+          })
+        })
         // // 修改用户表中的数据
         // // insertOne
         // // replaceOne
@@ -200,8 +148,6 @@ router.route('/')
         //     data: error,
         //   })
         // })
-
-
     } else {
         res.status(200).json({
           code: 100100,
