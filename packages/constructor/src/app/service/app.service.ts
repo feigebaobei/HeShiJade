@@ -95,7 +95,7 @@ export class AppService {
       name: data.name,
       ulid: ulid(),
       theme: data.theme,
-      // version: 0,
+      version: 0,
       owner: (this.userService.getUser()?.account as S),
       collaborator: data.collaborator,
       firstPageUlid: this._getFirstPageUlid(),

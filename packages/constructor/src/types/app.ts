@@ -6,6 +6,7 @@ interface App {
   ulid: ULID
   theme: S
   // members: S[]
+  version: N
   owner: S
   collaborator: S[]
   // child: S

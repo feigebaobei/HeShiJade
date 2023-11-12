@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
 import type { ResponseData, User } from 'src/types';
-import type { A, B, S } from 'src/types/base';
+import type { A, B, S, N } from 'src/types/base';
 import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
@@ -165,9 +165,10 @@ export class ListComponent implements OnInit {
   reqAppList() {
     this.appService.reqAppList()
   }
-  configBtClickH($event: Event) {
+  configBtClickH($event: Event, index: N) {
     $event.stopPropagation() // 阻止事件冒泡
     // $event.preventDefault() // 阻止默认事件
+    // clog('config', index, this.appList[index])
     let results = this.dialogService.open({
       id: 'app-config-dialog-service',
       width: '346px',
@@ -176,7 +177,9 @@ export class ListComponent implements OnInit {
       content: AppConfigDialogComponent,
       backdropCloseable: true,
       onClose: () => clog('hi close'),
-      data: {},
+      data: {
+        app: this.appList[index],
+      },
       dialogtype: 'standard',
       showAnimate: true,
       buttons: [

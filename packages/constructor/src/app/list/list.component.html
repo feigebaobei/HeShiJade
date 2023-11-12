@@ -13,7 +13,7 @@
     </div>
     <!-- 列表 -->
     <section class="app_section">
-        <div *ngFor="let app of appList" class="app_box" (click)="appItemClickH(app.ulid)">
+        <div *ngFor="let app of appList; let index = index" class="app_box" (click)="appItemClickH(app.ulid)">
             <p>
                 <span>key:</span>
                 <span>{{app.key}}</span>
@@ -27,7 +27,7 @@
                 <span>{{app.theme}}</span>
             </p>
             <p>
-                <d-button (click)="configBtClickH($event)">配置</d-button>
+                <d-button (click)="configBtClickH($event, index)">配置</d-button>
                 <d-button (click)="gotoPublishBtClickH()">去发布</d-button>
             </p>
         </div>
