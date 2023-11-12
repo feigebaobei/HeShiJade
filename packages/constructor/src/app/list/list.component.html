@@ -1,5 +1,6 @@
 <!-- header -->
 <header>header
+    {{user | json}}
     <span>用户账号：{{user?.account}}</span>
     <d-button (click)="logoutBtClickH()">logout</d-button>
     <d-button (click)="homeBtClickH()">home</d-button>
@@ -13,6 +14,7 @@
         <d-button (click)="sqlBtClickH()">查询应用列表</d-button>
     </div>
     <!-- 列表 -->
+    {{appList | json}}
     <section class="app_section">
         <div *ngFor="let app of appList" class="app_box" (click)="appItemClickH(app.ulid)">
             <p>
@@ -23,11 +25,16 @@
                 <span>name:</span>
                 <span>{{app.name}}</span>
             </p>
+            <p>
+                <span>theme:</span>
+                <span>{{app.theme}}</span>
+            </p>
             <!-- <p>
                 <span>theme</span>
                 <span></span>
             </p> -->
             <p>
+                <d-button (click)="configBtClickH">配置</d-button>
                 <d-button (click)="gotoPublishBtClickH">去发布</d-button>
             </p>
         </div>

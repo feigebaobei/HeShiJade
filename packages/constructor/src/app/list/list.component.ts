@@ -8,11 +8,13 @@ import type { A, B, S } from 'src/types/base';
 import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
+import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
 
 interface FormData {
   key: S
   name: S
   members: S
+  theme: S
 }
 // interface App {
 //   key: S
@@ -40,21 +42,25 @@ export class ListComponent implements OnInit {
     private appService: AppService,
     private userService: UserService,
   ) {
-    this.user = this.userService.user
+    this.user = this.userService.getUser()
     this.msg = []
-    this.appList = []
+    this.appList = this.appService.getAppList()
+    // this.userService.user$.subscribe(u => {
+    //   this.user = u
+    //   this.reqAppList()
+    // })
     this.appService.appList$.subscribe(arr => {
       this.appList = arr
     })
   }
   ngOnInit(): void {
-    this.init()
+    // this.init()
   }
-  init(): void {
-    if (!this.appList.length) {
-      this.reqAppList()
-    }
-  }
+  // init(): void {
+  //   if (!this.appList.length) {
+  //     this.reqAppList()
+  //   }
+  // }
   logoutBtClickH()  {
     // todo 验证登出。
     // 应该传递cookie
@@ -89,13 +95,13 @@ export class ListComponent implements OnInit {
         key: 'one',
         name: 'one',
         members: '123@qq.com,kevin@163.com',
-        theme: 'blur',
+        theme: 'blue',
         selectOptions: [{
-          id: 'blur',
+          value: 'blue',
           label: '蓝'
         },
         {
-          id: 'yellow',
+          value: 'yellow',
           label: '黄'
         },],
       }, // as FormData,
@@ -115,8 +121,9 @@ export class ListComponent implements OnInit {
             this.appService.createApp({
               key: data.key,
               name: data.name,
-              // ulid: '1234567',
-              members,
+              theme: data.theme,
+              collaborator: members,
+              prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
             })
             .subscribe((res) => {
               if (res.code === 0) {
@@ -155,10 +162,39 @@ export class ListComponent implements OnInit {
     this.reqAppList()
   }
   reqAppList() {
-    this.appService.reqAppList()
-    // .then(res => {
-    //   this.appList = res
-    // })
+    // this.appService.reqAppList()
+  }
+  configBtClickH() {
+    let results = this.dialogService.open({
+      id: 'app-config-dialog-service',
+      width: '346px',
+      maxHeight: '600px',
+      title: '应用配置',
+      content: AppConfigDialogComponent,
+      backdropCloseable: true,
+      onClose: () => clog('hi close'),
+      data: {},
+      dialogtype: 'standard',
+      showAnimate: true,
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: 'Ok',
+          disabled: false,
+          handler: ($event: Event) => {
+            results.modalInstance.hide()
+          }
+        },
+        {
+          id: 'app-config-dialog-btn-canncel',
+          cssClass: 'common',
+          text: 'Cancel',
+          handler: ($event: Event) => {
+            results.modalInstance.hide()
+          }
+        }
+      ]
+    })
   }
   gotoPublishBtClickH() {
     clog('gotoPublishBtClickH')
