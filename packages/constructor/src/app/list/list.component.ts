@@ -125,20 +125,20 @@ export class ListComponent implements OnInit {
               collaborator: members,
               prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
             })
-            .subscribe((res) => {
-              if (res.code === 0) {
-                this.msg = [
-                  { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
-                ]
-                results.modalInstance.hide(); // 成功才关闭
-                // 刷新应用列表
-                this.reqAppList()
-              } else {
-                this.msg = [
-                  { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
-                ]
-              }
-            })
+            // .subscribe((res) => {
+            //   if (res.code === 0) {
+            //     this.msg = [
+            //       { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
+            //     ]
+            //     results.modalInstance.hide(); // 成功才关闭
+            //     // 刷新应用列表
+            //     this.reqAppList()
+            //   } else {
+            //     this.msg = [
+            //       { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
+            //     ]
+            //   }
+            // })
           },
         },
         {
@@ -162,7 +162,7 @@ export class ListComponent implements OnInit {
     this.reqAppList()
   }
   reqAppList() {
-    // this.appService.reqAppList()
+    this.appService.reqAppList()
   }
   configBtClickH() {
     let results = this.dialogService.open({
