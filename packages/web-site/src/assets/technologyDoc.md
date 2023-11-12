@@ -319,12 +319,15 @@ withCredentials: true
 https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
+# todo
 
-
-从组件列表可拖动舞台区
-创建组件的接口。
-请求组件的接口
-如何封装一个ng组件
-创建正确数据结构的组件
 去发布
 整理接口文档
+断网缓存
+lc不做出码。出码由脚手架做。
+lc不做入码。
+
+# 脚手架
+# 单点登录系统
+# mock平台
+

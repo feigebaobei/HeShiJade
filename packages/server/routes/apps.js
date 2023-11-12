@@ -70,7 +70,7 @@ router.route('/')
       account: '123@qq.com',
       password: '123456',
       // passwordHash: md5('123456'),
-      firstApplicationList: '',
+      firstApplicationUlid: '',
     }
     // let appList = 
     lowcodeDb.collection('apps_dev').find({
@@ -99,7 +99,15 @@ router.route('/')
 })
 // 创建应用
 .post(cors.corsWithOptions, (req, res) => {
-  if (req.session.isAuth) {
+  let curUser = {
+    account: '123@qq.com',
+    password: '123456',
+    // passwordHash: md5('123456'),
+    firstApplicationUlid: '',
+    lastApplicationUlid: '',
+  }
+  // 日后同单点登录系统完成
+  if (true) {
     if (rules.required(req.body.key) && 
       rules.required(req.body.name) && 
       rules.required(req.body.ulid) && 
@@ -109,62 +117,33 @@ router.route('/')
         // 保存应用
         let version = req.body.version || 0
         let collaborator = req.body.collaborator.slice(0, 4)
-        // let lastAppUlid = req.session.user.applications[req.session.user.applications.length - 1]
-        // let appObj = [
-        //   {
-        //     updateOne: {
-        //       filter: {ulid: lastAppUlid},
-        //       update: {
-        //         $set: {nextUlid: req.body.ulid}
-        //       }
-        //     }
-        //   },
-        //   {
-        //     insertOne: {
-        //       document: {
-        //         key: req.body.key,
-        //         name: req.body.name,
-        //         ulid: req.body.ulid,
-        //         theme: req.body.theme,
-        //         version,
-        //         owner: req.body.owner,
-        //         members,
-        //         firstPageUlid: '',
-        //         lastPageUlid: '',
-        //         prevUlid: lastAppUlid,
-        //         nextUlid: ''
-        //       }
-        //     }
-        //   }
-        // ]
-        // let cApp = appsDb.collection('apps').bulkWrite(appObj)
-        // let cApp = 
-        // lowcodeDb.collection('apps_dev').bulkWrite([{
-        //   insertOne: {
-        //     document: {
-        //       key: req.body.key,
-        //       name: req.body.name,
-        //       ulid: req.body.ulid,
-        //       theme: req.body.theme,
-        //       version,
-        //       owner: req.session.user.account,
-        //       collaborator: req.body.collaborator,
-        //       firstPageUlid: '',
-        //     }
-        //   }
-        // }])
-        lowcodeDb.collection('apps_dev').insertOne({
+        
+        let userP, appP
+        if (!curUser.firstApplicationUlid) {
+          userP = usersDb.collection('users').updateOne({account: curUser.account},
+            {$set: {
+              firstApplicationUlid: req.body.ulid,
+              lastApplicationUlid: req.body.ulid,
+            }})
+        } else {
+          userP = Promise.resolve()
+        }
+        appP = lowcodeDb.collection('apps_dev').insertOne({
           key: req.body.key,
           name: req.body.name,
           ulid: req.body.ulid,
           theme: req.body.theme,
           version,
-          owner: req.session.user.account,
+          // owner: req.session.user.account,
+          owner: curUser.account,
           collaborator: req.body.collaborator,
           firstPageUlid: '',
           prevUlid: req.body.prevUlid,
           nextUlid: '',
         })
+        Promise.all(userP, appP)
+        // Promise.all(userP)
+        // Promise.all(appP)
         .then((app) => {
             return res.status(200).json({
               code: 0,
@@ -172,10 +151,13 @@ router.route('/')
               data: app,
             })
           }).catch((error) => {
-            appsDb.collection('apps').deleteOne({ulid: req.body.ulid})
-            usersDb.collection('users').updateOne({account: req.session.user.account}, {
-              $set: {applications: req.session.user.applications}
-            })
+            // appsDb.collection('apps').deleteOne({ulid: req.body.ulid})
+            // // usersDb.collection('users').updateOne({account: req.session.user.account}, {
+            //   usersDb.collection('users').updateOne(
+            //     {account: curUser.account}, {
+            //   // $set: {applications: req.session.user.applications}
+            //   $set: {applications: req.session.user.applications}
+            // })
             res.status(200).json({
               code: 200200,
               message: "数据库出错",
