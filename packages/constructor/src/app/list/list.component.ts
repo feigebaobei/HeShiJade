@@ -165,7 +165,9 @@ export class ListComponent implements OnInit {
   reqAppList() {
     this.appService.reqAppList()
   }
-  configBtClickH() {
+  configBtClickH($event: Event) {
+    $event.stopPropagation() // 阻止事件冒泡
+    // $event.preventDefault() // 阻止默认事件
     let results = this.dialogService.open({
       id: 'app-config-dialog-service',
       width: '346px',

@@ -4,8 +4,6 @@
     <span>用户账号：{{user?.account}}</span>
     <d-button (click)="logoutBtClickH()">logout</d-button>
     <d-button (click)="homeBtClickH()">home</d-button>
-    <!-- <d-button (click)="userInfoBtClickH()">get userInfo</d-button>
-    <d-button (click)="gotoHomeInfoBtClickH()">home</d-button> -->
 </header>
 <!-- main -->
 <main>
@@ -14,7 +12,6 @@
         <d-button (click)="sqlBtClickH()">查询应用列表</d-button>
     </div>
     <!-- 列表 -->
-    <!-- appList: {{appList | json}} -->
     <section class="app_section">
         <div *ngFor="let app of appList" class="app_box" (click)="appItemClickH(app.ulid)">
             <p>
@@ -29,18 +26,11 @@
                 <span>theme:</span>
                 <span>{{app.theme}}</span>
             </p>
-            <!-- <p>
-                <span>theme</span>
-                <span></span>
-            </p> -->
             <p>
-                <d-button (click)="configBtClickH">配置</d-button>
-                <d-button (click)="gotoPublishBtClickH">去发布</d-button>
+                <d-button (click)="configBtClickH($event)">配置</d-button>
+                <d-button (click)="gotoPublishBtClickH()">去发布</d-button>
             </p>
         </div>
     </section>
 </main>
 <d-toast [value]="msg"></d-toast>
-<!-- {{item | json}} -->
-<!-- <app-app-item *ngFor="let item of appList">
-</app-app-item> -->
