@@ -64,6 +64,7 @@ export class AppService {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
+          this.doublyChain.clear()
           this.setAppList(res.data)
           s(res.data)
         } else {
