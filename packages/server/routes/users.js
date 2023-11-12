@@ -66,6 +66,7 @@ router.route('/sign')
           password: mdp,
           // applications: [],
           firstApplicationUlid: '', // 第一个应用的ulid
+          lastApplicationUlid: '', // 第一个应用的ulid
         }).then(() => {
           // usersDb.collection('users').findOne({
           //   account: req.body.account,
@@ -138,7 +139,8 @@ router.route('/login')
           data: {
             account: user.account,
             // applications: user.applications || [],
-            firstApplicationUlid: user.firstApplicationUlid
+            firstApplicationUlid: user.firstApplicationUlid,
+            lastApplicationUlid: user.lastApplicationUlid,
           },
           // data: {}
         })

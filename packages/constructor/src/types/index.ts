@@ -14,7 +14,9 @@ interface ResponseData {
 
 interface User {
   account: S
-  applications: S[]
+  // applications: S[]
+  firstApplicationUlid: S
+  lastApplicationUlid: S
 }
 
 
