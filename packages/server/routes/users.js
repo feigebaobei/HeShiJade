@@ -56,7 +56,7 @@ router.route('/sign')
         return res.status(200).json({
           code: 100100,
           message: "该用户已经存在",
-          data: user,
+          data: '',
         })
       } else {
         // 创建新用户
@@ -64,20 +64,30 @@ router.route('/sign')
         usersDb.collection('users').insertOne({
           account: req.body.account,
           password: mdp,
-          applications: [],
+          // applications: [],
+          firstApplicationUlid: '', // 第一个应用的ulid
         }).then(() => {
-          usersDb.collection('users').findOne({
-            account: req.body.account,
-            password: mdp,
-          }).then(user => {
-            req.session.user = user
-            req.session.isAuth = true
-            req.session.save()
-            return res.status(200).json({
-              code: 0,
-              message: "ok",
-              data: {},
-            })
+          // usersDb.collection('users').findOne({
+          //   account: req.body.account,
+          //   password: mdp,
+          // }).then(user => {
+          //   req.session.user = user
+          //   req.session.isAuth = true
+          //   req.session.save()
+          //   return res.status(200).json({
+          //     code: 0,
+          //     message: "ok",
+          //     data: {},
+          //   })
+          // })
+          return res.status(200).json({
+            code: 0,
+            message: 'ok',
+            data: {}
+            // data: {
+            //   account: user.account,
+            //   firstApplicationUlid: user.firstApplicationUlid,
+            // }
           })
         }).catch((error) => {
           return res.status(200).json({
@@ -127,7 +137,8 @@ router.route('/login')
           message: "ok",
           data: {
             account: user.account,
-            applications: user.applications || [],
+            // applications: user.applications || [],
+            firstApplicationUlid: user.firstApplicationUlid
           },
           // data: {}
         })
