@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { reqToPromise } from 'src/helper';
 import type { ResponseData } from 'src/types';
-import type { S } from 'src/types/base';
+import type { S, ULID } from 'src/types/base';
 import { Subject, type Observable } from 'rxjs';
 import type { User } from 'src/types';
 
@@ -16,7 +16,7 @@ export class UserService {
   constructor(private http: HttpClient) {
     this.user = undefined
     this.user$ = new Subject()
-    let v = window.localStorage.getItem('lc-user')
+    let v = window.sessionStorage.getItem('lc-user')
     if (v) {
       this.setUser(JSON.parse(v))
     }
@@ -33,12 +33,12 @@ export class UserService {
     } else {
       user = JSON.stringify({})
     }
-    window.localStorage.setItem('lc-user', user)
+    window.sessionStorage.setItem('lc-user', user)
   }
   clearUser() {
     this.user = undefined
     this.user$.next(this.user)
-    window.localStorage.removeItem('lc-user')
+    window.sessionStorage.removeItem('lc-user')
   }
   login(data: {account: S, password: S}) {
     return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/login', {
@@ -78,5 +78,15 @@ export class UserService {
       })
       return true
     })
+  }
+  appendApp(appUlid: ULID) {
+    let u = this.user!
+    if (u?.firstApplicationUlid) {
+      u.lastApplicationUlid = appUlid
+    } else {
+      u.firstApplicationUlid = appUlid
+      u.lastApplicationUlid = appUlid
+    }
+    this.setUser(u)
   }
 }

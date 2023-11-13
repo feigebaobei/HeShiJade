@@ -8,6 +8,8 @@ import { ulid } from 'ulid';
 import { UserService } from './user.service';
 import { DoublyChain } from 'data-footstone';
 
+let clog = console.log
+
 type AppOrUn = App | undefined
 interface ReqCreateData {
   key: S,
@@ -38,9 +40,9 @@ export class AppService {
     this.doublyChain = new DoublyChain()
     // 各service需要写清空方法
     // 当改变user时请求appList
-    this.userService.user$.subscribe(u => {
-      this.reqAppList()
-    })
+    // this.userService.user$.subscribe(u => {
+    //   this.reqAppList()
+    // })
   }
   private _find(appUlid?: S) {
     return this._appList.find(item => item.ulid === appUlid)
@@ -54,6 +56,7 @@ export class AppService {
   setAppList(appList: App[]) {
     this._updateAppList(appList)
     this._appList = this.doublyChain.toArray()
+    clog('this._appList', this._appList)
     this.appList$.next(this._appList)
   }
   // 暂时不开发。设置方法在请求appList时设置。
@@ -64,7 +67,6 @@ export class AppService {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          this.doublyChain.clear()
           this.setAppList(res.data)
           s(res.data)
         } else {
@@ -74,6 +76,7 @@ export class AppService {
     })
   }
   private _updateAppList(appList: App[]) {
+    this.doublyChain.clear()
     let curUser = this.userService.getUser()
     let nextUlid = curUser?.firstApplicationUlid
     while (nextUlid) {
@@ -90,18 +93,24 @@ export class AppService {
     this.appSubject$.next(this._curApp)
   }
   createApp(data: ReqCreateData) {
-    this.doublyChain.append({
-      key: data.key,
-      name: data.name,
-      ulid: ulid(),
-      theme: data.theme,
-      version: 0,
-      owner: (this.userService.getUser()?.account as S),
-      collaborator: data.collaborator,
-      firstPageUlid: this._getFirstPageUlid(),
-      prevUlid: (this.doublyChain.tail?.value.ulid) || '',
-      nextUlid: '',
-    })
+    let u = ulid()
+    if (this._appList.length) {
+      this._appList[this._appList.length - 1].nextUlid = u
+    }
+    this._appList.push({
+        key: data.key,
+        name: data.name,
+        ulid: u,
+        theme: data.theme,
+        version: 0,
+        owner: (this.userService.getUser()?.account as S),
+        collaborator: data.collaborator,
+        firstPageUlid: this._getFirstPageUlid(),
+        prevUlid: (this.doublyChain.tail?.value.ulid) || '',
+        nextUlid: '',
+      })
+    this.userService.appendApp(u)
+    this.setAppList(this._appList)
     this._createApp(data)
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }

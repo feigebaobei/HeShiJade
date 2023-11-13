@@ -81,23 +81,54 @@ router.route('/')
               firstApplicationUlid: req.body.ulid,
               lastApplicationUlid: req.body.ulid,
             }})
+          appP = lowcodeDb.collection('apps_dev').insertOne({
+            key: req.body.key,
+            name: req.body.name,
+            ulid: req.body.ulid,
+            theme: req.body.theme,
+            version,
+            owner: curUser.account,
+            collaborator: req.body.collaborator,
+            firstPageUlid: '',
+            lastPageUlid: '',
+            prevUlid: req.body.prevUlid,
+            nextUlid: '',
+          })
         } else {
-          userP = Promise.resolve()
+          // userP = Promise.resolve()
+          userP = usersDb.collection('users').updateOne({
+            account: curUser.account
+          }, {
+            $set: {lastApplicationUlid: req.body.ulid}
+          })
+          appP = lowcodeDb.collection('apps_dev').bulkWrite([
+            {
+              updataOne: {
+                filter: {ulid: req.body.prevUlid},
+                update: {
+                  $set: {nextUlid: req.body.ulid}
+                }
+              }
+            },
+            {
+              insertOne: {
+                document: {
+                  key: req.body.key,
+                  name: req.body.name,
+                  ulid: req.body.ulid,
+                  theme: req.body.theme,
+                  version,
+                  owner: curUser.account,
+                  collaborator: req.body.collaborator,
+                  firstPageUlid: '',
+                  lastPageUlid: '',
+                  prevUlid: req.body.prevUlid,
+                  nextUlid: '',
+                }
+              }
+            }
+          ])
         }
-        appP = lowcodeDb.collection('apps_dev').insertOne({
-          key: req.body.key,
-          name: req.body.name,
-          ulid: req.body.ulid,
-          theme: req.body.theme,
-          version,
-          // owner: req.session.user.account,
-          owner: curUser.account,
-          collaborator: req.body.collaborator,
-          firstPageUlid: '',
-          lastPageUlid: '',
-          prevUlid: req.body.prevUlid,
-          nextUlid: '',
-        })
         Promise.all([userP, appP])
         .then((app) => {
           return res.status(200).json({

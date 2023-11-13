@@ -126,6 +126,7 @@ export class ListComponent implements OnInit {
               collaborator: members,
               prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
             })
+            results.modalInstance.hide();
             // .subscribe((res) => {
             //   if (res.code === 0) {
             //     this.msg = [
