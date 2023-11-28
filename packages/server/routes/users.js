@@ -5,7 +5,7 @@ let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
 let {usersDb} = require('../mongodb')
-let { rules } = require('../helper/index')
+let { rules, instance } = require('../helper/index')
 let md5 = require('md5');
 let clog = console.log
 
@@ -120,52 +120,82 @@ router.route('/login')
     data: {}
   })
 })
-.post(cors.corsWithOptions, async (req, res) => {
-  // clog('req', req.body)
-  if (rules.email(req.body.account) && rules.required(req.body.password)) {
-    let mdp = md5(req.body.password)
-    // clog('start', new Date().getTime())
-    usersDb.collection('users').findOne({
-      account: req.body.account,
-      password: mdp,
-    }).then((user) => {
-      req.session.user = user
-      req.session.isAuth = true
-      req.session.save()
-      if (user) {
-        return res.status(200).json({
+.post(cors.corsWithOptions, 
+  // async (req, res) => {
+  // // clog('req', req.body)
+  // if (rules.email(req.body.account) && rules.required(req.body.password)) {
+  //   let mdp = md5(req.body.password)
+  //   // clog('start', new Date().getTime())
+  //   usersDb.collection('users').findOne({
+  //     account: req.body.account,
+  //     password: mdp,
+  //   }).then((user) => {
+  //     req.session.user = user
+  //     req.session.isAuth = true
+  //     req.session.save()
+  //     if (user) {
+  //       return res.status(200).json({
+  //         code: 0,
+  //         message: "ok",
+  //         data: {
+  //           account: user.account,
+  //           // applications: user.applications || [],
+  //           firstApplicationUlid: user.firstApplicationUlid,
+  //           lastApplicationUlid: user.lastApplicationUlid,
+  //         },
+  //         // data: {}
+  //       })
+  //     } else {
+  //       return res.status(200).json({
+  //         code: 100000,
+  //         message: '用户不存在',
+  //         data: '',
+  //       })
+  //     }
+  //   }).catch(error => {
+  //     return res.status(200).json({
+  //       code: 200200,
+  //       message: "数据库出错",
+  //       data: error,
+  //     })
+  //   })
+  // } else {
+  //   return res.status(200).json({
+  //     code: 100100,
+  //     message: "请求参数错误",
+  //     data: {},
+  //   })
+  // }
+  // }
+  (req, res) => {
+    instance({
+      url: '/users/authUserInfo',
+      data: {
+        accessToken: req.headers.authorization,
+        systemId: 1,
+      }
+    }).then(response => {
+      if (response.code === 0) {
+        req.session.user = response.data
+        req.session.isAuth = true
+        req.session.save()
+        res.status(200).json({
           code: 0,
-          message: "ok",
-          data: {
-            account: user.account,
-            // applications: user.applications || [],
-            firstApplicationUlid: user.firstApplicationUlid,
-            lastApplicationUlid: user.lastApplicationUlid,
-          },
-          // data: {}
+          message: '',
+          data: {}
         })
       } else {
-        return res.status(200).json({
-          code: 100000,
-          message: '用户不存在',
-          data: '',
-        })
+        return Promise.reject(new Error(res.message || '验证用户失败'))
       }
     }).catch(error => {
-      return res.status(200).json({
-        code: 200200,
-        message: "数据库出错",
-        data: error,
+      res.status(200).json({
+        code: 1,
+        message: error.message,
+        data: {}
       })
     })
-  } else {
-    return res.status(200).json({
-      code: 100100,
-      message: "请求参数错误",
-      data: {},
-    })
   }
-})
+)
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })

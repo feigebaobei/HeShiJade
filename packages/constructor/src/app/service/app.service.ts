@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+// 配置项
 import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
 import type { B, S, ULID } from 'src/types/base';
 import { ulid } from 'ulid';
 import { UserService } from './user.service';
 import { DoublyChain } from 'data-footstone';
+import { serviceUrl } from 'src/helper/config';
 
 let clog = console.log
 
@@ -63,8 +65,11 @@ export class AppService {
   // 获取应用列表
   reqAppList() {
     return new Promise<App[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/apps', {
-        withCredentials: true
+      this.http.get<ResponseData>(`${serviceUrl()}/apps`, {
+        // withCredentials: true
+        headers: {
+          authorization: window.localStorage.getItem('accessToken') || '',
+        }
       }).subscribe(res => {
         if (res.code === 0) {
           this.setAppList(res.data)
@@ -120,7 +125,7 @@ export class AppService {
   }
   private _createApp(data: ReqCreateData) {
     return new Promise((s, j) => {
-      this.http.post<ResponseData>('http://localhost:5000/apps', {
+      this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
         ...data,
         ulid: ulid()
       }, {

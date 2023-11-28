@@ -12,11 +12,4 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router = router
   }
-  // loginClickH() {
-  //   this.router.navigate(['/login' ]);
-  // }
-  // listClickH() {
-  //   this.router.navigate(['/list' ]);
-  //   // this.route
-  // }
 }

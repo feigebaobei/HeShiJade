@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     confirmPassword: '123456',
   }
 
-  listClickH() {
+  gotoList() {
     this.router.navigate(['/list' ]);
   }
   // 登录
@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
     this.userService.login({
       account: this.formData.account,
       password: this.formData.password
+    }).then(() => {
+      return this.userService.loginSelf()
     }).then(() => {
       this.router.navigate(['/list' ]);
       this.user = this.userService.user
@@ -58,7 +60,10 @@ export class HomeComponent implements OnInit {
         account: this.formData.account,
         password: this.formData.password,
       }).then(() => {
-        this.listClickH()
+        this.gotoList()
+      }).catch((error) => {
+        clog('errror', error)
+        // this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }];
       })
     } else {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '二次输入的password不一致' }];
@@ -73,7 +78,7 @@ export class HomeComponent implements OnInit {
     this.status = value
   }
   gotoLinkButtonClickH() {
-    this.listClickH()
+    this.gotoList()
   }
 
 }

@@ -321,13 +321,12 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 # todo
 
+lc中接入sso
 去发布
 整理接口文档
 断网缓存
 lc不做出码。出码由脚手架做。
 lc不做入码。
 
-# 脚手架
-# 单点登录系统
 # mock平台
 

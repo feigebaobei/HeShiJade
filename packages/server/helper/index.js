@@ -1,6 +1,9 @@
 // let required = (params) => {
 //     return params !== undefined && params !== null
 // }
+
+let {instance} = require('./req')
+
 let rules = {
     required: (params) => {
         return params !== undefined && params !== null
@@ -19,7 +22,7 @@ let rules = {
         return true
     },
     isNumber: (n) => {
-        return Number.isNumber(n)
+        return typeof n === 'number' && isFinite(n);
     }
 }
 // let wrapCheck = (condition, res) => {
@@ -42,9 +45,12 @@ let resParamsError = (res) => {
         data: {},
       })
 }
+
+
 module.exports = {
     // required,
     rules,
     // wrapCheck,
     resParamsError,
+    instance,
 }

@@ -7,7 +7,7 @@ let bodyParser = require('body-parser');
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules } = require('../helper');
+const { rules, instance, } = require('../helper');
 // let md5 = require('md5');
 let clog = console.log
 
@@ -19,7 +19,29 @@ router.route('/')
   res.sendStatus(200)
 })
 // 取得应用列表
-.get(cors.corsWithOptions, (req, res) => {
+.get(cors.corsWithOptions,
+//   (req, res, next) => {
+//   // clog('authorization', req.headers.authorization)
+//   instance({
+//     url: '/users/authUserInfo',
+//     data: {
+//       accessToken: req.headers.authorization,
+//       systemId: 1,
+//     }
+//   }).then(response => {
+//     if (response.code === 0) {
+      
+//       next()
+//     } else {
+//       res.status(200).json({
+//         code: 1,
+//         message: '验证用户信息失败',
+//         data: {}
+//       })
+//     }
+//   })
+// }, 
+(req, res) => {
   if (true) {
     // usersDb.collection('users').findOne({acco/unt: req.})
     let curUser = {
@@ -91,7 +113,7 @@ router.route('/')
             collaborator: req.body.collaborator,
             firstPageUlid: '',
             lastPageUlid: '',
-            prevUlid: req.body.prevUlid,
+            prevUlid: '', // req.body.prevUlid,
             nextUlid: '',
           })
         } else {
@@ -130,11 +152,11 @@ router.route('/')
           ])
         }
         Promise.all([userP, appP])
-        .then((app) => {
+        .then(() => {
           return res.status(200).json({
             code: 0,
             message: "ok",
-            data: app,
+            data: {},
           })
         }).catch((error) => {
           res.status(200).json({
