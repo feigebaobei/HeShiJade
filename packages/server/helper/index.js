@@ -3,6 +3,7 @@
 // }
 
 let {instance} = require('./req')
+let {auth} = require('./auth')
 
 let rules = {
     required: (params) => {
@@ -53,4 +54,5 @@ module.exports = {
     // wrapCheck,
     resParamsError,
     instance,
+    auth,
 }

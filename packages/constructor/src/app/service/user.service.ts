@@ -76,7 +76,9 @@ export class UserService {
     return new Promise((s, j) => {
       this.http.post<ResponseData>(`${serviceUrl()}/users/login`, {
         accessToken: window.localStorage.getItem('accessToken') || '',
-        systemId: 1,
+        // systemId: 1,
+      }, {
+        withCredentials: true, // 控制是否种cookie
       }).subscribe(res => {
         if (res.code === 0) {
           s(undefined)

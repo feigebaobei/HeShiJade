@@ -171,17 +171,19 @@ router.route('/login')
     instance({
       url: '/users/authUserInfo',
       data: {
-        accessToken: req.headers.authorization,
+        accessToken: req.body.accessToken,
         systemId: 1,
-      }
+      },
+      method: 'post',
     }).then(response => {
+      clog('response', response)
       if (response.code === 0) {
         req.session.user = response.data
         req.session.isAuth = true
         req.session.save()
         res.status(200).json({
           code: 0,
-          message: '',
+          message: '登录成功',
           data: {}
         })
       } else {

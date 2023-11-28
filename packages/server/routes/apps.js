@@ -7,7 +7,8 @@ let bodyParser = require('body-parser');
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules, instance, } = require('../helper');
+const { rules, auth, } = require('../helper');
+
 // let md5 = require('md5');
 let clog = console.log
 
@@ -19,29 +20,7 @@ router.route('/')
   res.sendStatus(200)
 })
 // 取得应用列表
-.get(cors.corsWithOptions,
-//   (req, res, next) => {
-//   // clog('authorization', req.headers.authorization)
-//   instance({
-//     url: '/users/authUserInfo',
-//     data: {
-//       accessToken: req.headers.authorization,
-//       systemId: 1,
-//     }
-//   }).then(response => {
-//     if (response.code === 0) {
-      
-//       next()
-//     } else {
-//       res.status(200).json({
-//         code: 1,
-//         message: '验证用户信息失败',
-//         data: {}
-//       })
-//     }
-//   })
-// }, 
-(req, res) => {
+.get(cors.corsWithOptions, auth, (req, res) => {
   if (true) {
     // usersDb.collection('users').findOne({acco/unt: req.})
     let curUser = {

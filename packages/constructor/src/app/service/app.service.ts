@@ -69,7 +69,8 @@ export class AppService {
         // withCredentials: true
         headers: {
           authorization: window.localStorage.getItem('accessToken') || '',
-        }
+        },
+        withCredentials: true, // 控制是否带cookie
       }).subscribe(res => {
         if (res.code === 0) {
           this.setAppList(res.data)

@@ -321,7 +321,14 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 # todo
 
+整理需求
+  明确要做什么
+  整理思路，确定实现方案
+  写文档。接入api
+  严格调用api
+
 lc中接入sso
+记录日志的中间件
 去发布
 整理接口文档
 断网缓存
