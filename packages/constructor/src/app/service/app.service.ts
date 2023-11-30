@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 // 配置项
 import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
-import type { B, S, ULID } from 'src/types/base';
+import type { B, Email, S, ULID } from 'src/types/base';
 import { ulid } from 'ulid';
 import { UserService } from './user.service';
 import { DoublyChain } from 'data-footstone';
@@ -109,7 +109,8 @@ export class AppService {
         ulid: u,
         theme: data.theme,
         version: 0,
-        owner: (this.userService.getUser()?.account as S),
+        // owner: (this.userService.getUser()?.account as S),
+        owner: (this.userService.getUser()?.profile.email as Email), // 考虑一下，email好还是id好。
         collaborator: data.collaborator,
         firstPageUlid: this._getFirstPageUlid(),
         prevUlid: (this.doublyChain.tail?.value.ulid) || '',

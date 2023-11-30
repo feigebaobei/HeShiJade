@@ -49,38 +49,34 @@ export class UserService {
     this.user$.next(this.user)
     window.sessionStorage.removeItem('lc-user')
   }
-  login(data: {account: S, password: S}) {
-    // return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/login', {
-    //     account: data.account,
-    //     password: data.password,
-    //   }, {
-    //     withCredentials: true,
-    //   })).then(data => {
-    //     // this.user = (data as User)
-    //     this.setUser(data as User)
-    //   })
-    return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${ssoUrl()}/users/login`, {
+  // 登录sso
+  // 前端不应该直接请求sso
+  loginSso(data: {account: S, password: S}) {
+    return reqToPromise<User>(this.http.post<ResponseData>(`${ssoUrl()}/users/login`, {
         account: data.account,
         password: data.password,
-      }, {
-      })).then((data: TokenObj) => {
+      })).then((data: User) => {
         window.localStorage.setItem('accessToken', data.accessToken)
         window.localStorage.setItem('refreshToken', data.refreshToken)
+        this.setUser(data)
         return
       }).catch((e) => {
         // clog('sdfs', e)
         return Promise.reject(e)
       })
   }
-  loginSelf() {
+  loginServer(data: {account: S, password: S}) {
     return new Promise((s, j) => {
       this.http.post<ResponseData>(`${serviceUrl()}/users/login`, {
-        accessToken: window.localStorage.getItem('accessToken') || '',
+        // accessToken: window.localStorage.getItem('accessToken') || '',
         // systemId: 1,
+        account: data.account,
+        password: data.password,
       }, {
         withCredentials: true, // 控制是否种cookie
       }).subscribe(res => {
         if (res.code === 0) {
+          this.setUser(res.data)
           s(undefined)
         } else {
           j(res)
@@ -89,11 +85,6 @@ export class UserService {
     })
   }
   logout() {
-    // return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/logout', {}, {
-    //   withCredentials: true,
-    // })).then(() => {
-    //   this.clearUser()
-    // })
     return new Promise((s, j) => {
       this.http.post(`${ssoUrl()}/users/logout`, {}, {headers: {
         authorization: window.localStorage.getItem('accessToken') || '',
@@ -109,24 +100,28 @@ export class UserService {
       })
     })
   }
+  // 注册sso
   sign(data: {account: S, password: S}) {
-    return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/users/sign', {
+    return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${ssoUrl()}/users/sign`, {
       account: data.account,
       password: data.password,
-    }, {
-      withCredentials: true,
-    })).then(() => {
-      // this.user = {
+    })).then((data: TokenObj) => {
+      window.localStorage.setItem('accessToken', data.accessToken)
+      window.localStorage.setItem('refreshToken', data.refreshToken)
+      return
+      // this.setUser({
       //   account: data.account,
       //   firstApplicationUlid: '',
-      // }
-      this.setUser({
-        account: data.account,
-        firstApplicationUlid: '',
-        lastApplicationUlid: '',
-      })
-      return true
+      //   lastApplicationUlid: '',
+      // })
+      // return true
+    }).catch((e) => {
+      return Promise.reject(e)
     })
+  }
+  // 注册server
+  signSelf(data: {account: S, password: S}) {
+    return 
   }
   appendApp(appUlid: ULID) {
     let u = this.user!

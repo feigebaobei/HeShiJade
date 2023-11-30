@@ -1,4 +1,4 @@
-import type {N, B, A, S, ULID} from './base'
+import type {N, B, A, S, ULID, Email, } from './base'
 
 interface ResponseData {
   code: N
@@ -13,8 +13,14 @@ interface ResponseData {
 // }
 
 interface User {
-  account: S
+  // account: S
   // applications: S[]
+  ulid: ULID,
+  profile: {
+    email: Email,
+  },
+  accessToken: S
+  refreshToken: S
   firstApplicationUlid: S
   lastApplicationUlid: S
 }

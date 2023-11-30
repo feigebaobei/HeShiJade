@@ -39,14 +39,21 @@ export class HomeComponent implements OnInit {
   // 登录
   submitForm(a: any) {
     this.userService.clearUser()
-    this.userService.login({
+    // this.userService.loginSso({
+    //   account: this.formData.account,
+    //   password: this.formData.password
+    // }).then(() => {
+    //   return this.userService.loginServer()
+    // }).then(() => {
+    //   this.router.navigate(['/list' ]);
+    //   this.user = this.userService.user
+    // })
+    this.userService.loginServer({
       account: this.formData.account,
-      password: this.formData.password
+      password: this.formData.password,
     }).then(() => {
-      return this.userService.loginSelf()
-    }).then(() => {
-      this.router.navigate(['/list' ]);
-      this.user = this.userService.user
+      this.router.navigate(['/list'])
+      this.user = this.userService.getUser()
     })
   }
   // 注册

@@ -327,7 +327,9 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
   写文档。接入api
   严格调用api
 
-lc中接入sso
+注册用户
+请求应用列表
+渲染应用列表
 记录日志的中间件
 去发布
 整理接口文档

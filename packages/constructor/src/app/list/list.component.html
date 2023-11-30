@@ -1,7 +1,7 @@
 <!-- header -->
 <header>header
     {{user | json}}
-    <span>用户账号：{{user?.account}}</span>
+    <span>用户账号：{{user?.profile?.email}}</span>
     <d-button (click)="logoutBtClickH()">logout</d-button>
     <d-button (click)="homeBtClickH()">home</d-button>
 </header>
