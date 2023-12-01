@@ -67,9 +67,9 @@ export class AppService {
     return new Promise<App[]>((s, j) => {
       this.http.get<ResponseData>(`${serviceUrl()}/apps`, {
         // withCredentials: true
-        headers: {
-          authorization: window.localStorage.getItem('accessToken') || '',
-        },
+        // headers: {
+        //   authorization: window.localStorage.getItem('accessToken') || '',
+        // },
         withCredentials: true, // 控制是否带cookie
       }).subscribe(res => {
         if (res.code === 0) {
@@ -84,6 +84,7 @@ export class AppService {
   private _updateAppList(appList: App[]) {
     this.doublyChain.clear()
     let curUser = this.userService.getUser()
+    clog('curUser', curUser)
     let nextUlid = curUser?.firstApplicationUlid
     while (nextUlid) {
       let app = appList.find(app => app.ulid === nextUlid)

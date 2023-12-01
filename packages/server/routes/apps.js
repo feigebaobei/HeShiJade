@@ -8,6 +8,7 @@ let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
 const { rules, auth, } = require('../helper');
+const { errorCode } = require('../helper/errorCode');
 
 // let md5 = require('md5');
 let clog = console.log
@@ -33,7 +34,7 @@ router.route('/')
     lowcodeDb.collection('apps_dev').find({
       owner: curUser.account
     }).toArray().then(appList => {
-      clog('applist', appList)
+      // clog('applist', appList)
       return res.status(200).json({
         code: 0,
         message: '',
@@ -56,144 +57,119 @@ router.route('/')
 })
 // 创建应用
 .post(cors.corsWithOptions, (req, res) => {
-  let curUser = {
-    account: '123@qq.com',
-    password: '123456',
-    // passwordHash: md5('123456'),
-    firstApplicationUlid: '',
-    lastApplicationUlid: '',
-  }
-  // 日后同单点登录系统完成
-  if (true) {
-    if (rules.required(req.body.key) && 
-      rules.required(req.body.name) && 
-      rules.required(req.body.ulid) && 
-      rules.required(req.body.prevUlid) && 
-      rules.isArray(req.body.collaborator)
-    ) {
-        // 保存应用
-        let version = req.body.version || 0
-        let collaborator = req.body.collaborator.slice(0, 4)
-        
-        let userP, appP
-        if (!curUser.firstApplicationUlid) {
-          userP = usersDb.collection('users').updateOne({account: curUser.account},
-            {$set: {
-              firstApplicationUlid: req.body.ulid,
-              lastApplicationUlid: req.body.ulid,
-            }})
-          appP = lowcodeDb.collection('apps_dev').insertOne({
-            key: req.body.key,
-            name: req.body.name,
-            ulid: req.body.ulid,
-            theme: req.body.theme,
-            version,
-            owner: curUser.account,
-            collaborator: req.body.collaborator,
-            firstPageUlid: '',
-            lastPageUlid: '',
-            prevUlid: '', // req.body.prevUlid,
-            nextUlid: '',
-          })
-        } else {
-          // userP = Promise.resolve()
-          userP = usersDb.collection('users').updateOne({
-            account: curUser.account
-          }, {
-            $set: {lastApplicationUlid: req.body.ulid}
-          })
-          appP = lowcodeDb.collection('apps_dev').bulkWrite([
-            {
-              updataOne: {
-                filter: {ulid: req.body.prevUlid},
-                update: {
-                  $set: {nextUlid: req.body.ulid}
-                }
-              }
-            },
-            {
-              insertOne: {
-                document: {
-                  key: req.body.key,
-                  name: req.body.name,
-                  ulid: req.body.ulid,
-                  theme: req.body.theme,
-                  version,
-                  owner: curUser.account,
-                  collaborator: req.body.collaborator,
-                  firstPageUlid: '',
-                  lastPageUlid: '',
-                  prevUlid: req.body.prevUlid,
-                  nextUlid: '',
-                }
-              }
-            }
-          ])
-        }
-        Promise.all([userP, appP])
-        .then(() => {
-          return res.status(200).json({
-            code: 0,
-            message: "ok",
-            data: {},
-          })
-        }).catch((error) => {
-          res.status(200).json({
-            code: 200200,
-            message: "数据库出错",
-            data: error,
-          })
-        })
-        // // 修改用户表中的数据
-        // // insertOne
-        // // replaceOne
-        // // updateOne
-        // // updateMany
-        // // deleteOne
-        // // deleteMany
-        // let objArr = req.body.collaborator.map(item => {
-        //   return {
-        //     updateOne: {
-        //       filter: { account: item },
-        //       update: { $addToSet: { applications: req.body.ulid }},
-        //     }
-        //   }
-        // })
-        // clog('boj', objArr)
-        // let eUser = usersDb.collection('users').bulkWrite(objArr)
-        // // todo 修改所有用户的applications
-        // Promise.all([cApp, eUser])
-        // .then(() => {
-        //   return res.status(200).json({
-        //     code: 0,
-        //     message: "ok",
-        //     data: {},
-        //   })
-        // }).catch((error) => {
-        //   appsDb.collection('apps').deleteOne({ulid: req.body.ulid})
-        //   usersDb.collection('users').updateOne({account: req.session.user.account}, {
-        //     $set: {applications: req.session.user.applications}
-        //   })
-        //   res.status(200).json({
-        //     code: 200200,
-        //     message: "数据库出错",
-        //     data: error,
-        //   })
-        // })
+  // 检查参数
+  // 取session.user
+  // 为user设置first/last
+  // 创建应用
+  new Promise((s, j) => {
+    if (rules.required(req.body.key) &&
+    rules.required(req.body.name) &&
+    rules.required(req.body.ulid) &&
+    rules.required(req.body.prevUlid) &&
+    rules.required(req.body.collaborator)) {
+      s(true)
     } else {
-        res.status(200).json({
-          code: 100100,
-          message: "请求参数错误",
-          data: {},
-        })
+      j(100100)
     }
-  } else {
-    res.status(401).json({
-      code: 300000,
-      message: '用户未登录',
+  }).then(() => {
+    if (req.session.isAuth) {
+      return 
+    } else {
+      return Promise.reject(100130)
+    }
+  }).then(() => {
+    clog('req', req.session.user)
+    return lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
+      return user
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((user) => {
+    clog(user)
+    // 是否有应用
+    if (user.firstApplicationUlid) {
+      let p1 = lowcodeDb.collection('users').updateOne({
+        ulid: user.ulid
+      }, {
+        $set: { lastApplicationUlid: req.body.ulid }
+      })
+      let p2 = lowcodeDb.collection('apps_dev').bulkWrite([
+        {
+          updateOne: {
+            filter: {ulid: req.body.prevUlid},
+            update: {
+              $set: {nextUlid: req.body.ulid},
+            },
+          },
+        },
+        {
+          insertOne: {
+            document: {
+              key: req.body.key,
+              name: req.body.name,
+              ulid: req.body.ulid,
+              theme: req.body.theme,
+              version: req.body.version || 0, // todo 只增加
+              owner: user.ulid,
+              collaborator: req.body.collaborator,
+              firstPageUlid: '',
+              lastPageUlid: '',
+              prevUlid: req.body.prevUlid,
+              nextUlid: '',
+            }
+          },
+        }
+      ])
+      return Promise.all([p1, p2]).then(([r1, r2]) => {
+        return [r1, r2]
+      }).catch((e) => {
+        clog('sdfsdf', e)
+        return Promise.reject(200000)
+      })
+    } else {
+      // 设置最后一个应用
+      // 创建应用
+      let p1 = lowcodeDb.collection('users').updateOne({
+        ulid: req.session.user.ulid
+      }, {
+        $set: {
+          firstApplicationUlid: req.body.ulid,
+          lastApplicationUlid: req.body.ulid
+        }
+      })
+      let p2 = lowcodeDb.collection('apps_dev').insertOne({
+        key: req.body.key,
+        name: req.body.name,
+        ulid: req.body.ulid,
+        theme: req.body.theme,
+        version: 0,
+        owner: user.ulid,
+        collaborator: req.body.collaborator,
+        firstPageUlid: '',
+        lastPageUlid: '',
+        prevUlid: '',
+        nextUlid: '',
+      })
+      return Promise.all([p1, p2]).then(([r1, r2]) => {
+        return [r1, r2]
+      }).catch((e) => {
+        clog('234234', e)
+        return Promise.reject(200000)
+      })
+    }
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
       data: {}
     })
-  }
+  }).catch(code => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
