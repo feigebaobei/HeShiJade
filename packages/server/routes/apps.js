@@ -22,38 +22,35 @@ router.route('/')
 })
 // 取得应用列表
 .get(cors.corsWithOptions, auth, (req, res) => {
-  if (true) {
-    // usersDb.collection('users').findOne({acco/unt: req.})
-    let curUser = {
-      account: '123@qq.com',
-      password: '123456',
-      // passwordHash: md5('123456'),
-      firstApplicationUlid: '',
+  // 是否登录
+  // 是否有权限（暂不做）
+  // 取数据
+  new Promise((s, j) => {
+    if (req.session.isAuth) {
+      s(true)
+    } else {
+      j(100130)
     }
-    // let appList = 
-    lowcodeDb.collection('apps_dev').find({
-      owner: curUser.account
-    }).toArray().then(appList => {
-      // clog('applist', appList)
+  }).then(() => {
+    return lowcodeDb.collection('apps_dev').find({
+      owner: req.session.user.ulid
+    }).toArray().then((appList) => {
       return res.status(200).json({
         code: 0,
         message: '',
-        data: appList,
+        data: appList
       })
-    }).catch(error => {
-      return res.status(200).json({
-        code: 2002002,
-        message: '数据库出错',
-        data: error
-      })
+    }).catch(() => {
+      return Promise.reject(200010)
     })
-  } else {
-    return res.status(403).json({
-      code: 300000,
-      message: '无权限',
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
       data: {}
     })
-  }
+  })
+  
 })
 // 创建应用
 .post(cors.corsWithOptions, (req, res) => {
@@ -78,14 +75,12 @@ router.route('/')
       return Promise.reject(100130)
     }
   }).then(() => {
-    clog('req', req.session.user)
     return lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
       return user
     }).catch(() => {
       return Promise.reject(200010)
     })
   }).then((user) => {
-    clog(user)
     // 是否有应用
     if (user.firstApplicationUlid) {
       let p1 = lowcodeDb.collection('users').updateOne({
@@ -123,7 +118,6 @@ router.route('/')
       return Promise.all([p1, p2]).then(([r1, r2]) => {
         return [r1, r2]
       }).catch((e) => {
-        clog('sdfsdf', e)
         return Promise.reject(200000)
       })
     } else {
@@ -153,7 +147,6 @@ router.route('/')
       return Promise.all([p1, p2]).then(([r1, r2]) => {
         return [r1, r2]
       }).catch((e) => {
-        clog('234234', e)
         return Promise.reject(200000)
       })
     }
