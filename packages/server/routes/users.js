@@ -159,8 +159,8 @@ router.route('/login')
           profile: obj.profile,
           accessToken: obj.accessToken,
           refreshToken: obj.refreshToken,
-          firstApplicationUlid: '',
-          lastApplicationUlid: '',
+          firstApplicationUlid: user.firstApplicationUlid,
+          lastApplicationUlid: user.lastApplicationUlid,
         }
         req.session.user = result
         req.session.isAuth = true
