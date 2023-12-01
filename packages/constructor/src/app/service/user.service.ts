@@ -102,7 +102,7 @@ export class UserService {
   }
   // 注册sso
   sign(data: {account: S, password: S}) {
-    return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${ssoUrl()}/users/sign`, {
+    return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${serviceUrl()}/users/sign`, {
       account: data.account,
       password: data.password,
     })).then((data: TokenObj) => {

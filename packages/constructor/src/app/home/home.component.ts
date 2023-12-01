@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
         this.gotoList()
       }).catch((error) => {
         clog('errror', error)
-        // this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }];
+        this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }];
       })
     } else {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '二次输入的password不一致' }];

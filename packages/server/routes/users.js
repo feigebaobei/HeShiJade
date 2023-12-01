@@ -58,16 +58,6 @@ router.route('/sign')
     } else {
       j(100100)
     }
-  // }).then(() => {
-  //   return lowcodeDb.collection('users').findOne((user) => {
-  //     if (user) {
-  //       return Promise.reject(100120)
-  //     } else {
-  //       return true
-  //     }
-  //   }).catch(() => {
-  //     return Promise.reject(200010)
-  //   })
   }).then(() => {
     return instance({
       url: '/users/sign',
