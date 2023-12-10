@@ -2,9 +2,10 @@ var express = require('express');
 var cors = require('./cors')
 var router = express.Router();
 let bodyParser = require('body-parser');
-let {appsDb, componentsDb} = require('../mongodb');
+let {appsDb, componentsDb, lowcodeDb} = require('../mongodb');
 const { rules } = require('../helper');
 let clog = console.log
+const { errorCode } = require('../helper/errorCode');
 
 router.use(bodyParser.json())
 
@@ -12,46 +13,133 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-// 不再使用此接口了
 .get(cors.corsWithOptions, (req, res) => {
-  if (req.session.isAuth) {
-    let {user} = req.session
-    clog('user', user)
-    res.status(200).json({
-        code: 0,
-        message: '',
-        data: [
-            {
-                name: 'button',
-                type: 'Button',
-                ulid: '12345asdfg'
-            },
-            {
-                name: 'model',
-                type: 'Model',
-                ulid: '12345asdfg2'
-            },
-            {
-                name: 'form',
-                type: 'Form',
-                ulid: '12345asdfge'
-            },
-            {
-                name: 'table',
-                type: 'Table',
-                ulid: '12345asdfgs'
-            },
-        ]
+  // res.status(200).json({
+  //     code: 0,
+  //     message: '',
+  //     data: {}
+  // })
+  // 校验参数
+  // 从相应表中取数据
+  new Promise((s, j) => {
+    if (rules.required(req.query.pageUlid) && rules.required(req.query.env)) {
+      s()
+    } else {
+      j()
+    }
+  }).then(() => {
+    let p
+    switch (req.query.env) {
+      case 'dev':
+        p = lowcodeDb.collection('components_dev').find({
+          pageUlid: req.query.pageUlid
+        }).toArray().catch(() => {
+          return Promise.reject(200010)
+        })
+        break
+      case 'test':
+        p = lowcodeDb.collection('components_test').find({
+          pageUlid: req.query.pageUlid
+        }).toArray().catch(() => {
+          return Promise.reject(200010)
+        })
+        break
+      case 'pre':
+        p = lowcodeDb.collection('components_pre').find({
+          pageUlid: req.query.pageUlid
+        }).toArray().catch(() => {
+          return Promise.reject(200010)
+        })
+        break
+      case 'prod':
+        p = lowcodeDb.collection('components_prod').find({
+          pageUlid: req.query.pageUlid
+        }).toArray().catch(() => {
+          return Promise.reject(200010)
+        })
+        break
+      default:
+        p = Promise.reject(100140)
+        break
+    }
+  }).then((componentList) => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: componentList || []
     })
-  } else {
-    res.status(401).json({
-      code: 300000,
-      message: '用户未登录',
+  }).catch(code => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
       data: {}
     })
-  }
+  })
 })
 .post(cors.corsWithOptions, (req, res) => {
+  // 校验参数
+  // 存到dev表中
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) && 
+    rules.required(req.body.type) && 
+    rules.required(req.body.props) && 
+    rules.required(req.body.behavior) && 
+    rules.required(req.body.item) && 
+    // rules.required(req.body.slot) && // 暂时不校验
+    rules.required(req.body.appUlid) && 
+    rules.required(req.body.pageUlid)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    let arr = [
+      {
+        insertOne: {
+          document: {
+            ulid: req.body.ulid,
+            type: req.body.type,
+            prevUlid: req.body.prevUlid,
+            nextUlid: '',
+            props: req.body.props,
+            behavior: req.body.behavior,
+            item: req.body.item,
+            slot: req.body.slot,
+            appUlid: req.body.appUlid,
+            pageUlid: req.body.pageUlid,
+          }
+        }
+      }
+    ]
+    if (req.body.prevUlid) {
+      arr.unshift({
+        updateOne: {
+          filter: {ulid: req.body.prevUlid},
+          update: {
+            $set: {nextUlid: req.body.ulid}
+          }
+        }
+      })
+    }
+    return lowcodeDb.collection('components_dev').bulkWrite(arr).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch(code => {
+    return res.code(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+  
+  
     if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.isArray(req.body.members)) {
         appsDb.collection('apps').insertOne({
             key: req.body.key,
@@ -117,14 +205,6 @@ router.route('/listByPage')
       data: {},
     })
   }
-  // if (req.session.isAuth) {
-  // } else {
-  //   res.status(401).json({
-  //     code: 300000,
-  //     message: '用户未登录',
-  //     data: {}
-  //   })
-  // }
 })
 .post(cors.corsWithOptions, (req, res) => {
   // res.send('post')

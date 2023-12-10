@@ -114,8 +114,8 @@ export class SetupComponent implements OnInit {
     let obj = {
       ulid: ulid(),
       type: e.dragData.item.type,
-      prev: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
-      next: '',
+      prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
+      nextUlid: '',
       props: (CDM[e.dragData.item.type].props),
       behavior: (CDM[e.dragData.item.type].behavior),
       item: (CDM[e.dragData.item.type].item),

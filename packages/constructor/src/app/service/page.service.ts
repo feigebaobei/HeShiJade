@@ -142,6 +142,7 @@ export class PageService {
     }
     return p
   }
+  // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
   add(data: AddData) {
     let app = this.appService.getCurApp()
     if (app) {
@@ -156,7 +157,6 @@ export class PageService {
         withCredentials: true,
       })).then(() => {
         let pageDc = this._map.get(appUlid)
-        clog(pageDc)
         pageDc?.append({
           key: data.key,
           name: data.name,
