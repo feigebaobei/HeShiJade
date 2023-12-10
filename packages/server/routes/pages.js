@@ -30,7 +30,7 @@ router.route('/')
       case 'dev':
         p = lowcodeDb.collection('pages_dev').find({
           appUlid: req.query.appUlid
-        })
+        }).toArray()
         .catch(() => {
           return Promise.reject(200010)
         })
@@ -38,21 +38,21 @@ router.route('/')
       case 'test':
         p = lowcodeDb.collection('pages_test').find({
           appUlid: req.query.appUlid
-        }).catch(() => {
+        }).toArray().catch(() => {
           return Promise.reject(200010)
         })
         break
       case 'pre':
         p = lowcodeDb.collection('pages_pre').find({
           appUlid: req.query.appUlid
-        }).catch(() => {
+        }).toArray().catch(() => {
           return Promise.reject(200010)
         })
         break
       case 'prod':
         p = lowcodeDb.collection('pages_prod').find({
           appUlid: req.query.appUlid
-        }).catch(() => {
+        }).toArray().catch(() => {
           return Promise.reject(200010)
         })
         break
@@ -81,8 +81,6 @@ router.route('/')
   // 取出对应应用判断是否有权限。owner collaborator
   // 在dev环境创建页面 + 修改指定应用的lastPageUlid
   // 创建新页面+更新前页面+更新当前应用
-  // 
-  // 
   new Promise((s, j) => {
     if (rules.required(req.body.key) &&
     rules.required(req.body.name) &&
@@ -169,116 +167,6 @@ router.route('/')
       data: {}
     })
   })
-
-
-    // if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.required(req.body.appUlid)) {
-    //   // clog('req.body', req.body)
-    //   // 取出指定应用的数据app
-    //   // 使用app.lastPageUlid创建page
-    //   // 更新app.firstPageUlid的数据
-    //   // 检查app是否存在
-    //   // 检查用户是否有权限
-    //   // 创建页面
-    //   // 修改前一个page的nextUlid
-    //   // 修改app中的firstPageUlid/lastPageUlid
-    //   let curApp = null
-    //     appsDb.collection('apps').findOne({ulid: req.body.appUlid}).then(app => {
-    //       // clog('app', app, req.session)
-    //       if (app) {
-    //         curApp = app
-    //         return
-    //         // if (
-    //         //   true
-    //         //   // app.owner === req.session.user.account 
-    //         //   // || app.members.includes(req.session.user.account)
-    //         //   ) {
-    //         //   curApp = app
-    //         //   return
-    //         // } else {
-    //         //   return Promise.reject({
-    //         //     code: 400010,
-    //         //     message: '您无权限',
-    //         //     know: true
-    //         //   })
-    //         // }
-    //       } else {
-    //         return Promise.reject({
-    //           code: 400000, message: '指定应用不存在', 
-    //           know: true // 是否已知
-    //         })
-    //       }
-    //     }).then(() => {
-    //       // clog('create page', curApp)
-    //       return pagesDb.collection('pages').insertOne({
-    //         key: req.body.key,
-    //         name: req.body.name,
-    //         ulid: req.body.ulid,
-    //         prevUlid: curApp.lastPageUlid,
-    //         nextUlid: '',
-    //         childUlid: '',
-    //         firstComponentUlid: '',
-    //         lastComponentUlid: '',
-    //         appUlid: req.body.appUlid,
-    //       })
-    //     }).then(() => {
-    //       // clog(123, curApp.lastPageUlid)
-    //       if (curApp.lastPageUlid) {
-    //         return pagesDb.collection('pages').updateOne({
-    //           ulid: curApp.lastPageUlid
-    //         }, {
-    //           $set: {nextUlid: req.body.ulid}
-    //         })
-    //       } else {
-    //         return
-    //       }
-    //     }).then(() => {
-    //       // clog('asd')
-    //       if (!curApp.firstPageUlid && !curApp.lastPageUlid) {
-    //         return appsDb.collection('apps').updateOne({
-    //           ulid: curApp.ulid
-    //         }, {
-    //           $set: {
-    //             firstPageUlid: req.body.ulid,
-    //             lastPageUlid: req.body.ulid,
-    //           }
-    //         })
-    //       } else {
-    //         return appsDb.collection('apps').updateOne({
-    //           ulid: curApp.ulid,
-    //         }, {
-    //           $set: {lastPageUlid: req.body.ulid}
-    //         })
-    //       }
-    //     })
-    //     .then(() => {
-    //       // clog('created page')
-    //         return res.status(200).json({
-    //           code: 0,
-    //           message: "ok",
-    //           data: {},
-    //         })
-    //     }).catch((obj) => {
-    //       if (obj.know) {
-    //         res.status(200).json({
-    //           code: obj.code,
-    //           message: obj.message,
-    //           data: {},
-    //         })
-    //       } else {
-    //         res.status(200).json({
-    //           code: 200200,
-    //           message: "数据库出错",
-    //           data: obj,
-    //         })
-    //       }
-    //     })
-    // } else {
-    //     res.status(200).json({
-    //       code: 100100,
-    //       message: "请求参数错误",
-    //       data: {},
-    //     })
-    // }
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')

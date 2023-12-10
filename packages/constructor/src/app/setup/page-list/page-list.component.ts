@@ -142,6 +142,7 @@ export class PageListComponent implements OnInit {
   }
   reReqPageButtonClickH() {
     // this.pageService.reqPageList()
-    this.init()
+    // this.init()
+    this.pageService.recast()
   }
 }
