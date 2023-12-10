@@ -87,7 +87,6 @@ export class ComponentService {
               }
               nextComponentUlid = comp?.nextUlid
             }
-            // clog('init', this._map)
             let arr = this._map.get(curPage.ulid)!.toArray()
             this.componentListByCurPage$.next(arr)
           }

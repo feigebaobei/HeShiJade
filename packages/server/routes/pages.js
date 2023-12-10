@@ -96,16 +96,12 @@ router.route('/')
       return Promise.reject(300000)
     })
   }).then((curApp) => {
-    clog('curApp345', curApp)
-    clog('sdfasd', req.session.user)
     if ([curApp.owner].concat(curApp.collaborator).some(ulid => ulid === req.session.user.ulid)) {
-      clog('sdfasd', req.session.user)
       return curApp
     } else {
       return Promise.reject(400000)
     }
   }).then((curApp) => {
-    clog('curApp', curApp)
     let arr = [
       {
         insertOne: {

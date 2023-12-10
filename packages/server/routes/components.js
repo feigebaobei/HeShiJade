@@ -14,16 +14,11 @@ router.route('/')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  // res.status(200).json({
-  //     code: 0,
-  //     message: '',
-  //     data: {}
-  // })
   // 校验参数
   // 从相应表中取数据
   new Promise((s, j) => {
     if (rules.required(req.query.pageUlid) && rules.required(req.query.env)) {
-      s()
+      s(true)
     } else {
       j()
     }
@@ -62,6 +57,7 @@ router.route('/')
         p = Promise.reject(100140)
         break
     }
+    return p
   }).then((componentList) => {
     return res.status(200).json({
       code: 0,
@@ -78,7 +74,8 @@ router.route('/')
 })
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
-  // 存到dev表中
+  // 创建+更新组件
+  // 更新页面
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && 
     rules.required(req.body.type) && 
@@ -94,6 +91,10 @@ router.route('/')
       j(100100)
     }
   }).then(() => {
+    return lowcodeDb.collection('pages_dev').findOne({ulid: req.body.pageUlid}).catch(() => {
+      return Promise.reject(300000)
+    })
+  }).then((curPage) => {
     let arr = [
       {
         insertOne: {
@@ -122,8 +123,27 @@ router.route('/')
         }
       })
     }
-    return lowcodeDb.collection('components_dev').bulkWrite(arr).catch(() => {
-      return Promise.reject(200010)
+    let updateObj = {}
+    if (curPage.lastComponentUlid) {
+      updateObj = {
+        $set: {
+          lastComponentUlid: req.body.ulid
+        }
+      }
+    } else {
+      updateObj = {
+        $set: {
+          firstComponentUlid: req.body.ulid,
+          lastComponentUlid: req.body.ulid,
+        }
+      }
+    }
+    let p1 = lowcodeDb.collection('components_dev').bulkWrite(arr)
+    let p2 = lowcodeDb.collection('pages_dev').updateOne({
+      ulid: req.body.pageUlid
+    }, updateObj)
+    return Promise.all([p1, p2]).catch(() => {
+      return Promise.reject(200000)
     })
   }).then(() => {
     return res.status(200).json({
