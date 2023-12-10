@@ -81,7 +81,8 @@ export class PageService {
     return new Promise<Page[]>((s, j) => {
       this.http.get<ResponseData>('http://localhost:5000/pages', {
         params: {
-          appUlid
+          appUlid,
+          env: 'dev'
         },
         withCredentials: true
       }).subscribe(res => {
@@ -126,6 +127,8 @@ export class PageService {
         name: data.name,
         ulid: u,
         appUlid, // : app.ulid,
+      }, {
+        withCredentials: true,
       })).then(() => {
         let pageDc = this._map.get(appUlid)
         pageDc?.append({

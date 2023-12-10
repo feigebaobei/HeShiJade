@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// let { MongoClient } = require('mongodb')
 let session = require('express-session')
+// let morganBody = require('morgan-body')
 // let MongoDBStore = require('connect-mongodb-session')(session)
 let clog = console.log
 
@@ -25,6 +25,12 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// morganBody(app, {
+//   noColors: true,
+//   logRequestId:  true,
+//   stream: fs.createWriteStream(path.join(__dirname, 'logs', 'access.log'), {flags: 'a'})
+// })
 
 app.use(logger('dev'));
 app.use(express.json());

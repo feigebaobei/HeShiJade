@@ -106,7 +106,7 @@ router.route('/')
               theme: req.body.theme,
               version: req.body.version || 0, // todo 只增加
               owner: user.ulid,
-              collaborator: req.body.collaborator,
+              collaborator: req.body.collaborator, // ulid[]
               firstPageUlid: '',
               lastPageUlid: '',
               prevUlid: req.body.prevUlid,

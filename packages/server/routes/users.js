@@ -20,11 +20,9 @@ router.route('/')
 // 得到指定用户的信息。
 // 默认是当前用户。
 .get(cors.corsWithOptions, (req, res) => {
-  // clog('req', req.session)
   res.status(200).json({
     code: 0,
     message: '',
-    // data: req.session
     data: {}
   })
 })
@@ -77,12 +75,12 @@ router.route('/sign')
     })
   }).then((result) => {
     return lowcodeDb.collection('users').insertOne({
-      ulid: result.id,
+      ulid: result.ulid,
       firstApplicationUlid: '',
       lastApplicationUlid: '',
     }).then(() => {
       let obj = {
-        ulid: result.id,
+        ulid: result.ulid,
         profile: result.profile,
         accessToken: result.accessToken,
         refreshToken: result.refreshToken,
@@ -152,7 +150,7 @@ router.route('/login')
       return Promise.reject(100200)
     })
   }).then((obj) => {
-    return lowcodeDb.collection('users').findOne({ulid: obj.id}).then(user => {
+    return lowcodeDb.collection('users').findOne({ulid: obj.ulid}).then(user => {
       if (user) {
         let result = {
           ulid: user.ulid,
@@ -204,14 +202,14 @@ router.route('/logout')
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  let user = req.session.user // for test
-  clog('session', req.session)
+  // let user = req.session.user // for test
+  // clog('session', req.session)
   res.clearCookie()
   req.session.destroy();
   return res.status(200).json({
     code: 0,
     message: "ok",
-    data: user,
+    data: {},
   })
 })
 .put(cors.corsWithOptions, (req, res) => {
