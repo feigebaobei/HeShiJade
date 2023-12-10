@@ -138,34 +138,6 @@ router.route('/')
       data: {}
     })
   })
-  
-  
-    if (rules.required(req.body.key) && rules.required(req.body.name) && rules.required(req.body.ulid) && rules.isArray(req.body.members)) {
-        appsDb.collection('apps').insertOne({
-            key: req.body.key,
-            name: req.body.name,
-            ulid: req.body.ulid,
-            members: req.body.members,
-        }).then((apps) => {
-            res.status(200).json({
-              code: 0,
-              message: "ok",
-              data: {},
-            })
-        }).catch((error) => {
-          res.status(200).json({
-            code: 200200,
-            message: "数据库出错",
-            data: error,
-          })
-        })
-    } else {
-        res.status(200).json({
-          code: 100100,
-          message: "请求参数错误",
-          data: {},
-        })
-    }
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
