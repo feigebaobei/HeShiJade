@@ -9,6 +9,7 @@ import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
 import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
+import { PublishDialogComponent } from './publish-dialog/publish-dialog.component';
 
 interface FormData {
   key: S
@@ -184,18 +185,18 @@ export class ListComponent implements OnInit {
       dialogtype: 'standard',
       showAnimate: true,
       buttons: [
-        {
-          cssClass: 'primary',
-          text: 'Ok',
-          disabled: false,
-          handler: ($event: Event) => {
-            results.modalInstance.hide()
-          }
-        },
+        // {
+        //   cssClass: 'primary',
+        //   text: 'Ok',
+        //   disabled: false,
+        //   handler: ($event: Event) => {
+        //     results.modalInstance.hide()
+        //   }
+        // },
         {
           id: 'app-config-dialog-btn-canncel',
           cssClass: 'common',
-          text: 'Cancel',
+          text: '关闭',
           handler: ($event: Event) => {
             results.modalInstance.hide()
           }
@@ -203,9 +204,38 @@ export class ListComponent implements OnInit {
       ]
     })
   }
-  gotoPublishBtClickH() {
-    clog('gotoPublishBtClickH')
-    // let results = this.dialogService.open
+  gotoPublishBtClickH($event: Event, index: N) {
+    // clog('gotoPublishBtClickH')
+    $event.stopPropagation()
+    let results = this.dialogService.open({
+      id: 'PublishDialogComponent',
+      width: '800px',
+      maxHeight: '600px',
+      title: '发布',
+      content: PublishDialogComponent,
+      backdropCloseable: true,
+      onClose: () => clog('close'),
+      data: {},
+      dialogtype: 'standard',
+      showAnimate: true,
+      buttons: [
+        // {
+        //   cssClass: 'primary',
+        //   text: 'Ok',
+        //   disabled: false,
+        //   handler: ($event: Event) => {
+        //     results.modalInstance.hide()
+        //   }
+        // },
+        // {
+        //   cssClass: 'common',
+        //   text: 'Cancel',
+        //   handler: ($event: Event) => {
+        //     results.modalInstance.hide()
+        //   }
+        // },
+      ]
+    })
   }
   homeBtClickH() {
     this.router.navigate(['/home'])

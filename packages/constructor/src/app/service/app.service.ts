@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 // 配置项
 import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
-import type { B, Email, S, ULID } from 'src/types/base';
+import type { B, Email, S, ULID, N } from 'src/types/base';
 import { ulid } from 'ulid';
 import { UserService } from './user.service';
 import { DoublyChain } from 'data-footstone';
@@ -21,6 +21,12 @@ interface ReqCreateData {
   collaborator: S[],
   prevUlid: ULID,
 }
+interface Versions {
+  dev: N,
+  test: N,
+  pre: N,
+  prod: N,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +38,7 @@ export class AppService {
   appSubject$: Subject<AppOrUn>
   doublyChain: DoublyChain<App>
   // curApp: Subject<App>
+  versions: Versions
   constructor(
     private http: HttpClient,
     private userService: UserService,
@@ -45,6 +52,17 @@ export class AppService {
     // this.userService.user$.subscribe(u => {
     //   this.reqAppList()
     // })
+    // 日后可能会拆出去。
+    // 当前app的版本
+    this.versions = {
+      // get dev() {
+      //   this.app
+      // },
+      dev: 0,
+      test: 0,
+      pre: 0,
+      prod: 0,
+    }
   }
   private _find(appUlid?: S) {
     return this._appList.find(item => item.ulid === appUlid)
@@ -148,4 +166,21 @@ export class AppService {
       return this._appList
     })
   }
+  reqVersions(appUlid: ULID, env?: S) {
+    this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+      params: {
+        appUlid,
+        env: env || '',
+      },
+      withCredentials: true
+    }).subscribe(res => {
+      if (res.code === 0) {
+        this.versions.dev = res.data.dev
+        this.versions.test = res.data.test
+        this.versions.pre = res.data.pre
+        this.versions.prod = res.data.prod
+      }
+    })
+  }
+  
 }

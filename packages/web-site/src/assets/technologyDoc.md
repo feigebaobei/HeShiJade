@@ -56,6 +56,19 @@
 |list|||
 |setup|url通式 `http://$home:$port/setup?app=$appUlid`||
 
+#### version
+
+4个环境：dev/test/pre/prod依次发布，不可跳跃。
+版本号在dev环境设置。
+
+```
+/version
+get
+  取4个环境的version
+  取指定环境的version
+put
+  设置dev环境的version
+```
 
 
 

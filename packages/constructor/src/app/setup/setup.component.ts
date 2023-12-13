@@ -41,11 +41,7 @@ export class SetupComponent implements OnInit {
     private componentService: ComponentService,
     private route: ActivatedRoute,
     private router: Router,
-    // ActivatedRoute
   ) {
-    // this.pageKey = ''
-    // this.appKey = ''
-    // this.curApp
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
     this.componentCategoryList = []
@@ -63,9 +59,6 @@ export class SetupComponent implements OnInit {
     this.componentService.componentListByCurPage$.subscribe(compArr => {
       this.componentByPage = compArr
     })
-    // this.pageService.pageList$.subscribe(p => {
-    //   this.pageList = p
-    // })
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -101,14 +94,11 @@ export class SetupComponent implements OnInit {
       return Promise.resolve(appList.some(item => item.ulid === appUlid))
     } else {
       return this.appService.reqAppList().then(appList => {
-        // clog('appList', appList)
-        // this.appService.setCurApp(String(appUlid))
         return appList.some(item => item.ulid === appUlid)
       })
     }
   }
   onDrop(e: DropEvent, targetArray: A) {
-    // clog('stage onDrop', e, targetArray)
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     let obj = {
@@ -123,11 +113,7 @@ export class SetupComponent implements OnInit {
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
     }
-    clog('obj', obj)
     this.componentService.postCompListByPage(obj)
-    // .then((res: Comp[]) => {
-    //   this.componentByPage = res
-    // })
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {
