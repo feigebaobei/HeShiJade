@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-// 配置项
-import type { ResponseData } from 'src/types';
-import type { App } from 'src/types/app';
-import type { B, Email, S, ULID, N } from 'src/types/base';
 import { ulid } from 'ulid';
 import { UserService } from './user.service';
 import { DoublyChain } from 'data-footstone';
 import { serviceUrl } from 'src/helper/config';
+import type { ResponseData } from 'src/types';
+import type { App } from 'src/types/app';
+import type { 
+  // B,
+   Email, S, ULID, N } from 'src/types/base';
 
 let clog = console.log
 
@@ -21,12 +22,12 @@ interface ReqCreateData {
   collaborator: S[],
   prevUlid: ULID,
 }
-interface Versions {
-  dev: N,
-  test: N,
-  pre: N,
-  prod: N,
-}
+// interface Versions {
+//   dev: N,
+//   test: N,
+//   pre: N,
+//   prod: N,
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class AppService {
   appSubject$: Subject<AppOrUn>
   doublyChain: DoublyChain<App>
   // curApp: Subject<App>
-  versions: Versions
+  // versions: Versions
   constructor(
     private http: HttpClient,
     private userService: UserService,
@@ -54,15 +55,12 @@ export class AppService {
     // })
     // 日后可能会拆出去。
     // 当前app的版本
-    this.versions = {
-      // get dev() {
-      //   this.app
-      // },
-      dev: 0,
-      test: 0,
-      pre: 0,
-      prod: 0,
-    }
+    // this.versions = {
+    //   dev: 0,
+    //   test: 0,
+    //   pre: 0,
+    //   prod: 0,
+    // }
   }
   private _find(appUlid?: S) {
     return this._appList.find(item => item.ulid === appUlid)
@@ -166,21 +164,22 @@ export class AppService {
       return this._appList
     })
   }
-  reqVersions(appUlid: ULID, env?: S) {
-    this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
-      params: {
-        appUlid,
-        env: env || '',
-      },
-      withCredentials: true
-    }).subscribe(res => {
-      if (res.code === 0) {
-        this.versions.dev = res.data.dev
-        this.versions.test = res.data.test
-        this.versions.pre = res.data.pre
-        this.versions.prod = res.data.prod
-      }
-    })
-  }
+  // reqVersions(appUlid: ULID, env?: S) {
+  //   this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+  //     params: {
+  //       appUlid,
+  //       env: env || '',
+  //     },
+  //     withCredentials: true
+  //   }).subscribe(res => {
+  //     if (res.code === 0) {
+  //       this.versions.dev = res.data.dev
+  //       this.versions.test = res.data.test
+  //       this.versions.pre = res.data.pre
+  //       this.versions.prod = res.data.prod
+  //     }
+  //   })
+  // }
+  // getVersions()
   
 }

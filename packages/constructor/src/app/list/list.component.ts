@@ -205,7 +205,7 @@ export class ListComponent implements OnInit {
     })
   }
   gotoPublishBtClickH($event: Event, index: N) {
-    // clog('gotoPublishBtClickH')
+    clog('gotoPublishBtClickH', index, this.appList[index], this.appList[index].ulid)
     $event.stopPropagation()
     let results = this.dialogService.open({
       id: 'PublishDialogComponent',
@@ -215,7 +215,10 @@ export class ListComponent implements OnInit {
       content: PublishDialogComponent,
       backdropCloseable: true,
       onClose: () => clog('close'),
-      data: {},
+      data: {
+        appUlid: this.appList[index].ulid,
+        // app: this.appList[index],
+      },
       dialogtype: 'standard',
       showAnimate: true,
       buttons: [
