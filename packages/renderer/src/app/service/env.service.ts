@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import type { S } from 'src/types/base';
+import { Subject } from 'rxjs';
+import type { S, ENV } from 'src/types/base';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnvService {
-  private cur: S
+  private _cur: ENV
+  cur$: Subject<ENV>
   constructor() {
-    this.cur = ''
+    this._cur = 'dev'
+    this.cur$ = new Subject()
   }
-  setCur(v: S) {
-    this.cur = v
-    // 有可能需要响应式的
+  setCur(v: ENV) {
+    this._cur = v
+    this.cur$.next(this._cur)
   }
   getCur() {
-    return this.cur
+    return this._cur
   }
 }

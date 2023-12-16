@@ -6,8 +6,8 @@ interface Component {
   // name: S
   // key: S
   type: S
-  next: ULID
-  prev: ULID
+  nextUlid: ULID
+  prevUlid: ULID
   props: {
     [k: S]: PropsValue
   }

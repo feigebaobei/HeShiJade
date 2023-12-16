@@ -24,6 +24,27 @@ let rules = {
     },
     isNumber: (n) => {
         return typeof n === 'number' && isFinite(n);
+    },
+    range: (cur, min, max, minFlag = true, maxFlag = true) => {
+        let bool
+        if (minFlag) {
+            bool = min <= cur
+        } else {
+            bool = min < cur
+        }
+        if (bool) {
+            if (maxFlag) {
+                bool = cur <= max
+            } else {
+                bool = cur < max
+            }
+        } else {
+            // null
+        }
+        return bool
+    },
+    enum: (cur, arr) => {
+        return arr.includes(cur)
     }
 }
 // let wrapCheck = (condition, res) => {

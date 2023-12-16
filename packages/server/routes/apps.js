@@ -177,19 +177,60 @@ router.route('/detail')
 })
 .get(cors.corsWithOptions, (req, res) => {
   // res.send('put')
-  appsDb.collection('apps').findOne({key: req.query.appKey}).then((app) => {
+  // 校验参数
+  // 取出数据
+  // 返回数据
+  new Promise((s, j) => {
+    if (rules.required(req.query.appKey) && rules.enum(req.query.env, ['dev', 'test', 'pre', 'prod'])) {
+      s(true)
+    } else {
+      j(100144)
+    }
+  }).then(() => {
+    let tableName = ''
+    switch (req.query.env) {
+      case 'dev':
+        tableName = 'apps_dev'
+        break;
+      case 'test':
+        tableName = 'apps_test'
+        break
+      case 'pre':
+        tableName = 'apps_pre'
+        break;
+      case 'prod':
+        tableName = 'apps_prod'
+        break
+    }
+    return lowcodeDb.collection(tableName).findOne({key: req.query.appKey}).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((p) => {
     return res.status(200).json({
       code: 0,
       message: '',
-      data: app
+      data: p
     })
-  }).catch(() => {
+  }).catch((code) => {
     return res.status(200).json({
-      code: 200200,
-      message: "数据库出错",
-      data: obj,
+      code,
+      message: errorCode[code],
+      data: {}
     })
   })
+  // appsDb.collection('apps').findOne({key: req.query.appKey}).then((app) => {
+  //   return res.status(200).json({
+  //     code: 0,
+  //     message: '',
+  //     data: app
+  //   })
+  // }).catch(() => {
+  //   return res.status(200).json({
+  //     code: 200200,
+  //     message: "数据库出错",
+  //     data: obj,
+  //   })
+  // })
 })
 .post(cors.corsWithOptions, (req, res) => {
   res.send('post')
