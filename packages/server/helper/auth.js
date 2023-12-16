@@ -5,7 +5,7 @@ let auth = (req, res, next) => {
     if (req.session.isAuth) {
         next()
     } else {
-        clog('ssss', req.session)
+        clog('session', req.session)
         res.status(200).json({
             code: 1,
             message: '鉴权不通过',

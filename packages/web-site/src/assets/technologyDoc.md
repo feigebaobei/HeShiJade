@@ -143,6 +143,14 @@ put
 
 问问后端同学实现权限的事。
 
+1. 在url设置appKey/env/pageKey
+2. 使用appKey+env请求应用数据，再请求页面数据。
+3. 渲染页面列表
+4. 使用pageUlid+env请求组件数据。
+5. 渲染组件列表
+6. 处理组件之间的联动
+7. 在生命周期方法中执行钩子
+
 #### routes
 在一个应用中，动态生成多个路由。
 url通式 `http://$home:$port/$appKey/$env/$page?$qs`
@@ -342,8 +350,7 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
 
-去发布
-整理接口文档
+浏览4个环境的页面
 断网缓存
 lc不做出码。出码由脚手架做。
 lc不做入码。

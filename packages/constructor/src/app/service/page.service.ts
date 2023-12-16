@@ -37,8 +37,6 @@ export class PageService {
     this._find = (pageUlid: ULID, appUlid?: ULID) => {
       appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
       return this._map.get(appUlid)?.toArray().find(item => item.ulid === pageUlid)
-      // return this._curPage = this._pageList.find(item => item.ulid === pageUlid)
-
     }
     this._chain = new DoublyChain<Page>() // 有_map，应该删除它。
     this.pageList$ = new Subject<Page[]>()
@@ -48,8 +46,6 @@ export class PageService {
       let appUlid = curApp?.ulid
       if (appUlid) {
         this._opPageList(appUlid).then((arr) => {
-          // let arr = this._map.get(String(appUlid))?.toArray() || []
-          clog('arr', arr)
           this.pageList$.next(arr)
         })
       }
@@ -97,7 +93,7 @@ export class PageService {
   }
   // 获取pageList
   getPageList(appUlid?: ULID): Page[] {
-    appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
+    appUlid = appUlid || (this.appService.getCurApp()?.ulid || '')
     return this._map.get(appUlid)?.toArray() || []
   }
   // 对外不暴露set pageList的方法
@@ -105,19 +101,10 @@ export class PageService {
     return this._curPage
   }
   setCurPage(pageUlid: ULID) {
-    // this.setCurPage()
-    // this._curPage = 
-    // clog('setCurApp', pageUlid)
     this._curPage = this._find(pageUlid)
     this.pageSubject$.next(this._curPage)
   }
   // 重铸
-  // recast(): Promise<Page[]> {
-    // return this.reqPageList().then((pageList) => {
-    //   this.setCurPage(this.getCurPage()?.ulid)
-    //   return pageList
-    // })
-  // }
   recast() {
     let app = this.appService.getCurApp()
     let appUlid = app?.ulid || ''

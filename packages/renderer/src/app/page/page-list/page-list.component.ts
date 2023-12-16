@@ -23,6 +23,6 @@ export class PageListComponent {
     })
   }
   pageItemClickH(page: Page) {
-    this.pageService.cur$.next(page)
+    this.pageService.setCur(page.ulid)
   }
 }
