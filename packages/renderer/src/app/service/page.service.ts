@@ -15,6 +15,8 @@ import { DoublyChain } from 'data-footstone';
 // 向外输出页面列表
 // 输出当前页面
 
+let clog = console.log
+
 @Injectable({
   providedIn: 'root'
 })

@@ -32,15 +32,16 @@ export class ComponentService {
     this.componentList$ = new Subject()
     this.pageService.cur$.subscribe(curPage => {
       if (curPage) {
-        this.reqList(curPage.ulid, this.envService.getCur())
+        let arr: Component[] = this._map.get(curPage.ulid)?.toArray() || []
+        if (!(arr?.length)) { // 现在有map中不存在对应的组件链表
+          this.reqList(curPage.ulid, this.envService.getCur())
+        } else {
+          this.setList(arr)
+        }
       }
     })
-    // this.pageService.cur$.subscribe((curPage: Page | undefined) => {
-    //   this.updateComponentList(curPage)
-    // })
   }
   reqList(pageUlid: ULID, env: ENV) {
-    // return 
     this._reqComponentByPage(pageUlid, env).then(componentList => {
       let page = this.pageService.getCur()
       let dc = arrToChain(componentList, 'ulid', 'nextUlid', page?.firstComponentUlid)
@@ -155,40 +156,6 @@ export class ComponentService {
     // ])
     // })
   }
-  // private setComponentList(componentList: Component[]) {
-  //   this.componentList = componentList
-  //   this.componentList$.next(this.componentList)
-  // }
-  // 根据页面ulid取得组件列表
-  // getComponentByPage(pageUlid: ULID): Component[] {
-  //   this.updateComponentList(this.pageService.getPage(pageUlid))
-  //   return this._map.get(pageUlid)?.toArray() || []
-  // }
-  // 更新指定页面的组件列表
-  // updateComponentList(curPage?: Page) {
-  //   if (curPage) {
-  //     let dc = this._map.get(curPage.ulid)
-  //     if (dc) {
-  //       this.setComponentList(dc.toArray())
-  //     } else {
-  //       this._reqComponentByPage(curPage.ulid).then((componentList: Component[]) => {
-  //         let next = curPage.firstComponentUlid
-  //         let doublyChain = new DoublyChain<Component>()
-  //         while (next) {
-  //           let comp = componentList.find(item => item.ulid === next)
-  //           if (comp) {
-  //             doublyChain.append(comp)
-  //           }
-  //           next = comp?.next
-  //         }
-  //         this._map.set(curPage.ulid, doublyChain)
-  //         this.setComponentList(doublyChain.toArray())
-  //       })
-  //     }
-  //   } else {
-  //     this.setComponentList([])
-  //   }
-  // }
   getList() {
     return this._componentList
   }
