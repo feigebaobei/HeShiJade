@@ -62,9 +62,10 @@ export class ComponentService {
   // 请求指定页面的组件
   reqCompListByPage() {
     return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components/listByPage', { // 日后改为接口重载
+      this.http.get<ResponseData>('http://localhost:5000/components', {
         params: {
           pageUlid: String(this.pageService.getCurPage()?.ulid),
+          env: 'dev',
         },
         withCredentials: true
       }).subscribe(res => {
@@ -84,12 +85,9 @@ export class ComponentService {
                   this._map.set(String(curPage?.ulid), t)
                 }
               }
-              nextComponentUlid = comp?.next
+              nextComponentUlid = comp?.nextUlid
             }
-            clog('init', this._map)
-            // this.componentListByCurPage$.next(res.data)
             let arr = this._map.get(curPage.ulid)!.toArray()
-            // .toArray()
             this.componentListByCurPage$.next(arr)
           }
           s(res.data)
@@ -101,9 +99,10 @@ export class ComponentService {
   }
   _resComponentListByPage(pageUlid: ULID) {
     return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components/listByPage', {
+      this.http.get<ResponseData>('http://localhost:5000/components', {
         params: {
-          pageUlid
+          pageUlid,
+          env: 'dev',
         },
         withCredentials: true
       }).subscribe(res => {
@@ -118,28 +117,22 @@ export class ComponentService {
   // 创建组件
   postCompListByPage(obj: Component) {
     return new Promise<Component[]>((s, j) => {
-      this.http.post<ResponseData>('http://localhost:5000/components/listByPage', {
+      this.http.post<ResponseData>('http://localhost:5000/components', {
         ...obj,
       }, {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          clog('_map', this._map)
+          // clog('_map', this._map)
           let has = this._map.has((obj['pageUlid']))
           if (has) {
             let d = this._map.get((obj['pageUlid']))
             d!.append(obj)
-            clog('添加组件后的组件链表', d)
-            // this._opCompList(res.data)
             let arr = this._map.get((obj['pageUlid']))!.toArray()
-            clog('添加组件后的组合列表', arr, this._map)
             this.componentListByCurPage$.next(arr)
             s(arr)
-            // s(this.getComponentByPage(this.pageService.getCurPage()?.ulid))
           } else {
             this._opCompList(res.data)
-            // this._map.set(obj['pageUlid']) = new DoublyChain().append(obj)
-            // j()
           }
         } else {
           j()
@@ -169,7 +162,7 @@ export class ComponentService {
           if (component) {
             doubleChain.append(component)
           }
-          nextComponentUlid = component?.next
+          nextComponentUlid = component?.nextUlid
         }
         this._map.set(pageUlid, doubleChain)
         return doubleChain.toArray()
@@ -195,7 +188,6 @@ export class ComponentService {
     return res
   }
   private _findCategory(categoryUlid: ULID) {
-    // return this._curCategory = 
     return this.categoryList.find(item => item.ulid === categoryUlid)
   }
   curComponent() {
@@ -224,11 +216,7 @@ export class ComponentService {
         }
         cur = cur.next
       }
-      // let arr = this.getComponentByPage(curPage.ulid)
-      // clog('new ', arr)
-      // this.componentListByCurPage$.next(arr)
       if (cur) {
-        // this.componentProps$.next(cur.value.props)
         this.compSubject$.next(cur.value)
         this.componentListByCurPage$.next(this._map.get(curPage.ulid)?.toArray() || [])
       }

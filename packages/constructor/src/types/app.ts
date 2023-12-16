@@ -4,7 +4,11 @@ interface App {
   key: S
   name: S
   ulid: ULID
-  members: S[]
+  theme: S
+  // members: S[]
+  version: N
+  owner: S
+  collaborator: S[]
   // child: S
   firstPageUlid: ULID
   prevUlid: ULID

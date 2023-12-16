@@ -4,9 +4,10 @@ var router = express.Router();
 let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
-let {usersDb} = require('../mongodb')
-let { rules } = require('../helper/index')
+let {lowcodeDb} = require('../mongodb')
+let { rules, instance } = require('../helper/index')
 let md5 = require('md5');
+const { errorCode } = require('../helper/errorCode');
 let clog = console.log
 
 
@@ -19,11 +20,9 @@ router.route('/')
 // 得到指定用户的信息。
 // 默认是当前用户。
 .get(cors.corsWithOptions, (req, res) => {
-  // clog('req', req.session)
   res.status(200).json({
     code: 0,
     message: '',
-    // data: req.session
     data: {}
   })
 })
@@ -47,54 +46,66 @@ router.route('/sign')
   res.sendStatus(200)
 })
 .post(cors.corsWithOptions, (req, res) => {
-  if (rules.email(req.body.account) && rules.required(req.body.password)) {
-    // 是否已经注册
-    usersDb.collection('users').findOne({
-      account: req.body.account
-    }).then((user) => {
-      if (user) {
-        return res.status(200).json({
-          code: 100100,
-          message: "该用户已经存在",
-          data: user,
-        })
-      } else {
-        // 创建新用户
-        let mdp = md5(req.body.password)
-        usersDb.collection('users').insertOne({
-          account: req.body.account,
-          password: mdp,
-          applications: [],
-        }).then(() => {
-          usersDb.collection('users').findOne({
-            account: req.body.account,
-            password: mdp,
-          }).then(user => {
-            req.session.user = user
-            req.session.isAuth = true
-            req.session.save()
-            return res.status(200).json({
-              code: 0,
-              message: "ok",
-              data: {},
-            })
-          })
-        }).catch((error) => {
-          return res.status(200).json({
-            code: 200000,
-            message: "保存数据时出错",
-            data: error,
-          })
-        })
+  // 校验参数
+  // 请求sso注册，会得到token
+  // 创建新用户
+  // 返回token*2 + 种cookie
+  new Promise((s, j) => {
+    if (rules.required(req.body.account) && rules.required(req.body.password)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return instance({
+      url: '/users/sign',
+      method: 'post',
+      data: {
+        account: req.body.account,
+        password: req.body.password,
       }
+    }).then(response => {
+      if (response.code === 0) {
+        return response.data
+      } else {
+        return Promise.reject(100200)
+      }
+    }).catch(() => {
+      return Promise.reject(100200)
     })
-  } else {
+  }).then((result) => {
+    return lowcodeDb.collection('users').insertOne({
+      ulid: result.ulid,
+      firstApplicationUlid: '',
+      lastApplicationUlid: '',
+    }).then(() => {
+      let obj = {
+        ulid: result.ulid,
+        profile: result.profile,
+        accessToken: result.accessToken,
+        refreshToken: result.refreshToken,
+        firstApplicationUlid: '',
+        lastApplicationUlid: '',
+      }
+      req.session.user = obj
+      req.session.isAuth = true
+      req.session.save()
+      return res.status(200).json({
+        code: 0,
+        message: '',
+        data: obj
+      })
+    }).catch(() => {
+      return Promise.reject(200000)
+    })
+  }).then(() => {
+  }).catch((code) => {
     return res.status(200).json({
-      code: 100100,
-      message: "请求参数错误",
-      data: {},
+      code,
+      message: errorCode[code],
+      data: {}
     })
-  }
+  })
 })
 
 // 登录
@@ -109,49 +120,67 @@ router.route('/login')
     data: {}
   })
 })
-.post(cors.corsWithOptions, async (req, res) => {
-  // clog('req', req.body)
-  if (rules.email(req.body.account) && rules.required(req.body.password)) {
-    let mdp = md5(req.body.password)
-    // clog('start', new Date().getTime())
-    usersDb.collection('users').findOne({
-      account: req.body.account,
-      password: mdp,
-    }).then((user) => {
-      req.session.user = user
-      req.session.isAuth = true
-      req.session.save()
+.post(cors.corsWithOptions, (req, res) => {
+  // check
+  // 请求sso验证
+  // 从lowcode库中取出user
+  // 返回userInfo+token+种cookie
+  new Promise((s, j) => {
+    if (rules.required(req.body.account) && rules.required(req.body.password)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return instance({
+      url: '/users/login',
+      method: 'post',
+      data: {
+        account: req.body.account,
+        password: req.body.password,
+      },
+    }).then((response) => {
+      clog('response', response)
+      if (response.code === 0) {
+        return response.data
+      } else {
+        return Promise.reject(100200)
+      }
+    }).catch(() => {
+      return Promise.reject(100200)
+    })
+  }).then((obj) => {
+    return lowcodeDb.collection('users').findOne({ulid: obj.ulid}).then(user => {
       if (user) {
+        let result = {
+          ulid: user.ulid,
+          profile: obj.profile,
+          accessToken: obj.accessToken,
+          refreshToken: obj.refreshToken,
+          firstApplicationUlid: user.firstApplicationUlid,
+          lastApplicationUlid: user.lastApplicationUlid,
+        }
+        req.session.user = result
+        req.session.isAuth = true
+        req.session.save()
         return res.status(200).json({
           code: 0,
-          message: "ok",
-          data: {
-            account: user.account,
-            applications: user.applications || [],
-          },
-          // data: {}
+          message: '',
+          data: result
         })
       } else {
-        return res.status(200).json({
-          code: 100000,
-          message: '用户不存在',
-          data: '',
-        })
+        return Promise.reject(100160)
       }
-    }).catch(error => {
-      return res.status(200).json({
-        code: 200200,
-        message: "数据库出错",
-        data: error,
-      })
+    }).catch(() => {
+      return Promise.reject(200010)
     })
-  } else {
-    return res.status(200).json({
-      code: 100100,
-      message: "请求参数错误",
-      data: {},
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
     })
-  }
+  })
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
@@ -173,14 +202,14 @@ router.route('/logout')
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  let user = req.session.user // for test
-  clog('session', req.session)
+  // let user = req.session.user // for test
+  // clog('session', req.session)
   res.clearCookie()
   req.session.destroy();
   return res.status(200).json({
     code: 0,
     message: "ok",
-    data: user,
+    data: {},
   })
 })
 .put(cors.corsWithOptions, (req, res) => {

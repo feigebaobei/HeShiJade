@@ -43,6 +43,7 @@ export class PageService {
     this._chain = new DoublyChain<Page>() // 有_map，应该删除它。
     this.pageList$ = new Subject<Page[]>()
     this._map = new Map()
+    // 当当前应用改变时请求页面列表
     this.appService.appSubject$.subscribe(curApp => {
       let appUlid = curApp?.ulid
       if (appUlid) {
@@ -81,7 +82,8 @@ export class PageService {
     return new Promise<Page[]>((s, j) => {
       this.http.get<ResponseData>('http://localhost:5000/pages', {
         params: {
-          appUlid
+          appUlid,
+          env: 'dev'
         },
         withCredentials: true
       }).subscribe(res => {
@@ -111,11 +113,36 @@ export class PageService {
   }
   // 重铸
   // recast(): Promise<Page[]> {
-  //   return this.reqPageList().then((pageList) => {
-  //     this.setCurPage(this.getCurPage()?.ulid)
-  //     return pageList
-  //   })
+    // return this.reqPageList().then((pageList) => {
+    //   this.setCurPage(this.getCurPage()?.ulid)
+    //   return pageList
+    // })
   // }
+  recast() {
+    let app = this.appService.getCurApp()
+    let appUlid = app?.ulid || ''
+    let dc = new DoublyChain<Page>()
+    let p: Promise<Page[]>
+    if (appUlid) {
+      p = this._reqPageList(appUlid).then((pageList: Page[]) => {
+        let nextPageUlid = app?.firstPageUlid
+        while (nextPageUlid) {
+          let page = pageList.find(item => item.ulid === nextPageUlid)
+          if (page) {
+            dc.append(page)
+          }
+          nextPageUlid = page?.nextUlid
+        }
+        this._map.set(appUlid, dc)
+        return dc.toArray()
+      })
+    } else {
+      this._map.set(appUlid, dc)
+      p = Promise.resolve(dc.toArray())
+    }
+    return p
+  }
+  // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
   add(data: AddData) {
     let app = this.appService.getCurApp()
     if (app) {
@@ -126,6 +153,8 @@ export class PageService {
         name: data.name,
         ulid: u,
         appUlid, // : app.ulid,
+      }, {
+        withCredentials: true,
       })).then(() => {
         let pageDc = this._map.get(appUlid)
         pageDc?.append({
@@ -138,6 +167,7 @@ export class PageService {
           firstComponentUlid: '',
           appUlid,
         })
+        this.pageList$.next(pageDc?.toArray() || [])
       })
     } else {
       return Promise.reject(new Error('无此应用'))

@@ -53,6 +53,8 @@ import { PropsSwitchComponent } from './setup/props-switch/props-switch.componen
 import { PropsDirective } from './props.directive';
 import { PropsItemComponent } from './setup/props-item/props-item.component';
 import { PropsOptionComponent } from './setup/props-option/props-option.component';
+import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
+import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { PropsOptionComponent } from './setup/props-option/props-option.componen
     PropsDirective,
     PropsItemComponent,
     PropsOptionComponent,
+    AppConfigDialogComponent,
+    PublishDialogComponent,
     // IconModule,
   ],
   imports: [

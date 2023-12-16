@@ -22,18 +22,24 @@
         <d-form-control>
             <d-select [options]="data.selectOptions" name="theme" 
             [filterKey]="'label'" 
+            [valueKey]="'value'" 
             [(ngModel)]="data.theme"></d-select>
         </d-form-control>
     </d-form-item>
     <!-- 创建应用时无版本号。版本号都是0 -->
-    <!-- <d-form-item>
+    <d-form-item>
         <d-form-label>版本号</d-form-label>
         <d-form-control>
-            <d-select [options]="data.versionOptions" name="version" 
+            <!-- <d-select [options]="data.versionOptions" name="version" 
             [filterKey]="'label'" 
-            [(ngModel)]="data.version"></d-select>
+            [(ngModel)]="data.version"></d-select> -->
+
+            <!-- <input dTextInput autocomplete="off" name="version"
+                [(ngModel)]="0"
+                disabled="true"
+            /> -->
         </d-form-control>
-    </d-form-item> -->
+    </d-form-item>
     <d-form-item>
         <d-form-label>成员</d-form-label>
         <d-form-control>

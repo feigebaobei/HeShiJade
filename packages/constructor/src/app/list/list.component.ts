@@ -4,15 +4,18 @@ import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
 import type { ResponseData, User } from 'src/types';
-import type { A, B, S } from 'src/types/base';
+import type { A, B, S, N } from 'src/types/base';
 import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
+import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
+import { PublishDialogComponent } from './publish-dialog/publish-dialog.component';
 
 interface FormData {
   key: S
   name: S
   members: S
+  theme: S
 }
 // interface App {
 //   key: S
@@ -40,9 +43,14 @@ export class ListComponent implements OnInit {
     private appService: AppService,
     private userService: UserService,
   ) {
-    this.user = this.userService.user
+    this.user = this.userService.getUser()
     this.msg = []
+    // this.appList = this.appService.getAppList()
     this.appList = []
+    // this.userService.user$.subscribe(u => {
+    //   this.user = u
+    //   this.reqAppList()
+    // })
     this.appService.appList$.subscribe(arr => {
       this.appList = arr
     })
@@ -89,13 +97,13 @@ export class ListComponent implements OnInit {
         key: 'one',
         name: 'one',
         members: '123@qq.com,kevin@163.com',
-        theme: 'blur',
+        theme: 'blue',
         selectOptions: [{
-          id: 'blur',
+          value: 'blue',
           label: '蓝'
         },
         {
-          id: 'yellow',
+          value: 'yellow',
           label: '黄'
         },],
       }, // as FormData,
@@ -115,23 +123,25 @@ export class ListComponent implements OnInit {
             this.appService.createApp({
               key: data.key,
               name: data.name,
-              // ulid: '1234567',
-              members,
+              theme: data.theme,
+              collaborator: members,
+              prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
             })
-            .subscribe((res) => {
-              if (res.code === 0) {
-                this.msg = [
-                  { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
-                ]
-                results.modalInstance.hide(); // 成功才关闭
-                // 刷新应用列表
-                this.reqAppList()
-              } else {
-                this.msg = [
-                  { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
-                ]
-              }
-            })
+            results.modalInstance.hide();
+            // .subscribe((res) => {
+            //   if (res.code === 0) {
+            //     this.msg = [
+            //       { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
+            //     ]
+            //     results.modalInstance.hide(); // 成功才关闭
+            //     // 刷新应用列表
+            //     this.reqAppList()
+            //   } else {
+            //     this.msg = [
+            //       { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
+            //     ]
+            //   }
+            // })
           },
         },
         {
@@ -156,13 +166,79 @@ export class ListComponent implements OnInit {
   }
   reqAppList() {
     this.appService.reqAppList()
-    // .then(res => {
-    //   this.appList = res
-    // })
   }
-  gotoPublishBtClickH() {
-    clog('gotoPublishBtClickH')
-    // let results = this.dialogService.open
+  configBtClickH($event: Event, index: N) {
+    $event.stopPropagation() // 阻止事件冒泡
+    // $event.preventDefault() // 阻止默认事件
+    // clog('config', index, this.appList[index])
+    let results = this.dialogService.open({
+      id: 'app-config-dialog-service',
+      width: '346px',
+      maxHeight: '600px',
+      title: '应用配置',
+      content: AppConfigDialogComponent,
+      backdropCloseable: true,
+      onClose: () => clog('hi close'),
+      data: {
+        app: this.appList[index],
+      },
+      dialogtype: 'standard',
+      showAnimate: true,
+      buttons: [
+        // {
+        //   cssClass: 'primary',
+        //   text: 'Ok',
+        //   disabled: false,
+        //   handler: ($event: Event) => {
+        //     results.modalInstance.hide()
+        //   }
+        // },
+        {
+          id: 'app-config-dialog-btn-canncel',
+          cssClass: 'common',
+          text: '关闭',
+          handler: ($event: Event) => {
+            results.modalInstance.hide()
+          }
+        }
+      ]
+    })
+  }
+  gotoPublishBtClickH($event: Event, index: N) {
+    clog('gotoPublishBtClickH', index, this.appList[index], this.appList[index].ulid)
+    $event.stopPropagation()
+    let results = this.dialogService.open({
+      id: 'PublishDialogComponent',
+      width: '800px',
+      maxHeight: '600px',
+      title: '发布',
+      content: PublishDialogComponent,
+      backdropCloseable: true,
+      onClose: () => clog('close'),
+      data: {
+        appUlid: this.appList[index].ulid,
+        // app: this.appList[index],
+      },
+      dialogtype: 'standard',
+      showAnimate: true,
+      buttons: [
+        // {
+        //   cssClass: 'primary',
+        //   text: 'Ok',
+        //   disabled: false,
+        //   handler: ($event: Event) => {
+        //     results.modalInstance.hide()
+        //   }
+        // },
+        // {
+        //   cssClass: 'common',
+        //   text: 'Cancel',
+        //   handler: ($event: Event) => {
+        //     results.modalInstance.hide()
+        //   }
+        // },
+      ]
+    })
   }
   homeBtClickH() {
     this.router.navigate(['/home'])

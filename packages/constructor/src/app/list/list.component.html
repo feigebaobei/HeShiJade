@@ -1,10 +1,9 @@
 <!-- header -->
 <header>header
-    <span>用户账号：{{user?.account}}</span>
+    {{user | json}}
+    <span>用户账号：{{user?.profile?.email}}</span>
     <d-button (click)="logoutBtClickH()">logout</d-button>
     <d-button (click)="homeBtClickH()">home</d-button>
-    <!-- <d-button (click)="userInfoBtClickH()">get userInfo</d-button>
-    <d-button (click)="gotoHomeInfoBtClickH()">home</d-button> -->
 </header>
 <!-- main -->
 <main>
@@ -14,7 +13,7 @@
     </div>
     <!-- 列表 -->
     <section class="app_section">
-        <div *ngFor="let app of appList" class="app_box" (click)="appItemClickH(app.ulid)">
+        <div *ngFor="let app of appList; let index = index" class="app_box" (click)="appItemClickH(app.ulid)">
             <p>
                 <span>key:</span>
                 <span>{{app.key}}</span>
@@ -23,17 +22,15 @@
                 <span>name:</span>
                 <span>{{app.name}}</span>
             </p>
-            <!-- <p>
-                <span>theme</span>
-                <span></span>
-            </p> -->
             <p>
-                <d-button (click)="gotoPublishBtClickH">去发布</d-button>
+                <span>theme:</span>
+                <span>{{app.theme}}</span>
+            </p>
+            <p>
+                <d-button (click)="configBtClickH($event, index)">配置</d-button>
+                <d-button (click)="gotoPublishBtClickH($event, index)">版本&发布</d-button>
             </p>
         </div>
     </section>
 </main>
 <d-toast [value]="msg"></d-toast>
-<!-- {{item | json}} -->
-<!-- <app-app-item *ngFor="let item of appList">
-</app-app-item> -->

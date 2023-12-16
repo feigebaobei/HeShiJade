@@ -56,6 +56,19 @@
 |list|||
 |setup|url通式 `http://$home:$port/setup?app=$appUlid`||
 
+#### version
+
+4个环境：dev/test/pre/prod依次发布，不可跳跃。
+版本号在dev环境设置。
+
+```
+/version
+get
+  取4个环境的version
+  取指定环境的version
+put
+  设置dev环境的version
+```
 
 
 
@@ -319,12 +332,21 @@ withCredentials: true
 https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
+# todo
+
+整理需求
+  明确要做什么
+  整理思路，确定实现方案
+  写文档。接入api
+  严格调用api
 
 
-从组件列表可拖动舞台区
-创建组件的接口。
-请求组件的接口
-如何封装一个ng组件
-创建正确数据结构的组件
+
 去发布
 整理接口文档
+断网缓存
+lc不做出码。出码由脚手架做。
+lc不做入码。
+
+# mock平台
+
