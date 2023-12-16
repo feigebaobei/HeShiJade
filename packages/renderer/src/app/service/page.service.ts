@@ -15,7 +15,6 @@ import { DoublyChain } from 'data-footstone';
 // 向外输出页面列表
 // 输出当前页面
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -40,23 +39,22 @@ export class PageService {
       this.reqList(curApp.ulid, this.envService.getCur())
     })
   }
+  getList() {
+    return this._list
+  }
   setList(arr: Page[]) {
     this._list = arr
     this.list$.next(this._list)
-    // 默认选中第一个页面
-    // if (this.list.length) {
-    //   this.setCur(this.list[0].ulid)
-    // }
   }
   reqList(appUlid: ULID, env: ENV) {
     return this._reqList(appUlid, env).then((pageList: Page[]) => {
-      this.setList(pageList)
       return pageList
     }).then(pageList => {
       let app = this.appService.getCurApp()
       let dc = arrToChain(pageList, 'ulid', 'nextUlid', app?.firstPageUlid)
       this._map.set(app?.ulid || '', dc)
-      return dc.toArray()
+      this.setList(dc.toArray())
+      return true
     })
   }
   // 请求页面列表
@@ -121,6 +119,9 @@ export class PageService {
   setCur(pageUlid?: ULID) {
     this._cur = this.getPage(pageUlid)
     this.cur$.next(this._cur)
+  }
+  getCur() {
+    return this._cur
   }
   getPage(pageUlid?: ULID) {
     return this._list.find(page => page.ulid === pageUlid)
