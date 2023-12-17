@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import type { ResponseData } from 'src/types';
 import type { Page } from 'src/types/page';
 import type { S, ULID } from 'src/types/base';
+import { Component } from 'src/types/component';
 
 let clog = console.log
 
@@ -158,6 +159,32 @@ export class PageService {
       })
     } else {
       return Promise.reject(new Error('无此应用'))
+    }
+  }
+  deleteComponent(component: Component, componentUlid: ULID, pageUlid: ULID, appUlid: ULID) {
+    let dc = this._map.get(appUlid)
+    if (dc) {
+      let cur = dc.head
+      while (cur) {
+        if (cur.value.ulid === pageUlid) {
+          if (cur.value.firstComponentUlid === componentUlid) {
+            if (cur.value.lastComponentUlid === componentUlid) {
+              cur.value.firstComponentUlid = ''
+              cur.value.lastComponentUlid = ''
+            } else {
+              cur.value.firstComponentUlid = component.nextUlid
+            }
+          } else {
+            if (cur.value.lastComponentUlid === component.ulid) {
+              cur.value.lastComponentUlid = component.prevUlid
+            } else {
+              // null
+            }
+          }
+          break;
+        }
+        cur = cur.next
+      }
     }
   }
 }

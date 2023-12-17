@@ -222,4 +222,22 @@ export class ComponentService {
       }
     }
   }
+  delete(componentUlid: ULID, pageUlid: ULID) {
+    let dc = this._map.get(pageUlid)
+    if (dc) {
+      let cur = dc.head
+      let position = 0
+      while (cur) {
+        if (cur.value.ulid === componentUlid) {
+          break
+        }
+        position++
+        cur = cur.next
+      }
+      let compDeleted = dc.removeAt(position)
+      this.componentListByCurPage$.next(dc.toArray())
+      // 当删除最前面和最后面的组件时需要更新页面的数据
+      this.pageService.deleteComponent(compDeleted, compDeleted.ulid, compDeleted.pageUlid, compDeleted.appUlid)
+    }
+  }
 }

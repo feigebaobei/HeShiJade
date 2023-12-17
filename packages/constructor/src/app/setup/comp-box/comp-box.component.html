@@ -1,7 +1,12 @@
 <!-- {{ comp | json }} -->
-<div (click)="boxClickh()" class=""
+<div (click)="boxClickh()" class="comp-box"
     [ngClass]="{selected: comp.ulid === curComp?.ulid}"
 >
+    <div 
+    *ngIf="comp.ulid === curComp?.ulid"
+    class="toolbox">
+        <d-button bsSize="xs" icon="icon-delete" (click)="deleteButtonClickH()"></d-button>
+    </div>
     <!-- {{comp | json}} -->
     <ng-template adHost></ng-template>
 </div>

@@ -350,7 +350,7 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 
 
-浏览4个环境的页面
+创建一个页面：form+table+modal
 断网缓存
 lc不做出码。出码由脚手架做。
 lc不做入码。
