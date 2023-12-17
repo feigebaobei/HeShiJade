@@ -15,6 +15,7 @@ let clog = console.log
 
 type CompOrUn = Component | undefined
 type ComponentOrUn = Component | undefined
+type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin'
 
 @Injectable({
   providedIn: 'root'
@@ -222,6 +223,34 @@ export class ComponentService {
       }
     }
   }
+  
+  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
+    // switch(type) {
+    //   case 'props':
+    //     this._reqUpdateComponentProps(key, value)
+    //     break;
+    // }
+    return new Promise((s, j) => {
+      this.http.put<ResponseData>('http://localhost:5000/components', {
+        ulid: this.curComponent()?.ulid || '',
+        type,
+        key,
+        value,
+      }).subscribe((res) => {
+        if (res.code === 0) {
+          res.data
+          s(true)
+        }
+        j(res.message || '更新失败')
+      })
+    })
+  }
+  // private _reqUpdateComponentProps(key: S, value: PropsValue) {
+  //   this.http.put<ResponseData>('http://localhost:5000/components', {
+  //     key
+  //   })
+  // }
+  // 删除组件
   delete(componentUlid: ULID, pageUlid: ULID) {
     let dc = this._map.get(pageUlid)
     if (dc) {
@@ -237,7 +266,7 @@ export class ComponentService {
       let compDeleted = dc.removeAt(position)
       this.componentListByCurPage$.next(dc.toArray())
       // 当删除最前面和最后面的组件时需要更新页面的数据
-      this.pageService.deleteComponent(compDeleted, compDeleted.ulid, compDeleted.pageUlid, compDeleted.appUlid)
+      this.pageService.deleteComponent(compDeleted)
     }
   }
 }

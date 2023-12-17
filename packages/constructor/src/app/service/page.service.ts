@@ -161,14 +161,15 @@ export class PageService {
       return Promise.reject(new Error('无此应用'))
     }
   }
-  deleteComponent(component: Component, componentUlid: ULID, pageUlid: ULID, appUlid: ULID) {
-    let dc = this._map.get(appUlid)
+  // deleteComponent(component: Component, componentUlid: ULID, pageUlid: ULID, appUlid: ULID) {
+  deleteComponent(component: Component) {
+    let dc = this._map.get(component.appUlid)
     if (dc) {
       let cur = dc.head
       while (cur) {
-        if (cur.value.ulid === pageUlid) {
-          if (cur.value.firstComponentUlid === componentUlid) {
-            if (cur.value.lastComponentUlid === componentUlid) {
+        if (cur.value.ulid === component.pageUlid) {
+          if (cur.value.firstComponentUlid === component.ulid) {
+            if (cur.value.lastComponentUlid === component.ulid) {
               cur.value.firstComponentUlid = ''
               cur.value.lastComponentUlid = ''
             } else {

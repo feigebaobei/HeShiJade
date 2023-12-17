@@ -4,6 +4,8 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S } from 'src/types/base';
 import type { ComponentPropsMetaItem } from 'src/types/props'
 
+let clog = console.log
+
 @Component({
   selector: 'app-props-input',
   templateUrl: './props-input.component.html',
@@ -26,6 +28,8 @@ export class PropsInputComponent implements OnInit, OnChanges {
   }
   change() {
     this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
+    clog('curr r rs', this.componentService.curComponent(), this.data.propKey, this.data.value)
+    this.componentService.reqUpdateComponentProps('props', this.data.propKey, this.data.value)
     console.log('change', this.data.value)
   }
 }

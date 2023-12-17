@@ -159,8 +159,42 @@ router.route('/')
     })
   })
 })
+// 更新组件
 .put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
+  // res.send('put')
+  // 校验参数
+  // 更新数据
+  // 返回值
+  new Promise((s, j) => {
+    if (
+      rules.required(req.body.ulid) &&
+      rules.required(req.body.type) &&
+      rules.required(req.body.key) &&
+      rules.required(req.body.value)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: {
+      [`props.${req.body.key}`]: req.body.value
+    }}).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch(code => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 .delete(cors.corsWithOptions, (req, res) => {
   // 校验参数：必填+存在
