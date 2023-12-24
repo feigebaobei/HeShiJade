@@ -161,7 +161,6 @@ router.route('/')
 })
 // 更新组件
 .put(cors.corsWithOptions, (req, res) => {
-  // res.send('put')
   // 校验参数
   // 更新数据
   // 返回值

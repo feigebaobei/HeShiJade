@@ -1,6 +1,6 @@
 <p>form</p>
-
-<form dForm [layout]="layoutDirection" ngForm>
+{{ data | json}}
+<form dForm [layout]="data.props.layout" ngForm>
     <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
         <d-form-control>
@@ -9,8 +9,24 @@
         </div>
         </d-form-control>
     </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">Select</d-form-label>
+      <d-form-control>
+        <d-select [options]="selectOptions" name="select1" [filterKey]="'label'" [(ngModel)]="formData.selectValue"></d-select>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>Switch</d-form-label>
+      <d-form-control>
+        <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
+      </d-form-control>
+    </d-form-item>
     <d-form-operation>
-        <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px">Submit</d-button>
-        <d-button bsStyle="common" circled="true">Cancel</d-button>
+        <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
+            *ngIf="data.props.isSubmit"
+        >Submit</d-button>
+        <d-button bsStyle="common" circled="true"
+            *ngIf="data.props.isCancel"
+        >Cancel</d-button>
     </d-form-operation>
 </form>

@@ -223,13 +223,8 @@ export class ComponentService {
       }
     }
   }
-  
+  // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
-    // switch(type) {
-    //   case 'props':
-    //     this._reqUpdateComponentProps(key, value)
-    //     break;
-    // }
     return new Promise((s, j) => {
       this.http.put<ResponseData>('http://localhost:5000/components', {
         ulid: this.curComponent()?.ulid || '',
@@ -245,11 +240,6 @@ export class ComponentService {
       })
     })
   }
-  // private _reqUpdateComponentProps(key: S, value: PropsValue) {
-  //   this.http.put<ResponseData>('http://localhost:5000/components', {
-  //     key
-  //   })
-  // }
   // 删除组件
   delete(componentUlid: ULID, pageUlid: ULID) {
     let dc = this._map.get(pageUlid)

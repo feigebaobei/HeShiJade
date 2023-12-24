@@ -17,6 +17,7 @@ import {
   Input as inputPropsMeta,
   Select as selectPropsMeta,
   Modal as modalPropsMeta,
+  Form as formPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -113,8 +114,20 @@ export class PropsBoxComponent {
         break
       // case 'Table':
       //   break
-      // case 'Form':
-      //   break
+      case 'Form':
+        this.componentPropsMeta = formPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o: CPMI = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid
+          }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
+          this.componentPropsList.push(o)
+        })
+        break
       default:
         this.componentPropsMeta = {}
         break
