@@ -113,7 +113,8 @@ export class SetupComponent implements OnInit {
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
     }
-    this.componentService.postCompListByPage(obj)
+    // this.componentService.postCompListByPage(obj)
+    this.componentService.postCompListByPageForLocal(obj)
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {

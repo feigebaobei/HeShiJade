@@ -55,6 +55,9 @@ import { PropsItemComponent } from './setup/props-item/props-item.component';
 import { PropsOptionComponent } from './setup/props-option/props-option.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
+import { ItemsBoxComponent } from './setup/items-box/items-box.component';
+import { ItemsItemComponent } from './setup/items-item/items-item.component';
+import { ItemsDirective } from './items.directive';
 
 @NgModule({
   declarations: [
@@ -88,6 +91,9 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PropsOptionComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
+    ItemsBoxComponent,
+    ItemsItemComponent,
+    ItemsDirective,
     // IconModule,
   ],
   imports: [

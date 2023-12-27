@@ -30,12 +30,10 @@
             (click)="stageClickH($event)"
         >
             <p>stage</p>
-            <!-- {{ componentByPage | json }} -->
             <app-comp-box
                 *ngFor="let comp of componentByPage"
                 [comp]="comp"
             ></app-comp-box>
-            <!-- <app-comp-box /> -->
         </d-col>
         <!-- setter -->
         <d-col [dSpan]="8">
@@ -45,6 +43,9 @@
                 </d-tab>
                 <d-tab id="behavior" title="behavior">
                   <app-behavior-box></app-behavior-box>
+                </d-tab>
+                <d-tab id="items" title="items">
+                  <app-items-box></app-items-box>
                 </d-tab>
             </d-tabs>
         </d-col>

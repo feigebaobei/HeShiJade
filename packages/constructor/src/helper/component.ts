@@ -66,9 +66,40 @@ let Select: componentConfig = {
     slot: '',
 }
 let Form: componentConfig = {
-    props: {},
+    props: {
+        layout: 'horizontal',
+        isCancel: true,
+        isSubmit: true,
+    },
     behavior: {},
-    item: {},
+    item: {
+        addable: true, // 是否可增加
+        groups: [
+            {
+                type: 'Input',
+                label: '姓名',
+                value: '张三',
+            },
+            {
+                type: 'Select',
+                label: '爱好',
+                value: '读书',
+                options: [
+                    { label: '旅游', value: 'travel' },
+                    { label: '读书', value: 'read' },
+                ],
+            },
+            {
+                type: 'Switch',
+                label: '性别',
+                value: 1,
+                options: [
+                    { label: '男', value: 1 },
+                    { label: '女', value: 0 },
+                ],
+            }
+        ],
+    },
     slot: '',
 }
 let Table: componentConfig = {

@@ -141,6 +141,23 @@ export class ComponentService {
       })
     })
   }
+  // for dev
+  // 只在本地保存，不改变远端数据
+  postCompListByPageForLocal(obj: Component){
+    // return 
+    new Promise((s, j) => {
+      let has = this._map.has(obj['pageUlid'])
+      if (has) {
+        let d = this._map.get(obj.pageUlid)
+        d!.append(obj)
+        let arr = this._map.get(obj.pageUlid)!.toArray()
+        this.componentListByCurPage$.next(arr)
+        s(arr)
+      } else {
+        j()
+      }
+    })
+  }
   // 重排序
   // putCompListByPage(obj: Ao) {}
   getComponentByPage(pageUlid?: ULID): Component[] {
