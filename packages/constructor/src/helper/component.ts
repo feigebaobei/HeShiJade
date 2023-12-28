@@ -76,12 +76,14 @@ let Form: componentConfig = {
         addable: true, // 是否可增加
         groups: [
             {
-                type: 'Input',
+                category: 'input',
+                key: 'name',
                 label: '姓名',
                 value: '张三',
             },
             {
-                type: 'Select',
+                category: 'select',
+                key: 'interest',
                 label: '爱好',
                 value: '读书',
                 options: [
@@ -90,7 +92,8 @@ let Form: componentConfig = {
                 ],
             },
             {
-                type: 'Switch',
+                category: 'switch',
+                key: 'gender',
                 label: '性别',
                 value: 1,
                 options: [

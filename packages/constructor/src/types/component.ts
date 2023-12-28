@@ -1,4 +1,5 @@
 import type {N, B, A, S, ULID, O, SelectOptionsItem} from './base'
+import type { ComponentItem } from './items'
 
 type PropsValue = S | B | N | S[] | SelectOptionsItem[]
 interface Component {
@@ -14,7 +15,10 @@ interface Component {
     [k: S]: PropsValue
   }
   behavior: O
-  item: O
+  item: {
+    addable: B
+    groups: ComponentItem[]
+  }
   slot: S
   appUlid: ULID
   pageUlid: ULID
@@ -29,7 +33,10 @@ interface componentConfig {
     [k: S]: PropsValue,
   },
   behavior: O
-  item: O
+  item: {
+    addable: B,
+    groups: ComponentItem[]
+  }
   slot: S
 }
 
