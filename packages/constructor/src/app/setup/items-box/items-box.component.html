@@ -1,13 +1,7 @@
-<p>items-box works!</p>
-
-{{componentItemsList | json}}
 <app-items-item
     *ngFor="let a of componentItemsList"
     [itemsItem]="a"
     [compType]="curComp?.type"
 >
 </app-items-item>
-<!-- <d-button (click)="sqlBtClickH()">查询应用列表</d-button> -->
 <d-button *ngIf="addable" (click)="addButtonClickH()">添加一项</d-button>
-
-<!-- <d-toast [value]="msg"></d-toast> -->

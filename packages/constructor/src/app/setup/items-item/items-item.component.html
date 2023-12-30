@@ -1,8 +1,3 @@
-<p>items-item works!</p>
-
-<!-- <form dForm [layout]="'horizontal'" ngForm> -->
-    <!-- {{selectOptions | json}} -->
-    formData: {{formData | json}}
 <form dForm ngForm>
     <d-form-item>
       <d-form-label [required]="true">种类</d-form-label>
@@ -10,15 +5,17 @@
           <d-select [options]="selectOptions" 
           name="category"
          [filterKey]="'label'" [valueKey]="'value'" 
+         [(ngModel)]="formData!.category"
          ></d-select>
-         <!-- [(ngModel)]="formData.category" -->
         </d-form-control>
     </d-form-item>
     <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
         <d-form-control>
         <div>
-            <input dTextInput autocomplete="off" name="key" />
+            <input dTextInput autocomplete="off" name="key"
+            [(ngModel)]="formData.key"
+             />
         </div>
         </d-form-control>
     </d-form-item>
@@ -26,7 +23,9 @@
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
         <d-form-control>
         <div>
-            <input dTextInput autocomplete="off" name="label" />
+            <input dTextInput autocomplete="off" name="label"
+            [(ngModel)]="formData.label"
+             />
         </div>
         </d-form-control>
     </d-form-item>
@@ -34,7 +33,9 @@
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
         <d-form-control>
         <div>
-            <input dTextInput autocomplete="off" name="value" />
+            <input dTextInput autocomplete="off" name="value"
+            [(ngModel)]="formData.value"
+             />
         </div>
         </d-form-control>
     </d-form-item>

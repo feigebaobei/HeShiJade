@@ -17,16 +17,19 @@ let clog = console.log
   styleUrls: ['./items-item.component.sass']
 })
 export class ItemsItemComponent implements OnInit {
-  // @Input() itemsItem!: ComponentItem
-  @Input()
-  set itemsItem(p: ComponentItem | undefined) {
-    this.formData = p
+  // @Input()
+  // set itemsItem(p: ComponentItem) {
+  //   this.formData = p
+  // }
+  // get itemsItem() {
+  //   return this.formData
+  // }
+  @Input() itemsItem: ComponentItem = {
+    category: '',
+    key: '',
+    label: '',
+    value: '',
   }
-  get itemsItem() {
-    return this.formData
-  }
-  // @Input() a: A
-  // @Input() itemsItem: A
   @Input() compType?: S
   // todo delete
   // @ViewChild(ItemsDirective, {static: true}) appItems!: ItemsDirective
@@ -38,19 +41,19 @@ export class ItemsItemComponent implements OnInit {
   //   label: S,
   //   value: S,
   // }
-  formData?: ComponentItem
+  formData: ComponentItem
   constructor() {
     // 收不到传来的数据
     this.items = []
     this.compType = ''
-    this.selectOptions = [
-      { label: 'input', value: 'input', },
-      { label: 'select', value: 'select', },
-      { label: 'switch', value: 'switch', },
-    ]
-    // this.selectOptions = []
-    clog('itemsItem', this.itemsItem)
-    // this.formData = this.itemsItem
+    // this.selectOptions = [ // 默认值
+    //   // { label: 'input', value: 'input', },
+    //   // { label: 'select', value: 'select', },
+    //   // { label: 'switch', value: 'switch', },
+    // ]
+    this.selectOptions = [] // 默认值
+    // clog('itemsItem', this.itemsItem)
+    this.formData = this.itemsItem
     // this.formData = null
     // todo 来自itemsItem
     // this.formData = {} as x
@@ -91,7 +94,7 @@ export class ItemsItemComponent implements OnInit {
     switch(this.compType) {
       case 'Form':
         // clog(Form, Form.optionMap?.['category'])
-        // this.selectOptions = Form.optionMap?.['category'] || []
+        this.selectOptions = Form.optionMap?.['category'] || []
         // this.formData = Form.
         break
       case 'Table':
