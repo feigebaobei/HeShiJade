@@ -1,8 +1,10 @@
 <p>items-box works!</p>
 
+{{componentItemsList | json}}
 <app-items-item
-    *ngFor="let itemsItem of componentItemsList"
-    [itemsItem]="itemsItem"
+    *ngFor="let a of componentItemsList"
+    [itemsItem]="a"
+    [compType]="curComp?.type"
 >
 </app-items-item>
 <!-- <d-button (click)="sqlBtClickH()">查询应用列表</d-button> -->

@@ -17,7 +17,9 @@ interface CheckExp {
     operator: Options<S, S>
     threshold: N | S
 }
-interface Operator {}
+interface Operator {
+    [k: S]: N
+}
 
 let Form: ComponentItemsSetter = {
     addable: true,

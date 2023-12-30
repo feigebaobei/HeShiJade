@@ -25,7 +25,10 @@ let Button: componentConfig = {
             }
         }
     ],
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: 'button',
 }
 let Input: componentConfig = {
@@ -36,7 +39,10 @@ let Input: componentConfig = {
         styleType: 'default',
     },
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 let Modal: componentConfig = {
@@ -47,7 +53,10 @@ let Modal: componentConfig = {
         placement: 'center',
     },
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 let Select: componentConfig = {
@@ -62,7 +71,10 @@ let Select: componentConfig = {
         placeholder: '',
     },
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 let Form: componentConfig = {
@@ -108,7 +120,10 @@ let Form: componentConfig = {
 let Table: componentConfig = {
     props: {},
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 export {

@@ -1,16 +1,50 @@
 import type { Options, S,
-    //  A, ULID, B, N, SelectOptionsItem 
+    //  A, ULID, B, N, 
+    // Options, 
+    B,
     N,
     } from "./base"
 
-interface ComponentItem {
-    category: 'input' | 'select' | 'switch' | '',
-    label: S
+type ComponentItem = ComponentItemEmpty | ComponentItemInput | ComponentItemNumber | ComponentItemSelect | ComponentItemSwitch 
+
+interface ComponentItemEmpty {
+    category: '',
     key: S
-    value: S | N
-    options?: Options<S, S|N>[]
+    label: S
+    value: S
+}
+interface ComponentItemInput {
+    category: 'input',
+    key: S
+    label: S
+    value: S
+}
+interface ComponentItemNumber {
+    category: 'number',
+    key: S
+    label: S
+    value: N
+}
+interface ComponentItemSelect {
+    category: 'select',
+    key: S
+    label: S
+    value: S | N | B
+    options: Options<S, S | N | B>[]
+}
+
+interface ComponentItemSwitch {
+    category: 'switch',
+    key: S
+    label: S
+    value: S | B | N
+    options: Options<S, S | N | B>[]
 }
 
 export {
     ComponentItem,
+    ComponentItemInput,
+    ComponentItemNumber,
+    ComponentItemSelect,
+    ComponentItemSwitch,
 }

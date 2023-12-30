@@ -1,12 +1,18 @@
 <p>items-item works!</p>
 
 <!-- <form dForm [layout]="'horizontal'" ngForm> -->
+    <!-- {{selectOptions | json}} -->
+    formData: {{formData | json}}
 <form dForm ngForm>
     <d-form-item>
       <d-form-label [required]="true">种类</d-form-label>
       <d-form-control>
-        <d-select [options]="selectOptions" name="category" [filterKey]="'label'" [valueKey]="'value'" [(ngModel)]="formData.category"></d-select>
-      </d-form-control>
+          <d-select [options]="selectOptions" 
+          name="category"
+         [filterKey]="'label'" [valueKey]="'value'" 
+         ></d-select>
+         <!-- [(ngModel)]="formData.category" -->
+        </d-form-control>
     </d-form-item>
     <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>

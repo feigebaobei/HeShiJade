@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
+import { Form } from 'src/helper/items';
 // type
 import type {Component as Comp} from 'src/types/component'
 import type { B } from 'src/types/base';
@@ -17,9 +18,12 @@ export class ItemsBoxComponent {
   constructor(private componentService: ComponentService) {
     this.componentItemsList = []
     this.curComp = null
-    this.addable = true // todo 日后从service中取
+    this.addable = false
     this.componentService.compSubject$.subscribe(p => {
-      this.curComp = p
+      if (p) {
+        this.curComp = p
+        this.addable = p.item.addable
+      }
       this.componentSelectedChange()
     })
   }
@@ -29,14 +33,7 @@ export class ItemsBoxComponent {
     // 再赋值
     switch (this.curComp?.type) {
       case 'Form':
-        // 日后从service中取
-        let o: ComponentItem = {
-          type: 'input',
-          key: 'name',
-          label: '姓名',
-          value: 'tom',
-        }
-        this.componentItemsList.push(o)
+        this.componentItemsList.push(...this.curComp.item.groups)
         break
       default:
         break;
@@ -45,10 +42,17 @@ export class ItemsBoxComponent {
   addButtonClickH() {
     // 日后从service中取
     let o: ComponentItem = {
-      type: 'input',
+      category: 'input',
       key: 'name',
       label: '姓名',
       value: 'tom',
+    }
+    switch (this.curComp?.type) {
+      case 'Form':
+        o = Form.groupTemplate
+        break
+      default:
+        break
     }
     this.componentItemsList.push(o)
   }
