@@ -9,7 +9,7 @@ import {categoryList} from 'src/helper/category'
 import type { Component, Category, PropsValue } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 import type { ComponentPropsMeta } from '../../types/props'
-import type { S, Ao, ULID } from 'src/types/base';
+import type { S, Ao, ULID, A } from 'src/types/base';
 
 let clog = console.log
 
@@ -239,6 +239,17 @@ export class ComponentService {
         this.componentListByCurPage$.next(this._map.get(curPage.ulid)?.toArray() || [])
       }
     }
+  }
+  setCurComponentItem(key: S, k: 'category' | 'key' | 'label' | 'value', v: A) {
+    // todo v 有些暴力
+    let curComp = this.curComponent()
+    if (curComp) {
+      let obj = curComp.item.groups.find(item => item.key === key)
+      if (obj) {
+        obj[k] = v
+      }
+    }
+    // 此方法可证明，不用更新列表，就能更新列表中的特定元素的特定属性。
   }
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {

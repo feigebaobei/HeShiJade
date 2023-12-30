@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, 
   // ViewChild
 } from '@angular/core';
+import { ComponentService } from 'src/app/service/component.service';
 // import { ItemsDirective } from 'src/app/items.directive';
 import { Form } from 'src/helper/items';
 // type
@@ -42,7 +43,7 @@ export class ItemsItemComponent implements OnInit {
   //   value: S,
   // }
   formData: ComponentItem
-  constructor() {
+  constructor(private componentService: ComponentService) {
     // 收不到传来的数据
     this.items = []
     this.compType = ''
@@ -105,5 +106,18 @@ export class ItemsItemComponent implements OnInit {
   }
   deleteButtonClickH() {
     clog('deleteButtonClickH')
+  }
+  keyInputChangeH() {
+    this.componentService.setCurComponentItem(this.formData.key, 'key', this.formData.key)
+  }
+  categorySelectChangeH() {
+    this.componentService.setCurComponentItem(this.formData.key, 'category', this.formData.category)
+  }
+  labelInputChangeH() {
+    // clog('labelInputChangeH', this.formData.label)
+    this.componentService.setCurComponentItem(this.formData.key, 'label', this.formData.label)
+  }
+  valueInputChangeH() {
+    this.componentService.setCurComponentItem(this.formData.key, 'value', this.formData.value)
   }
 }

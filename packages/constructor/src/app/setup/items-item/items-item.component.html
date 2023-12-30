@@ -10,6 +10,7 @@
             name="category"
             [filterKey]="'label'" [valueKey]="'value'" 
             [(ngModel)]="formData!.category"
+            (ngModelChange)="categorySelectChangeH()"
             ></d-select>
             </d-form-control>
         </d-form-item>
@@ -19,6 +20,7 @@
             <div>
                 <input dTextInput autocomplete="off" name="key"
                 [(ngModel)]="formData.key"
+                (ngModelChange)="keyInputChangeH()"
                 />
             </div>
             </d-form-control>
@@ -29,6 +31,7 @@
             <div>
                 <input dTextInput autocomplete="off" name="label"
                 [(ngModel)]="formData.label"
+                (ngModelChange)="labelInputChangeH()"
                 />
             </div>
             </d-form-control>
@@ -39,6 +42,7 @@
             <div>
                 <input dTextInput autocomplete="off" name="value"
                 [(ngModel)]="formData.value"
+                (ngModelChange)="valueInputChangeH()"
                 />
             </div>
             </d-form-control>

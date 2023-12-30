@@ -12,11 +12,14 @@
             *ngIf="ele.category === 'input'"
             dTextInput
             autocomplete="off"
+            [value]="ele.value"
           />
           <d-select
             *ngIf="ele.category === 'select'"
             [options]="ele.options" 
             [filterKey]="'label'" 
+            name="value"
+            [ngModel]="ele.value"
           ></d-select>
           <d-toggle
             *ngIf="ele.category === 'switch'"

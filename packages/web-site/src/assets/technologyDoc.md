@@ -423,6 +423,9 @@ https://xbeibeix.com/video/BV1GU4y1N7eC
 
 form组件
   item
+    与舞台区联动
+    删除
+整理类型：成组的类型，配置类型&渲染类型
 创建一个页面：form+table+modal
 编辑组件
 断网缓存
