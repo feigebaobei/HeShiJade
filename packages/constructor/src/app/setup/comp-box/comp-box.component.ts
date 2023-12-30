@@ -51,7 +51,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   curComp?: Comp | null
   componentRef: A
   constructor(
-    private pageService: PageService,
+    // private pageService: PageService,
     private componentService: ComponentService,
     private http: HttpClient,
   ) {
@@ -74,10 +74,6 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.init()
   }
   init() {
-  //   this.update()
-  // }
-  // update() {
-    console.log('init comp', this.comp)
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
@@ -93,7 +89,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
       case 'Input':
         this.componentRef.instance.data = {
-          props: inputDefaultData.props
+          // props: inputDefaultData.props
+          props: this.comp.props
         }
         break
       case 'Modal':
@@ -104,17 +101,18 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
       case 'Select':
         this.componentRef.instance.data = {
-          props: selectDefaultData.props
+          props: this.comp.props
         }
         break
       case 'Form':
         this.componentRef.instance.data = {
-          props: formDefaultData.props
+          props: this.comp.props,
+          items: this.comp.items,
         }
         break
       case 'Table':
         this.componentRef.instance.data = {
-          props: tableDefaultData.props
+          props: this.comp.props
         }
         break
     }
@@ -132,7 +130,6 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.adHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
-    clog('deleteButtonClickH', this.curComp)
     if (this.curComp) {
       this.componentService.delete(this.curComp.ulid, this.curComp.pageUlid)
       this.http.delete<ResponseData>('http://localhost:5000/components', {
