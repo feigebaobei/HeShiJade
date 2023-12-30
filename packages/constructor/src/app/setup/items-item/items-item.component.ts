@@ -103,4 +103,7 @@ export class ItemsItemComponent implements OnInit {
         break
     }
   }
+  deleteButtonClickH() {
+    clog('deleteButtonClickH')
+  }
 }

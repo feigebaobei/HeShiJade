@@ -1,62 +1,51 @@
-<form dForm ngForm>
-    <d-form-item>
-      <d-form-label [required]="true">种类</d-form-label>
-      <d-form-control>
-          <d-select [options]="selectOptions" 
-          name="category"
-         [filterKey]="'label'" [valueKey]="'value'" 
-         [(ngModel)]="formData!.category"
-         ></d-select>
-        </d-form-control>
-    </d-form-item>
-    <d-form-item>
-        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
+<div class="box">
+    <form dForm ngForm dPopover [content]="customTemplate" [trigger]="'hover'" 
+    [controlled]="true"
+    [position]="'top-right'"
+    >
+        <d-form-item>
+        <d-form-label [required]="true">种类</d-form-label>
         <d-form-control>
-        <div>
-            <input dTextInput autocomplete="off" name="key"
-            [(ngModel)]="formData.key"
-             />
-        </div>
-        </d-form-control>
-    </d-form-item>
-    <d-form-item>
-        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
-        <d-form-control>
-        <div>
-            <input dTextInput autocomplete="off" name="label"
-            [(ngModel)]="formData.label"
-             />
-        </div>
-        </d-form-control>
-    </d-form-item>
-    <d-form-item>
-        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
-        <d-form-control>
-        <div>
-            <input dTextInput autocomplete="off" name="value"
-            [(ngModel)]="formData.value"
-             />
-        </div>
-        </d-form-control>
-    </d-form-item>
-    <!-- 
-    <d-form-item>
-      <d-form-label>Switch</d-form-label>
-      <d-form-control>
-        <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
-      </d-form-control>
-    </d-form-item> -->
-    <!-- <d-form-operation>
-        <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
-            *ngIf="data.props.isSubmit"
-        >Submit</d-button>
-        <d-button bsStyle="common" circled="true"
-            *ngIf="data.props.isCancel"
-        >Cancel</d-button>
-    </d-form-operation> -->
-</form>
+            <d-select [options]="selectOptions" 
+            name="category"
+            [filterKey]="'label'" [valueKey]="'value'" 
+            [(ngModel)]="formData!.category"
+            ></d-select>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
+            <d-form-control>
+            <div>
+                <input dTextInput autocomplete="off" name="key"
+                [(ngModel)]="formData.key"
+                />
+            </div>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
+            <d-form-control>
+            <div>
+                <input dTextInput autocomplete="off" name="label"
+                [(ngModel)]="formData.label"
+                />
+            </div>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
+            <d-form-control>
+            <div>
+                <input dTextInput autocomplete="off" name="value"
+                [(ngModel)]="formData.value"
+                />
+            </div>
+            </d-form-control>
+        </d-form-item>
+    </form>
+</div>
 
-<!--
-<div>
-    <ng-template appItems></ng-template>
-</div> -->
+<ng-template #customTemplate>
+    <d-button bsSize="xs" icon="icon-delete" (click)="deleteButtonClickH()"></d-button>
+</ng-template>
