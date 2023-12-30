@@ -1,7 +1,35 @@
-<!-- <p>form</p> -->
-<!-- {{ data | json}} -->
 <!-- todo 使用service中的数据渲染 -->
 <form dForm [layout]="data.props.layout" ngForm>
+  <!-- todo 考虑使用动态组件。不喜欢使用div包裹。-->
+  <!-- 不需要双向绑定表单项的值 -->
+  {{data.items.groups | json}}
+  <div *ngFor="let ele of data.items.groups">
+    <d-form-item>
+      <d-form-label [required]="false">{{ele.label}}</d-form-label>
+      <d-form-control>
+        <div>
+          <input
+            *ngIf="ele.category === 'input'"
+            dTextInput
+            autocomplete="off"
+          />
+          <d-select
+            *ngIf="ele.category === 'select'"
+            [options]="ele.options" 
+            [filterKey]="'label'" 
+          ></d-select>
+          <d-toggle
+            *ngIf="ele.category === 'switch'"
+            [checked]="ele.checked"
+          ></d-toggle>
+        </div>
+      </d-form-control>
+    </d-form-item>
+  </div>
+
+  
+  
+  <!-- 
     <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
         <d-form-control>
@@ -21,7 +49,7 @@
       <d-form-control>
         <d-toggle name="anonymous" [(ngModel)]="formData.toggleValue"></d-toggle>
       </d-form-control>
-    </d-form-item>
+    </d-form-item> -->
     <d-form-operation>
         <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
             *ngIf="data.props.isSubmit"

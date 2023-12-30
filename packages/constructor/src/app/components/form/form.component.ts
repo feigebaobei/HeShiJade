@@ -41,6 +41,6 @@ export class FormComponent {
   }
   layoutDirection: FormLayout = FormLayout.Vertical;
   ngOnInit() {
-    // clog('form data', this)
+    clog('form data', this)
   }
 }

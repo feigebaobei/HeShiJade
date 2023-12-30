@@ -105,9 +105,10 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         }
         break
       case 'Form':
+        clog('sdfsdf', this.comp)
         this.componentRef.instance.data = {
           props: this.comp.props,
-          items: this.comp.items,
+          items: this.comp.item,
         }
         break
       case 'Table':
