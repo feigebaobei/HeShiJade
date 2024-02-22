@@ -1,21 +1,52 @@
 <!-- <d-button bsSize="xs" icon="icon-delete" ></d-button> -->
+<!-- <p>sdf {{JSON.stringify(formData)}}</p> -->
+{{formData | json}}
 <form dForm ngForm>
     <d-form-item>
-        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
+      <d-form-label [required]="true">种类</d-form-label>
+      <d-form-control>
+        <d-select [options]="selectOptions" 
+        name="category"
+        [filterKey]="'label'" [valueKey]="'value'" 
+        [(ngModel)]="formData!.category"
+        (ngModelChange)="categorySelectChangeH()"
+        ></d-select>
+      </d-form-control>
+    </d-form-item>
+        <d-form-item>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
+          <d-form-control>
+          <div>
+              <input dTextInput autocomplete="off" name="key"
+              [(ngModel)]="formData.key"
+              (ngModelChange)="keyInputChangeH()"
+              />
+          </div>
+          </d-form-control>
+      </d-form-item>
+      <d-form-item>
+      <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
+      <d-form-control>
+      <div>
+          <input dTextInput autocomplete="off" name="label"
+          [(ngModel)]="formData.label"
+          (ngModelChange)="labelInputChangeH()"
+          />
+      </div>
+      </d-form-control>
+  </d-form-item>
+      
+    <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
         <d-form-control>
         <div>
-            <input dTextInput autocomplete="off" name="userName" />
+            <input 
+            *ngIf="['input', 'select'].includes(formData.category)"
+            dTextInput autocomplete="off" name="value"
+            [(ngModel)]="formData.value"
+            (ngModelChange)="valueInputChangeH()"
+            />
         </div>
         </d-form-control>
-    </d-form-item>
-    <d-form-item>
-      <d-form-label [required]="true">Name</d-form-label>
-      <d-form-control
-        [extraInfo]="
-          'Enter a short name that meets reading habits, up to 30 characters, cannot be a system field, and cannot be the same as an existing field.'
-        "
-      >
-        <input dTextInput name="userName" />
-      </d-form-control>
     </d-form-item>
 </form>

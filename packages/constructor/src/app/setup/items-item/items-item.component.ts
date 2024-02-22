@@ -71,10 +71,10 @@ export class ItemsItemComponent implements OnInit {
     let viewContainerRef = this.adHost.viewContainerRef
     viewContainerRef.clear()
     let componentRef: A
-    clog('qwertyu', this.itemsItem.category)
+    // clog('qwertyu', this.itemsItem)
     switch (this.itemsItem.category) {
       case 'input':
-        // componentRef = viewContainerRef.createComponent(InputComponent)
+        // componentRef = viewContainerRef.createComponent(ItemInputComponent)
         componentRef = viewContainerRef.createComponent(compMap['input'])
         componentRef.instance.itemsItem = this.itemsItem
         break;

@@ -1,69 +1,8 @@
-<!-- <div class="box"
+<div
     dPopover [content]="customTemplate" 
     [trigger]="'hover'" 
     [controlled]="true"
-    [position]="'top-right'"
->
-    <form dForm ngForm 
-    >
-        <d-form-item>
-            <d-form-label [required]="true">种类</d-form-label>
-            <d-form-control>
-                <d-select [options]="selectOptions" 
-                name="category"
-                [filterKey]="'label'" [valueKey]="'value'" 
-                [(ngModel)]="formData!.category"
-                (ngModelChange)="categorySelectChangeH()"
-                ></d-select>
-            </d-form-control>
-        </d-form-item>
-        <d-form-item>
-            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
-            <d-form-control>
-            <div>
-                <input dTextInput autocomplete="off" name="key"
-                [(ngModel)]="formData.key"
-                (ngModelChange)="keyInputChangeH()"
-                />
-            </div>
-            </d-form-control>
-        </d-form-item>
-        <d-form-item>
-            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
-            <d-form-control>
-            <div>
-                <input dTextInput autocomplete="off" name="label"
-                [(ngModel)]="formData.label"
-                (ngModelChange)="labelInputChangeH()"
-                />
-            </div>
-            </d-form-control>
-        </d-form-item>
-        <d-form-item>
-            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
-            <d-form-control>
-            <div>
-                <input 
-                *ngIf="['input', 'select'].includes(formData.category)"
-                dTextInput autocomplete="off" name="value"
-                [(ngModel)]="(formData as ComponentItemInput).value"
-                (ngModelChange)="valueInputChangeH()"
-                />
-            </div>
-            </d-form-control>
-        </d-form-item>
-    </form>
-</div>
--->
-
-
-
-<div
-dPopover [content]="customTemplate" 
-[trigger]="'hover'" 
-[controlled]="true"
-[position]="'top-right'">
-itemsItem
+    [position]="'top-right'">
     <!-- <ng-template appItemCategory></ng-template> -->
     <ng-template adHost></ng-template>
 </div>
