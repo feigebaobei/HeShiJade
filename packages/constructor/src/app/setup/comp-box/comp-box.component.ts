@@ -1,7 +1,6 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { AdDirective } from 'src/app/ad.directive';
 // 组件
-// import { ButtonComponent } from 'ng-devui';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { FormComponent } from 'src/app/components/form/form.component';
 import { InputComponent } from 'src/app/components/input/input.component';

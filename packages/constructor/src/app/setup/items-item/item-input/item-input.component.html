@@ -1,0 +1,21 @@
+<!-- <d-button bsSize="xs" icon="icon-delete" ></d-button> -->
+<form dForm ngForm>
+    <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">Name</d-form-label>
+        <d-form-control>
+        <div>
+            <input dTextInput autocomplete="off" name="userName" />
+        </div>
+        </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">Name</d-form-label>
+      <d-form-control
+        [extraInfo]="
+          'Enter a short name that meets reading habits, up to 30 characters, cannot be a system field, and cannot be the same as an existing field.'
+        "
+      >
+        <input dTextInput name="userName" />
+      </d-form-control>
+    </d-form-item>
+</form>

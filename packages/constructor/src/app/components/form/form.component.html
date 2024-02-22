@@ -2,7 +2,6 @@
 <form dForm [layout]="data.props.layout" ngForm>
   <!-- todo 考虑使用动态组件。不喜欢使用div包裹。-->
   <!-- 不需要双向绑定表单项的值 -->
-  {{data.items.groups | json}}
   <div *ngFor="let ele of data.items.groups">
     <d-form-item>
       <d-form-label [required]="false">{{ele.label}}</d-form-label>

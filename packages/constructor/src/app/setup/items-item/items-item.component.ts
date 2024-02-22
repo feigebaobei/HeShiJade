@@ -1,16 +1,29 @@
-import { Component, Input, OnInit, 
-  // ViewChild
+import { Component, Input, OnInit, ViewChild, 
 } from '@angular/core';
+// import { ItemCategoryDirective } from 'src/app/item-category.directive';
+import { AdDirective } from 'src/app/ad.directive';
 import { ComponentService } from 'src/app/service/component.service';
+// toto delete
 // import { ItemsDirective } from 'src/app/items.directive';
 import { Form } from 'src/helper/items';
 // type
 import type { A, S, Options, } from 'src/types/base';
-import type { ComponentItem } from 'src/types/items';
+import type { ComponentItem, ComponentItemInput } from 'src/types/items';
 // 组件
 // import { PropsInputComponent } from '../props-input/props-input.component';
+// import { InputComponent } from './input/input.component';
+// import { InputComponent } from 'src/app/setup/items-item/input/input.component';
+// import { InputComponent } from 'src/app/setup/items-item/item-input.component';
+import { ItemInputComponent } from 'src/app/setup/items-item/item-input/item-input.component';
+// import { ButtonComponent } from 'src/app/components/button/button.component';
 
 let clog = console.log
+let compMap = {
+  // input: InputComponent,
+  // input: ButtonComponent,
+  input: ItemInputComponent,
+  
+}
 
 @Component({
   selector: 'app-items-item',
@@ -34,6 +47,8 @@ export class ItemsItemComponent implements OnInit {
   @Input() compType?: S
   // todo delete
   // @ViewChild(ItemsDirective, {static: true}) appItems!: ItemsDirective
+  // @ViewChild(ItemCategoryDirective, {static: true}) itemCategoryDirective!: ItemCategoryDirective
+  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
   items: A[]
   selectOptions: Options<S, S>[]
   // formData: {
@@ -44,30 +59,36 @@ export class ItemsItemComponent implements OnInit {
   // }
   formData: ComponentItem
   constructor(private componentService: ComponentService) {
-    // 收不到传来的数据
     this.items = []
     this.compType = ''
-    // this.selectOptions = [ // 默认值
-    //   // { label: 'input', value: 'input', },
-    //   // { label: 'select', value: 'select', },
-    //   // { label: 'switch', value: 'switch', },
-    // ]
     this.selectOptions = [] // 默认值
-    // clog('itemsItem', this.itemsItem)
     this.formData = this.itemsItem
-    // this.formData = null
-    // todo 来自itemsItem
-    // this.formData = {} as x
-    // this.formData = {
-    //   category: 'input',
-    //   key: '',
-    //   label: '',
-    //   value: '',
-    // }
   }
   ngOnInit() {
-    this.formData = this.itemsItem
-    clog('items init', this.itemsItem)
+    // this.formData = this.itemsItem
+    // clog('items init', this.itemsItem)
+    // let viewContainerRef = this.itemCategoryDirective.viewContainerRef
+    let viewContainerRef = this.adHost.viewContainerRef
+    viewContainerRef.clear()
+    let componentRef: A
+    clog('qwertyu', this.itemsItem.category)
+    switch (this.itemsItem.category) {
+      case 'input':
+        // componentRef = viewContainerRef.createComponent(InputComponent)
+        componentRef = viewContainerRef.createComponent(compMap['input'])
+        componentRef.instance.itemsItem = this.itemsItem
+        break;
+      case 'number':
+        break;
+      case 'select':
+        break;
+      case 'switch':
+        break;
+      // case '':
+        // break;
+    }
+
+    
     // clog('items init a', this.a)
     // todo delete
     // 不使用指令了。
@@ -88,21 +109,27 @@ export class ItemsItemComponent implements OnInit {
     //   case 'Form':
     //     this.selectOptions = Form.optionMap?['category'] || []
 
+
+
     //     break
     //   case 'Table':
     //     break;
     // }
-    switch(this.compType) {
-      case 'Form':
-        // clog(Form, Form.optionMap?.['category'])
-        this.selectOptions = Form.optionMap?.['category'] || []
-        // this.formData = Form.
-        break
-      case 'Table':
-        break
-      default:
-        break
-    }
+    // switch(this.compType) {
+    //   case 'Form':
+    //     // clog(Form, Form.optionMap?.['category'])
+    //     this.selectOptions = Form.optionMap?.['category'] || []
+    //     // this.formData = Form.
+    //     break
+    //   case 'Table':
+    //     break
+    //   default:
+    //     break
+    // }
+  }
+  ngOnDestroy() {
+    // this.itemCategoryDirective.viewContainerRef.clear();
+    this.adHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
     clog('deleteButtonClickH')
@@ -118,6 +145,6 @@ export class ItemsItemComponent implements OnInit {
     this.componentService.setCurComponentItem(this.formData.key, 'label', this.formData.label)
   }
   valueInputChangeH() {
-    this.componentService.setCurComponentItem(this.formData.key, 'value', this.formData.value)
+    this.componentService.setCurComponentItem(this.formData.key, 'value', (this.formData as ComponentItemInput).value)
   }
 }

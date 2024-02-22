@@ -107,11 +107,8 @@ let Form: componentConfig = {
                 category: 'switch',
                 key: 'gender',
                 label: '性别',
-                value: 1,
-                options: [
-                    { label: '男', value: 1 },
-                    { label: '女', value: 0 },
-                ],
+                checked: false,
+                // value: false,
             }
         ],
     },

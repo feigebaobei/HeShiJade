@@ -1,7 +1,6 @@
 <app-items-item
-    *ngFor="let a of componentItemsList"
-    [itemsItem]="a"
+    *ngFor="let item of componentItemsList"
+    [itemsItem]="item"
     [compType]="curComp?.type"
 >
 </app-items-item>
-<d-button *ngIf="addable" (click)="addButtonClickH()">添加一项</d-button>

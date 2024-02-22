@@ -6,6 +6,12 @@ import type { Options, S,
     } from "./base"
 
 type ComponentItem = ComponentItemEmpty | ComponentItemInput | ComponentItemNumber | ComponentItemSelect | ComponentItemSwitch 
+// interface ComponentItem {
+//     category: '',
+//     key: S
+//     label: S
+//     value?: S
+// }
 
 interface ComponentItemEmpty {
     category: '',
@@ -37,8 +43,8 @@ interface ComponentItemSwitch {
     category: 'switch',
     key: S
     label: S
-    value: S | B | N
-    options: Options<S, S | N | B>[]
+    checked: B
+    // value: B
 }
 
 export {

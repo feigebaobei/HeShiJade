@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 // 指令
 import { AdDirective } from './ad.directive';
+import { ItemsDirective } from './items.directive';
+import { ItemCategoryDirective } from './item-category.directive';
 
 // angular material
 // import { MatButtonModule } from '@angular/material/button';
@@ -57,10 +59,13 @@ import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-di
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
 import { ItemsBoxComponent } from './setup/items-box/items-box.component';
 import { ItemsItemComponent } from './setup/items-item/items-item.component';
-import { ItemsDirective } from './items.directive';
+import { ItemInputComponent } from './setup/items-item/item-input/item-input.component';
 
 @NgModule({
   declarations: [
+    AdDirective,
+    ItemsDirective,
+    ItemCategoryDirective,
     AppComponent,
     LoginComponent,
     ListComponent,
@@ -73,7 +78,6 @@ import { ItemsDirective } from './items.directive';
     PageListComponent,
     ComponentListComponent,
     CompBoxComponent,
-    AdDirective,
     CompItemComponent,
     ButtonComponent,
     ModalComponent,
@@ -93,7 +97,7 @@ import { ItemsDirective } from './items.directive';
     PublishDialogComponent,
     ItemsBoxComponent,
     ItemsItemComponent,
-    ItemsDirective,
+    ItemInputComponent,
     // IconModule,
   ],
   imports: [
