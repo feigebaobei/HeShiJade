@@ -1,4 +1,3 @@
-<!-- {{formData | json}} -->
 <form dForm ngForm>
     <d-form-item>
       <d-form-label [required]="true">种类</d-form-label>
@@ -45,6 +44,19 @@
             (ngModelChange)="valueInputChangeH()"
             />
         </div>
-        </d-form-control>
-    </d-form-item>
+    </d-form-control>
+</d-form-item>
+<d-form-item>
+    <d-form-label [hasHelp]="true" [helpTips]="helpTips">options</d-form-label>
+    <d-form-control>
+        <textarea 
+            dTextarea 
+            placeholder="如：one:1|two:2"
+            id="textArea"
+            name="options"
+            [(ngModel)]="options"
+            (ngModelChange)="valueTextareaChangeH()"
+        ></textarea>
+    </d-form-control>
+</d-form-item>
 </form>

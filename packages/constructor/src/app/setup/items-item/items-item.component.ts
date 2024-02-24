@@ -14,14 +14,20 @@ import type { ComponentItem, ComponentItemInput } from 'src/types/items';
 // import { InputComponent } from './input/input.component';
 // import { InputComponent } from 'src/app/setup/items-item/input/input.component';
 // import { InputComponent } from 'src/app/setup/items-item/item-input.component';
-import { ItemInputComponent } from 'src/app/setup/items-item/item-input/item-input.component';
 // import { ButtonComponent } from 'src/app/components/button/button.component';
+import { ItemInputComponent } from 'src/app/setup/items-item/item-input/item-input.component';
+import { ItemNumberComponent } from 'src/app/setup/items-item/item-number/item-number.component';
+import { ItemSelectComponent } from 'src/app/setup/items-item/item-select/item-select.component';
+import { ItemSwitchComponent } from 'src/app/setup/items-item/item-switch/item-switch.component';
 
 let clog = console.log
 let compMap = {
   // input: InputComponent,
   // input: ButtonComponent,
   input: ItemInputComponent,
+  number: ItemNumberComponent,
+  select: ItemSelectComponent,
+  switch: ItemSwitchComponent,
   
 }
 
@@ -79,10 +85,16 @@ export class ItemsItemComponent implements OnInit {
         componentRef.instance.itemsItem = this.itemsItem
         break;
       case 'number':
+        componentRef = viewContainerRef.createComponent(compMap['number'])
+        componentRef.instance.itemsItem = this.itemsItem
         break;
       case 'select':
+        componentRef = viewContainerRef.createComponent(compMap['select'])
+        componentRef.instance.itemsItem = this.itemsItem
         break;
       case 'switch':
+        componentRef = viewContainerRef.createComponent(compMap['switch'])
+        componentRef.instance.itemsItem = this.itemsItem
         break;
       // case '':
         // break;

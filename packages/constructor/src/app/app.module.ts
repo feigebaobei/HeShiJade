@@ -60,6 +60,9 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
 import { ItemsBoxComponent } from './setup/items-box/items-box.component';
 import { ItemsItemComponent } from './setup/items-item/items-item.component';
 import { ItemInputComponent } from './setup/items-item/item-input/item-input.component';
+import { ItemNumberComponent } from './setup/items-item/item-number/item-number.component';
+import { ItemSwitchComponent } from './setup/items-item/item-switch/item-switch.component';
+import { ItemSelectComponent } from './setup/items-item/item-select/item-select.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +101,9 @@ import { ItemInputComponent } from './setup/items-item/item-input/item-input.com
     ItemsBoxComponent,
     ItemsItemComponent,
     ItemInputComponent,
+    ItemNumberComponent,
+    ItemSwitchComponent,
+    ItemSelectComponent,
     // IconModule,
   ],
   imports: [

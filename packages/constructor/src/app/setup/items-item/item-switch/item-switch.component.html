@@ -1,4 +1,4 @@
-<!-- {{formData | json}} -->
+
 <form dForm ngForm>
     <d-form-item>
       <d-form-label [required]="true">种类</d-form-label>
@@ -11,7 +11,7 @@
         ></d-select>
       </d-form-control>
     </d-form-item>
-        <d-form-item>
+    <d-form-item>
           <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
           <d-form-control>
           <div>
@@ -21,8 +21,8 @@
               />
           </div>
           </d-form-control>
-      </d-form-item>
-      <d-form-item>
+    </d-form-item>
+    <d-form-item>
       <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
       <d-form-control>
       <div>
@@ -32,18 +32,12 @@
           />
       </div>
       </d-form-control>
-  </d-form-item>
-      
+    </d-form-item>
     <d-form-item>
         <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
         <d-form-control>
         <div>
-            <input 
-            *ngIf="['input', 'select'].includes(formData.category)"
-            dTextInput autocomplete="off" name="value"
-            [(ngModel)]="formData.value"
-            (ngModelChange)="valueInputChangeH()"
-            />
+            <d-toggle [checked]="formData.checked" [size]="'lg'"></d-toggle>
         </div>
         </d-form-control>
     </d-form-item>
