@@ -1,4 +1,8 @@
-<div>
+<div
+    [class]="{
+        box: true,
+        disvisible: !data.props.visible
+    }">
     <header>title: {{data.props.title}}
         <d-icon [icon]="'icon-close'"></d-icon>
     </header>
