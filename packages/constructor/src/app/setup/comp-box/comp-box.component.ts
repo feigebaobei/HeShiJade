@@ -104,7 +104,6 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         }
         break
       case 'Form':
-        clog('sdfsdf', this.comp)
         this.componentRef.instance.data = {
           props: this.comp.props,
           items: this.comp.item,
@@ -130,6 +129,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.adHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
+    // 应该调用service中的方法
     if (this.curComp) {
       this.componentService.delete(this.curComp.ulid, this.curComp.pageUlid)
       this.http.delete<ResponseData>('http://localhost:5000/components', {

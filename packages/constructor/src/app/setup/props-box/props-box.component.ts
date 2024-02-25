@@ -50,6 +50,7 @@ export class PropsBoxComponent {
     // 先清空
     this.componentPropsList = []
     // 再赋值
+    // 取出模板再赋值当前值
     switch(this.curComp?.type) {
       case 'Button':
         this.componentPropsMeta = buttonPropsMeta

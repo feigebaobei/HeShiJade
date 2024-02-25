@@ -27,9 +27,8 @@ export class PropsInputComponent implements OnInit, OnChanges {
     console.log('ngModel', p)
   }
   change() {
-    this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
-    // // clog('curr r rs', this.componentService.curComponent(), this.data.propKey, this.data.value)
+    // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
+    this.componentService.setComponentProp(this.data.propKey, this.data.value)
     this.componentService.reqUpdateComponentProps('props', this.data.propKey, this.data.value)
-    // console.log('change', this.data.value)
   }
 }

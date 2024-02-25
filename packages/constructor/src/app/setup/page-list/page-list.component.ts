@@ -32,7 +32,7 @@ export class PageListComponent implements OnInit {
   curPage?: Page | null
   constructor(
     private dialogService: DialogService,
-    private appService: AppService,
+    // private appService: AppService,
     private pageService: PageService,
   ) {
     this.pageList = []

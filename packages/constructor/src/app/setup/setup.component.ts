@@ -73,7 +73,6 @@ export class SetupComponent implements OnInit {
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
     let appList = this.appService.getAppList()
-    // clog('sdsd')
     if (appList.length) {
       this.appService.setCurApp(appUlid)
     } else {

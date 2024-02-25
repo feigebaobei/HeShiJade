@@ -230,7 +230,6 @@ export class ComponentService {
   }
   // 设置当前组件的prop
   setCurComponentProp(key: S, value: PropsValue) {
-    // debugger
     let curComp = this.curComponent()
     let curPage = this.pageService.getCurPage()
     if (curPage && curComp) {
@@ -248,6 +247,15 @@ export class ComponentService {
       }
     }
   }
+  // 直接改变属性
+  setComponentProp(key: S, value: PropsValue) {
+    let curComp: CompOrUn = this.curComponent()
+    if (curComp) {
+      curComp.props[key] = value
+    }
+  }
+
+
   // setCurComponentItem(key: S, k: keyof ComponentItem, v: A) {
   // setCurComponentItem(key: S, k: 'category' | 'key' | 'label' | 'value' | 'checked', v: A) {
   setCurComponentItem(key: S, k: keyof ComponentItemInput
