@@ -5,6 +5,8 @@ import { DoublyChain } from 'data-footstone'
 import { PageService } from './page.service';
 // 数据
 import {categoryList} from 'src/helper/category'
+import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
+// 类型
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, PropsValue } from '../../types/component'
 import type { ComponentItem,
@@ -82,7 +84,8 @@ export class ComponentService {
           let curPage = this.pageService.getCurPage()
           if (curPage) {
             let nextComponentUlid = curPage?.firstComponentUlid
-            while (nextComponentUlid) {
+            let threshold: null | N = 0
+            while (nextComponentUlid && threshold < COMPONENTTOTALMAXOFPAGE) {
               let comp = (res.data as Component[] || []).find((item: Component) => item.ulid === nextComponentUlid)
               if (comp) {
                 let dc = this._map.get(String(curPage?.ulid))
@@ -95,7 +98,10 @@ export class ComponentService {
                 }
               }
               nextComponentUlid = comp?.nextUlid
+              threshold++
             }
+            clog('threshold', threshold)
+            threshold = null
             let arr = this._map.get(curPage.ulid)!.toArray()
             this.componentListByCurPage$.next(arr)
           }
@@ -183,13 +189,17 @@ export class ComponentService {
         let doubleChain = new DoublyChain<Component>()
         let curPage = this.pageService.getCurPage()
         let nextComponentUlid = curPage?.firstComponentUlid
-        while (nextComponentUlid) {
+        let threshold: null | N = 0
+        while (nextComponentUlid && threshold < COMPONENTTOTALMAXOFPAGE) {
           let component = componentList.find(item => item.ulid === nextComponentUlid)
           if (component) {
             doubleChain.append(component)
           }
           nextComponentUlid = component?.nextUlid
+          threshold++
         }
+        clog('threshold', threshold)
+        threshold = null
         this._map.set(pageUlid, doubleChain)
         return doubleChain.toArray()
       })
