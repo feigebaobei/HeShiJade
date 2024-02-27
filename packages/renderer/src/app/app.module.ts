@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // import { BrowserAnimationsModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DevUIModule } from 'ng-devui';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { FormComponent } from './components/form/form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { SelectComponent } from './components/select/select.component';
     BrowserAnimationsModule,
     DevUIModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
