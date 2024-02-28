@@ -155,9 +155,42 @@ let Modal: ComponentPropsMetaRaw = {
         overFields: ['value'],
     },
 }
+let Form: ComponentPropsMetaRaw = {
+    layout: {
+        type: 'select',
+        options: [
+            { label: '水平', value: 'horizontal' },
+            { label: '竖直', value: 'vertical' },
+        ],
+        value: true,
+        label: '排版',
+        overFields: ['value'],
+    },
+    isCancel: {
+        type: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: true,
+        label: '是否有取消按钮',
+        overFields: ['value'],
+    },
+    isSubmit: {
+        type: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: true,
+        label: '是否有提交按钮',
+        overFields: ['value'],
+    },
+}
 export {
     Button,
     Input,
     Select,
     Modal,
+    Form,
 }

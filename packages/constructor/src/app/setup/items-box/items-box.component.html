@@ -1,0 +1,8 @@
+<!-- {{componentItemsList | json}} -->
+<!-- {{ JSON.stringify(componentItemsList, (_k, v) => v, 2) }} -->
+<app-items-item
+    *ngFor="let item of componentItemsList"
+    [itemsItem]="item"
+    [compType]="curComp?.type"
+>
+</app-items-item>

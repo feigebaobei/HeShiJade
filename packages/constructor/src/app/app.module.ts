@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 // 指令
 import { AdDirective } from './ad.directive';
+import { ItemsDirective } from './items.directive';
+import { ItemCategoryDirective } from './item-category.directive';
 
 // angular material
 // import { MatButtonModule } from '@angular/material/button';
@@ -55,9 +57,18 @@ import { PropsItemComponent } from './setup/props-item/props-item.component';
 import { PropsOptionComponent } from './setup/props-option/props-option.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
+import { ItemsBoxComponent } from './setup/items-box/items-box.component';
+import { ItemsItemComponent } from './setup/items-item/items-item.component';
+import { ItemInputComponent } from './setup/items-item/item-input/item-input.component';
+import { ItemNumberComponent } from './setup/items-item/item-number/item-number.component';
+import { ItemSwitchComponent } from './setup/items-item/item-switch/item-switch.component';
+import { ItemSelectComponent } from './setup/items-item/item-select/item-select.component';
 
 @NgModule({
   declarations: [
+    AdDirective,
+    ItemsDirective,
+    ItemCategoryDirective,
     AppComponent,
     LoginComponent,
     ListComponent,
@@ -70,7 +81,6 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PageListComponent,
     ComponentListComponent,
     CompBoxComponent,
-    AdDirective,
     CompItemComponent,
     ButtonComponent,
     ModalComponent,
@@ -88,6 +98,12 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PropsOptionComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
+    ItemsBoxComponent,
+    ItemsItemComponent,
+    ItemInputComponent,
+    ItemNumberComponent,
+    ItemSwitchComponent,
+    ItemSelectComponent,
     // IconModule,
   ],
   imports: [

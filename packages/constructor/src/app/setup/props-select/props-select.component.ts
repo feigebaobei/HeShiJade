@@ -11,6 +11,7 @@ export class PropsSelectComponent {
   @Input() data: A
   constructor(private componentService: ComponentService) {}
   change() {
-    this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
+    // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
+    this.componentService.setComponentProp(this.data.propKey, this.data.value)
   }
 }

@@ -25,7 +25,10 @@ let Button: componentConfig = {
             }
         }
     ],
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: 'button',
 }
 let Input: componentConfig = {
@@ -36,7 +39,10 @@ let Input: componentConfig = {
         styleType: 'default',
     },
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 let Modal: componentConfig = {
@@ -47,7 +53,10 @@ let Modal: componentConfig = {
         placement: 'center',
     },
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 let Select: componentConfig = {
@@ -62,19 +71,56 @@ let Select: componentConfig = {
         placeholder: '',
     },
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 let Form: componentConfig = {
-    props: {},
+    props: {
+        layout: 'horizontal',
+        isCancel: true,
+        isSubmit: true,
+    },
     behavior: {},
-    item: {},
+    item: {
+        addable: true, // 是否可增加
+        groups: [
+            {
+                category: 'input',
+                key: 'name',
+                label: '姓名',
+                value: '张三',
+            },
+            {
+                category: 'select',
+                key: 'interest',
+                label: '爱好',
+                value: '读书',
+                options: [
+                    { label: '旅游', value: 'travel' },
+                    { label: '读书', value: 'read' },
+                ],
+            },
+            {
+                category: 'switch',
+                key: 'gender',
+                label: '性别',
+                checked: false,
+                // value: false,
+            }
+        ],
+    },
     slot: '',
 }
 let Table: componentConfig = {
     props: {},
     behavior: {},
-    item: {},
+    item: {
+        addable: true,
+        groups: [],
+    },
     slot: '',
 }
 export {

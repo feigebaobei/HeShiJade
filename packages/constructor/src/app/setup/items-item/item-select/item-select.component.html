@@ -1,0 +1,62 @@
+<form dForm ngForm>
+    <d-form-item>
+      <d-form-label [required]="true">种类</d-form-label>
+      <d-form-control>
+        <d-select [options]="selectOptions" 
+        name="category"
+        [filterKey]="'label'" [valueKey]="'value'" 
+        [(ngModel)]="formData!.category"
+        (ngModelChange)="categorySelectChangeH()"
+        ></d-select>
+      </d-form-control>
+    </d-form-item>
+        <d-form-item>
+          <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">key</d-form-label>
+          <d-form-control>
+          <div>
+              <input dTextInput autocomplete="off" name="key"
+              [(ngModel)]="formData.key"
+              (ngModelChange)="keyInputChangeH()"
+              />
+          </div>
+          </d-form-control>
+      </d-form-item>
+      <d-form-item>
+      <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">label</d-form-label>
+      <d-form-control>
+      <div>
+          <input dTextInput autocomplete="off" name="label"
+          [(ngModel)]="formData.label"
+          (ngModelChange)="labelInputChangeH()"
+          />
+      </div>
+      </d-form-control>
+  </d-form-item>
+      
+    <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">value</d-form-label>
+        <d-form-control>
+        <div>
+            <input 
+            *ngIf="['input', 'select'].includes(formData.category)"
+            dTextInput autocomplete="off" name="value"
+            [(ngModel)]="formData.value"
+            (ngModelChange)="valueInputChangeH()"
+            />
+        </div>
+    </d-form-control>
+</d-form-item>
+<d-form-item>
+    <d-form-label [hasHelp]="true" [helpTips]="helpTips">options</d-form-label>
+    <d-form-control>
+        <textarea 
+            dTextarea 
+            placeholder="如：one:1|two:2"
+            id="textArea"
+            name="options"
+            [(ngModel)]="options"
+            (ngModelChange)="valueTextareaChangeH()"
+        ></textarea>
+    </d-form-control>
+</d-form-item>
+</form>

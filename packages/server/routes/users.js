@@ -140,7 +140,7 @@ router.route('/login')
         password: req.body.password,
       },
     }).then((response) => {
-      clog('response', response)
+      // clog('response', response)
       if (response.code === 0) {
         return response.data
       } else {

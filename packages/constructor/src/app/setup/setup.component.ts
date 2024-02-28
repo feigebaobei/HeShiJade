@@ -73,7 +73,6 @@ export class SetupComponent implements OnInit {
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
     let appList = this.appService.getAppList()
-    // clog('sdsd')
     if (appList.length) {
       this.appService.setCurApp(appUlid)
     } else {
@@ -114,6 +113,7 @@ export class SetupComponent implements OnInit {
       pageUlid: curPage!.ulid,
     }
     this.componentService.postCompListByPage(obj)
+    // this.componentService.postCompListByPageForLocal(obj)
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {

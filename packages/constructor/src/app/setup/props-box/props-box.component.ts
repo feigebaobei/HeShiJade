@@ -17,6 +17,7 @@ import {
   Input as inputPropsMeta,
   Select as selectPropsMeta,
   Modal as modalPropsMeta,
+  Form as formPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -49,6 +50,7 @@ export class PropsBoxComponent {
     // 先清空
     this.componentPropsList = []
     // 再赋值
+    // 取出模板再赋值当前值
     switch(this.curComp?.type) {
       case 'Button':
         this.componentPropsMeta = buttonPropsMeta
@@ -113,8 +115,20 @@ export class PropsBoxComponent {
         break
       // case 'Table':
       //   break
-      // case 'Form':
-      //   break
+      case 'Form':
+        this.componentPropsMeta = formPropsMeta
+        Object.keys(this.componentPropsMeta).forEach((key) => {
+          let o: CPMI = {
+            ...this.componentPropsMeta[key],
+            propKey: key,
+            componentUlid: this.curComp!.ulid
+          }
+          o.overFields.forEach(field => {
+            o[field] = this.curComp?.props[key]
+          })
+          this.componentPropsList.push(o)
+        })
+        break
       default:
         this.componentPropsMeta = {}
         break

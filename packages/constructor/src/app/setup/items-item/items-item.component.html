@@ -1,0 +1,15 @@
+<div
+    dPopover
+    class="box"
+    [content]="customTemplate" 
+    [trigger]="'hover'" 
+    [controlled]="true"
+    [position]="'top-right'"
+>
+    <!-- <ng-template appItemCategory></ng-template> -->
+    <ng-template adHost></ng-template>
+</div>
+
+<ng-template #customTemplate>
+    <d-button bsSize="xs" icon="icon-delete" (click)="deleteButtonClickH()"></d-button>
+</ng-template>

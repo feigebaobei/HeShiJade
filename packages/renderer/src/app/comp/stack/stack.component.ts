@@ -57,7 +57,8 @@ export class StackComponent {
         break;
       case 'Form':
         this.componentRef.instance.data = {
-          props: this.data.props
+          props: this.data.props,
+          items: this.data.item,
         }
         break;
       case 'Modal':
@@ -65,10 +66,16 @@ export class StackComponent {
           props: this.data.props
         }
         break;
-      // case 'Input':
-      //   break;
-      // case 'Select':
-      //   break;
+      case 'Input':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+        }
+        break;
+      case 'Select':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+        }
+        break;
     }
   }
 }

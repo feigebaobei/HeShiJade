@@ -1,13 +1,13 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { AdDirective } from 'src/app/ad.directive';
 // 组件
-// import { ButtonComponent } from 'ng-devui';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { FormComponent } from 'src/app/components/form/form.component';
 import { InputComponent } from 'src/app/components/input/input.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
 import { TableComponent } from 'src/app/components/table/table.component';
+import { HttpClient } from '@angular/common/http';
 // service
 import { ComponentService } from 'src/app/service/component.service';
 // type
@@ -21,6 +21,8 @@ Select as selectDefaultData,
 Form as formDefaultData,
 Table as tableDefaultData,
  } from '../../../helper/component'
+import { ResponseData } from 'src/types';
+import { PageService } from 'src/app/service/page.service';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所有我考虑使用封装全部devui的组件来实现.
@@ -47,7 +49,11 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   // private clearTimer: VoidFunction | undefined;
   curComp?: Comp | null
   componentRef: A
-  constructor(private componentService: ComponentService) {
+  constructor(
+    // private pageService: PageService,
+    private componentService: ComponentService,
+    private http: HttpClient,
+  ) {
     this.curComp = null
     this.componentRef
     this.componentService.compSubject$.subscribe(p => {
@@ -67,10 +73,6 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.init()
   }
   init() {
-  //   this.update()
-  // }
-  // update() {
-    console.log('init comp', this.comp)
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
@@ -86,7 +88,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
       case 'Input':
         this.componentRef.instance.data = {
-          props: inputDefaultData.props
+          // props: inputDefaultData.props
+          props: this.comp.props
         }
         break
       case 'Modal':
@@ -97,17 +100,18 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
       case 'Select':
         this.componentRef.instance.data = {
-          props: selectDefaultData.props
+          props: this.comp.props
         }
         break
       case 'Form':
         this.componentRef.instance.data = {
-          props: formDefaultData.props
+          props: this.comp.props,
+          items: this.comp.item,
         }
         break
       case 'Table':
         this.componentRef.instance.data = {
-          props: tableDefaultData.props
+          props: this.comp.props
         }
         break
     }
@@ -124,5 +128,20 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.adHost.viewContainerRef.clear();
   }
-
+  deleteButtonClickH() {
+    // 应该调用service中的方法
+    if (this.curComp) {
+      this.componentService.delete(this.curComp.ulid, this.curComp.pageUlid)
+      this.http.delete<ResponseData>('http://localhost:5000/components', {
+        params: {
+          ulid: this.curComp?.ulid || ''
+        },
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          clog('删除成功')
+        }
+      })
+    }
+  }
 }

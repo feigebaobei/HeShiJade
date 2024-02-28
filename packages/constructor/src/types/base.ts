@@ -19,6 +19,10 @@ interface SelectOptionsItem {
     diabled?: B // 是否可用
     valueType?: ValueType // 值的类型，优先级高于ComponentPropsMetaItemRaw的valueType
 }
+interface Options<T, G> {
+    label: T,
+    value: G,
+}
 
 export type {
     S, N, A, B, ULID, 
@@ -26,4 +30,5 @@ export type {
     F, Ao, O,
     ValueType,
     SelectOptionsItem,
+    Options,
 }

@@ -152,18 +152,118 @@ router.route('/')
       data: {}
     })
   }).catch(code => {
-    return res.code(200).json({
+    return res.status(200).json({
       code,
       message: errorCode[code],
       data: {}
     })
   })
 })
+// 更新组件
 .put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
+  // 校验参数
+  // 更新数据
+  // 返回值
+  new Promise((s, j) => {
+    if (
+      rules.required(req.body.ulid) &&
+      rules.required(req.body.type) &&
+      rules.required(req.body.key) &&
+      rules.required(req.body.value)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: {
+      [`props.${req.body.key}`]: req.body.value
+    }}).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch(code => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
+  // 校验参数：必填+存在
+  // 处理页面级数据
+  // 处理组件级数据
+  let component, page
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('components_dev').findOne({ulid: req.query.ulid}).then((comp) => {
+      component = comp
+      return true
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then(() => {
+    return lowcodeDb.collection('pages_dev').findOne({ulid: component.pageUlid}).then((p) => {
+      page = p
+      return true
+    }).catch(() => {
+      return Promise.reject(2000101)
+    })
+  }).then(() => {
+    let arr = [lowcodeDb.collection('components_dev').deleteOne({ulid: component.ulid})]
+    if (component.prevUlid) { // 前面有组件
+      // lowcodeDb.collection('page')
+      if (component.nextUlid === '') { // 后面无组件
+        let p1 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {lastComponentUlid: component.prevUlid}})
+        let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.prevUlid}, {$set: {nextUlid: ''}})
+        arr.push(p1, p2)
+      } else { // 后面有组件 等效于 它在中间
+        // page不变
+        let p1 = lowcodeDb.collection('components_dev').updateOne({ulid: component.prevUlid}, {$set: {nextUlid: component.nextUlid}})
+        let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {nextUlid: component.prevUlid}})
+        arr.push(p1, p2)
+      }
+    } else { // 前面没有组件
+      if (component.nextUlid === '') { // 等效于 page.firstComponentUlid === page.lastComponentUlid // 只有一个组件
+        let p1 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {
+          firstComponentUlid: '',
+          lastComponentUlid: '',
+        }})
+        arr.push(p1)
+      } else {
+        let p1 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {prevUlid: ''}})
+        let p2 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {firstComponentUlid: component.nextUlid}})
+        arr.push(p1, p2)
+      }
+    }
+    return Promise.all(arr).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {},
+    })
+  }).catch((code) => {
+    clog('da', code)
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 
 router.route('/listByPage')
@@ -203,31 +303,6 @@ router.route('/listByPage')
   // 先做成保存到数据库的。
   // 插入当前组件
   // 修改前组件
-  // componentsDb.collection('components').insertOne({
-  //   ulid: req.body.ulid,
-  //   type: req.body.type,
-  //   next: '',
-  //   prev: req.body.prev,
-  //   props: req.body.props,
-  //   behavior: req.body.behavior,
-  //   item: req.body.item,
-  //   slot: req.body.slot,
-  //   appUlid: req.body.appUlid,
-  //   pageUlid: req.body.pageUlid,
-  // }).then(() => {
-  //   res.status(200).json({
-  //     code: 0,
-  //     message: 'ok',
-  //     data: {},
-  //   })
-  // }).catch(error => {
-  //   res.status(200).json({
-  //     code: 200200,
-  //     message: "保存时出错",
-  //     data: error
-  //   })
-  // })
-  // return 
   componentsDb.collection('components').bulkWrite([
     {
       updateOne: {

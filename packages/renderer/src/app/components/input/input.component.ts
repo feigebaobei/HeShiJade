@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, } from '@angular/core';
+import { A } from 'src/types/base';
 
 @Component({
   selector: 'app-input',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./input.component.sass']
 })
 export class InputComponent {
-
+  @Input() data: A
+  constructor() {}
 }
