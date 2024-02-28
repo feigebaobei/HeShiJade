@@ -219,7 +219,6 @@ put
 
 ### renderer 渲染侧
 
-
 问问后端同学实现权限的事。
 
 #### 运行逻辑
@@ -235,6 +234,35 @@ put
 使用comp/stack完成动态组件
 components目录里是所有支持的组件
 由源组件在指定事件时触发共享事件+传递相关数据，由目标组件接收共享事件+相关数据，再执行相关逻辑
+```
+
+行为源在xx事件时向行为目标传递xx数据。行为目标监听xx事件,接收xx数据后执行相关逻辑。
+
+```
+{
+  origin // 不需要
+  event: EventName,
+  target: ULID,
+  payload: any,
+}
+{
+  event: {
+    type: 'select',
+    options: [
+      {label: '单击', value: 'click'},
+    ],
+    value: undefined,
+    label: '事件',
+  },
+  target: {
+    type: 'input',
+    value: '',
+  },
+  payload: {
+    type: 'textarea',
+    value: '',
+  },
+}
 ```
 
 #### routes

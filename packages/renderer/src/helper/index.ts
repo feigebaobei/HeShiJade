@@ -2,6 +2,7 @@ import { A, S } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import { DoublyChain } from 'data-footstone';
+import shareEvent from './share-event';
 
 // 因类型不以，无法使用此方法了。
 let reqToPromise = (fn: Observable<ResponseData>) => {
@@ -39,4 +40,5 @@ export {
   reqToPromise,
   // createCompKey,
   arrToChain,
+  shareEvent,
 }
