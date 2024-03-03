@@ -13,6 +13,8 @@ import { BehaviorMeta, BehaviorItem } from 'src/types/behavior';
 //   } from "src/types/base"
 type keyType = 'event' | 'target' | 'payload'
 
+let clog = console.log
+
 @Component({
   selector: 'app-behavior-box',
   templateUrl: './behavior-box.component.html',
@@ -52,24 +54,9 @@ export class BehaviorBoxComponent {
       case 'Button':
         this.componentBehaviorMeta = buttonBehaviorMeta
         this.curComp.behavior.groups.forEach(item => {
-          // let arr: keyType[] = Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>
-          let o: BehaviorItem // = {...this.componentBehaviorMeta}
-          // o = {...this.componentBehaviorMeta}
-          o = JSON.parse(JSON.stringify(this.componentBehaviorMeta))
+          let o: BehaviorItem
+          o = JSON.parse(JSON.stringify(this.componentBehaviorMeta));
           (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
-            // switch (key) {
-            //   case 'event': 
-            //     break
-            // }
-            // let o = {
-            //   ...this.componentBehaviorMeta[key],
-            //   value: item[key],
-            // }
-            // this.componentBehaviorList.push(o)
-            // o = {
-
-            // }
-            // o[key] = this.componentBehaviorMeta[key]
             o[key].value = item[key]
           })
           this.componentBehaviorList.push(o)
