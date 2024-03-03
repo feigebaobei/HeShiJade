@@ -2,6 +2,12 @@
 // component文件 定义数据。
 // props文件     定义结构
 // 这是所有组件的默认配置数据
+import type { Options, S,
+    //  A, ULID, B, N, 
+    // Options, 
+    B,
+    N,
+    } from "../types/base"
 import type { componentConfig } from '../types/component'
 
 let Button: componentConfig = {
@@ -12,19 +18,16 @@ let Button: componentConfig = {
         disabled: false,
         width: '100px',
     },
-    // behavior: {
-        
-    // },
-    behavior: [
-        {
-            event: 'click',
-            type: 'relation',
-            target: 'ulid',
-            props: {
-                visible: true
-            }
-        }
-    ],
+    behavior: {
+        addable: true,
+        groups: [
+            {
+                event: 'click',
+                target: 'ulid',
+                payload: '{"visible": true}',
+            },
+        ],
+    },
     item: {
         addable: true,
         groups: [],
@@ -38,7 +41,10 @@ let Input: componentConfig = {
         showGlowStyle: true,
         styleType: 'default',
     },
-    behavior: {},
+    behavior: {
+        addable: true,
+        groups: []
+    },
     item: {
         addable: true,
         groups: [],
@@ -52,7 +58,10 @@ let Modal: componentConfig = {
         width: '',
         placement: 'center',
     },
-    behavior: {},
+    behavior: {
+        addable: true,
+        groups: []
+    },
     item: {
         addable: true,
         groups: [],
@@ -70,7 +79,10 @@ let Select: componentConfig = {
         size: '',
         placeholder: '',
     },
-    behavior: {},
+    behavior: {
+        addable: true,
+        groups: []
+    },
     item: {
         addable: true,
         groups: [],
@@ -83,7 +95,10 @@ let Form: componentConfig = {
         isCancel: true,
         isSubmit: true,
     },
-    behavior: {},
+    behavior: {
+        addable: true,
+        groups: []
+    },
     item: {
         addable: true, // 是否可增加
         groups: [
@@ -116,7 +131,17 @@ let Form: componentConfig = {
 }
 let Table: componentConfig = {
     props: {},
-    behavior: {},
+    behavior: {
+        // addable: B,
+        // groups: BehaviorItem[],
+        addable: true,
+        groups: []
+    },
+    // behavior: BehaviorMeta,
+    // behavior: {
+    //     addable: true,
+    //     groups: BehaviorMeta[]
+    // },
     item: {
         addable: true,
         groups: [],

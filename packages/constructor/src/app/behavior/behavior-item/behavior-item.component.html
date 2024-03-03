@@ -1,0 +1,15 @@
+<p>behavior-item works!</p>
+<form dForm ngForm>
+    <d-form-item>
+        <d-form-label>{{behavior.event.label}}</d-form-label>
+    </d-form-item>
+    <d-form-control>
+        <d-select [options]="behavior.event.options"
+            name="event"
+            [filterKey]="'label'"
+            [valueKey]="'value'"
+            [(ngModel)]="behavior.event.value"
+            (ngModelChange)="eventValueChange()"
+        ></d-select>
+    </d-form-control>
+</form>

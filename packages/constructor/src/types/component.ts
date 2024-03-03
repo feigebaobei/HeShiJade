@@ -1,5 +1,6 @@
 import type {N, B, A, S, ULID, O, SelectOptionsItem} from './base'
 import type { ComponentItem } from './items'
+import type { BehaviorMeta } from './behavior'
 
 type PropsValue = S | B | N | S[] | SelectOptionsItem[]
 interface Component {
@@ -14,7 +15,11 @@ interface Component {
   props: {
     [k: S]: PropsValue
   }
-  behavior: O
+  behavior: BehaviorMeta,
+  // behavior: {
+  //   addable: B
+  //   groups: BehaviorMeta[]
+  // }
   item: {
     addable: B
     groups: ComponentItem[]
@@ -32,7 +37,11 @@ interface componentConfig {
   props: {
     [k: S]: PropsValue,
   },
-  behavior: O
+  behavior: BehaviorMeta,
+  // behavior: {
+  //   addadble: B
+  //   groups: BehaviorMeta[]
+  // }
   item: {
     addable: B,
     groups: ComponentItem[]

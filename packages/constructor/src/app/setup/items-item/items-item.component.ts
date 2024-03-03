@@ -100,44 +100,6 @@ export class ItemsItemComponent implements OnInit {
         // break;
     }
 
-    
-    // clog('items init a', this.a)
-    // todo delete
-    // 不使用指令了。
-    // let viewContainerRef = this.appItems.viewContainerRef
-    // viewContainerRef.clear() // 先清空
-    // let componentRef: A
-    // switch(this.itemsItem.category) {
-    //   case 'input':
-    //     default:
-    //       componentRef = viewContainerRef.createComponent(PropsInputComponent)
-    //       componentRef.instance.data = this.itemsItem
-    //       break
-    // }
-    // todo 日后会把form组件的item抽离为单独的item组件
-    // 按组件种类渲染相应的组件
-    // let 
-    // switch (this.compType) {
-    //   case 'Form':
-    //     this.selectOptions = Form.optionMap?['category'] || []
-
-
-
-    //     break
-    //   case 'Table':
-    //     break;
-    // }
-    // switch(this.compType) {
-    //   case 'Form':
-    //     // clog(Form, Form.optionMap?.['category'])
-    //     this.selectOptions = Form.optionMap?.['category'] || []
-    //     // this.formData = Form.
-    //     break
-    //   case 'Table':
-    //     break
-    //   default:
-    //     break
-    // }
   }
   ngOnDestroy() {
     // this.itemCategoryDirective.viewContainerRef.clear();

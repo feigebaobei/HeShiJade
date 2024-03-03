@@ -44,15 +44,18 @@
 //         minLength: 1,
 //         addable: true
 //     },
+
+import { BehaviorItem } from "src/types/behavior"
+
 // }
-let Button = {
+let Button: BehaviorItem = {
   event: {
     type: 'select',
     options: [
       {label: '单击', value: 'click'},
       {label: '双击', value: 'dbClick'},
     ],
-    value: undefined,
+    value: '',
     label: '事件',
   },
   target: {
