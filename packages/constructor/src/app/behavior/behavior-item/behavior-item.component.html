@@ -1,15 +1,34 @@
-<p>behavior-item works!</p>
 <form dForm ngForm>
     <d-form-item>
-        <d-form-label>{{behavior.event.label}}</d-form-label>
+        <d-form-label>{{behavior.event.label}} {{index}}</d-form-label>
+        <d-form-control>
+            <d-select [options]="behavior.event.options"
+                name="event"
+                [filterKey]="'label'"
+                [valueKey]="'value'"
+                [(ngModel)]="behavior.event.value"
+                (ngModelChange)="eventValueChange(behavior.event.value)"
+            ></d-select>
+        </d-form-control>
     </d-form-item>
-    <d-form-control>
-        <d-select [options]="behavior.event.options"
-            name="event"
-            [filterKey]="'label'"
-            [valueKey]="'value'"
-            [(ngModel)]="behavior.event.value"
-            (ngModelChange)="eventValueChange()"
-        ></d-select>
-    </d-form-control>
+    <d-form-item>
+        <!-- <d-form-label>{{behavior.target.label}}</d-form-label> -->
+        <d-form-label>目标</d-form-label>
+        <d-form-control>
+            <input dTextInput name="target"
+                [(ngModel)]="behavior.target.value"
+                (ngModelChange)="targetInputChangeH(behavior.target.value)"
+            >
+        </d-form-control>
+    </d-form-item>
+    <d-form-item>
+        <!-- <d-form-label>{{behavior.payload.label}}</d-form-label> -->
+        <d-form-label>载荷</d-form-label>
+        <d-form-control>
+            <input dTextInput name="payload"
+                [(ngModel)]="behavior.payload.value"
+                (ngModelChange)="payloadInputChangeH(behavior.payload.value)"
+            >
+        </d-form-control>
+    </d-form-item>
 </form>

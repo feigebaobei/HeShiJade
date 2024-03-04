@@ -32,8 +32,10 @@ interface BehaviorItem {
     },
 }
 
+type BehaviorItemKey = 'event' | 'target' | 'payload' // keyof typeof BehaviorItem
 
 export {
     BehaviorItem,
     BehaviorMeta,
+    BehaviorItemKey,
 }

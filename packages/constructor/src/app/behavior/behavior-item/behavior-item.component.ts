@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ComponentService } from 'src/app/service/component.service';
 import { BehaviorMeta, BehaviorItem, } from 'src/types/behavior';
+import { N, S } from 'src/types/base';
 
 let clog = console.log
 
@@ -11,18 +13,19 @@ let clog = console.log
 export class BehaviorItemComponent {
   // @Input() behavior!: BehaviorMeta
   @Input() behavior!: BehaviorItem
-  constructor() {
+  @Input() index!: N
+  constructor(private componentService: ComponentService) {
     
   }
-  // switch (this.behavior.type) {
-  //   case value:
-      
-  //     break;
-  
-  //   default:
-  //     break;
-  // }
-  eventValueChange() {
-    clog('eventValueChange')
+  eventValueChange(value: S) {
+    this.componentService.setComponentsBehavior('behavior', this.index, 'event', value)
+  }
+  targetInputChangeH(value: S) {
+    clog('targetInputChangeH')
+    this.componentService.setComponentsBehavior('behavior', this.index, 'target', value)
+  }
+  payloadInputChangeH(value: S) {
+    clog('payloadInputChangeH')
+    this.componentService.setComponentsBehavior('behavior', this.index, 'payload', value)
   }
 }

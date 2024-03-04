@@ -1,10 +1,7 @@
-<p>behavior-box works! str</p>
-<!-- <app-props-item 
-    *ngFor="let propItem of componentPropsList"
-    [propItem]="propItem"
-></app-props-item> -->
+<!-- <p>behavior-box works! str</p> -->
 
 <app-behavior-item
-    *ngFor="let item of componentBehaviorList"
+    *ngFor="let item of componentBehaviorList; let i = index"
     [behavior]="item"
+    [index]="i"
 ></app-behavior-item>

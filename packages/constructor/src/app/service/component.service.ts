@@ -9,6 +9,7 @@ import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 // 类型
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, PropsValue } from '../../types/component'
+import type { BehaviorItemKey } from 'src/types/behavior'
 import type { ComponentItem,
   ComponentItemInput,
   ComponentItemNumber,
@@ -143,6 +144,7 @@ export class ComponentService {
           if (has) {
             let d = this._map.get((obj['pageUlid']))
             d!.append(obj)
+            clog(this._map.get((obj['pageUlid'])))
             let arr = this._map.get((obj['pageUlid']))!.toArray()
             this.componentListByCurPage$.next(arr)
             s(arr)
@@ -264,6 +266,13 @@ export class ComponentService {
       curComp.props[key] = value
     }
   }
+  setComponentsBehavior(type: UpdateType, index: N, key: BehaviorItemKey, value: S) {
+    let curComp: CompOrUn = this.curComponent()
+    if(curComp) {
+      let arr = curComp.behavior.groups
+      arr[index][key] = value
+    }
+  }
 
 
   // setCurComponentItem(key: S, k: keyof ComponentItem, v: A) {
@@ -369,6 +378,7 @@ export class ComponentService {
       })
     })
   }
+  // reqUpdateBehavior(type)
   // 删除组件
   delete(componentUlid: ULID, pageUlid: ULID) {
     let dc = this._map.get(pageUlid)

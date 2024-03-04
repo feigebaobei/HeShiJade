@@ -7,3 +7,9 @@
 ||||
 ||||
 ||||
+
+
+click、change/blur 触发更新组件的逻辑
+设置组件的配置 setComponentConfig type: props/behavior/slots/plugins
+调用后端接口
+后端根据参数修改type里的key的value
