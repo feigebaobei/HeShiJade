@@ -14,6 +14,14 @@ export class ButtonComponent {
   @Input() data: A
   constructor() {}
   buttonClickH() {
-    shareEvent.emit('01HQFYX942DGF1Z8CQ30BTXXSC', {visible: true})
+    let eventArr = this.data.behavior.groups.filter((item: A) => item.event === 'click')
+    eventArr.forEach((item: A) => {
+      shareEvent.emit(item.target, item.payload)
+    })
+  }
+  buttonDbClickH() {
+    this.data.behavior.groups.filter((item: A) => item.event === 'dbClick').forEach((item: A) => {
+      shareEvent.emit(item.target, item.payload)
+    })
   }
 }
