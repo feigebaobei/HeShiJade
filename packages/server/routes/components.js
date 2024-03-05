@@ -165,20 +165,50 @@ router.route('/')
   // 更新数据
   // 返回值
   new Promise((s, j) => {
-    if (
-      rules.required(req.body.ulid) &&
-      rules.required(req.body.type) &&
-      rules.required(req.body.key) &&
-      rules.required(req.body.value)
-    ) {
-      s(true)
+    // props     ulid,type,key,value,
+    // behavior  ulid,type,index,key,value,
+    if (rules.required(req.body.ulid) && rules.required(req.body.type)) {
+      switch (req.body.type) {
+        case 'props':
+          if (rules.required(req.body.key) && rules.required(req.body.value)) {
+            s(true)
+          } else {
+            j(100100)
+          }
+          break;
+        case 'behavior':
+          if (rules.isNumber(req.body.index) && rules.required(req.body.key) && rules.required(req.body.value)) {
+            s(true)
+          } else {
+            j(100100)
+          }
+          break;
+        case 'slots':
+          break;
+      }
     } else {
       j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: {
-      [`props.${req.body.key}`]: req.body.value
-    }}).catch(() => {
+    let k = ''
+    switch(req.body.type) {
+      case 'props':
+        k = `props.${req.body.key}`
+        break;
+      case 'behavior':
+        k = `behavior.groups.${req.body.index}.${req.body.key}`
+        break;
+    }
+    let updateObj = {
+      [k]: req.body.value
+    }
+    clog('updateObj', updateObj)
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: 
+      // {
+      //   [`props.${req.body.key}`]: req.body.value
+      // }
+      updateObj
+    }).catch(() => {
       return Promise.reject(200020)
     })
   }).then(() => {

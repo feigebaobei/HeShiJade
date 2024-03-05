@@ -19,13 +19,17 @@ export class BehaviorItemComponent {
   }
   eventValueChange(value: S) {
     this.componentService.setComponentsBehavior('behavior', this.index, 'event', value)
+    // this.componentService.reqUpdateComponentProps('props', this.data.propKey, this.data.value)
+    this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'event', value)
   }
   targetInputChangeH(value: S) {
     clog('targetInputChangeH')
     this.componentService.setComponentsBehavior('behavior', this.index, 'target', value)
+    this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'target', value)
   }
   payloadInputChangeH(value: S) {
     clog('payloadInputChangeH')
     this.componentService.setComponentsBehavior('behavior', this.index, 'payload', value)
+    this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'payload', value)
   }
 }

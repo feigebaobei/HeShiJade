@@ -371,10 +371,27 @@ export class ComponentService {
         value,
       }).subscribe((res) => {
         if (res.code === 0) {
-          res.data
+          // res.data
           s(true)
         }
         j(res.message || '更新失败')
+      })
+    })
+  }
+  reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
+    return new Promise((s, j) => {
+      this.http.put<ResponseData>('http://localhost:5000/components', {
+        ulid: this.curComponent()?.ulid || '',
+        type,
+        index,
+        key,
+        value,
+      }).subscribe((res) => {
+        if (res.code === 0) {
+          s(true)
+        } else {
+          j(res.message || '更新失败')
+        }
       })
     })
   }
