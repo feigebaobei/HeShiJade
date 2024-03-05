@@ -52,6 +52,7 @@ export class StackComponent {
       case 'Button':
         this.componentRef.instance.data = {
           props: this.data.props,
+          behavior: this.data.behavior,
           slot: this.data.slot,
         }
         break;
@@ -63,7 +64,8 @@ export class StackComponent {
         break;
       case 'Modal':
         this.componentRef.instance.data = {
-          props: this.data.props
+          props: this.data.props,
+          ulid: this.data.ulid,
         }
         break;
       case 'Input':

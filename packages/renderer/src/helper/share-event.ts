@@ -3,6 +3,8 @@ import { Subject } from 'rxjs';
 import { A, S } from 'src/types/base';
 // import {}
 
+let clog = console.log
+
 // @Injectable({
 //   providedIn: 'root'
 // })

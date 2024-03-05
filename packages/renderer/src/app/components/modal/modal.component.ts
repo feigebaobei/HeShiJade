@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { A } from 'src/types/base';
 import { DialogService } from 'ng-devui/modal';
+import {shareEvent} from 'src/helper';
+
+let clog = console.log
 
 @Component({
   selector: 'app-modal',
@@ -35,7 +38,18 @@ export class ModalComponent implements OnInit {
     this.config.width = this.data.props.width
     if (this.data.props.visible) {
       this.openDialog()
-    } 
+    }
+    // shareEvent.listen('01HQFYX942DGF1Z8CQ30BTXXSC', (payload) => {
+    //   if (payload.visible) {
+    //     this.openDialog()
+    //   }
+    // })
+    shareEvent.listen(this.data.ulid, (payload) => {
+      let obj = JSON.parse(payload)
+      if (obj.visible) {
+        this.openDialog()
+      }
+    })
   }
   
   openDialog(dialogtype?: string, showAnimation?: boolean) {

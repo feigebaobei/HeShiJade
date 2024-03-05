@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 // import { PanelModule } from 'ng-devui';
 // import { IconModule } from 'ng-devui/icon';
+import { BehaviorModule } from './behavior/behavior.module';
 
 // 指令
 import { AdDirective } from './ad.directive';
@@ -48,7 +49,7 @@ import { TableComponent } from './components/table/table.component';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
 import { PropsBoxComponent } from './setup/props-box/props-box.component';
-import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
+// import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
 import { PropsInputComponent } from './setup/props-input/props-input.component';
 import { PropsSelectComponent } from './setup/props-select/props-select.component';
 import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
@@ -89,7 +90,7 @@ import { ItemSelectComponent } from './setup/items-item/item-select/item-select.
     InputComponent,
     SelectComponent,
     PropsBoxComponent,
-    BehaviorBoxComponent,
+    // BehaviorBoxComponent,
     PropsInputComponent,
     PropsSelectComponent,
     PropsSwitchComponent,
@@ -121,6 +122,7 @@ import { ItemSelectComponent } from './setup/items-item/item-select/item-select.
     FormsModule,
     HttpClientModule,
     // LayoutModule,
+    BehaviorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

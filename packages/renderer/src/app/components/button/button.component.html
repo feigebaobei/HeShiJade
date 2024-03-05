@@ -5,5 +5,8 @@
     [disabled]="data.props.disabled"
     [type]="data.props.type.value"
     [width]="data.props.width"
->{{data.slot}}
+    (click)="buttonClickH()"
+    (dblclick)="buttonDbClickH()"
+    >
+    {{data.slot}}
 </d-button>
