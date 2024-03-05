@@ -51,9 +51,13 @@ export class HomeComponent implements OnInit {
     this.userService.loginServer({
       account: this.formData.account,
       password: this.formData.password,
-    }).then(() => {
+    }).then((res) => {
+      clog(res)
       this.router.navigate(['/list'])
       this.user = this.userService.getUser()
+    }).catch(error => {
+      this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
+      clog('error', error, this.msg)
     })
   }
   // 注册

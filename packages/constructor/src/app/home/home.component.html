@@ -97,13 +97,13 @@
                     dFormReset>重置</d-button>
                   </d-form-operation>
                 </form>
-                <d-toast [value]="msg"></d-toast>
               </section>
             </ng-template>
             <!-- for dev -->
             <d-button bsStyle="common" circled="true" 
             (click)="gotoLinkButtonClickH()">goto list</d-button>
         </section>
+        <d-toast [value]="msg"></d-toast>
     </section>
     <section class="left">
         <p class="welcome">{{'welcome' | uppercase}}</p>
