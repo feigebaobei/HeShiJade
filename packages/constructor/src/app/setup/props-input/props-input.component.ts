@@ -15,10 +15,14 @@ export class PropsInputComponent implements OnInit, OnChanges {
   @Input() data!: ConfigItemInput
   value: S
   constructor(private componentService: ComponentService) {
-    this.value = this.data.value
+    // 类实例化时还没收到传入的数据。所以得不到
+    // this.value = this.data.value
+    this.value = ''
   }
   ngOnInit(): void {
+    // 初始化组件时可以收到传入的数据。在这里赋值。
     // console.log('props input', this, this.data)
+    this.value = this.data.value
   }
   ngOnChanges(...p: A) {
     // console.log('changie', p)

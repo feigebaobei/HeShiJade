@@ -81,25 +81,15 @@ export class PropsBoxComponent {
         // })
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(buttonPropsMeta[key]))
+          o.key = key
           o.value = value
           this.componentPropsList.push(o)
         })
         break
       case 'Input':
-        // this.componentPropsMeta = inputPropsMeta
-        // Object.keys(this.componentPropsMeta).forEach((key) => {
-        //   let o: ConfigItem = {
-        //     ...this.componentPropsMeta[key],
-        //     // propKey: key,
-        //     // componentUlid: this.curComp!.ulid,
-        //   }
-        //   // o.overFields.forEach(field => {
-        //   //   o[field] = this.curComp?.props[key]
-        //   // })
-        //   this.componentPropsList.push(o)
-        // })
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(inputPropsMeta[key]))
+          o.key = key
           o.value = value
           this.componentPropsList.push(o)
         })
@@ -125,6 +115,7 @@ export class PropsBoxComponent {
         
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(selectPropsMeta[key]))
+          o.key = key
           o.value = value
           this.componentPropsList.push(o)
         })
@@ -144,6 +135,7 @@ export class PropsBoxComponent {
         // })
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(modalPropsMeta[key]))
+          o.key = key
           o.value = value
           this.componentPropsList.push(o)
         })
@@ -166,6 +158,7 @@ export class PropsBoxComponent {
 
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(formPropsMeta[key]))
+          o.key = key
           o.value = value
           this.componentPropsList.push(o)
         })

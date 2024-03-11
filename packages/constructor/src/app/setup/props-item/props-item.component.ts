@@ -4,10 +4,12 @@ import { PropsDirective } from 'src/app/props.directive';
 import { PropsInputComponent } from '../props-input/props-input.component';
 import { PropsSelectComponent } from '../props-select/props-select.component';
 import { PropsSwitchComponent } from '../props-switch/props-switch.component';
-import { PropsOptionComponent } from '../props-option/props-option.component';
+// import { PropsOptionComponent } from '../props-option/props-option.component';
 // type
 import type { A, ConfigItem, } from 'src/types/base';
 // import type { ComponentPropsMetaItem } from 'src/types/props'
+
+let clog = console.log
 
 @Component({
   selector: 'app-props-item',
@@ -27,9 +29,6 @@ export class PropsItemComponent implements OnInit {
     viewContainerRef.clear() // 先清空
 
     let componentRef: A
-    // viewContainerRef.createComponent(PropsInputComponent)
-    // console.log('oninit', this, this.propItem)
-    // componentRef.instance.data = this.propItem
     // 根据type使用相应的表单元素渲染设置器
     switch(this.propItem.category) {
       case 'input':
