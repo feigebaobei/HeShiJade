@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 // type
-import type { A, S } from 'src/types/base';
-import type { ComponentPropsMetaItem } from 'src/types/props'
+import type { A, S, ConfigItem, ConfigItemInput } from 'src/types/base';
 
 let clog = console.log
 
@@ -12,10 +11,11 @@ let clog = console.log
   styleUrls: ['./props-input.component.sass']
 })
 export class PropsInputComponent implements OnInit, OnChanges {
-  @Input() data!: ComponentPropsMetaItem
+  // @Input() data!: ConfigItem
+  @Input() data!: ConfigItemInput
   value: S
   constructor(private componentService: ComponentService) {
-    this.value = this.data?.value
+    this.value = this.data.value
   }
   ngOnInit(): void {
     // console.log('props input', this, this.data)
@@ -28,7 +28,7 @@ export class PropsInputComponent implements OnInit, OnChanges {
   }
   change() {
     // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
-    this.componentService.setComponentProp(this.data.propKey, this.data.value)
-    this.componentService.reqUpdateComponentProps('props', this.data.propKey, this.data.value)
+    this.componentService.setComponentProp(this.data.key, this.data.value)
+    this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
   }
 }

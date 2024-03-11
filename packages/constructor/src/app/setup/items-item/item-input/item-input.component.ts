@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { Form } from 'src/helper/items';
-import type { ComponentItemInput } from 'src/types/items';
-import type { Options, S } from 'src/types/base';
+// import type { ComponentItemInput } from 'src/types/items';
+import type { Options, S, ConfigItem } from 'src/types/base';
+import { FormItemCategory } from 'src/helper/items'
 
 let clog = console.log
 
@@ -11,20 +12,21 @@ let clog = console.log
   styleUrls: ['./item-input.component.sass']
 })
 export class ItemInputComponent implements OnInit {
-  @Input() itemsItem: ComponentItemInput = {
+  @Input() itemsItem: ConfigItem = {
     category: 'input',
     key: '',
     label: '',
     value: '',
   }
-  formData: ComponentItemInput
+  formData: ConfigItem
   selectOptions: Options<S, S>[]
   constructor() {
     this.formData = this.itemsItem
-    this.selectOptions = []
+    // this.selectOptions = []
+    this.selectOptions = FormItemCategory
   }
   ngOnInit() {
-    this.selectOptions = Form.optionMap?.['category'] || []
+    // this.selectOptions = Form.optionMap?.['category'] || []
     this.formData = this.itemsItem
   }
   categorySelectChangeH() {

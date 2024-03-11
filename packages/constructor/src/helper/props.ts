@@ -1,7 +1,13 @@
-import type { ComponentPropsMetaRaw } from 'src/types/props'
-let Button: ComponentPropsMetaRaw = {
+// import type { ConfigItem } from 'src/types/props'
+// import type { ConfigItem, S } from 'src/types/base'
+import type { PropsConfigItem } from 'src/types/config'
+// interface PropsConfigItem {
+//     [k: S]: ConfigItem
+// }
+// 指定组件的配置项
+let Button: PropsConfigItem = {
     type: {
-        type: 'select',
+        category: 'select',
         options: [
             {label: 'button', value: 'button'},
             {label: 'submit', value: 'submit'},
@@ -9,10 +15,11 @@ let Button: ComponentPropsMetaRaw = {
         ],
         value: 'button',
         label: '类型',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
     bsSize: {
-        type: 'select',
+        category: 'select',
         options: [
             {label: 'lg', value: 'lg'},
             {label: 'md', value: 'md'},
@@ -21,48 +28,53 @@ let Button: ComponentPropsMetaRaw = {
         ],
         value: 'md',
         label: '大小',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
     bordered: {
-        type: 'switch',
+        category: 'switch',
         options: [
             {label: 'false', value: false},
             {label: 'true', value: true},
         ],
         value: false,
         label: '边框',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
     disabled: {
-        type: 'switch',
+        category: 'switch',
         options: [
             {label: 'false', value: false},
             {label: 'true', value: true},
         ],
         value: false,
         label: '禁用',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
     width: {
-        type: 'input',
+        category: 'input',
         value: '',
         label: '宽度',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     }
 }
-let Input: ComponentPropsMetaRaw = {
+let Input: PropsConfigItem = {
     error: {
-        type: 'switch',
+        category: 'switch',
         options: [
             { label: 'false', value: false },
             { label: 'true', value: true },
         ],
         value: false,
         label: '是否出现错误状态',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
     size: {
-        type: 'select',
+        category: 'select',
         options: [
             { label: 'sm', value: 'sm' },
             { label: '""', value: '' },
@@ -70,80 +82,76 @@ let Input: ComponentPropsMetaRaw = {
         ],
         value: '',
         label: '尺寸',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
-    // showGlowStyle: {
-    //     type: 'switch',
-    //     options: [
-    //         { label: 'false', value: false },
-    //         { label: 'true', value: true },
-    //     ],
-    //     value: true,
-    //     label: '发光效果'
-    // },
     styleType: {
-        type: 'select',
+        category: 'select',
         options: [
             { label: 'default', value: 'default' },
             { label: 'grey', value: 'grey' },
         ],
         value: 'default',
         label: '风格',
-        overFields: ['value'],
+        key: '',
+        // overFields: ['value'],
     },
 }
-let Select: ComponentPropsMetaRaw = {
+let Select: PropsConfigItem = {
     styleType: {
-        type: 'select',
+        category: 'select',
         options: [
             { label: 'default', value: 'default' },
             { label: 'grey', value: 'grey' },
         ],
         value: 'default',
         label: '风格',
-        overFields: ['value']
+        key: '',
     },
     options: {
-        type: 'option',
-        // value: [
+        // type: 'option',
+        category: 'select',
         options: [
             { label: 'oneLabel', value: 'oneVlaue' },
-            // { label: 'ones', value: 'one', disabled: true },
         ],
-        valueType: 'string',
+        // valueType: 'string',
         label: '选项',
-        addable: true,
-        reducible: true,
-        maxLength: 5,
-        minLength: 1,
-        overFields: ['options']
+        // addable: true,
+        // reducible: true,
+        // maxLength: 5,
+        // minLength: 1,
+        key: '',
+        value: '',
     }
 }
-let Modal: ComponentPropsMetaRaw = {
+let Modal: PropsConfigItem = {
     title: {
-        type: 'input',
+        category: 'input',
         value: 'title',
         label: 'title',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
     visible: {
-        type: 'switch',
+        category: 'switch',
         options: [
             {label: 'false', value: false},
             {label: 'true', value: true},
         ],
         value: true,
         label: '是否显示',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
     width: {
-        type: 'input',
+        category: 'input',
         value: '',
         label: '宽度',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
     placement: {
-        type: 'select',
+        category: 'select',
         options: [
             {label: 'center', value: 'center'},
             {label: 'top', value: 'top'},
@@ -152,39 +160,44 @@ let Modal: ComponentPropsMetaRaw = {
         // value: 'center',
         value: '',
         label: '宽度',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
 }
-let Form: ComponentPropsMetaRaw = {
+let Form: PropsConfigItem = {
     layout: {
-        type: 'select',
+        category: 'select',
         options: [
             { label: '水平', value: 'horizontal' },
             { label: '竖直', value: 'vertical' },
         ],
-        value: true,
+        // value: true,
+        value: 'horizontal',
         label: '排版',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
     isCancel: {
-        type: 'switch',
+        category: 'switch',
         options: [
             { label: 'false', value: false },
             { label: 'true', value: true },
         ],
         value: true,
         label: '是否有取消按钮',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
     isSubmit: {
-        type: 'switch',
+        category: 'switch',
         options: [
             { label: 'false', value: false },
             { label: 'true', value: true },
         ],
         value: true,
         label: '是否有提交按钮',
-        overFields: ['value'],
+        // overFields: ['value'],
+        key: '',
     },
 }
 export {

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComponentItemSelect } from 'src/types/items';
+// import { ComponentItemSelect } from 'src/types/items';
 import { Form } from 'src/helper/items';
-import { Options, S } from 'src/types/base'
+import { Options, S, ConfigItem, ConfigItemSelect, } from 'src/types/base'
+import { FormItemCategory } from 'src/helper/items'
 
 let clog = console.log
 
@@ -11,14 +12,14 @@ let clog = console.log
   styleUrls: ['./item-select.component.sass']
 })
 export class ItemSelectComponent implements OnInit {
-  @Input() itemsItem: ComponentItemSelect = {
+  @Input() itemsItem: ConfigItemSelect<S> = {
     category: 'select',
     key: '',
     label: '',
     value: '',
     options: [],
   }
-  formData: ComponentItemSelect
+  formData: ConfigItemSelect<S>
   selectOptions: Options<S, S>[]
   helpTips: S
   options: S
@@ -29,7 +30,8 @@ export class ItemSelectComponent implements OnInit {
     this.options = ''
   }
   ngOnInit() {
-    this.selectOptions = Form.optionMap?.['category'] || []
+    // this.selectOptions = Form.optionMap?.['category'] || []
+    this.selectOptions = FormItemCategory
     this.formData = this.itemsItem
     this.formData.options.forEach(item => {
       this.options += `${item.label}:${item.value},`

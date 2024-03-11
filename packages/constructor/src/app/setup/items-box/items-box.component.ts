@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { Form } from 'src/helper/items';
+import addable from 'src/helper/addable'
 // type
 import type {Component as Comp} from 'src/types/component'
-import type { B } from 'src/types/base';
-import type { ComponentItem } from 'src/types/items';
+import type { B, ConfigItem } from 'src/types/base';
+// let addable: {[k: S]: } = {
+//   Button: ButtonAddable,
+//   Form: FormAddable,
+// }
 
 @Component({
   selector: 'app-items-box',
@@ -12,7 +16,8 @@ import type { ComponentItem } from 'src/types/items';
   styleUrls: ['./items-box.component.sass']
 })
 export class ItemsBoxComponent {
-  componentItemsList: ComponentItem[]
+  // componentItemsList: ComponentItem[]
+  componentItemsList: ConfigItem[]
   curComp?: Comp | null
   addable: B
   constructor(private componentService: ComponentService) {
@@ -22,7 +27,8 @@ export class ItemsBoxComponent {
     this.componentService.compSubject$.subscribe(p => {
       if (p) {
         this.curComp = p
-        this.addable = p.item.addable
+        // this.addable = p.items.addable
+        this.addable = addable[p.type].items
       }
       this.componentSelectedChange()
     })
@@ -33,15 +39,17 @@ export class ItemsBoxComponent {
     // 再赋值
     switch (this.curComp?.type) {
       case 'Form':
-        this.componentItemsList.push(...this.curComp.item.groups)
+        // this.componentItemsList.push(...this.curComp.items.groups)
+        this.componentItemsList.push(...this.curComp.items)
         break
       default:
         break;
     }
+    // this.componentItemsList[index]
   }
   addButtonClickH() {
     // 日后从service中取
-    let o: ComponentItem = {
+    let o: ConfigItem = {
       category: 'input',
       key: 'name',
       label: '姓名',
@@ -49,7 +57,8 @@ export class ItemsBoxComponent {
     }
     switch (this.curComp?.type) {
       case 'Form':
-        o = Form.groupTemplate
+        // o = Form.groupTemplate
+        o = Form
         break
       default:
         break

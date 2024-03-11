@@ -5,17 +5,20 @@ import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
 // 数据
-import * as componentConfig from '../../helper/component'
+// import * as componentConfig from '../../helper/component'
+import componentDefaultConfigAll from '../../helper/component'
 // 类型
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
-import type { Category, Component as Comp, componentConfig as componentConfigT } from 'src/types/component';
+import type { Category, Component as Comp,
+  //  componentConfig as componentConfigT
+   } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 import type { App } from 'src/types/app';
 
 
 let clog = console.log
-let CDM: Record<S, componentConfigT> = componentConfig
+// let CDM: Record<S, componentConfigT> = componentConfig
 
 @Component({
   selector: 'app-setup',
@@ -100,15 +103,35 @@ export class SetupComponent implements OnInit {
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    let obj = {
+    // let obj = {
+    //   ulid: ulid(),
+    //   type: e.dragData.item.type,
+    //   prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
+    //   nextUlid: '',
+    //   props: (CDM[e.dragData.item.type].props),
+    //   behavior: (CDM[e.dragData.item.type].behavior),
+    //   item: (CDM[e.dragData.item.type].item),
+    //   slot: (CDM[e.dragData.item.type].slot),
+    //   appUlid: curPage!.appUlid,
+    //   pageUlid: curPage!.ulid,
+    // }
+    // componentConfig['hi']
+    // componentDefaultConfigAll['dd']
+    e.dragData.item.type
+    let obj: Comp = {
       ulid: ulid(),
       type: e.dragData.item.type,
       prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
       nextUlid: '',
-      props: (CDM[e.dragData.item.type].props),
-      behavior: (CDM[e.dragData.item.type].behavior),
-      item: (CDM[e.dragData.item.type].item),
-      slot: (CDM[e.dragData.item.type].slot),
+      // props: (CDM[e.dragData.item.type].props),
+      // behavior: (CDM[e.dragData.item.type].behavior),
+      // item: (CDM[e.dragData.item.type].item),
+      // slot: (CDM[e.dragData.item.type].slot),
+      // todo 优化dragData的类型
+      props: componentDefaultConfigAll[(e.dragData.item.type as S)].props,
+      behavior: componentDefaultConfigAll[(e.dragData.item.type as S)].behavior,
+      items: componentDefaultConfigAll[(e.dragData.item.type as S)].items,
+      slots: componentDefaultConfigAll[(e.dragData.item.type as S)].slots,
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
     }

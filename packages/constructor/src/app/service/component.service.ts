@@ -8,15 +8,18 @@ import {categoryList} from 'src/helper/category'
 import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 // 类型
 // import { createCompKey } from 'src/helper/index'
-import type { Component, Category, PropsValue } from '../../types/component'
-import type { BehaviorItemKey } from 'src/types/behavior'
-import type { ComponentItem,
-  ComponentItemInput,
-  ComponentItemNumber,
-  ComponentItemSelect,
-  ComponentItemSwitch, } from 'src/types/items';
+import type { Component, Category, 
+  PropsValue, 
+  BehaviorItemKey } from '../../types/component'
+// import type { BehaviorItemKey } from 'src/types/behavior'
+// import type { ComponentItem,
+//   ComponentItemInput,
+//   ComponentItemNumber,
+//   ComponentItemSelect,
+//   ComponentItemSwitch, } from 'src/types/items';
 import type { ResponseData } from '../../types/index'
-import type { ComponentPropsMeta } from '../../types/props'
+// import type { ComponentPropsMeta } from '../../types/props'
+import type { ConfigItemKeys, CategoryType } from 'src/types/base'
 import type { S, Ao, ULID, A,
   N,
 B,
@@ -266,10 +269,14 @@ export class ComponentService {
       curComp.props[key] = value
     }
   }
-  setComponentsBehavior(type: UpdateType, index: N, key: BehaviorItemKey, value: S) {
+  
+  setComponentsBehavior(
+    // type: UpdateType, 
+    index: N, key: BehaviorItemKey, value: S) {
     let curComp: CompOrUn = this.curComponent()
     if(curComp) {
-      let arr = curComp.behavior.groups
+      // let arr = curComp.behavior.groups
+      let arr = curComp.behavior
       arr[index][key] = value
     }
   }
@@ -277,58 +284,73 @@ export class ComponentService {
 
   // setCurComponentItem(key: S, k: keyof ComponentItem, v: A) {
   // setCurComponentItem(key: S, k: 'category' | 'key' | 'label' | 'value' | 'checked', v: A) {
-  setCurComponentItem(key: S, k: keyof ComponentItemInput
-    | keyof ComponentItemNumber
-    | keyof ComponentItemSelect
-    | keyof ComponentItemSwitch, v: A) {
-    // todo v 有些暴力
+  // setCurComponentItem(key: S, k: keyof ComponentItemInput
+  //   | keyof ComponentItemNumber
+  //   | keyof ComponentItemSelect
+  //   | keyof ComponentItemSwitch, v: A) {
+  //   // todo v 有些暴力
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let obj = curComp.items.groups.find(item => item.key === key)
+  //     if (obj) {
+  //       switch (obj.category) {
+  //         case 'input':
+  //           obj[(k as keyof ComponentItemInput)] = v
+  //           break;
+  //         case 'number':
+  //           switch (k) {
+  //             case 'category':
+  //               obj[k] = v
+  //               break;
+  //             case 'key':
+  //               obj[k] = v
+  //               break;
+  //             case 'label':
+  //               obj[k] = v
+  //               break;
+  //             case 'value':
+  //               obj[k] = v
+  //               break
+  //           }
+  //           break;
+  //         case 'select':
+  //           obj[(k as keyof ComponentItemSelect)] = v
+  //           break;
+  //         case 'switch':
+  //           switch (k) {
+  //             case 'category':
+  //               obj[k] = v
+  //               break;
+  //             case 'key':
+  //               obj[k] = v
+  //               break;
+  //             case 'label':
+  //               obj[k] = v
+  //               break;
+  //             case 'checked':
+  //               obj[k] = v
+  //               break;
+  //           }
+  //           break
+  //       }
+  //     }
+  //   }
+  //   // 此方法可证明，不用更新列表，就能更新列表中的特定元素的特定属性。
+  // }
+  setCurComponentItem(index: N,
+    //  key: ConfigItemKeys, 
+    //  value: CategoryType
+    key: 'category' | 'value' | 'key' | 'label',
+     value: 'input' | 'textarea' | 'select' | 'number' | 'switch'
+     ) {
     let curComp = this.curComponent()
     if (curComp) {
-      let obj = curComp.item.groups.find(item => item.key === key)
-      if (obj) {
-        switch (obj.category) {
-          case 'input':
-            obj[(k as keyof ComponentItemInput)] = v
-            break;
-          case 'number':
-            switch (k) {
-              case 'category':
-                obj[k] = v
-                break;
-              case 'key':
-                obj[k] = v
-                break;
-              case 'label':
-                obj[k] = v
-                break;
-              case 'value':
-                obj[k] = v
-                break
-            }
-            break;
-          case 'select':
-            obj[(k as keyof ComponentItemSelect)] = v
-            break;
-          case 'switch':
-            switch (k) {
-              case 'category':
-                obj[k] = v
-                break;
-              case 'key':
-                obj[k] = v
-                break;
-              case 'label':
-                obj[k] = v
-                break;
-              case 'checked':
-                obj[k] = v
-                break;
-            }
-            break
-        }
-      }
+      curComp.items[index][key] = value
+      // let obj = curComp.items.find(item => item.key === key)
+      // if (obj) {
+      //   obj[key] = value
+      // }
     }
-    // 此方法可证明，不用更新列表，就能更新列表中的特定元素的特定属性。
   }
   // setCurComponentItem(key: S, k: S, v: A) {
   //   let curComp = this.curComponent()

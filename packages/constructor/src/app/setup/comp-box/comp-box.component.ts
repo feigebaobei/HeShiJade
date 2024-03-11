@@ -14,13 +14,13 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Ao } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 // 数据
-import { Button as buttonDefaultData,
-  Input as inputDefaultData,
-Modal as modalDefaultData,
-Select as selectDefaultData,
-Form as formDefaultData,
-Table as tableDefaultData,
- } from '../../../helper/component'
+// import { Button as buttonDefaultData,
+//   Input as inputDefaultData,
+// Modal as modalDefaultData,
+// Select as selectDefaultData,
+// Form as formDefaultData,
+// Table as tableDefaultData,
+//  } from '../../../helper/component'
 import { ResponseData } from 'src/types';
 import { PageService } from 'src/app/service/page.service';
 // 我看到实现动态组件功能时都是引入组件的。

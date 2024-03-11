@@ -2,14 +2,15 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { PropsDirective } from 'src/app/props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 // type
-import type {Component as Comp} from 'src/types/component'
-import type {
-  ComponentPropsMetaRaw as CPMR,
-  ComponentPropsMetaItemRaw as CPMIR,
-  ComponentPropsMetaItem as CPMI,
-  SelectOptionsItem
-} from 'src/types/props'
-import { A } from 'src/types/base';
+import type {Component as Comp, } from 'src/types/component'
+import type { PropsConfigItem } from 'src/types/config'
+// import type {
+//   ComponentPropsMetaRaw as CPMR,
+//   ComponentPropsMetaItemRaw as CPMIR,
+//   ComponentPropsMetaItem as ConfigItem,
+//   SelectOptionsItem
+// } from 'src/types/props'
+import type { A, ConfigItem, } from 'src/types/base';
 // data
 // import * as 
 import {
@@ -31,12 +32,24 @@ export class PropsBoxComponent {
   // @Input() data: A
   @ViewChild(PropsDirective, {static: true}) propsDirective!: PropsDirective
   curComp?: Comp | null
-  componentPropsMeta: CPMR
-  componentPropsList: CPMI[]
+  // componentPropsMeta: CPMR
+  componentPropsMeta: PropsConfigItem = {
+    key: {
+      category: 'select',
+      options: [
+          {label: 'button', value: 'button'},
+          {label: 'submit', value: 'submit'},
+          {label: 'reset', value: 'reset'},
+      ],
+      value: 'button',
+      label: '类型',
+      key: '',
+    },
+  }
+  componentPropsList: ConfigItem[]
   msg: {}[]
   constructor(private componentService: ComponentService) {
     this.curComp = null
-    this.componentPropsMeta = {}
     this.componentPropsList = []
     this.msg = []
     this.componentService.compSubject$.subscribe(p => {
@@ -51,32 +64,43 @@ export class PropsBoxComponent {
     this.componentPropsList = []
     // 再赋值
     // 取出模板再赋值当前值
+    // todo 可优化为从map对象中取映射值
     switch(this.curComp?.type) {
       case 'Button':
-        this.componentPropsMeta = buttonPropsMeta
-        Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o: CPMI = {
-            ...this.componentPropsMeta[key],
-            propKey: key,
-            componentUlid: this.curComp!.ulid,
-          }
-          o.overFields.forEach(field => {
-            o[field] = this.curComp?.props[key]
-          })
+        // this.componentPropsMeta = buttonPropsMeta
+        // Object.keys(this.componentPropsMeta).forEach((key) => {
+        //   let o: ConfigItem = {
+        //     ...this.componentPropsMeta[key],
+        //     // propKey: key,
+        //     // componentUlid: this.curComp!.ulid,
+        //   }
+        //   // o.overFields.forEach(field => {
+        //   //   o[field] = this.curComp?.props[key]
+        //   // })
+        //   this.componentPropsList.push(o)
+        // })
+        Object.entries(this.curComp.props).forEach(([key, value]) => {
+          let o: ConfigItem = JSON.parse(JSON.stringify(buttonPropsMeta[key]))
+          o.value = value
           this.componentPropsList.push(o)
         })
         break
       case 'Input':
-        this.componentPropsMeta = inputPropsMeta
-        Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o: CPMI = {
-            ...this.componentPropsMeta[key],
-            propKey: key,
-            componentUlid: this.curComp!.ulid,
-          }
-          o.overFields.forEach(field => {
-            o[field] = this.curComp?.props[key]
-          })
+        // this.componentPropsMeta = inputPropsMeta
+        // Object.keys(this.componentPropsMeta).forEach((key) => {
+        //   let o: ConfigItem = {
+        //     ...this.componentPropsMeta[key],
+        //     // propKey: key,
+        //     // componentUlid: this.curComp!.ulid,
+        //   }
+        //   // o.overFields.forEach(field => {
+        //   //   o[field] = this.curComp?.props[key]
+        //   // })
+        //   this.componentPropsList.push(o)
+        // })
+        Object.entries(this.curComp.props).forEach(([key, value]) => {
+          let o: ConfigItem = JSON.parse(JSON.stringify(inputPropsMeta[key]))
+          o.value = value
           this.componentPropsList.push(o)
         })
         break
@@ -85,47 +109,64 @@ export class PropsBoxComponent {
         // 读取配置数据
         // 为数据结构赋值
         // push到数组中
-        this.componentPropsMeta = selectPropsMeta
-        Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o: CPMI = {
-            ...this.componentPropsMeta[key],
-            propKey: key,
-            componentUlid: this.curComp!.ulid
-          }
-          // 赋值
-          o.overFields.forEach(field => {
-            o[field] = this.curComp?.props[key]
-          })
+        // this.componentPropsMeta = selectPropsMeta
+        // Object.keys(this.componentPropsMeta).forEach((key) => {
+        //   let o: ConfigItem = {
+        //     ...this.componentPropsMeta[key],
+        //     propKey: key,
+        //     componentUlid: this.curComp!.ulid
+        //   }
+        //   // 赋值
+        //   o.overFields.forEach(field => {
+        //     o[field] = this.curComp?.props[key]
+        //   })
+        //   this.componentPropsList.push(o)
+        // })
+        
+        Object.entries(this.curComp.props).forEach(([key, value]) => {
+          let o: ConfigItem = JSON.parse(JSON.stringify(selectPropsMeta[key]))
+          o.value = value
           this.componentPropsList.push(o)
         })
         break
       case 'Modal':
-        this.componentPropsMeta = modalPropsMeta
-        Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o: CPMI = {
-            ...this.componentPropsMeta[key],
-            propKey: key,
-            componentUlid: this.curComp!.ulid
-          }
-          o.overFields.forEach(field => {
-            o[field] = this.curComp?.props[key]
-          })
+        // this.componentPropsMeta = modalPropsMeta
+        // Object.keys(this.componentPropsMeta).forEach((key) => {
+        //   let o: ConfigItem = {
+        //     ...this.componentPropsMeta[key],
+        //     propKey: key,
+        //     componentUlid: this.curComp!.ulid
+        //   }
+        //   o.overFields.forEach(field => {
+        //     o[field] = this.curComp?.props[key]
+        //   })
+        //   this.componentPropsList.push(o)
+        // })
+        Object.entries(this.curComp.props).forEach(([key, value]) => {
+          let o: ConfigItem = JSON.parse(JSON.stringify(modalPropsMeta[key]))
+          o.value = value
           this.componentPropsList.push(o)
         })
         break
       // case 'Table':
       //   break
       case 'Form':
-        this.componentPropsMeta = formPropsMeta
-        Object.keys(this.componentPropsMeta).forEach((key) => {
-          let o: CPMI = {
-            ...this.componentPropsMeta[key],
-            propKey: key,
-            componentUlid: this.curComp!.ulid
-          }
-          o.overFields.forEach(field => {
-            o[field] = this.curComp?.props[key]
-          })
+        // this.componentPropsMeta = formPropsMeta
+        // Object.keys(this.componentPropsMeta).forEach((key) => {
+        //   let o: ConfigItem = {
+        //     ...this.componentPropsMeta[key],
+        //     propKey: key,
+        //     componentUlid: this.curComp!.ulid
+        //   }
+        //   o.overFields.forEach(field => {
+        //     o[field] = this.curComp?.props[key]
+        //   })
+        //   this.componentPropsList.push(o)
+        // })
+
+        Object.entries(this.curComp.props).forEach(([key, value]) => {
+          let o: ConfigItem = JSON.parse(JSON.stringify(formPropsMeta[key]))
+          o.value = value
           this.componentPropsList.push(o)
         })
         break
