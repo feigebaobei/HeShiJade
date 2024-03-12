@@ -105,8 +105,8 @@ router.route('/')
             nextUlid: '',
             props: req.body.props,
             behavior: req.body.behavior,
-            item: req.body.item,
-            slot: req.body.slot,
+            items: req.body.item,
+            slots: req.body.slot,
             appUlid: req.body.appUlid,
             pageUlid: req.body.pageUlid,
           }
@@ -261,17 +261,20 @@ router.route('/')
     let arr = [lowcodeDb.collection('components_dev').deleteOne({ulid: component.ulid})]
     if (component.prevUlid) { // 前面有组件
       // lowcodeDb.collection('page')
+      // tested
       if (component.nextUlid === '') { // 后面无组件
         let p1 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {lastComponentUlid: component.prevUlid}})
         let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.prevUlid}, {$set: {nextUlid: ''}})
         arr.push(p1, p2)
       } else { // 后面有组件 等效于 它在中间
         // page不变
+        // tested
         let p1 = lowcodeDb.collection('components_dev').updateOne({ulid: component.prevUlid}, {$set: {nextUlid: component.nextUlid}})
-        let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {nextUlid: component.prevUlid}})
+        let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {prevUlid: component.prevUlid}})
         arr.push(p1, p2)
       }
     } else { // 前面没有组件
+      // tested
       if (component.nextUlid === '') { // 等效于 page.firstComponentUlid === page.lastComponentUlid // 只有一个组件
         let p1 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {
           firstComponentUlid: '',
@@ -279,6 +282,7 @@ router.route('/')
         }})
         arr.push(p1)
       } else {
+        // tested
         let p1 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {prevUlid: ''}})
         let p2 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {firstComponentUlid: component.nextUlid}})
         arr.push(p1, p2)
