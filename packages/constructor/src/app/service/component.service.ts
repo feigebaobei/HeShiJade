@@ -104,7 +104,6 @@ export class ComponentService {
               nextComponentUlid = comp?.nextUlid
               threshold++
             }
-            clog('threshold', threshold)
             threshold = null
             let arr = this._map.get(curPage.ulid)!.toArray()
             this.componentListByCurPage$.next(arr)

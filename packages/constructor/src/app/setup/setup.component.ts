@@ -5,8 +5,9 @@ import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
 // 数据
-// import * as componentConfig from '../../helper/component'
-import componentDefaultConfigAll from '../../helper/component'
+// import * as componentDefaultConfigAll from '../../helper/component'
+import {componentDefaultConfigAll} from '../../helper/component'
+// import all from '../../helper/component'
 // 类型
 import type { A, S, N, B } from 'src/types/base';
 import type { Page } from 'src/types/page';
@@ -16,6 +17,7 @@ import type { Category, Component as Comp,
 import type { DropEvent } from 'ng-devui';
 import type { App } from 'src/types/app';
 
+// let componentDefaultConfigAll = all
 
 let clog = console.log
 // let CDM: Record<S, componentConfigT> = componentConfig
@@ -117,10 +119,10 @@ export class SetupComponent implements OnInit {
     // }
     // componentConfig['hi']
     // componentDefaultConfigAll['dd']
-    e.dragData.item.type
+    // e.dragData.item.type
     let obj: Comp = {
       ulid: ulid(),
-      type: e.dragData.item.type,
+      type: e.dragData.item.componentCategory,
       prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
       nextUlid: '',
       // props: (CDM[e.dragData.item.type].props),
@@ -128,14 +130,16 @@ export class SetupComponent implements OnInit {
       // item: (CDM[e.dragData.item.type].item),
       // slot: (CDM[e.dragData.item.type].slot),
       // todo 优化dragData的类型
-      props: componentDefaultConfigAll[(e.dragData.item.type as S)].props,
-      behavior: componentDefaultConfigAll[(e.dragData.item.type as S)].behavior,
-      items: componentDefaultConfigAll[(e.dragData.item.type as S)].items,
-      slots: componentDefaultConfigAll[(e.dragData.item.type as S)].slots,
+      props: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].props,
+      behavior: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].behavior,
+      items: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].items,
+      slots: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].slots,
       appUlid: curPage!.appUlid,
       pageUlid: curPage!.ulid,
     }
-    this.componentService.postCompListByPage(obj)
+    this.componentService.postCompListByPage(obj).catch(error => {
+      clog('error', error)
+    })
     // this.componentService.postCompListByPageForLocal(obj)
   }
   stageClickH($event: A) {

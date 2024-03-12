@@ -81,7 +81,7 @@ router.route('/')
     rules.required(req.body.type) && 
     rules.required(req.body.props) && 
     rules.required(req.body.behavior) && 
-    rules.required(req.body.item) && 
+    rules.required(req.body.items) && 
     // rules.required(req.body.slot) && // 暂时不校验
     rules.required(req.body.appUlid) && 
     rules.required(req.body.pageUlid)
@@ -230,27 +230,34 @@ router.route('/')
   // 处理页面级数据
   // 处理组件级数据
   let component, page
+  // 检查必填项
   new Promise((s, j) => {
     if (rules.required(req.query.ulid)) {
       s(true)
     } else {
       j(100100)
     }
-  }).then(() => {
+  })
+  // 找到要删除的组件
+  .then(() => {
     return lowcodeDb.collection('components_dev').findOne({ulid: req.query.ulid}).then((comp) => {
       component = comp
       return true
     }).catch(() => {
       return Promise.reject(200010)
     })
-  }).then(() => {
+  })
+  // 找到要删除的页面
+  .then(() => {
     return lowcodeDb.collection('pages_dev').findOne({ulid: component.pageUlid}).then((p) => {
       page = p
       return true
     }).catch(() => {
       return Promise.reject(2000101)
     })
-  }).then(() => {
+  })
+  // 删除组件及页面
+  .then(() => {
     let arr = [lowcodeDb.collection('components_dev').deleteOne({ulid: component.ulid})]
     if (component.prevUlid) { // 前面有组件
       // lowcodeDb.collection('page')
@@ -280,7 +287,9 @@ router.route('/')
     return Promise.all(arr).catch(() => {
       return Promise.reject(200020)
     })
-  }).then(() => {
+  })
+  // 返回结果
+  .then(() => {
     return res.status(200).json({
       code: 0,
       message: '',

@@ -3,8 +3,8 @@
 // props文件     定义结构
 // 这是所有组件的默认配置数据
 
-import type { ComponentDefaultConfig } from 'src/types/component'
-import type { S } from 'src/types/base'
+import type { ComponentDefaultConfig, ComponentDefaultConfigAll } from 'src/types/component'
+// import type { S } from 'src/types/base'
 
 let Button: ComponentDefaultConfig = {
     props: {
@@ -114,7 +114,7 @@ let Table: ComponentDefaultConfig = {
 //     Form,
 //     Table,
 // }
-let all: {[k: S]: ComponentDefaultConfig} = {
+export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
     Input,
     Modal,
@@ -122,4 +122,5 @@ let all: {[k: S]: ComponentDefaultConfig} = {
     Form,
     Table,
 }
-export default all
+// export {all}
+// export default all

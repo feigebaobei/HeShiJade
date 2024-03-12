@@ -68,6 +68,9 @@ interface Category {
   ulid: ULID
 }
 type ComponentDefaultConfig = Pick<Component, 'props' | 'behavior' | 'items' | 'slots'>
+interface ComponentDefaultConfigAll {
+  [k: S]: ComponentDefaultConfig
+}
 type BehaviorItemKey = 'event' | 'target' | 'payload' // keyof typeof BehaviorItem
 // type BehaviorItemKey = keyof typeof BehaviorMetaItem
 // interface BehaviorConfigItem {
@@ -94,4 +97,5 @@ export type {
   // ComponentConfig,
   ConfigItem,
   ComponentDefaultConfig,
+  ComponentDefaultConfigAll,
 }
