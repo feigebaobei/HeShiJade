@@ -53,12 +53,12 @@ import type {
 //         }
 //     ]
 // }
-let Form: ConfigItem =    {
-        category: 'input',
-        key: '',
-        label: '',
-        value: '',
-    }
+let Form: ConfigItem = {
+    category: 'input',
+    key: '',
+    label: '',
+    value: '',
+}
 
 let FormItemCategory = [
     { label: 'input', value: 'input', },

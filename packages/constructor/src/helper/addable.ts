@@ -12,8 +12,8 @@ let Button: CompConfigAddabel = {
     slots: false,
 }
 let Form: CompConfigAddabel = {
-    behavior: false,
-    items: false,
+    behavior: true,
+    items: true,
     slots: false,
 }
 

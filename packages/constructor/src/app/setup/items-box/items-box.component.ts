@@ -12,6 +12,8 @@ import type { B, ConfigItem } from 'src/types/base';
 //   Form: FormAddable,
 // }
 
+let clog = console.log
+
 @Component({
   selector: 'app-items-box',
   templateUrl: './items-box.component.html',
@@ -44,6 +46,15 @@ export class ItemsBoxComponent {
       case 'Form':
         // this.componentItemsList.push(...this.curComp.items.groups)
         // this.componentItemsList.push(...this.curComp.items)
+          let o: ConfigItem
+        this.curComp.items.forEach((obj: ConfigItem) => {
+          o = JSON.parse(JSON.stringify(Form))
+          o.value = obj.value
+          o.key = obj.key
+          o.category = obj.category
+          o.label = obj.label
+          this.componentItemsList.push(o)
+        })
         break
       // case 'Button':
       //   let o: ConfigItem = JSON.parse(JSON.stringify(Button))
@@ -61,14 +72,14 @@ export class ItemsBoxComponent {
     // 日后从service中取
     let o: ConfigItem = {
       category: 'input',
-      key: 'name',
-      label: '姓名',
-      value: 'tom',
+      key: '',
+      label: '',
+      value: '',
     }
-    switch (this.curComp?.type) {
+    switch (this.curComp.type) {
       case 'Form':
         // o = Form.groupTemplate
-        o = Form
+        o = JSON.parse(JSON.stringify(Form))
         break
       default:
         break

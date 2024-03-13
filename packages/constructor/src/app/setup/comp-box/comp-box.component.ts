@@ -84,7 +84,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
           // slot: buttonDefaultData.slot,
           props: this.comp.props,
           slots: this.comp.slots,
-          items: this.comp.items,
+          // items: this.comp.items,
         }
         break
       case 'Input':
@@ -107,7 +107,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
       case 'Form':
         this.componentRef.instance.data = {
           props: this.comp.props,
-          items: this.comp.item,
+          items: this.comp.items,
         }
         break
       case 'Table':

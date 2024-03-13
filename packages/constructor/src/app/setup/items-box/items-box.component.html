@@ -4,3 +4,7 @@
     [compType]="curComp.type"
 >
 </app-items-item>
+<d-button bsStyle="common" circled="true"
+    *ngIf="addable"
+    (click)="addButtonClickH()"
+>增加一项</d-button>

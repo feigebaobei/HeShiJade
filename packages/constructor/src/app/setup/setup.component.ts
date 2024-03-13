@@ -105,30 +105,11 @@ export class SetupComponent implements OnInit {
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    // let obj = {
-    //   ulid: ulid(),
-    //   type: e.dragData.item.type,
-    //   prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
-    //   nextUlid: '',
-    //   props: (CDM[e.dragData.item.type].props),
-    //   behavior: (CDM[e.dragData.item.type].behavior),
-    //   item: (CDM[e.dragData.item.type].item),
-    //   slot: (CDM[e.dragData.item.type].slot),
-    //   appUlid: curPage!.appUlid,
-    //   pageUlid: curPage!.ulid,
-    // }
-    // componentConfig['hi']
-    // componentDefaultConfigAll['dd']
-    // e.dragData.item.type
     let obj: Comp = {
       ulid: ulid(),
       type: e.dragData.item.componentCategory,
       prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
       nextUlid: '',
-      // props: (CDM[e.dragData.item.type].props),
-      // behavior: (CDM[e.dragData.item.type].behavior),
-      // item: (CDM[e.dragData.item.type].item),
-      // slot: (CDM[e.dragData.item.type].slot),
       // todo 优化dragData的类型
       props: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].props,
       behavior: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].behavior,
