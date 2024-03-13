@@ -59,6 +59,12 @@ let Button: PropsConfigItem = {
         label: '宽度',
         key: '',
         // overFields: ['value'],
+    },
+    text: {
+        category: 'input',
+        value: 'button',
+        label: '文本',
+        key: '',
     }
 }
 let Input: PropsConfigItem = {

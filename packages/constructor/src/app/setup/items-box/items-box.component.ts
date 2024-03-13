@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-import { Form } from 'src/helper/items';
+import { Form, Button } from 'src/helper/items';
 import addable from 'src/helper/addable'
 // type
 import type {Component as Comp} from 'src/types/component'
@@ -18,11 +18,12 @@ import type { B, ConfigItem } from 'src/types/base';
 export class ItemsBoxComponent {
   // componentItemsList: ComponentItem[]
   componentItemsList: ConfigItem[]
-  curComp?: Comp | null
+  curComp: Comp //| null
   addable: B
   constructor(private componentService: ComponentService) {
     this.componentItemsList = []
-    this.curComp = null
+    // this.curComp = null
+    this.curComp = {} as Comp
     this.addable = false
     this.componentService.compSubject$.subscribe(p => {
       if (p) {
@@ -40,8 +41,15 @@ export class ItemsBoxComponent {
     switch (this.curComp?.type) {
       case 'Form':
         // this.componentItemsList.push(...this.curComp.items.groups)
-        this.componentItemsList.push(...this.curComp.items)
+        // this.componentItemsList.push(...this.curComp.items)
         break
+      case 'Button':
+        let o: ConfigItem = JSON.parse(JSON.stringify(Button))
+        this.curComp.items.forEach(obj => {
+          o.value = obj.value
+          this.componentItemsList.push(o)
+        })
+        break;
       default:
         break;
     }

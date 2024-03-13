@@ -66,8 +66,7 @@ let FormItemCategory = [
     { label: 'switch', value: 'switch', },
 ]
 // todo 以后再把addable与groups合并在一起
-let Button: ConfigItem =
-    {
+let Button: ConfigItem = {
         category: 'input',
         key: 'text',
         label: '文本',

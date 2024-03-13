@@ -33,13 +33,20 @@ interface ItemsMetaItemCategory {
   value: S
 }
 // type ItemsMetaItem = ItemsMetaItemString | ItemsMetaItemCategory
-type ItemsMetaItem = ItemsMetaItemCategory
+// type ItemsMetaItem = ItemsMetaItemCategory
+type ItemsMetaItem = {
+  [k: S]: PropsValue
+}
 interface SlotsMetaItem { // 待增强
   [k: S]: A
 }
 type BehaviorMeta = BehaviorMetaItem[]
 // type ItemsMeta = ItemsMetaItem[]
-type ItemsMeta = ConfigItem[]
+type ItemsMeta = ConfigItem[] // 为了兼容像button/form这类组件的item
+// type ItemsMeta = ItemsMetaItem[]
+// type ItemsMeta = {
+//   [k: S]: PropsValue
+// }
 type SlotsMeta = SlotsMetaItem[]
 
 interface Component {
