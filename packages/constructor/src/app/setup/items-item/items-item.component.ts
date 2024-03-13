@@ -8,13 +8,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { Form } from 'src/helper/items';
 // type
 import type { A, S, Options, ConfigItem } from 'src/types/base';
-// import type { ConfigItem, ComponentItemInput } from 'src/types/items';
 // 组件
-// import { PropsInputComponent } from '../props-input/props-input.component';
-// import { InputComponent } from './input/input.component';
-// import { InputComponent } from 'src/app/setup/items-item/input/input.component';
-// import { InputComponent } from 'src/app/setup/items-item/item-input.component';
-// import { ButtonComponent } from 'src/app/components/button/button.component';
 import { ItemInputComponent } from 'src/app/setup/items-item/item-input/item-input.component';
 import { ItemNumberComponent } from 'src/app/setup/items-item/item-number/item-number.component';
 import { ItemSelectComponent } from 'src/app/setup/items-item/item-select/item-select.component';
