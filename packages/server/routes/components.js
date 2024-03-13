@@ -72,10 +72,12 @@ router.route('/')
     })
   })
 })
+// 创建组件
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 创建+更新组件
   // 更新页面
+  // 检查必要参数
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && 
     rules.required(req.body.type) && 
@@ -90,11 +92,16 @@ router.route('/')
     } else {
       j(100100)
     }
-  }).then(() => {
+  })
+  // 找到页面
+  // 
+  .then(() => {
     return lowcodeDb.collection('pages_dev').findOne({ulid: req.body.pageUlid}).catch(() => {
       return Promise.reject(300000)
     })
-  }).then((curPage) => {
+  })
+  // 操作页面和组件
+  .then((curPage) => {
     let arr = [
       {
         insertOne: {
@@ -105,8 +112,8 @@ router.route('/')
             nextUlid: '',
             props: req.body.props,
             behavior: req.body.behavior,
-            items: req.body.item,
-            slots: req.body.slot,
+            items: req.body.items,
+            slots: req.body.slots,
             appUlid: req.body.appUlid,
             pageUlid: req.body.pageUlid,
           }
@@ -145,7 +152,9 @@ router.route('/')
     return Promise.all([p1, p2]).catch(() => {
       return Promise.reject(200000)
     })
-  }).then(() => {
+  })
+  // 返回值
+  .then(() => {
     return res.status(200).json({
       code: 0,
       message: '',
@@ -225,6 +234,7 @@ router.route('/')
     })
   })
 })
+// 删除组件
 .delete(cors.corsWithOptions, (req, res) => {
   // 校验参数：必填+存在
   // 处理页面级数据

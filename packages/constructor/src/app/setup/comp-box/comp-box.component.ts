@@ -83,7 +83,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
           // props: buttonDefaultData.props,
           // slot: buttonDefaultData.slot,
           props: this.comp.props,
-          slot: this.comp.slot,
+          slots: this.comp.slots,
+          items: this.comp.items,
         }
         break
       case 'Input':
