@@ -13,6 +13,7 @@ let Button: ComponentDefaultConfig = {
         bordered: true,
         disabled: false,
         width: '100px',
+        text: 'button',
     },
     behavior: [
         {

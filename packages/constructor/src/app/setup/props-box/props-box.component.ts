@@ -67,18 +67,6 @@ export class PropsBoxComponent {
     // todo 可优化为从map对象中取映射值
     switch(this.curComp?.type) {
       case 'Button':
-        // this.componentPropsMeta = buttonPropsMeta
-        // Object.keys(this.componentPropsMeta).forEach((key) => {
-        //   let o: ConfigItem = {
-        //     ...this.componentPropsMeta[key],
-        //     // propKey: key,
-        //     // componentUlid: this.curComp!.ulid,
-        //   }
-        //   // o.overFields.forEach(field => {
-        //   //   o[field] = this.curComp?.props[key]
-        //   // })
-        //   this.componentPropsList.push(o)
-        // })
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(buttonPropsMeta[key]))
           o.key = key

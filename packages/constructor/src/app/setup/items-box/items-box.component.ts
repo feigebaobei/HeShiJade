@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-import { Form, Button } from 'src/helper/items';
+import { Form, 
+  // Button
+ } from 'src/helper/items';
 import addable from 'src/helper/addable'
 // type
 import type {Component as Comp} from 'src/types/component'
@@ -43,13 +45,13 @@ export class ItemsBoxComponent {
         // this.componentItemsList.push(...this.curComp.items.groups)
         // this.componentItemsList.push(...this.curComp.items)
         break
-      case 'Button':
-        let o: ConfigItem = JSON.parse(JSON.stringify(Button))
-        this.curComp.items.forEach(obj => {
-          o.value = obj.value
-          this.componentItemsList.push(o)
-        })
-        break;
+      // case 'Button':
+      //   let o: ConfigItem = JSON.parse(JSON.stringify(Button))
+      //   this.curComp.items.forEach(obj => {
+      //     o.value = obj.value
+      //     this.componentItemsList.push(o)
+      //   })
+      //   break;
       default:
         break;
     }

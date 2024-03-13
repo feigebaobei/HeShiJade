@@ -66,12 +66,12 @@ let FormItemCategory = [
     { label: 'switch', value: 'switch', },
 ]
 // todo 以后再把addable与groups合并在一起
-let Button: ConfigItem = {
-        category: 'input',
-        key: 'text',
-        label: '文本',
-        value: '',
-    }
+// let Button: ConfigItem = {
+//         category: 'input',
+//         key: 'text',
+//         label: '文本',
+//         value: '',
+//     }
 
 
 export {
@@ -81,5 +81,5 @@ export {
     // Modal,
     Form,
     FormItemCategory,
-    Button,
+    // Button,
 }
