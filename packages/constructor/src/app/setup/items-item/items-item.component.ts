@@ -7,7 +7,7 @@ import { ComponentService } from 'src/app/service/component.service';
 // import { ItemsDirective } from 'src/app/items.directive';
 import { Form } from 'src/helper/items';
 // type
-import type { A, S, Options, ConfigItem } from 'src/types/base';
+import type { A, S, N, Options, ConfigItem } from 'src/types/base';
 // 组件
 import { ItemInputComponent } from 'src/app/setup/items-item/item-input/item-input.component';
 import { ItemNumberComponent } from 'src/app/setup/items-item/item-number/item-number.component';
@@ -45,6 +45,7 @@ export class ItemsItemComponent implements OnInit {
     value: '',
   }
   @Input() compType?: S
+  @Input() index: N = -1
   // todo delete
   // @ViewChild(ItemsDirective, {static: true}) appItems!: ItemsDirective
   // @ViewChild(ItemCategoryDirective, {static: true}) itemCategoryDirective!: ItemCategoryDirective
@@ -73,18 +74,22 @@ export class ItemsItemComponent implements OnInit {
         // componentRef = viewContainerRef.createComponent(ItemInputComponent)
         componentRef = viewContainerRef.createComponent(compMap['input'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       case 'number':
         componentRef = viewContainerRef.createComponent(compMap['number'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       case 'select':
         componentRef = viewContainerRef.createComponent(compMap['select'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       case 'switch':
         componentRef = viewContainerRef.createComponent(compMap['switch'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       // case '':
         // break;

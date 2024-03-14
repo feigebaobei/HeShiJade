@@ -11,19 +11,14 @@ import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import type { Component, Category, 
   PropsValue, 
   BehaviorItemKey } from '../../types/component'
-// import type { BehaviorItemKey } from 'src/types/behavior'
-// import type { ComponentItem,
-//   ComponentItemInput,
-//   ComponentItemNumber,
-//   ComponentItemSelect,
-//   ComponentItemSwitch, } from 'src/types/items';
 import type { ResponseData } from '../../types/index'
 // import type { ComponentPropsMeta } from '../../types/props'
-import type { ConfigItemKeys, CategoryType } from 'src/types/base'
+import type { ConfigItemsCategoryType } from 'src/types/base'
 import type { S, Ao, ULID, A,
   N,
-B,
- } from 'src/types/base';
+  B,
+  ConfigItem,
+} from 'src/types/base';
 
 let clog = console.log
 
@@ -336,21 +331,63 @@ export class ComponentService {
   //   }
   //   // 此方法可证明，不用更新列表，就能更新列表中的特定元素的特定属性。
   // }
-  setCurComponentItem(index: N,
-    //  key: ConfigItemKeys, 
-    //  value: CategoryType
-    key: 'category' | 'value' | 'key' | 'label',
-     value: 'input' | 'textarea' | 'select' | 'number' | 'switch'
-     ) {
+  setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
     let curComp = this.curComponent()
     if (curComp) {
-      curComp.items[index][key] = value
-      // let obj = curComp.items.find(item => item.key === key)
-      // if (obj) {
-      //   obj[key] = value
-      // }
+      let t: ConfigItem = curComp.items[index]
+      t.category = value
     }
   }
+  setCurComponentLabel(index: N, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let t: ConfigItem = curComp.items[index]
+      t.label = value
+    }
+  }
+  setCurComponentValue(index: N, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let t: ConfigItem = curComp.items[index]
+      t.value = value
+    }
+  }
+  setCurComponentKey(index: N, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let t: ConfigItem = curComp.items[index]
+      t.key = value
+    }
+  }
+  // todo 改名为 setItemOfCurComponent
+  // setCurComponentItem(index: N,
+  //   //  key: ConfigItemKeys, 
+  //   //  value: CategoryType
+  //   key: 'category' | 'value' | 'key' | 'label',
+  //   // value: 'input' | 'textarea' | 'select' | 'number' | 'switch'
+  //   value: valueof ConfigItem,
+  //   k: keyof ConfigItem,
+  // ) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t = curComp.items[index]
+  //     switch (key) {
+  //       case 'category':
+  //         t[key] = value
+  //         break;
+  //       case 'key':
+  //         t[key] = value
+  //         break;
+        
+  //     }
+  //     // t[key]
+  //     // curComp.items[index][key] = value
+  //     // let obj = curComp.items.find(item => item.key === key)
+  //     // if (obj) {
+  //     //   obj[key] = value
+  //     // }
+  //   }
+  // }
   // setCurComponentItem(key: S, k: S, v: A) {
   //   let curComp = this.curComponent()
   //   if (curComp) {

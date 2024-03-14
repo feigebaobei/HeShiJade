@@ -7,7 +7,7 @@
             name="category"
             [filterKey]="'label'" [valueKey]="'value'" 
             [(ngModel)]="formData!.category"
-            (ngModelChange)="categorySelectChangeH()"
+            (ngModelChange)="categorySelectChangeH($event)"
             ></d-select>
         </d-form-control>
     </d-form-item>
@@ -17,7 +17,7 @@
         <div>
             <input dTextInput autocomplete="off" name="key"
             [(ngModel)]="formData.key"
-            (ngModelChange)="keyInputChangeH()"
+            (ngModelChange)="keyInputChangeH($event)"
             />
         </div>
         </d-form-control>
@@ -28,7 +28,7 @@
         <div>
             <input dTextInput autocomplete="off" name="label"
             [(ngModel)]="formData.label"
-            (ngModelChange)="labelInputChangeH()"
+            (ngModelChange)="labelInputChangeH($event)"
             />
         </div>
         </d-form-control>
@@ -41,7 +41,7 @@
             *ngIf="['input', 'select'].includes(formData.category)"
             dTextInput autocomplete="off" name="value"
             [(ngModel)]="formData.value"
-            (ngModelChange)="valueInputChangeH()"
+            (ngModelChange)="valueInputChangeH($event)"
             />
         </div>
         </d-form-control>

@@ -8,7 +8,7 @@
 |设置当前的app/page/component|||
 |整理list（DialogComponent, AppConfigDialogComponent, PublishDialogComponent）为module|||
 |添加新组件时，及时在舞台上显示。|||
-||||
+|// todo 改名为 setItemOfCurComponen|||
 ||||
 
 props 一对kv就能搞定的

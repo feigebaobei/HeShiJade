@@ -60,12 +60,13 @@ interface ConfigItemSwitch {
   label: S
   key: S
 }
-type CategoryType = Pick<ConfigItem, 'category'>
+// type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput
   | ConfigItemTextarea
   | ConfigItemSelect<T>
   | ConfigItemNumber
   | ConfigItemSwitch
+type ConfigItemsCategoryType = ConfigItem['category']
 export type {
   S, N, A, B, ULID, 
   Email,
@@ -76,9 +77,9 @@ export type {
   ConfigItem,
   ConfigItemInput,
   ConfigItemNumber,
-ConfigItemTextarea,
-ConfigItemSelect,
-ConfigItemSwitch,
+  ConfigItemTextarea,
+  ConfigItemSelect,
+  ConfigItemSwitch,
   ConfigItemKeys,
-  CategoryType,
+  ConfigItemsCategoryType,
 }

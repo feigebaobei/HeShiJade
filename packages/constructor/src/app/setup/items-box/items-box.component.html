@@ -1,7 +1,8 @@
 <app-items-item
-    *ngFor="let item of componentItemsList"
+    *ngFor="let item of componentItemsList; let i = index"
     [itemsItem]="item"
     [compType]="curComp.type"
+    [index]="i"
 >
 </app-items-item>
 <d-button bsStyle="common" circled="true"
