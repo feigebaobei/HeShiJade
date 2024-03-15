@@ -33,9 +33,9 @@ export class ItemSelectComponent implements OnInit {
     // this.selectOptions = Form.optionMap?.['category'] || []
     this.selectOptions = FormItemCategory
     this.formData = this.itemsItem
-    this.formData.options.forEach(item => {
-      this.options += `${item.label}:${item.value},`
-    })
+    // this.formData.options.forEach(item => {
+    //   this.options += `${item.label}:${item.value},`
+    // })
     this.options.slice(0, -1)
   }
   categorySelectChangeH() {

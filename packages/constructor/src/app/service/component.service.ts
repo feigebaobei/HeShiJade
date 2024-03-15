@@ -275,67 +275,16 @@ export class ComponentService {
     }
   }
 
-
-  // setCurComponentItem(key: S, k: keyof ComponentItem, v: A) {
-  // setCurComponentItem(key: S, k: 'category' | 'key' | 'label' | 'value' | 'checked', v: A) {
-  // setCurComponentItem(key: S, k: keyof ComponentItemInput
-  //   | keyof ComponentItemNumber
-  //   | keyof ComponentItemSelect
-  //   | keyof ComponentItemSwitch, v: A) {
-  //   // todo v 有些暴力
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let obj = curComp.items.groups.find(item => item.key === key)
-  //     if (obj) {
-  //       switch (obj.category) {
-  //         case 'input':
-  //           obj[(k as keyof ComponentItemInput)] = v
-  //           break;
-  //         case 'number':
-  //           switch (k) {
-  //             case 'category':
-  //               obj[k] = v
-  //               break;
-  //             case 'key':
-  //               obj[k] = v
-  //               break;
-  //             case 'label':
-  //               obj[k] = v
-  //               break;
-  //             case 'value':
-  //               obj[k] = v
-  //               break
-  //           }
-  //           break;
-  //         case 'select':
-  //           obj[(k as keyof ComponentItemSelect)] = v
-  //           break;
-  //         case 'switch':
-  //           switch (k) {
-  //             case 'category':
-  //               obj[k] = v
-  //               break;
-  //             case 'key':
-  //               obj[k] = v
-  //               break;
-  //             case 'label':
-  //               obj[k] = v
-  //               break;
-  //             case 'checked':
-  //               obj[k] = v
-  //               break;
-  //           }
-  //           break
-  //       }
-  //     }
-  //   }
-  //   // 此方法可证明，不用更新列表，就能更新列表中的特定元素的特定属性。
-  // }
   setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
     let curComp = this.curComponent()
     if (curComp) {
       let t: ConfigItem = curComp.items[index]
       t.category = value
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'category',
+        value: value,
+      })
     }
   }
   setCurComponentLabel(index: N, value: S) {
@@ -343,6 +292,11 @@ export class ComponentService {
     if (curComp) {
       let t: ConfigItem = curComp.items[index]
       t.label = value
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'label',
+        value: value,
+      })
     }
   }
   setCurComponentValue(index: N, value: S) {
@@ -350,6 +304,17 @@ export class ComponentService {
     if (curComp) {
       let t: ConfigItem = curComp.items[index]
       t.value = value
+      clog('vlue', value)
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'value',
+        value: value,
+        index: index,
+      }, {
+        withCredentials: true
+      }).subscribe(res => {
+        clog('res', res)
+      })
     }
   }
   setCurComponentKey(index: N, value: S) {
@@ -357,67 +322,15 @@ export class ComponentService {
     if (curComp) {
       let t: ConfigItem = curComp.items[index]
       t.key = value
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'key',
+        value: value,
+      }, {
+        withCredentials: true
+      })
     }
   }
-  // todo 改名为 setItemOfCurComponent
-  // setCurComponentItem(index: N,
-  //   //  key: ConfigItemKeys, 
-  //   //  value: CategoryType
-  //   key: 'category' | 'value' | 'key' | 'label',
-  //   // value: 'input' | 'textarea' | 'select' | 'number' | 'switch'
-  //   value: valueof ConfigItem,
-  //   k: keyof ConfigItem,
-  // ) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let t = curComp.items[index]
-  //     switch (key) {
-  //       case 'category':
-  //         t[key] = value
-  //         break;
-  //       case 'key':
-  //         t[key] = value
-  //         break;
-        
-  //     }
-  //     // t[key]
-  //     // curComp.items[index][key] = value
-  //     // let obj = curComp.items.find(item => item.key === key)
-  //     // if (obj) {
-  //     //   obj[key] = value
-  //     // }
-  //   }
-  // }
-  // setCurComponentItem(key: S, k: S, v: A) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let obj = curComp.item.groups.find(item => item.key === key)
-  //     if (obj) {
-  //       switch (obj.category) {
-  //         case 'input':
-  //           this.setItemInput(obj, k, v)
-  //           break;
-  //         case 'switch':
-  //           this.setItemSwitch(obj, k, v)
-  //           break;
-  //       }
-  //     }
-  //   }
-  // }
-  // setItemInput(obj: A, k: S, v: A) {
-  //   obj[k] = v
-  // }
-  // setItemSwitch(k: S, field: 'label' | 'checked', v: S | B) {
-  //   // obj[k] = v
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let obj = curComp.item.groups.find(item => item.key === k)
-  //     if (obj) {
-  //       // (obj as ComponentItemSwitch)[k] = v
-  //       (obj as ComponentItemSwitch)[field] = v
-  //     }
-  //   }
-  // }
 
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {

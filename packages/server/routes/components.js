@@ -402,4 +402,124 @@ router.route('/listByPage')
   res.send('delete')
 })
 
+router.route('/items')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.send('post')
+  // 检验参数
+  // 取出相关组件
+  // 增加items
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) &&
+      // rules.required(req.body.index) && 
+      rules.required(req.body.key) && 
+      rules.required(req.body.value)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  })
+  .then(() => {
+    return lowcodeDb.collection('components_dev').update({ulid: req.body.ulid}, {$push: {
+      [`items`]: req.body.value
+    }}).catch(error => {
+      return Promise.reject(200020)
+    })
+  })
+  .then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  })
+  .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  // 校验参数
+  // 修改数据
+  // 返回结果
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) &&
+    rules.isNumber(req.body.index) &&
+    rules.required(req.body.key) &&
+    rules.required(req.body.value)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  })
+  .then(() => {
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: {
+      [`items.${req.body.index}.${req.body.key}`]: req.body.value
+    }}).catch(() => {
+      return Promise.reject(200020)
+    })
+  })
+  .then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  })
+  .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  let index = -1
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) &&
+      rules.required(req.query.index)
+    ) {
+      index = Number(req.query.index)
+      if (rules.isNumber(index) && index > -1) {
+        s(true)
+      } else {
+        j(100100)
+      }
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.query.ulid}, {$pull: {
+      items: index
+    }}).catch(() => {
+      return Promise.reject(200020)
+    })
+  })
+  .then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  })
+  .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+
 module.exports = router;
