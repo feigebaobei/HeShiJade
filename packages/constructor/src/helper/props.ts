@@ -206,10 +206,26 @@ let Form: PropsConfigItem = {
         key: '',
     },
 }
+let Table: PropsConfigItem = {
+    size: {
+        category: 'select',
+        options: [
+            { label: 'mini', value: 'mini', },
+            { label: 'xs', value: 'xs', },
+            { label: 'sm', value: 'sm', },
+            { label: 'md', value: 'md', },
+            { label: 'lg', value: 'lg', },
+        ],
+        value: 'sm',
+        label: '大小',
+        key: '',
+    }
+}
 export {
     Button,
     Input,
     Select,
     Modal,
     Form,
+    Table,
 }

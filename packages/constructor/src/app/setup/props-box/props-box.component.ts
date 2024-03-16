@@ -19,6 +19,7 @@ import {
   Select as selectPropsMeta,
   Modal as modalPropsMeta,
   Form as formPropsMeta,
+  Table as tablePropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -151,6 +152,14 @@ export class PropsBoxComponent {
           this.componentPropsList.push(o)
         })
         break
+      case 'Table':
+        Object.entries(this.curComp.props).forEach(([key, value]) => {
+          let o: ConfigItem = JSON.parse(JSON.stringify(tablePropsMeta[key]))
+          o.key = key
+          o.value = value
+          this.componentPropsList.push(o)
+        })
+        break;
       default:
         this.componentPropsMeta = {}
         break

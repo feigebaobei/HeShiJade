@@ -5,6 +5,7 @@ type B = boolean
 type ULID = S
 type F = Function
 type O = object
+type D = Date
 // type At = '@'
 // type Email 
 interface Ao {
@@ -70,7 +71,7 @@ type ConfigItemsCategoryType = ConfigItem['category']
 export type {
   S, N, A, B, ULID, 
   Email,
-  F, Ao, O,
+  F, Ao, O, D,
   ValueType,
   SelectOptionsItem,
   Options,

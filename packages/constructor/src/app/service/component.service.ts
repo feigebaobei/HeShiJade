@@ -261,6 +261,7 @@ export class ComponentService {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
+      clog('key', key, value)
     }
   }
   

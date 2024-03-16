@@ -101,6 +101,7 @@ let Form: ComponentDefaultConfig = {
 }
 let Table: ComponentDefaultConfig = {
     props: {
+        size: 'sm',
     },
     behavior: [],
     items: [],
