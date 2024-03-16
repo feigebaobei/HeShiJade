@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { PanelModule } from 'ng-devui';
 // import { IconModule } from 'ng-devui/icon';
 import { BehaviorModule } from './behavior/behavior.module';
+import { SlotModule } from './slot/slot.module';
 
 // 指令
 import { AdDirective } from './ad.directive';
@@ -123,6 +124,7 @@ import { ItemSelectComponent } from './setup/items-item/item-select/item-select.
     HttpClientModule,
     // LayoutModule,
     BehaviorModule,
+    SlotModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

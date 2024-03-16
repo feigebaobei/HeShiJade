@@ -2,159 +2,126 @@
 // component文件 定义数据。
 // props文件     定义结构
 // 这是所有组件的默认配置数据
-import type { Options, S,
-    //  A, ULID, B, N, 
-    // Options, 
-    B,
-    N,
-    } from "../types/base"
-import type { componentConfig } from '../types/component'
 
-let Button: componentConfig = {
+import type { ComponentDefaultConfig, ComponentDefaultConfigAll } from 'src/types/component'
+// import type { S } from 'src/types/base'
+
+let Button: ComponentDefaultConfig = {
     props: {
         type: 'button',
         bsSize: 'md',
-        bordered: false,
+        bordered: true,
         disabled: false,
         width: '100px',
+        text: 'button',
     },
-    behavior: {
-        addable: true,
-        groups: [
-            {
-                event: 'click',
-                target: 'ulid',
-                payload: '{"visible": true}',
-            },
-        ],
-    },
-    item: {
-        addable: true,
-        groups: [],
-    },
-    slot: 'button',
+    behavior: [
+        {
+            event: 'click',
+            target: 'ulid',
+            payload: '{"visible": true}',
+        },
+    ],
+    items: [
+        {
+            category: 'input',
+            label: '文本',
+            value: 'button star',
+            key: '',
+        }
+    ],
+    slots: [], // 子组件
 }
-let Input: componentConfig = {
+let Input: ComponentDefaultConfig = {
     props: {
         error: false,
         size: '',
-        showGlowStyle: true,
+        showGrowStyle: true,
         styleType: 'default',
     },
-    behavior: {
-        addable: true,
-        groups: []
-    },
-    item: {
-        addable: true,
-        groups: [],
-    },
-    slot: '',
+    behavior: [],
+    items: [],
+    slots: [],
 }
-let Modal: componentConfig = {
+let Modal: ComponentDefaultConfig = {
     props: {
-        title: 'str',
+        title: '标题',
         visible: false,
         width: '',
         placement: 'center',
     },
-    behavior: {
-        addable: true,
-        groups: []
-    },
-    item: {
-        addable: true,
-        groups: [],
-    },
-    slot: '',
+    behavior: [],
+    items: [],
+    slots: [],
 }
-let Select: componentConfig = {
+let Select: ComponentDefaultConfig = {
     props: {
-        options: [
-            {label: 'one', value: 'one',},
-            {label: 'two', value: 'two',},
-            {label: 'three', value: 'three',},
-        ],
+        // options: [
+        //     {label: 'one', value: 'one',},
+        //     {label: 'two', value: 'two',},
+        //     {label: 'three', value: 'three',},
+        // ],
         isSearch: false,
         size: '',
         placeholder: '',
     },
-    behavior: {
-        addable: true,
-        groups: []
-    },
-    item: {
-        addable: true,
-        groups: [],
-    },
-    slot: '',
+    behavior: [],
+    items: [],
+    slots: [],
 }
-let Form: componentConfig = {
+let Form: ComponentDefaultConfig = {
     props: {
         layout: 'horizontal',
         isCancel: true,
         isSubmit: true,
     },
-    behavior: {
-        addable: true,
-        groups: []
-    },
-    item: {
-        addable: true, // 是否可增加
-        groups: [
-            {
-                category: 'input',
-                key: 'name',
-                label: '姓名',
-                value: '张三',
-            },
-            {
-                category: 'select',
-                key: 'interest',
-                label: '爱好',
-                value: '读书',
-                options: [
-                    { label: '旅游', value: 'travel' },
-                    { label: '读书', value: 'read' },
-                ],
-            },
-            {
-                category: 'switch',
-                key: 'gender',
-                label: '性别',
-                checked: false,
-                // value: false,
-            }
-        ],
-    },
-    slot: '',
+    behavior: [],
+    items: [
+        {
+            category: 'input',
+            key: 'name',
+            label: '姓名',
+            value: '张三',
+        },
+        {
+            category: 'select',
+            options: [],
+            key: 'name',
+            label: '姓名',
+            value: '张三',
+        },
+        {
+            category: 'input',
+            key: 'name',
+            label: '姓名',
+            value: '张三',
+        },
+    ],
+    slots: [],
 }
-let Table: componentConfig = {
-    props: {},
-    behavior: {
-        // addable: B,
-        // groups: BehaviorItem[],
-        addable: true,
-        groups: []
+let Table: ComponentDefaultConfig = {
+    props: {
     },
-    // behavior: BehaviorMeta,
-    // behavior: {
-    //     addable: true,
-    //     groups: BehaviorMeta[]
-    // },
-    item: {
-        addable: true,
-        groups: [],
-    },
-    slot: '',
+    behavior: [],
+    items: [],
+    slots: [],
 }
-export {
+
+// export {
+//     Button,
+//     Input,
+//     Modal,
+//     Select,
+//     Form,
+//     Table,
+// }
+export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
     Input,
     Modal,
     Select,
     Form,
     Table,
-
-    // categoryList,
 }
+// export {all}
+// export default all

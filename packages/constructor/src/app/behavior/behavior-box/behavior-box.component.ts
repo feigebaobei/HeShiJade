@@ -4,7 +4,11 @@ import type { Component as Comp } from 'src/types/component';
 import {
   Button as buttonBehaviorMeta
 } from 'src/helper/behavior'
-import { BehaviorMeta, BehaviorItem } from 'src/types/behavior';
+// import { BehaviorMeta, BehaviorItem } from 'src/types/behavior';
+// import type { BehaviorMeta, BehaviorMetaItem } from 'src/types/component';
+// import type { BehaviorConfigGroupsItem } from 'src/types/config';
+// import type { BehaviorConfigGroupsItem } from 'src/types/component';
+import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
 //   //  A, ULID, B, N, 
 //   // Options, 
@@ -21,10 +25,10 @@ let clog = console.log
   styleUrls: ['./behavior-box.component.sass']
 })
 export class BehaviorBoxComponent {
-  componentBehaviorList: BehaviorItem[]
+  componentBehaviorList: BehaviorConfigItem[]
   curComp?: Comp | null
   // componentBehaviorMeta: BehaviorMeta
-  componentBehaviorMeta: BehaviorItem
+  componentBehaviorMeta: BehaviorConfigItem
   constructor(private componentService: ComponentService) {
     this.componentBehaviorList = []
     this.componentService.compSubject$.subscribe(p => {
@@ -33,18 +37,23 @@ export class BehaviorBoxComponent {
     })
     this.componentBehaviorMeta = {
       event: {
-        type: 'select',
+        category: 'select',
         options: [],
         value: '',
         label: '事件',
+        key: '',
       },
       target: {
-        type: 'input',
-        value: ''
+        category: 'input',
+        value: '',
+        label: '',
+        key: '',
       },
       payload: {
-        type: 'textarea',
+        category: 'textarea',
         value: '',
+        label: '',
+        key: '',
       },
     }
   }
@@ -53,8 +62,8 @@ export class BehaviorBoxComponent {
     switch (this.curComp?.type) {
       case 'Button':
         this.componentBehaviorMeta = buttonBehaviorMeta
-        this.curComp.behavior.groups.forEach(item => {
-          let o: BehaviorItem
+        this.curComp.behavior.forEach(item => {
+          let o: BehaviorConfigItem
           o = JSON.parse(JSON.stringify(this.componentBehaviorMeta));
           (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
             o[key].value = item[key]

@@ -7,14 +7,8 @@ import { ComponentService } from 'src/app/service/component.service';
 // import { ItemsDirective } from 'src/app/items.directive';
 import { Form } from 'src/helper/items';
 // type
-import type { A, S, Options, } from 'src/types/base';
-import type { ComponentItem, ComponentItemInput } from 'src/types/items';
+import type { A, S, N, Options, ConfigItem } from 'src/types/base';
 // 组件
-// import { PropsInputComponent } from '../props-input/props-input.component';
-// import { InputComponent } from './input/input.component';
-// import { InputComponent } from 'src/app/setup/items-item/input/input.component';
-// import { InputComponent } from 'src/app/setup/items-item/item-input.component';
-// import { ButtonComponent } from 'src/app/components/button/button.component';
 import { ItemInputComponent } from 'src/app/setup/items-item/item-input/item-input.component';
 import { ItemNumberComponent } from 'src/app/setup/items-item/item-number/item-number.component';
 import { ItemSelectComponent } from 'src/app/setup/items-item/item-select/item-select.component';
@@ -38,19 +32,20 @@ let compMap = {
 })
 export class ItemsItemComponent implements OnInit {
   // @Input()
-  // set itemsItem(p: ComponentItem) {
+  // set itemsItem(p: ConfigItem) {
   //   this.formData = p
   // }
   // get itemsItem() {
   //   return this.formData
   // }
-  @Input() itemsItem: ComponentItem = {
-    category: '',
+  @Input() itemsItem: ConfigItem = {
+    category: 'input',
     key: '',
     label: '',
     value: '',
   }
   @Input() compType?: S
+  @Input() index: N = -1
   // todo delete
   // @ViewChild(ItemsDirective, {static: true}) appItems!: ItemsDirective
   // @ViewChild(ItemCategoryDirective, {static: true}) itemCategoryDirective!: ItemCategoryDirective
@@ -63,7 +58,7 @@ export class ItemsItemComponent implements OnInit {
   //   label: S,
   //   value: S,
   // }
-  formData: ComponentItem
+  formData: ConfigItem
   constructor(private componentService: ComponentService) {
     this.items = []
     this.compType = ''
@@ -71,30 +66,30 @@ export class ItemsItemComponent implements OnInit {
     this.formData = this.itemsItem
   }
   ngOnInit() {
-    // this.formData = this.itemsItem
-    // clog('items init', this.itemsItem)
-    // let viewContainerRef = this.itemCategoryDirective.viewContainerRef
     let viewContainerRef = this.adHost.viewContainerRef
     viewContainerRef.clear()
     let componentRef: A
-    // clog('qwertyu', this.itemsItem)
     switch (this.itemsItem.category) {
       case 'input':
         // componentRef = viewContainerRef.createComponent(ItemInputComponent)
         componentRef = viewContainerRef.createComponent(compMap['input'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       case 'number':
         componentRef = viewContainerRef.createComponent(compMap['number'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       case 'select':
         componentRef = viewContainerRef.createComponent(compMap['select'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       case 'switch':
         componentRef = viewContainerRef.createComponent(compMap['switch'])
         componentRef.instance.itemsItem = this.itemsItem
+        componentRef.instance.index = this.index
         break;
       // case '':
         // break;
@@ -102,23 +97,21 @@ export class ItemsItemComponent implements OnInit {
 
   }
   ngOnDestroy() {
-    // this.itemCategoryDirective.viewContainerRef.clear();
     this.adHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
     clog('deleteButtonClickH')
   }
-  keyInputChangeH() {
-    this.componentService.setCurComponentItem(this.formData.key, 'key', this.formData.key)
-  }
-  categorySelectChangeH() {
-    this.componentService.setCurComponentItem(this.formData.key, 'category', this.formData.category)
-  }
-  labelInputChangeH() {
-    // clog('labelInputChangeH', this.formData.label)
-    this.componentService.setCurComponentItem(this.formData.key, 'label', this.formData.label)
-  }
-  valueInputChangeH() {
-    this.componentService.setCurComponentItem(this.formData.key, 'value', (this.formData as ComponentItemInput).value)
-  }
+  // keyInputChangeH() {
+  //   this.componentService.setCurComponentItem(this.formData.key, 'key', this.formData.key)
+  // }
+  // categorySelectChangeH() {
+  //   this.componentService.setCurComponentItem(this.formData.key, 'category', this.formData.category)
+  // }
+  // labelInputChangeH() {
+  //   this.componentService.setCurComponentItem(this.formData.key, 'label', this.formData.label)
+  // }
+  // valueInputChangeH() {
+  //   this.componentService.setCurComponentItem(this.formData.key, 'value', (this.formData).value)
+  // }
 }

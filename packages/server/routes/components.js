@@ -72,16 +72,18 @@ router.route('/')
     })
   })
 })
+// 创建组件
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 创建+更新组件
   // 更新页面
+  // 检查必要参数
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && 
     rules.required(req.body.type) && 
     rules.required(req.body.props) && 
     rules.required(req.body.behavior) && 
-    rules.required(req.body.item) && 
+    rules.required(req.body.items) && 
     // rules.required(req.body.slot) && // 暂时不校验
     rules.required(req.body.appUlid) && 
     rules.required(req.body.pageUlid)
@@ -90,11 +92,16 @@ router.route('/')
     } else {
       j(100100)
     }
-  }).then(() => {
+  })
+  // 找到页面
+  // 
+  .then(() => {
     return lowcodeDb.collection('pages_dev').findOne({ulid: req.body.pageUlid}).catch(() => {
       return Promise.reject(300000)
     })
-  }).then((curPage) => {
+  })
+  // 操作页面和组件
+  .then((curPage) => {
     let arr = [
       {
         insertOne: {
@@ -105,8 +112,8 @@ router.route('/')
             nextUlid: '',
             props: req.body.props,
             behavior: req.body.behavior,
-            item: req.body.item,
-            slot: req.body.slot,
+            items: req.body.items,
+            slots: req.body.slots,
             appUlid: req.body.appUlid,
             pageUlid: req.body.pageUlid,
           }
@@ -145,7 +152,9 @@ router.route('/')
     return Promise.all([p1, p2]).catch(() => {
       return Promise.reject(200000)
     })
-  }).then(() => {
+  })
+  // 返回值
+  .then(() => {
     return res.status(200).json({
       code: 0,
       message: '',
@@ -225,46 +234,57 @@ router.route('/')
     })
   })
 })
+// 删除组件
 .delete(cors.corsWithOptions, (req, res) => {
   // 校验参数：必填+存在
   // 处理页面级数据
   // 处理组件级数据
   let component, page
+  // 检查必填项
   new Promise((s, j) => {
     if (rules.required(req.query.ulid)) {
       s(true)
     } else {
       j(100100)
     }
-  }).then(() => {
+  })
+  // 找到要删除的组件
+  .then(() => {
     return lowcodeDb.collection('components_dev').findOne({ulid: req.query.ulid}).then((comp) => {
       component = comp
       return true
     }).catch(() => {
       return Promise.reject(200010)
     })
-  }).then(() => {
+  })
+  // 找到要删除的页面
+  .then(() => {
     return lowcodeDb.collection('pages_dev').findOne({ulid: component.pageUlid}).then((p) => {
       page = p
       return true
     }).catch(() => {
       return Promise.reject(2000101)
     })
-  }).then(() => {
+  })
+  // 删除组件及页面
+  .then(() => {
     let arr = [lowcodeDb.collection('components_dev').deleteOne({ulid: component.ulid})]
     if (component.prevUlid) { // 前面有组件
       // lowcodeDb.collection('page')
+      // tested
       if (component.nextUlid === '') { // 后面无组件
         let p1 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {lastComponentUlid: component.prevUlid}})
         let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.prevUlid}, {$set: {nextUlid: ''}})
         arr.push(p1, p2)
       } else { // 后面有组件 等效于 它在中间
         // page不变
+        // tested
         let p1 = lowcodeDb.collection('components_dev').updateOne({ulid: component.prevUlid}, {$set: {nextUlid: component.nextUlid}})
-        let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {nextUlid: component.prevUlid}})
+        let p2 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {prevUlid: component.prevUlid}})
         arr.push(p1, p2)
       }
     } else { // 前面没有组件
+      // tested
       if (component.nextUlid === '') { // 等效于 page.firstComponentUlid === page.lastComponentUlid // 只有一个组件
         let p1 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {
           firstComponentUlid: '',
@@ -272,6 +292,7 @@ router.route('/')
         }})
         arr.push(p1)
       } else {
+        // tested
         let p1 = lowcodeDb.collection('components_dev').updateOne({ulid: component.nextUlid}, {$set: {prevUlid: ''}})
         let p2 = lowcodeDb.collection('pages_dev').updateOne({ulid: page.ulid}, {$set: {firstComponentUlid: component.nextUlid}})
         arr.push(p1, p2)
@@ -280,7 +301,9 @@ router.route('/')
     return Promise.all(arr).catch(() => {
       return Promise.reject(200020)
     })
-  }).then(() => {
+  })
+  // 返回结果
+  .then(() => {
     return res.status(200).json({
       code: 0,
       message: '',
@@ -377,6 +400,126 @@ router.route('/listByPage')
 })
 .delete(cors.corsWithOptions, (req, res) => {
   res.send('delete')
+})
+
+router.route('/items')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.send('post')
+  // 检验参数
+  // 取出相关组件
+  // 增加items
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) &&
+      // rules.required(req.body.index) && 
+      rules.required(req.body.key) && 
+      rules.required(req.body.value)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  })
+  .then(() => {
+    return lowcodeDb.collection('components_dev').update({ulid: req.body.ulid}, {$push: {
+      [`items`]: req.body.value
+    }}).catch(error => {
+      return Promise.reject(200020)
+    })
+  })
+  .then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  })
+  .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  // 校验参数
+  // 修改数据
+  // 返回结果
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) &&
+    rules.isNumber(req.body.index) &&
+    rules.required(req.body.key) &&
+    rules.required(req.body.value)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  })
+  .then(() => {
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: {
+      [`items.${req.body.index}.${req.body.key}`]: req.body.value
+    }}).catch(() => {
+      return Promise.reject(200020)
+    })
+  })
+  .then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  })
+  .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  let index = -1
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) &&
+      rules.required(req.query.index)
+    ) {
+      index = Number(req.query.index)
+      if (rules.isNumber(index) && index > -1) {
+        s(true)
+      } else {
+        j(100100)
+      }
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.query.ulid}, {$pull: {
+      items: index
+    }}).catch(() => {
+      return Promise.reject(200020)
+    })
+  })
+  .then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  })
+  .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
 })
 
 module.exports = router;

@@ -14,13 +14,13 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Ao } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 // 数据
-import { Button as buttonDefaultData,
-  Input as inputDefaultData,
-Modal as modalDefaultData,
-Select as selectDefaultData,
-Form as formDefaultData,
-Table as tableDefaultData,
- } from '../../../helper/component'
+// import { Button as buttonDefaultData,
+//   Input as inputDefaultData,
+// Modal as modalDefaultData,
+// Select as selectDefaultData,
+// Form as formDefaultData,
+// Table as tableDefaultData,
+//  } from '../../../helper/component'
 import { ResponseData } from 'src/types';
 import { PageService } from 'src/app/service/page.service';
 // 我看到实现动态组件功能时都是引入组件的。
@@ -83,7 +83,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
           // props: buttonDefaultData.props,
           // slot: buttonDefaultData.slot,
           props: this.comp.props,
-          slot: this.comp.slot,
+          slots: this.comp.slots,
+          // items: this.comp.items,
         }
         break
       case 'Input':
@@ -106,7 +107,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
       case 'Form':
         this.componentRef.instance.data = {
           props: this.comp.props,
-          items: this.comp.item,
+          items: this.comp.items,
         }
         break
       case 'Table':

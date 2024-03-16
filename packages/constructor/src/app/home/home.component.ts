@@ -6,6 +6,7 @@ import { FormLayout } from 'ng-devui/form';
 // import { Observable } from 'rxjs';
 import type { ResponseData, User } from 'src/types';
 import { UserService } from '../service/user.service';
+import { B } from 'src/types/base';
 
 let clog = console.log
 
@@ -20,12 +21,14 @@ export class HomeComponent implements OnInit {
   layoutDirection: FormLayout = FormLayout.Vertical;
   msg: {}[]
   user?: User
+  logining: B
   constructor(private router: Router, private http: HttpClient,
     private userService: UserService) {
     this.isCollapsed = false
     this.status = 1 // 0 注册 1 登录
     this.msg = []
     this.user = this.userService.user
+    this.logining = false
   }
   formData = {
     account: '123@qq.com', // for dev
@@ -38,6 +41,7 @@ export class HomeComponent implements OnInit {
   }
   // 登录
   submitForm(a: any) {
+    this.logining = true
     this.userService.clearUser()
     // this.userService.loginSso({
     //   account: this.formData.account,
@@ -54,6 +58,10 @@ export class HomeComponent implements OnInit {
     }).then(() => {
       this.router.navigate(['/list'])
       this.user = this.userService.getUser()
+    }).catch(error => {
+      this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
+    }).finally(() => {
+      this.logining = false
     })
   }
   // 注册

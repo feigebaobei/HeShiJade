@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComponentItemSwitch } from 'src/types/items';
-import type { Options, S } from 'src/types/base'
-import { Form } from 'src/helper/items';
+// import { ComponentItemSwitch } from 'src/types/items';
+import type { Options, S, ConfigItemSwitch, } from 'src/types/base'
+import { Form, FormItemCategory } from 'src/helper/items';
 
 let clog = console.log
 
@@ -11,13 +11,18 @@ let clog = console.log
   styleUrls: ['./item-switch.component.sass']
 })
 export class ItemSwitchComponent implements OnInit {
-  @Input() itemsItem: ComponentItemSwitch = {
+  @Input() itemsItem: ConfigItemSwitch = {
     category: 'switch',
     key: '',
     label: '',
-    checked: false,
+    options: [
+      {label: 'true', value: true},
+      {label: 'false', value: false},
+    ],
+    // checked: false,
+    value: false,
   }
-  formData: ComponentItemSwitch
+  formData: ConfigItemSwitch
   selectOptions: Options<S, S>[]
   constructor () {
     this.formData = this.itemsItem
@@ -25,7 +30,8 @@ export class ItemSwitchComponent implements OnInit {
   }
   ngOnInit() {
     this.formData = this.itemsItem
-    this.selectOptions = Form.optionMap?.['category'] || []
+    // this.selectOptions = Form.optionMap?.['category'] || []
+    this.selectOptions = FormItemCategory
   }
   categorySelectChangeH() {
     clog('categorySelectChangeH12345')

@@ -2,32 +2,38 @@
 let categoryList = [
     {
       name: 'button',
-      type: 'Button',
+    //   type: 'Button',
+        componentCategory: 'Button',
       ulid: '12345asdfg'
     },
     {
         name: 'modal',
-        type: 'Modal',
+        // type: 'Modal',
+        componentCategory: 'Modal',
         ulid: '12345asdfg2'
     },
     {
         name: 'form',
-        type: 'Form',
+        // type: 'Form',
+        componentCategory: 'Form',
         ulid: '12345asdfge'
     },
     {
         name: 'table',
-        type: 'Table',
+        // type: 'Table',
+        componentCategory: 'Table',
         ulid: '12345asdfgs'
     },
     {
         name: 'input',
-        type: 'Input',
+        // type: 'Input',
+        componentCategory: 'Input',
         ulid: '12345asdfga'
     },
     {
         name: 'select',
-        type: 'Select',
+        // type: 'Select',
+        componentCategory: 'Select',
         ulid: '12345asdfgb'
     },
   ]

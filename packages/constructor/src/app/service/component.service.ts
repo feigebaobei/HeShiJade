@@ -8,19 +8,17 @@ import {categoryList} from 'src/helper/category'
 import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 // 类型
 // import { createCompKey } from 'src/helper/index'
-import type { Component, Category, PropsValue } from '../../types/component'
-import type { BehaviorItemKey } from 'src/types/behavior'
-import type { ComponentItem,
-  ComponentItemInput,
-  ComponentItemNumber,
-  ComponentItemSelect,
-  ComponentItemSwitch, } from 'src/types/items';
+import type { Component, Category, 
+  PropsValue, 
+  BehaviorItemKey } from '../../types/component'
 import type { ResponseData } from '../../types/index'
-import type { ComponentPropsMeta } from '../../types/props'
+// import type { ComponentPropsMeta } from '../../types/props'
+import type { ConfigItemsCategoryType } from 'src/types/base'
 import type { S, Ao, ULID, A,
   N,
-B,
- } from 'src/types/base';
+  B,
+  ConfigItem,
+} from 'src/types/base';
 
 let clog = console.log
 
@@ -101,7 +99,6 @@ export class ComponentService {
               nextComponentUlid = comp?.nextUlid
               threshold++
             }
-            clog('threshold', threshold)
             threshold = null
             let arr = this._map.get(curPage.ulid)!.toArray()
             this.componentListByCurPage$.next(arr)
@@ -266,100 +263,74 @@ export class ComponentService {
       curComp.props[key] = value
     }
   }
-  setComponentsBehavior(type: UpdateType, index: N, key: BehaviorItemKey, value: S) {
+  
+  setComponentsBehavior(
+    // type: UpdateType, 
+    index: N, key: BehaviorItemKey, value: S) {
     let curComp: CompOrUn = this.curComponent()
     if(curComp) {
-      let arr = curComp.behavior.groups
+      // let arr = curComp.behavior.groups
+      let arr = curComp.behavior
       arr[index][key] = value
     }
   }
 
-
-  // setCurComponentItem(key: S, k: keyof ComponentItem, v: A) {
-  // setCurComponentItem(key: S, k: 'category' | 'key' | 'label' | 'value' | 'checked', v: A) {
-  setCurComponentItem(key: S, k: keyof ComponentItemInput
-    | keyof ComponentItemNumber
-    | keyof ComponentItemSelect
-    | keyof ComponentItemSwitch, v: A) {
-    // todo v 有些暴力
+  setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
     let curComp = this.curComponent()
     if (curComp) {
-      let obj = curComp.item.groups.find(item => item.key === key)
-      if (obj) {
-        switch (obj.category) {
-          case 'input':
-            obj[(k as keyof ComponentItemInput)] = v
-            break;
-          case 'number':
-            switch (k) {
-              case 'category':
-                obj[k] = v
-                break;
-              case 'key':
-                obj[k] = v
-                break;
-              case 'label':
-                obj[k] = v
-                break;
-              case 'value':
-                obj[k] = v
-                break
-            }
-            break;
-          case 'select':
-            obj[(k as keyof ComponentItemSelect)] = v
-            break;
-          case 'switch':
-            switch (k) {
-              case 'category':
-                obj[k] = v
-                break;
-              case 'key':
-                obj[k] = v
-                break;
-              case 'label':
-                obj[k] = v
-                break;
-              case 'checked':
-                obj[k] = v
-                break;
-            }
-            break
-        }
-      }
+      let t: ConfigItem = curComp.items[index]
+      t.category = value
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'category',
+        value: value,
+      })
     }
-    // 此方法可证明，不用更新列表，就能更新列表中的特定元素的特定属性。
   }
-  // setCurComponentItem(key: S, k: S, v: A) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let obj = curComp.item.groups.find(item => item.key === key)
-  //     if (obj) {
-  //       switch (obj.category) {
-  //         case 'input':
-  //           this.setItemInput(obj, k, v)
-  //           break;
-  //         case 'switch':
-  //           this.setItemSwitch(obj, k, v)
-  //           break;
-  //       }
-  //     }
-  //   }
-  // }
-  // setItemInput(obj: A, k: S, v: A) {
-  //   obj[k] = v
-  // }
-  // setItemSwitch(k: S, field: 'label' | 'checked', v: S | B) {
-  //   // obj[k] = v
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let obj = curComp.item.groups.find(item => item.key === k)
-  //     if (obj) {
-  //       // (obj as ComponentItemSwitch)[k] = v
-  //       (obj as ComponentItemSwitch)[field] = v
-  //     }
-  //   }
-  // }
+  setCurComponentLabel(index: N, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let t: ConfigItem = curComp.items[index]
+      t.label = value
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'label',
+        value: value,
+      })
+    }
+  }
+  setCurComponentValue(index: N, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let t: ConfigItem = curComp.items[index]
+      t.value = value
+      clog('vlue', value)
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'value',
+        value: value,
+        index: index,
+      }, {
+        withCredentials: true
+      }).subscribe(res => {
+        clog('res', res)
+      })
+    }
+  }
+  setCurComponentKey(index: N, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let t: ConfigItem = curComp.items[index]
+      t.key = value
+      this.http.put<ResponseData>('http://localhost:5000/components/items', {
+        ulid: curComp.ulid,
+        key: 'key',
+        value: value,
+      }, {
+        withCredentials: true
+      })
+    }
+  }
 
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
