@@ -1,0 +1,13 @@
+<p>items-group works!</p>
+<form dForm ngForm>
+    <d-form-item *ngFor="let item of group">
+        <d-form-label>{{item.label}}</d-form-label>
+        <d-form-control>
+            <input dTextInput
+                [name]="item.key"
+                [(ngModel)]="item.value"
+                (ngModelChange)="change(item.key, item.value)"
+            />
+        </d-form-control>
+    </d-form-item>
+</form>
