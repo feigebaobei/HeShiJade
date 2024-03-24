@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { IconModule } from 'ng-devui/icon';
 import { BehaviorModule } from './behavior/behavior.module';
 import { SlotModule } from './slot/slot.module';
+import { ItemsModule } from './items/items.module';
 
 // 指令
 import { AdDirective } from './ad.directive';
@@ -59,12 +60,12 @@ import { PropsItemComponent } from './setup/props-item/props-item.component';
 import { PropsOptionComponent } from './setup/props-option/props-option.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
-import { ItemsBoxComponent } from './setup/items-box/items-box.component';
-import { ItemsItemComponent } from './setup/items-item/items-item.component';
-import { ItemInputComponent } from './setup/items-item/item-input/item-input.component';
-import { ItemNumberComponent } from './setup/items-item/item-number/item-number.component';
-import { ItemSwitchComponent } from './setup/items-item/item-switch/item-switch.component';
-import { ItemSelectComponent } from './setup/items-item/item-select/item-select.component';
+// import { ItemsBoxComponent } from './setup/items-box/items-box.component';
+// import { ItemsItemComponent } from './setup/items-item/items-item.component';
+// import { ItemInputComponent } from './setup/items-item/item-input/item-input.component';
+// import { ItemNumberComponent } from './setup/items-item/item-number/item-number.component';
+// import { ItemSwitchComponent } from './setup/items-item/item-switch/item-switch.component';
+// import { ItemSelectComponent } from './setup/items-item/item-select/item-select.component';
 
 @NgModule({
   declarations: [
@@ -100,12 +101,12 @@ import { ItemSelectComponent } from './setup/items-item/item-select/item-select.
     PropsOptionComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
-    ItemsBoxComponent,
-    ItemsItemComponent,
-    ItemInputComponent,
-    ItemNumberComponent,
-    ItemSwitchComponent,
-    ItemSelectComponent,
+    // ItemsBoxComponent,
+    // ItemsItemComponent,
+    // ItemInputComponent,
+    // ItemNumberComponent,
+    // ItemSwitchComponent,
+    // ItemSelectComponent,
     // IconModule,
   ],
   imports: [
@@ -125,6 +126,7 @@ import { ItemSelectComponent } from './setup/items-item/item-select/item-select.
     // LayoutModule,
     BehaviorModule,
     SlotModule,
+    ItemsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

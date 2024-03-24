@@ -140,13 +140,14 @@ router.route('/login')
         password: req.body.password,
       },
     }).then((response) => {
-      // clog('response', response)
+      clog('response', response)
       if (response.code === 0) {
         return response.data
       } else {
         return Promise.reject(100200)
       }
-    }).catch(() => {
+    }).catch((e ) => {
+      clog('sdfas', e)
       return Promise.reject(100200)
     })
   }).then((obj) => {

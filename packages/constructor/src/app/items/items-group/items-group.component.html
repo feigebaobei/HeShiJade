@@ -1,13 +1,30 @@
-<p>items-group works!</p>
-<form dForm ngForm>
-    <d-form-item *ngFor="let item of group">
-        <d-form-label>{{item.label}}</d-form-label>
-        <d-form-control>
-            <input dTextInput
-                [name]="item.key"
-                [(ngModel)]="item.value"
-                (ngModelChange)="change(item.key, item.value)"
-            />
-        </d-form-control>
-    </d-form-item>
-</form>
+<section>
+    <app-item *ngFor="let item of group; let i = index"
+        [groupItem]="item"
+        (change)="changeH()"
+    ></app-item>
+    
+    <div *ngFor="let item of group; let i = index">
+        <!-- <div *ngIf="item.category === 'select'">
+            <app-select [label]="item.label" [value]="item.value" [options]="item.options" (change)="changeH(i)"></app-select>
+        </div>
+        <div *ngIf="item.category === 'input'">
+            <app-input [label]="item.label" [value]="item.value" (change)="changeH(i)"></app-input>
+        </div>
+        <div *ngIf="item.category === 'switch'">
+            <app-switch [label]="item.label" [value]="item.value" (change)="changeH(i)"></app-switch>
+        </div>
+        <div *ngIf="item.category === 'select'">
+            <app-options [optionsList]="item.options" [OptionsTemp]="item.OptionsTemp"></app-options>
+        </div> -->
+        <!-- <div *ngIf="item.category === 'input'">
+            <app-input [label]="item.label" [value]="item.value" (change)="changeH(i)">
+        </div>
+        <div *ngIf="item.category === 'input'">
+            <app-input [label]="item.label" [value]="item.value" (change)="changeH(i)">
+        </div>
+        <div *ngIf="item.category === 'input'">
+            <app-input [label]="item.label" [value]="item.value" (change)="changeH(i)">
+        </div> -->
+    </div>
+</section>

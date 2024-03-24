@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
 // import * as componentDefaultConfigAll from '../../helper/component'
+import addableAll from 'src/helper/addable'
 // type
 import type { B, ConfigItem, N } from 'src/types/base';
 import type { Component as Comp, ItemsMeta } from 'src/types/component';
@@ -17,22 +18,27 @@ export class ItemsBoxComponent {
   groupList: ConfigItem[][] = []
   curComponent: Comp | null = null
   constructor(private componentService: ComponentService) {
+    this.groupList = []
     this.componentService.compSubject$.subscribe(p => {
       if (p) {
         this.curComponent = p
-        let group = JSON.parse(JSON.stringify(groupTemplate[p.type])) as ConfigItem[]
+        this.groupList = []
         p.items.forEach(item => {
-          // Object.entries(item).forEach(([k: 'category' | 'label' | 'key' | 'value', v]) => {
+          let group = JSON.parse(JSON.stringify(groupTemplate[p.type])) as ConfigItem[]
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
               gi.value = v
+              // gi.label = v.label
             }
           })
+          this.groupList.push(group)
+          
+          this.addable = addableAll[p.type].items
         })
-        this.groupList.push(group)
       } else {
         this.curComponent = null
+        this.groupList = []
       }
     })
   }

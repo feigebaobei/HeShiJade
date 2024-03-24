@@ -275,62 +275,85 @@ export class ComponentService {
       arr[index][key] = value
     }
   }
-
-  setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
+  // setItemsOfCurComponent(index: N, key: S, value: A) {
+  // todo 可优化key的类型
+  setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value', value: A) {
     let curComp = this.curComponent()
     if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.category = value
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'category',
-        value: value,
-      })
+      curComp.items[index][key] = value
     }
   }
-  setCurComponentLabel(index: N, value: S) {
-    let curComp = this.curComponent()
-    if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.label = value
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'label',
-        value: value,
-      })
-    }
+  reqChangeItems(index: N, key: S, value: A) {
+    this.http.put<ResponseData>('http://localhost:5000/components/items', {
+      ulid: this.curComponent()?.ulid,
+      index,
+      key,
+      value,
+    }, {
+      withCredentials: true
+    })
+    .subscribe(res => {
+      clog('res', res)
+    })
   }
-  setCurComponentValue(index: N, value: S) {
-    let curComp = this.curComponent()
-    if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.value = value
-      clog('vlue', value)
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'value',
-        value: value,
-        index: index,
-      }, {
-        withCredentials: true
-      }).subscribe(res => {
-        clog('res', res)
-      })
-    }
-  }
-  setCurComponentKey(index: N, value: S) {
-    let curComp = this.curComponent()
-    if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.key = value
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'key',
-        value: value,
-      }, {
-        withCredentials: true
-      })
-    }
+  // setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.category = value
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'category',
+  //       value: value,
+  //     })
+  //   }
+  // }
+  // setCurComponentLabel(index: N, value: S) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.label = value
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'label',
+  //       value: value,
+  //     })
+  //   }
+  // }
+  // setCurComponentValue(index: N, value: S) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.value = value
+  //     clog('vlue', value)
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'value',
+  //       value: value,
+  //       index: index,
+  //     }, {
+  //       withCredentials: true
+  //     }).subscribe(res => {
+  //       clog('res', res)
+  //     })
+  //   }
+  // }
+  // setCurComponentKey(index: N, value: S) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.key = value
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'key',
+  //       value: value,
+  //     }, {
+  //       withCredentials: true
+  //     })
+  //   }
+  // }
+  removeItemsOfCurComponent(index: N) {
+    
   }
 
   // 更新组件

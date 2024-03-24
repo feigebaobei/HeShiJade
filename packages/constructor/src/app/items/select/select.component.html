@@ -1,0 +1,13 @@
+
+<d-form-item>
+    <d-form-label>{{_label}}</d-form-label>
+    <d-form-control>
+        <d-select
+            [options]="options"
+            filterKey="label"
+            valueKey="value"
+            [(ngModel)]="value"
+            (ngModelChange)="changeH()"
+        ></d-select>
+    </d-form-control>
+</d-form-item>
