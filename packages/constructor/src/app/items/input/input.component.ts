@@ -11,7 +11,7 @@ import type { S } from 'src/types/base';
 export class InputComponent implements OnInit {
   @Input() label: S = 'label'
   @Input() value: S = ''
-  @Output() change = new EventEmitter()
+  @Output() changeValue = new EventEmitter()
   _label: S = ''
   _value: S = ''
   constructor() {
@@ -21,7 +21,7 @@ export class InputComponent implements OnInit {
     this._value = this.value
   }
   changeH() {
-    console.log('change', this._value)
-    this.change.emit(this._value)
+    // console.log('change', this._value)
+    this.changeValue.emit(this._value)
   }
 }

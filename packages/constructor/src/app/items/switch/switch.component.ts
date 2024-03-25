@@ -11,7 +11,7 @@ import type { S, B } from 'src/types/base';
 export class SwitchComponent implements OnInit {
   @Input() label: S = ''
   @Input() value: B = false
-  @Output() change = new EventEmitter()
+  @Output() changeValue = new EventEmitter()
   _label: S = ''
   _value: B = false
   constructor() {
@@ -21,6 +21,6 @@ export class SwitchComponent implements OnInit {
     this._value = this.value
   }
   changeH() {
-    this.change.emit(this._value)
+    this.changeValue.emit(this._value)
   }
 }

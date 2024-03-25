@@ -11,9 +11,9 @@ import type { S, B, Options, A, N, } from 'src/types/base';
 export class OptionsComponent {
   // @Input() label: S = ''
   // @Input() value: B = false
-  @Input() optionsList: Options<S, A>[] = []
-  @Input() optionsTemp!: Options<S, A>
-  @Output() changeE = new EventEmitter()
+  @Input() optionsList: Options<S, S>[] = []
+  @Input() optionsTemp!: Options<S, S>
+  @Output() changeOptions = new EventEmitter<Options<S, S>[]>()
   // _label: S
   // _value: B
   _optionsList: Options<S, A>[] = []
@@ -25,14 +25,17 @@ export class OptionsComponent {
   ngOnInit() {
     this._optionsList = this.optionsList
   }
-  labelChangeH(i: N) {
-    // this.changeE.emit(this._value)
+  labelChangeH(v: S, i: N) {
+    this.changeOptions.emit(this._optionsList)
   }
   valueChangeH(index: N) {
-    // this.changeE.emit(this._value)
+    this.changeOptions.emit(this._optionsList)
   }
-  // addH() {
-  //   let o = JSON.parse(JSON.stringify(this.optionsTemp))
-  //   this._optionsList.push(o)
-  // }
+  opLv () {
+    // this._optionsList
+  }
+  addH() {
+    let o = JSON.parse(JSON.stringify(this.optionsTemp))
+    this._optionsList.push(o)
+  }
 }

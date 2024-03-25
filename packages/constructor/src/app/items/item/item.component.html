@@ -2,24 +2,24 @@
 <app-input *ngIf="groupItem.category === 'input'"
     [label]="groupItem.label"
     [value]="groupItem.value"
-    (change)="inputChangeH()"
+    (changeValue)="inputChangeH($event)"
 ></app-input>
 <app-select *ngIf="groupItem.category === 'select'"
     [label]="groupItem.label"
     [value]="groupItem.value"
     [options]="groupItem.options"
-    (change)="selectChangeH()"
+    (changeValue)="selectChangeH($event)"
 ></app-select>
 <app-switch *ngIf="groupItem.category === 'switch'"
     [label]="groupItem.label"
     [value]="groupItem.value"
-    (change)="switchChangeH()"
+    (changeValue)="switchChangeH($event)"
 ></app-switch>
 <div *ngIf="groupItem.category === 'options'">
     {{groupItem | json}}
 </div>
-<app-options *ngIf="groupItem.category === 'options'"
+<app-options *ngIf="groupItem.category === 'options' && !!groupItem.value.length"
     [optionsList]="groupItem.value"
     [optionsTemp]="groupItem.template"
-    (change)="optionsChangeH()"
+    (changeOptions)="optionsChangeH($event)"
 ></app-options>

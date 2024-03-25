@@ -167,3 +167,58 @@ api只暴露几个用户关心的、使用简单的api.
 |stage2|在lc项目中开发此组件，设置相关配置项。|||
 |stage3||||
 |stage4||||
+
+
+## signal
+import { Injectable, signal } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class DataSignalService {
+  private data = signal('');
+
+  setData(update: string) {
+    this.data.set(update);
+  }
+
+  getData(){
+    return this.data;
+  }
+}
+
+import { Component } from '@angular/core';
+import { DataSignalService } from '../data.service';
+
+@Component({
+  selector: 'app-sender-signal',
+  template: `
+    <h3>Sender Component</h3>
+    <button (click)="sendData()">Send Data</button>
+  `,
+})
+export class SenderSignalComponent {
+  constructor(private dataService: DataSignalService) {}
+
+  sendData() {
+    this.dataService.setData('Data from Sender Component');
+  }
+}
+
+import { Component } from '@angular/core';
+import { DataSignalService } from '../data.service';
+
+@Component({
+  selector: 'app-receiver-signal',
+  template: `
+    <h3>Receiver Component</h3>
+    <p>{{ data() }}</p>
+  `,
+})
+export class ReceiverSignalComponent {
+  data;
+
+  constructor(private dataService: DataSignalService) {
+    this.data = this.dataService.getData();
+  }
+}

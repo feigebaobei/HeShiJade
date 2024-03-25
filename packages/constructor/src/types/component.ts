@@ -2,6 +2,7 @@ import type {N, B, A, S, ULID, O, SelectOptionsItem, ConfigItem,
   ConfigItemSelect,
   ConfigItemTextarea,
   ConfigItemInput,
+  Options,
 } from './base'
 // import type { ComponentItem,
 //   ItemsMeta,
@@ -41,6 +42,7 @@ type ItemsMetaItem = {
   label: S
   key: S
   value: A
+  options?: Options<S, S>[]
 }
 interface SlotsMetaItem { // 待增强
   [k: S]: A

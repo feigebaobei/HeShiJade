@@ -4,7 +4,7 @@
         <d-form-control>
             <input dTextInput
             [(ngModel)]="item.label"
-            (ngModelChange)="labelChangeH(i)"
+            (ngModelChange)="labelChangeH($event, i)"
             placeholder="label"
             />
         </d-form-control>
@@ -24,12 +24,12 @@
     <d-col [dSpan]="4">
         <d-icon-group>
             <d-icon [icon]="'icon-add'" [operable]="true" [disabled]="true"></d-icon>
-            <d-icon [icon]="'icon-sub'" [operable]="true" [disabled]="true"></d-icon>
+            <d-icon [icon]="'icon-minus'" [operable]="true" [disabled]="true"></d-icon>
         </d-icon-group>
     </d-col>
 </d-row>
-<!-- <d-button
+<d-button
     bsStyle="common"
     circled="true"
     (click)="addH()"
->增加一项</d-button> -->
+>增加一项</d-button>

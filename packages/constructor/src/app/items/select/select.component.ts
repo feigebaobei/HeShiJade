@@ -18,7 +18,7 @@ export class SelectComponent implements OnInit {
   //   return this._value
   // }
   @Input() options: Options<S, A>[] = []
-  @Output() change = new EventEmitter()
+  @Output() changeValue = new EventEmitter()
   _value: S = ''
   _label: S = ''
   constructor() {
@@ -28,6 +28,6 @@ export class SelectComponent implements OnInit {
     this._label = this.label
   }
   changeH() {
-    this.change.emit(this._value)
+    this.changeValue.emit(this._value)
   }
 }

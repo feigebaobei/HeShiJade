@@ -2,7 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 
 // type
-import type { A, ConfigItem, N, S, Options, ConfigItemSelect, } from 'src/types/base';
+import type { A, ConfigItem, N, B, S, Options, ConfigItemSelect, } from 'src/types/base';
+
+// interface T {
+//   key: 'label' | 'key' | 'value'
+//   value: S
+// }
 
 @Component({
   selector: 'app-items-group',
@@ -26,4 +31,35 @@ export class ItemsGroupComponent {
   changeH() {
 
   }
+  // inputChangeH(k: 'label' | 'key' | 'value', v: S) {
+  // inputChangeH({
+  //   key: 'label' | 'key' | 'value',
+  //   v: S
+  // }
+  //   // k: 'label' | 'key' | 'value', v: S
+  //   ) {
+  //   this.componentService.setItemsOfCurComponent(this.index, k, v)
+  // }
+  inputChangeH(p: {
+    key: 'label' | 'key' | 'value'
+    value: S
+  }) {
+    console.log(p)
+    this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+  }
+  selectChangeH(p: {
+    key: 'category'
+    value: S
+  }) {
+    this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+  }
+  switchChangeH(p: {
+    key: 'value'
+    value: B
+  }) {
+    this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+  }
+  // optionsChangeH(p: {key: 'options', value: Options<S, S>[]}) {
+  //   this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+  // }
 }
