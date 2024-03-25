@@ -278,7 +278,7 @@ export class ComponentService {
   // setItemsOfCurComponent(index: N, key: S, value: A) {
   // todo 可优化key的类型
   setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options', value: A) {
-    clog('setItemsOfCurComponent', index, key, value)
+    // clog('setItemsOfCurComponent', index, key, value)
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
