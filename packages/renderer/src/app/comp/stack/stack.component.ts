@@ -53,13 +53,13 @@ export class StackComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
-          slot: this.data.slot,
+          slots: this.data.slots,
         }
         break;
       case 'Form':
         this.componentRef.instance.data = {
           props: this.data.props,
-          items: this.data.item,
+          items: this.data.items,
         }
         break;
       case 'Modal':

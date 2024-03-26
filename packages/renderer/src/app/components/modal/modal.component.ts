@@ -39,11 +39,6 @@ export class ModalComponent implements OnInit {
     if (this.data.props.visible) {
       this.openDialog()
     }
-    // shareEvent.listen('01HQFYX942DGF1Z8CQ30BTXXSC', (payload) => {
-    //   if (payload.visible) {
-    //     this.openDialog()
-    //   }
-    // })
     shareEvent.listen(this.data.ulid, (payload) => {
       let obj = JSON.parse(payload)
       if (obj.visible) {

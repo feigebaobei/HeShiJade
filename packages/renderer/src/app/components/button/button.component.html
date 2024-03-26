@@ -1,12 +1,13 @@
 <!-- {{data | json}} -->
 <d-button
     [bordered]="data.props.bordered"
-    [bsSize]="data.props.bsSize.value"
+    [bsSize]="data.props.bsSize"
     [disabled]="data.props.disabled"
-    [type]="data.props.type.value"
+    [type]="data.props.type"
     [width]="data.props.width"
     (click)="buttonClickH()"
     (dblclick)="buttonDbClickH()"
-    >
-    {{data.slot}}
+>
+    <!-- {{data.slot}} -->
+    {{data.props.text}}
 </d-button>
