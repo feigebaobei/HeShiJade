@@ -410,14 +410,11 @@ router.route('/items')
   res.send('get')
 })
 .post(cors.corsWithOptions, (req, res) => {
-  res.send('post')
   // 检验参数
   // 取出相关组件
   // 增加items
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) &&
-      // rules.required(req.body.index) && 
-      rules.required(req.body.key) && 
       rules.required(req.body.value)
     ) {
       s(true)
@@ -426,21 +423,22 @@ router.route('/items')
     }
   })
   .then(() => {
-    return lowcodeDb.collection('components_dev').update({ulid: req.body.ulid}, {$push: {
-      [`items`]: req.body.value
+    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$push: {
+      items: req.body.value
     }}).catch(error => {
+      clog(error)
       return Promise.reject(200020)
     })
   })
   .then(() => {
-    return res.status(200).json({
+    res.status(200).json({
       code: 0,
       message: '',
       data: {}
     })
   })
   .catch((code) => {
-    return res.status(200).json({
+    res.status(200).json({
       code,
       message: errorCode[code],
       data: {},
