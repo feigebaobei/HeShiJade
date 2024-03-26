@@ -72,27 +72,24 @@ let Form: ConfigItem[] = [
         ],
         key: 'category',
         value: 'input',
-        // extend: {
-        //     options: {label: '',value: '', disabled: false, valueType: 'string'},
-        // }
     },
     {
         label: 'key',      // 在配置面板中的显示的文本
         category: 'input', // 在配置面板中显示的种类
         key: 'key',        // 配置组中项的key
-        value: 'age',      // 在配置面板中设置的值
+        value: '',      // 在配置面板中设置的值
     },
     {
         label: 'label',
         category: 'input',
         key: 'label',
-        value: '姓名',
+        value: '',
     },
     {
         label: 'value',
         category: 'input',
         key: 'value',
-        value: 'san',
+        value: '',
     },
     {
         label: '',

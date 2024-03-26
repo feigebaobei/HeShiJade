@@ -5,7 +5,8 @@ import groupTemplate from 'src/helper/items'
 import addableAll from 'src/helper/addable'
 // type
 import type { B, ConfigItem, N } from 'src/types/base';
-import type { Component as Comp, ItemsMeta } from 'src/types/component';
+import type { Component as Comp, ItemsMeta, ItemsMetaItem
+ } from 'src/types/component';
 
 @Component({
   selector: 'app-items-box',
@@ -44,8 +45,15 @@ export class ItemsBoxComponent {
   }
   addH() {
     if (this.curComponent) {
-      let group = JSON.parse(JSON.stringify(groupTemplate[this.curComponent.type]))
+      let group = JSON.parse(JSON.stringify(groupTemplate[this.curComponent.type])) as ConfigItem[]
       this.groupList.push(group)
+      let obj: ItemsMetaItem = {} as ItemsMetaItem
+      group.forEach((item) => {
+        let k: keyof ItemsMetaItem = item.key as unknown as keyof ItemsMetaItem
+        obj[k] = item.value
+      })
+      this.componentService.addItemsOfCurComponent(obj)
+      this.componentService.reqAddItems(obj)
     }
   }
   removeH(i: N) {

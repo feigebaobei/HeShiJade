@@ -15,9 +15,9 @@
     [value]="groupItem.value"
     (changeValue)="switchChangeH($event)"
 ></app-switch>
-<div *ngIf="groupItem.category === 'options'">
+<!-- <div *ngIf="groupItem.category === 'options'">
     {{groupItem | json}}
-</div>
+</div> -->
 <app-options *ngIf="groupItem.category === 'options' && !!groupItem.value.length"
     [optionsList]="groupItem.value"
     [optionsTemp]="groupItem.template"

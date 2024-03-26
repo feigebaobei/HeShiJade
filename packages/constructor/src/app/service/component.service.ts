@@ -10,7 +10,9 @@ import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, 
   PropsValue, 
-  BehaviorItemKey } from '../../types/component'
+  BehaviorItemKey,
+  ItemsMetaItem,
+ } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 // import type { ComponentPropsMeta } from '../../types/props'
 import type { ConfigItemsCategoryType } from 'src/types/base'
@@ -284,6 +286,12 @@ export class ComponentService {
       curComp.items[index][key] = value
     }
   }
+  addItemsOfCurComponent(obj: ItemsMetaItem) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      curComp.items.push(obj)
+    }
+  }
   reqChangeItems(index: N, key: S, value: A) {
     this.http.put<ResponseData>('http://localhost:5000/components/items', {
       ulid: this.curComponent()?.ulid,
@@ -296,6 +304,14 @@ export class ComponentService {
     .subscribe(res => {
       clog('res', res)
     })
+  }
+  reqAddItems(obj: ItemsMetaItem) {
+    this.http.post<ResponseData>('http://localhost:5000/components/items', {
+      ulid: this.curComponent()?.ulid,
+      value: obj
+    }, {
+      withCredentials: true
+    }).subscribe(() => {})
   }
   // setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
   //   let curComp = this.curComponent()

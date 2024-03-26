@@ -116,4 +116,5 @@ export type {
   ConfigItem,
   ComponentDefaultConfig,
   ComponentDefaultConfigAll,
+  ItemsMetaItem,
 }

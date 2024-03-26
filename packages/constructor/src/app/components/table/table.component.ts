@@ -15,12 +15,13 @@ interface basicDataSourceItem {
   styleUrls: ['./table.component.sass']
 })
 export class TableComponent {
+  // @Input() props
+  @Input() data: A
   basicDataSource: basicDataSourceItem[]
   dataTableOptions: {columns: A[]}
   // @Input() props: {[k: S]: A} = {
   //   size: 'lg', // 'mini'| 'xs' |'sm'|'md'|'lg'
   // }
-  @Input() data: A
   constructor() {
     this.basicDataSource = [
       {
