@@ -1,18 +1,19 @@
-import { A, S } from 'src/types/base';
+import { A, O, S } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import { DoublyChain } from 'data-footstone';
 import shareEvent from './share-event';
 
-// 因类型不以，无法使用此方法了。
-let reqToPromise = (fn: Observable<ResponseData>) => {
+
+let reqToPromise = (fn: Observable<ResponseData>): Promise<ResponseData> => {
     return new Promise((s, j) => {
-      fn.subscribe(res => {
-        if (res.code === 0) {
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
+      fn.subscribe((res: ResponseData) => {
+        // if (res.code === 0) {
+        //   s(res.data as T)
+        // } else {
+        //   j(new Error(res.message))
+        // }
+        s(res)
       })
     })
   }
@@ -35,10 +36,15 @@ let arrToChain = <T extends {[k: S]: A}>(arr: T[], mainKey: S, nextKey: S, first
   }
   return dc
 }
+let {log: clog, dir: cdir} = console
+
+
 
 export {
   reqToPromise,
   // createCompKey,
   arrToChain,
   shareEvent,
+  clog,
+  cdir,
 }

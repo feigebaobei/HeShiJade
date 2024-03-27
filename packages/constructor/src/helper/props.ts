@@ -219,6 +219,12 @@ let Table: PropsConfigItem = {
         value: 'sm',
         label: '大小',
         key: '',
+    },
+    url: {
+        category: 'input',
+        value: '',
+        label: 'url',
+        key: '',
     }
 }
 export {

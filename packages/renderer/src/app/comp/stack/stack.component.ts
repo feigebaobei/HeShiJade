@@ -84,6 +84,7 @@ export class StackComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           items: this.data.items,
+          ulid: this.data.ulid,
         }
         break;
     }
