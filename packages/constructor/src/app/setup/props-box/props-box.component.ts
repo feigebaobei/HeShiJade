@@ -66,6 +66,7 @@ export class PropsBoxComponent {
     // 再赋值
     // 取出模板再赋值当前值
     // todo 可优化为从map对象中取映射值
+    // todo 优化为从配置文件中取出可配置项
     switch(this.curComp?.type) {
       case 'Button':
         Object.entries(this.curComp.props).forEach(([key, value]) => {
