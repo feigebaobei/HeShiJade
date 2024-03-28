@@ -1,16 +1,7 @@
+<!-- {{data | json}} -->
 <d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [tableOverflowType]="'overlay'"
     [size]="data.props['size']"
 >
-    <!-- <d-column field="$index" header="#" [width]="'50px'"></d-column>
-    <d-column
-      *ngFor="let colOption of dataTableOptions.columns"
-      [field]="colOption.field"
-      [header]="colOption.header"
-      [width]="'150px'"
-    > -->
-      <!-- [fieldType]="colOption.fieldType" 暂时不支持它 -->
-    <!-- </d-column> -->
-
     <d-column
       *ngFor="let colOption of data.items"
       [field]="colOption.field"
@@ -18,4 +9,8 @@
       [width]="colOption.width"
     ></d-column>
 </d-data-table>
-  
+<div *ngIf="!data.items.length"
+  class="placeholderBox"
+>
+  placeholder for table
+</div>
