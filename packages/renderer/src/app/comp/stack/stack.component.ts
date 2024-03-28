@@ -6,6 +6,7 @@ import { FormComponent } from 'src/app/components/form/form.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { InputComponent } from 'src/app/components/input/input.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
+import { TableComponent } from 'src/app/components/table/table.component';
 // type
 import type { A, S } from 'src/types/base';
 
@@ -16,6 +17,7 @@ let compMap: {[k: S]: A} = {
   Modal: ModalComponent,
   Input: InputComponent,
   Select: SelectComponent,
+  Table: TableComponent,
 }
 
 @Component({
@@ -53,13 +55,13 @@ export class StackComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
-          slot: this.data.slot,
+          slots: this.data.slots,
         }
         break;
       case 'Form':
         this.componentRef.instance.data = {
           props: this.data.props,
-          items: this.data.item,
+          items: this.data.items,
         }
         break;
       case 'Modal':
@@ -76,6 +78,13 @@ export class StackComponent {
       case 'Select':
         this.componentRef.instance.data = {
           props: this.data.props,
+        }
+        break;
+      case 'Table':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          items: this.data.items,
+          ulid: this.data.ulid,
         }
         break;
     }

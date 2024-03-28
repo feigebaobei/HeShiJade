@@ -5,6 +5,7 @@ type B = boolean
 type ULID = S
 type F = Function
 type O = object
+type D = Date
 // type At = '@'
 // type Email 
 interface Ao {
@@ -17,7 +18,7 @@ type ValueType = 'string' | 'number' | 'switch'
 interface SelectOptionsItem {
     label: S
     value: A
-    diabled?: B // 是否可用
+    disabled?: B // 是否可用
     valueType?: ValueType // 值的类型，优先级高于ComponentPropsMetaItemRaw的valueType
 }
 interface Options<T, G> {
@@ -39,11 +40,18 @@ interface ConfigItemTextarea {
 }
 interface ConfigItemSelect<T> {
   category: 'select'
-  // value: S | N
   value: T
-  options: SelectOptionsItem[]
+  options: SelectOptionsItem[] // 当前配置项的可选项
   label: S
   key: S
+  extend?: {
+    select?: {
+      options: SelectOptionsItem
+    }
+    switch?: {
+      options: SelectOptionsItem
+    }
+  }
 }
 interface ConfigItemNumber {
   category: 'number'
@@ -60,17 +68,25 @@ interface ConfigItemSwitch {
   label: S
   key: S
 }
+interface ConfigItmeOption {
+  category: 'options',
+  label: S,
+  key: S,
+  value: []
+  template: Options<S, S>
+}
 // type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput
   | ConfigItemTextarea
   | ConfigItemSelect<T>
   | ConfigItemNumber
   | ConfigItemSwitch
+  | ConfigItmeOption
 type ConfigItemsCategoryType = ConfigItem['category']
 export type {
   S, N, A, B, ULID, 
   Email,
-  F, Ao, O,
+  F, Ao, O, D,
   ValueType,
   SelectOptionsItem,
   Options,

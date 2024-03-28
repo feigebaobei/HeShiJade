@@ -1,0 +1,10 @@
+<section class="box">
+    <app-item *ngFor="let item of group; let i = index"
+        [groupItem]="item"
+        (change)="changeH()"
+        (inputChange)="inputChangeH($event)"
+        (selectChange)="selectChangeH($event)"
+        (switchChange)="switchChangeH($event)"
+        (optionsChange)="optionsChangeH($event)"
+    ></app-item>
+</section>

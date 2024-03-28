@@ -2,6 +2,7 @@ import type {N, B, A, S, ULID, O, SelectOptionsItem, ConfigItem,
   ConfigItemSelect,
   ConfigItemTextarea,
   ConfigItemInput,
+  Options,
 } from './base'
 // import type { ComponentItem,
 //   ItemsMeta,
@@ -35,15 +36,24 @@ interface ItemsMetaItemCategory {
 // type ItemsMetaItem = ItemsMetaItemString | ItemsMetaItemCategory
 // type ItemsMetaItem = ItemsMetaItemCategory
 type ItemsMetaItem = {
-  [k: S]: PropsValue
+  // [k: S]: PropsValue
+  // [k: S]: A // 先宽松一点吧
+  category: S
+  label: S
+  key: S
+  value: A
+  options?: Options<S, S>[]
 }
 interface SlotsMetaItem { // 待增强
   [k: S]: A
 }
 type BehaviorMeta = BehaviorMetaItem[]
 // type ItemsMeta = ItemsMetaItem[]
-type ItemsMeta = ConfigItem[] // 为了兼容像button/form这类组件的item
-// type ItemsMeta = ItemsMetaItem[]
+// type ItemsMeta = ConfigItem[] // 为了兼容像button/form这类组件的item
+// interface ItemsMeta {
+//   [k: S]: A
+// }
+type ItemsMeta = ItemsMetaItem[]
 // type ItemsMeta = {
 //   [k: S]: PropsValue
 // }
@@ -57,6 +67,7 @@ interface Component {
   props: PropsMeta
   behavior: BehaviorMeta
   items: ItemsMeta
+  // items: {[k: S]: A}[]
   slots: SlotsMeta
   appUlid: ULID
   pageUlid: ULID
@@ -105,4 +116,5 @@ export type {
   ConfigItem,
   ComponentDefaultConfig,
   ComponentDefaultConfigAll,
+  ItemsMetaItem,
 }

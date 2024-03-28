@@ -16,20 +16,6 @@ export class FormComponent {
   selectOptions
   formData: A
   constructor() {
-    // let layout: FormLayout
-    // switch (this.data.props.layout) {
-    //   case 'horizontal':
-    //   default:
-    //     layout = FormLayout.Horizontal;
-    //     break;
-    //   case 'vertical':
-    //     layout = FormLayout.Vertical;
-    //     break;
-      
-    // }
-    // this.layout = layout
-    // this.layout = 'horizontal'
-    
     this.selectOptions = [
       { label: 'one', value: 'one' },
       { label: 'two', value: 'two' },

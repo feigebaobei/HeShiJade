@@ -19,6 +19,7 @@ import {
   Select as selectPropsMeta,
   Modal as modalPropsMeta,
   Form as formPropsMeta,
+  Table as tablePropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -65,6 +66,7 @@ export class PropsBoxComponent {
     // 再赋值
     // 取出模板再赋值当前值
     // todo 可优化为从map对象中取映射值
+    // todo 优化为从配置文件中取出可配置项
     switch(this.curComp?.type) {
       case 'Button':
         Object.entries(this.curComp.props).forEach(([key, value]) => {
@@ -151,6 +153,14 @@ export class PropsBoxComponent {
           this.componentPropsList.push(o)
         })
         break
+      case 'Table':
+        // todo把其他组件也改为从配置文件中取配置项。
+        // todo配置文件改为数组
+        Object.values(tablePropsMeta).forEach((item: ConfigItem) => {
+          item.value = this.curComp!.props[item.key] // value
+          this.componentPropsList.push(item)
+        })
+        break;
       default:
         this.componentPropsMeta = {}
         break

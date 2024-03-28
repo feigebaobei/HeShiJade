@@ -1,0 +1,25 @@
+<!-- {{groupItem | json }} -->
+<app-input *ngIf="groupItem.category === 'input'"
+    [label]="groupItem.label"
+    [value]="groupItem.value"
+    (changeValue)="inputChangeH($event)"
+></app-input>
+<app-select *ngIf="groupItem.category === 'select'"
+    [label]="groupItem.label"
+    [value]="groupItem.value"
+    [options]="groupItem.options"
+    (changeValue)="selectChangeH($event)"
+></app-select>
+<app-switch *ngIf="groupItem.category === 'switch'"
+    [label]="groupItem.label"
+    [value]="groupItem.value"
+    (changeValue)="switchChangeH($event)"
+></app-switch>
+<!-- <div *ngIf="groupItem.category === 'options'">
+    {{groupItem | json}}
+</div> -->
+<app-options *ngIf="groupItem.category === 'options' && !!groupItem.value.length"
+    [optionsList]="groupItem.value"
+    [optionsTemp]="groupItem.template"
+    (changeOptions)="optionsChangeH($event)"
+></app-options>

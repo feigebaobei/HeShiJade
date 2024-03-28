@@ -18,6 +18,7 @@ import { FormComponent } from './components/form/form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
+import { TableComponent } from './components/table/table.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SelectComponent } from './components/select/select.component';
     FormComponent,
     ModalComponent,
     InputComponent,
-    SelectComponent
+    SelectComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

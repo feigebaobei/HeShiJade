@@ -1,1 +1,16 @@
-<p>table</p>
+<!-- {{data | json}} -->
+<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [tableOverflowType]="'overlay'"
+    [size]="data.props['size']"
+>
+    <d-column
+      *ngFor="let colOption of data.items"
+      [field]="colOption.field"
+      [header]="colOption.header"
+      [width]="colOption.width"
+    ></d-column>
+</d-data-table>
+<div *ngIf="!data.items.length"
+  class="placeholderBox"
+>
+  placeholder for table
+</div>

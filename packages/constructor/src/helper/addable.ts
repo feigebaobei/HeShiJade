@@ -16,10 +16,16 @@ let Form: CompConfigAddabel = {
     items: true,
     slots: false,
 }
+let Table: CompConfigAddabel = {
+    behavior: false,
+    items: true,
+    slots: false,
+}
 
 let all: {[k: S]: CompConfigAddabel} = {
     Button,
     Form,
+    Table,
 }
 
 export {

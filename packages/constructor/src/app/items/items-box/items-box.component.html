@@ -1,0 +1,12 @@
+<app-items-group
+    *ngFor="let ele of groupList; let i = index"
+    [group]="ele"
+    [index]="i"
+    (remove)="removeH(i)"
+></app-items-group>
+<d-button
+    bsStyle="common"
+    circled="true"
+    *ngIf="addable"
+    (click)="addH()"
+>增加一项</d-button>

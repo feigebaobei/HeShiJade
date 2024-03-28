@@ -1,4 +1,4 @@
-import { A } from 'src/types/base';
+import type { A, F, N } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
@@ -34,11 +34,23 @@ let cloneDeep: <T>(p: T, c: T) => T = (p: A, c: A) => {
   }
   return c
 }
-
+let createDebounceFn = (fn: F, t = 250, self?: A) => {
+  var timer: N
+  return (...rest: A[]) => {
+    var context = self
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = window.setTimeout(() => {
+      fn.apply(context, rest)
+    }, t)
+  }
+}
 
 
 export {
   reqToPromise,
   cloneDeep,
   // createCompKey,
+  createDebounceFn,
 }

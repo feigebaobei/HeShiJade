@@ -10,7 +10,9 @@ import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, 
   PropsValue, 
-  BehaviorItemKey } from '../../types/component'
+  BehaviorItemKey,
+  ItemsMetaItem,
+ } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 // import type { ComponentPropsMeta } from '../../types/props'
 import type { ConfigItemsCategoryType } from 'src/types/base'
@@ -261,6 +263,7 @@ export class ComponentService {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
+      clog('key', key, value)
     }
   }
   
@@ -274,62 +277,100 @@ export class ComponentService {
       arr[index][key] = value
     }
   }
-
-  setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
+  // setItemsOfCurComponent(index: N, key: S, value: A) {
+  // todo 可优化key的类型
+  setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options', value: A) {
+    // clog('setItemsOfCurComponent', index, key, value)
     let curComp = this.curComponent()
     if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.category = value
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'category',
-        value: value,
-      })
+      curComp.items[index][key] = value
     }
   }
-  setCurComponentLabel(index: N, value: S) {
+  addItemsOfCurComponent(obj: ItemsMetaItem) {
     let curComp = this.curComponent()
     if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.label = value
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'label',
-        value: value,
-      })
+      curComp.items.push(obj)
     }
   }
-  setCurComponentValue(index: N, value: S) {
-    let curComp = this.curComponent()
-    if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.value = value
-      clog('vlue', value)
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'value',
-        value: value,
-        index: index,
-      }, {
-        withCredentials: true
-      }).subscribe(res => {
-        clog('res', res)
-      })
-    }
+  reqChangeItems(index: N, key: S, value: A) {
+    this.http.put<ResponseData>('http://localhost:5000/components/items', {
+      ulid: this.curComponent()?.ulid,
+      index,
+      key,
+      value,
+    }, {
+      withCredentials: true
+    })
+    .subscribe(res => {
+      clog('res', res)
+    })
   }
-  setCurComponentKey(index: N, value: S) {
-    let curComp = this.curComponent()
-    if (curComp) {
-      let t: ConfigItem = curComp.items[index]
-      t.key = value
-      this.http.put<ResponseData>('http://localhost:5000/components/items', {
-        ulid: curComp.ulid,
-        key: 'key',
-        value: value,
-      }, {
-        withCredentials: true
-      })
-    }
+  reqAddItems(obj: ItemsMetaItem) {
+    this.http.post<ResponseData>('http://localhost:5000/components/items', {
+      ulid: this.curComponent()?.ulid,
+      value: obj
+    }, {
+      withCredentials: true
+    }).subscribe(() => {})
+  }
+  // setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.category = value
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'category',
+  //       value: value,
+  //     })
+  //   }
+  // }
+  // setCurComponentLabel(index: N, value: S) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.label = value
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'label',
+  //       value: value,
+  //     })
+  //   }
+  // }
+  // setCurComponentValue(index: N, value: S) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.value = value
+  //     clog('vlue', value)
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'value',
+  //       value: value,
+  //       index: index,
+  //     }, {
+  //       withCredentials: true
+  //     }).subscribe(res => {
+  //       clog('res', res)
+  //     })
+  //   }
+  // }
+  // setCurComponentKey(index: N, value: S) {
+  //   let curComp = this.curComponent()
+  //   if (curComp) {
+  //     let t: ConfigItem = curComp.items[index]
+  //     t.key = value
+  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
+  //       ulid: curComp.ulid,
+  //       key: 'key',
+  //       value: value,
+  //     }, {
+  //       withCredentials: true
+  //     })
+  //   }
+  // }
+  removeItemsOfCurComponent(index: N) {
+    
   }
 
   // 更新组件

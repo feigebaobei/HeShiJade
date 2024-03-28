@@ -33,15 +33,23 @@ export class ItemInputComponent implements OnInit {
   }
   // categorySelectChangeH(v: 'input' | 'textarea' | 'select' | 'number' | 'switch') {
   categorySelectChangeH(v: ConfigItemsCategoryType) {
-    this.componentService.setCurComponentCategory(this.index, v)
+    // this.componentService.setCurComponentCategory(this.index, v)
+    this.componentService.setItemsOfCurComponent(this.index, 'category', v)
+    this.componentService.reqChangeItems(this.index, 'category', v)
   }
   keyInputChangeH(v: S) {
-    this.componentService.setCurComponentKey(this.index, v)
+    // this.componentService.setCurComponentKey(this.index, v)
+    this.componentService.setItemsOfCurComponent(this.index, 'key', v)
+    this.componentService.reqChangeItems(this.index, 'key', v)
   }
   labelInputChangeH(v: S) {
-    this.componentService.setCurComponentLabel(this.index, v)
+    // this.componentService.setCurComponentLabel(this.index, v)
+    this.componentService.setItemsOfCurComponent(this.index, 'label', v)
+    this.componentService.reqChangeItems(this.index, 'label', v)
   }
   valueInputChangeH(v: S) {
-    this.componentService.setCurComponentValue(this.index, v)
+    // this.componentService.setCurComponentValue(this.index, v)
+    this.componentService.setItemsOfCurComponent(this.index, 'value', v)
+    this.componentService.reqChangeItems(this.index, 'value', v)
   }
 }

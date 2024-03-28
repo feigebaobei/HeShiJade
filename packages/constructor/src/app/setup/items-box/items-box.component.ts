@@ -44,25 +44,24 @@ export class ItemsBoxComponent {
     // 再赋值
     switch (this.curComp?.type) {
       case 'Form':
-        // this.componentItemsList.push(...this.curComp.items.groups)
-        // this.componentItemsList.push(...this.curComp.items)
-          let o: ConfigItem
-        this.curComp.items.forEach((obj: ConfigItem) => {
-          o = JSON.parse(JSON.stringify(Form))
-          o.value = obj.value
-          o.key = obj.key
-          o.category = obj.category
-          o.label = obj.label
+        //   let o: ConfigItem
+        // this.curComp.items.forEach((obj: ConfigItem) => {
+        //   o = JSON.parse(JSON.stringify(Form))
+        //   o.value = obj.value
+        //   o.key = obj.key
+        //   o.category = obj.category
+        //   o.label = obj.label
+        //   this.componentItemsList.push(o)
+        // })
+
+        this.curComp.items.forEach((obj) => {
+          let o = JSON.parse(JSON.stringify(Form))
+          Object.keys(o).forEach((k) => {
+            o[k] = obj[k]
+          })
           this.componentItemsList.push(o)
         })
         break
-      // case 'Button':
-      //   let o: ConfigItem = JSON.parse(JSON.stringify(Button))
-      //   this.curComp.items.forEach(obj => {
-      //     o.value = obj.value
-      //     this.componentItemsList.push(o)
-      //   })
-      //   break;
       default:
         break;
     }

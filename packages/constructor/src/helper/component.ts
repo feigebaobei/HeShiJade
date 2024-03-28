@@ -84,8 +84,8 @@ let Form: ComponentDefaultConfig = {
             value: '张三',
         },
         {
-            category: 'select',
-            options: [],
+            category: 'input',
+            // options: [],
             key: 'name',
             label: '姓名',
             value: '张三',
@@ -101,9 +101,16 @@ let Form: ComponentDefaultConfig = {
 }
 let Table: ComponentDefaultConfig = {
     props: {
+        size: 'sm',
     },
     behavior: [],
-    items: [],
+    items: [
+        // {
+        //     field: 'key',
+        //     header: 'str',
+        //     width: '150px',
+        // }
+    ],
     slots: [],
 }
 

@@ -112,7 +112,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
       case 'Table':
         this.componentRef.instance.data = {
-          props: this.comp.props
+          props: this.comp.props,
+          items: this.comp.items,
         }
         break
     }
