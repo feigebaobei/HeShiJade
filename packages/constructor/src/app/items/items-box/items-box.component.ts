@@ -8,6 +8,9 @@ import type { B, ConfigItem, N } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
  } from 'src/types/component';
 
+let clog = console.log
+
+
 @Component({
   selector: 'app-items-box',
   templateUrl: './items-box.component.html',
@@ -34,9 +37,8 @@ export class ItemsBoxComponent {
             }
           })
           this.groupList.push(group)
-          
-          this.addable = addableAll[p.type].items
         })
+        this.addable = addableAll[p.type].items
       } else {
         this.curComponent = null
         this.groupList = []
