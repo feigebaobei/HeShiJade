@@ -154,11 +154,11 @@ export class PropsBoxComponent {
         })
         break
       case 'Table':
-        Object.entries(this.curComp.props).forEach(([key, value]) => {
-          let o: ConfigItem = JSON.parse(JSON.stringify(tablePropsMeta[key]))
-          o.key = key
-          o.value = value
-          this.componentPropsList.push(o)
+        // todo把其他组件也改为从配置文件中取配置项。
+        // todo配置文件改为数组
+        Object.values(tablePropsMeta).forEach((item: ConfigItem) => {
+          item.value = this.curComp!.props[item.key] // value
+          this.componentPropsList.push(item)
         })
         break;
       default:
