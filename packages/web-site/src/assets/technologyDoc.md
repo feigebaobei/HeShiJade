@@ -203,8 +203,8 @@ put
 |prev|上一个组件的ulid|||
 |props|属性|||
 |behavior|行为|||
-|item|条目|||
-|slot|内置文本|||
+|items|条目|||
+|slots|插槽|||
 |appUlid|所属应用的ulid|||
 |pageUlid|所属页面的ulid|||
 

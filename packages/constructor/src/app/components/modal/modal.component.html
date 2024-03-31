@@ -6,8 +6,15 @@
     <header>title: {{data.props.title}}
         <d-icon [icon]="'icon-close'"></d-icon>
     </header>
-    <main>
-        main
+    <main dDroppable
+        (dropEvent)="dropH($event)"
+    >
+        dDroppable
+        main body
+        {{data.slots | json}}
+        <!-- <app-comp-box [comp]="data.slots['body']"></app-comp-box> -->
+        end
+        <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"></app-comp-box>
     </main>
     <footer>
         <d-button>取消</d-button>

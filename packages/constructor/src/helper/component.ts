@@ -30,7 +30,7 @@ let Button: ComponentDefaultConfig = {
             key: '',
         }
     ],
-    slots: [], // 子组件
+    slots: {}, // 子组件
 }
 let Input: ComponentDefaultConfig = {
     props: {
@@ -41,7 +41,7 @@ let Input: ComponentDefaultConfig = {
     },
     behavior: [],
     items: [],
-    slots: [],
+    slots: {},
 }
 let Modal: ComponentDefaultConfig = {
     props: {
@@ -52,7 +52,11 @@ let Modal: ComponentDefaultConfig = {
     },
     behavior: [],
     items: [],
-    slots: [],
+    slots: {
+        header: {},
+        body: {},
+        footer: {},
+    },
 }
 let Select: ComponentDefaultConfig = {
     props: {
@@ -67,7 +71,7 @@ let Select: ComponentDefaultConfig = {
     },
     behavior: [],
     items: [],
-    slots: [],
+    slots: {},
 }
 let Form: ComponentDefaultConfig = {
     props: {
@@ -97,7 +101,7 @@ let Form: ComponentDefaultConfig = {
             value: '张三',
         },
     ],
-    slots: [],
+    slots: {},
 }
 let Table: ComponentDefaultConfig = {
     props: {
@@ -111,7 +115,7 @@ let Table: ComponentDefaultConfig = {
         //     width: '150px',
         // }
     ],
-    slots: [],
+    slots: {},
 }
 
 // export {

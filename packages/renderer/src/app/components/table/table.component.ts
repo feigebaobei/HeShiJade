@@ -14,12 +14,12 @@ export class TableComponent implements OnInit {
   basicDataSource: A[]
   constructor(private dataService: DataService) {
     this.basicDataSource = [
-      {
-        id: 1,
-        name: 'name',
-        a: 'a',
-        d: 'd',
-      },
+      // {
+      //   id: 1,
+      //   name: 'name',
+      //   a: 'a',
+      //   d: 'd',
+      // },
     ]
   }
   req() {

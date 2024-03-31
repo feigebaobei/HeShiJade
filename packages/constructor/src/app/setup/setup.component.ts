@@ -4,9 +4,10 @@ import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
+import { initComponentMeta } from 'src/helper'
 // 数据
 // import * as componentDefaultConfigAll from '../../helper/component'
-import {componentDefaultConfigAll} from '../../helper/component'
+import {componentDefaultConfigAll} from 'src/helper/component'
 // import all from '../../helper/component'
 // 类型
 import type { A, S, N, B } from 'src/types/base';
@@ -105,19 +106,7 @@ export class SetupComponent implements OnInit {
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    let obj: Comp = {
-      ulid: ulid(),
-      type: e.dragData.item.componentCategory,
-      prevUlid: this.componentByPage[this.componentByPage.length - 1]?.ulid || '',
-      nextUlid: '',
-      // todo 优化dragData的类型
-      props: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].props,
-      behavior: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].behavior,
-      items: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].items,
-      slots: componentDefaultConfigAll[(e.dragData.item.componentCategory as S)].slots,
-      appUlid: curPage!.appUlid,
-      pageUlid: curPage!.ulid,
-    }
+    let obj: Comp = initComponentMeta(e.dragData.item.componentCategory, curPage!.appUlid, curPage!.ulid, this.componentByPage[this.componentByPage.length - 1]?.ulid || '')
     this.componentService.postCompListByPage(obj).catch(error => {
       clog('error', error)
     })

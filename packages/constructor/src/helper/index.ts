@@ -1,6 +1,11 @@
-import type { A, F, N } from 'src/types/base';
+import { ulid } from 'ulid';
+import {componentDefaultConfigAll} from 'src/helper/component'
+// type
+import type { A, F, N, S } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
+import type { Component } from 'src/types/component';
+
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     return new Promise((s, j) => {
       fn.subscribe(res => {
@@ -46,6 +51,20 @@ let createDebounceFn = (fn: F, t = 250, self?: A) => {
     }, t)
   }
 }
+let initComponentMeta = (category: S, appUlid: ULID, pageUlid: ULID, prevUlid: S = '', nextUlid: S = ''): Component => {
+  return {
+    ulid: ulid(),
+    type: category,
+    prevUlid,
+    nextUlid,
+    props: componentDefaultConfigAll[category].props,
+    behavior: componentDefaultConfigAll[category].behavior,
+    items: componentDefaultConfigAll[category].items,
+    slots: componentDefaultConfigAll[category].slots,
+    appUlid,
+    pageUlid,
+  }
+}
 
 
 export {
@@ -53,4 +72,5 @@ export {
   cloneDeep,
   // createCompKey,
   createDebounceFn,
+  initComponentMeta,
 }

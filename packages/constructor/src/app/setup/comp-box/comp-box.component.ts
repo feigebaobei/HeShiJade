@@ -96,7 +96,10 @@ export class CompBoxComponent implements OnInit, OnDestroy {
       case 'Modal':
         this.componentRef.instance.data = {
           // props: modalDefaultData.props
-          props: this.comp.props
+          props: this.comp.props,
+          // items: this.comp.items,
+          slots: this.comp.slots,
+          ulid: this.comp.ulid,
         }
         break
       case 'Select':
