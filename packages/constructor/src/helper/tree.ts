@@ -2,6 +2,9 @@ import { A, N, S, B, ULID, } from "src/types/base"
 import { Component } from "src/types/component"
 import { Queue } from "data-footstone"
 
+let clog = console.log
+
+
 // 基于js的面向对象的思想做一棵树
 interface NodePropotype<T> {
     isTop: () => B
@@ -81,12 +84,30 @@ let nodePropotype: NodePropotype<Component> = Object.create({}, {
 })
 let createNode = <T>(v: T): Node<T> => {
     return Object.create(nodePropotype, {
-        prev: {value: null},
-        next: {value: null},
-        parent: {value: null},
-        children: {value: {}},
-        mountPosition: {value: ''},
-        value: {value: v},
+        prev: {
+            writable: true,
+            value: null
+        },
+        next: {
+            writable: true,
+            value: null
+        },
+        parent: {
+            writable: true,
+            value: null
+        },
+        children: {
+            writable: true,
+            value: {}
+        },
+        mountPosition: {
+            writable: true,
+            value: ''
+        },
+        value: {
+            writable: true,
+            value: v
+        },
     })
 }
 let obj = Object.create({}, {
@@ -119,7 +140,7 @@ let obj = Object.create({}, {
     mountRoot: {
         value: function (component: Component) {
         let node = createNode(component);
-        
+        clog('this', this);
         (this as TC).root = node
     }},
     // 挂载前节点。在指定node.value.ulid的节点前挂载节点
@@ -158,6 +179,7 @@ let obj = Object.create({}, {
     mountNext: {
         value: function(component: Component, ulid: ULID) {
             let node: NC | undefined = this.find(ulid)
+            clog('node' , node)
             if (node) {
                 let newNode = createNode(component)
                 let nextNode = node.next
@@ -253,14 +275,18 @@ let obj = Object.create({}, {
     },
 })
 
-let createTree = (): Tree<Component> => {
+let createTree = <T>(): Tree<T> => {
     return Object.create(obj, {
         root: {
+            writable: true,
             value: null
         }
     })
 }
-export { 
+export {
     createTree,
     createNode,
+}
+export type {
+    Node, Tree,
 }

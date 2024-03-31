@@ -5,6 +5,7 @@ import type { A, F, N, S } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component } from 'src/types/component';
+import type { App } from 'src/types/app';
 
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     return new Promise((s, j) => {
@@ -65,6 +66,21 @@ let initComponentMeta = (category: S, appUlid: ULID, pageUlid: ULID, prevUlid: S
     pageUlid,
   }
 }
+let initAppMeta = (key: S, name: S, theme: S, owner: S, version:N = 0): App => {
+  return {
+    key,
+    name,
+    ulid: ulid(),
+    theme,
+    version,
+    // owner: (this.userService.getUser()?.account as S),
+    owner, // : (this.userService.getUser()?.profile.email as Email), // 考虑一下，email好还是id好。 // id好
+    collaborator: [],
+    firstPageUlid: '',
+    prevUlid: '',
+    nextUlid: '',
+  }
+}
 
 
 export {
@@ -73,4 +89,5 @@ export {
   // createCompKey,
   createDebounceFn,
   initComponentMeta,
+  initAppMeta,
 }
