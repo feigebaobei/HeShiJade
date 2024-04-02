@@ -107,7 +107,10 @@ export class SetupComponent implements OnInit {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     let obj: Comp = initComponentMeta(e.dragData.item.componentCategory, curPage!.appUlid, curPage!.ulid, this.componentByPage[this.componentByPage.length - 1]?.ulid || '')
-    this.componentService.postCompListByPage(obj).catch(error => {
+    this.componentService.mountComponent(obj, this.componentByPage[this.componentByPage.length - 1].ulid, 'next')
+    this.componentService.reqPostCompListByPage(obj).then(() => {
+      clog('成功在远端保存组件')
+    }).catch(error => {
       clog('error', error)
     })
     // this.componentService.postCompListByPageForLocal(obj)

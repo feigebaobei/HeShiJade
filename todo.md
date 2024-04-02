@@ -86,3 +86,17 @@ export class ReceiverSignalComponent {
     this.data = this.dataService.getData();
   }
 }
+
+
+1. 请求该页面的全量组件。
+2. 再全部挂载到树上。不生成数组。
+3. 以appUlid+pageUlid为key。以tree为value，建立对应关系map
+4. 在setup.html中根据appUlid+pageUlid取得组件组成的数组，放在当前组件中，用于渲染组件。
+5. 增加时，在数组中增加，在tree上增加。
+6. 删除时，在数组中删除，在tree上删除。
+7. 改变位置时，在数组中改变位置，在tree上改变位置。
+8. 在父组件中根据appUlid+pageUlid+componentUlid+slots.key取得组件组成的数组subComponentList，放在当前组件中，用于渲染子组件。
+9. 增加时，在subComponentList中增加，在tree上增加。
+10. 删除时，在subComponentList中删除，在tree上删除。
+11. 改变位置时，在subComponentList中改变位置，在tree上改变位置。
+使用三缓存处理组件列表。

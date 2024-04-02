@@ -31,7 +31,7 @@ export class BehaviorBoxComponent {
   componentBehaviorMeta: BehaviorConfigItem
   constructor(private componentService: ComponentService) {
     this.componentBehaviorList = []
-    this.componentService.compSubject$.subscribe(p => {
+    this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
       this.curComponentChange()
     })

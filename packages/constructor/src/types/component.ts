@@ -59,7 +59,8 @@ type ItemsMeta = ItemsMetaItem[]
 // }
 // type SlotsMeta = SlotsMetaItem[]
 type SlotsMeta = {
-  [k: S]: Component | {}
+  // [k: S]: Component | {}
+  [k: S]: ULID
 }// | {}
 
 interface Component {
