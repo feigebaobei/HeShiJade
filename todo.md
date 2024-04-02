@@ -1,6 +1,7 @@
 ||完成日期||
 |-|-|-|
 |组件嵌套|||
+  |setup页面，从tree中出组件列表。|||
 |配置项中增强可切换功能|||
 |设置版本号，用于设置配置文件升级。|||
 |整理component为module|||
@@ -100,3 +101,6 @@ export class ReceiverSignalComponent {
 10. 删除时，在subComponentList中删除，在tree上删除。
 11. 改变位置时，在subComponentList中改变位置，在tree上改变位置。
 使用三缓存处理组件列表。
+reqXxx 请求后端操作数据库
+componentService.xxx 操作服务中的树型数据
+xxxList 它是当前组件内的子组件列表。操作它改变子组件

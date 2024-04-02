@@ -129,6 +129,7 @@ let obj = Object.create({}, {
                     res = cur
                     break;
                 }
+                cur.next ? q.enqueue(cur.next) : null
                 Object.values(cur.children).forEach(item => {
                     q.enqueue(item)
                 })
@@ -140,7 +141,7 @@ let obj = Object.create({}, {
     mountRoot: {
         value: function (component: Component) {
         let node = createNode(component);
-        clog('this', this);
+        // clog('this', this);
         (this as TC).root = node
     }},
     // 挂载前节点。在指定node.value.ulid的节点前挂载节点
@@ -179,7 +180,7 @@ let obj = Object.create({}, {
     mountNext: {
         value: function(component: Component, ulid: ULID) {
             let node: NC | undefined = this.find(ulid)
-            clog('node' , node)
+            // clog('要挂载节点的节点' , node)
             if (node) {
                 let newNode = createNode(component)
                 let nextNode = node.next

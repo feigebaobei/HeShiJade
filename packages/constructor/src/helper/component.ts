@@ -53,9 +53,9 @@ let Modal: ComponentDefaultConfig = {
     behavior: [],
     items: [],
     slots: {
-        header: {},
-        body: {},
-        footer: {},
+        // header: '', // value是ulid
+        // body: '',   // value是ulid
+        // footer: '', // value是ulid
     },
 }
 let Select: ComponentDefaultConfig = {

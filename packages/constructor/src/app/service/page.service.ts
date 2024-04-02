@@ -63,18 +63,7 @@ export class PageService {
     let dc = this._map.get(appUlid)
     if (!dc) {
       return this._reqPageList(appUlid).then((pageList: Page[]) => {
-        // let dc = new DoublyChain<Page>()
-        // let app = this.appService.getCurApp()
-        // let nextPageUlid = app?.firstPageUlid
-        // while (nextPageUlid) {
-        //   let page = pageList.find(item => item.ulid === nextPageUlid)
-        //   if (page) {
-        //     dc.append(page)
-        //   }
-        //   nextPageUlid = page?.nextUlid
-        // }
-        // this._map.set(appUlid, dc)
-        // return dc.toArray()
+        // todo 应该兼容子页面
         let tree = createTree<Page>()
         let app = this.appService.getCurApp()
         let curPageUlid = app?.firstPageUlid
@@ -84,12 +73,14 @@ export class PageService {
             tree.mountRoot(curPage)
             while(curPage) {
               let nextPage = pageList.find(item => item.ulid === curPage!.nextUlid)
+              clog('nextPage',nextPage, curPage.ulid)
               if (nextPage) {
                 tree.mountNext(nextPage, curPage.ulid)
               }
               curPage = nextPage
             }
             this._map.set(appUlid, tree)
+            clog('tree page', tree)
             this.pageList$.next(tree.root!.toArray())
           } else {
             this.pageList$.next([])
@@ -138,28 +129,28 @@ export class PageService {
   }
   // 重铸
   recast() {
-    let app = this.appService.getCurApp()
-    let appUlid = app?.ulid || ''
-    let dc = new DoublyChain<Page>()
-    let p: Promise<Page[]>
-    if (appUlid) {
-      p = this._reqPageList(appUlid).then((pageList: Page[]) => {
-        let nextPageUlid = app?.firstPageUlid
-        while (nextPageUlid) {
-          let page = pageList.find(item => item.ulid === nextPageUlid)
-          if (page) {
-            dc.append(page)
-          }
-          nextPageUlid = page?.nextUlid
-        }
-        this._map.set(appUlid, dc)
-        return dc.toArray()
-      })
-    } else {
-      this._map.set(appUlid, dc)
-      p = Promise.resolve(dc.toArray())
-    }
-    return p
+    // let app = this.appService.getCurApp()
+    // let appUlid = app?.ulid || ''
+    // // let dc = new DoublyChain<Page>()
+    // let p: Promise<Page[]>
+    // if (appUlid) {
+    //   p = this._reqPageList(appUlid).then((pageList: Page[]) => {
+    //     let nextPageUlid = app?.firstPageUlid
+    //     while (nextPageUlid) {
+    //       let page = pageList.find(item => item.ulid === nextPageUlid)
+    //       if (page) {
+    //         dc.append(page)
+    //       }
+    //       nextPageUlid = page?.nextUlid
+    //     }
+    //     this._map.set(appUlid, dc)
+    //     return dc.toArray()
+    //   })
+    // } else {
+    //   this._map.set(appUlid, dc)
+    //   p = Promise.resolve(dc.toArray())
+    // }
+    // return p
   }
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
   add(data: AddData) {

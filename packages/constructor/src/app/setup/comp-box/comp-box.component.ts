@@ -136,7 +136,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   deleteButtonClickH() {
     // 应该调用service中的方法
     if (this.curComp) {
-      this.componentService.delete(this.curComp.ulid, this.curComp.pageUlid)
+      this.componentService.delete(this.curComp.ulid)
       this.http.delete<ResponseData>('http://localhost:5000/components', {
         params: {
           ulid: this.curComp?.ulid || ''

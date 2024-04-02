@@ -7,7 +7,7 @@ import { ulid } from 'ulid';
 import { initComponentMeta } from 'src/helper'
 // 数据
 // import * as componentDefaultConfigAll from '../../helper/component'
-import {componentDefaultConfigAll} from 'src/helper/component'
+// import {componentDefaultConfigAll} from 'src/helper/component'
 // import all from '../../helper/component'
 // 类型
 import type { A, S, N, B } from 'src/types/base';

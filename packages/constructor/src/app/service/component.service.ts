@@ -73,9 +73,9 @@ export class ComponentService {
       let pageUlid = curPage?.ulid
       if (pageUlid) {
         this._opCompList(pageUlid)
-        // .then((arr) => {
-        //   this.componentListByCurPage$.next(arr)
-        // })
+        .then((arr) => {
+          this.componentListByCurPage$.next(arr)
+        })
       }
     })
   }
@@ -330,11 +330,11 @@ export class ComponentService {
           }
         }
         this._map.set(this.createTreeKey(), tree)
-
+        return Promise.resolve(tree.root?.toArray() || [])
       })
     } else {
       // return Promise.resolve(this._map.get(pageUlid)?.toArray() || [])
-      // return Promise.resolve(this._map.get(pageUlid)?.root?.toArray() || [])
+      return Promise.resolve(this._map.get(this.createTreeKey())?.root?.toArray() || [])
     }
   }
   // 在当前页面中查找
