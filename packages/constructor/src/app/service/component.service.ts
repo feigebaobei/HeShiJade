@@ -84,47 +84,6 @@ export class ComponentService {
       s(this.categoryList)
     })
   }
-  // 请求指定页面的组件
-  // reqCompListByPage() {
-  //   return new Promise<Component[]>((s, j) => {
-  //     this.http.get<ResponseData>('http://localhost:5000/components', {
-  //       params: {
-  //         pageUlid: String(this.pageService.getCurPage()?.ulid),
-  //         env: 'dev',
-  //       },
-  //       withCredentials: true
-  //     }).subscribe(res => {
-  //       if (res.code === 0) {
-  //         let curPage = this.pageService.getCurPage()
-  //         if (curPage) {
-  //           let nextComponentUlid = curPage?.firstComponentUlid
-  //           let threshold: null | N = 0
-  //           while (nextComponentUlid && threshold < COMPONENTTOTALMAXOFPAGE) {
-  //             let comp = (res.data as Component[] || []).find((item: Component) => item.ulid === nextComponentUlid)
-  //             if (comp) {
-  //               let dc = this._map.get(String(curPage?.ulid))
-  //               if (dc) {
-  //                 dc.append(comp)
-  //               } else {
-  //                 let t = new DoublyChain<Component>()
-  //                 t.append(comp)
-  //                 this._map.set(String(curPage?.ulid), t)
-  //               }
-  //             }
-  //             nextComponentUlid = comp?.nextUlid
-  //             threshold++
-  //           }
-  //           threshold = null
-  //           let arr = this._map.get(curPage.ulid)!.toArray()
-  //           this.componentListByCurPage$.next(arr)
-  //         }
-  //         s(res.data)
-  //       } else {
-  //         j(new Error(res.message))
-  //       }
-  //     })
-  //   })
-  // }
   _resComponentListByPage(pageUlid: ULID) {
     return new Promise<Component[]>((s, j) => {
       this.http.get<ResponseData>('http://localhost:5000/components', {
@@ -224,48 +183,6 @@ export class ComponentService {
     let dc = this._map.get(this.createTreeKey())
     if (!dc) {
       return this._resComponentListByPage(pageUlid).then((componentList: Component[]) => {
-        // let doubleChain = new DoublyChain<Component>()
-        // let curPage = this.pageService.getCurPage()
-        // let nextComponentUlid = curPage?.firstComponentUlid
-        // let threshold: null | N = 0
-        // while (nextComponentUlid && threshold < COMPONENTTOTALMAXOFPAGE) {
-        //   let component = componentList.find(item => item.ulid === nextComponentUlid)
-        //   if (component) {
-        //     doubleChain.append(component)
-        //   }
-        //   nextComponentUlid = component?.nextUlid
-        //   threshold++
-        // }
-        // clog('threshold', threshold)
-        // threshold = null
-        // this._map.set(pageUlid, doubleChain)
-        // return doubleChain.toArray()
-
-        // let tree = createTree<Component>()
-        // let curPage = this.pageService.getCurPage()
-        // let curComponentUlid = curPage?.firstComponentUlid
-        // let arr: Component[] = []
-        // if (curComponentUlid) {
-        //   let curComp = componentList.find(item => item.ulid === curComponentUlid)
-        //   if (curComp) {
-        //     tree.mountRoot(curComp)
-        //     while(curComp) {
-        //       let nextComp = componentList.find(item => item.ulid === curComp!.nextUlid)
-        //       if (nextComp) {
-        //         tree.mountNext(nextComp, curComp.ulid)
-        //       }
-        //       curComp = nextComp
-        //     }
-        //     this._map.set(pageUlid, tree)
-        //     arr = tree.root!.toArray()
-        //   } else {
-        //     arr = []
-        //   }
-        // } else {
-        //   arr = []
-        // }
-        // return arr
-
         let curPage = this.pageService.getCurPage()
         let curComponentUlid = curPage?.firstComponentUlid
         let tree = createTree<Component>()
@@ -316,7 +233,7 @@ export class ComponentService {
                 })
               }
               Object.entries(cur.component.slots).forEach(([slot, ulid]) => {
-                let t = componentList.find(item => item.ulid = ulid)
+                let t = componentList.find(item => item.ulid === ulid)
                 if (t) {
                   q.enqueue({
                     position: 'child',

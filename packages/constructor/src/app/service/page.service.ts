@@ -73,14 +73,14 @@ export class PageService {
             tree.mountRoot(curPage)
             while(curPage) {
               let nextPage = pageList.find(item => item.ulid === curPage!.nextUlid)
-              clog('nextPage',nextPage, curPage.ulid)
+              // clog('nextPage',nextPage, curPage.ulid)
               if (nextPage) {
                 tree.mountNext(nextPage, curPage.ulid)
               }
               curPage = nextPage
             }
             this._map.set(appUlid, tree)
-            clog('tree page', tree)
+            // clog('tree page', tree)
             this.pageList$.next(tree.root!.toArray())
           } else {
             this.pageList$.next([])
