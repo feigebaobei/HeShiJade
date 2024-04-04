@@ -3,6 +3,7 @@
 |组件嵌套|||
   |解决选中组件时的报错|||
   |渲染出子组件|||
+    |p3页面无法选中组件|||
 |配置项中增强可切换功能|||
 |设置版本号，用于设置配置文件升级。|||
 |整理component为module|||
@@ -24,62 +25,5 @@ config 配置面板中使用
 组件做通用。若干组件收敛为一个组件。
 若干用法中，指定一种用法。
 api只暴露几个用户关心的、使用简单的api.
-
-
-
-
-## signal
-import { Injectable, signal } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class DataSignalService {
-  private data = signal('');
-
-  setData(update: string) {
-    this.data.set(update);
-  }
-
-  getData(){
-    return this.data;
-  }
-}
-
-import { Component } from '@angular/core';
-import { DataSignalService } from '../data.service';
-
-@Component({
-  selector: 'app-sender-signal',
-  template: `
-    <h3>Sender Component</h3>
-    <button (click)="sendData()">Send Data</button>
-  `,
-})
-export class SenderSignalComponent {
-  constructor(private dataService: DataSignalService) {}
-
-  sendData() {
-    this.dataService.setData('Data from Sender Component');
-  }
-}
-
-import { Component } from '@angular/core';
-import { DataSignalService } from '../data.service';
-
-@Component({
-  selector: 'app-receiver-signal',
-  template: `
-    <h3>Receiver Component</h3>
-    <p>{{ data() }}</p>
-  `,
-})
-export class ReceiverSignalComponent {
-  data;
-
-  constructor(private dataService: DataSignalService) {
-    this.data = this.dataService.getData();
-  }
-}
 
 
