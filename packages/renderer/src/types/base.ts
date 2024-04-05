@@ -16,11 +16,15 @@ interface SelectOptionsItem {
     valueType?: ValueType // 值的类型，优先级高于ComponentPropsMetaItemRaw的valueType
 }
 type ENV = 'dev' | 'test' | 'pre' | 'prod'
-
+interface Options<T, G> {
+    label: T,
+    value: G,
+}
 export type {
     S, N, A, B, ULID, 
     F, Ao, O,
     ValueType,
     SelectOptionsItem,
     ENV,
+    Options,
 }

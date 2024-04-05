@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Page } from 'src/types/page';
 import { HttpClient } from '@angular/common/http';
-import { arrToChain, reqToPromise } from 'src/helper';
+// import { arrToChain, reqToPromise } from 'src/helper';
 import { Subject } from 'rxjs';
 import { AppService } from './app.service';
 import { EnvService } from './env.service';
@@ -77,7 +77,7 @@ export class PageService {
             }
           }
         }
-        clog('tree', tree)
+        // clog('tree', tree)
         this._map.set(app.ulid || '', tree)
         this.setList(tree.root?.toArray() || [])
       }

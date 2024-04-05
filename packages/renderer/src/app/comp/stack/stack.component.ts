@@ -30,7 +30,7 @@ export class StackComponent {
   @ViewChild(StackDirective, {static: true}) stack!: StackDirective;
   componentRef: A
   constructor() {
-    let componentRef
+    // let componentRef
   }
   ngOnInit() {
     this.init()
