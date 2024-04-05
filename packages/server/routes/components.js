@@ -138,7 +138,10 @@ router.route('/')
         updateOne: {
           filter: {ulid: req.body.parentUlid},
           update: {
-            $set: {
+            // $set: { // 覆盖
+            //   [`slots.${req.body.mountPosition}`]: req.body.ulid
+            // }
+            $setOnInsert: { // 不可覆盖。若存在，则不覆盖。
               [`slots.${req.body.mountPosition}`]: req.body.ulid
             }
           }
