@@ -27,42 +27,44 @@ export class ModalComponent implements OnInit{
   ) {
     this.childrenHeader = []
     this.childrenBody = [
-      {
-          // "_id": "65f1832ecf67e0f44f098eb1",
-          // "ulid": "01HRVPGTZ2HK32RM1RH3BCQHJ7",
-          "ulid": "01HRVPGTZ2HK32RM1RH3BCQHJ8",
-          "type": "Button",
-          // "prevUlid": "01HR3Y833FAG8PKCDNQ9QPXCVS",
-          // "nextUlid": "01HT4B4M99ZXGV7W5VYRKC7RSP",
-          prevUlid: '',
-          nextUlid: '',
-          "props": {
-              "type": "button",
-              "bsSize": "md",
-              "bordered": true,
-              "disabled": false,
-              "width": "150px",
-              "text": "button sub"
-          },
-          "behavior": [
-              {
-                  "event": "click",
-                  "target": "ulid",
-                  "payload": "{\"visible\": true}"
-              }
-          ],
-          "items": [
-              {
-                  "category": "input",
-                  "label": "文本",
-                  "value": "button star",
-                  "key": ""
-              }
-          ],
-          "slots": {},
-          "appUlid": "01HGKPCCA5E5F4DH42ZX8PENY8",
-          "pageUlid": "01HH8ZXBAXMNC72VBPJ3AWCFPG"
-      }
+      // {
+      //     // "_id": "65f1832ecf67e0f44f098eb1",
+      //     // "ulid": "01HRVPGTZ2HK32RM1RH3BCQHJ7",
+      //     "ulid": "01HRVPGTZ2HK32RM1RH3BCQHJ8",
+      //     "type": "Button",
+      //     // "prevUlid": "01HR3Y833FAG8PKCDNQ9QPXCVS",
+      //     // "nextUlid": "01HT4B4M99ZXGV7W5VYRKC7RSP",
+      //     prevUlid: '',
+      //     nextUlid: '',
+      //     parentUlid: this.data.ulid || '',
+      //     mountPosition: 'body',
+      //     "props": {
+      //         "type": "button",
+      //         "bsSize": "md",
+      //         "bordered": true,
+      //         "disabled": false,
+      //         "width": "150px",
+      //         "text": "button sub"
+      //     },
+      //     "behavior": [
+      //         {
+      //             "event": "click",
+      //             "target": "ulid",
+      //             "payload": "{\"visible\": true}"
+      //         }
+      //     ],
+      //     "items": [
+      //         {
+      //             "category": "input",
+      //             "label": "文本",
+      //             "value": "button star",
+      //             "key": ""
+      //         }
+      //     ],
+      //     "slots": {},
+      //     "appUlid": "01HGKPCCA5E5F4DH42ZX8PENY8",
+      //     "pageUlid": "01HH8ZXBAXMNC72VBPJ3AWCFPG"
+      // }
     ]
     this.childrenFooter = []
     // this.curComponent = {} as Comp
@@ -72,17 +74,23 @@ export class ModalComponent implements OnInit{
     let tree = this.componentService.getTreeByKey()
     if (tree) {
       let node = tree.find(this.data.ulid)
-
-      let bodyNode = node!.children['header']
-      this.childrenHeader = bodyNode.toArray()
+      clog('node', node)
+      let headerNode = node!.children['header']
+      this.childrenHeader = headerNode?.toArray() || []
+      let bodyNode = node!.children['body']
+      this.childrenBody = bodyNode?.toArray() || []
+      let footerNode = node!.children['footer']
+      this.childrenFooter = footerNode?.toArray() || []
     }
   }
   dropHeaderH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''
-    let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid)
+    let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
+      '', '', this.data.ulid, 'header',)
     // 在childrenHeader中增加组件元素
     clog('component', component)
+    // component.slots.header = 
     this.childrenHeader.push(component)
     // 在tree中增加节点
     // let tree = this.componentService.getTreeByKey()
@@ -97,18 +105,32 @@ export class ModalComponent implements OnInit{
     })
   }
   dropH($event: A) {
-    clog('dropH', $event, this.data.ulid)
-    // 插入组件
-    let p = this.componentService.curComponent()
-    clog('p', p)
-    if (p) {
-      let appUlid = this.appService.getCurApp()?.ulid || ''
-      let pageUlid = this.pageService.getCurPage()?.ulid || ''
-      let c = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid)
-      // 添加用于渲染的组件的数组中
-      this.childrenBody.push(c)
-      // 添加到链表中
-      // 添加到数据库中
-    }
+    // clog('dropH', $event, this.data.ulid)
+    // // 插入组件
+    // let p = this.componentService.curComponent()
+    // clog('p', p)
+    // if (p) {
+    //   let appUlid = this.appService.getCurApp()?.ulid || ''
+    //   let pageUlid = this.pageService.getCurPage()?.ulid || ''
+    //   let c = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid)
+    //   // 添加用于渲染的组件的数组中
+    //   this.childrenBody.push(c)
+    //   // 添加到链表中
+    //   // 添加到数据库中
+    // }
+    
+    let appUlid = this.appService.getCurApp()?.ulid || ''
+    let pageUlid = this.pageService.getCurPage()?.ulid || ''
+    let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
+      '', '', this.data.ulid, 'body',)
+    // 在childrenHeader中增加组件元素
+    clog('component', component)
+    this.childrenBody.push(component)
+    this.componentService.mountComponent(component, this.data.ulid, 'child', 'body')
+    this.componentService.reqPostCompListByPage(component).then(() => {
+      clog('成功在远端保存组件')
+    }).catch((error) => {
+      clog('error', error)
+    })
   }
 }

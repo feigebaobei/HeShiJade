@@ -128,18 +128,6 @@ export class ComponentService {
       }).subscribe(res => {
         if (res.code === 0) {
           s(true)
-          // clog('_map', this._map)
-          // let has = this._map.has((obj['pageUlid']))
-          // if (has) {
-          //   let d = this._map.get((obj['pageUlid']))
-          //   d!.append(obj)
-          //   clog(this._map.get((obj['pageUlid'])))
-          //   let arr = this._map.get((obj['pageUlid']))!.toArray()
-          //   this.componentListByCurPage$.next(arr)
-          //   s(arr)
-          // } else {
-          //   this._opCompList(res.data)
-          // }
         } else {
           j()
         }
@@ -247,6 +235,7 @@ export class ComponentService {
           }
         }
         this._map.set(this.createTreeKey(), tree)
+        clog('tree', tree)
         return Promise.resolve(tree.root?.toArray() || [])
       })
     } else {

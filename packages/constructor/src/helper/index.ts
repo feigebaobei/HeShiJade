@@ -52,12 +52,22 @@ let createDebounceFn = (fn: F, t = 250, self?: A) => {
     }, t)
   }
 }
-let initComponentMeta = (category: S, appUlid: ULID, pageUlid: ULID, prevUlid: S = '', nextUlid: S = ''): Component => {
+let initComponentMeta = (
+  category: S,
+  appUlid: ULID,
+  pageUlid: ULID,
+  prevUlid: S = '',
+  nextUlid: S = '',
+  parentUlid: S = '',
+  mountPosition: S = '',
+): Component => {
   return {
     ulid: ulid(),
     type: category,
     prevUlid,
     nextUlid,
+    parentUlid,
+    mountPosition,
     props: componentDefaultConfigAll[category].props,
     behavior: componentDefaultConfigAll[category].behavior,
     items: componentDefaultConfigAll[category].items,

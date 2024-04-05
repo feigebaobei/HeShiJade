@@ -68,6 +68,8 @@ interface Component {
   type: S
   nextUlid: ULID
   prevUlid: ULID
+  parentUlid: ULID
+  mountPosition: S
   props: PropsMeta
   behavior: BehaviorMeta
   items: ItemsMeta
