@@ -65,10 +65,10 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     //   this.componentRef.instance.data.props = p
     // })
   }
-  boxClickh() {
+  boxClickh($event: A) {
     // 选中组件
+    $event.stopPropagation()
     this.componentService.setCurComponent(this.comp.ulid)
-  
   }
   ngOnInit() {
     this.init()

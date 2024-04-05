@@ -84,7 +84,7 @@ router.route('/')
     rules.required(req.body.props) && 
     rules.required(req.body.behavior) && 
     rules.required(req.body.items) && 
-    // rules.required(req.body.slot) && // 暂时不校验
+    rules.required(req.body.slots) &&
     rules.required(req.body.appUlid) && 
     rules.required(req.body.pageUlid)
     ) {
@@ -94,7 +94,6 @@ router.route('/')
     }
   })
   // 找到页面
-  // 
   .then(() => {
     return lowcodeDb.collection('pages_dev').findOne({ulid: req.body.pageUlid}).catch(() => {
       return Promise.reject(300000)
@@ -104,12 +103,14 @@ router.route('/')
   .then((curPage) => {
     let arr = [
       {
-        insertOne: {
+        insertOne: { // 插入一个组件
           document: {
             ulid: req.body.ulid,
             type: req.body.type,
             prevUlid: req.body.prevUlid,
             nextUlid: '',
+            parentUlid: req.body.parentUlid,
+            mountPosition: req.body.mountPosition,
             props: req.body.props,
             behavior: req.body.behavior,
             items: req.body.items,
@@ -122,7 +123,7 @@ router.route('/')
     ]
     if (req.body.prevUlid) {
       arr.unshift({
-        updateOne: {
+        updateOne: { // 更新前组件
           filter: {ulid: req.body.prevUlid},
           update: {
             $set: {nextUlid: req.body.ulid}
@@ -130,7 +131,21 @@ router.route('/')
         }
       })
     }
-    let updateObj = {}
+    // 更新父组件
+    // let updateObj = {}
+    if (req.body.parentUlid) {
+      arr.unshift({
+        updateOne: {
+          filter: {ulid: req.body.parentUlid},
+          update: {
+            $set: {
+              [`slots.${req.body.mountPosition}`]: req.body.ulid
+            }
+          }
+        }
+      })
+    }
+    // 更新最后一个组件
     if (curPage.lastComponentUlid) {
       updateObj = {
         $set: {

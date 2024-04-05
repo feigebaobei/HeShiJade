@@ -24,7 +24,7 @@ import type { S, Ao, ULID, A,
   B,
   ConfigItem,
 } from 'src/types/base';
-import type { Tree } from 'src/helper/tree';
+import type { Tree, Node } from 'src/helper/tree';
 
 
 let clog = console.log
@@ -105,13 +105,19 @@ export class ComponentService {
     let tree = this._map.get(this.createTreeKey())
     if (tree) {
       let b: B
+      let node: Node<Component> | undefined
       switch(position) {
         case 'next':
           b = !!tree.mountNext(comp, ulid)
+          node = tree.find(ulid)
+          if (node) {
+            node.value.nextUlid = comp.ulid
+          }
+          clog('tree', tree)
           break;
         case 'child':
           b = !!tree.mountChild(comp, ulid, slot!)
-          let node = tree.find(ulid)
+          node = tree.find(ulid)
           if (node) {
             node.value.slots[slot!] = comp.ulid
           }

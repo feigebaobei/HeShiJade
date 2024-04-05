@@ -180,7 +180,7 @@ let obj = Object.create({}, {
     mountNext: {
         value: function(component: Component, ulid: ULID) {
             let node: NC | undefined = this.find(ulid)
-            // clog('要挂载节点的节点' , node)
+            clog('要挂载节点的节点' , node)
             if (node) {
                 let newNode = createNode(component)
                 let nextNode = node.next

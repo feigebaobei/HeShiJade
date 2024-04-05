@@ -107,17 +107,30 @@ export class ModalComponent implements OnInit{
   dropH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''
-    let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
-      '', '', this.data.ulid, 'body',)
-    // 在childrenHeader中增加组件元素
-    clog('component', component)
-    this.childrenBody.push(component)
-    this.componentService.mountComponent(component, this.data.ulid, 'child', 'body')
-    clog('tree', this.componentService.getTreeByKey())
-    this.componentService.reqPostCompListByPage(component).then(() => {
-      clog('成功在远端保存组件')
-    }).catch((error) => {
-      clog('error', error)
-    })
+    if (this.childrenBody.length) {
+      let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
+        this.childrenBody[this.childrenBody.length - 1].ulid, '', this.data.ulid, 'body')
+      this.childrenBody.push(component)
+      this.componentService.mountComponent(component, component.prevUlid, 'next')
+      // clog('tree', this.componentService.getTreeByKey())
+      this.componentService.reqPostCompListByPage(component).then(() => {
+        clog('成功在远端保存组件')
+      }).catch((error) => {
+        clog('error', error)
+      })
+    } else {
+      let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
+        '', '', this.data.ulid, 'body',)
+      // 在childrenHeader中增加组件元素
+      clog('component', component)
+      this.childrenBody.push(component)
+      this.componentService.mountComponent(component, this.data.ulid, 'child', 'body')
+      clog('tree', this.componentService.getTreeByKey())
+      this.componentService.reqPostCompListByPage(component).then(() => {
+        clog('成功在远端保存组件')
+      }).catch((error) => {
+        clog('error', error)
+      })
+    }
   }
 }
