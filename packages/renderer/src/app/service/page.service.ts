@@ -3,12 +3,14 @@ import { Page } from 'src/types/page';
 import { HttpClient } from '@angular/common/http';
 import { arrToChain, reqToPromise } from 'src/helper';
 import { Subject } from 'rxjs';
+import { AppService } from './app.service';
+import { EnvService } from './env.service';
+// import { DoublyChain } from 'data-footstone';
+import { createTree } from 'src/helper/tree';
 // type
 import type { ResponseData, ULID } from 'src/types'
 import type { ENV } from 'src/types/base';
-import { AppService } from './app.service';
-import { EnvService } from './env.service';
-import { DoublyChain } from 'data-footstone';
+import type { Tree } from 'src/helper/tree';
 
 // 根据appUlid+env请求页面
 // 根据app的第一个页面的ulid把页面列表转化为双向链表。
@@ -25,7 +27,8 @@ export class PageService {
   list$: Subject<Page[]>
   private _cur: Page | undefined
   cur$: Subject<Page | undefined>
-  private _map: Map<ULID, DoublyChain<Page>>
+  // private _map: Map<ULID, DoublyChain<Page>>
+  private _map: Map<ULID, Tree<Page>>
   constructor(
     private http: HttpClient,
     private appService: AppService,
@@ -53,10 +56,31 @@ export class PageService {
       return pageList
     }).then(pageList => {
       let app = this.appService.getCurApp()
-      let dc = arrToChain(pageList, 'ulid', 'nextUlid', app?.firstPageUlid)
-      this._map.set(app?.ulid || '', dc)
-      this.setList(dc.toArray())
-      return true
+      // let dc = arrToChain(pageList, 'ulid', 'nextUlid', app?.firstPageUlid)
+      // this._map.set(app?.ulid || '', dc)
+      // this.setList(dc.toArray())
+      // return true
+      if (app) {
+        let tree = createTree<Page>()
+        let curUlid = app.firstPageUlid
+        if (curUlid) {
+          let curPage = pageList.find(item => item.ulid === curUlid)
+          if (curPage) {
+            tree.mountRoot(curPage)
+            let i = 0  
+            while (curPage && i < 100) { // 为了安全
+              let nextPage = pageList.find(item => item.ulid === curPage?.nextUlid)
+              if (nextPage) {
+                tree.mountNext(nextPage, curPage.ulid)
+              }
+              curPage = nextPage
+            }
+          }
+        }
+        clog('tree', tree)
+        this._map.set(app.ulid || '', tree)
+        this.setList(tree.root?.toArray() || [])
+      }
     })
   }
   // 请求页面列表
@@ -130,6 +154,7 @@ export class PageService {
   }
   getPageList(appUlid?: ULID): Page[] {
     appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
-    return this._map.get(appUlid)?.toArray() || []
+    // return this._map.get(appUlid)?.toArray() || []
+    return this._map.get(appUlid)?.root?.toArray() || []
   }
 }
