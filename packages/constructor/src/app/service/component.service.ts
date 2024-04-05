@@ -484,4 +484,7 @@ export class ComponentService {
     //   tree.unmount(componentUlid)
     // }
   }
+  getTreeByKey(key = this.createTreeKey()): Tree<Component> | undefined {
+    return this._map.get(key)
+  }
 }
