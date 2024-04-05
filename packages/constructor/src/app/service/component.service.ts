@@ -111,6 +111,10 @@ export class ComponentService {
           break;
         case 'child':
           b = !!tree.mountChild(comp, ulid, slot!)
+          let node = tree.find(ulid)
+          if (node) {
+            node.value.slots[slot!] = comp.ulid
+          }
           break;
       }
       return b

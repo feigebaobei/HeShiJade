@@ -89,14 +89,14 @@ export class ModalComponent implements OnInit{
     let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
       '', '', this.data.ulid, 'header',)
     // 在childrenHeader中增加组件元素
-    clog('component', component)
+    // clog('component', component)
     // component.slots.header = 
     this.childrenHeader.push(component)
     // 在tree中增加节点
     // let tree = this.componentService.getTreeByKey()
     // tree?.mountChild(component, this.data.ulid, 'header')
     this.componentService.mountComponent(component, this.data.ulid, 'child', 'header')
-    clog('tree', this.componentService.getTreeByKey())
+    // clog('tree', this.componentService.getTreeByKey())
     // 请求保存组件的接口
     this.componentService.reqPostCompListByPage(component).then(() => {
       clog('成功在远端保存组件')
@@ -105,20 +105,6 @@ export class ModalComponent implements OnInit{
     })
   }
   dropH($event: A) {
-    // clog('dropH', $event, this.data.ulid)
-    // // 插入组件
-    // let p = this.componentService.curComponent()
-    // clog('p', p)
-    // if (p) {
-    //   let appUlid = this.appService.getCurApp()?.ulid || ''
-    //   let pageUlid = this.pageService.getCurPage()?.ulid || ''
-    //   let c = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid)
-    //   // 添加用于渲染的组件的数组中
-    //   this.childrenBody.push(c)
-    //   // 添加到链表中
-    //   // 添加到数据库中
-    // }
-    
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''
     let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
@@ -127,6 +113,7 @@ export class ModalComponent implements OnInit{
     clog('component', component)
     this.childrenBody.push(component)
     this.componentService.mountComponent(component, this.data.ulid, 'child', 'body')
+    clog('tree', this.componentService.getTreeByKey())
     this.componentService.reqPostCompListByPage(component).then(() => {
       clog('成功在远端保存组件')
     }).catch((error) => {
