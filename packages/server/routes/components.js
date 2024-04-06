@@ -223,7 +223,7 @@ router.route('/')
         k = `props.${req.body.key}`
         break;
       case 'behavior':
-        k = `behavior.groups.${req.body.index}.${req.body.key}`
+        k = `behavior.${req.body.index}.${req.body.key}`
         break;
     }
     let updateObj = {
