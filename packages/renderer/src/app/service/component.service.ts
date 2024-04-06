@@ -79,7 +79,7 @@ export class ComponentService {
               position: 'child',
               component: comp,
               ulid: curComp!.ulid,
-              slot: key
+              slot: key,
             })
           }
         })
@@ -87,13 +87,11 @@ export class ComponentService {
         while (!q.isEmpty() && i < 100) {
           i++
           let cur = q.dequeue() // || curComp
-          clog('i', i, cur)
           switch(cur.position) {
             case 'next':
               tree.mountNext(cur.component, cur.ulid)
               break
             case 'child':
-              clog('child', cur.component, cur.ulid, cur.slot)
               tree.mountChild(cur.component, cur.ulid, cur.slot!)
               break
           }
@@ -112,7 +110,7 @@ export class ComponentService {
                 position: 'child',
                 slot: key,
                 component: comp,
-                ulid: value
+                ulid: cur.component.ulid
               })
             }
           })
