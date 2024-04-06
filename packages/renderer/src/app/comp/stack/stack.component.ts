@@ -56,28 +56,36 @@ export class StackComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           slots: this.data.slots,
+          ulid: this.data.ulid,
         }
         break;
       case 'Form':
         this.componentRef.instance.data = {
           props: this.data.props,
           items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
         }
         break;
       case 'Modal':
         this.componentRef.instance.data = {
           props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
       case 'Input':
         this.componentRef.instance.data = {
           props: this.data.props,
+          ulid: this.data.ulid,
         }
         break;
       case 'Select':
         this.componentRef.instance.data = {
           props: this.data.props,
+          ulid: this.data.ulid,
         }
         break;
       case 'Table':

@@ -42,6 +42,7 @@ export class PageService {
     // 当应用改变时请求对应的页面数据
     this.appService.curApp$.subscribe(curApp => {
       this.reqList(curApp.ulid, this.envService.getCur())
+      // this.setCur()
     })
   }
   getList() {

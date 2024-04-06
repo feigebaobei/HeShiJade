@@ -237,4 +237,7 @@ export class ComponentService {
     this._componentList = p
     this.componentList$.next(this._componentList)
   }
+  getTreeByKey(key = this.pageService.getCur()?.ulid || '') {
+    return this._map.get(key)
+  }
 }

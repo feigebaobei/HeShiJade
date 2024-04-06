@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { A } from 'src/types/base';
 import { DialogService } from 'ng-devui/modal';
+import { ComponentService } from 'src/app/service/component.service';
+// import { PageService } from 'src/app/service/page.service';
 import {shareEvent} from 'src/helper';
+import type { A } from 'src/types/base';
+import type { Component as Comp } from 'src/types/component';
 
 let clog = console.log
 
@@ -13,7 +16,14 @@ let clog = console.log
 export class ModalComponent implements OnInit {
   @Input() data: A
   config: A
-  constructor(private dialogService: DialogService) {
+  childrenHeader: Comp[]
+  childrenBody: Comp[]
+  childrenFooter: Comp[]
+  constructor(
+    private dialogService: DialogService,
+    // private pageService: PageService,
+    private componentService: ComponentService,
+  ) {
     this.config = {
       id: 'dialog-service',
       width: '346px',
@@ -30,6 +40,9 @@ export class ModalComponent implements OnInit {
         address: 'Chengdu',
       },
     };
+    this.childrenHeader = []
+    this.childrenBody = []
+    this.childrenFooter = []
   }
   
   ngOnInit(): void {
@@ -45,6 +58,15 @@ export class ModalComponent implements OnInit {
         this.openDialog()
       }
     })
+    // let curPage = this.pageService.getCur()
+    let tree = this.componentService.getTreeByKey()
+    if (tree) {
+      let curNode = tree.find(this.data.ulid)!
+      this.childrenHeader = curNode.children['header']?.toArray() || []
+      this.childrenBody = curNode.children['body']?.toArray() || []
+      this.childrenFooter = curNode.children['footer']?.toArray() || []
+    }
+    // clog('12345', this.childrenHeader, this.childrenBody, this.childrenFooter)
   }
   
   openDialog(dialogtype?: string, showAnimation?: boolean) {
