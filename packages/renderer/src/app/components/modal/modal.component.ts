@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DialogService } from 'ng-devui/modal';
+import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
 // import { PageService } from 'src/app/service/page.service';
 import {shareEvent} from 'src/helper';
+import { ModalCompComponent } from './modal-comp/modal-comp.component';
 import type { A } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
 
@@ -20,24 +21,23 @@ export class ModalComponent implements OnInit {
   childrenBody: Comp[]
   childrenFooter: Comp[]
   constructor(
-    private dialogService: DialogService,
-    // private pageService: PageService,
+    private modalService: ModalService,
     private componentService: ComponentService,
   ) {
     this.config = {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      title: 'title',
-      content: 'ModalTestComponent for content',
+      title: 'title', // 使用传入的数据
+      component: ModalCompComponent,
       backdropCloseable: true,
       placement: 'center',
-
       onClose: () => console.log('on dialog closed'),
       data: {
         name: 'Tom',
         age: 10,
         address: 'Chengdu',
+        title: 'hi title'
       },
     };
     this.childrenHeader = []
@@ -53,7 +53,9 @@ export class ModalComponent implements OnInit {
       this.openDialog()
     }
     shareEvent.listen(this.data.ulid, (payload) => {
+      clog('payload', payload)
       let obj = JSON.parse(payload)
+      clog('obj', obj)
       if (obj.visible) {
         this.openDialog()
       }
@@ -70,7 +72,7 @@ export class ModalComponent implements OnInit {
   }
   
   openDialog(dialogtype?: string, showAnimation?: boolean) {
-    const results = this.dialogService.open({
+    const results = this.modalService.open({
       ...this.config,
       dialogtype: dialogtype,
       showAnimation: showAnimation,

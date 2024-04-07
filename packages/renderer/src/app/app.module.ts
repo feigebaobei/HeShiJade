@@ -19,6 +19,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
 import { TableComponent } from './components/table/table.component';
+import { ModalCompComponent } from './components/modal/modal-comp/modal-comp.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TableComponent } from './components/table/table.component';
     ModalComponent,
     InputComponent,
     SelectComponent,
-    TableComponent
+    TableComponent,
+    ModalCompComponent
   ],
   imports: [
     BrowserModule,
