@@ -34,10 +34,11 @@ export class ModalComponent implements OnInit {
       placement: 'center',
       onClose: () => console.log('on dialog closed'),
       data: {
-        name: 'Tom',
-        age: 10,
-        address: 'Chengdu',
-        title: 'hi title'
+        // ulid: this.data.ulid,
+        // props: this.data.props,
+        // items: this.data.items,
+        // slots: this.data.slots,
+        // behavior: this.data.behavior,
       },
     };
     this.childrenHeader = []
@@ -49,13 +50,18 @@ export class ModalComponent implements OnInit {
     this.config.placement = this.data.props.placement
     this.config.title = this.data.props.title
     this.config.width = this.data.props.width
+    this.config.data.ulid = this.data.ulid
+    this.config.data.props = this.data.props
+    this.config.data.items = this.data.items
+    this.config.data.slots = this.data.slots
+    this.config.data.behavior = this.data.behavior
     if (this.data.props.visible) {
       this.openDialog()
     }
     shareEvent.listen(this.data.ulid, (payload) => {
-      clog('payload', payload)
+      // clog('payload', payload)
       let obj = JSON.parse(payload)
-      clog('obj', obj)
+      // clog('obj', obj)
       if (obj.visible) {
         this.openDialog()
       }
