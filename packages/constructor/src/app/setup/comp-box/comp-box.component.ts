@@ -56,7 +56,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   ) {
     this.curComp = null
     this.componentRef
-    this.componentService.compSubject$.subscribe(p => {
+    this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
       // this.init()
       this.update()
@@ -65,8 +65,9 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     //   this.componentRef.instance.data.props = p
     // })
   }
-  boxClickh() {
+  boxClickh($event: A) {
     // 选中组件
+    $event.stopPropagation()
     this.componentService.setCurComponent(this.comp.ulid)
   }
   ngOnInit() {
@@ -85,35 +86,43 @@ export class CompBoxComponent implements OnInit, OnDestroy {
           props: this.comp.props,
           slots: this.comp.slots,
           // items: this.comp.items,
+          ulid: this.comp.ulid,
         }
         break
       case 'Input':
         this.componentRef.instance.data = {
           // props: inputDefaultData.props
-          props: this.comp.props
+          props: this.comp.props,
+          ulid: this.comp.ulid,
         }
         break
       case 'Modal':
         this.componentRef.instance.data = {
           // props: modalDefaultData.props
-          props: this.comp.props
+          props: this.comp.props,
+          // items: this.comp.items,
+          slots: this.comp.slots,
+          ulid: this.comp.ulid,
         }
         break
       case 'Select':
         this.componentRef.instance.data = {
-          props: this.comp.props
+          props: this.comp.props,
+          ulid: this.comp.ulid,
         }
         break
       case 'Form':
         this.componentRef.instance.data = {
           props: this.comp.props,
           items: this.comp.items,
+          ulid: this.comp.ulid,
         }
         break
       case 'Table':
         this.componentRef.instance.data = {
           props: this.comp.props,
           items: this.comp.items,
+          ulid: this.comp.ulid,
         }
         break
     }
@@ -133,7 +142,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   deleteButtonClickH() {
     // 应该调用service中的方法
     if (this.curComp) {
-      this.componentService.delete(this.curComp.ulid, this.curComp.pageUlid)
+      this.componentService.delete(this.curComp.ulid)
       this.http.delete<ResponseData>('http://localhost:5000/components', {
         params: {
           ulid: this.curComp?.ulid || ''

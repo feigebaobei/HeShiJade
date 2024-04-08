@@ -1,19 +1,29 @@
-import type {N, B, A, S, ULID, O, SelectOptionsItem} from './base'
+import type {N, B, A, S, ULID, O, SelectOptionsItem, Options} from './base'
 
 type PropsValue = S | B | N | S[] | SelectOptionsItem[]
 interface Component {
   ulid: S
-  // name: S
-  // key: S
   type: S
   nextUlid: ULID
   prevUlid: ULID
+  parentUlid: ULID
+  mountPosition: S
   props: {
     [k: S]: PropsValue
   }
-  behavior: O
-  item: O
-  slot: S
+  behavior: {
+    event: S
+    target: S
+    payload: S
+  }[]
+  items: {
+    category: S
+    label: S
+    key: S
+    value: A
+    options?: Options<S, S>
+  }[]
+  slots: S
   appUlid: ULID
   pageUlid: ULID
 }

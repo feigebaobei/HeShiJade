@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
+import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
+import { AppService } from './app.service';
+import { Queue } from "data-footstone"
 // 数据
 import {categoryList} from 'src/helper/category'
 import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -21,6 +24,8 @@ import type { S, Ao, ULID, A,
   B,
   ConfigItem,
 } from 'src/types/base';
+import type { Tree, Node } from 'src/helper/tree';
+
 
 let clog = console.log
 
@@ -35,21 +40,27 @@ export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   private categoryList: Category[] // 这里应该使用组件种类的类型
   // componentListByPage: Component[] // 应该使用组件的类型 // 考虑是否可删除
-  compSubject$: Subject<CompOrUn> // 组件的subject
+  curComponent$: Subject<CompOrUn> // 组件的subject
   // categorySubject$: Subject<CompOrUn> // 组件的subject
   componentListByCurPage$: Subject<Component[]> // 当前页面的组件
   _curCompUlid: S
   _curComponent: CompOrUn
   // _curCategory: ComponentOrUn
-  _map: Map<ULID, DoublyChain<Component>> // 日后改为4向的数据结构
+  // _map: Map<ULID, DoublyChain<Component>> // 日后改为4向的数据结构
+  _map: Map<S, Tree<Component>> // key: appUlid+pageUlid+componentUlid
   // ulid是pageUlid
   componentProps$: Subject<Component['props']>
 
-  constructor(private http: HttpClient, private pageService: PageService) {
+  constructor(
+    private http: HttpClient,
+    private pageService: PageService,
+    private appService: AppService,
+
+  ) {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
     // this.componentListByPage = []
-    this.compSubject$ = new Subject<CompOrUn>()
+    this.curComponent$ = new Subject<CompOrUn>()
     // this.categorySubject$ = new Subject<ComponentOrUn>()
     this.componentListByCurPage$ = new Subject<Component[]>()
     this.componentProps$ = new Subject<Component['props']>()
@@ -57,10 +68,12 @@ export class ComponentService {
     this._curComponent = undefined
     // this._curCategory = undefined
     this._map = new Map()
+    // 当页面改变时更新组件列表
     this.pageService.pageSubject$.subscribe(curPage => {
       let pageUlid = curPage?.ulid
       if (pageUlid) {
-        this._opCompList(pageUlid).then((arr) => {
+        this._opCompList(pageUlid)
+        .then((arr) => {
           this.componentListByCurPage$.next(arr)
         })
       }
@@ -69,47 +82,6 @@ export class ComponentService {
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
       s(this.categoryList)
-    })
-  }
-  // 请求指定页面的组件
-  reqCompListByPage() {
-    return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components', {
-        params: {
-          pageUlid: String(this.pageService.getCurPage()?.ulid),
-          env: 'dev',
-        },
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          let curPage = this.pageService.getCurPage()
-          if (curPage) {
-            let nextComponentUlid = curPage?.firstComponentUlid
-            let threshold: null | N = 0
-            while (nextComponentUlid && threshold < COMPONENTTOTALMAXOFPAGE) {
-              let comp = (res.data as Component[] || []).find((item: Component) => item.ulid === nextComponentUlid)
-              if (comp) {
-                let dc = this._map.get(String(curPage?.ulid))
-                if (dc) {
-                  dc.append(comp)
-                } else {
-                  let t = new DoublyChain<Component>()
-                  t.append(comp)
-                  this._map.set(String(curPage?.ulid), t)
-                }
-              }
-              nextComponentUlid = comp?.nextUlid
-              threshold++
-            }
-            threshold = null
-            let arr = this._map.get(curPage.ulid)!.toArray()
-            this.componentListByCurPage$.next(arr)
-          }
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
     })
   }
   _resComponentListByPage(pageUlid: ULID) {
@@ -129,27 +101,43 @@ export class ComponentService {
       })
     })
   }
+  mountComponent(comp: Component, ulid: ULID, position: 'next' | 'child', slot?: S): B {
+    let tree = this._map.get(this.createTreeKey())
+    if (tree) {
+      let b: B
+      let node: Node<Component> | undefined
+      switch(position) {
+        case 'next':
+          b = !!tree.mountNext(comp, ulid)
+          node = tree.find(ulid)
+          if (node) {
+            node.value.nextUlid = comp.ulid
+          }
+          clog('tree', tree)
+          break;
+        case 'child':
+          b = !!tree.mountChild(comp, ulid, slot!)
+          node = tree.find(ulid)
+          if (node) {
+            node.value.slots[slot!] = comp.ulid
+          }
+          break;
+      }
+      return b
+    } else {
+      return false
+    }
+  }
   // 创建组件
-  postCompListByPage(obj: Component) {
-    return new Promise<Component[]>((s, j) => {
+  reqPostCompListByPage(obj: Component) {
+    return new Promise<B>((s, j) => {
       this.http.post<ResponseData>('http://localhost:5000/components', {
         ...obj,
       }, {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
-          // clog('_map', this._map)
-          let has = this._map.has((obj['pageUlid']))
-          if (has) {
-            let d = this._map.get((obj['pageUlid']))
-            d!.append(obj)
-            clog(this._map.get((obj['pageUlid'])))
-            let arr = this._map.get((obj['pageUlid']))!.toArray()
-            this.componentListByCurPage$.next(arr)
-            s(arr)
-          } else {
-            this._opCompList(res.data)
-          }
+          s(true)
         } else {
           j()
         }
@@ -163,11 +151,12 @@ export class ComponentService {
     new Promise((s, j) => {
       let has = this._map.has(obj['pageUlid'])
       if (has) {
-        let d = this._map.get(obj.pageUlid)
-        d!.append(obj)
-        let arr = this._map.get(obj.pageUlid)!.toArray()
-        this.componentListByCurPage$.next(arr)
-        s(arr)
+        // let d = this._map.get(obj.pageUlid)
+        // d!.append(obj)
+        // let arr = this._map.get(obj.pageUlid)!.toArray()
+        // this.componentListByCurPage$.next(arr)
+        // s(arr)
+
       } else {
         j()
       }
@@ -175,54 +164,112 @@ export class ComponentService {
   }
   // 重排序
   // putCompListByPage(obj: Ao) {}
-  getComponentByPage(pageUlid?: ULID): Component[] {
-    if (pageUlid) {
-      clog('getComponentByPage', this._map.get(pageUlid)?.toArray())
-      return (this._map.get(pageUlid)?.toArray() as Component[])
-    } else {
-      return []
-    }
+  // getComponentByPage(pageUlid?: ULID): Component[] {
+  //   if (pageUlid) {
+  //     clog('getComponentByPage', this._map.get(pageUlid)?.toArray())
+  //     return (this._map.get(pageUlid)?.toArray() as Component[])
+  //   } else {
+  //     return []
+  //   }
+  // }
+  createTreeKey() {
+    let app = this.appService.getCurApp()
+    let page = this.pageService.getCurPage()
+    return `${app?.ulid}_${page?.ulid}_`
   }
   private _opCompList(pageUlid: ULID) {
-    let dc = this._map.get(pageUlid)
+    let dc = this._map.get(this.createTreeKey())
     if (!dc) {
       return this._resComponentListByPage(pageUlid).then((componentList: Component[]) => {
-        let doubleChain = new DoublyChain<Component>()
         let curPage = this.pageService.getCurPage()
-        let nextComponentUlid = curPage?.firstComponentUlid
-        let threshold: null | N = 0
-        while (nextComponentUlid && threshold < COMPONENTTOTALMAXOFPAGE) {
-          let component = componentList.find(item => item.ulid === nextComponentUlid)
-          if (component) {
-            doubleChain.append(component)
+        let curComponentUlid = curPage?.firstComponentUlid
+        let tree = createTree<Component>()
+        if (curComponentUlid) {
+          let curComp = componentList.find(item => item.ulid === curComponentUlid)
+          if (curComp) {
+            tree.mountRoot(curComp)
+            let q = new Queue<{position: S, slot?: S, component: Component, ulid: ULID}>()
+
+            let nextComp = componentList.find(item => item.ulid === curComp!.nextUlid)
+            if (nextComp) {
+              q.enqueue({
+                position: 'next',
+                component: nextComp,
+                ulid: curComp.ulid,
+              })
+            }
+            let a = Object.entries(curComp.slots)
+            a.forEach(([slot, ulid]) => {
+              let t = componentList.find(item => item.ulid === ulid)
+              if (t) {
+                q.enqueue({
+                  position: 'child',
+                  slot: slot,
+                  component: t,
+                  ulid: curComp!.ulid,
+                })
+              }
+            })
+            let i = 0 // 为了开发时安全
+            while (!q.isEmpty() && i < 100) {
+              i++
+              let cur = q.dequeue()
+              switch (cur.position) {
+                case 'next':
+                  tree.mountNext(cur.component, cur.ulid)
+                  break;
+                case 'child':
+                  tree.mountChild(cur.component, cur.ulid, cur.slot!)
+                  break;
+              }
+              let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
+              if (nextComp) {
+                q.enqueue({
+                  position: 'next',
+                  component: nextComp,
+                  ulid: cur.component.ulid,
+                })
+              }
+              Object.entries(cur.component.slots).forEach(([slot, ulid]) => {
+                let t = componentList.find(item => item.ulid === ulid)
+                if (t) {
+                  q.enqueue({
+                    position: 'child',
+                    slot: slot,
+                    component: t,
+                    ulid: cur.component.ulid,
+                  })
+                }
+              })
+            }
           }
-          nextComponentUlid = component?.nextUlid
-          threshold++
         }
-        clog('threshold', threshold)
-        threshold = null
-        this._map.set(pageUlid, doubleChain)
-        return doubleChain.toArray()
+        this._map.set(this.createTreeKey(), tree)
+        clog('tree', tree)
+        return Promise.resolve(tree.root?.toArray() || [])
       })
     } else {
-      return Promise.resolve(this._map.get(pageUlid)?.toArray() || [])
+      // return Promise.resolve(this._map.get(pageUlid)?.toArray() || [])
+      return Promise.resolve(this._map.get(this.createTreeKey())?.root?.toArray() || [])
     }
   }
   // 在当前页面中查找
   private _find(compUlid: S): CompOrUn {
+    // let pageUlid = this.pageService.getCurPage()?.ulid
+    // let res = undefined
+    // if (pageUlid) {
+    //   let cur = this._map.get(pageUlid)?.head
+    //   while (cur) {
+    //     if (cur.value.ulid === compUlid) {
+    //       res = cur.value
+    //       break
+    //     }
+    //     cur = cur.next
+    //   }    
+    // }
+    // return res
     let pageUlid = this.pageService.getCurPage()?.ulid
-    let res = undefined
-    if (pageUlid) {
-      let cur = this._map.get(pageUlid)?.head
-      while (cur) {
-        if (cur.value.ulid === compUlid) {
-          res = cur.value
-          break
-        }
-        cur = cur.next
-      }    
-    }
-    return res
+    return this._map.get(this.createTreeKey())?.find(compUlid)?.value
   }
   private _findCategory(categoryUlid: ULID) {
     return this.categoryList.find(item => item.ulid === categoryUlid)
@@ -233,37 +280,40 @@ export class ComponentService {
   setCurComponent(compUlid?: S) {
     if (compUlid) {
       this._curComponent = this._find(compUlid)
-      this.compSubject$.next(this._curComponent)
+      this.curComponent$.next(this._curComponent)
     } else {
       this._curComponent = undefined
-      this.compSubject$.next(undefined)
+      this.curComponent$.next(undefined)
     }
   }
   // 设置当前组件的prop
   setCurComponentProp(key: S, value: PropsValue) {
-    let curComp = this.curComponent()
-    let curPage = this.pageService.getCurPage()
-    if (curPage && curComp) {
-      let cur = this._map.get(curPage.ulid)?.head
-      while (cur) {
-        if (cur.value.ulid === curComp.ulid) {
-          cur.value.props[key] = value
-          break
-        }
-        cur = cur.next
-      }
-      if (cur) {
-        this.compSubject$.next(cur.value)
-        this.componentListByCurPage$.next(this._map.get(curPage.ulid)?.toArray() || [])
-      }
+    // let curComp = this.curComponent()
+    // let curPage = this.pageService.getCurPage()
+    // if (curPage && curComp) {
+    //   let cur = this._map.get(curPage.ulid)?.head
+    //   while (cur) {
+    //     if (cur.value.ulid === curComp.ulid) {
+    //       cur.value.props[key] = value
+    //       break
+    //     }
+    //     cur = cur.next
+    //   }
+    //   if (cur) {
+    //     this.curComponent$.next(cur.value)
+    //     this.componentListByCurPage$.next(this._map.get(curPage.ulid)?.toArray() || [])
+    //   }
+    // }
+    if (this._curComponent) {
+      this._curComponent.props[key] = value
     }
   }
+  // todo 应该删除一个设置prop的方法
   // 直接改变属性
   setComponentProp(key: S, value: PropsValue) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
-      clog('key', key, value)
     }
   }
   
@@ -409,22 +459,31 @@ export class ComponentService {
   }
   // reqUpdateBehavior(type)
   // 删除组件
-  delete(componentUlid: ULID, pageUlid: ULID) {
-    let dc = this._map.get(pageUlid)
-    if (dc) {
-      let cur = dc.head
-      let position = 0
-      while (cur) {
-        if (cur.value.ulid === componentUlid) {
-          break
-        }
-        position++
-        cur = cur.next
-      }
-      let compDeleted = dc.removeAt(position)
-      this.componentListByCurPage$.next(dc.toArray())
-      // 当删除最前面和最后面的组件时需要更新页面的数据
-      this.pageService.deleteComponent(compDeleted)
-    }
+  delete(componentUlid: ULID) {
+    // let dc = this._map.get(pageUlid)
+    // if (dc) {
+    //   let cur = dc.head
+    //   let position = 0
+    //   while (cur) {
+    //     if (cur.value.ulid === componentUlid) {
+    //       break
+    //     }
+    //     position++
+    //     cur = cur.next
+    //   }
+    //   let compDeleted = dc.removeAt(position)
+    //   this.componentListByCurPage$.next(dc.toArray())
+    //   // 当删除最前面和最后面的组件时需要更新页面的数据
+    //   this.pageService.deleteComponent(compDeleted)
+    // }
+    return this._map.get(this.createTreeKey())?.unmount(componentUlid)
+    // let tree = 
+    // if (tree) {
+    //   // let c = tree.find(componentUlid)?.value
+    //   tree.unmount(componentUlid)
+    // }
+  }
+  getTreeByKey(key = this.createTreeKey()): Tree<Component> | undefined {
+    return this._map.get(key)
   }
 }

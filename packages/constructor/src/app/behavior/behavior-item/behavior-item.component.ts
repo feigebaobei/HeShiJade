@@ -1,4 +1,3 @@
-// todo 应该改名为app-behavior-group-item
 import { Component, Input } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 // import { 

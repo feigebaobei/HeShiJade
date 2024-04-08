@@ -21,11 +21,29 @@ let Table: CompConfigAddabel = {
     items: true,
     slots: false,
 }
+let Input: CompConfigAddabel = {
+    behavior: false,
+    items: true,
+    slots: false,
+}
+let Select: CompConfigAddabel = {
+    behavior: false,
+    items: true,
+    slots: false,
+}
+let Modal: CompConfigAddabel = {
+    behavior: false,
+    items: true,
+    slots: false,
+}
 
 let all: {[k: S]: CompConfigAddabel} = {
     Button,
     Form,
     Table,
+    Input,
+    Select,
+    Modal,
 }
 
 export {

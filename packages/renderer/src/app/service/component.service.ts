@@ -1,15 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DoublyChain } from 'data-footstone'
-// type
-import type { ResponseData, ULID } from 'src/types';
-import type { Component } from 'src/types/component';
+// import { DoublyChain } from 'data-footstone'
+import { Queue } from 'data-footstone'
+import { createTree } from 'src/helper/tree'
 import { PageService } from './page.service';
 import { Page } from 'src/types/page';
 import { Subject } from 'rxjs';
-import { ENV } from 'src/types/base';
+import { ENV, S } from 'src/types/base';
 import { EnvService } from './env.service';
-import { arrToChain } from 'src/helper';
+// import { arrToChain } from 'src/helper';
+// type
+import type { ResponseData, ULID } from 'src/types';
+import type { Component } from 'src/types/component';
+import type { Tree } from 'src/helper/tree';
+
+let clog = console.log
 
 // 使用当前页面ulid请求组件列表。保存在map中。
 // 当页面改变时判断map中是否存在对应组件列表。若不存在，则执行no.1。否则null
@@ -19,7 +24,8 @@ import { arrToChain } from 'src/helper';
   providedIn: 'root'
 })
 export class ComponentService {
-  private _map: Map<ULID, DoublyChain<Component>>
+  // private _map: Map<ULID, DoublyChain<Component>>
+  private _map: Map<ULID, Tree<Component>>
   private _componentList: Component[]
   componentList$: Subject<Component[]>
   constructor(
@@ -32,11 +38,14 @@ export class ComponentService {
     this.componentList$ = new Subject()
     this.pageService.cur$.subscribe(curPage => {
       if (curPage) {
-        let arr: Component[] = this._map.get(curPage.ulid)?.toArray() || []
-        if (!(arr?.length)) { // 现在有map中不存在对应的组件链表
-          this.reqList(curPage.ulid, this.envService.getCur())
-        } else {
+        let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
+        if (arr.length) {
           this.setList(arr)
+        } else {
+          this.reqList(curPage.ulid, this.envService.getCur())
+          // arr = this._map.get(curPage.ulid)?.root?.toArray() || []
+          // clog('arr', arr)
+          // this.setList(arr)
         }
       }
     })
@@ -44,9 +53,74 @@ export class ComponentService {
   reqList(pageUlid: ULID, env: ENV) {
     this._reqComponentByPage(pageUlid, env).then(componentList => {
       let page = this.pageService.getCur()
-      let dc = arrToChain(componentList, 'ulid', 'nextUlid', page?.firstComponentUlid)
-      this._map.set(page?.ulid || '', dc)
-      this.setList(dc.toArray())
+      let curComp = componentList.find(item => item.ulid === page?.firstComponentUlid)
+      let tree = createTree<Component>()
+
+      if (curComp) {
+        tree.mountRoot(curComp)
+        let q = new Queue<{
+          position: 'next' | 'child'
+          slot?: S
+          component: Component
+          ulid: ULID
+        }>()
+        let nextComp = componentList.find(item => item.ulid === curComp?.nextUlid)
+        if (nextComp) {
+          q.enqueue({
+            position: 'next',
+            component: nextComp,
+            ulid: curComp.ulid,
+          })
+        }
+        Object.entries(curComp.slots).forEach(([key, value]) => {
+          let comp = componentList.find(item => item.ulid === value)
+          if (comp) {
+            q.enqueue({
+              position: 'child',
+              component: comp,
+              ulid: curComp!.ulid,
+              slot: key,
+            })
+          }
+        })
+        let i = 0
+        while (!q.isEmpty() && i < 100) {
+          i++
+          let cur = q.dequeue() // || curComp
+          switch(cur.position) {
+            case 'next':
+              tree.mountNext(cur.component, cur.ulid)
+              break
+            case 'child':
+              tree.mountChild(cur.component, cur.ulid, cur.slot!)
+              break
+          }
+          let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
+          if (nextComp) {
+            q.enqueue({
+              position: 'next',
+              component: nextComp,
+              ulid: cur.component.ulid
+            })
+          }
+          Object.entries(cur.component.slots).forEach(([key, value]) => {
+            let comp = componentList.find(item => item.ulid === value)
+            if (comp) {
+              q.enqueue({
+                position: 'child',
+                slot: key,
+                component: comp,
+                ulid: cur.component.ulid
+              })
+            }
+          })
+        }
+        clog('tree', tree)
+        this._map.set(page?.ulid || '', tree)
+        this.setList(tree.root?.toArray() || [])
+      } else {
+
+      }
     })
   }
   private _reqComponentByPage(pageUlid: ULID, env: ENV): Promise<Component[]> {
@@ -162,5 +236,8 @@ export class ComponentService {
   setList(p: Component[]) {
     this._componentList = p
     this.componentList$.next(this._componentList)
+  }
+  getTreeByKey(key = this.pageService.getCur()?.ulid || '') {
+    return this._map.get(key)
   }
 }

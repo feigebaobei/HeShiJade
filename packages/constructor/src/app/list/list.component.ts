@@ -45,12 +45,7 @@ export class ListComponent implements OnInit {
   ) {
     this.user = this.userService.getUser()
     this.msg = []
-    // this.appList = this.appService.getAppList()
     this.appList = []
-    // this.userService.user$.subscribe(u => {
-    //   this.user = u
-    //   this.reqAppList()
-    // })
     this.appService.appList$.subscribe(arr => {
       this.appList = arr
     })
@@ -64,11 +59,6 @@ export class ListComponent implements OnInit {
     }
   }
   logoutBtClickH()  {
-    // todo 验证登出。
-    // 应该传递cookie
-    // this.http.post<ResponseData>('http://localhost:5000/users/logout', {}).subscribe((res) => {
-    //   this.router.navigate(['/'])
-    // })
     this.userService.logout().then(() => {
       this.router.navigate(['/'])
     })
@@ -128,20 +118,6 @@ export class ListComponent implements OnInit {
               prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
             })
             results.modalInstance.hide();
-            // .subscribe((res) => {
-            //   if (res.code === 0) {
-            //     this.msg = [
-            //       { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
-            //     ]
-            //     results.modalInstance.hide(); // 成功才关闭
-            //     // 刷新应用列表
-            //     this.reqAppList()
-            //   } else {
-            //     this.msg = [
-            //       { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
-            //     ]
-            //   }
-            // })
           },
         },
         {

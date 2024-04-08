@@ -53,7 +53,7 @@ export class PropsBoxComponent {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    this.componentService.compSubject$.subscribe(p => {
+    this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
       this.componentSelectedChange()
     })
@@ -103,11 +103,17 @@ export class PropsBoxComponent {
         //   this.componentPropsList.push(o)
         // })
         
-        Object.entries(this.curComp.props).forEach(([key, value]) => {
-          let o: ConfigItem = JSON.parse(JSON.stringify(selectPropsMeta[key]))
-          o.key = key
-          o.value = value
-          this.componentPropsList.push(o)
+        // 以该组件拥有多少props决定显示多少
+        // Object.entries(this.curComp.props).forEach(([key, value]) => {
+        //   let o: ConfigItem = JSON.parse(JSON.stringify(selectPropsMeta[key]))
+        //   o.key = key
+        //   o.value = value
+        //   this.componentPropsList.push(o)
+        // })
+        // 以props配置文件决定显示多少
+        Object.values(selectPropsMeta).forEach((item: ConfigItem) => {
+          item.value = this.curComp!.props[item.key] // value
+          this.componentPropsList.push(item)
         })
         break
       case 'Modal':

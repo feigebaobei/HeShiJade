@@ -29,7 +29,7 @@ export class ItemsBoxComponent {
     // this.curComp = null
     this.curComp = {} as Comp
     this.addable = false
-    this.componentService.compSubject$.subscribe(p => {
+    this.componentService.curComponent$.subscribe(p => {
       if (p) {
         this.curComp = p
         // this.addable = p.items.addable

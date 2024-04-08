@@ -60,7 +60,10 @@ import type {
 //     label: '',
 //     value: '',
 // }
-
+let Input: ConfigItem[] = []
+let Select: ConfigItem[] = []
+let Button: ConfigItem[] = []
+let Modal: ConfigItem[] = []
 let Form: ConfigItem[] = [
     {
         label: '种类',
@@ -133,6 +136,10 @@ let Table: ConfigItem[] = [
     },
 ]
 let all: {[k: S]: ConfigItem[]} = {
+    Input,
+    Select,
+    Button,
+    Modal,
     Form,
     // FormItemCategory,
     Table,

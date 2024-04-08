@@ -57,17 +57,22 @@ type ItemsMeta = ItemsMetaItem[]
 // type ItemsMeta = {
 //   [k: S]: PropsValue
 // }
-type SlotsMeta = SlotsMetaItem[]
+// type SlotsMeta = SlotsMetaItem[]
+type SlotsMeta = {
+  // [k: S]: Component | {}
+  [k: S]: ULID
+}// | {}
 
 interface Component {
   ulid: S
   type: S
   nextUlid: ULID
   prevUlid: ULID
+  parentUlid: ULID
+  mountPosition: S
   props: PropsMeta
   behavior: BehaviorMeta
   items: ItemsMeta
-  // items: {[k: S]: A}[]
   slots: SlotsMeta
   appUlid: ULID
   pageUlid: ULID

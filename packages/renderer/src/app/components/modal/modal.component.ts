@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { A } from 'src/types/base';
-import { DialogService } from 'ng-devui/modal';
+import { ModalService } from 'ng-devui/modal';
+import { ComponentService } from 'src/app/service/component.service';
+// import { PageService } from 'src/app/service/page.service';
 import {shareEvent} from 'src/helper';
+import { ModalCompComponent } from './modal-comp/modal-comp.component';
+import type { A } from 'src/types/base';
+import type { Component as Comp } from 'src/types/component';
 
 let clog = console.log
 
@@ -13,42 +17,68 @@ let clog = console.log
 export class ModalComponent implements OnInit {
   @Input() data: A
   config: A
-  constructor(private dialogService: DialogService) {
+  childrenHeader: Comp[]
+  childrenBody: Comp[]
+  childrenFooter: Comp[]
+  constructor(
+    private modalService: ModalService,
+    private componentService: ComponentService,
+  ) {
     this.config = {
       id: 'dialog-service',
       width: '346px',
       maxHeight: '600px',
-      title: 'title',
-      content: 'ModalTestComponent for content',
+      title: 'title', // 使用传入的数据
+      component: ModalCompComponent,
       backdropCloseable: true,
       placement: 'center',
-
       onClose: () => console.log('on dialog closed'),
       data: {
-        name: 'Tom',
-        age: 10,
-        address: 'Chengdu',
+        // ulid: this.data.ulid,
+        // props: this.data.props,
+        // items: this.data.items,
+        // slots: this.data.slots,
+        // behavior: this.data.behavior,
       },
     };
+    this.childrenHeader = []
+    this.childrenBody = []
+    this.childrenFooter = []
   }
   
   ngOnInit(): void {
     this.config.placement = this.data.props.placement
     this.config.title = this.data.props.title
     this.config.width = this.data.props.width
+    this.config.data.ulid = this.data.ulid
+    this.config.data.props = this.data.props
+    this.config.data.items = this.data.items
+    this.config.data.slots = this.data.slots
+    this.config.data.behavior = this.data.behavior
     if (this.data.props.visible) {
       this.openDialog()
     }
     shareEvent.listen(this.data.ulid, (payload) => {
+      // clog('payload', payload)
       let obj = JSON.parse(payload)
+      // clog('obj', obj)
       if (obj.visible) {
         this.openDialog()
       }
     })
+    // let curPage = this.pageService.getCur()
+    let tree = this.componentService.getTreeByKey()
+    if (tree) {
+      let curNode = tree.find(this.data.ulid)!
+      this.childrenHeader = curNode.children['header']?.toArray() || []
+      this.childrenBody = curNode.children['body']?.toArray() || []
+      this.childrenFooter = curNode.children['footer']?.toArray() || []
+    }
+    // clog('12345', this.childrenHeader, this.childrenBody, this.childrenFooter)
   }
   
   openDialog(dialogtype?: string, showAnimation?: boolean) {
-    const results = this.dialogService.open({
+    const results = this.modalService.open({
       ...this.config,
       dialogtype: dialogtype,
       showAnimation: showAnimation,

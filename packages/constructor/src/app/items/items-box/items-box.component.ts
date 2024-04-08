@@ -23,7 +23,7 @@ export class ItemsBoxComponent {
   curComponent: Comp | null = null
   constructor(private componentService: ComponentService) {
     this.groupList = []
-    this.componentService.compSubject$.subscribe(p => {
+    this.componentService.curComponent$.subscribe(p => {
       if (p) {
         this.curComponent = p
         this.groupList = []

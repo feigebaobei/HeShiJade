@@ -1,0 +1,14 @@
+<header>
+    header
+    {{data.title}}
+    <app-stack *ngFor="let comp of componenntListHeader" [data]="comp"></app-stack>
+</header>
+<main>
+    main
+    <app-stack *ngFor="let comp of componenntListBody" [data]="comp"></app-stack>
+    <!-- {{title}} -->
+</main>
+<footer>
+    footer
+    <!-- {{title}} -->
+</footer>

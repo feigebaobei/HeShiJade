@@ -148,7 +148,59 @@ put
 #### 删除应用
 #### 删除页面
 #### 删除组件
+#### 树型结构
+使用tree的逻辑
+1. 请求该页面的全量组件。
+2. 再全部挂载到树上。不生成数组。
+3. 以appUlid+pageUlid为key。以tree为value，建立对应关系map
+4. 在setup.html中根据appUlid+pageUlid取得组件组成的数组，放在当前组件中，用于渲染组件。
+5. 增加时，在数组中增加，在tree上增加。
+6. 删除时，在数组中删除，在tree上删除。
+7. 改变位置时，在数组中改变位置，在tree上改变位置。
+8. 在父组件中根据appUlid+pageUlid+componentUlid+slots.key取得组件组成的数组subComponentList，放在当前组件中，用于渲染子组件。
+9. 增加时，在subComponentList中增加，在tree上增加。
+10. 删除时，在subComponentList中删除，在tree上删除。
+11. 改变位置时，在subComponentList中改变位置，在tree上改变位置。
+使用三缓存处理组件列表。
+reqXxx 请求后端操作数据库
+componentService.xxx 操作服务中的树型数据
+xxxList 它是当前组件内的子组件列表。操作它改变子组件
 
+tree的逻辑
+```
+
+      
+              null
+                ^
+                |
+          |------------|
+          |            | --> null
+ null <-- |    node    | --> null
+          |            | ...
+          |------------|                             null
+               |  ^                                    ^
+               V  |                                    |
+          |------------|                          |------------|     
+          |            | <----------------------- |            | --> null
+ null <-- |    node    | -----------------------> |    node    | --> ...
+          |            | --> ...                  |            |     
+          |------------| <--------------------|   |------------|     
+               |  ^                           |        |  ^
+               |  |                           |        |  |
+                ...                           |         ...
+               |  |                           |        |  |
+               V  |                           |        V  |
+          |------------|                      |   |------------|     
+          |            | --> null             |-- |            | --> null
+ null <-- |    node    | --> null                 |    node    | --> ...
+          |            | ...                      |            |     
+          |------------|                          |------------|     
+               |                                       |
+               V                                       V
+              null                                    null
+
+
+```
 
 ### server 服务侧
 
@@ -203,8 +255,8 @@ put
 |prev|上一个组件的ulid|||
 |props|属性|||
 |behavior|行为|||
-|item|条目|||
-|slot|内置文本|||
+|items|条目|||
+|slots|插槽|||
 |appUlid|所属应用的ulid|||
 |pageUlid|所属页面的ulid|||
 
