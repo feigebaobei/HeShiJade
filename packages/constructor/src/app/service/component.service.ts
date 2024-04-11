@@ -101,13 +101,13 @@ export class ComponentService {
       })
     })
   }
-  mountComponent(comp: Component, ulid: ULID, position: 'next' | 'child', slot?: S): B {
+  mountComponent(comp: Component, ulid: ULID, position: 'next' | 'child' | 'items', slot?: S): B {
     let tree = this._map.get(this.createTreeKey())
     if (tree) {
       let b: B
       let node: Node<Component> | undefined
       switch(position) {
-        case 'next':
+        case 'next': // 后节点
           b = !!tree.mountNext(comp, ulid)
           node = tree.find(ulid)
           if (node) {
@@ -115,12 +115,20 @@ export class ComponentService {
           }
           clog('tree', tree)
           break;
-        case 'child':
+        case 'child': // 子节点
           b = !!tree.mountChild(comp, ulid, slot!)
           node = tree.find(ulid)
           if (node) {
             node.value.slots[slot!] = comp.ulid
           }
+          break;
+        case 'items': 
+          b = !!tree.mountNext(comp, ulid)
+          node = tree.find(ulid)
+          if (node) {
+            node.value.nextUlid = comp.ulid
+          }
+          clog('tree todo', tree)
           break;
       }
       return b
@@ -256,19 +264,6 @@ export class ComponentService {
   // 在当前页面中查找
   private _find(compUlid: S): CompOrUn {
     // let pageUlid = this.pageService.getCurPage()?.ulid
-    // let res = undefined
-    // if (pageUlid) {
-    //   let cur = this._map.get(pageUlid)?.head
-    //   while (cur) {
-    //     if (cur.value.ulid === compUlid) {
-    //       res = cur.value
-    //       break
-    //     }
-    //     cur = cur.next
-    //   }    
-    // }
-    // return res
-    let pageUlid = this.pageService.getCurPage()?.ulid
     return this._map.get(this.createTreeKey())?.find(compUlid)?.value
   }
   private _findCategory(categoryUlid: ULID) {
@@ -363,64 +358,7 @@ export class ComponentService {
       withCredentials: true
     }).subscribe(() => {})
   }
-  // setCurComponentCategory(index: N, value: ConfigItemsCategoryType) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let t: ConfigItem = curComp.items[index]
-  //     t.category = value
-  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
-  //       ulid: curComp.ulid,
-  //       key: 'category',
-  //       value: value,
-  //     })
-  //   }
-  // }
-  // setCurComponentLabel(index: N, value: S) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let t: ConfigItem = curComp.items[index]
-  //     t.label = value
-  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
-  //       ulid: curComp.ulid,
-  //       key: 'label',
-  //       value: value,
-  //     })
-  //   }
-  // }
-  // setCurComponentValue(index: N, value: S) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let t: ConfigItem = curComp.items[index]
-  //     t.value = value
-  //     clog('vlue', value)
-  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
-  //       ulid: curComp.ulid,
-  //       key: 'value',
-  //       value: value,
-  //       index: index,
-  //     }, {
-  //       withCredentials: true
-  //     }).subscribe(res => {
-  //       clog('res', res)
-  //     })
-  //   }
-  // }
-  // setCurComponentKey(index: N, value: S) {
-  //   let curComp = this.curComponent()
-  //   if (curComp) {
-  //     let t: ConfigItem = curComp.items[index]
-  //     t.key = value
-  //     this.http.put<ResponseData>('http://localhost:5000/components/items', {
-  //       ulid: curComp.ulid,
-  //       key: 'key',
-  //       value: value,
-  //     }, {
-  //       withCredentials: true
-  //     })
-  //   }
-  // }
   removeItemsOfCurComponent(index: N) {
-    
   }
 
   // 更新组件
@@ -457,31 +395,9 @@ export class ComponentService {
       })
     })
   }
-  // reqUpdateBehavior(type)
   // 删除组件
   delete(componentUlid: ULID) {
-    // let dc = this._map.get(pageUlid)
-    // if (dc) {
-    //   let cur = dc.head
-    //   let position = 0
-    //   while (cur) {
-    //     if (cur.value.ulid === componentUlid) {
-    //       break
-    //     }
-    //     position++
-    //     cur = cur.next
-    //   }
-    //   let compDeleted = dc.removeAt(position)
-    //   this.componentListByCurPage$.next(dc.toArray())
-    //   // 当删除最前面和最后面的组件时需要更新页面的数据
-    //   this.pageService.deleteComponent(compDeleted)
-    // }
     return this._map.get(this.createTreeKey())?.unmount(componentUlid)
-    // let tree = 
-    // if (tree) {
-    //   // let c = tree.find(componentUlid)?.value
-    //   tree.unmount(componentUlid)
-    // }
   }
   getTreeByKey(key = this.createTreeKey()): Tree<Component> | undefined {
     return this._map.get(key)
