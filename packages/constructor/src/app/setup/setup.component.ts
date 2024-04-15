@@ -106,8 +106,14 @@ export class SetupComponent implements OnInit {
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
-    let obj: Comp = initComponentMeta(e.dragData.item.componentCategory, curPage!.appUlid, curPage!.ulid, this.componentByPage[this.componentByPage.length - 1]?.ulid || '')
-    this.componentService.mountComponent(obj, this.componentByPage[this.componentByPage.length - 1].ulid, 'next')
+    let obj: Comp = initComponentMeta(
+      e.dragData.item.componentCategory, 
+      curPage!.appUlid, curPage!.ulid, 
+      this.componentByPage[this.componentByPage.length - 1]?.ulid || '', '', '',
+      {area: ''},
+    )
+    // this.componentService.mountComponent(obj, this.componentByPage[this.componentByPage.length - 1].ulid, 'next')
+    this.componentService.mountComponent(obj)
     this.componentService.reqPostCompListByPage(obj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {

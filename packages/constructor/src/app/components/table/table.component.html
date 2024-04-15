@@ -3,7 +3,7 @@
     [size]="data.props['size']"
 >
   <d-column
-    *ngFor="let colOption of data.items"
+    *ngFor="let colOption of data.items; let i = index"
     [field]="colOption['field']"
     [header]="colOption['header']"
     [width]="colOption['width']"
@@ -16,11 +16,11 @@
         </div>
         <div *ngIf="colOption['category'] === 'slots'"
           dDroppable
-          (dropEvent)="dropH($event, colOption['field'])"
+          (dropEvent)="dropH($event, colOption['field'], i)"
           class="dropArea"
         >
           <app-comp-box
-              *ngFor="let comp of compObj[colOption['field']]"
+              *ngFor="let comp of (compObj[createChildKey('items', i, 'component')] || [])"
               [comp]="comp"
           ></app-comp-box>
         </div>

@@ -3,9 +3,12 @@ import { AppService } from 'src/app/service/app.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { initComponentMeta } from 'src/helper'
+import { createChildKey } from 'src/helper/index'
 // type
 import { A } from 'src/types/base';
-import type {Component as Comp} from 'src/types/component'
+import type {Component as Comp, 
+  ComponentMountItems,
+  ComponentMountSlots,} from 'src/types/component'
 let clog = console.log
 
 
@@ -75,19 +78,26 @@ export class ModalComponent implements OnInit{
     if (tree) {
       let node = tree.find(this.data.ulid)
       clog('node', node)
-      let headerNode = node!.children['header']
+      // createChildKey('slots', (node?.value.mount as ComponentMountSlots).slotKey, 'node')
+      // let headerNode = node!.children['header']
+      let headerNode = node?.children[createChildKey('slots', 'header', 'node')]
       this.childrenHeader = headerNode?.toArray() || []
-      let bodyNode = node!.children['body']
+      // let bodyNode = node!.children['body']
+      let bodyNode = node?.children[createChildKey('slots', 'body', 'node')]
       this.childrenBody = bodyNode?.toArray() || []
-      let footerNode = node!.children['footer']
+      // let footerNode = node!.children['footer']
+      let footerNode = node?.children[createChildKey('slots', 'footer', 'node')]
       this.childrenFooter = footerNode?.toArray() || []
     }
   }
   dropHeaderH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''
-    let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
-      '', '', this.data.ulid, 'header',)
+    let component = initComponentMeta(
+      $event.dragData.item.componentCategory, 
+      appUlid, pageUlid,
+      '', '', this.data.ulid,
+      {area: 'slots', slotKey: 'header'},)
     // 在childrenHeader中增加组件元素
     // clog('component', component)
     // component.slots.header = 
@@ -95,7 +105,8 @@ export class ModalComponent implements OnInit{
     // 在tree中增加节点
     // let tree = this.componentService.getTreeByKey()
     // tree?.mountChild(component, this.data.ulid, 'header')
-    this.componentService.mountComponent(component, this.data.ulid, 'child', 'header')
+    // this.componentService.mountComponent(component, this.data.ulid, 'slots', 'header')
+    this.componentService.mountComponent(component)
     // clog('tree', this.componentService.getTreeByKey())
     // 请求保存组件的接口
     this.componentService.reqPostCompListByPage(component).then(() => {
@@ -108,10 +119,14 @@ export class ModalComponent implements OnInit{
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''
     if (this.childrenBody.length) {
-      let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
-        this.childrenBody[this.childrenBody.length - 1].ulid, '', this.data.ulid, 'body')
+      let component = initComponentMeta(
+        $event.dragData.item.componentCategory, 
+        appUlid, pageUlid, 
+        this.childrenBody[this.childrenBody.length - 1].ulid, '', this.data.ulid,
+        {area: 'slots', slotKey: 'body'})
       this.childrenBody.push(component)
-      this.componentService.mountComponent(component, component.prevUlid, 'next')
+      // this.componentService.mountComponent(component, component.prevUlid, 'next')
+      this.componentService.mountComponent(component)
       // clog('tree', this.componentService.getTreeByKey())
       this.componentService.reqPostCompListByPage(component).then(() => {
         clog('成功在远端保存组件')
@@ -119,12 +134,16 @@ export class ModalComponent implements OnInit{
         clog('error', error)
       })
     } else {
-      let component = initComponentMeta($event.dragData.item.componentCategory, appUlid, pageUlid,
-        '', '', this.data.ulid, 'body',)
+      let component = initComponentMeta(
+        $event.dragData.item.componentCategory, 
+        appUlid, pageUlid,
+        '', '', this.data.ulid,
+        {area: 'slots', slotKey: 'body'})
       // 在childrenHeader中增加组件元素
       clog('component', component)
       this.childrenBody.push(component)
-      this.componentService.mountComponent(component, this.data.ulid, 'child', 'body')
+      // this.componentService.mountComponent(component, this.data.ulid, 'slots', 'body')
+      this.componentService.mountComponent(component)
       clog('tree', this.componentService.getTreeByKey())
       this.componentService.reqPostCompListByPage(component).then(() => {
         clog('成功在远端保存组件')

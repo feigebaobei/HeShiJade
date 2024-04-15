@@ -73,6 +73,10 @@ router.route('/')
   })
 })
 // 创建组件
+// req.body: {
+//   component: Component
+//   itemIndex: N
+// }
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 创建+更新组件
@@ -83,11 +87,29 @@ router.route('/')
     rules.required(req.body.type) && 
     rules.required(req.body.props) && 
     rules.required(req.body.behavior) && 
-    rules.required(req.body.items) && 
+    isArray.required(req.body.items) && 
     rules.required(req.body.slots) &&
+    rules.required(req.body.mount) && 
     rules.required(req.body.appUlid) && 
     rules.required(req.body.pageUlid)
     ) {
+      // if (
+      //   rules.required(req.body.parentUlid) ||
+      //   rules.required(req.body.mount.area) ||
+      //   rules.required(req.body.mountKey)
+      // ) {
+      //   if (
+      //     rules.required(req.body.parentUlid) &&
+      //     rules.required(req.body.mountArea) &&
+      //     rules.required(req.body.mountKey)
+      //   ) {
+      //     s(true)
+      //   } else {
+      //     j(100100)
+      //   }
+      //   s(true)
+      // } else {
+      // }
       s(true)
     } else {
       j(100100)
@@ -101,7 +123,7 @@ router.route('/')
   })
   // 操作页面和组件
   .then((curPage) => {
-    let arr = [
+    let componentUpdateArr = [
       {
         insertOne: { // 插入一个组件
           document: {
@@ -110,7 +132,10 @@ router.route('/')
             prevUlid: req.body.prevUlid,
             nextUlid: '',
             parentUlid: req.body.parentUlid,
-            mountPosition: req.body.mountPosition,
+            // mountPosition: req.body.mountPosition,
+            // mountArea: req.body.mountArea,
+            // mountKey: req.body.mountKey,
+            mount: req.body.mount,
             props: req.body.props,
             behavior: req.body.behavior,
             items: req.body.items,
@@ -122,7 +147,7 @@ router.route('/')
       }
     ]
     if (req.body.prevUlid) {
-      arr.unshift({
+      componentUpdateArr.unshift({
         updateOne: { // 更新前组件
           filter: {ulid: req.body.prevUlid},
           update: {
@@ -131,42 +156,77 @@ router.route('/')
         }
       })
     }
-    // 更新父组件
-    // let updateObj = {}
-    if (req.body.parentUlid) {
-      arr.unshift({
-        updateOne: {
-          filter: {ulid: req.body.parentUlid},
+    if (req.body.nextUlid) {
+      componentUpdateArr.unshift({
+        updateOne: { // 更新后组件
+          filter: {ulid: req.body.nextUlid},
           update: {
-            // $set: { // 覆盖
-            //   [`slots.${req.body.mountPosition}`]: req.body.ulid
-            // }
-            $setOnInsert: { // 不可覆盖。若存在，则不覆盖。
-              [`slots.${req.body.mountPosition}`]: req.body.ulid
-            }
+            $set: {prevUlid: req.body.ulid}
           }
         }
       })
     }
+    // 更新父组件
+    if (req.body.parentUlid) {
+      // componentUpdateArr.unshift({
+      //   filter: {ulid: req.body.parentUlid},
+      //   update: {
+      //     $setOnInsert: {
+      //       [`${req.body.mountArea}_${req.body.mountKey}`]: req.body.ulid
+      //     }
+      //   }
+      // })
+      switch(req.body.mount.area) {
+        case 'items':
+          componentUpdateArr.unshift({
+            updateOne: {
+              filter: {ulid: req.body.parentUlid},
+              update: {
+                $set: {
+                  [`items.${itemIndex}.childUlid`]: req.body.ulid
+                }
+              }
+            }
+          })
+          break;
+        case 'slots':
+          componentUpdateArr.unshift({
+            updateOne: {
+              filter: {ulid: req.body.parentUlid},
+              update: {
+                // $set: { // 覆盖
+                //   [`slots.${req.body.mountPosition}`]: req.body.ulid
+                // }
+                $setOnInsert: { // 不可覆盖。若存在，则不覆盖。
+                  [`slots.${req.body.mountPosition}`]: req.body.ulid
+                }
+              }
+            }
+          })
+          break;
+      }
+    }
+
+    let pageUpdateObj
     // 更新最后一个组件
     if (curPage.lastComponentUlid) {
-      updateObj = {
+      pageUpdateObj = {
         $set: {
           lastComponentUlid: req.body.ulid
         }
       }
     } else {
-      updateObj = {
+      pageUpdateObj = {
         $set: {
           firstComponentUlid: req.body.ulid,
           lastComponentUlid: req.body.ulid,
         }
       }
     }
-    let p1 = lowcodeDb.collection('components_dev').bulkWrite(arr)
+    let p1 = lowcodeDb.collection('components_dev').bulkWrite(componentUpdateArr)
     let p2 = lowcodeDb.collection('pages_dev').updateOne({
       ulid: req.body.pageUlid
-    }, updateObj)
+    }, pageUpdateObj)
     return Promise.all([p1, p2]).catch(() => {
       return Promise.reject(200000)
     })

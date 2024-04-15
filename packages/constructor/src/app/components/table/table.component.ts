@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
+import { createChildKey } from 'src/helper/index'
 // type
 import type { N, S, D, A, ULID } from 'src/types/base';
-import type { Component as Comp } from 'src/types/component';
+import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
 import { initComponentMeta } from 'src/helper';
@@ -24,6 +25,7 @@ interface TableData {
   props: Comp['props']
   items: Comp['items']
   ulid: ULID
+  mount: ComponentMountItems
 }
 
 
@@ -41,6 +43,7 @@ export class TableComponent implements OnInit {
   //   size: 'lg', // 'mini'| 'xs' |'sm'|'md'|'lg'
   // }
   compObj: {[k: S]: Comp[]}
+  createChildKey: typeof createChildKey
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -131,6 +134,7 @@ export class TableComponent implements OnInit {
     //     this.compObj[item['field']] = []
     //   }
     // })
+    this.createChildKey = createChildKey
   }
   ngOnInit(): void {
     // clog('thid.data', this.data)
@@ -141,47 +145,99 @@ export class TableComponent implements OnInit {
     //   {field: 'id', header: 'id', width: '150px'},
     // ]
     this.data.items.forEach(item => item['category'] = 'fill')
-    this.data.items.unshift(
-      {
-        field: 'gender', header: 'gender', width: '150px',
-        category: 'slots',
-        child: 'ulidulidulid',
-      },
-    )
+    // this.data.items.unshift(
+    //   {
+    //     field: 'gender', header: 'gender', width: '150px',
+    //     category: 'slots',
+    //     child: 'ulidulidulid',
+    //   },
+    // )
     clog('thid.data', this.data)
-    this.data.items.forEach(item => {
-      if (item['child']) {
-        let tree = this.componentService.getTreeByKey()
-        let node = tree?.find(item['child'])
+    // this.data.items.forEach(item => {
+    //   if (item['child']) {
+    //     let tree = this.componentService.getTreeByKey()
+    //     let node = tree?.find(item['child'])
+    //     if (node) {
+    //       this.compObj[item['field']] = node.toArray()
+    //     } else {
+    //       this.compObj[item['field']] = []
+    //     }
+    //   } else {
+    //     this.compObj[item['field']] = []
+    //   }
+    // })
+    this.compObj = {}
+    let tree = this.componentService.getTreeByKey()
+    this.data.items.forEach((item, index) => {
+      if (item['category'] === 'slots') {
+        let node = tree?.find(item['childUlid'])
         if (node) {
-          this.compObj[item['field']] = node.toArray()
-        } else {
-          this.compObj[item['field']] = []
+          // this.compObj[`items_${index}`] = node.toArray()
+          this.compObj[createChildKey('items', index, 'component')] = node.toArray()
         }
-      } else {
-        this.compObj[item['field']] = []
       }
     })
+    // for dev
+    // this.compObj['gender'] = [
+    //   {
+    //     // "_id": "65f52b0c39d86fce07471053",
+    //     "ulid": "01HS2V09RY71C3NFYYKE5RCV7M",
+    //     "type": "Button",
+    //     "prevUlid": "",
+    //     "nextUlid": "01HS2V11ET15BP6FVC6P4F6R37",
+    //     "props": {
+    //         "type": "button",
+    //         "bsSize": "md",
+    //         "bordered": true,
+    //         "disabled": false,
+    //         "width": "100px",
+    //         "text": "button"
+    //     },
+    //     "behavior": [
+    //         {
+    //             "event": "click",
+    //             "target": "ulid",
+    //             "payload": "{\"visible\": true}"
+    //         }
+    //     ],
+    //     "items": [],
+    //     "slots": {},
+    //     "appUlid": "01HGKPCCA5E5F4DH42ZX8PENY8",
+    //     "pageUlid": "01HH9035JX4Q34P05Y17XXCT7H",
+    //     parentUlid: '',
+    //     mountPosition: '',
+    //   },
+    // ]
+    clog('compObj', this.compObj)
   }
-  dropH(e: DropEvent, field: S) {
+  // createChildKey(...p: Parameters<typeof createChildKey>) {
+  //   return createChildKey(...p)
+  // }
+  dropH(e: DropEvent, field: S, itemIndex: N) {
     // 在本组件内添加新组件
     let curPage = this.pageService.getCurPage()
     let comp: Comp
     if (this.compObj[field].length) {
-      comp = initComponentMeta(e.dragData.item.componentCategory, curPage!.appUlid, curPage!.ulid, this.compObj[field][this.compObj[field].length - 1].ulid || '')
+      comp = initComponentMeta(
+        e.dragData.item.componentCategory,
+        curPage!.appUlid, curPage!.ulid,
+        this.compObj[field][this.compObj[field].length - 1].ulid, '', this.data.ulid,
+        {area: 'items', itemIndex}
+        )
       this.compObj[field].push(comp)
     } else {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
-        curPage!.appUlid,
-        curPage!.ulid,
-        ''
+        curPage!.appUlid, curPage!.ulid,
+        '', '', this.data.ulid,
+        {area: 'items', itemIndex}
       )
       this.compObj[field] = [comp]
     }
     // 在service中添加新组件
-    // this.componentService.mountComponent(comp, ulid, )
+    // this.componentService.mountComponent(comp, this.data.ulid, 'items', field, 'field')
+    this.componentService.mountComponent(comp)
     // 在服务端保存新组件
-    // this.componentService.reqPostCompListByPage(comp)
+    this.componentService.reqPostCompListByPage(comp)
   }
 }

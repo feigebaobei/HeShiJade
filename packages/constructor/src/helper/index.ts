@@ -54,12 +54,12 @@ let createDebounceFn = (fn: F, t = 250, self?: A) => {
 }
 let initComponentMeta = (
   category: S,
-  appUlid: ULID,
-  pageUlid: ULID,
-  prevUlid: S = '',
-  nextUlid: S = '',
-  parentUlid: S = '',
-  mountPosition: S = '',
+  appUlid: ULID, pageUlid: ULID,
+  prevUlid: S = '', nextUlid: S = '', parentUlid: S = '',
+  // mountPosition: S = '',
+  // mountArea: '' | 'items' | 'slots' = '',
+  // mountItemIndex: N = -1,
+  mount: Component['mount']
 ): Component => {
   return {
     ulid: ulid(),
@@ -67,7 +67,12 @@ let initComponentMeta = (
     prevUlid,
     nextUlid,
     parentUlid,
-    mountPosition,
+    // mountPosition,
+    // mount: {
+    //   area: mountArea,
+    //   itemIndex: mountItemIndex,
+    // },
+    mount,
     props: componentDefaultConfigAll[category].props,
     behavior: componentDefaultConfigAll[category].behavior,
     items: componentDefaultConfigAll[category].items,
@@ -91,7 +96,9 @@ let initAppMeta = (key: S, name: S, theme: S, owner: S, version:N = 0): App => {
     nextUlid: '',
   }
 }
-
+let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' | 'node' | 'component' = '') => {
+  return `${prefix}_${key}_${type}`
+}
 
 export {
   reqToPromise,
@@ -100,4 +107,5 @@ export {
   createDebounceFn,
   initComponentMeta,
   initAppMeta,
+  createChildKey,
 }

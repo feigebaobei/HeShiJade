@@ -44,7 +44,7 @@ let compMap: Ao = {
   styleUrls: ['./comp-box.component.sass']
 })
 export class CompBoxComponent implements OnInit, OnDestroy {
-  @Input() comp: A
+  @Input() comp!: Comp
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
   // private clearTimer: VoidFunction | undefined;
   curComp?: Comp | null
@@ -103,6 +103,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
           // items: this.comp.items,
           slots: this.comp.slots,
           ulid: this.comp.ulid,
+          mount: this.comp.mount,
         }
         break
       case 'Select':
@@ -116,6 +117,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
           props: this.comp.props,
           items: this.comp.items,
           ulid: this.comp.ulid,
+          mount: this.comp.mount,
         }
         break
       case 'Table':
