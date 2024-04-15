@@ -28,6 +28,7 @@ export class SelectComponent implements OnInit {
     this._label = this.label
   }
   changeH() {
-    this.changeValue.emit(this._value)
+    // console.log('chagneH', this._value, this.value)
+    this.changeValue.emit(this.value)
   }
 }
