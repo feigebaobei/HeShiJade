@@ -1,3 +1,4 @@
+// 删除此组件 2024.05.15+
 import { Component } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { Form, 
@@ -20,19 +21,16 @@ let clog = console.log
   styleUrls: ['./items-box.component.sass']
 })
 export class ItemsBoxComponent {
-  // componentItemsList: ComponentItem[]
   componentItemsList: ConfigItem[]
   curComp: Comp //| null
   addable: B
   constructor(private componentService: ComponentService) {
     this.componentItemsList = []
-    // this.curComp = null
     this.curComp = {} as Comp
     this.addable = false
     this.componentService.curComponent$.subscribe(p => {
       if (p) {
         this.curComp = p
-        // this.addable = p.items.addable
         this.addable = addable[p.type].items
       }
       this.componentSelectedChange()
@@ -44,16 +42,6 @@ export class ItemsBoxComponent {
     // 再赋值
     switch (this.curComp?.type) {
       case 'Form':
-        //   let o: ConfigItem
-        // this.curComp.items.forEach((obj: ConfigItem) => {
-        //   o = JSON.parse(JSON.stringify(Form))
-        //   o.value = obj.value
-        //   o.key = obj.key
-        //   o.category = obj.category
-        //   o.label = obj.label
-        //   this.componentItemsList.push(o)
-        // })
-
         this.curComp.items.forEach((obj) => {
           let o = JSON.parse(JSON.stringify(Form))
           Object.keys(o).forEach((k) => {
@@ -65,7 +53,7 @@ export class ItemsBoxComponent {
       default:
         break;
     }
-    // this.componentItemsList[index]
+    clog('componentItemsList', this.componentItemsList)
   }
   addButtonClickH() {
     // 日后从service中取
@@ -77,7 +65,6 @@ export class ItemsBoxComponent {
     }
     switch (this.curComp.type) {
       case 'Form':
-        // o = Form.groupTemplate
         o = JSON.parse(JSON.stringify(Form))
         break
       default:

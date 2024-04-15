@@ -144,7 +144,7 @@ export class TableComponent implements OnInit {
     //   {field: 'd', header: 'd', width: '80px'},
     //   {field: 'id', header: 'id', width: '150px'},
     // ]
-    this.data.items.forEach(item => item['category'] = 'fill')
+    // this.data.items.forEach(item => item['category'] = 'fill')
     // this.data.items.unshift(
     //   {
     //     field: 'gender', header: 'gender', width: '150px',
