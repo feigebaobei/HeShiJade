@@ -217,14 +217,33 @@ export class TableComponent implements OnInit {
     // 在本组件内添加新组件
     let curPage = this.pageService.getCurPage()
     let comp: Comp
-    if (this.compObj[field].length) {
+    // if (this.compObj[field].length) {
+    //   comp = initComponentMeta(
+    //     e.dragData.item.componentCategory,
+    //     curPage!.appUlid, curPage!.ulid,
+    //     this.compObj[field][this.compObj[field].length - 1].ulid, '', this.data.ulid,
+    //     {area: 'items', itemIndex}
+    //     )
+    //   this.compObj[field].push(comp)
+    // } else {
+    //   comp = initComponentMeta(
+    //     e.dragData.item.componentCategory,
+    //     curPage!.appUlid, curPage!.ulid,
+    //     '', '', this.data.ulid,
+    //     {area: 'items', itemIndex}
+    //   )
+    //   this.compObj[field] = [comp]
+    // }
+    let key = createChildKey('items', itemIndex, 'component')
+    clog('key', key)
+    if (this.compObj[key]?.length) {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
         curPage!.appUlid, curPage!.ulid,
-        this.compObj[field][this.compObj[field].length - 1].ulid, '', this.data.ulid,
+        this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
         {area: 'items', itemIndex}
         )
-      this.compObj[field].push(comp)
+      this.compObj[key].push(comp)
     } else {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
@@ -232,7 +251,7 @@ export class TableComponent implements OnInit {
         '', '', this.data.ulid,
         {area: 'items', itemIndex}
       )
-      this.compObj[field] = [comp]
+      this.compObj[key] = [comp]
     }
     // 在service中添加新组件
     // this.componentService.mountComponent(comp, this.data.ulid, 'items', field, 'field')
