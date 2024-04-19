@@ -1,4 +1,4 @@
-import { A, O, S } from 'src/types/base';
+import { A, N, S } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 // import { DoublyChain } from 'data-footstone';
@@ -38,7 +38,9 @@ let reqToPromise = (fn: Observable<ResponseData>): Promise<ResponseData> => {
 // }
 let {log: clog, dir: cdir} = console
 
-
+let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' | 'node' | 'component' = '') => {
+  return `${prefix}_${key}_${type}`
+}
 
 export {
   reqToPromise,
@@ -47,4 +49,5 @@ export {
   shareEvent,
   clog,
   cdir,
+  createChildKey,
 }

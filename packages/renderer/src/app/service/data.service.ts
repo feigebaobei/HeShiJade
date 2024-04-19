@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { reqToPromise } from 'src/helper/index'
 // type
-import type { O, S } from 'src/types/base';
+import type { O, S, ReqMethod} from 'src/types/base';
 import type { ResponseData } from 'src/types';
 
 
@@ -18,7 +18,7 @@ export class DataService {
   }
   req(
     url: S,
-    method: 'get' | 'post' | 'put' | 'delete',
+    method: ReqMethod,
     dataParams: O,
   ) {
     let fn

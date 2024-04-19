@@ -55,22 +55,6 @@ interface Component {
   nextUlid: ULID
   prevUlid: ULID
   parentUlid: ULID
-  // mountPosition: S
-  // mountArea: '' | 'items' | 'slots'
-  // mountItemIndex: N // 在no.x个item上挂载
-  // mountKey: S
-  // mount: {
-  //   area: '' | 'items' | 'slots'
-  //   itemIndex: N
-  //   // key: S
-  // }
-  // mount: {area: ''} | {
-  //   area: 'items'
-  //   itemIndex: N
-  // } | {
-  //   area: 'slots'
-  //   slotKey: S
-  // }
   mount: ComponentMountEmpty | ComponentMountItems | ComponentMountSlots // 表示挂载到父组件的位置
   props: PropsMeta
   behavior: BehaviorMeta
@@ -81,19 +65,6 @@ interface Component {
   slots: SlotsMeta
   appUlid: ULID
   pageUlid: ULID
-  // children: {
-  //   items: {
-  //     ['key']: ULID
-  //   }
-  //   slots: {
-  //     ['key']: ULID
-  //   }
-  //   [`xxx_key`]: ULID
-  // }
-  // children: {
-  //   // string_string
-  //   [k: S]: ULID
-  // }
 }
 
 interface Category {

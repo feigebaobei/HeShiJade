@@ -172,7 +172,7 @@ router.route('/')
             updateOne: {
               filter: {ulid: req.body.parentUlid},
               update: {
-                $set: {
+                $setOnInsert: {// 待测试
                   [`items.${req.body.mount.itemIndex}.childUlid`]: req.body.ulid
                 }
               }
