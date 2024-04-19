@@ -9,9 +9,12 @@ import { Subject } from 'rxjs';
 import { ENV, S } from 'src/types/base';
 import { EnvService } from './env.service';
 // import { arrToChain } from 'src/helper';
+import { createChildKey } from 'src/helper/index'
 // type
 import type { ResponseData, ULID } from 'src/types';
-import type { Component } from 'src/types/component';
+import type { Component,
+  ComponentMountItems,
+  ComponentMountSlots, } from 'src/types/component';
 import type { Tree } from 'src/helper/tree';
 
 let clog = console.log
@@ -59,58 +62,101 @@ export class ComponentService {
       if (curComp) {
         tree.mountRoot(curComp)
         let q = new Queue<{
-          position: 'next' | 'child'
-          slot?: S
+          // position: 'next' | 'child'
+          // slot?: S
+          // component: Component
+          // ulid: ULID
           component: Component
-          ulid: ULID
+          mountMethod: 'next' | 'items' | 'slots'
         }>()
         let nextComp = componentList.find(item => item.ulid === curComp?.nextUlid)
         if (nextComp) {
           q.enqueue({
-            position: 'next',
+            // position: 'next',
+            // component: nextComp,
+            // ulid: curComp.ulid,
             component: nextComp,
-            ulid: curComp.ulid,
+            mountMethod: 'next',
           })
         }
         Object.entries(curComp.slots).forEach(([key, value]) => {
           let comp = componentList.find(item => item.ulid === value)
           if (comp) {
             q.enqueue({
-              position: 'child',
+              // position: 'child',
+              // component: comp,
+              // ulid: curComp!.ulid,
+              // slot: key,
               component: comp,
-              ulid: curComp!.ulid,
-              slot: key,
+              mountMethod: 'slots',
             })
           }
         })
-        let i = 0
+        curComp.items.forEach((item) => {
+          let comp = componentList.find(ele => ele.ulid === item['childUlid'])
+          if (comp) {
+            q.enqueue({
+              component: comp,
+              mountMethod: 'items',
+            })
+          }
+        })
+        let i = 0 // 为了开发时安全
         while (!q.isEmpty() && i < 100) {
           i++
           let cur = q.dequeue() // || curComp
-          switch(cur.position) {
+          // switch(cur.position) {
+          //   case 'next':
+          //     tree.mountNext(cur.component, cur.ulid)
+          //     break
+          //   case 'child':
+          //     tree.mountChild(cur.component, cur.ulid, cur.slot!)
+          //     break
+          // }
+          switch(cur.mountMethod) {
             case 'next':
-              tree.mountNext(cur.component, cur.ulid)
+              tree.mountNext(cur.component, cur.component.prevUlid)
               break
-            case 'child':
-              tree.mountChild(cur.component, cur.ulid, cur.slot!)
-              break
+            case 'items':
+              tree.mountChild(cur.component, cur.component.parentUlid,
+                createChildKey('items', (cur.component.mount as ComponentMountItems).itemIndex, 'node')
+                )
+                break;
+            case 'slots':
+              tree.mountChild(cur.component, cur.component.parentUlid,
+                createChildKey('slots', (cur.component.mount as ComponentMountSlots).slotKey, 'node')
+                )
+                break;
           }
           let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
           if (nextComp) {
             q.enqueue({
-              position: 'next',
+              // position: 'next',
+              // component: nextComp,
+              // ulid: cur.component.ulid
               component: nextComp,
-              ulid: cur.component.ulid
+              mountMethod: 'next',
             })
           }
-          Object.entries(cur.component.slots).forEach(([key, value]) => {
+          Object.entries(cur.component.slots).forEach(([_key, value]) => {
             let comp = componentList.find(item => item.ulid === value)
             if (comp) {
               q.enqueue({
-                position: 'child',
-                slot: key,
+                // position: 'child',
+                // slot: key,
+                // component: comp,
+                // ulid: cur.component.ulid
                 component: comp,
-                ulid: cur.component.ulid
+                mountMethod: 'slots',
+              })
+            }
+          })
+          cur.component.items.forEach((item) => {
+            let comp = componentList.find((ele) => ele.ulid === item['childUlid'])
+            if (comp) {
+              q.enqueue({
+                component: comp,
+                mountMethod: 'items',
               })
             }
           })

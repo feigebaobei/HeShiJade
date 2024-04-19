@@ -117,6 +117,16 @@ let FormItemCategory = [
 //     }
 let Table: ConfigItem[] = [
     {
+        label: '类型',
+        category: 'select',
+        options: [
+            {label: 'fill', value: 'fill'},
+            {label: 'slots', value: 'slots'},
+        ],
+        key: 'category',
+        value: 'fill',
+    },
+    {
         label: 'field',
         category: 'input',
         key: 'field',

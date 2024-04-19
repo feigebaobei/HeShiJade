@@ -114,26 +114,6 @@ export class TableComponent implements OnInit {
     this.compObj = {
       // <field>: Comp[]
     }
-    // items: {
-    //   category: 'fill' | 'slots'
-    //   field: S
-    //   width: S
-    //   header: S
-    //   child: ULID
-    // }[]
-    // this.data.items.forEach(item => {
-    //   if (item['child']) {
-    //     let tree = this.componentService.getTreeByKey()
-    //     let node = tree?.find(item['child'])
-    //     if (node) {
-    //       this.compObj[item['field']] = node.toArray()
-    //     } else {
-    //       this.compObj[item['field']] = []
-    //     }
-    //   } else {
-    //     this.compObj[item['field']] = []
-    //   }
-    // })
     this.createChildKey = createChildKey
   }
   ngOnInit(): void {
@@ -144,7 +124,7 @@ export class TableComponent implements OnInit {
     //   {field: 'd', header: 'd', width: '80px'},
     //   {field: 'id', header: 'id', width: '150px'},
     // ]
-    this.data.items.forEach(item => item['category'] = 'fill')
+    // this.data.items.forEach(item => item['category'] = 'fill')
     // this.data.items.unshift(
     //   {
     //     field: 'gender', header: 'gender', width: '150px',
@@ -153,19 +133,6 @@ export class TableComponent implements OnInit {
     //   },
     // )
     clog('thid.data', this.data)
-    // this.data.items.forEach(item => {
-    //   if (item['child']) {
-    //     let tree = this.componentService.getTreeByKey()
-    //     let node = tree?.find(item['child'])
-    //     if (node) {
-    //       this.compObj[item['field']] = node.toArray()
-    //     } else {
-    //       this.compObj[item['field']] = []
-    //     }
-    //   } else {
-    //     this.compObj[item['field']] = []
-    //   }
-    // })
     this.compObj = {}
     let tree = this.componentService.getTreeByKey()
     this.data.items.forEach((item, index) => {
@@ -177,37 +144,6 @@ export class TableComponent implements OnInit {
         }
       }
     })
-    // for dev
-    // this.compObj['gender'] = [
-    //   {
-    //     // "_id": "65f52b0c39d86fce07471053",
-    //     "ulid": "01HS2V09RY71C3NFYYKE5RCV7M",
-    //     "type": "Button",
-    //     "prevUlid": "",
-    //     "nextUlid": "01HS2V11ET15BP6FVC6P4F6R37",
-    //     "props": {
-    //         "type": "button",
-    //         "bsSize": "md",
-    //         "bordered": true,
-    //         "disabled": false,
-    //         "width": "100px",
-    //         "text": "button"
-    //     },
-    //     "behavior": [
-    //         {
-    //             "event": "click",
-    //             "target": "ulid",
-    //             "payload": "{\"visible\": true}"
-    //         }
-    //     ],
-    //     "items": [],
-    //     "slots": {},
-    //     "appUlid": "01HGKPCCA5E5F4DH42ZX8PENY8",
-    //     "pageUlid": "01HH9035JX4Q34P05Y17XXCT7H",
-    //     parentUlid: '',
-    //     mountPosition: '',
-    //   },
-    // ]
     clog('compObj', this.compObj)
   }
   // createChildKey(...p: Parameters<typeof createChildKey>) {
@@ -217,14 +153,16 @@ export class TableComponent implements OnInit {
     // 在本组件内添加新组件
     let curPage = this.pageService.getCurPage()
     let comp: Comp
-    if (this.compObj[field].length) {
+    let key = createChildKey('items', itemIndex, 'component')
+    clog('key', key)
+    if (this.compObj[key]?.length) {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
         curPage!.appUlid, curPage!.ulid,
-        this.compObj[field][this.compObj[field].length - 1].ulid, '', this.data.ulid,
+        this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
         {area: 'items', itemIndex}
         )
-      this.compObj[field].push(comp)
+      this.compObj[key].push(comp)
     } else {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
@@ -232,7 +170,7 @@ export class TableComponent implements OnInit {
         '', '', this.data.ulid,
         {area: 'items', itemIndex}
       )
-      this.compObj[field] = [comp]
+      this.compObj[key] = [comp]
     }
     // 在service中添加新组件
     // this.componentService.mountComponent(comp, this.data.ulid, 'items', field, 'field')

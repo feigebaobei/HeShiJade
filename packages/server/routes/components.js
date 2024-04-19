@@ -82,47 +82,37 @@ router.route('/')
   // 创建+更新组件
   // 更新页面
   // 检查必要参数
+  // clog('post')
+  // clog('post09')
   new Promise((s, j) => {
+    // clog('88')
     if (rules.required(req.body.ulid) && 
-    rules.required(req.body.type) && 
-    rules.required(req.body.props) && 
-    rules.required(req.body.behavior) && 
-    isArray.required(req.body.items) && 
-    rules.required(req.body.slots) &&
-    rules.required(req.body.mount) && 
-    rules.required(req.body.appUlid) && 
-    rules.required(req.body.pageUlid)
+      rules.required(req.body.type) && 
+      rules.required(req.body.props) && 
+      rules.required(req.body.behavior) && 
+      rules.isArray(req.body.items) && 
+      rules.required(req.body.slots) &&
+      rules.required(req.body.mount) && 
+      rules.required(req.body.appUlid) && 
+      rules.required(req.body.pageUlid)
     ) {
-      // if (
-      //   rules.required(req.body.parentUlid) ||
-      //   rules.required(req.body.mount.area) ||
-      //   rules.required(req.body.mountKey)
-      // ) {
-      //   if (
-      //     rules.required(req.body.parentUlid) &&
-      //     rules.required(req.body.mountArea) &&
-      //     rules.required(req.body.mountKey)
-      //   ) {
-      //     s(true)
-      //   } else {
-      //     j(100100)
-      //   }
-      //   s(true)
-      // } else {
-      // }
+      // clog('trree')
       s(true)
     } else {
+      // clog('12345')
       j(100100)
     }
   })
   // 找到页面
   .then(() => {
+    // clog('dev page')
     return lowcodeDb.collection('pages_dev').findOne({ulid: req.body.pageUlid}).catch(() => {
       return Promise.reject(300000)
     })
   })
   // 操作页面和组件
   .then((curPage) => {
+    // clog('curPage', curPage)
     let componentUpdateArr = [
       {
         insertOne: { // 插入一个组件
@@ -182,8 +172,8 @@ router.route('/')
             updateOne: {
               filter: {ulid: req.body.parentUlid},
               update: {
-                $set: {
-                  [`items.${itemIndex}.childUlid`]: req.body.ulid
+                $setOnInsert: {// 待测试
+                  [`items.${req.body.mount.itemIndex}.childUlid`]: req.body.ulid
                 }
               }
             }
@@ -223,11 +213,13 @@ router.route('/')
         }
       }
     }
+    // clog('componentUpdateArr',componentUpdateArr)
     let p1 = lowcodeDb.collection('components_dev').bulkWrite(componentUpdateArr)
     let p2 = lowcodeDb.collection('pages_dev').updateOne({
       ulid: req.body.pageUlid
     }, pageUpdateObj)
-    return Promise.all([p1, p2]).catch(() => {
+    return Promise.all([p1, p2]).catch((error) => {
+      // clog('error', error)
       return Promise.reject(200000)
     })
   })
@@ -239,6 +231,7 @@ router.route('/')
       data: {}
     })
   }).catch(code => {
+    // clog('code', code)
     return res.status(200).json({
       code,
       message: errorCode[code],

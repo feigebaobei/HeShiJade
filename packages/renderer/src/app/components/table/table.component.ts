@@ -1,8 +1,29 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ComponentService } from 'src/app/service/component.service';
 import { DataService } from 'src/app/service/data.service';
-import { cdir } from 'src/helper';
+import { cdir, clog } from 'src/helper';
+import { createChildKey } from 'src/helper/index'
 // type
-import type { A } from 'src/types/base';
+import type { A, S, ULID, N, D, ReqMethod, } from 'src/types/base';
+import type { Component as Comp, ComponentMountItems } from 'src/types/component';
+
+// interface basicDataSourceItem {
+//   id: N,
+//   firstName: S,
+//   lastName: S,
+//   dob: D,
+//   gender: S,
+//   description: S,
+// }
+
+interface TableData {
+  props: Comp['props']
+  items: Comp['items']
+  ulid: ULID
+  mount: ComponentMountItems
+}
+
+// let clog = console
 
 @Component({
   selector: 'app-table',
@@ -10,9 +31,14 @@ import type { A } from 'src/types/base';
   styleUrls: ['./table.component.sass']
 })
 export class TableComponent implements OnInit {
-  @Input() data: A
+  // @Input() data: A
+  @Input() data!: TableData
   basicDataSource: A[]
-  constructor(private dataService: DataService) {
+  createChildKey: typeof createChildKey
+  compObj: {[k: S]: Comp[]}
+  constructor(private dataService: DataService,
+    private componentService: ComponentService
+    ) {
     this.basicDataSource = [
       // {
       //   id: 1,
@@ -21,9 +47,25 @@ export class TableComponent implements OnInit {
       //   d: 'd',
       // },
     ]
+    this.createChildKey = createChildKey
+    this.compObj = {}
+  }
+  ngOnInit(): void {
+    this.req()
+    this.compObj = {}
+    let tree = this.componentService.getTreeByKey()
+    this.data.items.forEach((item, index) => {
+      if (item['category'] === 'slots') {
+        let node = tree?.find(item['childUlid'] || '')
+        if (node) {
+          this.compObj[createChildKey('items', index, 'component')] = node.toArray()
+        }
+      }
+    })
+    clog(' 12345',this.compObj)
   }
   req() {
-    this.dataService.req(this.data.props.url, this.data.props.method || 'get', {}).then(res => {
+    this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {
       if (res.code === 0) {
         this.basicDataSource = res.data
       } else {
@@ -36,7 +78,7 @@ export class TableComponent implements OnInit {
       }
     })
   }
-  ngOnInit() {
-    this.req()
-  }
+  // ngOnInit() {
+  //   this.req()
+  // }
 }

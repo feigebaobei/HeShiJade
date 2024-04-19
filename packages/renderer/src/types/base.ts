@@ -3,6 +3,7 @@ type N = number
 type A = any
 type B = boolean
 type ULID = S
+type D = Date
 type F = Function
 type O = object
 interface Ao {
@@ -20,11 +21,13 @@ interface Options<T, G> {
     label: T,
     value: G,
 }
+type ReqMethod = "get" | "post" | "put" | "delete"
 export type {
     S, N, A, B, ULID, 
-    F, Ao, O,
+    F, Ao, O, D,
     ValueType,
     SelectOptionsItem,
     ENV,
     Options,
+    ReqMethod,
 }

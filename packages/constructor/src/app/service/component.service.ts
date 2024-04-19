@@ -283,8 +283,6 @@ export class ComponentService {
           if (curComp) {
             tree.mountRoot(curComp)
             let q = new Queue<{
-              // position: S, slot?: S, 
-              // component: Component, ulid: ULID
               component: Component
               mountMethod: 'next' | 'items' | 'slots' // 用不到'prev'
             }>()
@@ -292,9 +290,6 @@ export class ComponentService {
             let nextComp = componentList.find(item => item.ulid === curComp!.nextUlid)
             if (nextComp) {
               q.enqueue({
-                // position: 'next',
-                // component: nextComp,
-                // ulid: curComp.ulid,
                 component: nextComp,
                 mountMethod: 'next',
               })
@@ -303,10 +298,6 @@ export class ComponentService {
               let t = componentList.find(item => item.ulid === ulid)
               if (t) {
                 q.enqueue({
-                  // position: 'child',
-                  // slot: slot,
-                  // component: t,
-                  // ulid: curComp!.ulid,
                   component: t,
                   mountMethod: 'slots',
                 })
@@ -325,32 +316,18 @@ export class ComponentService {
             while (!q.isEmpty() && i < 100) {
               i++
               let cur = q.dequeue()
-              // switch (cur.position) {
-              //   case 'next':
-              //     tree.mountNext(cur.component, cur.ulid)
-              //     break;
-              //   case 'child':
-              //     tree.mountChild(cur.component, cur.ulid, cur.slot!)
-              //     break;
-              // }
+              // clog('q', q)
               switch (cur.mountMethod) {
-                // case 'prev':
-                //   tree.mountPrev()
-                //   break;
                 case 'next':
                   tree.mountNext(cur.component, cur.component.prevUlid)
                   break;
                 case 'items':
-                  // tree.mountChild(cur.component, cur.component.parentUlid, `items_${(cur.component.mount as ComponentMountItems).itemIndex}`)
                   tree.mountChild(cur.component, cur.component.parentUlid, 
-                    // `items_${(cur.component.mount as ComponentMountItems).itemIndex}`
                     createChildKey('items', (cur.component.mount as ComponentMountItems).itemIndex, 'node')
                     )
                   break;
                 case 'slots':
-                  // tree.mountChild(cur.component, cur.component.parentUlid, `slots_${(cur.component.mount as ComponentMountSlots).slotKey}`)
                   tree.mountChild(cur.component, cur.component.parentUlid, 
-                    // `slots_${(cur.component.mount as ComponentMountSlots).slotKey}`
                     createChildKey('slots', (cur.component.mount as ComponentMountSlots).slotKey, 'node')
                     )
                   break;
@@ -358,21 +335,14 @@ export class ComponentService {
               let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
               if (nextComp) {
                 q.enqueue({
-                  // position: 'next',
-                  // component: nextComp,
-                  // ulid: cur.component.ulid,
                   component: nextComp,
                   mountMethod: 'next',
                 })
               }
-              Object.entries(cur.component.slots).forEach(([slot, ulid]) => {
+              Object.entries(cur.component.slots).forEach(([_slot, ulid]) => {
                 let t = componentList.find(item => item.ulid === ulid)
                 if (t) {
                   q.enqueue({
-                    // position: 'child',
-                    // slot: slot,
-                    // component: t,
-                    // ulid: cur.component.ulid,
                     component: t,
                     mountMethod: 'slots',
                   })
