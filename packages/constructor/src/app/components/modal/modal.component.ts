@@ -5,7 +5,7 @@ import { PageService } from 'src/app/service/page.service';
 import { initComponentMeta } from 'src/helper'
 import { createChildKey } from 'src/helper/index'
 // type
-import { A } from 'src/types/base';
+import type { A, ULID } from 'src/types/base';
 import type {Component as Comp, 
   ComponentMountItems,
   ComponentMountSlots,} from 'src/types/component'
@@ -151,5 +151,16 @@ export class ModalComponent implements OnInit{
         clog('error', error)
       })
     }
+  }
+  deleteComponentByUlidH(ulid: ULID) {
+    this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
+    this.componentService.delete(ulid)
+    this.componentService.reqDeleteComponent(ulid)
+  }
+  bodyDeleteComponentByUlidH(ulid: ULID) {
+    this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
+    this.componentService.delete(ulid)
+    this.componentService.reqDeleteComponent(ulid)
+
   }
 }

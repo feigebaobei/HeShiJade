@@ -135,34 +135,6 @@ export class ComponentService {
     if (tree) {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
-      // switch(position) {
-      //   case 'next': // 后节点
-      //     b = !!tree.mountNext(comp, ulid)
-      //     node = tree.find(ulid)
-      //     if (node) {
-      //       node.value.nextUlid = comp.ulid
-      //     }
-      //     clog('tree', tree)
-      //     break;
-      //   case 'slots': // 子节点
-      //     b = !!tree.mountChild(comp, ulid, `slots_${key}`)
-      //     node = tree.find(ulid)
-      //     if (node) {
-      //       node.value.slots[`slots_${key}`!] = comp.ulid
-      //     }
-      //     break;
-      //   case 'items': 
-      //     b = !!tree.mountChild(comp, ulid, `items_${key}`)
-      //     node = tree.find(ulid)
-      //     if (node) {
-      //       let item = node.value.items.find(item => item[itemsKey] === key) // 先使用硬编码吧。
-      //       if (item) {
-      //         item['child'] = comp.ulid
-      //       }
-      //     }
-      //     clog('tree todo', tree)
-      //     break;
-      // }
       switch(this.mountPosition(comp)) {
         case 1: // prev
           b = !!tree.mountPrev(comp, comp.parentUlid)
@@ -236,6 +208,23 @@ export class ComponentService {
           j()
         }
       })
+    })
+  }
+  reqDeleteComponent(ulid: ULID) {
+    return new Promise<B>((s, j) => {
+      this.http.delete<ResponseData>('http://localhost:5000/components', {
+          params: {
+            ulid
+          },
+          withCredentials: true
+        }).subscribe(res => {
+          if (res.code === 0) {
+            clog('删除成功')
+            s(true)
+          } else {
+            j()
+          }
+        })
     })
   }
   // for dev

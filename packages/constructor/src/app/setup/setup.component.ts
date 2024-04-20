@@ -10,7 +10,7 @@ import { initComponentMeta } from 'src/helper'
 // import {componentDefaultConfigAll} from 'src/helper/component'
 // import all from '../../helper/component'
 // 类型
-import type { A, S, N, B } from 'src/types/base';
+import type { A, S, N, B, ULID, } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Category, Component as Comp,
   //  componentConfig as componentConfigT
@@ -126,5 +126,10 @@ export class SetupComponent implements OnInit {
     if (Array.from($event.target.classList).includes('stage')) {
       this.componentService.setCurComponent()
     }
+  }
+  deleteComponentByUlidH(ulid: ULID) {
+    this.componentByPage = this.componentByPage.filter(item => item.ulid !== ulid)
+    this.componentService.delete(ulid)
+    this.componentService.reqDeleteComponent(ulid)
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { AdDirective } from 'src/app/ad.directive';
 // 组件
 import { ButtonComponent } from 'src/app/components/button/button.component';
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 // service
 import { ComponentService } from 'src/app/service/component.service';
 // type
-import type { A, S, Ao } from 'src/types/base';
+import type { A, S, Ao, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 // 数据
 // import { Button as buttonDefaultData,
@@ -47,6 +47,7 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   @Input() comp!: Comp
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
   // private clearTimer: VoidFunction | undefined;
+  @Output() deleteComp = new EventEmitter<ULID>()
   curComp?: Comp | null
   componentRef: A
   constructor(
@@ -142,19 +143,20 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.adHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
+    this.deleteComp.emit(this.curComp?.ulid)
     // 应该调用service中的方法
-    if (this.curComp) {
-      this.componentService.delete(this.curComp.ulid)
-      this.http.delete<ResponseData>('http://localhost:5000/components', {
-        params: {
-          ulid: this.curComp?.ulid || ''
-        },
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          clog('删除成功')
-        }
-      })
-    }
+    // if (this.curComp) {
+    //   this.componentService.delete(this.curComp.ulid)
+    //   this.http.delete<ResponseData>('http://localhost:5000/components', {
+    //     params: {
+    //       ulid: this.curComp?.ulid || ''
+    //     },
+    //     withCredentials: true
+    //   }).subscribe(res => {
+    //     if (res.code === 0) {
+    //       clog('删除成功')
+    //     }
+    //   })
+    // }
   }
 }

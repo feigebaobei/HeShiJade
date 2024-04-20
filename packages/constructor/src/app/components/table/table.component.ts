@@ -8,7 +8,7 @@ import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
-import { ulid } from 'ulid';
+// import { ulid } from 'ulid';
 
 let clog = console.log
 
@@ -117,22 +117,6 @@ export class TableComponent implements OnInit {
     this.createChildKey = createChildKey
   }
   ngOnInit(): void {
-    // clog('thid.data', this.data)
-    // this.data.items: [
-    //   {field: 'name', header: '姓名', width: '80px'},
-    //   {field: 'a', header: 'a', width: '80px'},
-    //   {field: 'd', header: 'd', width: '80px'},
-    //   {field: 'id', header: 'id', width: '150px'},
-    // ]
-    // this.data.items.forEach(item => item['category'] = 'fill')
-    // this.data.items.unshift(
-    //   {
-    //     field: 'gender', header: 'gender', width: '150px',
-    //     category: 'slots',
-    //     child: 'ulidulidulid',
-    //   },
-    // )
-    clog('thid.data', this.data)
     this.compObj = {}
     let tree = this.componentService.getTreeByKey()
     this.data.items.forEach((item, index) => {
@@ -144,11 +128,7 @@ export class TableComponent implements OnInit {
         }
       }
     })
-    clog('compObj', this.compObj)
   }
-  // createChildKey(...p: Parameters<typeof createChildKey>) {
-  //   return createChildKey(...p)
-  // }
   dropH(e: DropEvent, field: S, itemIndex: N) {
     // 在本组件内添加新组件
     let curPage = this.pageService.getCurPage()
@@ -177,5 +157,11 @@ export class TableComponent implements OnInit {
     this.componentService.mountComponent(comp)
     // 在服务端保存新组件
     this.componentService.reqPostCompListByPage(comp)
+  }
+  deleteComponentByUlidH(ulid: ULID, index: N) {
+    let key = createChildKey('items', index, 'component')
+    this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+    this.componentService.delete(ulid)
+    this.componentService.reqDeleteComponent(ulid)
   }
 }
