@@ -43,7 +43,7 @@ import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.compon
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
 import { CompBoxComponent } from './setup/comp-box/comp-box.component';
-import { CompItemComponent } from './setup/comp-item/comp-item.component';
+// import { CompItemComponent } from './setup/comp-item/comp-item.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormComponent } from './components/form/form.component';
@@ -84,7 +84,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PageListComponent,
     ComponentListComponent,
     CompBoxComponent,
-    CompItemComponent,
+    // CompItemComponent,
     ButtonComponent,
     ModalComponent,
     FormComponent,

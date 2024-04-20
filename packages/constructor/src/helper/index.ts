@@ -19,10 +19,6 @@ let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     })
   }
 
-// let createCompKey = (appUlid: ULID, pageUlid: ULID) => {
-//   return `${appUlid}_${pageUlid}`
-// }
-
 // 获取数据类型
 let getType = (o: A) => Object.prototype.toString.call(o).slice(8, -1) // 返回构造函数的名字 大写开头
 // 深复制对象
@@ -30,7 +26,6 @@ let cloneDeep: <T>(p: T, c: T) => T = (p: A, c: A) => {
   for (let k in p) {
     if (p.hasOwnProperty(k)) {
       if (typeof p[k] === 'object') {
-        // c[k] = getType(p[k]) === 'Array' ? [] : {}
         c[k] = Array.isArray(p[k]) ? [] : {}
         cloneDeep(p[k], c[k])
       } else {

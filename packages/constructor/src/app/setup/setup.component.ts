@@ -112,6 +112,7 @@ export class SetupComponent implements OnInit {
       this.componentByPage[this.componentByPage.length - 1]?.ulid || '', '', '',
       {area: ''},
     )
+    this.componentByPage.push(obj)
     // this.componentService.mountComponent(obj, this.componentByPage[this.componentByPage.length - 1].ulid, 'next')
     this.componentService.mountComponent(obj)
     this.componentService.reqPostCompListByPage(obj).then(() => {
