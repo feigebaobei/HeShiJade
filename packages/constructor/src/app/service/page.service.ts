@@ -152,51 +152,73 @@ export class PageService {
     // }
     // return p
   }
+  createPage(key: S, name: S, ulid: ULID,prevUlid: S, nextUlid: S,
+    // appUlid: S
+    ): Page {
+    let app = this.appService.getCurApp()
+    return {
+      key,
+      name,
+      ulid,
+      prevUlid,
+      nextUlid,
+      appUlid: app?.ulid || '',
+      childUlid: '',
+      firstComponentUlid: '',
+      lastComponentUlid: '',
+    }
+  }
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
-  add(data: AddData) {
+  // add(data: AddData) {
+  add(page: Page) {
     let app = this.appService.getCurApp()
     if (app) {
-      let u: ULID = ulid()
+      // let u: ULID = ulid()
       let appUlid = app.ulid
-      return reqToPromise(this.http.post<ResponseData>('http://localhost:5000/pages', {
-        key: data.key,
-        name: data.name,
-        ulid: u,
-        appUlid, // : app.ulid,
-      }, {
-        withCredentials: true,
-      })).then(() => {
-        let pageDc = this._map.get(appUlid)
-        // pageDc?.append({
-        //   key: data.key,
-        //   name: data.name,
-        //   ulid: u,
-        //   prevUlid: pageDc.tail?.value.ulid || '',
-        //   nextUlid: '',
-        //   childUlid: '',
-        //   firstComponentUlid: '',
-        //   appUlid,
-        // })
-        // this.pageList$.next(pageDc?.toArray() || [])
-        let pageObj = {
+      let pageDc = this._map.get(appUlid)
+      // let pageObj = {
+      //   key: data.key,
+      //   name: data.name,
+      //   ulid: u,
+      //   prevUlid: this._pageList.length ? this._pageList[this._pageList.length - 1].ulid : '',
+      //   nextUlid: '',
+      //   childUlid: '',
+      //   firstComponentUlid: '',
+      //   appUlid,
+      // }
+      let pageObj = page
+      if (this._pageList) {
+        pageDc?.mountNext(pageObj, pageObj.prevUlid)
+      } else {
+        pageDc?.mountRoot(pageObj)
+      }
+    }
+  }
+  reqPostPage(data: AddData, pageUlid: ULID) {
+    return new Promise((s, j) => {
+      let app = this.appService.getCurApp()
+      if (app) {
+        // let u: ULID = ulid()
+        let u: ULID = pageUlid
+        let appUlid = app.ulid
+        this.http.post<ResponseData>('http://localhost:5000/pages', {
           key: data.key,
           name: data.name,
           ulid: u,
-          prevUlid: this._pageList.length ? this._pageList[this._pageList.length - 1].ulid : '',
-          nextUlid: '',
-          childUlid: '',
-          firstComponentUlid: '',
           appUlid,
-        }
-        if (this._pageList) {
-          pageDc?.mountNext(pageObj, this._pageList[this._pageList.length - 1].ulid)
-        } else {
-          pageDc?.mountRoot(pageObj)
-        }
-      })
-    } else {
-      return Promise.reject(new Error('无此应用'))
-    }
+        }, {
+          withCredentials: true,
+        }).subscribe(res => {
+          if (res.code === 0) {
+            s(true)
+          } else {
+            j()
+          }
+        })
+      } else {
+        j(new Error('无此应用'))
+      }
+    })
   }
   // deleteComponent(component: Component, componentUlid: ULID, pageUlid: ULID, appUlid: ULID) {
   // 计划不支持lastComponentUlid了。

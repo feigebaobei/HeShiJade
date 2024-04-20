@@ -156,7 +156,6 @@ router.route('/')
       data: {}
     })
   }).catch(code => {
-
     return res.status(200).json({
       code,
       message: errorCode[code],

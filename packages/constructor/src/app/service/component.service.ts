@@ -340,7 +340,7 @@ export class ComponentService {
           }
         }
         this._map.set(this.createTreeKey(), tree)
-        clog('tree', tree)
+        // clog('tree', tree)
         return Promise.resolve(tree.root?.toArray() || [])
       })
     } else {
