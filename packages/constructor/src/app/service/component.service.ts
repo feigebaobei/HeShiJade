@@ -148,7 +148,7 @@ export class ComponentService {
           }
           break;
         case 2: // next
-          b = !!tree.mountNext(comp, comp.parentUlid)
+          b = !!tree.mountNext(comp, comp.prevUlid)
           node = tree.find(comp.prevUlid)
           if (node) {
             node.value.nextUlid = comp.ulid
@@ -170,19 +170,9 @@ export class ComponentService {
           }
           break;
         case 4: // slots
-          // b = !!tree.mountChild(comp, comp.parentUlid, `slots_${comp.slots[(comp.mount as ComponentMountSlots).slotKey]}`)
           b = !!tree.mountChild(comp, comp.parentUlid, 
             createChildKey('slots', (comp.mount as ComponentMountSlots).slotKey, 'node')
             )
-          // 兼容脏数据
-          // let mount = <ComponentMountSlots>comp.mount
-          // if (mount) {
-
-          // } else {
-
-          // }
-          // mount = comp.mountPosition
-          // b = !!tree.mountChild(comp, comp.parentUlid, createChildKey('slots', mount.slotKey, 'node'))
           node = tree.find(comp.parentUlid)
           if (node) {
             node.value.slots[`slots_${(comp.mount as ComponentMountSlots).slotKey}Ulid`] = comp.ulid

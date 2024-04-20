@@ -7,7 +7,7 @@ import { InputComponent } from 'src/app/components/input/input.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
 import { TableComponent } from 'src/app/components/table/table.component';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 // service
 import { ComponentService } from 'src/app/service/component.service';
 // type
@@ -21,8 +21,8 @@ import type {Component as Comp} from 'src/types/component'
 // Form as formDefaultData,
 // Table as tableDefaultData,
 //  } from '../../../helper/component'
-import { ResponseData } from 'src/types';
-import { PageService } from 'src/app/service/page.service';
+// import { ResponseData } from 'src/types';
+// import { PageService } from 'src/app/service/page.service';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所有我考虑使用封装全部devui的组件来实现.
@@ -51,24 +51,20 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   curComp?: Comp | null
   componentRef: A
   constructor(
-    // private pageService: PageService,
     private componentService: ComponentService,
-    private http: HttpClient,
+    // private http: HttpClient,
   ) {
     this.curComp = null
     this.componentRef
     this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
-      // this.init()
       this.update()
     })
-    // this.componentService.componentProps$.subscribe(p => {
-    //   this.componentRef.instance.data.props = p
-    // })
   }
   boxClickh($event: A) {
     // 选中组件
     $event.stopPropagation()
+    clog(this.comp)
     this.componentService.setCurComponent(this.comp.ulid)
   }
   ngOnInit() {
@@ -134,9 +130,6 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     if (this.comp.ulid === this.curComp?.ulid) {
       this.init()
     }
-    // this.componentRef.instance.data = {
-    //   props: data.props
-    // }
   }
   ngOnChange() {}
   ngOnDestroy() {
@@ -144,19 +137,5 @@ export class CompBoxComponent implements OnInit, OnDestroy {
   }
   deleteButtonClickH() {
     this.deleteComp.emit(this.curComp?.ulid)
-    // 应该调用service中的方法
-    // if (this.curComp) {
-    //   this.componentService.delete(this.curComp.ulid)
-    //   this.http.delete<ResponseData>('http://localhost:5000/components', {
-    //     params: {
-    //       ulid: this.curComp?.ulid || ''
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       clog('删除成功')
-    //     }
-    //   })
-    // }
   }
 }
