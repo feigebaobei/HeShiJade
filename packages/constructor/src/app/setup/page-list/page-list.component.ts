@@ -8,6 +8,7 @@ import { PageDialogComponent } from './dialog/page-dialog.component'; // 以后�
 import { AppService } from 'src/app/service/app.service';
 import { PageService } from 'src/app/service/page.service';
 import { ulid } from 'ulid'
+import { initPageMeta } from 'src/helper/index'
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
 import type { A, S, ULID } from 'src/types/base'
@@ -78,7 +79,7 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            let page = this.pageService.createPage(data.key, data.name, ulid(), this.pageList[this.pageList.length - 1].ulid || '', '')
+            let page = initPageMeta(data.key, data.name, ulid(), this.pageList[this.pageList.length - 1].ulid || '', '')
             this.pageList.push(page)
             this.pageService.add(page)
             this.pageService.reqPostPage(data, page.ulid)

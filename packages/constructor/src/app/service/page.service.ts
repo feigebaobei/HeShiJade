@@ -152,22 +152,21 @@ export class PageService {
     // }
     // return p
   }
-  createPage(key: S, name: S, ulid: ULID,prevUlid: S, nextUlid: S,
-    // appUlid: S
-    ): Page {
-    let app = this.appService.getCurApp()
-    return {
-      key,
-      name,
-      ulid,
-      prevUlid,
-      nextUlid,
-      appUlid: app?.ulid || '',
-      childUlid: '',
-      firstComponentUlid: '',
-      lastComponentUlid: '',
-    }
-  }
+  // delete 2024.05.15+
+  // createPage(key: S, name: S, ulid: ULID,prevUlid: S, nextUlid: S,): Page {
+  //   let app = this.appService.getCurApp()
+  //   return {
+  //     key,
+  //     name,
+  //     ulid,
+  //     prevUlid,
+  //     nextUlid,
+  //     appUlid: app?.ulid || '',
+  //     childUlid: '',
+  //     firstComponentUlid: '',
+  //     lastComponentUlid: '',
+  //   }
+  // }
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
   // add(data: AddData) {
   add(page: Page) {
