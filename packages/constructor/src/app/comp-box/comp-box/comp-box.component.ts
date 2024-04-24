@@ -1,8 +1,7 @@
 // 它被移到components模块了。
-// 2024.05.15+ 删除
-// 2024.04.23 不能删除
-import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { AdDirective } from 'src/app/ad.directive';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, ElementRef } from '@angular/core';
+// import { AdDirective } from 'src/app/ad.directive';
+import { CompDirective } from '../comp.directive'
 // 组件
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { FormComponent } from 'src/app/components/form/form.component';
@@ -46,9 +45,10 @@ let compMap: Ao = {
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
-export class CompBoxComponent implements OnInit, OnDestroy {
+export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() comp!: Comp
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  // @ViewChild(CompDirective, {static: true}) compHost!: CompDirective;
+  @ViewChild(CompDirective, {static: false, read: ElementRef}) compHost!: CompDirective;
   // private clearTimer: VoidFunction | undefined;
   @Output() deleteComp = new EventEmitter<ULID>()
   curComp?: Comp | null
@@ -74,9 +74,8 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.init()
   }
   init() {
-    // comp-box组件内
-    clog('comp-box组件内', this.adHost)
-    const viewContainerRef = this.adHost.viewContainerRef;
+    // comp-box模块内的组件
+    const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
     this.componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
@@ -131,14 +130,23 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
     }
   }
+  ngAfterViewInit() {
+    this.init()
+    // setTimeout(() => {
+    //   this.init()
+    // }, 2000)
+    // console.log(this.compHost);
+  }
   update() {
     if (this.comp.ulid === this.curComp?.ulid) {
       this.init()
     }
   }
-  ngOnChange() {}
+  ngOnChange() {
+    // this.init()
+  }
   ngOnDestroy() {
-    this.adHost.viewContainerRef.clear();
+    this.compHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
     this.deleteComp.emit(this.curComp?.ulid)

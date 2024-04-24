@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BehaviorModule } from './behavior/behavior.module';
 import { SlotModule } from './slot/slot.module';
 import { ItemsModule } from './items/items.module';
+import { ComponentsModule } from './components/components.module';
+// import { CompBoxModule } from './comp-box/comp-box.module';
 
 // 指令
 import { AdDirective } from './ad.directive';
@@ -44,12 +46,18 @@ import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
 import { CompBoxComponent } from './setup/comp-box/comp-box.component';
 // import { CompItemComponent } from './setup/comp-item/comp-item.component';
-import { ButtonComponent } from './components/button/button.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { FormComponent } from './components/form/form.component';
-import { TableComponent } from './components/table/table.component';
-import { InputComponent } from './components/input/input.component';
-import { SelectComponent } from './components/select/select.component';
+
+
+
+// import { ButtonComponent } from './components/button/button.component';
+// import { ModalComponent } from './components/modal/modal.component';
+// import { FormComponent } from './components/form/form.component';
+// import { TableComponent } from './components/table/table.component';
+// import { InputComponent } from './components/input/input.component';
+// import { SelectComponent } from './components/select/select.component';
+
+
+
 import { PropsBoxComponent } from './setup/props-box/props-box.component';
 // import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
 import { PropsInputComponent } from './setup/props-input/props-input.component';
@@ -85,12 +93,17 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     ComponentListComponent,
     CompBoxComponent,
     // CompItemComponent,
-    ButtonComponent,
-    ModalComponent,
-    FormComponent,
-    TableComponent,
-    InputComponent,
-    SelectComponent,
+
+
+    // ButtonComponent,
+    // ModalComponent,
+    // FormComponent,
+    // TableComponent,
+    // InputComponent,
+    // SelectComponent,
+
+
+
     PropsBoxComponent,
     // BehaviorBoxComponent,
     PropsInputComponent,
@@ -127,6 +140,8 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     BehaviorModule,
     SlotModule,
     ItemsModule,
+    ComponentsModule,
+    // CompBoxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

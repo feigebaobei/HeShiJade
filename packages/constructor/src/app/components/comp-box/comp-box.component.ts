@@ -1,16 +1,15 @@
 // 它被移到components模块了。
-// 2024.05.15+ 删除
-// 2024.04.23 不能删除
-import { Component, Input, Output, ViewChild, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { AdDirective } from 'src/app/ad.directive';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
+// import { AdDirective } from 'src/app/ad.directive';
+import { CompDirective } from '../comp.directive'
 // 组件
-import { ButtonComponent } from 'src/app/components/button/button.component';
-import { FormComponent } from 'src/app/components/form/form.component';
-import { InputComponent } from 'src/app/components/input/input.component';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
-import { SelectComponent } from 'src/app/components/select/select.component';
-import { TableComponent } from 'src/app/components/table/table.component';
-// import { HttpClient } from '@angular/common/http';
+import { ButtonComponent } from '../button/button.component';
+import { FormComponent } from '../form/form.component';
+import { InputComponent } from '../input/input.component';
+import { ModalComponent } from '../modal/modal.component';
+import { SelectComponent } from '../select/select.component';
+import { TableComponent } from '../table/table.component';
+
 // service
 import { ComponentService } from 'src/app/service/component.service';
 // type
@@ -42,13 +41,17 @@ let compMap: Ao = {
 }
 
 @Component({
-  selector: 'app-comp-box',
+  selector: 'app-comp-boxx',
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
-export class CompBoxComponent implements OnInit, OnDestroy {
+export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @Input() comp!: Comp
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  // @ViewChild(CompDirective, {static: true}) compHost!: CompDirective;
+  // @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  // @ViewChild(CompDirective, {static: false, read: ElementRef}) compHost!: CompDirective; // 返回undefined
+  @ViewChild(CompDirective, {static: false, }) compHost!: CompDirective; // 正常运行
+  // @ViewChild(AdDirective, {static: false, read: ElementRef}) adHost!: AdDirective;
   // private clearTimer: VoidFunction | undefined;
   @Output() deleteComp = new EventEmitter<ULID>()
   curComp?: Comp | null
@@ -71,12 +74,15 @@ export class CompBoxComponent implements OnInit, OnDestroy {
     this.componentService.setCurComponent(this.comp.ulid)
   }
   ngOnInit() {
-    this.init()
+    // this.init()
   }
   init() {
-    // comp-box组件内
-    clog('comp-box组件内', this.adHost)
-    const viewContainerRef = this.adHost.viewContainerRef;
+    // components模块内
+    // clog('components模块内', compMap, this.comp, compMap[this.comp.type])
+    // clog('components模块内', this.adHost) // undefined
+    clog('components模块内', this.compHost) 
+    if (!this.compHost) return
+    const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
     this.componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
@@ -131,14 +137,26 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
     }
   }
+  ngAfterViewInit() {
+    this.init()
+    // setTimeout(() => {
+    //   this.init()
+    // }, 2000)
+    // console.log(this.compHost);
+  }
+  ngAfterViewChecked(): void {
+    clog('ngAfterViewChecked', this.compHost)
+  }
   update() {
     if (this.comp.ulid === this.curComp?.ulid) {
       this.init()
     }
   }
-  ngOnChange() {}
+  ngOnChange() {
+    // this.init()
+  }
   ngOnDestroy() {
-    this.adHost.viewContainerRef.clear();
+    this.compHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
     this.deleteComp.emit(this.curComp?.ulid)

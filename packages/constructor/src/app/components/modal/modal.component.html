@@ -1,0 +1,27 @@
+<div
+    [class]="{
+        box: true,
+        disvisible: !data.props.visible
+    }">
+    <header dDroppable
+        (dropEvent)="dropHeaderH($event)"
+    >title: {{data.props.title}}
+        <d-icon [icon]="'icon-close'"></d-icon>
+        header
+        <app-comp-boxx *ngFor="let comp of childrenHeader" [comp]="comp"
+        (deleteComp)="deleteComponentByUlidH($event)"
+        ></app-comp-boxx>
+    </header>
+    <hr>
+    <main dDroppable (dropEvent)="dropH($event)">
+        body
+        {{data.slots | json}}
+        <app-comp-boxx *ngFor="let comp of childrenBody" [comp]="comp"
+        (deleteComp)="bodyDeleteComponentByUlidH($event)"
+        ></app-comp-boxx>
+    </main>
+    <footer>
+        <d-button>取消</d-button>
+        <d-button>确定</d-button>
+    </footer>
+</div>

@@ -1,0 +1,40 @@
+<!-- todo 使用service中的数据渲染 -->
+<form dForm [layout]="data.props.layout" ngForm>
+  <!-- todo 考虑使用动态组件。不喜欢使用div包裹。-->
+  <!-- 不需要双向绑定表单项的值 -->
+  <div *ngFor="let ele of data.items">
+    <d-form-item>
+      <d-form-label [required]="false">{{ele.label}}</d-form-label>
+      <d-form-control>
+        <div>
+          <input
+            *ngIf="ele.category === 'input'"
+            dTextInput
+            autocomplete="off"
+            [value]="ele.value"
+          />
+          <d-select
+            *ngIf="ele.category === 'select'"
+            [options]="ele.options" 
+            [filterKey]="'label'" 
+            name="value"
+            [ngModel]="ele.value"
+          ></d-select>
+          <d-toggle
+            *ngIf="ele.category === 'switch'"
+            [checked]="ele.checked"
+          ></d-toggle>
+        </div>
+      </d-form-control>
+    </d-form-item>
+  </div>
+
+  <d-form-operation>
+      <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
+          *ngIf="data.props.isSubmit"
+      >Submit</d-button>
+      <d-button bsStyle="common" circled="true"
+          *ngIf="data.props.isCancel"
+      >Cancel</d-button>
+  </d-form-operation>
+</form>
