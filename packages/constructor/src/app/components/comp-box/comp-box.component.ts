@@ -1,5 +1,4 @@
-// 它被移到components模块了。
-import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked } from '@angular/core';
 // import { AdDirective } from 'src/app/ad.directive';
 import { CompDirective } from '../comp.directive'
 // 组件
@@ -45,12 +44,12 @@ let compMap: Ao = {
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
-export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked, AfterContentInit {
   @Input() comp!: Comp
   // @ViewChild(CompDirective, {static: true}) compHost!: CompDirective;
   // @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
   // @ViewChild(CompDirective, {static: false, read: ElementRef}) compHost!: CompDirective; // 返回undefined
-  @ViewChild(CompDirective, {static: false, }) compHost!: CompDirective; // 正常运行
+  @ViewChild(CompDirective, {static: true, }) compHost!: CompDirective; // 正常运行
   // @ViewChild(AdDirective, {static: false, read: ElementRef}) adHost!: AdDirective;
   // private clearTimer: VoidFunction | undefined;
   @Output() deleteComp = new EventEmitter<ULID>()
@@ -138,11 +137,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     }
   }
   ngAfterViewInit() {
-    this.init()
+    // this.init()
     // setTimeout(() => {
     //   this.init()
     // }, 2000)
     // console.log(this.compHost);
+  }
+  ngAfterContentInit() {
+    this.init()
   }
   ngAfterViewChecked(): void {
     clog('ngAfterViewChecked', this.compHost)

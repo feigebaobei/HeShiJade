@@ -19,18 +19,11 @@ import { BehaviorModule } from './behavior/behavior.module';
 import { SlotModule } from './slot/slot.module';
 import { ItemsModule } from './items/items.module';
 import { ComponentsModule } from './components/components.module';
-// import { CompBoxModule } from './comp-box/comp-box.module';
 
 // 指令
 import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
 import { ItemCategoryDirective } from './item-category.directive';
-
-// angular material
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input'
 
 // devui
 import { DevUIModule, 
@@ -44,19 +37,8 @@ import { DialogComponent } from './list/dialog/dialog.component';
 import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
-import { CompBoxComponent } from './setup/comp-box/comp-box.component';
+// import { CompBoxComponent } from './setup/comp-box/comp-box.component';
 // import { CompItemComponent } from './setup/comp-item/comp-item.component';
-
-
-
-// import { ButtonComponent } from './components/button/button.component';
-// import { ModalComponent } from './components/modal/modal.component';
-// import { FormComponent } from './components/form/form.component';
-// import { TableComponent } from './components/table/table.component';
-// import { InputComponent } from './components/input/input.component';
-// import { SelectComponent } from './components/select/select.component';
-
-
 
 import { PropsBoxComponent } from './setup/props-box/props-box.component';
 // import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
@@ -68,12 +50,6 @@ import { PropsItemComponent } from './setup/props-item/props-item.component';
 import { PropsOptionComponent } from './setup/props-option/props-option.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
-// import { ItemsBoxComponent } from './setup/items-box/items-box.component';
-// import { ItemsItemComponent } from './setup/items-item/items-item.component';
-// import { ItemInputComponent } from './setup/items-item/item-input/item-input.component';
-// import { ItemNumberComponent } from './setup/items-item/item-number/item-number.component';
-// import { ItemSwitchComponent } from './setup/items-item/item-switch/item-switch.component';
-// import { ItemSelectComponent } from './setup/items-item/item-select/item-select.component';
 
 @NgModule({
   declarations: [
@@ -91,18 +67,8 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PageDialogComponent,
     PageListComponent,
     ComponentListComponent,
-    CompBoxComponent,
+    // CompBoxComponent,
     // CompItemComponent,
-
-
-    // ButtonComponent,
-    // ModalComponent,
-    // FormComponent,
-    // TableComponent,
-    // InputComponent,
-    // SelectComponent,
-
-
 
     PropsBoxComponent,
     // BehaviorBoxComponent,
@@ -114,13 +80,6 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PropsOptionComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
-    // ItemsBoxComponent,
-    // ItemsItemComponent,
-    // ItemInputComponent,
-    // ItemNumberComponent,
-    // ItemSwitchComponent,
-    // ItemSelectComponent,
-    // IconModule,
   ],
   imports: [
     BrowserModule,
@@ -129,19 +88,13 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     RouterOutlet,
     UpperCasePipe,
     JsonPipe,
-    // MatButtonModule,
-    // MatIconModule,
-    // MatFormFieldModule,
-    // MatInputModule,
     DevUIModule,
     FormsModule,
     HttpClientModule,
-    // LayoutModule,
     BehaviorModule,
     SlotModule,
     ItemsModule,
     ComponentsModule,
-    // CompBoxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

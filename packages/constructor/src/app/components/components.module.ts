@@ -37,12 +37,12 @@ import { TableComponent } from './table/table.component';
   providers: [],
   exports: [
     CompBoxComponent,
-    ButtonComponent,
-    FormComponent,
-    InputComponent,
-    ModalComponent,
-    SelectComponent,
-    TableComponent,
+    // ButtonComponent,
+    // FormComponent,
+    // InputComponent,
+    // ModalComponent,
+    // SelectComponent,
+    // TableComponent,
   ],
 })
 export class ComponentsModule { }
