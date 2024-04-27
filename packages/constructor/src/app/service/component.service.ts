@@ -489,4 +489,9 @@ export class ComponentService {
   getTreeByKey(key = this.createTreeKey()): Tree<Component> | undefined {
     return this._map.get(key)
   }
+  deleteComponentByPageUlid(pageUlid: ULID) {
+    let app = this.appService.getCurApp()
+    let key = `${app?.ulid}_${pageUlid}_`
+    this._map.delete(key)
+  }
 }

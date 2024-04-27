@@ -6,6 +6,7 @@ import { createTree } from 'src/helper/tree';
 import { ulid } from 'ulid';
 import { reqToPromise } from 'src/helper';
 import { AppService } from './app.service';
+// import { ComponentService } from './component.service';
 import type { ResponseData } from 'src/types';
 import type { Page } from 'src/types/page';
 import type { S, ULID } from 'src/types/base';
@@ -28,13 +29,12 @@ export class PageService {
   _find: (p: ULID, appUlid?: ULID) => PageOrUn
   pageSubject$: Subject<PageOrUn>
   _curPage: PageOrUn
-  // _chain: DoublyChain<Page> // 有_map，应该删除它。
   pageList$: Subject<Page[]>
-  // private _map: Map<ULID, DoublyChain<Page>>
   private _map: Map<ULID, Tree<Page>>
   constructor(
     private http: HttpClient,
     private appService: AppService,
+    // private componentService: ComponentService
   ) {
     this._pageList = [] // 无顺序
     this.pageSubject$ = new Subject<PageOrUn>()
@@ -43,7 +43,6 @@ export class PageService {
       // return this._map.get(appUlid)?.toArray().find(item => item.ulid === pageUlid)
       return this._map.get(appUlid)?.find(pageUlid)?.value
     }
-    // this._chain = new DoublyChain<Page>() // 有_map，应该删除它。
     this.pageList$ = new Subject<Page[]>()
     this._map = new Map()
     // 当当前应用改变时请求页面列表
@@ -73,14 +72,12 @@ export class PageService {
             tree.mountRoot(curPage)
             while(curPage) {
               let nextPage = pageList.find(item => item.ulid === curPage!.nextUlid)
-              // clog('nextPage',nextPage, curPage.ulid)
               if (nextPage) {
                 tree.mountNext(nextPage, curPage.ulid)
               }
               curPage = nextPage
             }
             this._map.set(appUlid, tree)
-            // clog('tree page', tree)
             this.pageList$.next(tree.root!.toArray())
           } else {
             this.pageList$.next([])
@@ -111,15 +108,6 @@ export class PageService {
       })
     })
   }
-  // 获取pageList
-  // getPageList(appUlid?: ULID): Page[] {
-  //   appUlid = appUlid || (this.appService.getCurApp()?.ulid || '')
-  //   return this._map.get(appUlid)?.toArray() || []
-  // }
-  // setPageList() {
-  //   this.pageList$.next(this._pageList)
-  // }
-  // 对外不暴露set pageList的方法
   getCurPage() {
     return this._curPage
   }
@@ -129,44 +117,7 @@ export class PageService {
   }
   // 重铸
   recast() {
-    // let app = this.appService.getCurApp()
-    // let appUlid = app?.ulid || ''
-    // // let dc = new DoublyChain<Page>()
-    // let p: Promise<Page[]>
-    // if (appUlid) {
-    //   p = this._reqPageList(appUlid).then((pageList: Page[]) => {
-    //     let nextPageUlid = app?.firstPageUlid
-    //     while (nextPageUlid) {
-    //       let page = pageList.find(item => item.ulid === nextPageUlid)
-    //       if (page) {
-    //         dc.append(page)
-    //       }
-    //       nextPageUlid = page?.nextUlid
-    //     }
-    //     this._map.set(appUlid, dc)
-    //     return dc.toArray()
-    //   })
-    // } else {
-    //   this._map.set(appUlid, dc)
-    //   p = Promise.resolve(dc.toArray())
-    // }
-    // return p
   }
-  // delete 2024.05.15+
-  // createPage(key: S, name: S, ulid: ULID,prevUlid: S, nextUlid: S,): Page {
-  //   let app = this.appService.getCurApp()
-  //   return {
-  //     key,
-  //     name,
-  //     ulid,
-  //     prevUlid,
-  //     nextUlid,
-  //     appUlid: app?.ulid || '',
-  //     childUlid: '',
-  //     firstComponentUlid: '',
-  //     lastComponentUlid: '',
-  //   }
-  // }
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
   // add(data: AddData) {
   add(page: Page) {
@@ -175,16 +126,6 @@ export class PageService {
       // let u: ULID = ulid()
       let appUlid = app.ulid
       let pageDc = this._map.get(appUlid)
-      // let pageObj = {
-      //   key: data.key,
-      //   name: data.name,
-      //   ulid: u,
-      //   prevUlid: this._pageList.length ? this._pageList[this._pageList.length - 1].ulid : '',
-      //   nextUlid: '',
-      //   childUlid: '',
-      //   firstComponentUlid: '',
-      //   appUlid,
-      // }
       let pageObj = page
       if (this._pageList) {
         pageDc?.mountNext(pageObj, pageObj.prevUlid)
@@ -219,7 +160,6 @@ export class PageService {
       }
     })
   }
-  // deleteComponent(component: Component, componentUlid: ULID, pageUlid: ULID, appUlid: ULID) {
   // 计划不支持lastComponentUlid了。
   deleteComponent(component: Component) {
     let pageTree = this._map.get(component.appUlid)
@@ -232,29 +172,31 @@ export class PageService {
         cur = cur.next
       }
     }
-  //   let dc = this._map.get(component.appUlid)
-  //   if (dc) {
-  //     let cur = dc.head
-  //     while (cur) {
-  //       if (cur.value.ulid === component.pageUlid) {
-  //         if (cur.value.firstComponentUlid === component.ulid) {
-  //           if (cur.value.lastComponentUlid === component.ulid) {
-  //             cur.value.firstComponentUlid = ''
-  //             cur.value.lastComponentUlid = ''
-  //           } else {
-  //             cur.value.firstComponentUlid = component.nextUlid
-  //           }
-  //         } else {
-  //           if (cur.value.lastComponentUlid === component.ulid) {
-  //             cur.value.lastComponentUlid = component.prevUlid
-  //           } else {
-  //             // null
-  //           }
-  //         }
-  //         break;
-  //       }
-  //       cur = cur.next
-  //     }
-  //   }
+  }
+  deletePageByUlid(ulid: ULID) {
+    // 在页面树中删除
+    let appUlid = String(this.appService.getCurApp()?.ulid)
+    let tree = this._map.get(appUlid)
+    let b = tree?.unmount(ulid)
+    // 在应用树中删除
+    this.appService.deletePageByUlid(ulid)
+    // 在组件树中删除
+    // this.componentService.deleteComponentByPageUlid(ulid)
+  }
+  reqDeletePage(ulid: ULID) {
+    return new Promise((s, j) => {
+      this.http.delete<ResponseData>('http://localhost:5000/pages', {
+        params: {
+          ulid
+        },
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          s(true)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
   }
 }

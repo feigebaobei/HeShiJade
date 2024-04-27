@@ -68,10 +68,6 @@ export class AppService {
     this.appList$.next(this._appList)
   }
   opAppList(appList: App[]) {
-    // this._updateAppList(appList)
-    // this._appList = this.doublyChain.toArray()
-    // clog('this._appList', this._appList)
-    // this.appList$.next(this._appList)
     let curUser = this.userService.getUser()
     if (curUser) {
       let ulid = curUser.firstApplicationUlid
@@ -111,19 +107,6 @@ export class AppService {
       })
     })
   }
-  // private _updateAppList(appList: App[]) {
-  //   this.doublyChain.clear()
-  //   let curUser = this.userService.getUser()
-  //   clog('curUser', curUser)
-  //   let nextUlid = curUser?.firstApplicationUlid
-  //   while (nextUlid) {
-  //     let app = appList.find(app => app.ulid === nextUlid)
-  //     if (app) {
-  //       this.doublyChain.append(app)
-  //     }
-  //     nextUlid = app?.nextUlid
-  //   }
-  // }
   // 根据ulid设置指定app为当前激活状态。
   setCurApp(appUlid?: S) {
     this._curApp = this._find(appUlid)
@@ -149,10 +132,6 @@ export class AppService {
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
-  // _getFirstPageUlid
-  // private _getFirstPageUlid(): ULID {
-  //   return ((this._appList.length ? this._appList[0] : undefined)?.firstPageUlid) || ''
-  // }
   private _createApp(data: ReqCreateData & {ulid: ULID}) {
     return new Promise((s, j) => {
       this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
@@ -175,22 +154,13 @@ export class AppService {
       return this._appList
     })
   }
-  // reqVersions(appUlid: ULID, env?: S) {
-  //   this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
-  //     params: {
-  //       appUlid,
-  //       env: env || '',
-  //     },
-  //     withCredentials: true
-  //   }).subscribe(res => {
-  //     if (res.code === 0) {
-  //       this.versions.dev = res.data.dev
-  //       this.versions.test = res.data.test
-  //       this.versions.pre = res.data.pre
-  //       this.versions.prod = res.data.prod
-  //     }
-  //   })
-  // }
-  // getVersions()
+  deletePageByUlid(ulid: ULID) {
+    let app = this.getCurApp()
+    if (app) {
+      if (app.firstPageUlid === ulid) {
+        app.firstPageUlid = ''
+      }
+    }
+  }
   
 }

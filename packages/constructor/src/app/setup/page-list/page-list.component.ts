@@ -11,7 +11,7 @@ import { ulid } from 'ulid'
 import { initPageMeta } from 'src/helper/index'
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
-import type { A, S, ULID } from 'src/types/base'
+import type { A, B, N, S, ULID } from 'src/types/base'
 // import type { ResponseData } from 'src/types';
 
 let clog = console.log
@@ -31,6 +31,7 @@ export class PageListComponent implements OnInit {
   msg: {}[]
   // curPageUlid: S
   curPage?: Page | null
+  hoveredIndex: N
   constructor(
     private dialogService: DialogService,
     // private appService: AppService,
@@ -48,12 +49,12 @@ export class PageListComponent implements OnInit {
       this.curPage = p
     })
     this.msg = []
+    this.hoveredIndex = -1
   }
   ngOnInit(): void {
     this.init()
   }
   init() {
-
   }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent
@@ -104,5 +105,21 @@ export class PageListComponent implements OnInit {
     // this.pageService.reqPageList()
     // this.init()
     // this.pageService.recast()
+  }
+  mouseoverH(i: N) {
+    this.hoveredIndex = i
+  }
+  mouseoutH() {
+    this.hoveredIndex = -1
+  }
+  iconClickH(i: N) {
+    let page = this.pageList[i]
+    // clog('page', page)
+    // 在本组件中删除该元素
+    this.pageList.splice(i, 1)
+    // 在store中删除
+    // this.pageService.deletePageByUlid(page.ulid)
+    // // 在服务端中删除
+    // this.pageService.reqDeletePage(page.ulid)
   }
 }

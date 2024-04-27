@@ -1,11 +1,11 @@
 ||完成日期||
 |-|-|-|
-|整理component为module|doing||
+|开发删除页面的功能|doing||
+|搭建侧也把component整理为模块|||
 |配置项中增强可切换功能|||
 |解决删除组件控制前后组件错误的问题|
-|删除<p>comp-item works!</p>|||
 |setup -》 list => setup 应该有组件渲染|||
-|开发删除页面的功能|
+||||
 ||||
 
 props 一对kv就能搞定的
