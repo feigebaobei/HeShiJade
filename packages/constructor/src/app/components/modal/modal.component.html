@@ -8,17 +8,17 @@
     >title: {{data.props.title}}
         <d-icon [icon]="'icon-close'"></d-icon>
         header
-        <app-comp-boxx *ngFor="let comp of childrenHeader" [comp]="comp"
+        <app-comp-box *ngFor="let comp of childrenHeader" [comp]="comp"
         (deleteComp)="deleteComponentByUlidH($event)"
-        ></app-comp-boxx>
+        ></app-comp-box>
     </header>
     <hr>
     <main dDroppable (dropEvent)="dropH($event)">
         body
         {{data.slots | json}}
-        <app-comp-boxx *ngFor="let comp of childrenBody" [comp]="comp"
+        <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
         (deleteComp)="bodyDeleteComponentByUlidH($event)"
-        ></app-comp-boxx>
+        ></app-comp-box>
     </main>
     <footer>
         <d-button>取消</d-button>

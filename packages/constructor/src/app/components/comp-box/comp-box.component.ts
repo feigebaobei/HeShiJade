@@ -40,7 +40,7 @@ let compMap: Ao = {
 }
 
 @Component({
-  selector: 'app-comp-boxx',
+  selector: 'app-comp-box',
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
