@@ -12,6 +12,7 @@ import { initPageMeta } from 'src/helper/index'
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
 import type { A, B, N, S, ULID } from 'src/types/base'
+import { ComponentService } from 'src/app/service/component.service';
 // import type { ResponseData } from 'src/types';
 
 let clog = console.log
@@ -26,7 +27,6 @@ interface PageData {
   styleUrls: ['./page-list.component.sass']
 })
 export class PageListComponent implements OnInit {
-  // @Input() pageList: Page[]
   pageList: Page[]
   msg: {}[]
   // curPageUlid: S
@@ -34,16 +34,17 @@ export class PageListComponent implements OnInit {
   hoveredIndex: N
   constructor(
     private dialogService: DialogService,
-    // private appService: AppService,
+    private appService: AppService,
     private pageService: PageService,
+    private componentService: ComponentService,
   ) {
     this.pageList = []
-    this.pageService.pageList$.subscribe(pl => {
-      this.pageList = pl
-      if (pl.length) {
-        this.pageService.setCurPage(pl[0].ulid)
-      }
-    })
+    // this.pageService.pageList$.subscribe(pl => {
+    //   this.pageList = pl
+    //   if (pl.length) {
+    //     this.pageService.setCurPage(pl[0].ulid) // 设置第一个页面为默认打开的页面
+    //   }
+    // })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
@@ -55,6 +56,12 @@ export class PageListComponent implements OnInit {
     this.init()
   }
   init() {
+    let app = this.appService.getCurApp()
+    if (app) {
+      this.pageService.getPageList(app.ulid).then(pl => {
+        this.pageList = pl
+      })
+    }
   }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent
@@ -114,11 +121,11 @@ export class PageListComponent implements OnInit {
   }
   iconClickH(i: N) {
     let page = this.pageList[i]
-    // clog('page', page)
     // 在本组件中删除该元素
     this.pageList.splice(i, 1)
     // 在store中删除
     // this.pageService.deletePageByUlid(page.ulid)
+    // this.componentService.deleteComponentByPageUlid(page.ulid)
     // // 在服务端中删除
     // this.pageService.reqDeletePage(page.ulid)
   }

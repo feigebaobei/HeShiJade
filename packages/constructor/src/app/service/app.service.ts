@@ -23,13 +23,6 @@ interface ReqCreateData {
   collaborator: S[],
   prevUlid: ULID,
 }
-// interface Versions {
-//   dev: N,
-//   test: N,
-//   pre: N,
-//   prod: N,
-// }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,8 +32,6 @@ export class AppService {
   appList$: Subject<App[]>
   appSubject$: Subject<AppOrUn>
   tree: Tree<App>
-  // curApp: Subject<App>
-  // versions: Versions
   constructor(
     private http: HttpClient,
     private userService: UserService,
@@ -49,11 +40,6 @@ export class AppService {
     this.appList$ = new Subject<App[]>()
     this.appSubject$ = new Subject<AppOrUn>()
     this.tree = createTree()
-    // 各service需要写清空方法
-    // 当改变user时请求appList
-    // this.userService.user$.subscribe(u => {
-    //   this.reqAppList()
-    // })
   }
   private _find(appUlid?: S) {
     return this._appList.find(item => item.ulid === appUlid)
@@ -159,6 +145,12 @@ export class AppService {
     if (app) {
       if (app.firstPageUlid === ulid) {
         app.firstPageUlid = ''
+      }
+      let appNode = this.tree.find(app.ulid)
+      if (appNode?.value) {
+        if (appNode.value.firstPageUlid === ulid) {
+          appNode.value.firstPageUlid = ''
+        }
       }
     }
   }

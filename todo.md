@@ -5,7 +5,7 @@
 |搭建侧也把component整理为模块|||
 |配置项中增强可切换功能|||
 |解决删除组件控制前后组件错误的问题|
-||||
+|更新pageservice/componentservice中的url为serviceUrl|||
 ||||
 
 props 一对kv就能搞定的

@@ -31,11 +31,11 @@
         >
             <p>stage</p>
             <div *ngIf="componentByPage.length">
-                <app-comp-boxx
+                <app-comp-box
                     *ngFor="let comp of componentByPage"
                     [comp]="comp"
                     (deleteComp)="deleteComponentByUlidH($event)"
-                ></app-comp-boxx>
+                ></app-comp-box>
             </div>
         </d-col>
         <!-- setter -->

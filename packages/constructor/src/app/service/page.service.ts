@@ -8,6 +8,7 @@ import { reqToPromise } from 'src/helper';
 import { AppService } from './app.service';
 // import { ComponentService } from './component.service';
 import type { ResponseData } from 'src/types';
+import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
 import type { S, ULID } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
@@ -36,7 +37,7 @@ export class PageService {
     private appService: AppService,
     // private componentService: ComponentService
   ) {
-    this._pageList = [] // 无顺序
+    this._pageList = []
     this.pageSubject$ = new Subject<PageOrUn>()
     this._find = (pageUlid: ULID, appUlid?: ULID) => {
       appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
@@ -49,19 +50,39 @@ export class PageService {
     this.appService.appSubject$.subscribe(curApp => {
       let appUlid = curApp?.ulid
       if (appUlid) {
-        this._opPageList(appUlid)
-        // .then((arr) => {
-        //   this.pageList$.next(arr)
-        // })
+        // this._opPageList(appUlid)
+        if (!this._map.get(appUlid)) {
+          this.reqPageList(appUlid).then((pageList: Page[]) => {
+            this.storePageList((curApp as App), pageList)
+          })
+        }
       }
     })
+  }
+  storePageList(app: App, pagsList: Page[]) {
+    let tree = createTree<Page>()
+    let curPageUlid = app.firstPageUlid
+    if (curPageUlid) {
+      let curPage = pagsList.find(item => item.ulid === curPageUlid)
+      if (curPage) {
+        tree.mountRoot(curPage)
+        while(curPage) {
+          let nextPage = pagsList.find(item => item.ulid === curPage?.nextUlid)
+          if (nextPage) {
+            tree.mountNext(nextPage, curPage.ulid)
+          }
+          curPage = nextPage
+        }
+        this._map.set(app.ulid, tree)
+      }
+    }
   }
   // 把无序页面列表排序为有序
   // 返回指定应用的有序页面列表
   private _opPageList(appUlid: ULID) {
     let dc = this._map.get(appUlid)
     if (!dc) {
-      return this._reqPageList(appUlid).then((pageList: Page[]) => {
+      return this.reqPageList(appUlid).then((pageList: Page[]) => {
         // todo 应该兼容子页面
         let tree = createTree<Page>()
         let app = this.appService.getCurApp()
@@ -87,11 +108,10 @@ export class PageService {
         }
       })
     } else {
-      // return Promise.resolve(this._map.get(appUlid)?.toArray() || [])
       return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
     }
   }
-  _reqPageList(appUlid: ULID) {
+  reqPageList(appUlid: ULID) {
     return new Promise<Page[]>((s, j) => {
       this.http.get<ResponseData>('http://localhost:5000/pages', {
         params: {
@@ -107,6 +127,19 @@ export class PageService {
         }
       })
     })
+  }
+  getPageList(appUlid: ULID): Promise<Page[]> {
+    // return this._map.get(appUlid)?.root?.toArray() || []
+    let pageTree = this._map.get(appUlid)
+    if (pageTree) {
+      return Promise.resolve(pageTree.root?.toArray() || [])
+    } else {
+      return this.reqPageList(appUlid).then((pageList: Page[]) => {
+        this.storePageList((this.appService.getAppList().find(item => item.ulid === appUlid))!, pageList)
+        return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
+      })
+    }
+    // if (this._map.get(appUlid)) {}
   }
   getCurPage() {
     return this._curPage
@@ -177,11 +210,10 @@ export class PageService {
     // 在页面树中删除
     let appUlid = String(this.appService.getCurApp()?.ulid)
     let tree = this._map.get(appUlid)
-    let b = tree?.unmount(ulid)
+    tree?.unmount(ulid)
+    this.pageList$.next(tree?.root?.toArray() || [])
     // 在应用树中删除
     this.appService.deletePageByUlid(ulid)
-    // 在组件树中删除
-    // this.componentService.deleteComponentByPageUlid(ulid)
   }
   reqDeletePage(ulid: ULID) {
     return new Promise((s, j) => {
