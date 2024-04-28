@@ -86,17 +86,31 @@ export class SetupComponent implements OnInit {
         // alert('您无此应用的权限')
         return Promise.reject('您无此应用的权限')
       }
-    }).then(() => { // 取当前应用
+    }).then(() => { // 取当前应用 setCurApp
       this.curApp = this.appService.getCurApp()
       if (this.curApp) {
         return true
       } else {
         return Promise.reject('该应用不存在')
       }
-    }).then(() => { // 取组件列表
-      // return this.pageService.getPageList(this.curApp?.ulid).then(pl => {
-      //   this.
-      // })
+    }).then(() => { // 取组件列表 setCurPage
+      return this.pageService.getPageList(this.curApp?.ulid).then(pl => {
+        this.curPage = pl[0]
+        if (this.curPage) {
+          this.pageService.setCurPage(this.curPage.ulid)
+          return true
+        } else {
+          return Promise.reject('无页面')
+        }
+      })
+    }).then(() => {
+      clog('cg', this.curPage?.ulid)
+      return this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
+        this.componentByPage = cl
+        clog('cg', cl)
+      })
+      // setTimeout(() => {
+      // }, 2000)
     }).catch((msg) => {
       clog(msg)
     })
