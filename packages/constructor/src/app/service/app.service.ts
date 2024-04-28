@@ -30,7 +30,7 @@ export class AppService {
   private _appList: App[]  // 缓存应用列表
   private _curApp: AppOrUn // 缓存当前应用
   appList$: Subject<App[]>
-  appSubject$: Subject<AppOrUn>
+  // appSubject$: Subject<AppOrUn> // 04.29+ 删除
   tree: Tree<App>
   constructor(
     private http: HttpClient,
@@ -38,7 +38,7 @@ export class AppService {
   ) {
     this._appList = []
     this.appList$ = new Subject<App[]>()
-    this.appSubject$ = new Subject<AppOrUn>()
+    // this.appSubject$ = new Subject<AppOrUn>()
     this.tree = createTree()
   }
   private _find(appUlid?: S) {
@@ -46,6 +46,11 @@ export class AppService {
   }
   getCurApp() {
     return this._curApp
+  }
+  // 根据ulid设置指定app为当前激活状态。
+  setCurApp(appUlid?: S) {
+    this._curApp = this._find(appUlid)
+    // this.appSubject$.next(this._curApp)
   }
   getAppList() {
     // return this._appList
@@ -104,11 +109,6 @@ export class AppService {
         }
       })
     })
-  }
-  // 根据ulid设置指定app为当前激活状态。
-  setCurApp(appUlid?: S) {
-    this._curApp = this._find(appUlid)
-    this.appSubject$.next(this._curApp)
   }
   createApp(data: ReqCreateData) {
     let appObj = initAppMeta(data.key, data.name, data.theme, (this.userService.getUser()?.profile.email as Email))

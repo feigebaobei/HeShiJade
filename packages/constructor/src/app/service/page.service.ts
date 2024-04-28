@@ -47,17 +47,17 @@ export class PageService {
     this.pageList$ = new Subject<Page[]>()
     this._map = new Map()
     // 当当前应用改变时请求页面列表
-    this.appService.appSubject$.subscribe(curApp => {
-      let appUlid = curApp?.ulid
-      if (appUlid) {
-        // this._opPageList(appUlid)
-        if (!this._map.get(appUlid)) {
-          this.reqPageList(appUlid).then((pageList: Page[]) => {
-            this.storePageList((curApp as App), pageList)
-          })
-        }
-      }
-    })
+    // this.appService.appSubject$.subscribe(curApp => {
+    //   let appUlid = curApp?.ulid
+    //   if (appUlid) {
+    //     // this._opPageList(appUlid)
+    //     if (!this._map.get(appUlid)) {
+    //       this.reqPageList(appUlid).then((pageList: Page[]) => {
+    //         this.storePageList((curApp as App), pageList)
+    //       })
+    //     }
+    //   }
+    // })
   }
   storePageList(app: App, pagsList: Page[]) {
     let tree = createTree<Page>()
@@ -129,14 +129,31 @@ export class PageService {
     })
   }
   getPageList(appUlid?: ULID): Promise<Page[]> {
+    // clog('getPageList', appUlid)
     let appUlid2 = appUlid || String(this.appService.getCurApp()?.ulid)
     let pageTree = this._map.get(appUlid2)
     if (pageTree) {
       return Promise.resolve(pageTree.root?.toArray() || [])
     } else {
       return this.reqPageList(appUlid2).then((pageList: Page[]) => {
-        this.storePageList((this.appService.getAppList().find(item => item.ulid === appUlid2))!, pageList)
+        // clog(pageList)
+        return this.appService.getAppList().then(appList => {
+          let app = appList.find(item => item.ulid === appUlid2)
+          if (app) {
+            this.storePageList(app, pageList)
+            return true
+          } else {
+            return Promise.reject('无此应用')
+          }
+        })
+        // this.storePageList((this.appService.getAppList().find(item => item.ulid === appUlid2))!, pageList)
+        // clog('this._map', this._map, appUlid2)
+        // return Promise.resolve(this._map.get(appUlid2)?.root?.toArray() || [])
+      }).then(() => {
         return Promise.resolve(this._map.get(appUlid2)?.root?.toArray() || [])
+      }).catch(error => {
+        clog('error', error)
+        return Promise.reject(error)
       })
     }
     // if (this._map.get(appUlid)) {}

@@ -9,6 +9,7 @@ import { AppService } from 'src/app/service/app.service';
 import { PageService } from 'src/app/service/page.service';
 import { ulid } from 'ulid'
 import { initPageMeta } from 'src/helper/index'
+import { ActivatedRoute } from '@angular/router';
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
 import type { A, B, N, S, ULID } from 'src/types/base'
@@ -37,6 +38,7 @@ export class PageListComponent implements OnInit {
     private appService: AppService,
     private pageService: PageService,
     private componentService: ComponentService,
+    private route: ActivatedRoute,
   ) {
     this.pageList = []
     // this.pageService.pageList$.subscribe(pl => {
@@ -56,12 +58,19 @@ export class PageListComponent implements OnInit {
     this.init()
   }
   init() {
-    let app = this.appService.getCurApp()
-    if (app) {
-      this.pageService.getPageList(app.ulid).then(pl => {
-        this.pageList = pl
-      })
-    }
+    let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
+    this.appService.getAppList().then((al) => {
+      let app = al.find(item => item.ulid === appUlid)
+      clog(app)
+      return app
+    }).then(app => {
+      if (app) {
+        this.pageService.getPageList(app.ulid).then(pl => {
+          clog('pl', pl)
+          this.pageList = pl
+        })
+      }
+    })
   }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent

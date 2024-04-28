@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ulid } from 'ulid';
 import { initComponentMeta } from 'src/helper'
 // 数据
@@ -46,7 +46,7 @@ export class SetupComponent implements OnInit {
     private pageService: PageService,
     private componentService: ComponentService,
     private route: ActivatedRoute,
-    private router: Router,
+    // private router: Router,
   ) {
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
@@ -56,15 +56,15 @@ export class SetupComponent implements OnInit {
     this.msg = []
     this.pageData = []
 
-    this.appService.appSubject$.subscribe(p => {
-      this.curApp = p
-    })
-    this.pageService.pageSubject$.subscribe(p => {
-      this.curPage = p
-    })
-    this.componentService.componentListByCurPage$.subscribe(compArr => {
-      this.componentByPage = compArr
-    })
+    // this.appService.appSubject$.subscribe(p => {
+    //   this.curApp = p
+    // })
+    // this.pageService.pageSubject$.subscribe(p => {
+    //   this.curPage = p
+    // })
+    // this.componentService.componentListByCurPage$.subscribe(compArr => {
+    //   this.componentByPage = compArr
+    // })
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -81,22 +81,25 @@ export class SetupComponent implements OnInit {
     this.appService.getAppList().then(appList => {
       if (appList) {
         this.appService.setCurApp(appUlid)
+        return true
       } else {
-        alert('您无此应用的权限')
+        // alert('您无此应用的权限')
+        return Promise.reject('您无此应用的权限')
       }
+    }).then(() => { // 取当前应用
+      this.curApp = this.appService.getCurApp()
+      if (this.curApp) {
+        return true
+      } else {
+        return Promise.reject('该应用不存在')
+      }
+    }).then(() => { // 取组件列表
+      // return this.pageService.getPageList(this.curApp?.ulid).then(pl => {
+      //   this.
+      // })
+    }).catch((msg) => {
+      clog(msg)
     })
-    // let appList = 
-    // if (appList.length) {
-    //   this.appService.setCurApp(appUlid)
-    // } else {
-    //   this.appService.reqAppList().then(appList => {
-    //     if (appList.some(item => item.ulid === appUlid)) {
-    //       this.appService.setCurApp(appUlid)
-    //     } else {
-    //       alert('您无此应用的权限')
-    //     }
-    //   })
-    // }
   }
   // 检查当前app是否在应用列表中
   checkApp(): Promise<B> {
