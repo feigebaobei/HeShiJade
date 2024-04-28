@@ -147,7 +147,6 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.init()
   }
   ngAfterViewChecked(): void {
-    clog('ngAfterViewChecked', this.compHost)
   }
   update() {
     if (this.comp.ulid === this.curComp?.ulid) {

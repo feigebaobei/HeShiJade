@@ -6,7 +6,7 @@ import { Subject, type Observable } from 'rxjs';
 import { ssoUrl, serviceUrl } from 'src/helper/config';
 // 类型
 import type { ResponseData } from 'src/types';
-import type { S, ULID, A } from 'src/types/base';
+import type { S, ULID, A, N } from 'src/types/base';
 import type { User } from 'src/types';
 
 let clog = console.log
@@ -22,6 +22,8 @@ export class UserService {
   // 日后改为private
   user?: User
   user$: Subject<User | undefined>
+  regularTime: N
+  regularTimeId: N
   constructor(private http: HttpClient) {
     this.user = undefined
     this.user$ = new Subject()
@@ -29,6 +31,9 @@ export class UserService {
     if (v) {
       this.setUser(JSON.parse(v))
     }
+    this.regularTime = 10 * 60 * 1000 // 10min
+    this.regularRefresh()
+    this.regularTimeId = 0
   }
   getUser() {
     return this.user
@@ -132,5 +137,20 @@ export class UserService {
       u.lastApplicationUlid = appUlid
     }
     this.setUser(u)
+  }
+  // 刷新token
+  refresh() {
+  }
+  regularRefresh() {
+    if (this.regularTimeId) {
+      clearInterval(this.regularTimeId)
+      this.refresh()
+    }
+    this.regularTimeId = window.setInterval(this.refresh, this.regularTime)
+  }
+  clearRefresh() {
+    if (this.regularTimeId) {
+      clearInterval(this.regularTimeId)
+    }
   }
 }

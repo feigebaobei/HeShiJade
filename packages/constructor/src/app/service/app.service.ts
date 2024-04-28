@@ -48,7 +48,19 @@ export class AppService {
     return this._curApp
   }
   getAppList() {
-    return this._appList
+    // return this._appList
+    let al = this.tree.root?.toArray()
+    if (al) {
+      return Promise.resolve(al)
+    } else {
+      // return Promise.resolve([]) // todo
+      return this.reqAppList().then((appList: App[]) => {
+        return this.opAppList(appList)
+      }).then(() => {
+        let appList = this.tree.root?.toArray()
+        return appList || []
+      })
+    }
   }
   setAppList() {
     this.appList$.next(this._appList)
@@ -85,7 +97,7 @@ export class AppService {
         withCredentials: true, // 控制是否带cookie
       }).subscribe(res => {
         if (res.code === 0) {
-          this.opAppList(res.data)
+          // this.opAppList(res.data)
           s(res.data)
         } else {
           j(new Error(res.message))

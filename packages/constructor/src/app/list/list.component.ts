@@ -46,17 +46,20 @@ export class ListComponent implements OnInit {
     this.user = this.userService.getUser()
     this.msg = []
     this.appList = []
-    this.appService.appList$.subscribe(arr => {
-      this.appList = arr
-    })
+    // this.appService.appList$.subscribe(arr => {
+    //   this.appList = arr
+    // })
   }
   ngOnInit(): void {
     this.init()
   }
   init(): void {
-    if (!this.appList.length) {
-      this.reqAppList()
-    }
+    // if (!this.appList.length) {
+    //   this.reqAppList()
+    // }
+    this.appService.getAppList().then(al => {
+      this.appList = al
+    })
   }
   logoutBtClickH()  {
     this.userService.logout().then(() => {

@@ -128,15 +128,15 @@ export class PageService {
       })
     })
   }
-  getPageList(appUlid: ULID): Promise<Page[]> {
-    // return this._map.get(appUlid)?.root?.toArray() || []
-    let pageTree = this._map.get(appUlid)
+  getPageList(appUlid?: ULID): Promise<Page[]> {
+    let appUlid2 = appUlid || String(this.appService.getCurApp()?.ulid)
+    let pageTree = this._map.get(appUlid2)
     if (pageTree) {
       return Promise.resolve(pageTree.root?.toArray() || [])
     } else {
-      return this.reqPageList(appUlid).then((pageList: Page[]) => {
-        this.storePageList((this.appService.getAppList().find(item => item.ulid === appUlid))!, pageList)
-        return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
+      return this.reqPageList(appUlid2).then((pageList: Page[]) => {
+        this.storePageList((this.appService.getAppList().find(item => item.ulid === appUlid2))!, pageList)
+        return Promise.resolve(this._map.get(appUlid2)?.root?.toArray() || [])
       })
     }
     // if (this._map.get(appUlid)) {}

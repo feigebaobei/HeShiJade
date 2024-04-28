@@ -78,30 +78,46 @@ export class SetupComponent implements OnInit {
   }
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
-    let appList = this.appService.getAppList()
-    if (appList.length) {
-      this.appService.setCurApp(appUlid)
-    } else {
-      this.appService.reqAppList().then(appList => {
-        if (appList.some(item => item.ulid === appUlid)) {
-          this.appService.setCurApp(appUlid)
-        } else {
-          alert('您无此应用的权限')
-        }
-      })
-    }
+    this.appService.getAppList().then(appList => {
+      if (appList) {
+        this.appService.setCurApp(appUlid)
+      } else {
+        alert('您无此应用的权限')
+      }
+    })
+    // let appList = 
+    // if (appList.length) {
+    //   this.appService.setCurApp(appUlid)
+    // } else {
+    //   this.appService.reqAppList().then(appList => {
+    //     if (appList.some(item => item.ulid === appUlid)) {
+    //       this.appService.setCurApp(appUlid)
+    //     } else {
+    //       alert('您无此应用的权限')
+    //     }
+    //   })
+    // }
   }
   // 检查当前app是否在应用列表中
   checkApp(): Promise<B> {
     let appUlid = this.route.snapshot.queryParamMap.get('app')
-    let appList = this.appService.getAppList()
-    if (appList.length) {
-      return Promise.resolve(appList.some(item => item.ulid === appUlid))
-    } else {
-      return this.appService.reqAppList().then(appList => {
-        return appList.some(item => item.ulid === appUlid)
-      })
-    }
+    return this.appService.getAppList().then(appList => {
+      if (appList.length) {
+        return Promise.resolve(appList.some(item => item.ulid === appUlid))
+      } else {
+        return this.appService.reqAppList().then(appList => {
+          return appList.some(item => item.ulid === appUlid)
+        })
+      }
+    })
+    // let appList = this.appService.getAppList()
+    // if (appList.length) {
+    //   return Promise.resolve(appList.some(item => item.ulid === appUlid))
+    // } else {
+    //   return this.appService.reqAppList().then(appList => {
+    //     return appList.some(item => item.ulid === appUlid)
+    //   })
+    // }
   }
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。

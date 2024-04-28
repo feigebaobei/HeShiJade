@@ -124,9 +124,13 @@ export class PageListComponent implements OnInit {
     // 在本组件中删除该元素
     this.pageList.splice(i, 1)
     // 在store中删除
-    // this.pageService.deletePageByUlid(page.ulid)
-    // this.componentService.deleteComponentByPageUlid(page.ulid)
+    this.pageService.deletePageByUlid(page.ulid)
+    this.componentService.deleteComponentByPageUlid(page.ulid)
+    // this.pageService.getPageList().then((pl) => {
+    //   clog(pl)
+    // })
+    // clog(this.componentService._map)
     // // 在服务端中删除
-    // this.pageService.reqDeletePage(page.ulid)
+    this.pageService.reqDeletePage(page.ulid)
   }
 }
