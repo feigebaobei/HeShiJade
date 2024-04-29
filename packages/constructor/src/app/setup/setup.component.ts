@@ -59,9 +59,12 @@ export class SetupComponent implements OnInit {
     // this.appService.appSubject$.subscribe(p => {
     //   this.curApp = p
     // })
-    // this.pageService.pageSubject$.subscribe(p => {
-    //   this.curPage = p
-    // })
+    this.pageService.pageSubject$.subscribe(p => {
+      this.curPage = p
+      this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
+        this.componentByPage = cl
+      })
+    })
     // this.componentService.componentListByCurPage$.subscribe(compArr => {
     //   this.componentByPage = compArr
     // })
@@ -95,22 +98,22 @@ export class SetupComponent implements OnInit {
       }
     }).then(() => { // 取组件列表 setCurPage
       return this.pageService.getPageList(this.curApp?.ulid).then(pl => {
-        this.curPage = pl[0]
-        if (this.curPage) {
-          this.pageService.setCurPage(this.curPage.ulid)
+        // this.curPage = pl[0]
+        // if (this.curPage) {
+          // this.pageService.setCurPage(this.curPage.ulid)
+        if (pl[0]) {
+          this.pageService.setCurPage(pl[0])
           return true
         } else {
           return Promise.reject('无页面')
         }
       })
-    }).then(() => {
-      clog('cg', this.curPage?.ulid)
-      return this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
-        this.componentByPage = cl
-        clog('cg', cl)
-      })
-      // setTimeout(() => {
-      // }, 2000)
+    // }).then(() => {
+    //   clog('cg', this.curPage?.ulid)
+    //   return this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
+    //     this.componentByPage = cl
+    //     clog('cg', cl)
+    //   })
     }).catch((msg) => {
       clog(msg)
     })

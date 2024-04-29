@@ -116,6 +116,7 @@ export class PageListComponent implements OnInit {
   }
   pageItemClickH(pageUlid: S) {
     this.pageService.setCurPage(pageUlid)
+    // this.curPage = this.pageList.find(item => item.ulid === pageUlid)
   }
   reReqPageButtonClickH() {
     // this.pageService.reqPageList()

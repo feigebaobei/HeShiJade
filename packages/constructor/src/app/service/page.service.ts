@@ -161,8 +161,12 @@ export class PageService {
   getCurPage() {
     return this._curPage
   }
-  setCurPage(pageUlid: ULID) {
-    this._curPage = this._find(pageUlid)
+  setCurPage(p: Page | ULID): void {
+    if (typeof p === 'string') {
+      this._curPage = this._find(p)
+    } else if (typeof p === 'object') {
+      this._curPage = p
+    }
     this.pageSubject$.next(this._curPage)
   }
   // 重铸
