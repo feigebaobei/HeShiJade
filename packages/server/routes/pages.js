@@ -167,7 +167,7 @@ router.route('/')
   res.send('put')
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
+  // res.send('delete')
   // 检验参数
   // 是否有权限
   // 删除
@@ -216,41 +216,53 @@ router.route('/')
     })
     if (page.prevUlid) {
       pageUpdateArr.push({
-        updateOne: { filter: {ulid: page.prevUlid} },
-        update: {
-          $set: {nextUlid: page.nextUlid}
-        }
+        updateOne: {
+          filter: {ulid: page.prevUlid},
+          update: {
+            $set: {nextUlid: page.nextUlid}
+          }
+        },
       })
     } else {
       pageUpdateArr.push({
-        updateOne: {filter: {ulid: page.nextUlid}},
-        update: {
-          $set: {prevUlid: ''}
+        updateOne: {
+          filter: {ulid: page.nextUlid},
+          update: {
+            $set: {prevUlid: ''}
+          },
         },
       })
     }
     if (page.nextUlid) {
       pageUpdateArr.push({
-        updateOn: { filter: {ulid: page.nextUlid}},
-        update: {
-          $set: {prevUlid: page.prevUlid}
-        }
+        updateOne: {
+          filter: {ulid: page.nextUlid},
+          update: {
+            $set: {prevUlid: page.prevUlid}
+          },
+        },
       })
     } else {
       pageUpdateArr.push({
-        updateOne: {filter: {ulid: page.prevUlid}},
-        update: {
-          $set: {nextUlid: ''}
-        }
+        updateOne: {
+          filter: {ulid: page.prevUlid},
+          update: {
+            $set: {nextUlid: ''}
+          }
+        },
       })
     }
+    clog('page', page)
+    clog('app', app)
     let p2 = lowcodeDb.collection('pages_dev').bulkWrite(pageUpdateArr)
     let p3 = lowcodeDb.collection('components_dev').deleteMany({pageUlid: page.ulid}).then(() => {
       return true
-    }).catch(() => {
+    }).catch((error) => {
+      clog(123, error)
       return Promise.reject(200030)
     })
     return Promise.all([p1, p2, p3]).catch((error) => {
+      clog(456, error)
       return Promise.reject(200030)
     })
   }).then(() => {
