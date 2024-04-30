@@ -88,11 +88,15 @@ export class ComponentService {
     })
   }
   getComponentList(pageUlid: ULID): Promise<Component[]>{
-    return this.reqComponentListByPage(pageUlid).then((cl) => {
-      let tree = this.opCompList(cl)
-      clog(tree)
+    let tree = this._map.get(this.createTreeKey('', pageUlid))
+    if (tree) {
       return Promise.resolve(tree.root?.toArray() || [])
-    })
+    } else {
+      return this.reqComponentListByPage(pageUlid).then((cl) => {
+        let tree = this.opCompList(cl)
+        return Promise.resolve(tree.root?.toArray() || [])
+      })
+    }
   }
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
     return new Promise<Component[]>((s, j) => {
@@ -150,11 +154,8 @@ export class ComponentService {
             })
           }
         })
-        let i = 0 // 为了开发时安全
-        while (!q.isEmpty() && i < 100) {
-          i++
+        while (!q.isEmpty()) {
           let cur = q.dequeue()
-          // clog('q', q)
           switch (cur.mountMethod) {
             case 'next':
               tree.mountNext(cur.component, cur.component.prevUlid)
@@ -342,10 +343,21 @@ export class ComponentService {
   //     return []
   //   }
   // }
-  createTreeKey() {
-    let app = this.appService.getCurApp()
-    let page = this.pageService.getCurPage()
-    return `${app?.ulid}_${page?.ulid}_`
+  createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
+    let au: ULID, pu: ULID
+    if (appUlid) {
+      au = appUlid
+    } else {
+      let app = this.appService.getCurApp()
+      au = app?.ulid || ''
+    }
+    if (pageUlid) {
+      pu = pageUlid
+    } else {
+      let page = this.pageService.getCurPage()
+      pu = page?.ulid || ''
+    }
+    return `${au}_${pu}_`
   }
   // 05.15+ 删除
   // private _opCompList(pageUlid: ULID) {

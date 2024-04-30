@@ -55,12 +55,12 @@ export class AppService {
   getAppList() {
     // return this._appList
     let al = this.tree.root?.toArray()
-    if (al) {
+    if (al?.length) {
       return Promise.resolve(al)
     } else {
-      // return Promise.resolve([]) // todo
       return this.reqAppList().then((appList: App[]) => {
-        return this.opAppList(appList)
+        this.opAppList(appList)
+        return true
       }).then(() => {
         let appList = this.tree.root?.toArray()
         return appList || []
@@ -102,7 +102,6 @@ export class AppService {
         withCredentials: true, // 控制是否带cookie
       }).subscribe(res => {
         if (res.code === 0) {
-          // this.opAppList(res.data)
           s(res.data)
         } else {
           j(new Error(res.message))
