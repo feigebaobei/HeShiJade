@@ -6,6 +6,7 @@ import { createTree } from 'src/helper/tree';
 import { ulid } from 'ulid';
 import { reqToPromise } from 'src/helper';
 import { AppService } from './app.service';
+import { serviceUrl } from 'src/helper/config';
 // import { ComponentService } from './component.service';
 import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
@@ -101,8 +102,9 @@ export class PageService {
     }
   }
   reqPageList(appUlid: ULID) {
+    clog(12345, `${serviceUrl()}/pages`)
     return new Promise<Page[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/pages', {
+      this.http.get<ResponseData>(`${serviceUrl()}/pages`, {
         params: {
           appUlid,
           env: 'dev'
@@ -178,7 +180,7 @@ export class PageService {
         // let u: ULID = ulid()
         let u: ULID = pageUlid
         let appUlid = app.ulid
-        this.http.post<ResponseData>('http://localhost:5000/pages', {
+        this.http.post<ResponseData>(`${serviceUrl()}/pages`, {
           key: data.key,
           name: data.name,
           ulid: u,
@@ -221,7 +223,7 @@ export class PageService {
   }
   reqDeletePage(ulid: ULID) {
     return new Promise((s, j) => {
-      this.http.delete<ResponseData>('http://localhost:5000/pages', {
+      this.http.delete<ResponseData>(`${serviceUrl()}/pages`, {
         params: {
           ulid
         },

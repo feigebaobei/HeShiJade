@@ -10,6 +10,7 @@ import { createChildKey } from 'src/helper/index'
 // 数据
 import {categoryList} from 'src/helper/category'
 import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
+import { serviceUrl } from 'src/helper/config';
 // 类型
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, 
@@ -100,7 +101,7 @@ export class ComponentService {
   }
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
     return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components', {
+      this.http.get<ResponseData>(`${serviceUrl()}/components`, {
         params: {
           pageUlid,
           env: 'dev',
@@ -285,7 +286,7 @@ export class ComponentService {
   // 创建组件
   reqPostCompListByPage(obj: Component) {
     return new Promise<B>((s, j) => {
-      this.http.post<ResponseData>('http://localhost:5000/components', {
+      this.http.post<ResponseData>(`${serviceUrl()}/components`, {
         ...obj,
       }, {
         withCredentials: true
@@ -300,7 +301,7 @@ export class ComponentService {
   }
   reqDeleteComponent(ulid: ULID) {
     return new Promise<B>((s, j) => {
-      this.http.delete<ResponseData>('http://localhost:5000/components', {
+      this.http.delete<ResponseData>(`${serviceUrl()}/components`, {
           params: {
             ulid
           },
@@ -535,7 +536,7 @@ export class ComponentService {
     }
   }
   reqChangeItems(index: N, key: S, value: A) {
-    this.http.put<ResponseData>('http://localhost:5000/components/items', {
+    this.http.put<ResponseData>(`${serviceUrl()}/components/items`, {
       ulid: this.curComponent()?.ulid,
       index,
       key,
@@ -548,7 +549,7 @@ export class ComponentService {
     })
   }
   reqAddItems(obj: ItemsMetaItem) {
-    this.http.post<ResponseData>('http://localhost:5000/components/items', {
+    this.http.post<ResponseData>(`${serviceUrl()}/components/items`, {
       ulid: this.curComponent()?.ulid,
       value: obj
     }, {
@@ -561,7 +562,7 @@ export class ComponentService {
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
     return new Promise((s, j) => {
-      this.http.put<ResponseData>('http://localhost:5000/components', {
+      this.http.put<ResponseData>(`${serviceUrl()}/components`, {
         ulid: this.curComponent()?.ulid || '',
         type,
         key,
@@ -577,7 +578,7 @@ export class ComponentService {
   }
   reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
     return new Promise((s, j) => {
-      this.http.put<ResponseData>('http://localhost:5000/components', {
+      this.http.put<ResponseData>(`${serviceUrl()}/components`, {
         ulid: this.curComponent()?.ulid || '',
         type,
         index,

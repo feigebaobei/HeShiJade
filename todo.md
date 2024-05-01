@@ -1,11 +1,9 @@
 ||完成日期||
 |-|-|-|
-|搭建侧也把component整理为模块|doing||
+|更新pageservice/componentservice中的url为serviceUrl|doing||
 |配置项中增强可切换功能|||
-|解决删除组件控制前后组件错误的问题|
-|更新pageservice/componentservice中的url为serviceUrl|||
+|解决删除组件控制前后组件错误的问题|||
 |定时刷新token|
-|把service中的请求方法改为同时只能触发一个|
 ||||
 
 props 一对kv就能搞定的
