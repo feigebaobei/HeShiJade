@@ -40,6 +40,7 @@ import { ComponentListComponent } from './setup/component-list/component-list.co
 // import { CompBoxComponent } from './setup/comp-box/comp-box.component';
 // import { CompItemComponent } from './setup/comp-item/comp-item.component';
 
+// todo delete
 import { PropsBoxComponent } from './setup/props-box/props-box.component';
 // import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
 import { PropsInputComponent } from './setup/props-input/props-input.component';

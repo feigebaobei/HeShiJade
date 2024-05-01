@@ -10,6 +10,7 @@
   "scripts": {
     "ds": "cd packages/server && pnpm dev",
     "dc": "cd packages/constructor && pnpm start",
-    "dr": "cd packages/renderer && pnpm start"
+    "dr": "cd packages/renderer && pnpm start",
+    "dms": "cd packages/mock-server && pnpm start"
   }
 }

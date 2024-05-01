@@ -1,5 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { StackDirective } from 'src/app/stack.directive';
+// 指令
+// import { StackDirective } from 'src/app/stack.directive';
+import { StackDirective } from '../stack.directive';
 // 组件
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { FormComponent } from 'src/app/components/form/form.component';
@@ -9,6 +11,8 @@ import { SelectComponent } from 'src/app/components/select/select.component';
 import { TableComponent } from 'src/app/components/table/table.component';
 // type
 import type { A, S } from 'src/types/base';
+
+let clog = console.log
 
 // data
 let compMap: {[k: S]: A} = {
@@ -36,6 +40,7 @@ export class StackComponent {
     this.init()
   }
   init() {
+    clog('sdsf', this.stack)
     let viewContainerRef = this.stack.viewContainerRef
     viewContainerRef.clear()
     // this.componentRef = viewContainerRef.createComponent(ButtonComponent)

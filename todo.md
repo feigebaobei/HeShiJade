@@ -1,7 +1,6 @@
 ||完成日期||
 |-|-|-|
-|切换页面时从接口取得，改为从service中取|doing|使用缓存promise对象的方法解决|
-|搭建侧也把component整理为模块|||
+|搭建侧也把component整理为模块|doing||
 |配置项中增强可切换功能|||
 |解决删除组件控制前后组件错误的问题|
 |更新pageservice/componentservice中的url为serviceUrl|||
