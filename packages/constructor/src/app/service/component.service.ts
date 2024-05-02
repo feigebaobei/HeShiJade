@@ -10,6 +10,7 @@ import { createChildKey } from 'src/helper/index'
 // 数据
 import {categoryList} from 'src/helper/category'
 import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
+import { serviceUrl } from 'src/helper/config';
 // 类型
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, 
@@ -72,24 +73,35 @@ export class ComponentService {
     // this._curCategory = undefined
     this._map = new Map()
     // 当页面改变时更新组件列表
-    this.pageService.pageSubject$.subscribe(curPage => {
-      let pageUlid = curPage?.ulid
-      if (pageUlid) {
-        this._opCompList(pageUlid)
-        .then((arr) => {
-          this.componentListByCurPage$.next(arr)
-        })
-      }
-    })
+    // this.pageService.pageSubject$.subscribe(curPage => {
+    //   let pageUlid = curPage?.ulid
+    //   if (pageUlid) {
+    //     this._opCompList(pageUlid)
+    //     .then((arr) => {
+    //       this.componentListByCurPage$.next(arr)
+    //     })
+    //   }
+    // })
   }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
       s(this.categoryList)
     })
   }
-  _resComponentListByPage(pageUlid: ULID) {
+  getComponentList(pageUlid: ULID): Promise<Component[]>{
+    let tree = this._map.get(this.createTreeKey('', pageUlid))
+    if (tree) {
+      return Promise.resolve(tree.root?.toArray() || [])
+    } else {
+      return this.reqComponentListByPage(pageUlid).then((cl) => {
+        let tree = this.opCompList(cl)
+        return Promise.resolve(tree.root?.toArray() || [])
+      })
+    }
+  }
+  reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
     return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components', {
+      this.http.get<ResponseData>(`${serviceUrl()}/components`, {
         params: {
           pageUlid,
           env: 'dev',
@@ -103,6 +115,93 @@ export class ComponentService {
         }
       })
     })
+  }
+  // 把组件组装成树，再做映射。
+  opCompList(componentList: Component[]): Tree<Component> {
+    let curPage = this.pageService.getCurPage()
+    let curComponentUlid = curPage?.firstComponentUlid
+    let tree = createTree<Component>()
+    if (curComponentUlid) {
+      let curComp = componentList.find(item => item.ulid === curComponentUlid)
+      if (curComp) {
+        tree.mountRoot(curComp)
+        let q = new Queue<{
+          component: Component
+          mountMethod: 'next' | 'items' | 'slots' // 用不到'prev'
+        }>()
+
+        let nextComp = componentList.find(item => item.ulid === curComp!.nextUlid)
+        if (nextComp) {
+          q.enqueue({
+            component: nextComp,
+            mountMethod: 'next',
+          })
+        }
+        Object.entries(curComp.slots).forEach(([_slotKey, ulid]) => {
+          let t = componentList.find(item => item.ulid === ulid)
+          if (t) {
+            q.enqueue({
+              component: t,
+              mountMethod: 'slots',
+            })
+          }
+        })
+        curComp.items.forEach((item) => {
+          let t = componentList.find(ele => ele.ulid === item['childUlid'])
+          if (t) {
+            q.enqueue({
+              component: t,
+              mountMethod: 'items',
+            })
+          }
+        })
+        while (!q.isEmpty()) {
+          let cur = q.dequeue()
+          switch (cur.mountMethod) {
+            case 'next':
+              tree.mountNext(cur.component, cur.component.prevUlid)
+              break;
+            case 'items':
+              tree.mountChild(cur.component, cur.component.parentUlid, 
+                createChildKey('items', (cur.component.mount as ComponentMountItems).itemIndex, 'node')
+                )
+              break;
+            case 'slots':
+              tree.mountChild(cur.component, cur.component.parentUlid, 
+                createChildKey('slots', (cur.component.mount as ComponentMountSlots).slotKey, 'node')
+                )
+              break;
+          }
+          let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
+          if (nextComp) {
+            q.enqueue({
+              component: nextComp,
+              mountMethod: 'next',
+            })
+          }
+          Object.entries(cur.component.slots).forEach(([_slot, ulid]) => {
+            let t = componentList.find(item => item.ulid === ulid)
+            if (t) {
+              q.enqueue({
+                component: t,
+                mountMethod: 'slots',
+              })
+            }
+          })
+          cur.component.items.forEach((item) => {
+            let t = componentList.find(subItem => subItem.ulid === item['childUlid'])
+            if (t) {
+              q.enqueue({
+                component: t,
+                mountMethod: 'items',
+              })
+            }
+          })
+        }
+      }
+    }
+    this._map.set(this.createTreeKey(), tree)
+    return tree
   }
   // 作为哪种节点返回
   private mountPosition(comp: Component): N {
@@ -135,34 +234,6 @@ export class ComponentService {
     if (tree) {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
-      // switch(position) {
-      //   case 'next': // 后节点
-      //     b = !!tree.mountNext(comp, ulid)
-      //     node = tree.find(ulid)
-      //     if (node) {
-      //       node.value.nextUlid = comp.ulid
-      //     }
-      //     clog('tree', tree)
-      //     break;
-      //   case 'slots': // 子节点
-      //     b = !!tree.mountChild(comp, ulid, `slots_${key}`)
-      //     node = tree.find(ulid)
-      //     if (node) {
-      //       node.value.slots[`slots_${key}`!] = comp.ulid
-      //     }
-      //     break;
-      //   case 'items': 
-      //     b = !!tree.mountChild(comp, ulid, `items_${key}`)
-      //     node = tree.find(ulid)
-      //     if (node) {
-      //       let item = node.value.items.find(item => item[itemsKey] === key) // 先使用硬编码吧。
-      //       if (item) {
-      //         item['child'] = comp.ulid
-      //       }
-      //     }
-      //     clog('tree todo', tree)
-      //     break;
-      // }
       switch(this.mountPosition(comp)) {
         case 1: // prev
           b = !!tree.mountPrev(comp, comp.parentUlid)
@@ -176,7 +247,7 @@ export class ComponentService {
           }
           break;
         case 2: // next
-          b = !!tree.mountNext(comp, comp.parentUlid)
+          b = !!tree.mountNext(comp, comp.prevUlid)
           node = tree.find(comp.prevUlid)
           if (node) {
             node.value.nextUlid = comp.ulid
@@ -198,19 +269,9 @@ export class ComponentService {
           }
           break;
         case 4: // slots
-          // b = !!tree.mountChild(comp, comp.parentUlid, `slots_${comp.slots[(comp.mount as ComponentMountSlots).slotKey]}`)
           b = !!tree.mountChild(comp, comp.parentUlid, 
             createChildKey('slots', (comp.mount as ComponentMountSlots).slotKey, 'node')
             )
-          // 兼容脏数据
-          // let mount = <ComponentMountSlots>comp.mount
-          // if (mount) {
-
-          // } else {
-
-          // }
-          // mount = comp.mountPosition
-          // b = !!tree.mountChild(comp, comp.parentUlid, createChildKey('slots', mount.slotKey, 'node'))
           node = tree.find(comp.parentUlid)
           if (node) {
             node.value.slots[`slots_${(comp.mount as ComponentMountSlots).slotKey}Ulid`] = comp.ulid
@@ -225,7 +286,7 @@ export class ComponentService {
   // 创建组件
   reqPostCompListByPage(obj: Component) {
     return new Promise<B>((s, j) => {
-      this.http.post<ResponseData>('http://localhost:5000/components', {
+      this.http.post<ResponseData>(`${serviceUrl()}/components`, {
         ...obj,
       }, {
         withCredentials: true
@@ -236,6 +297,23 @@ export class ComponentService {
           j()
         }
       })
+    })
+  }
+  reqDeleteComponent(ulid: ULID) {
+    return new Promise<B>((s, j) => {
+      this.http.delete<ResponseData>(`${serviceUrl()}/components`, {
+          params: {
+            ulid
+          },
+          withCredentials: true
+        }).subscribe(res => {
+          if (res.code === 0) {
+            clog('删除成功')
+            s(true)
+          } else {
+            j()
+          }
+        })
     })
   }
   // for dev
@@ -266,109 +344,121 @@ export class ComponentService {
   //     return []
   //   }
   // }
-  createTreeKey() {
-    let app = this.appService.getCurApp()
-    let page = this.pageService.getCurPage()
-    return `${app?.ulid}_${page?.ulid}_`
-  }
-  private _opCompList(pageUlid: ULID) {
-    let dc = this._map.get(this.createTreeKey())
-    if (!dc) {
-      return this._resComponentListByPage(pageUlid).then((componentList: Component[]) => {
-        let curPage = this.pageService.getCurPage()
-        let curComponentUlid = curPage?.firstComponentUlid
-        let tree = createTree<Component>()
-        if (curComponentUlid) {
-          let curComp = componentList.find(item => item.ulid === curComponentUlid)
-          if (curComp) {
-            tree.mountRoot(curComp)
-            let q = new Queue<{
-              component: Component
-              mountMethod: 'next' | 'items' | 'slots' // 用不到'prev'
-            }>()
-
-            let nextComp = componentList.find(item => item.ulid === curComp!.nextUlid)
-            if (nextComp) {
-              q.enqueue({
-                component: nextComp,
-                mountMethod: 'next',
-              })
-            }
-            Object.entries(curComp.slots).forEach(([_slotKey, ulid]) => {
-              let t = componentList.find(item => item.ulid === ulid)
-              if (t) {
-                q.enqueue({
-                  component: t,
-                  mountMethod: 'slots',
-                })
-              }
-            })
-            curComp.items.forEach((item) => {
-              let t = componentList.find(ele => ele.ulid === item['childUlid'])
-              if (t) {
-                q.enqueue({
-                  component: t,
-                  mountMethod: 'items',
-                })
-              }
-            })
-            let i = 0 // 为了开发时安全
-            while (!q.isEmpty() && i < 100) {
-              i++
-              let cur = q.dequeue()
-              // clog('q', q)
-              switch (cur.mountMethod) {
-                case 'next':
-                  tree.mountNext(cur.component, cur.component.prevUlid)
-                  break;
-                case 'items':
-                  tree.mountChild(cur.component, cur.component.parentUlid, 
-                    createChildKey('items', (cur.component.mount as ComponentMountItems).itemIndex, 'node')
-                    )
-                  break;
-                case 'slots':
-                  tree.mountChild(cur.component, cur.component.parentUlid, 
-                    createChildKey('slots', (cur.component.mount as ComponentMountSlots).slotKey, 'node')
-                    )
-                  break;
-              }
-              let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
-              if (nextComp) {
-                q.enqueue({
-                  component: nextComp,
-                  mountMethod: 'next',
-                })
-              }
-              Object.entries(cur.component.slots).forEach(([_slot, ulid]) => {
-                let t = componentList.find(item => item.ulid === ulid)
-                if (t) {
-                  q.enqueue({
-                    component: t,
-                    mountMethod: 'slots',
-                  })
-                }
-              })
-              cur.component.items.forEach((item) => {
-                let t = componentList.find(subItem => subItem.ulid === item['childUlid'])
-                if (t) {
-                  q.enqueue({
-                    component: t,
-                    mountMethod: 'items',
-                  })
-                }
-              })
-            }
-          }
-        }
-        this._map.set(this.createTreeKey(), tree)
-        clog('tree', tree)
-        return Promise.resolve(tree.root?.toArray() || [])
-      })
+  createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
+    let au: ULID, pu: ULID
+    if (appUlid) {
+      au = appUlid
     } else {
-      // return Promise.resolve(this._map.get(pageUlid)?.toArray() || [])
-      return Promise.resolve(this._map.get(this.createTreeKey())?.root?.toArray() || [])
+      let app = this.appService.getCurApp()
+      au = app?.ulid || ''
     }
+    if (pageUlid) {
+      pu = pageUlid
+    } else {
+      let page = this.pageService.getCurPage()
+      pu = page?.ulid || ''
+    }
+    return `${au}_${pu}_`
   }
+  // 05.15+ 删除
+  // private _opCompList(pageUlid: ULID) {
+  //   let dc = this._map.get(this.createTreeKey())
+  //   if (!dc) {
+  //     return this.reqComponentListByPage(pageUlid).then((componentList: Component[]) => {
+  //       let curPage = this.pageService.getCurPage()
+  //       let curComponentUlid = curPage?.firstComponentUlid
+  //       let tree = createTree<Component>()
+  //       if (curComponentUlid) {
+  //         let curComp = componentList.find(item => item.ulid === curComponentUlid)
+  //         if (curComp) {
+  //           tree.mountRoot(curComp)
+  //           let q = new Queue<{
+  //             component: Component
+  //             mountMethod: 'next' | 'items' | 'slots' // 用不到'prev'
+  //           }>()
+
+  //           let nextComp = componentList.find(item => item.ulid === curComp!.nextUlid)
+  //           if (nextComp) {
+  //             q.enqueue({
+  //               component: nextComp,
+  //               mountMethod: 'next',
+  //             })
+  //           }
+  //           Object.entries(curComp.slots).forEach(([_slotKey, ulid]) => {
+  //             let t = componentList.find(item => item.ulid === ulid)
+  //             if (t) {
+  //               q.enqueue({
+  //                 component: t,
+  //                 mountMethod: 'slots',
+  //               })
+  //             }
+  //           })
+  //           curComp.items.forEach((item) => {
+  //             let t = componentList.find(ele => ele.ulid === item['childUlid'])
+  //             if (t) {
+  //               q.enqueue({
+  //                 component: t,
+  //                 mountMethod: 'items',
+  //               })
+  //             }
+  //           })
+  //           let i = 0 // 为了开发时安全
+  //           while (!q.isEmpty() && i < 100) {
+  //             i++
+  //             let cur = q.dequeue()
+  //             // clog('q', q)
+  //             switch (cur.mountMethod) {
+  //               case 'next':
+  //                 tree.mountNext(cur.component, cur.component.prevUlid)
+  //                 break;
+  //               case 'items':
+  //                 tree.mountChild(cur.component, cur.component.parentUlid, 
+  //                   createChildKey('items', (cur.component.mount as ComponentMountItems).itemIndex, 'node')
+  //                   )
+  //                 break;
+  //               case 'slots':
+  //                 tree.mountChild(cur.component, cur.component.parentUlid, 
+  //                   createChildKey('slots', (cur.component.mount as ComponentMountSlots).slotKey, 'node')
+  //                   )
+  //                 break;
+  //             }
+  //             let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
+  //             if (nextComp) {
+  //               q.enqueue({
+  //                 component: nextComp,
+  //                 mountMethod: 'next',
+  //               })
+  //             }
+  //             Object.entries(cur.component.slots).forEach(([_slot, ulid]) => {
+  //               let t = componentList.find(item => item.ulid === ulid)
+  //               if (t) {
+  //                 q.enqueue({
+  //                   component: t,
+  //                   mountMethod: 'slots',
+  //                 })
+  //               }
+  //             })
+  //             cur.component.items.forEach((item) => {
+  //               let t = componentList.find(subItem => subItem.ulid === item['childUlid'])
+  //               if (t) {
+  //                 q.enqueue({
+  //                   component: t,
+  //                   mountMethod: 'items',
+  //                 })
+  //               }
+  //             })
+  //           }
+  //         }
+  //       }
+  //       this._map.set(this.createTreeKey(), tree)
+  //       // clog('tree', tree)
+  //       return Promise.resolve(tree.root?.toArray() || [])
+  //     })
+  //   } else {
+  //     // return Promise.resolve(this._map.get(pageUlid)?.toArray() || [])
+  //     return Promise.resolve(this._map.get(this.createTreeKey())?.root?.toArray() || [])
+  //   }
+  // }
   // 在当前页面中查找
   private _find(compUlid: S): CompOrUn {
     // let pageUlid = this.pageService.getCurPage()?.ulid
@@ -446,7 +536,7 @@ export class ComponentService {
     }
   }
   reqChangeItems(index: N, key: S, value: A) {
-    this.http.put<ResponseData>('http://localhost:5000/components/items', {
+    this.http.put<ResponseData>(`${serviceUrl()}/components/items`, {
       ulid: this.curComponent()?.ulid,
       index,
       key,
@@ -459,7 +549,7 @@ export class ComponentService {
     })
   }
   reqAddItems(obj: ItemsMetaItem) {
-    this.http.post<ResponseData>('http://localhost:5000/components/items', {
+    this.http.post<ResponseData>(`${serviceUrl()}/components/items`, {
       ulid: this.curComponent()?.ulid,
       value: obj
     }, {
@@ -472,7 +562,7 @@ export class ComponentService {
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
     return new Promise((s, j) => {
-      this.http.put<ResponseData>('http://localhost:5000/components', {
+      this.http.put<ResponseData>(`${serviceUrl()}/components`, {
         ulid: this.curComponent()?.ulid || '',
         type,
         key,
@@ -488,7 +578,7 @@ export class ComponentService {
   }
   reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
     return new Promise((s, j) => {
-      this.http.put<ResponseData>('http://localhost:5000/components', {
+      this.http.put<ResponseData>(`${serviceUrl()}/components`, {
         ulid: this.curComponent()?.ulid || '',
         type,
         index,
@@ -509,5 +599,10 @@ export class ComponentService {
   }
   getTreeByKey(key = this.createTreeKey()): Tree<Component> | undefined {
     return this._map.get(key)
+  }
+  deleteComponentByPageUlid(pageUlid: ULID) {
+    let app = this.appService.getCurApp()
+    let key = `${app?.ulid}_${pageUlid}_`
+    this._map.delete(key)
   }
 }

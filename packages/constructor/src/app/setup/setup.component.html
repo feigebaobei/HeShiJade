@@ -30,10 +30,13 @@
             (click)="stageClickH($event)"
         >
             <p>stage</p>
-            <app-comp-box
-                *ngFor="let comp of componentByPage"
-                [comp]="comp"
-            ></app-comp-box>
+            <div *ngIf="componentByPage.length">
+                <app-comp-box
+                    *ngFor="let comp of componentByPage"
+                    [comp]="comp"
+                    (deleteComp)="deleteComponentByUlidH($event)"
+                ></app-comp-box>
+            </div>
         </d-col>
         <!-- setter -->
         <d-col [dSpan]="8">

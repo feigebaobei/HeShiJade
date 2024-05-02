@@ -1,12 +1,15 @@
 <div dDroppable (dropEvent)="onDrop($event, pageList)">
     <ul dSortable>
         <li dDraggable
-            *ngFor="let page of pageList"
+            *ngFor="let page of pageList; let i = index"
             class="page_item"
             [ngClass]="{selected: page.ulid === curPage?.ulid}"
             (click)="pageItemClickH(page.ulid)"
+            (mouseenter)="mouseoverH(i)"
+            (mouseleave)="mouseoutH()"
         >
             {{page.name}}
+            <d-icon *ngIf="hoveredIndex === i" [icon]="'icon-delete'" (click)="iconClickH(i)" class="icon"></d-icon>
         </li>
         <li>
             <d-button (click)="createPageButtonClickH()">创建新页面</d-button>

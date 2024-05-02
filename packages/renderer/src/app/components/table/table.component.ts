@@ -62,7 +62,7 @@ export class TableComponent implements OnInit {
         }
       }
     })
-    clog(' 12345',this.compObj)
+    clog('compObj',this.compObj)
   }
   req() {
     this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {

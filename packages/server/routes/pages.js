@@ -156,7 +156,6 @@ router.route('/')
       data: {}
     })
   }).catch(code => {
-
     return res.status(200).json({
       code,
       message: errorCode[code],
@@ -168,74 +167,118 @@ router.route('/')
   res.send('put')
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
+  // res.send('delete')
   // 检验参数
   // 是否有权限
   // 删除
   // if () {}
-  if(rules.required(req.body.appUlid) && req.body.pageUlid) {
-    if (req.session.user.applications.includes(req.body.appUlid)) {
-      appsDb.collection('apps').findOne({ulid: req.body.appUlid}).then(app => {
-        if (app) {
-          return pagesDb.collection('pages').findOne({ulid: req.body.pageUlid})
-        } else {
-          return Promise.reject({
-            code: 400000,
-            message: '应用不存在',
-            know: true,
-          })
-        }
-      }).then((page) => {
-        if (page) {
-          // 修改2个
-          // 删除1个
-          return pagesDb.collection('pages').bulkWrite({
-            updateOne: {
-              filter: {ulid: page.prevUlid},
-              update: {nextUlid: page.nextUlid}
-            },
-            updateOne: {
-              filter: {ulid: page.nextUlid},
-              update: {prevUlid: page.prevUlid}
-            },
-            deleteOne: {
-              filter: {ulid: pageUlid}
-            }
-          })
-        } else {
-          return Promise.reject({
-            code: 500000,
-            message: '页面不存在',
-            know: true,
-          })
-        }
-      }).then(() => {
-        return res.status(200).json({
-          code: 0,
-          message: '',
-          data: {}
-        })
-      }).catch(obj => {
-        if (obj.know) {
-          res.status(200).json({
-            code: obj.code,
-            message: obj.message,
-            data: {},
-          })
-        } else {
-          res.status(200).json({
-            code: 200200,
-            message: "数据库出错",
-            data: obj,
-          })
-        }
+  let page, app
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid)) {
+      s(true)
+    } else {
+      j()
+    }
+  }).then(() => {
+    return lowcodeDb.collection('pages_dev').findOne({ulid: req.query.ulid}).then((p) => {
+      page = p
+      return true
+    }).catch(() => {
+      return Promise.reject(2000010)
+    })
+  }).then(() => {
+    return lowcodeDb.collection('apps_dev').findOne({ulid: page.appUlid}).then((p) => {
+      app = p
+      return true
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then(() => {
+    let p1
+    if (page.ulid === app.firstPageUlid) {
+      let appUpdateObj = {
+        $set: {firstPageUlid: page.nextUlid}
+      }
+      p1 = lowcodeDb.collection('apps_dev').updateOne({
+        ulid: app.ulid
+      }, appUpdateObj)
+    } else {
+      p1 = Promise.resolve(true)
+    }
+    let pageUpdateArr = []
+    // 删除当前的。
+    // 修改前一个
+    // 修改后一个
+    pageUpdateArr.push({
+      deleteOne: {
+        filter: {ulid: page.ulid},
+      },
+    })
+    if (page.prevUlid) {
+      pageUpdateArr.push({
+        updateOne: {
+          filter: {ulid: page.prevUlid},
+          update: {
+            $set: {nextUlid: page.nextUlid}
+          }
+        },
       })
     } else {
-      resParamsError(res)
+      pageUpdateArr.push({
+        updateOne: {
+          filter: {ulid: page.nextUlid},
+          update: {
+            $set: {prevUlid: ''}
+          },
+        },
+      })
     }
-  } else {
-    resParamsError(res)
-  }
+    if (page.nextUlid) {
+      pageUpdateArr.push({
+        updateOne: {
+          filter: {ulid: page.nextUlid},
+          update: {
+            $set: {prevUlid: page.prevUlid}
+          },
+        },
+      })
+    } else {
+      pageUpdateArr.push({
+        updateOne: {
+          filter: {ulid: page.prevUlid},
+          update: {
+            $set: {nextUlid: ''}
+          }
+        },
+      })
+    }
+    clog('page', page)
+    clog('app', app)
+    let p2 = lowcodeDb.collection('pages_dev').bulkWrite(pageUpdateArr)
+    let p3 = lowcodeDb.collection('components_dev').deleteMany({pageUlid: page.ulid}).then(() => {
+      return true
+    }).catch((error) => {
+      clog(123, error)
+      return Promise.reject(200030)
+    })
+    return Promise.all([p1, p2, p3]).catch((error) => {
+      clog(456, error)
+      return Promise.reject(200030)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code,
+      message: '',
+      data: {},
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+
 
 })
 

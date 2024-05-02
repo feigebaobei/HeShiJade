@@ -58,6 +58,8 @@ export class HomeComponent implements OnInit {
     }).then(() => {
       this.router.navigate(['/list'])
       this.user = this.userService.getUser()
+      this.userService.clearRefresh()
+      this.userService.regularRefresh()
     }).catch(error => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {

@@ -22,6 +22,7 @@
           <app-comp-box
               *ngFor="let comp of (compObj[createChildKey('items', i, 'component')] || [])"
               [comp]="comp"
+              (deleteComp)="deleteComponentByUlidH($event, i)"
           ></app-comp-box>
         </div>
       </ng-template>

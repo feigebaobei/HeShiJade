@@ -7,20 +7,18 @@
         (dropEvent)="dropHeaderH($event)"
     >title: {{data.props.title}}
         <d-icon [icon]="'icon-close'"></d-icon>
-        header start
-        <app-comp-box *ngFor="let comp of childrenHeader" [comp]="comp"></app-comp-box>
-        header end
+        header
+        <app-comp-box *ngFor="let comp of childrenHeader" [comp]="comp"
+        (deleteComp)="deleteComponentByUlidH($event)"
+        ></app-comp-box>
     </header>
     <hr>
-    <main dDroppable
-        (dropEvent)="dropH($event)"
-    >
-        dDroppable
-        main body
+    <main dDroppable (dropEvent)="dropH($event)">
+        body
         {{data.slots | json}}
-        <!-- <app-comp-box [comp]="data.slots['body']"></app-comp-box> -->
-        end
-        <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"></app-comp-box>
+        <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
+        (deleteComp)="bodyDeleteComponentByUlidH($event)"
+        ></app-comp-box>
     </main>
     <footer>
         <d-button>取消</d-button>

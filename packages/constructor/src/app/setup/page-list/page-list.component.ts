@@ -8,9 +8,12 @@ import { PageDialogComponent } from './dialog/page-dialog.component'; // 以后�
 import { AppService } from 'src/app/service/app.service';
 import { PageService } from 'src/app/service/page.service';
 import { ulid } from 'ulid'
+import { initPageMeta } from 'src/helper/index'
+import { ActivatedRoute } from '@angular/router';
 // import type { Page } from 'src/types';
 import type { Page } from 'src/types/page';
-import type { A, S, ULID } from 'src/types/base'
+import type { A, B, N, S, ULID } from 'src/types/base'
+import { ComponentService } from 'src/app/service/component.service';
 // import type { ResponseData } from 'src/types';
 
 let clog = console.log
@@ -25,60 +28,50 @@ interface PageData {
   styleUrls: ['./page-list.component.sass']
 })
 export class PageListComponent implements OnInit {
-  // @Input() pageList: Page[]
   pageList: Page[]
   msg: {}[]
   // curPageUlid: S
   curPage?: Page | null
+  hoveredIndex: N
   constructor(
     private dialogService: DialogService,
-    // private appService: AppService,
+    private appService: AppService,
     private pageService: PageService,
+    private componentService: ComponentService,
+    private route: ActivatedRoute,
   ) {
     this.pageList = []
-    this.pageService.pageList$.subscribe(pl => {
-      // clog('pl', pl)
-      this.pageList = pl
-      if (pl.length) {
-        this.pageService.setCurPage(pl[0].ulid)
-      }
-    })
+    // this.pageService.pageList$.subscribe(pl => {
+    //   this.pageList = pl
+    //   if (pl.length) {
+    //     this.pageService.setCurPage(pl[0].ulid) // 设置第一个页面为默认打开的页面
+    //   }
+    // })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
     })
     this.msg = []
-    // this.appService.appList$.subscribe(appList => {
-    //   this.opPageList(appList.map(item => item.ulid))
-    // })
-    // 移到page.service.ts中了
-    // this.appService.appSubject$.subscribe(curApp => {
-    //   this.opPageList(String(curApp?.ulid))
-    // })
+    this.hoveredIndex = -1
   }
   ngOnInit(): void {
     this.init()
   }
   init() {
-    // this.pageService.recast()
-    // .then(arr => {
-    //   this.pageList = arr
-    //   clog('this.pagelist', this.pageList, arr)
-    // })
-    
-
+    let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
+    this.appService.getAppList().then((al) => {
+      let app = al.find(item => item.ulid === appUlid)
+      clog(app)
+      return app
+    }).then(app => {
+      if (app) {
+        this.pageService.getPageList(app.ulid).then(pl => {
+          clog('pl', pl)
+          this.pageList = pl
+        })
+      }
+    })
   }
-  // 设置应用ulid对应的page
-  // opPageList(appUlidList: ULID[]) {
-  //   if () {}
-  //   this.initMap(appUlidList)
-  // }
-  // opPageList(appUlid: ULID) {
-  //   let arr = this.pageService.getPageList(appUlid)
-  //   if (!arr.length) {
-  //     this.pageService.reqPageList(appUlid)
-  //   }
-  // }
   onDrop(dropEvent : A, arr: Page[]) {
     let {dragFromIndex, dropIndex} = dropEvent
     arr.splice(dropIndex, 0, ...arr.splice(dragFromIndex, 1))
@@ -103,27 +96,11 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            this.pageService.add(data).then(() => {
-              // 提示
-              // 关闭
-              // 刷新页面列表
-              this.msg = [
-                { severity: 'success', summary: '创建成功', content: '', myInfo: 'Devui' },
-              ]
-              results.modalInstance.hide(); // 成功才关闭
-              // if (!this.appService.getCurApp()?.firstPageUlid) {
-              //   this.appService.recast().then(() => {
-              //     this.pageService.recast()
-              //   })
-              // } else {
-              //   this.pageService.recast()
-              // }
-              this.pageService.setCurPage(this.pageList[this.pageList.length].ulid)
-            }).catch(() => {
-              this.msg = [
-                { severity: 'error', summary: '创建失败', content: '', myInfo: 'Devui' },
-              ]
-            })
+            let page = initPageMeta(data.key, data.name, ulid(), this.pageList[this.pageList.length - 1].ulid || '', '')
+            this.pageList.push(page)
+            this.pageService.add(page)
+            this.pageService.reqPostPage(data, page.ulid)
+            results.modalInstance.hide();
           }
         },
         {
@@ -139,10 +116,31 @@ export class PageListComponent implements OnInit {
   }
   pageItemClickH(pageUlid: S) {
     this.pageService.setCurPage(pageUlid)
+    // this.curPage = this.pageList.find(item => item.ulid === pageUlid)
   }
   reReqPageButtonClickH() {
     // this.pageService.reqPageList()
     // this.init()
     // this.pageService.recast()
+  }
+  mouseoverH(i: N) {
+    this.hoveredIndex = i
+  }
+  mouseoutH() {
+    this.hoveredIndex = -1
+  }
+  iconClickH(i: N) {
+    let page = this.pageList[i]
+    // 在本组件中删除该元素
+    this.pageList.splice(i, 1)
+    // 在store中删除
+    this.pageService.deletePageByUlid(page.ulid)
+    this.componentService.deleteComponentByPageUlid(page.ulid)
+    // this.pageService.getPageList().then((pl) => {
+    //   clog(pl)
+    // })
+    // clog(this.componentService._map)
+    // // 在服务端中删除
+    this.pageService.reqDeletePage(page.ulid)
   }
 }

@@ -28,7 +28,6 @@ export class PageListComponent {
         if (page) {
           this.pageService.setCur(page.ulid)
         }
-        clog('当前页面', this.pageService.getCur())
       })
     })
     this.pageService.cur$.subscribe(page => {

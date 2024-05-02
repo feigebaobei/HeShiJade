@@ -1,17 +1,18 @@
-import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { AdDirective } from 'src/app/ad.directive';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked } from '@angular/core';
+// import { AdDirective } from 'src/app/ad.directive';
+import { CompDirective } from '../comp.directive'
 // 组件
-import { ButtonComponent } from 'src/app/components/button/button.component';
-import { FormComponent } from 'src/app/components/form/form.component';
-import { InputComponent } from 'src/app/components/input/input.component';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
-import { SelectComponent } from 'src/app/components/select/select.component';
-import { TableComponent } from 'src/app/components/table/table.component';
-import { HttpClient } from '@angular/common/http';
+import { ButtonComponent } from '../button/button.component';
+import { FormComponent } from '../form/form.component';
+import { InputComponent } from '../input/input.component';
+import { ModalComponent } from '../modal/modal.component';
+import { SelectComponent } from '../select/select.component';
+import { TableComponent } from '../table/table.component';
+
 // service
 import { ComponentService } from 'src/app/service/component.service';
 // type
-import type { A, S, Ao } from 'src/types/base';
+import type { A, S, Ao, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 // 数据
 // import { Button as buttonDefaultData,
@@ -21,8 +22,8 @@ import type {Component as Comp} from 'src/types/component'
 // Form as formDefaultData,
 // Table as tableDefaultData,
 //  } from '../../../helper/component'
-import { ResponseData } from 'src/types';
-import { PageService } from 'src/app/service/page.service';
+// import { ResponseData } from 'src/types';
+// import { PageService } from 'src/app/service/page.service';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所有我考虑使用封装全部devui的组件来实现.
@@ -43,38 +44,44 @@ let compMap: Ao = {
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
-export class CompBoxComponent implements OnInit, OnDestroy {
+export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked, AfterContentInit {
   @Input() comp!: Comp
-  @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  // @ViewChild(CompDirective, {static: true}) compHost!: CompDirective;
+  // @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
+  // @ViewChild(CompDirective, {static: false, read: ElementRef}) compHost!: CompDirective; // 返回undefined
+  @ViewChild(CompDirective, {static: true, }) compHost!: CompDirective; // 正常运行
+  // @ViewChild(AdDirective, {static: false, read: ElementRef}) adHost!: AdDirective;
   // private clearTimer: VoidFunction | undefined;
+  @Output() deleteComp = new EventEmitter<ULID>()
   curComp?: Comp | null
   componentRef: A
   constructor(
-    // private pageService: PageService,
     private componentService: ComponentService,
-    private http: HttpClient,
+    // private http: HttpClient,
   ) {
     this.curComp = null
     this.componentRef
     this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
-      // this.init()
       this.update()
     })
-    // this.componentService.componentProps$.subscribe(p => {
-    //   this.componentRef.instance.data.props = p
-    // })
   }
   boxClickh($event: A) {
     // 选中组件
     $event.stopPropagation()
+    clog(this.comp)
     this.componentService.setCurComponent(this.comp.ulid)
   }
   ngOnInit() {
-    this.init()
+    // this.init()
   }
   init() {
-    const viewContainerRef = this.adHost.viewContainerRef;
+    // components模块内
+    // clog('components模块内', compMap, this.comp, compMap[this.comp.type])
+    // clog('components模块内', this.adHost) // undefined
+    clog('components模块内', this.compHost) 
+    if (!this.compHost) return
+    const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
     this.componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
@@ -129,32 +136,30 @@ export class CompBoxComponent implements OnInit, OnDestroy {
         break
     }
   }
+  ngAfterViewInit() {
+    // this.init()
+    // setTimeout(() => {
+    //   this.init()
+    // }, 2000)
+    // console.log(this.compHost);
+  }
+  ngAfterContentInit() {
+    this.init()
+  }
+  ngAfterViewChecked(): void {
+  }
   update() {
     if (this.comp.ulid === this.curComp?.ulid) {
       this.init()
     }
-    // this.componentRef.instance.data = {
-    //   props: data.props
-    // }
   }
-  ngOnChange() {}
+  ngOnChange() {
+    // this.init()
+  }
   ngOnDestroy() {
-    this.adHost.viewContainerRef.clear();
+    this.compHost.viewContainerRef.clear();
   }
   deleteButtonClickH() {
-    // 应该调用service中的方法
-    if (this.curComp) {
-      this.componentService.delete(this.curComp.ulid)
-      this.http.delete<ResponseData>('http://localhost:5000/components', {
-        params: {
-          ulid: this.curComp?.ulid || ''
-        },
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          clog('删除成功')
-        }
-      })
-    }
+    this.deleteComp.emit(this.curComp?.ulid)
   }
 }

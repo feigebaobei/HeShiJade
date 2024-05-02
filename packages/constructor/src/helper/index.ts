@@ -1,11 +1,13 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
 // type
-import type { A, F, N, S } from 'src/types/base';
+import type { A, F, N, S, Ao } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component } from 'src/types/component';
 import type { App } from 'src/types/app';
+
+const VERSION = 3 // 按照圆周率的数值
 
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     return new Promise((s, j) => {
@@ -19,10 +21,6 @@ let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     })
   }
 
-// let createCompKey = (appUlid: ULID, pageUlid: ULID) => {
-//   return `${appUlid}_${pageUlid}`
-// }
-
 // 获取数据类型
 let getType = (o: A) => Object.prototype.toString.call(o).slice(8, -1) // 返回构造函数的名字 大写开头
 // 深复制对象
@@ -30,7 +28,6 @@ let cloneDeep: <T>(p: T, c: T) => T = (p: A, c: A) => {
   for (let k in p) {
     if (p.hasOwnProperty(k)) {
       if (typeof p[k] === 'object') {
-        // c[k] = getType(p[k]) === 'Array' ? [] : {}
         c[k] = Array.isArray(p[k]) ? [] : {}
         cloneDeep(p[k], c[k])
       } else {
@@ -53,13 +50,10 @@ let createDebounceFn = (fn: F, t = 250, self?: A) => {
   }
 }
 let initComponentMeta = (
-  category: S,
-  appUlid: ULID, pageUlid: ULID,
+  category: S = '',
+  appUlid: ULID = '', pageUlid: ULID = '',
   prevUlid: S = '', nextUlid: S = '', parentUlid: S = '',
-  // mountPosition: S = '',
-  // mountArea: '' | 'items' | 'slots' = '',
-  // mountItemIndex: N = -1,
-  mount: Component['mount']
+  mount: Component['mount'] = {area: ''},
 ): Component => {
   return {
     ulid: ulid(),
@@ -67,11 +61,6 @@ let initComponentMeta = (
     prevUlid,
     nextUlid,
     parentUlid,
-    // mountPosition,
-    // mount: {
-    //   area: mountArea,
-    //   itemIndex: mountItemIndex,
-    // },
     mount,
     props: componentDefaultConfigAll[category].props,
     behavior: componentDefaultConfigAll[category].behavior,
@@ -81,7 +70,21 @@ let initComponentMeta = (
     pageUlid,
   }
 }
-let initAppMeta = (key: S, name: S, theme: S, owner: S, version:N = 0): App => {
+let initPageMeta = (key: S = '', name: S = '',prevUlid: S = '', nextUlid: S = '', appUlid: ULID = '') => {
+  // let app = this.appService.getCurApp()
+  return {
+    key,
+    name,
+    ulid: ulid(),
+    prevUlid,
+    nextUlid,
+    appUlid,
+    childUlid: '',
+    firstComponentUlid: '',
+    lastComponentUlid: '',
+  }
+}
+let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', version:N = VERSION): App => {
   return {
     key,
     name,
@@ -100,12 +103,66 @@ let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' |
   return `${prefix}_${key}_${type}`
 }
 
+// 方法重载
+// // 先签名，就是定义类型
+// function cleanout(value: number, myName: string): Message
+// function cleanout(value: MessageType, readRecordCount: number): Message[]
+// // 再实现，
+let cleanoutApp = (p: A) : App => {
+  let initApp = initAppMeta()
+  // 只取需要变动的字段。
+  initApp.key = p.key
+  initApp.name = p.name
+  initApp.ulid = p.ulid
+  initApp.theme = p.theme
+  // 使用版本号
+  initApp.owner = p.owner
+  initApp.collaborator = p.collaborator
+  initApp.firstPageUlid = p.firstPageUlid
+  initApp.prevUlid = p.prevUlid
+  initApp.nextUlid = p.nextUlid
+  return initApp
+}
+let cleanoutPage = (p: A) => {
+  let initPage = initPageMeta()
+  initPage.key = p.key
+  initPage.name = p.name
+  initPage.ulid = p.ulid
+  initPage.prevUlid = p.prevUlid
+  initPage.nextUlid = p.nextUlid
+  initPage.appUlid = p.appUlid
+  initPage.childUlid = p.childUlid
+  initPage.firstComponentUlid = p.firstComponentUlid
+  initPage.lastComponentUlid = p.lastComponentUlid
+  return initPage
+}
+let cleanoutComponent = (p: A) => {
+  let initComponent = initComponentMeta()
+  initComponent.ulid = p.ulid
+  initComponent.type = p.type
+  initComponent.prevUlid = p.prevUlid
+  initComponent.nextUlid = p.nextUlid
+  initComponent.parentUlid = p.parentUlid
+  initComponent.mount = p.mount
+  initComponent.props = p.props
+  initComponent.behavior = p.behavior
+  initComponent.items = p.items
+  initComponent.slots = p.slots
+  initComponent.appUlid = p.appUlid
+  initComponent.pageUlid = p.pageUlid
+  return initComponent
+}
+
 export {
   reqToPromise,
   cloneDeep,
   // createCompKey,
   createDebounceFn,
   initComponentMeta,
+  initPageMeta,
   initAppMeta,
   createChildKey,
+  cleanoutApp,
+  cleanoutPage,
+  cleanoutComponent,
 }
