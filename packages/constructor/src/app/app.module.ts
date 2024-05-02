@@ -13,8 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { PanelModule } from 'ng-devui';
-// import { IconModule } from 'ng-devui/icon';
 import { BehaviorModule } from './behavior/behavior.module';
 import { SlotModule } from './slot/slot.module';
 import { ItemsModule } from './items/items.module';
@@ -37,12 +35,8 @@ import { DialogComponent } from './list/dialog/dialog.component';
 import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
-// import { CompBoxComponent } from './setup/comp-box/comp-box.component';
-// import { CompItemComponent } from './setup/comp-item/comp-item.component';
 
-// todo delete
 import { PropsBoxComponent } from './setup/props-box/props-box.component';
-// import { BehaviorBoxComponent } from './setup/behavior-box/behavior-box.component';
 import { PropsInputComponent } from './setup/props-input/props-input.component';
 import { PropsSelectComponent } from './setup/props-select/props-select.component';
 import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
@@ -68,11 +62,8 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     PageDialogComponent,
     PageListComponent,
     ComponentListComponent,
-    // CompBoxComponent,
-    // CompItemComponent,
 
     PropsBoxComponent,
-    // BehaviorBoxComponent,
     PropsInputComponent,
     PropsSelectComponent,
     PropsSwitchComponent,

@@ -1,9 +1,15 @@
 ||完成日期||
 |-|-|-|
-|更新pageservice/componentservice中的url为serviceUrl|doing||
+|定时刷新token|doing||
 |配置项中增强可切换功能|||
 |解决删除组件控制前后组件错误的问题|||
-|定时刷新token|
+||||
+|编辑页面名称|||
+|接口中先核验token|||
+|登录、注册功能|||
+|发布回滚功能|||
+|丰富组件功能|||
+|官网|||
 ||||
 
 props 一对kv就能搞定的
@@ -45,7 +51,5 @@ subject&promise不同
 # 动态变化的过程
 
 
-p7
-01HVXRGXSC7WSQ85846WE201BT
 
 
