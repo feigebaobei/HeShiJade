@@ -36,6 +36,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/ng-devui/devui.min.css",
               "node_modules/@devui-design/icons/icomoon/devui-icon.css",
+              "node_modules/ng-devui/devui-layout.min.css",
               "src/styles.sass"
             ],
             "scripts": []

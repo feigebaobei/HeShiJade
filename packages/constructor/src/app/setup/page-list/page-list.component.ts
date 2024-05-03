@@ -141,6 +141,7 @@ export class PageListComponent implements OnInit {
     let ulid = this.pageList[this.editIndex].ulid
     this.pageService.update(ulid, 'name', this.pageNameEdit)
     this.pageService.reqUpdate(ulid, 'name', this.pageNameEdit)
+    this.editIndex = -1
   }
   iconEditClickH($event: Event, i: N) {
     this.pageNameEdit = this.pageList[i].name

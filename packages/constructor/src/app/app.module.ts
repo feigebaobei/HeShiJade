@@ -27,6 +27,7 @@ import { ItemCategoryDirective } from './item-category.directive';
 import { DevUIModule, 
   // InputGroupModule,
   // LayoutModule
+  // LayoutModule,
 } from 'ng-devui';
 import { InputGroupModule } from 'ng-devui/input-group';
 
@@ -83,6 +84,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     UpperCasePipe,
     JsonPipe,
     DevUIModule,
+    // LayoutModule,
     InputGroupModule,
     FormsModule,
     HttpClientModule,
