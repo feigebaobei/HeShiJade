@@ -28,7 +28,7 @@ import { DevUIModule,
   // InputGroupModule,
   // LayoutModule
 } from 'ng-devui';
-// import { InputGroupModule } from 'ng-devui/input-group';
+import { InputGroupModule } from 'ng-devui/input-group';
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
@@ -83,7 +83,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     UpperCasePipe,
     JsonPipe,
     DevUIModule,
-    // InputGroupModule,
+    InputGroupModule,
     FormsModule,
     HttpClientModule,
     BehaviorModule,
