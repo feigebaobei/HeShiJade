@@ -31,8 +31,8 @@ export class UserService {
     if (v) {
       this.setUser(JSON.parse(v))
     }
-    // this.regularTime = 10 * 60 * 1000 // 10min
-    this.regularTime = 2000 // for dev
+    this.regularTime = 10 * 60 * 1000 // 10min
+    // this.regularTime = 2000 // for dev
     // this.regularRefresh()
     this.regularTimeId = 0
   }

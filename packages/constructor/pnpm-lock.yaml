@@ -42,8 +42,8 @@ dependencies:
     specifier: ^0.1.23
     version: 0.1.23
   ng-devui:
-    specifier: ^15.1.0
-    version: 15.1.0(@angular/animations@16.0.0)(@angular/common@16.0.0)(@angular/core@16.0.0)(@angular/forms@16.0.0)(rxjs@7.8.0)
+    specifier: ^17.0.0
+    version: 17.0.0(@angular/animations@16.0.0)(@angular/common@16.0.0)(@angular/core@16.0.0)(@angular/forms@16.0.0)(rxjs@7.8.0)
   node-sass:
     specifier: ^9.0.0
     version: 9.0.0
@@ -296,21 +296,6 @@ packages:
       tslib: 2.3.0
     dev: false
 
-  /@angular/cdk@15.2.9(@angular/common@16.0.0)(@angular/core@16.0.0)(rxjs@7.8.0):
-    resolution: {integrity: sha512-koaM07N1AIQ5oHU27l0/FoQSSoYAwlAYwVZ4Di3bYrJsTBNCN2Xsby7wI8gZxdepMnV4Fe9si382BDBov+oO4Q==}
-    peerDependencies:
-      '@angular/common': ^15.0.0 || ^16.0.0
-      '@angular/core': ^15.0.0 || ^16.0.0
-      rxjs: ^6.5.3 || ^7.4.0
-    dependencies:
-      '@angular/common': 16.0.0(@angular/core@16.0.0)(rxjs@7.8.0)
-      '@angular/core': 16.0.0(rxjs@7.8.0)(zone.js@0.13.0)
-      rxjs: 7.8.0
-      tslib: 2.3.0
-    optionalDependencies:
-      parse5: 7.1.2
-    dev: false
-
   /@angular/cdk@16.1.1(@angular/common@16.0.0)(@angular/core@16.0.0)(rxjs@7.8.0):
     resolution: {integrity: sha512-nVIeooGspNLT8XySfGZ4e8HYO/TsFemrjNVKb3G9+7KxY4tvE5dkGbJjx5TStEQoSzjfNbCscO89lHIaQ7+aMA==}
     peerDependencies:
@@ -322,6 +307,21 @@ packages:
       '@angular/core': 16.0.0(rxjs@7.8.0)(zone.js@0.13.0)
       rxjs: 7.8.0
       tslib: 2.3.0
+    optionalDependencies:
+      parse5: 7.1.2
+    dev: false
+
+  /@angular/cdk@17.3.7(@angular/common@16.0.0)(@angular/core@16.0.0)(rxjs@7.8.0):
+    resolution: {integrity: sha512-aFEh8tzKFOwini6aNEp57S54Ocp9T7YIJfBVMESptu2TCPdMTlJ1HJTg5XS8NcQO+vwi9cFPGVwGF1frOx4LXA==}
+    peerDependencies:
+      '@angular/common': ^17.0.0 || ^18.0.0
+      '@angular/core': ^17.0.0 || ^18.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+    dependencies:
+      '@angular/common': 16.0.0(@angular/core@16.0.0)(rxjs@7.8.0)
+      '@angular/core': 16.0.0(rxjs@7.8.0)(zone.js@0.13.0)
+      rxjs: 7.8.0
+      tslib: 2.5.0
     optionalDependencies:
       parse5: 7.1.2
     dev: false
@@ -1775,14 +1775,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
-    dev: true
-
-  /@babel/runtime@7.22.6:
-    resolution: {integrity: sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.11
-    dev: false
 
   /@babel/template@7.20.7:
     resolution: {integrity: sha512-8SegXApWe6VoNw0r9JHpSteLKTpTiLZ4rMlGIm9JQ18KiCtyQiAMEazujAHrUS5flrcqYZa75ukev3P6QmUwUw==}
@@ -4100,11 +4092,11 @@ packages:
       nth-check: 2.1.1
     dev: true
 
-  /css-vars-ponyfill@2.4.8:
-    resolution: {integrity: sha512-4/j4AX4htytYHWyHVZ2BFQ+NoCGZEcOH2h4/2mmgE4SkrFg4Xq6tGYR77DtvvUIDsaXuJN+sj41bbgauA0Gfmg==}
+  /css-vars-ponyfill@2.4.9:
+    resolution: {integrity: sha512-aZyLue5bdiGVNCiCclNjo123D8I7kyoYNUaAvz+H1JalX1ye4Ilz7jNRRH5YbM+dYD6ucejiydGwk7lol/GCXQ==}
     dependencies:
       balanced-match: 1.0.2
-      get-css-data: 2.1.0
+      get-css-data: 2.1.1
     dev: false
 
   /css-what@6.1.0:
@@ -4130,7 +4122,7 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
     dependencies:
-      '@babel/runtime': 7.22.6
+      '@babel/runtime': 7.21.0
     dev: false
 
   /date-format@4.0.14:
@@ -4750,8 +4742,8 @@ packages:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
 
-  /get-css-data@2.1.0:
-    resolution: {integrity: sha512-HtPrzGk8aBF9rLeQNuImcXci7YVqsMEKzVflEWaCJu25ehxyDNiZRWoSxqSFUBfma8LERqKo70t/TcaGjIsM9g==}
+  /get-css-data@2.1.1:
+    resolution: {integrity: sha512-JpMa/f5P4mDXKg6l5/2cHL5xNY77Jap7tHyduMa6BF0E2a7bQ6Tvaz2BIMjeVYZYLcmOZ5w2Ro0yVJEI41tMbw==}
     dev: false
 
   /get-intrinsic@1.2.1:
@@ -6018,24 +6010,24 @@ packages:
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  /ng-devui@15.1.0(@angular/animations@16.0.0)(@angular/common@16.0.0)(@angular/core@16.0.0)(@angular/forms@16.0.0)(rxjs@7.8.0):
-    resolution: {integrity: sha512-dojgJLCkDgAnVZacdVnGG8yDImRb3Q2JNG34Pe0GE7tqzR0Mo18xkEXlXHAdk1UTsYs4JS6LOf3IqmNyangZrQ==}
+  /ng-devui@17.0.0(@angular/animations@16.0.0)(@angular/common@16.0.0)(@angular/core@16.0.0)(@angular/forms@16.0.0)(rxjs@7.8.0):
+    resolution: {integrity: sha512-hrm3q4cOK9a6cY5BwdJ601otYWQcSPta2FcU+eghpaYakpaZmawh+Z6cQy5tKwygCtd4iyy61AqIxpaWED/HJg==}
     peerDependencies:
-      '@angular/animations': ^15.0.0
-      '@angular/common': ^15.0.0
-      '@angular/core': ^15.0.0
-      '@angular/forms': ^15.0.0
+      '@angular/animations': ^17.0.0
+      '@angular/common': ^17.0.0
+      '@angular/core': ^17.0.0
+      '@angular/forms': ^17.0.0
     dependencies:
       '@angular/animations': 16.0.0(@angular/core@16.0.0)
-      '@angular/cdk': 15.2.9(@angular/common@16.0.0)(@angular/core@16.0.0)(rxjs@7.8.0)
+      '@angular/cdk': 17.3.7(@angular/common@16.0.0)(@angular/core@16.0.0)(rxjs@7.8.0)
       '@angular/common': 16.0.0(@angular/core@16.0.0)(rxjs@7.8.0)
       '@angular/core': 16.0.0(rxjs@7.8.0)(zone.js@0.13.0)
       '@angular/forms': 16.0.0(@angular/common@16.0.0)(@angular/core@16.0.0)(@angular/platform-browser@16.0.0)(rxjs@7.8.0)
       '@popperjs/core': 2.11.8
-      css-vars-ponyfill: 2.4.8
+      css-vars-ponyfill: 2.4.9
       date-fns: 2.30.0
       lodash-es: 4.17.21
-      tslib: 2.3.0
+      tslib: 2.5.0
     transitivePeerDependencies:
       - rxjs
     dev: false
@@ -7637,7 +7629,6 @@ packages:
 
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
-    dev: true
 
   /tuf-js@1.1.7:
     resolution: {integrity: sha512-i3P9Kgw3ytjELUfpuKVDNBJvk4u5bXL6gskv572mcevPbSKCV3zt3djhmlEQ65yERjIbOSncy7U4cQJaB1CBCg==}

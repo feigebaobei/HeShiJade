@@ -33,6 +33,8 @@ export class PageListComponent implements OnInit {
   // curPageUlid: S
   curPage?: Page | null
   hoveredIndex: N
+  editIndex: N
+  pageNameEdit: S // 编辑状态的页面名称
   constructor(
     private dialogService: DialogService,
     private appService: AppService,
@@ -53,6 +55,8 @@ export class PageListComponent implements OnInit {
     })
     this.msg = []
     this.hoveredIndex = -1
+    this.editIndex = -1
+    this.pageNameEdit = ''
   }
   ngOnInit(): void {
     this.init()
@@ -123,13 +127,27 @@ export class PageListComponent implements OnInit {
     // this.init()
     // this.pageService.recast()
   }
-  mouseoverH(i: N) {
+  mouseenterH(i: N) {
     this.hoveredIndex = i
   }
-  mouseoutH() {
+  mouseleaveH() {
     this.hoveredIndex = -1
   }
-  iconClickH(i: N) {
+  editInputBlurH() {
+    this.editIndex = -1
+  }
+  okSpanClickH() {
+    this.pageList[this.editIndex].name = this.pageNameEdit
+    let ulid = this.pageList[this.editIndex].ulid
+    this.pageService.update(ulid, 'name', this.pageNameEdit)
+    this.pageService.reqUpdate(ulid, 'name', this.pageNameEdit)
+  }
+  iconEditClickH($event: Event, i: N) {
+    this.pageNameEdit = this.pageList[i].name
+    this.editIndex = i
+    $event.stopPropagation()
+  }
+  iconDeleteClickH(i: N) {
     let page = this.pageList[i]
     // 在本组件中删除该元素
     this.pageList.splice(i, 1)

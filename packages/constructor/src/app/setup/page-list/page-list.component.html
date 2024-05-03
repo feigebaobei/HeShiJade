@@ -1,20 +1,45 @@
 <div dDroppable (dropEvent)="onDrop($event, pageList)">
-    <ul dSortable>
-        <li dDraggable
+    <div dSortable>
+        <div dDraggable
             *ngFor="let page of pageList; let i = index"
             class="page_item"
             [ngClass]="{selected: page.ulid === curPage?.ulid}"
             (click)="pageItemClickH(page.ulid)"
-            (mouseenter)="mouseoverH(i)"
-            (mouseleave)="mouseoutH()"
         >
-            {{page.name}}
-            <d-icon *ngIf="hoveredIndex === i" [icon]="'icon-delete'" (click)="iconClickH(i)" class="icon"></d-icon>
-        </li>
-        <li>
+        <d-input-group [suffixContent]="ok">
+            <input class="duration-value" dTextInput [(ngModel)]="pageNameEdit" [placeholder]="'页面名称'" (blur)="editInputBlurH" />
+        </d-input-group>
+        <ng-template #ok>
+            <span class="edit_ok" (click)="okSpanClickH">ok</span>
+        </ng-template>
+            <div *ngIf="editIndex === i; else read">
+                edit
+                <d-button id="primaryBtn" style="margin-right: 8px">Primary</d-button>
+                <!-- <d-input-group [suffixContent]="ok">
+                    <input class="duration-value" dTextInput [(ngModel)]="pageNameEdit" [placeholder]="'页面名称'" (blur)="editInputBlurH" />
+                </d-input-group>
+                <ng-template #ok>
+                    <span class="edit_ok" (click)="okSpanClickH">ok</span>
+                </ng-template> -->
+            </div>
+            <ng-template #read>
+                <div 
+                    class="read_box"
+                    (mouseenter)="mouseenterH(i)"
+                    (mouseleave)="mouseleaveH()"
+                >
+                    {{page.name}}, {{hoveredIndex}}
+                    <div class="icon-box">
+                        <d-icon *ngIf="hoveredIndex === i" [icon]="'icon-edit'" (click)="iconEditClickH($event, i)" class="icon"></d-icon>
+                        <d-icon *ngIf="hoveredIndex === i" [icon]="'icon-delete'" (click)="iconDeleteClickH(i)" class="icon"></d-icon>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div>
             <d-button (click)="createPageButtonClickH()">创建新页面</d-button>
             <d-button (click)="reReqPageButtonClickH()">刷新页面列表</d-button>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 <d-toast [value]="msg"></d-toast>

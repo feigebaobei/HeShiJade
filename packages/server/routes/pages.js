@@ -164,7 +164,31 @@ router.route('/')
   })
 })
 .put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) && rules.required(req.body.key) && rules.required(req.body.value)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('pages_dev').updateOne({
+      ulid: req.body.ulid
+    }, {
+      $set: {[req.body.key]: req.body.value}
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 .delete(cors.corsWithOptions, (req, res) => {
   // res.send('delete')
