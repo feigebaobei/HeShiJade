@@ -11,7 +11,7 @@ import { serviceUrl } from 'src/helper/config';
 import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
-import type { S, ULID } from 'src/types/base';
+import type { S, ULID, A } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 import type { Component } from 'src/types/component';
 
@@ -102,7 +102,7 @@ export class PageService {
     }
   }
   reqPageList(appUlid: ULID) {
-    clog(12345, `${serviceUrl()}/pages`)
+    // clog(12345, `${serviceUrl()}/pages`)
     return new Promise<Page[]>((s, j) => {
       this.http.get<ResponseData>(`${serviceUrl()}/pages`, {
         params: {
@@ -227,6 +227,29 @@ export class PageService {
         params: {
           ulid
         },
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          s(true)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  update(ulid: ULID, key: keyof Page, value: S) {
+    // 更新tree中的数据
+    let app = this.appService.getCurApp()
+    let node = this._map.get(String(app?.ulid))?.find(ulid)
+    if (node) {
+      node.value[key] = value
+    }
+  }
+  reqUpdate(ulid: ULID, key: keyof Page, value: S) {
+    return new Promise((s, j) => {
+      this.http.put<ResponseData>(`${serviceUrl()}/pages`, {
+        ulid, key, value
+      }, {
         withCredentials: true
       }).subscribe(res => {
         if (res.code === 0) {
