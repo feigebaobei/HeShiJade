@@ -9,4 +9,3 @@ tscDist
 .nyc_output
 coverage/
 lerna-debug.log
-
