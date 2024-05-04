@@ -5,7 +5,7 @@ let logger = pino({
     name: 'logname',
 }, pino.destination(path.resolve(`${__dirname}`, `../log/access.log`)))
 
-console.log('logger', logger)
+// console.log('logger', logger)
 
 module.exports = {
     pino,
