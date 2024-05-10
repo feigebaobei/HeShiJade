@@ -7,12 +7,12 @@ const COMPONENTTOTALMAXOFPAGE = 30
 let ssoClientParams = () => {
     return {
         idp: {
-            url: `${ssoUrl}/login`,
+            url: `${ssoUrl}/users/saml`,
             method: 'post',
             data: {}
         },
         sp: {
-            url: `${serviceUrl}/saml`,
+            url: `${serviceUrl}/users/saml`,
             method: 'post'
         }
     }

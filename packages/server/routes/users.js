@@ -295,4 +295,47 @@ router.route('/refreshToken')
   res.send('delete')
 })
 
+router.route('/saml')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  // 验证数据是否正确
+  // 放入session
+  // 种cookie
+  // res.send('post')
+  new Promise((s, j) => {
+    // 验证
+    s(true)
+  }).then(() => {
+    // req.body // saml
+    req.session.user = {
+      profile: {
+        email: req.body.email,
+      },
+    }
+    req.session.isAuth = true
+    req.session.save()
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send('delete')
+})
 module.exports = router;
