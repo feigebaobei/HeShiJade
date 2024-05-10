@@ -55,44 +55,6 @@ export class UserService {
     this.user$.next(this.user)
     window.sessionStorage.removeItem('lc-user')
   }
-  // 登录sso
-  // 前端不应该直接请求sso
-  // loginSso(data: {account: S, password: S}) {
-  //   return reqToPromise<User>(this.http.post<ResponseData>(`${ssoUrl()}/users/login`, {
-  //       account: data.account,
-  //       password: data.password,
-  //     })).then((data: User) => {
-  //       clog(data.accessToken)
-  //       this.setAccessToken(data.accessToken)
-  //       this.setRefreshToken(data.refreshToken)
-  //       this.setUser(data)
-  //       return
-  //     }).catch((e) => {
-  //       // clog('sdfs', e)
-  //       return Promise.reject(e)
-  //     })
-  // }
-  loginServer(data: {account: S, password: S}) {
-    return new Promise((s, j) => {
-      this.http.post<ResponseData>(`${serviceUrl()}/users/login`, {
-        // accessToken: window.localStorage.getItem('accessToken') || '',
-        // systemId: 1,
-        account: data.account,
-        password: data.password,
-      }, {
-        withCredentials: true, // 控制是否种cookie
-      }).subscribe(res => {
-        if (res.code === 0) {
-          this.setUser(res.data)
-          this.setAccessToken(res.data.accessToken)
-          this.setRefreshToken(res.data.refreshToken)
-          s(undefined)
-        } else {
-          j(res)
-        }
-      })
-    })
-  }
   logout() {
     return new Promise((s, j) => {
       this.http.post(`${ssoUrl()}/users/logout`, {}, {headers: {

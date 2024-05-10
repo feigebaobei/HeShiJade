@@ -113,7 +113,7 @@ setup组件中根据组件种类取出默认配置数据，间接喂入动态组
 #### routes
 ||||
 |-|-|-|
-|login/sign|||
+|path|||
 |list|||
 |setup|url通式 `http://$home:$port/setup?app=$appUlid`||
 
@@ -322,11 +322,6 @@ components目录里是所有支持的组件
 url通式 `http://$home:$port/$appKey/$env/$page?$qs`
 
 ##### user
-users/login
-登录
-post
-account / password
-
 
 users/sign
 注册
