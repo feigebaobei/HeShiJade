@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { MatIconModule } from '@angular/material/icon';
 import { FormLayout } from 'ng-devui/form';
-// import { Observable } from 'rxjs';
+import { login } from 'src/helper/sso-saml-client';
+import { ssoClientParams } from 'src/helper/config';
+
 import type { ResponseData, User } from 'src/types';
+import type { SsoClientParams } from 'src/helper/sso-saml-client';
 import { UserService } from '../service/user.service';
 import { B } from 'src/types/base';
 
@@ -52,14 +54,24 @@ export class HomeComponent implements OnInit {
     //   this.router.navigate(['/list' ]);
     //   this.user = this.userService.user
     // })
-    this.userService.loginServer({
-      account: this.formData.account,
-      password: this.formData.password,
-    }).then(() => {
+
+    // this.userService.loginServer({
+    //   account: this.formData.account,
+    //   password: this.formData.password,
+    // }).then(() => {
+    //   this.router.navigate(['/list'])
+    //   this.user = this.userService.getUser()
+    //   this.userService.clearRefresh()
+    //   this.userService.regularRefresh()
+    // }).catch(error => {
+    //   this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
+    // }).finally(() => {
+    //   this.logining = false
+    // })
+
+    login(ssoClientParams() as SsoClientParams).then(() => {
       this.router.navigate(['/list'])
       this.user = this.userService.getUser()
-      this.userService.clearRefresh()
-      this.userService.regularRefresh()
     }).catch(error => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {
