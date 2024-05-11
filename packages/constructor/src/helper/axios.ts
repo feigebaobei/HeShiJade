@@ -42,7 +42,7 @@ instance.interceptors.request.use((config: A) => {
     return Promise.reject(error)
 })
 instance.interceptors.response.use((res: A) => {
-    return res.data
+    return res
 }, (error: A) => {
     return Promise.reject(error)
 })

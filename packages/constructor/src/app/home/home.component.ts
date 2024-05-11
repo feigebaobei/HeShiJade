@@ -8,7 +8,7 @@ import { ssoClientParams } from 'src/helper/config';
 import type { ResponseData, User } from 'src/types';
 import type { SsoClientParams } from 'src/helper/sso-saml-client';
 import { UserService } from '../service/user.service';
-import { B } from 'src/types/base';
+import { B, A, } from 'src/types/base';
 
 let clog = console.log
 
@@ -45,11 +45,10 @@ export class HomeComponent implements OnInit {
   submitForm(a: any) {
     this.logining = true
     this.userService.clearUser()
-
-    login(ssoClientParams() as SsoClientParams).then(() => {
+    login(ssoClientParams({account: this.formData.account, password: this.formData.password}) as SsoClientParams).then(() => {
       this.router.navigate(['/list'])
       this.user = this.userService.getUser()
-    }).catch(error => {
+    }).catch((error: A) => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {
       this.logining = false
