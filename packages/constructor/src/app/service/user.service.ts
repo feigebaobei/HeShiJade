@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { reqToPromise } from 'src/helper';
 import { Subject, type Observable } from 'rxjs';
+import { login } from 'src/helper/sso-saml-client';
 // 配置项
-import { ssoUrl, serviceUrl } from 'src/helper/config';
+import { ssoUrl, serviceUrl, ssoClientParams } from 'src/helper/config';
 // 类型
 import type { ResponseData } from 'src/types';
 import type { S, ULID, A, N } from 'src/types/base';
@@ -27,17 +28,23 @@ export class UserService {
   constructor(private http: HttpClient) {
     this.user = undefined
     this.user$ = new Subject()
-    let v = window.sessionStorage.getItem('lc-user')
-    if (v) {
-      this.setUser(JSON.parse(v))
-    }
+    // todo delete 06.01+
+    // let v = window.sessionStorage.getItem('lc-user')
+    // if (v) {
+    //   this.setUser(JSON.parse(v))
+    // }
     this.regularTime = 10 * 60 * 1000 // 10min
     // this.regularTime = 2000 // for dev
     // this.regularRefresh()
     this.regularTimeId = 0
   }
   getUser() {
-    return this.user
+    // return this.user
+    if (this.user) {
+      return Promise.resolve(this.user)
+    } else {
+      return Promise.reject(new Error('未登录'))
+    }
   }
   setUser(u?: User) {
     this.user = u
@@ -72,6 +79,7 @@ export class UserService {
     })
   }
   // 注册sso
+  // todo delete 06.01+
   sign(data: {account: S, password: S}) {
     return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${serviceUrl()}/users/sign`, {
       account: data.account,
@@ -91,6 +99,7 @@ export class UserService {
     })
   }
   // 注册server
+  // todo delete 06.01+
   signSelf(data: {account: S, password: S}) {
     return 
   }
@@ -105,6 +114,7 @@ export class UserService {
     this.setUser(u)
   }
   // 刷新token
+  // todo delete 06.01+
   _refresh() {
     this.http.put<ResponseData>(`${serviceUrl()}/users/refreshToken`, {
       accessToken: this.getAccessToken(),
@@ -131,6 +141,7 @@ export class UserService {
   //     this.refresh()
   //   }
   // }
+  // todo delete 06.01+
   regularRefresh() {
     this.regularTimeId = window.setInterval(() => {
       let at = this.getAccessToken()
@@ -140,6 +151,7 @@ export class UserService {
       }
     }, this.regularTime)
   }
+  // todo delete 06.01+
   clearRefresh() {
     if (this.regularTimeId) {
       clearInterval(this.regularTimeId)
@@ -163,5 +175,10 @@ export class UserService {
   }
   clearRefreshToken() {
     window.localStorage.removeItem('refreshToken')
+  }
+  login(account: S, password: S) {
+    return login(ssoClientParams({account: account, password: password})).then(({idpRes, spRes}) => {
+      this.setUser(idpRes.data)
+    })
   }
 }

@@ -45,9 +45,11 @@ export class HomeComponent implements OnInit {
   submitForm(a: any) {
     this.logining = true
     this.userService.clearUser()
-    login(ssoClientParams({account: this.formData.account, password: this.formData.password}) as SsoClientParams).then(() => {
+    // login(ssoClientParams({account: this.formData.account, password: this.formData.password}) as SsoClientParams).then(() => {
+    //   this.router.navigate(['/list'])
+    //   this.user = this.userService.getUser()
+    this.userService.login(this.formData.account, this.formData.password).then(() => {
       this.router.navigate(['/list'])
-      this.user = this.userService.getUser()
     }).catch((error: A) => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {
