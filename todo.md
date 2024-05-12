@@ -1,10 +1,9 @@
 ||完成日期||
 |-|-|-|
-|登录、注册功能|doing||
+|登录、注册功能|||
 |配置项中增强可切换功能|||
 ||||
-|server setcookie|doing||
-|验证saml数据是否有效|doing||
+|验证saml数据是否有效|||
 |login方法兼容cb&promise|||
 |接口中先核验token|||
 |发布回滚功能|||

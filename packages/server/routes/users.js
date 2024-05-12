@@ -230,13 +230,25 @@ router.route('/saml')
     s(true)
   }).then(() => {
     // req.body // saml
-    req.session.user = {
-      profile: {
-        email: req.body.email,
-      },
-    }
+    // req.session.user = {
+    //   profile: {
+    //     email: req.body.email,
+    //   },
+    // }
+    req.session.user = {emial: '23456@qq.com'}
     req.session.isAuth = true
-    req.session.save()
+    return new Promise((s, j) => {
+      req.session.save((error) => {
+        clog('set session error', error)
+        if (error) {
+          j(100000)
+        } else {
+          s(true)
+        }
+      })
+    })
+  }).then(() => {
+    clog('set req.session', req.session)
     return res.status(200).json({
       code: 0,
       message: '',
