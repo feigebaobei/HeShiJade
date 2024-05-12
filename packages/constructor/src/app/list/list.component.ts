@@ -43,7 +43,10 @@ export class ListComponent implements OnInit {
     private appService: AppService,
     private userService: UserService,
   ) {
-    this.user = this.userService.getUser()
+    // this.user = this.userService.getUser()
+    this.userService.getUser().then((v) => {
+      this.user = v
+    })
     this.msg = []
     this.appList = []
     // this.appService.appList$.subscribe(arr => {
@@ -59,6 +62,7 @@ export class ListComponent implements OnInit {
     // }
     this.appService.getAppList().then(al => {
       this.appList = al
+      clog('al', al)
     })
   }
   logoutBtClickH()  {

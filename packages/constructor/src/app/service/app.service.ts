@@ -55,6 +55,7 @@ export class AppService {
   getAppList() {
     // return this._appList
     let al = this.tree.root?.toArray()
+    clog('al', al)
     if (al?.length) {
       return Promise.resolve(al)
     } else {
@@ -71,28 +72,32 @@ export class AppService {
     this.appList$.next(this._appList)
   }
   opAppList(appList: App[]) {
-    let curUser = this.userService.getUser()
-    if (curUser) {
-      let ulid = curUser.firstApplicationUlid
-      let cur = appList.find(item => item.ulid === ulid)
-      if (cur) {
-        this.tree.mountRoot(cur)
-        while (cur) {
-          let nextApp = appList.find(item => item.ulid === cur!.nextUlid)
-          if (nextApp) {
-            this.tree.mountNext(nextApp, cur.ulid)
+    // let curUser = this.userService.getUser()
+    this.userService.getUser().then(v => {
+      let curUser = v
+      clog('curUser', curUser)
+      if (curUser) {
+        let ulid = curUser.firstApplicationUlid
+        let cur = appList.find(item => item.ulid === ulid)
+        if (cur) {
+          this.tree.mountRoot(cur)
+          while (cur) {
+            let nextApp = appList.find(item => item.ulid === cur!.nextUlid)
+            if (nextApp) {
+              this.tree.mountNext(nextApp, cur.ulid)
+            }
+            cur = nextApp
           }
-          cur = nextApp
         }
       }
-    }
-    let root = this.tree.root
-    if (root) {
-      this._appList = root.toArray()
-    } else {
-      this._appList = []
-    }
-    this.setAppList()
+      let root = this.tree.root
+      if (root) {
+        this._appList = root.toArray()
+      } else {
+        this._appList = []
+      }
+      this.setAppList()
+    })
   }
   // 暂时不开发。设置方法在请求appList时设置。
   // 获取应用列表
@@ -110,22 +115,24 @@ export class AppService {
     })
   }
   createApp(data: ReqCreateData) {
-    let appObj = initAppMeta(data.key, data.name, data.theme, (this.userService.getUser()?.profile.email as Email))
-    if (this._appList.length) {
-      let last = this._appList[this._appList.length - 1]
-      last.nextUlid = appObj.ulid
-      appObj.prevUlid = last.ulid
-    }
-    this._appList.push(appObj)
-    this.userService.appendApp(appObj.ulid)
-    this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
-    this._createApp({
-      key: appObj.key,
-      name: appObj.name,
-      theme: appObj.theme,
-      collaborator: appObj.collaborator,
-      prevUlid: appObj.prevUlid,
-      ulid: appObj.ulid,
+    this.userService.getUser().then(user => {
+      let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+      if (this._appList.length) {
+        let last = this._appList[this._appList.length - 1]
+        last.nextUlid = appObj.ulid
+        appObj.prevUlid = last.ulid
+      }
+      this._appList.push(appObj)
+      this.userService.appendApp(appObj.ulid)
+      this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
+      this._createApp({
+        key: appObj.key,
+        name: appObj.name,
+        theme: appObj.theme,
+        collaborator: appObj.collaborator,
+        prevUlid: appObj.prevUlid,
+        ulid: appObj.ulid,
+      })
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
