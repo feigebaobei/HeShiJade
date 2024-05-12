@@ -39,7 +39,9 @@ app.use(cookieParser());
 app.use(session({
   name: "user",
   secret: '1234',
-  saveUninitialized: false,
+  // saveUninitialized: false,
+  saveUninitialized: true, // 为什么为true时可以setcookie成功
+  // 是否保存未初始化（未存储的任务会话数据）的会话到存储介质中。
   resave: false,
   cookie: {
     // sameSite: 'none',
