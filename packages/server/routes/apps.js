@@ -38,7 +38,7 @@ router.route('/')
       return res.status(200).json({
         code: 0,
         message: '',
-        data: appList
+        data: appList,
       })
     }).catch(() => {
       return Promise.reject(200010)

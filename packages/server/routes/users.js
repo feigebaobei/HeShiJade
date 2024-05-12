@@ -139,13 +139,13 @@ router.route('/logout')
 })
 
 // 更新token
+// todo delete
 router.route('/refreshToken')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
   res.send('get')
-
 })
 .post(cors.corsWithOptions, (req, res) => {
   res.send('post')
@@ -230,11 +230,7 @@ router.route('/saml')
     s(true)
   }).then(() => {
     // req.body // saml
-    req.session.user = {
-      profile: {
-        email: req.body.email,
-      },
-    }
+    req.session.user = req.body
     req.session.isAuth = true
     req.session.save()
     return res.status(200).json({
