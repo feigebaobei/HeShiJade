@@ -35,6 +35,7 @@ type Req = (p: RequestData) => Promise<ResponseData>
 let instance: NewAxiosInstance = axios.create({
     timeout: 5000,
     headers: {},
+    withCredentials: true,
 })
 instance.interceptors.request.use((config: A) => {
     return config

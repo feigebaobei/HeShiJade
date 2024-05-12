@@ -43,14 +43,14 @@ app.use(session({
   // saveUninitialized: true, // 为什么为true时可以setcookie成功
   // 是否保存未初始化（未存储的任务会话数据）的会话到存储介质中。
   resave: true, // 每次访问之后，过期时间重新设置过期时间
-  cookie: {
-    // sameSite: 'none',
-    // secure: true,
-    // domain: '127.0.0.1',
-    // domain: 'http://127.0.0.1',
-    // maxAge: 1000 * 60 * 60 * 24 * 30,
-    domain: '.localhost/'
-  }
+  // cookie: {
+  //   // sameSite: 'none',
+  //   // secure: true,
+  //   // domain: '127.0.0.1',
+  //   // domain: 'http://127.0.0.1',
+  //   // maxAge: 1000 * 60 * 60 * 24 * 30,
+  //   domain: '.localhost/'
+  // }
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
