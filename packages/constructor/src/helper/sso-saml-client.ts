@@ -32,8 +32,13 @@ let opReqObj = (url: S, method: Method, data: A): RequestData => {
     return reqObj
 }
 let login = (obj: SsoClientParams) => {
-    return req(opReqObj(obj.idp.url, obj.idp.method, obj.idp.data)).then((res: ResponseData) => {
-        return req(opReqObj(obj.sp.url, obj.sp.method, res.data))
+    return req(opReqObj(obj.idp.url, obj.idp.method, obj.idp.data)).then((idpRes: ResponseData) => {
+        return req(opReqObj(obj.sp.url, obj.sp.method, idpRes.data)).then((spRes) => {
+            return {
+                idpRes,
+                spRes,
+            }
+        })
     })
 }
 export {
