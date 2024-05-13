@@ -178,7 +178,10 @@ export class UserService {
   }
   login(account: S, password: S) {
     return login(ssoClientParams({account: account, password: password})).then(({idpRes, spRes}) => {
-      this.setUser(idpRes.data)
+      this.setUser({
+        ...idpRes.data,
+        ...spRes.data
+      })
     })
   }
 }

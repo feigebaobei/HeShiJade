@@ -230,13 +230,20 @@ router.route('/saml')
     s(true)
   }).then(() => {
     // req.body // saml
-    req.session.user = req.body
+    return lowcodeDb.collection('users').findOne({
+      ulid: req.body.ulid
+    })
+  }).then((user) => {
+    req.session.user = {
+      ...req.body,
+      ...user,
+    }
     req.session.isAuth = true
     req.session.save()
     return res.status(200).json({
       code: 0,
       message: '',
-      data: {}
+      data: user,
     })
   }).catch((code) => {
     return res.status(200).json({

@@ -43,7 +43,6 @@ export class ListComponent implements OnInit {
     private appService: AppService,
     private userService: UserService,
   ) {
-    // this.user = this.userService.getUser()
     this.userService.getUser().then((v) => {
       this.user = v
     })

@@ -75,7 +75,7 @@ export class AppService {
     // let curUser = this.userService.getUser()
     this.userService.getUser().then(v => {
       let curUser = v
-      clog('curUser', curUser)
+      // clog('curUser', curUser)
       if (curUser) {
         let ulid = curUser.firstApplicationUlid
         let cur = appList.find(item => item.ulid === ulid)
