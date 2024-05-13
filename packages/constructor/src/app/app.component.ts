@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 // import type { F } from 'src/types/base';
-import { UserService } from './service/user.service';
+// import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +12,18 @@ import { UserService } from './service/user.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'constructor';
   // refresh: F
-  constructor(private router: Router,
-    private userService: UserService,
+  constructor(
+    // private router: Router,
+    // private userService: UserService,
   ) {
-    this.router = router
+    // this.router = router
     // this.refresh = () => {}
   }
   ngOnInit(): void {
-    this.userService.clearRefresh()
-    this.userService.regularRefresh()
+    // this.userService.clearRefresh()
+    // this.userService.regularRefresh()
   }
   ngOnDestroy() {
-    this.userService.clearRefresh()
+    // this.userService.clearRefresh()
   }
 }

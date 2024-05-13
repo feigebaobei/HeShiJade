@@ -29,10 +29,11 @@ export class UserService {
     this.user = undefined
     this.user$ = new Subject()
     // todo delete 06.01+
-    // let v = window.sessionStorage.getItem('lc-user')
-    // if (v) {
-    //   this.setUser(JSON.parse(v))
-    // }
+    let v = window.sessionStorage.getItem('lc-user')
+    if (v) {
+      // this.setUser(JSON.parse(v))
+      this.user = JSON.parse(v || '{}')
+    }
     this.regularTime = 10 * 60 * 1000 // 10min
     // this.regularTime = 2000 // for dev
     // this.regularRefresh()
@@ -65,12 +66,12 @@ export class UserService {
   logout() {
     return new Promise((s, j) => {
       this.http.post(`${ssoUrl()}/users/logout`, {}, {headers: {
-        authorization: this.getAccessToken(),
-        refreshToken: this.getRefreshToken(),
+        // authorization: this.getAccessToken(),
+        // refreshToken: this.getRefreshToken(),
       }}).subscribe((res: any) => {
         if (res.code === 0) {
-          this.clearAccessToken()
-          this.clearRefreshToken()
+          // this.clearAccessToken()
+          // this.clearRefreshToken()
           s(undefined)
         } else {
           j(res)
@@ -85,8 +86,8 @@ export class UserService {
       account: data.account,
       password: data.password,
     })).then((data: TokenObj) => {
-      this.setAccessToken(data.accessToken)
-      this.setRefreshToken(data.refreshToken)
+      // this.setAccessToken(data.accessToken)
+      // this.setRefreshToken(data.refreshToken)
       return
       // this.setUser({
       //   account: data.account,
@@ -115,22 +116,22 @@ export class UserService {
   }
   // 刷新token
   // todo delete 06.01+
-  _refresh() {
-    this.http.put<ResponseData>(`${serviceUrl()}/users/refreshToken`, {
-      accessToken: this.getAccessToken(),
-      refreshToken: this.getRefreshToken(),
-    }, {
-      withCredentials: true
-    }).subscribe(res => {
-      if (res.code === 0) {
-        this.setAccessToken(res.data.accessToken)
-        this.setRefreshToken(res.data.refreshToken)
-      } else {
-        clog('更新token失败') // 若更新失败，则不再更新。
-        this.clearRefresh()
-      }
-    })
-  }
+  // _refresh() {
+  //   this.http.put<ResponseData>(`${serviceUrl()}/users/refreshToken`, {
+  //     accessToken: this.getAccessToken(),
+  //     refreshToken: this.getRefreshToken(),
+  //   }, {
+  //     withCredentials: true
+  //   }).subscribe(res => {
+  //     if (res.code === 0) {
+  //       this.setAccessToken(res.data.accessToken)
+  //       this.setRefreshToken(res.data.refreshToken)
+  //     } else {
+  //       clog('更新token失败') // 若更新失败，则不再更新。
+  //       this.clearRefresh()
+  //     }
+  //   })
+  // }
   // refresh() {
   //   let at = this.getAccessToken()
   //   let rt = this.getRefreshToken()
@@ -142,40 +143,41 @@ export class UserService {
   //   }
   // }
   // todo delete 06.01+
-  regularRefresh() {
-    this.regularTimeId = window.setInterval(() => {
-      let at = this.getAccessToken()
-      let rt = this.getRefreshToken()
-      if (at && rt) {
-        this._refresh()
-      }
-    }, this.regularTime)
-  }
+  // regularRefresh() {
+  //   this.regularTimeId = window.setInterval(() => {
+  //     let at = this.getAccessToken()
+  //     let rt = this.getRefreshToken()
+  //     if (at && rt) {
+  //       this._refresh()
+  //     }
+  //   }, this.regularTime)
+  // }
   // todo delete 06.01+
-  clearRefresh() {
-    if (this.regularTimeId) {
-      clearInterval(this.regularTimeId)
-    }
-  }
-  getAccessToken(): S {
-    return window.localStorage.getItem('accessToken') || ''
-  }
-  setAccessToken(v: S) {
-    window.localStorage.setItem('accessToken', v)
-    clog('setAccessToken', v, this.getAccessToken())
-  }
-  clearAccessToken() {
-    window.localStorage.removeItem('accessToken')
-  }
-  getRefreshToken(): S {
-    return window.localStorage.getItem('refreshToken') || ''
-  }
-  setRefreshToken(v: S) {
-    window.localStorage.setItem('refreshToken', v)
-  }
-  clearRefreshToken() {
-    window.localStorage.removeItem('refreshToken')
-  }
+  // clearRefresh() {
+  //   if (this.regularTimeId) {
+  //     clearInterval(this.regularTimeId)
+  //   }
+  // }
+  // todo delete 06.01+
+  // getAccessToken(): S {
+  //   return window.localStorage.getItem('accessToken') || ''
+  // }
+  // setAccessToken(v: S) {
+  //   window.localStorage.setItem('accessToken', v)
+  //   clog('setAccessToken', v, this.getAccessToken())
+  // }
+  // clearAccessToken() {
+  //   window.localStorage.removeItem('accessToken')
+  // }
+  // getRefreshToken(): S {
+  //   return window.localStorage.getItem('refreshToken') || ''
+  // }
+  // setRefreshToken(v: S) {
+  //   window.localStorage.setItem('refreshToken', v)
+  // }
+  // clearRefreshToken() {
+  //   window.localStorage.removeItem('refreshToken')
+  // }
   login(account: S, password: S) {
     return login(ssoClientParams({account: account, password: password})).then(({idpRes, spRes}) => {
       this.setUser({
