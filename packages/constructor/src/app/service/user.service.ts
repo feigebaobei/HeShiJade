@@ -65,10 +65,9 @@ export class UserService {
   }
   logout() {
     return new Promise((s, j) => {
-      this.http.post(`${ssoUrl()}/users/logout`, {}, {headers: {
-        // authorization: this.getAccessToken(),
-        // refreshToken: this.getRefreshToken(),
-      }}).subscribe((res: any) => {
+      this.http.delete(`${serviceUrl()}/users/logout`, {
+        withCredentials: true
+      }).subscribe((res: any) => {
         if (res.code === 0) {
           // this.clearAccessToken()
           // this.clearRefreshToken()

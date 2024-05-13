@@ -121,21 +121,34 @@ router.route('/logout')
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  // let user = req.session.user // for test
-  // clog('session', req.session)
-  res.clearCookie()
-  req.session.destroy();
-  return res.status(200).json({
-    code: 0,
-    message: "ok",
-    data: {},
-  })
+  res.send('post')
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
+  new Promise((s, j) => {
+    res.clearCookie('user', {path: '/'})
+    req.session.destroy((error) => {
+      if (error) {
+        j(100170)
+      } else {
+        s(true)
+      }
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: 'ok',
+      data: {}
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 
 // 更新token
