@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { reqToPromise } from 'src/helper';
 import { Subject, type Observable } from 'rxjs';
-import { login } from 'src/helper/sso-saml-client';
+import { createSsoClient } from 'src/helper/sso-saml-client';
 // 配置项
-import { ssoUrl, serviceUrl, ssoClientParams } from 'src/helper/config';
+import { ssoUrl, serviceUrl, ssoClientConfig } from 'src/helper/config';
 // 类型
 import type { ResponseData } from 'src/types';
 import type { S, ULID, A, N } from 'src/types/base';
 import type { User } from 'src/types';
+import type { SsoClient } from 'src/helper/sso-saml-client';
 
 let clog = console.log
 interface TokenObj {
@@ -25,6 +26,7 @@ export class UserService {
   user$: Subject<User | undefined>
   regularTime: N
   regularTimeId: N
+  ssoClient: SsoClient
   constructor(private http: HttpClient) {
     this.user = undefined
     this.user$ = new Subject()
@@ -38,6 +40,7 @@ export class UserService {
     // this.regularTime = 2000 // for dev
     // this.regularRefresh()
     this.regularTimeId = 0
+    this.ssoClient = createSsoClient(ssoClientConfig.idp, ssoClientConfig.sp)
   }
   getUser() {
     // return this.user
@@ -64,38 +67,45 @@ export class UserService {
     window.sessionStorage.removeItem('lc-user')
   }
   logout() {
-    return new Promise((s, j) => {
-      this.http.delete(`${serviceUrl()}/users/logout`, {
-        withCredentials: true
-      }).subscribe((res: any) => {
-        if (res.code === 0) {
-          // this.clearAccessToken()
-          // this.clearRefreshToken()
-          s(undefined)
-        } else {
-          j(res)
-        }
-      })
-    })
+    // return new Promise((s, j) => {
+    //   this.http.delete(`${serviceUrl()}/users/logout`, {
+    //     withCredentials: true
+    //   }).subscribe((res: any) => {
+    //     if (res.code === 0) {
+    //       s(undefined)
+    //     } else {
+    //       j(res)
+    //     }
+    //   })
+    // })
+    return this.ssoClient.logoutSp()
   }
   // 注册sso
-  // todo delete 06.01+
-  sign(data: {account: S, password: S}) {
-    return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${serviceUrl()}/users/sign`, {
-      account: data.account,
-      password: data.password,
-    })).then((data: TokenObj) => {
-      // this.setAccessToken(data.accessToken)
-      // this.setRefreshToken(data.refreshToken)
-      return
-      // this.setUser({
-      //   account: data.account,
-      //   firstApplicationUlid: '',
-      //   lastApplicationUlid: '',
-      // })
-      // return true
-    }).catch((e) => {
-      return Promise.reject(e)
+  sign(data: {account: S, password: S, confirmPassword: S, verification: S}) {
+    // return reqToPromise<TokenObj>(this.http.post<ResponseData>(`${ssoUrl()}/users/sign`, {
+    //   account: data.account,
+    //   password: data.password,
+    //   confirmPassword: data.confirmPassword,
+    //   verification: data.verification,
+    // })).then((data: TokenObj) => {
+    //   // this.setAccessToken(data.accessToken)
+    //   // this.setRefreshToken(data.refreshToken)
+    //   return
+    //   // this.setUser({
+    //   //   account: data.account,
+    //   //   firstApplicationUlid: '',
+    //   //   lastApplicationUlid: '',
+    //   // })
+    //   // return true
+    // }).catch((e) => {
+    //   return Promise.reject(e)
+    // })
+    return this.ssoClient.signIdp({email: data.account, password: data.password, verification: data.verification}).then((idpRes) => {
+      if (idpRes.code === 0) {
+        return this.ssoClient.loginSp(idpRes.data)
+      } else {
+        return Promise.reject()
+      }
     })
   }
   // 注册server
@@ -178,11 +188,22 @@ export class UserService {
   //   window.localStorage.removeItem('refreshToken')
   // }
   login(account: S, password: S) {
-    return login(ssoClientParams({account: account, password: password})).then(({idpRes, spRes}) => {
+    // return login(ssoClientParams({account: account, password: password})).then(({idpRes, spRes}) => {
+    //   this.setUser({
+    //     ...idpRes.data,
+    //     ...spRes.data
+    //   })
+    // })
+    return this.ssoClient.login({email: account, password}).then((res) => {
+      clog('res', res)
       this.setUser({
-        ...idpRes.data,
-        ...spRes.data
+        ...res.idpRes.data,
+        ...res.spRes.data,
       })
+      return true
     })
+  }
+  sendVerification(data: A) {
+    return this.ssoClient.sendVerification(data)
   }
 }
