@@ -40,6 +40,59 @@ router.route('/')
   res.send('delete')
 })
 
+// 登录
+router.route('/login')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.post(cors.corsWithOptions, (req, res) => {
+  // 校验
+  clog('req', req.body)
+  new Promise((s, j) => {
+    if (req.body) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('users').findOne({
+      ulid: req.body.ulid
+    }).then((user) => {
+      return user
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((user) => {
+    req.session.user = {
+      ...req.body,
+      ...user,
+    }
+    req.session.isAuth = true
+    req.session.save()
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {...user}
+    })
+  }).catch((code) => {
+    clog('code', code)
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+
 // 注册
 router.route('/sign')
 .options(cors.corsWithOptions, (req, res) => {
@@ -108,88 +161,6 @@ router.route('/sign')
   })
 })
 
-// 登录
-router.route('/login')
-.options(cors.corsWithOptions, (req, res) => {
-  res.sendStatus(200)
-})
-.get(cors.corsWithOptions, (req, res) => {
-  return res.status(200).json({
-    code: 0,
-    message: '',
-    data: {}
-  })
-})
-.post(cors.corsWithOptions, (req, res) => {
-  // check
-  // 请求sso验证
-  // 从lowcode库中取出user
-  // 返回userInfo+token+种cookie
-  new Promise((s, j) => {
-    if (rules.required(req.body.account) && rules.required(req.body.password)) {
-      s(true)
-    } else {
-      j(100100)
-    }
-  }).then(() => {
-    return instance({
-      url: '/users/login',
-      method: 'post',
-      data: {
-        account: req.body.account,
-        password: req.body.password,
-      },
-    }).then((response) => {
-      clog('response', response)
-      if (response.code === 0) {
-        return response.data
-      } else {
-        return Promise.reject(100200)
-      }
-    }).catch((e ) => {
-      clog('sdfas', e)
-      return Promise.reject(100200)
-    })
-  }).then((obj) => {
-    return lowcodeDb.collection('users').findOne({ulid: obj.ulid}).then(user => {
-      if (user) {
-        let result = {
-          ulid: user.ulid,
-          profile: obj.profile,
-          accessToken: obj.accessToken,
-          refreshToken: obj.refreshToken,
-          firstApplicationUlid: user.firstApplicationUlid,
-          lastApplicationUlid: user.lastApplicationUlid,
-        }
-        req.session.user = result
-        req.session.isAuth = true
-        req.session.save()
-        return res.status(200).json({
-          code: 0,
-          message: '',
-          data: result
-        })
-      } else {
-        return Promise.reject(100160)
-      }
-    }).catch(() => {
-      return Promise.reject(200010)
-    })
-  }).catch((code) => {
-    res.status(200).json({
-      code,
-      message: errorCode[code],
-      data: {}
-    })
-  })
-})
-.put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
-})
-.delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
-})
-
 // 登出
 router.route('/logout')
 .options(cors.corsWithOptions, (req, res) => {
@@ -203,31 +174,44 @@ router.route('/logout')
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  // let user = req.session.user // for test
-  // clog('session', req.session)
-  res.clearCookie()
-  req.session.destroy();
-  return res.status(200).json({
-    code: 0,
-    message: "ok",
-    data: {},
-  })
+  res.send('post')
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
+  new Promise((s, j) => {
+    res.clearCookie('user', {path: '/'})
+    req.session.destroy((error) => {
+      if (error) {
+        j(100170)
+      } else {
+        s(true)
+      }
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: 'ok',
+      data: {}
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 
 // 更新token
+// todo delete
 router.route('/refreshToken')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
   res.send('get')
-
 })
 .post(cors.corsWithOptions, (req, res) => {
   res.send('post')
@@ -295,4 +279,54 @@ router.route('/refreshToken')
   res.send('delete')
 })
 
+router.route('/saml')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  // 验证数据是否正确
+  // 放入session
+  // 种cookie
+  // res.send('post')
+  new Promise((s, j) => {
+    // 验证
+    s(true)
+  }).then(() => {
+    // req.body // saml
+    return lowcodeDb.collection('users').findOne({
+      ulid: req.body.ulid
+    }).then(user => {
+      return user
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((user) => {
+    req.session.user = {
+      ...req.body,
+      ...user,
+    }
+    req.session.isAuth = true
+    req.session.save()
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: user,
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send('delete')
+})
 module.exports = router;

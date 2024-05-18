@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { MatIconModule } from '@angular/material/icon';
 import { FormLayout } from 'ng-devui/form';
-// import { Observable } from 'rxjs';
+// import { login } from 'src/helper/sso-saml-client';
+// import { ssoClientParams } from 'src/helper/config';
+
 import type { ResponseData, User } from 'src/types';
+// import type { SsoClientParams } from 'src/helper/sso-saml-client';
 import { UserService } from '../service/user.service';
-import { B } from 'src/types/base';
+import { B, A, } from 'src/types/base';
 
 let clog = console.log
 
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit {
     account: '123@qq.com', // for dev
     password: '123456',
     confirmPassword: '123456',
+    verification: '',
   }
 
   gotoList() {
@@ -43,24 +46,12 @@ export class HomeComponent implements OnInit {
   submitForm(a: any) {
     this.logining = true
     this.userService.clearUser()
-    // this.userService.loginSso({
-    //   account: this.formData.account,
-    //   password: this.formData.password
-    // }).then(() => {
-    //   return this.userService.loginServer()
-    // }).then(() => {
-    //   this.router.navigate(['/list' ]);
-    //   this.user = this.userService.user
-    // })
-    this.userService.loginServer({
-      account: this.formData.account,
-      password: this.formData.password,
-    }).then(() => {
+    // login(ssoClientParams({account: this.formData.account, password: this.formData.password}) as SsoClientParams).then(() => {
+    //   this.router.navigate(['/list'])
+    //   this.user = this.userService.getUser()
+    this.userService.login(this.formData.account, this.formData.password).then(() => {
       this.router.navigate(['/list'])
-      this.user = this.userService.getUser()
-      this.userService.clearRefresh()
-      this.userService.regularRefresh()
-    }).catch(error => {
+    }).catch((error: A) => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {
       this.logining = false
@@ -68,14 +59,16 @@ export class HomeComponent implements OnInit {
   }
   // 注册
   submitSignForm(e: Event) {
-    if (!this.formData.account || !this.formData.password) {
+    if (!this.formData.account || !this.formData.password || !this.formData.verification || !this.formData.confirmPassword) {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '不能为空' }];
       return
     }
-    if (this.formData.password === this.formData.confirmPassword && this.formData.password) {
+    if (this.formData.password === this.formData.confirmPassword) {
       this.userService.sign({
         account: this.formData.account,
         password: this.formData.password,
+        confirmPassword: this.formData.confirmPassword,
+        verification: this.formData.verification,
       }).then(() => {
         this.gotoList()
       }).catch((error) => {
@@ -97,5 +90,13 @@ export class HomeComponent implements OnInit {
   gotoLinkButtonClickH() {
     this.gotoList()
   }
-
+  sendButtonClickH() {
+    this.userService.sendVerification({email: this.formData.account}).then((res) => {
+      if (res.code === 0) {
+        this.msg = [{ severity: 'success', summary: 'Summary', content: '验证码已经发送到指定邮箱，请查收。有效期2min.' }];
+      } else {
+        this.msg = [{ severity: 'error', summary: 'Summary', content: res.message }];
+      }
+    })
+  }
 }
