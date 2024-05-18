@@ -40,6 +40,59 @@ router.route('/')
   res.send('delete')
 })
 
+// 登录
+router.route('/login')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.post(cors.corsWithOptions, (req, res) => {
+  // 校验
+  clog('req', req.body)
+  new Promise((s, j) => {
+    if (req.body) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection('users').findOne({
+      ulid: req.body.ulid
+    }).then((user) => {
+      return user
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((user) => {
+    req.session.user = {
+      ...req.body,
+      ...user,
+    }
+    req.session.isAuth = true
+    req.session.save()
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {...user}
+    })
+  }).catch((code) => {
+    clog('code', code)
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+
 // 注册
 router.route('/sign')
 .options(cors.corsWithOptions, (req, res) => {
@@ -245,6 +298,10 @@ router.route('/saml')
     // req.body // saml
     return lowcodeDb.collection('users').findOne({
       ulid: req.body.ulid
+    }).then(user => {
+      return user
+    }).catch(() => {
+      return Promise.reject(200010)
     })
   }).then((user) => {
     req.session.user = {
