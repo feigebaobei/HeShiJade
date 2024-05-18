@@ -13,7 +13,7 @@
                 (dSubmit)="submitForm($event)"
               >
                 <d-form-item>
-                  <d-form-label>账号</d-form-label>
+                  <d-form-label>邮箱</d-form-label>
                   <d-form-control>
                     <input dTextInput autocomplete="off" name="account"
                       [(ngModel)]="formData.account"
@@ -54,12 +54,29 @@
                   (dSubmit)="submitSignForm($event)"
                 >
                   <d-form-item>
-                    <d-form-label>账号</d-form-label>
+                    <d-form-label [helpTips]="'当前只支持使用邮箱注册'">邮箱</d-form-label>
                     <d-form-control>
                       <input dTextInput autocomplete="off" name="account"
                         [(ngModel)]="formData.account"
                         placeholder="邮箱"
                       />
+                    </d-form-control>
+                  </d-form-item>
+                  <d-form-item>
+                    <d-form-label>验证码</d-form-label>
+                    <d-form-control>
+                      <input
+                        dTextInput
+                        name="verification"
+                        [(ngModel)]="formData.verification"
+                        placeholder="请在指定邮箱查收验证码"
+                      />
+                      <br>
+                      <br>
+                      <d-button bsStyle="common" [disabled]="false" (click)="sendButtonClickH()">发送验证码</d-button>
+                      <!-- <d-button bsStyle="common" style="margin-right: 8px">Common</d-button>  -->
+                      <!-- <d-input-group [prefixContent]="'duration'" [suffixContent]="'ms'">
+                      </d-input-group> -->
                     </d-form-control>
                   </d-form-item>
                   <d-form-item>
