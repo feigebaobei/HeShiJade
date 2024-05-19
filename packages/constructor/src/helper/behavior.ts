@@ -22,6 +22,11 @@ let Button: BehaviorConfigItem = {
     value: '',
     label: '载荷',
     key: 'payload',
+    hide: function (itemGroup: BehaviorConfigItem) {
+      // this: Component
+      // itemGroup: 当前配置项组
+      return !itemGroup.target.value
+    }
   },
 }
 

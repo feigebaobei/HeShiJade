@@ -79,7 +79,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     // components模块内
     // clog('components模块内', compMap, this.comp, compMap[this.comp.type])
     // clog('components模块内', this.adHost) // undefined
-    clog('components模块内', this.compHost) 
+    // clog('components模块内', this.compHost) 
     if (!this.compHost) return
     const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();

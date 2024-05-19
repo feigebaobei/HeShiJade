@@ -21,7 +21,7 @@
             >
         </d-form-control>
     </d-form-item>
-    <d-form-item>
+    <d-form-item *ngIf="!hidePayload">
         <!-- <d-form-label>{{behavior.payload.label}}</d-form-label> -->
         <d-form-label>载荷</d-form-label>
         <d-form-control>

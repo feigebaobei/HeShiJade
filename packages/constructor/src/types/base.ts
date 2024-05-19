@@ -11,7 +11,7 @@ type D = Date
 interface Ao {
     [k: S]: A
 }
-
+type FT<T = A> = (...p: A[]) => T
 type Email = `${S}@${S}`
 type ValueType = 'string' | 'number' | 'switch'
 // todo 完善类型
@@ -37,6 +37,8 @@ interface ConfigItemTextarea {
   value: S
   label: S
   key: S
+  // hide?: B | FT<B>
+  hide?: FT<B>
 }
 interface ConfigItemSelect<T> {
   category: 'select'
@@ -87,6 +89,7 @@ export type {
   S, N, A, B, ULID, 
   Email,
   F, Ao, O, D,
+  FT,
   ValueType,
   SelectOptionsItem,
   Options,
