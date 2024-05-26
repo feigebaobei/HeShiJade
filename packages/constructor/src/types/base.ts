@@ -30,6 +30,8 @@ interface ConfigItemInput {
   value: S
   label: S
   key: S
+  hide?: FT<B>
+  hideListenerKey?: S
 }
 type ConfigItemKeys = keyof ConfigItem
 interface ConfigItemTextarea {
@@ -39,6 +41,7 @@ interface ConfigItemTextarea {
   key: S
   // hide?: B | FT<B>
   hide?: FT<B>
+  hideListenerKey?: S
 }
 interface ConfigItemSelect<T> {
   category: 'select'
@@ -54,6 +57,8 @@ interface ConfigItemSelect<T> {
       options: SelectOptionsItem
     }
   }
+  hide?: FT<B>
+  hideListenerKey?: S
 }
 interface ConfigItemNumber {
   category: 'number'
@@ -62,6 +67,8 @@ interface ConfigItemNumber {
   key: S
   maxLength: N
   minLength: N
+  hide?: FT<B>
+  hideListenerKey?: S
 }
 interface ConfigItemSwitch {
   category: 'switch'
@@ -69,13 +76,17 @@ interface ConfigItemSwitch {
   value: B
   label: S
   key: S
+  hide?: FT<B>
+  hideListenerKey?: S
 }
 interface ConfigItmeOption {
-  category: 'options',
-  label: S,
-  key: S,
+  category: 'options'
+  label: S
+  key: S
   value: []
   template: Options<S, S>
+  hide?: FT<B>
+  hideListenerKey?: S
 }
 // type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput

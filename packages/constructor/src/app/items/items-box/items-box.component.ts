@@ -3,6 +3,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
 // import * as componentDefaultConfigAll from '../../helper/component'
 import addableAll from 'src/helper/addable'
+import { cloneDeep } from 'src/helper/index'
 // type
 import type { B, ConfigItem, N } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
@@ -28,15 +29,16 @@ export class ItemsBoxComponent {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          let group = JSON.parse(JSON.stringify(groupTemplate[p.type])) as ConfigItem[]
+          // let group = JSON.parse(JSON.stringify(groupTemplate[p.type])) as ConfigItem[]
+          let group = cloneDeep(groupTemplate[p.type], [] as ConfigItem[])
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
               gi.value = v
-              // gi.label = v.label
             }
           })
           this.groupList.push(group)
+          clog('thislgroplist', this.groupList)
         })
         this.addable = addableAll[p.type].items
       } else {
@@ -47,7 +49,9 @@ export class ItemsBoxComponent {
   }
   addH() {
     if (this.curComponent) {
-      let group = JSON.parse(JSON.stringify(groupTemplate[this.curComponent.type])) as ConfigItem[]
+      // let group = JSON.parse(JSON.stringify(groupTemplate[this.curComponent.type])) as ConfigItem[]
+      let group = cloneDeep(groupTemplate[this.curComponent.type], [] as ConfigItem[])
+      // clog('group', group)
       this.groupList.push(group)
       let obj: ItemsMetaItem = {} as ItemsMetaItem
       group.forEach((item) => {

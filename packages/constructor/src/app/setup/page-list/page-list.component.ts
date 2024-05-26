@@ -70,7 +70,6 @@ export class PageListComponent implements OnInit {
     }).then(app => {
       if (app) {
         this.pageService.getPageList(app.ulid).then(pl => {
-          clog('pl', pl)
           this.pageList = pl
         })
       }
