@@ -4,8 +4,9 @@
 |整理所有merge已存数据与默认数据|doing||
 ||||
 |所有props/behavior/items中增强可切换（显示隐藏）功能|doing|需要再理一理|
-|解决多次选中组件时items减少第一个item的问题|||
+|解决多次选中组件时items减少第一个item的问题|doing||
 |升级cloneDeep|||
+|setup页面的三个区域分别独立滚动|||
 |3个服务ts => js|||
 |3个服务增加日志功能|||
 |登录信息无效时服务端返回401,前端重定向到login|||

@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { createDebounceFn } from 'src/helper/index'
-import { CompDirective } from '../comp.directive'
+// import { CompDirective } from '../comp.directive'
 // import { cloneDeep } from 'src/helper/index'
 // type
 import type { A, ConfigItem, N, B, S, Options, ConfigItemSelect, F, } from 'src/types/base';
@@ -22,7 +22,7 @@ type newConfigItem = ConfigItem & {hideCalc: B}
 export class ItemsGroupComponent implements OnInit, OnDestroy {
   @Input() group: ConfigItem[] = []
   @Input() index: N = -1 // 第几个group
-  @ViewChild(CompDirective, {static: true, }) compHost!: CompDirective; // 正常运行
+  // @ViewChild(CompDirective, {static: true, }) compHost!: CompDirective; // 正常运行
   // OptionsTemp: Options<S, A>
   reqChangeItems: F
   itemList: newConfigItem[]
@@ -53,7 +53,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     clog('this.itemList', this.itemList)
   }
   ngOnDestroy() {
-    this.compHost.viewContainerRef.clear();
+    // this.compHost.viewContainerRef.clear();
   }
   initCalc() {
     this.itemList = this.group.map((item) => {
