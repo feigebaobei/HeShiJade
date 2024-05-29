@@ -1,11 +1,15 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
+// import clone from 'rfdc/default'
 // type
 import type { A, F, N, S, Ao } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component } from 'src/types/component';
 import type { App } from 'src/types/app';
+
+let clog = console.log
+// clog('clone', clone)
 
 const VERSION = 3 // 按照圆周率的数值
 
@@ -23,20 +27,61 @@ let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
 
 // 获取数据类型
 let getType = (o: A) => Object.prototype.toString.call(o).slice(8, -1) // 返回构造函数的名字 大写开头
-// 深复制对象
-let cloneDeep: <T>(p: T, c: T) => T = (p: A, c: A) => {
-  for (let k in p) {
-    if (p.hasOwnProperty(k)) {
-      if (typeof p[k] === 'object') {
-        c[k] = Array.isArray(p[k]) ? [] : {}
-        cloneDeep(p[k], c[k])
+// 深复制
+let cloneDeep = (v: A): A => {
+  let baseType = ['string', 'number', 'boolean', 'undefined', 'bigint', 'symbol']
+  let res
+  if (baseType.includes(typeof v)) {
+      res = v
+  } else { // null array object date set map function
+      if (!v) {
+          res = v
       } else {
-        c[k] = p[k]
+          if (Array.isArray(v)) {
+              res = v.map((item: A) => cloneDeep(item))
+          } else {
+              let t: A = {}
+              Object.entries(v).forEach(([k, v]) => {
+                let type = getType(v)
+                switch (type) {
+                  case 'Function':
+                    t[k] = v
+                    break;
+                  case 'Set':
+                    t[k] = new Set(Array.from(v as Set<A>).map(item => {
+                      return cloneDeep(item)
+                    }))
+                    break;
+                  case 'Map':
+                    t[k] = new Map(Array.from(v as Map<A, A>).map(([k, v]) => ([cloneDeep(k), cloneDeep(v)])))
+                    break;
+                  case 'Date':
+                    t[k] = new Date(v as unknown as Date)
+                    break;
+                  case 'Object':
+                    t[k] = cloneDeep(v)
+                    break;
+                  default:
+                    t[k] = v // 当发现新类型里再添加，先用引用处理。
+                    break;
+                }
+              })
+              res = t
+          }
       }
-    }
   }
-  return c
+  return res
 }
+// cloneDeep = (v) => {
+//   return structuredClone(v)
+// }
+// let cloneDeep = <T>(v: T): Promise<T> => {
+//   return new Promise(resolve => { 
+//     const { port1, port2 } = new MessageChannel() 
+//     port2.onmessage = ev => resolve(ev.data)
+//     port1.postMessage(v)
+//   }) 
+// }
 let createDebounceFn = (fn: F, t = 250, self?: A) => {
   var timer: N
   return (...rest: A[]) => {

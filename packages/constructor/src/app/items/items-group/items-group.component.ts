@@ -2,7 +2,6 @@ import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { createDebounceFn } from 'src/helper/index'
 // import { CompDirective } from '../comp.directive'
-// import { cloneDeep } from 'src/helper/index'
 // type
 import type { A, ConfigItem, N, B, S, Options, ConfigItemSelect, F, } from 'src/types/base';
 
@@ -92,7 +91,6 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     // clog('eventMap', this.eventMap)
   }
   listenerChange(listenerKey: S, group: newConfigItem[]) {
-    // clog('listenerChange', cloneDeep(group, [] as newConfigItem[]))
     let obj = this.eventMap.get(`compId${listenerKey}`)
     if (obj) {
       let t = this.itemList.find(item => item.key === obj!.targetKey)

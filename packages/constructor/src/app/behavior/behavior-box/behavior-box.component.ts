@@ -60,8 +60,10 @@ export class BehaviorBoxComponent {
       case 'Button':
         this.componentBehaviorMeta = buttonBehaviorMeta
         this.curComp.behavior.forEach(item => {
-          let o: BehaviorConfigItem
-          o = cloneDeep(this.componentBehaviorMeta, {} as BehaviorConfigItem);
+          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta)
+          // .then((v: BehaviorConfigItem) => {
+          // })
+          // o = v;
           (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
             if (item.hasOwnProperty(key)) {
               o[key].value = item[key]
