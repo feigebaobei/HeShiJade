@@ -27,7 +27,7 @@ interface BehaviorConfigItem {
     // }
     event: ConfigItemSelect<S>
     target: ConfigItemInput
-    payload: ConfigItemTextarea & ThisType<Component>
+    payload: ConfigItemTextarea & ThisType<Component> // 思考为了hide方法的可以得到component对象，使用this还是使用参数。 2024.06.01+
   }
   
 interface BehaviorConfig {

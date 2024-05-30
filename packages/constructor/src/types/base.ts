@@ -32,6 +32,7 @@ interface ConfigItemInput {
   key: S
   hide?: FT<B>
   hideListenerKey?: S
+  hideCalc?: B
 }
 type ConfigItemKeys = keyof ConfigItem
 interface ConfigItemTextarea {
@@ -42,6 +43,7 @@ interface ConfigItemTextarea {
   // hide?: B | FT<B>
   hide?: FT<B>
   hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItemSelect<T> {
   category: 'select'
@@ -59,6 +61,7 @@ interface ConfigItemSelect<T> {
   }
   hide?: FT<B>
   hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItemNumber {
   category: 'number'

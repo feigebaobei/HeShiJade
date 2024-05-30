@@ -30,9 +30,6 @@ export class ItemsBoxComponent {
         this.groupList = []
         p.items.forEach(item => {
           let group: ConfigItem[] = cloneDeep(groupTemplate[p.type])
-          // cloneDeep(groupTemplate[p.type]).then((group: ConfigItem[]) => {
-          //   // clog('thislgroplist', this.groupList)
-          // })
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
@@ -51,9 +48,6 @@ export class ItemsBoxComponent {
   addH() {
     if (this.curComponent) {
       let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
-      // cloneDeep(groupTemplate[this.curComponent.type]).then((group: ConfigItem[]) => {
-      //   // clog('group', group)
-      // })
       this.groupList.push(group)
       let obj: ItemsMetaItem = {} as ItemsMetaItem
       group.forEach((item) => {

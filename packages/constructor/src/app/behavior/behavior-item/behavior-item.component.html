@@ -21,8 +21,7 @@
             >
         </d-form-control>
     </d-form-item>
-    <d-form-item *ngIf="!hidePayload">
-        <!-- <d-form-label>{{behavior.payload.label}}</d-form-label> -->
+    <d-form-item *ngIf="!itemGroup.payload.hideCalc">
         <d-form-label>载荷</d-form-label>
         <d-form-control>
             <input dTextInput name="payload"

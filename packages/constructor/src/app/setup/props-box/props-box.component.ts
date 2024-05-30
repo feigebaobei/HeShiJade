@@ -69,11 +69,15 @@ export class PropsBoxComponent {
     // todo 优化为从配置文件中取出可配置项
     switch(this.curComp?.type) {
       case 'Button':
-        Object.entries(this.curComp.props).forEach(([key, value]) => {
-          let o: ConfigItem = JSON.parse(JSON.stringify(buttonPropsMeta[key]))
-          o.key = key
-          o.value = value
-          this.componentPropsList.push(o)
+        // Object.entries(this.curComp.props).forEach(([key, value]) => {
+        //   let o: ConfigItem = JSON.parse(JSON.stringify(buttonPropsMeta[key]))
+        //   o.key = key
+        //   o.value = value
+        //   this.componentPropsList.push(o)
+        // })
+        Object.values(buttonPropsMeta).forEach(item => {
+          item.value = this.curComp?.props[item.key]
+          this.componentPropsList.push(item)
         })
         break
       case 'Input':
@@ -89,27 +93,6 @@ export class PropsBoxComponent {
         // 读取配置数据
         // 为数据结构赋值
         // push到数组中
-        // this.componentPropsMeta = selectPropsMeta
-        // Object.keys(this.componentPropsMeta).forEach((key) => {
-        //   let o: ConfigItem = {
-        //     ...this.componentPropsMeta[key],
-        //     propKey: key,
-        //     componentUlid: this.curComp!.ulid
-        //   }
-        //   // 赋值
-        //   o.overFields.forEach(field => {
-        //     o[field] = this.curComp?.props[key]
-        //   })
-        //   this.componentPropsList.push(o)
-        // })
-        
-        // 以该组件拥有多少props决定显示多少
-        // Object.entries(this.curComp.props).forEach(([key, value]) => {
-        //   let o: ConfigItem = JSON.parse(JSON.stringify(selectPropsMeta[key]))
-        //   o.key = key
-        //   o.value = value
-        //   this.componentPropsList.push(o)
-        // })
         // 以props配置文件决定显示多少
         Object.values(selectPropsMeta).forEach((item: ConfigItem) => {
           item.value = this.curComp!.props[item.key] // value
@@ -117,18 +100,6 @@ export class PropsBoxComponent {
         })
         break
       case 'Modal':
-        // this.componentPropsMeta = modalPropsMeta
-        // Object.keys(this.componentPropsMeta).forEach((key) => {
-        //   let o: ConfigItem = {
-        //     ...this.componentPropsMeta[key],
-        //     propKey: key,
-        //     componentUlid: this.curComp!.ulid
-        //   }
-        //   o.overFields.forEach(field => {
-        //     o[field] = this.curComp?.props[key]
-        //   })
-        //   this.componentPropsList.push(o)
-        // })
         Object.entries(this.curComp.props).forEach(([key, value]) => {
           let o: ConfigItem = JSON.parse(JSON.stringify(modalPropsMeta[key]))
           o.key = key

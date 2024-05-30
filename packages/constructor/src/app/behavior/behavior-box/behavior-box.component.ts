@@ -27,11 +27,6 @@ export class BehaviorBoxComponent {
   // componentBehaviorMeta: BehaviorMeta
   componentBehaviorMeta: BehaviorConfigItem
   constructor(private componentService: ComponentService) {
-    this.componentBehaviorList = []
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComp = p
-      this.curComponentChange()
-    })
     this.componentBehaviorMeta = {
       event: {
         category: 'select',
@@ -53,6 +48,11 @@ export class BehaviorBoxComponent {
         key: '',
       },
     }
+    this.componentBehaviorList = []
+    this.componentService.curComponent$.subscribe(p => {
+      this.curComp = p
+      this.curComponentChange()
+    })
   }
   curComponentChange() {
     this.componentBehaviorList = []
@@ -60,7 +60,9 @@ export class BehaviorBoxComponent {
       case 'Button':
         this.componentBehaviorMeta = buttonBehaviorMeta
         this.curComp.behavior.forEach(item => {
-          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta)
+          clog('cloneDeep', cloneDeep)
+          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
+          clog('o', o);
           // .then((v: BehaviorConfigItem) => {
           // })
           // o = v;
