@@ -6,8 +6,8 @@
     <span #ref>{{curComp?.ulid}}</span>
 </div>
 <app-props-item 
-*ngFor="let propItem of componentPropsList"
-[propItem]="propItem"
+    *ngFor="let propItem of componentPropsList"
+    [propItem]="propItem"
 ></app-props-item>
 
 <d-toast [value]="msg"></d-toast>

@@ -1,9 +1,6 @@
-// 改名为behavior-group
+// todo 改名为behavior-group
 import { Component, Input, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-// import { 
-//   // BehaviorMeta,
-//    BehaviorItem, } from 'src/types/behavior';
 import { B, F, N, S, } from 'src/types/base';
 import type { BehaviorConfigItem } from 'src/types/config';
 
@@ -15,7 +12,6 @@ type newBehaviorConfigItem = Required<BehaviorConfigItem>
   styleUrls: ['./behavior-item.component.sass']
 })
 export class BehaviorItemComponent implements OnInit {
-  // @Input() behavior!: BehaviorMeta
   @Input() behavior!: BehaviorConfigItem
   @Input() index!: N
   eventMap: Map<S, {f: F, targetKey: S}> // todo 抽象为
@@ -33,7 +29,6 @@ export class BehaviorItemComponent implements OnInit {
     if (this.itemGroup.payload.hide) {
       this.itemGroup.payload.hideCalc = this.itemGroup.payload.hide(this.behavior)
     }
-    // clog('itemGroup', this.itemGroup)
     Array.from(Object.values(this.behavior)).forEach(item => {
       if (item.hideListenerKey) {
         this.eventMap.set(item.hideListenerKey, {
@@ -58,18 +53,16 @@ export class BehaviorItemComponent implements OnInit {
   }
   eventValueChange(value: S) {
     this.componentService.setComponentsBehavior(this.index, 'event', value)
-    // this.componentService.reqUpdateComponentProps('props', this.data.propKey, this.data.value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'event', value)
   }
   targetInputChangeH(value: S) {
-    clog('targetInputChangeH')
     this.componentService.setComponentsBehavior(this.index, 'target', value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'target', value)
-    this.behavior.target.value = value
-    this.listenerChange('target', this.behavior)
+    // this.behavior.target.value = value
+    this.itemGroup.target.value = value
+    this.listenerChange('target', this.itemGroup)
   }
   payloadInputChangeH(value: S) {
-    clog('payloadInputChangeH')
     this.componentService.setComponentsBehavior(this.index, 'payload', value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'payload', value)
   }
