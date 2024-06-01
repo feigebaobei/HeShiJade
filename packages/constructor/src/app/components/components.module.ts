@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 // import { CompBoxModule } from 'src/app/comp-box/comp-box.module';
 import { CompDirective } from './comp.directive'
 
-
 // import { AdDirective } from 'src/app/ad.directive';
 
 import { CompBoxComponent } from './comp-box/comp-box.component';

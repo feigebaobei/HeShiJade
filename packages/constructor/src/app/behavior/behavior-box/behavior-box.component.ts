@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
+import { cloneDeep } from 'src/helper/index'
 import type { Component as Comp } from 'src/types/component';
 import {
   Button as buttonBehaviorMeta
 } from 'src/helper/behavior'
-// import { BehaviorMeta, BehaviorItem } from 'src/types/behavior';
-// import type { BehaviorMeta, BehaviorMetaItem } from 'src/types/component';
-// import type { BehaviorConfigGroupsItem } from 'src/types/config';
-// import type { BehaviorConfigGroupsItem } from 'src/types/component';
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
 //   //  A, ULID, B, N, 
@@ -30,11 +27,6 @@ export class BehaviorBoxComponent {
   // componentBehaviorMeta: BehaviorMeta
   componentBehaviorMeta: BehaviorConfigItem
   constructor(private componentService: ComponentService) {
-    this.componentBehaviorList = []
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComp = p
-      this.curComponentChange()
-    })
     this.componentBehaviorMeta = {
       event: {
         category: 'select',
@@ -56,6 +48,11 @@ export class BehaviorBoxComponent {
         key: '',
       },
     }
+    this.componentBehaviorList = []
+    this.componentService.curComponent$.subscribe(p => {
+      this.curComp = p
+      this.curComponentChange()
+    })
   }
   curComponentChange() {
     this.componentBehaviorList = []
@@ -63,10 +60,16 @@ export class BehaviorBoxComponent {
       case 'Button':
         this.componentBehaviorMeta = buttonBehaviorMeta
         this.curComp.behavior.forEach(item => {
-          let o: BehaviorConfigItem
-          o = JSON.parse(JSON.stringify(this.componentBehaviorMeta));
+          clog('cloneDeep', cloneDeep)
+          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
+          clog('o', o);
+          // .then((v: BehaviorConfigItem) => {
+          // })
+          // o = v;
           (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
-            o[key].value = item[key]
+            if (item.hasOwnProperty(key)) {
+              o[key].value = item[key]
+            }
           })
           this.componentBehaviorList.push(o)
         })

@@ -11,7 +11,7 @@ type D = Date
 interface Ao {
     [k: S]: A
 }
-
+type FT<T = A> = (...p: A[]) => T
 type Email = `${S}@${S}`
 type ValueType = 'string' | 'number' | 'switch'
 // todo 完善类型
@@ -30,6 +30,9 @@ interface ConfigItemInput {
   value: S
   label: S
   key: S
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
 }
 type ConfigItemKeys = keyof ConfigItem
 interface ConfigItemTextarea {
@@ -37,6 +40,10 @@ interface ConfigItemTextarea {
   value: S
   label: S
   key: S
+  // hide?: B | FT<B>
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItemSelect<T> {
   category: 'select'
@@ -52,6 +59,9 @@ interface ConfigItemSelect<T> {
       options: SelectOptionsItem
     }
   }
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItemNumber {
   category: 'number'
@@ -60,6 +70,9 @@ interface ConfigItemNumber {
   key: S
   maxLength: N
   minLength: N
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItemSwitch {
   category: 'switch'
@@ -67,13 +80,19 @@ interface ConfigItemSwitch {
   value: B
   label: S
   key: S
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItmeOption {
-  category: 'options',
-  label: S,
-  key: S,
+  category: 'options'
+  label: S
+  key: S
   value: []
   template: Options<S, S>
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
 }
 // type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput
@@ -87,6 +106,7 @@ export type {
   S, N, A, B, ULID, 
   Email,
   F, Ao, O, D,
+  FT,
   ValueType,
   SelectOptionsItem,
   Options,

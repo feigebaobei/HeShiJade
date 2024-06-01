@@ -46,12 +46,7 @@ let compMap: Ao = {
 })
 export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked, AfterContentInit {
   @Input() comp!: Comp
-  // @ViewChild(CompDirective, {static: true}) compHost!: CompDirective;
-  // @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
-  // @ViewChild(CompDirective, {static: false, read: ElementRef}) compHost!: CompDirective; // 返回undefined
   @ViewChild(CompDirective, {static: true, }) compHost!: CompDirective; // 正常运行
-  // @ViewChild(AdDirective, {static: false, read: ElementRef}) adHost!: AdDirective;
-  // private clearTimer: VoidFunction | undefined;
   @Output() deleteComp = new EventEmitter<ULID>()
   curComp?: Comp | null
   componentRef: A
@@ -79,7 +74,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     // components模块内
     // clog('components模块内', compMap, this.comp, compMap[this.comp.type])
     // clog('components模块内', this.adHost) // undefined
-    clog('components模块内', this.compHost) 
+    // clog('components模块内', this.compHost) 
     if (!this.compHost) return
     const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
@@ -153,9 +148,9 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       this.init()
     }
   }
-  ngOnChange() {
-    // this.init()
-  }
+  // ngOnChanges() {
+  //   // this.init()
+  // }
   ngOnDestroy() {
     this.compHost.viewContainerRef.clear();
   }

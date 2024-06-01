@@ -1,10 +1,57 @@
 <section class="box">
-    <app-item *ngFor="let item of group; let i = index"
-        [groupItem]="item"
-        (change)="changeH()"
-        (inputChange)="inputChangeH($event)"
-        (selectChange)="selectChangeH($event)"
-        (switchChange)="switchChangeH($event)"
-        (optionsChange)="optionsChangeH($event)"
-    ></app-item>
+    <div *ngFor="let item of itemList; let i = index">
+        <div [ngSwitch]="item.category">
+            <ng-template [ngSwitchCase]="'input'">
+                <div>
+                    <app-item
+                        [groupItem]="item"
+                        [group]="itemList"
+                        (inputChange)="inputChangeH($event)"
+                        (selectChange)="selectChangeH($event, i)"
+                        (switchChange)="switchChangeH($event)"
+                        (optionsChange)="optionsChangeH($event)"
+                    ></app-item>
+                </div>
+            </ng-template>
+            <ng-template [ngSwitchCase]="'select'">
+                <div>
+                    <app-item
+                        [groupItem]="item"
+                        [group]="itemList"
+                        (inputChange)="inputChangeH($event)"
+                        (selectChange)="selectChangeH($event, i)"
+                        (switchChange)="switchChangeH($event)"
+                        (optionsChange)="optionsChangeH($event)"
+                    ></app-item>
+                </div>
+            </ng-template>
+            <ng-template [ngSwitchCase]="'switch'">
+                <div>
+                    <app-item
+                        [groupItem]="item"
+                        [group]="itemList"
+                        (inputChange)="inputChangeH($event)"
+                        (selectChange)="selectChangeH($event, i)"
+                        (switchChange)="switchChangeH($event)"
+                        (optionsChange)="optionsChangeH($event)"
+                    ></app-item>
+                </div>
+            </ng-template>
+            <ng-template [ngSwitchCase]="'options'">
+                <div *ngIf="!item.hideCalc">
+                    <app-item
+                        [groupItem]="item"
+                        [group]="itemList"
+                        (inputChange)="inputChangeH($event)"
+                        (selectChange)="selectChangeH($event, i)"
+                        (switchChange)="switchChangeH($event)"
+                        (optionsChange)="optionsChangeH($event)"
+                    ></app-item>
+                </div>
+            </ng-template>
+            <ng-template [ngSwitchDefault]>
+                ngSwitchDefault
+            </ng-template>
+        </div>
+    </div>
 </section>

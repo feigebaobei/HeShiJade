@@ -1,4 +1,7 @@
 import type { BehaviorConfigItem } from 'src/types/config'
+
+let clog = console.log
+
 // 指定组件的配置项
 let Button: BehaviorConfigItem = {
   event: {
@@ -22,6 +25,15 @@ let Button: BehaviorConfigItem = {
     value: '',
     label: '载荷',
     key: 'payload',
+    hide: function (itemGroup: BehaviorConfigItem) {
+      // this: Component
+      // itemGroup: 当前配置项组
+      clog('hide', !itemGroup.target.value)
+      return !itemGroup.target.value
+    },
+    hideListenerKey: 'target',
+    // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
+
   },
 }
 

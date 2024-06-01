@@ -1,33 +1,31 @@
 <form dForm ngForm>
     <d-form-item>
-        <d-form-label>{{behavior.event.label}} {{index}}</d-form-label>
+        <d-form-label>{{itemGroup.event.label}}</d-form-label>
         <d-form-control>
-            <d-select [options]="behavior.event.options"
+            <d-select [options]="itemGroup.event.options"
                 name="event"
                 [filterKey]="'label'"
                 [valueKey]="'value'"
-                [(ngModel)]="behavior.event.value"
-                (ngModelChange)="eventValueChange(behavior.event.value)"
+                [(ngModel)]="itemGroup.event.value"
+                (ngModelChange)="eventValueChange(itemGroup.event.value)"
             ></d-select>
         </d-form-control>
     </d-form-item>
     <d-form-item>
-        <!-- <d-form-label>{{behavior.target.label}}</d-form-label> -->
-        <d-form-label>目标</d-form-label>
+        <d-form-label>{{itemGroup.target.label}}</d-form-label>
         <d-form-control>
             <input dTextInput name="target"
-                [(ngModel)]="behavior.target.value"
-                (ngModelChange)="targetInputChangeH(behavior.target.value)"
+                [(ngModel)]="itemGroup.target.value"
+                (ngModelChange)="targetInputChangeH(itemGroup.target.value)"
             >
         </d-form-control>
     </d-form-item>
-    <d-form-item>
-        <!-- <d-form-label>{{behavior.payload.label}}</d-form-label> -->
-        <d-form-label>载荷</d-form-label>
+    <d-form-item *ngIf="!itemGroup.payload.hideCalc">
+        <d-form-label>{{itemGroup.payload.label}}</d-form-label>
         <d-form-control>
             <input dTextInput name="payload"
-                [(ngModel)]="behavior.payload.value"
-                (ngModelChange)="payloadInputChangeH(behavior.payload.value)"
+                [(ngModel)]="itemGroup.payload.value"
+                (ngModelChange)="payloadInputChangeH(itemGroup.payload.value)"
             >
         </d-form-control>
     </d-form-item>

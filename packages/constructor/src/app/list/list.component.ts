@@ -61,7 +61,6 @@ export class ListComponent implements OnInit {
     // }
     this.appService.getAppList().then(al => {
       this.appList = al
-      clog('al', al)
     })
   }
   logoutBtClickH()  {

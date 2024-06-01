@@ -10,9 +10,12 @@ import { SwitchComponent } from './switch/switch.component';
 import { OptionsComponent } from './options/options.component';
 import { ItemComponent } from './item/item.component';
 
+import { CompDirective } from './comp.directive'
+
 
 @NgModule({
   declarations: [
+    CompDirective,
     ItemsBoxComponent,
     ItemsGroupComponent,
     InputComponent,
