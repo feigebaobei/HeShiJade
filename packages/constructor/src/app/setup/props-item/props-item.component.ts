@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { PropsDirective } from 'src/app/props.directive';
 // 组件
 import { PropsInputComponent } from '../props-input/props-input.component';
@@ -20,6 +20,7 @@ export class PropsItemComponent implements OnInit {
   // @Input() propItem!: ComponentPropsMetaItem
   @Input() propItem!: ConfigItem
   @ViewChild(PropsDirective, {static: true}) propsHost!: PropsDirective
+  @Output() itemChange = new EventEmitter()
   propArr: A[]
   constructor() {
     this.propArr = []
@@ -35,6 +36,11 @@ export class PropsItemComponent implements OnInit {
       default:
         componentRef = viewContainerRef.createComponent(PropsInputComponent)
         componentRef.instance.data = this.propItem
+        // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          // clog('change', v)
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
         break
       case 'select':
         componentRef = viewContainerRef.createComponent(PropsSelectComponent)
@@ -49,7 +55,7 @@ export class PropsItemComponent implements OnInit {
       // case 'option':
       //   componentRef = viewContainerRef.createComponent(PropsOptionComponent)
       //   componentRef.instance.data = this.propItem
-        break
+        // break
     }
   }
 }

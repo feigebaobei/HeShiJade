@@ -5,9 +5,15 @@
     <span>组件标识</span>
     <span #ref>{{curComp?.ulid}}</span>
 </div>
+<ng-container
+*ngFor="let propItem of componentPropsList"
+>
 <app-props-item 
-    *ngFor="let propItem of componentPropsList"
+    *ngIf="!propItem.hideCalc"
     [propItem]="propItem"
+    (itemChange)="itemChangeH($event)"
 ></app-props-item>
+
+</ng-container>
 
 <d-toast [value]="msg"></d-toast>

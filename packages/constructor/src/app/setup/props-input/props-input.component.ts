@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 // type
 import type { A, S, ConfigItem, ConfigItemInput } from 'src/types/base';
@@ -14,6 +14,7 @@ export class PropsInputComponent implements OnInit, OnChanges {
   // @Input() data!: ConfigItem
   @Input() data!: ConfigItemInput
   value: S
+  @Output() change = new EventEmitter()
   constructor(private componentService: ComponentService) {
     // 类实例化时还没收到传入的数据。所以得不到
     // this.value = this.data.value
@@ -30,9 +31,11 @@ export class PropsInputComponent implements OnInit, OnChanges {
   ngModel(...p: A) {
     console.log('ngModel', p)
   }
-  change() {
+  modelChangeH(v: S) {
     // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
     this.componentService.setComponentProp(this.data.key, this.data.value)
     this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
+    // clog('modelChangeH', v)
+    this.change.emit(v)
   }
 }

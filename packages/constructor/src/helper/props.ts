@@ -4,6 +4,9 @@ import type { PropsConfigItem } from 'src/types/config'
 // interface PropsConfigItem {
 //     [k: S]: ConfigItem
 // }
+
+let clog = console.log
+
 // 指定组件的配置项
 let Button: PropsConfigItem = {
     type: {
@@ -15,8 +18,7 @@ let Button: PropsConfigItem = {
         ],
         value: 'button',
         label: '类型',
-        key: '',
-        // overFields: ['value'],
+        key: 'type',
     },
     bsSize: {
         category: 'select',
@@ -28,8 +30,7 @@ let Button: PropsConfigItem = {
         ],
         value: 'md',
         label: '大小',
-        key: '',
-        // overFields: ['value'],
+        key: 'bsSize',
     },
     bordered: {
         category: 'switch',
@@ -39,8 +40,7 @@ let Button: PropsConfigItem = {
         ],
         value: false,
         label: '边框',
-        key: '',
-        // overFields: ['value'],
+        key: 'bordered',
     },
     disabled: {
         category: 'switch',
@@ -50,21 +50,19 @@ let Button: PropsConfigItem = {
         ],
         value: false,
         label: '禁用',
-        key: '',
-        // overFields: ['value'],
+        key: 'disabled',
     },
     width: {
         category: 'input',
         value: '',
         label: '宽度',
-        key: '',
-        // overFields: ['value'],
+        key: 'width',
     },
     text: {
         category: 'input',
         value: 'button',
         label: '文本',
-        key: '',
+        key: 'text',
     }
 }
 let Input: PropsConfigItem = {
@@ -76,8 +74,7 @@ let Input: PropsConfigItem = {
         ],
         value: false,
         label: '是否出现错误状态',
-        key: '',
-        // overFields: ['value'],
+        key: 'error',
     },
     size: {
         category: 'select',
@@ -88,8 +85,7 @@ let Input: PropsConfigItem = {
         ],
         value: '',
         label: '尺寸',
-        key: '',
-        // overFields: ['value'],
+        key: 'size',
     },
     styleType: {
         category: 'select',
@@ -99,8 +95,7 @@ let Input: PropsConfigItem = {
         ],
         value: 'default',
         label: '风格',
-        key: '',
-        // overFields: ['value'],
+        key: 'styleType',
     },
 }
 let Select: PropsConfigItem = {
@@ -112,22 +107,16 @@ let Select: PropsConfigItem = {
         ],
         value: 'default',
         label: '风格',
-        key: '',
+        key: 'styleType',
     },
     options: {
-        // type: 'option',
         category: 'select',
         options: [
             { label: 'oneLabel', value: 'oneVlaue' },
         ],
-        // valueType: 'string',
-        label: '选项',
-        // addable: true,
-        // reducible: true,
-        // maxLength: 5,
-        // minLength: 1,
-        key: '',
         value: '',
+        label: '选项',
+        key: 'options',
     }
 }
 let Modal: PropsConfigItem = {
@@ -135,8 +124,7 @@ let Modal: PropsConfigItem = {
         category: 'input',
         value: 'title',
         label: 'title',
-        // overFields: ['value'],
-        key: '',
+        key: 'title',
     },
     visible: {
         category: 'switch',
@@ -146,15 +134,18 @@ let Modal: PropsConfigItem = {
         ],
         value: true,
         label: '是否显示',
-        // overFields: ['value'],
-        key: '',
+        key: 'visible',
+        hide: (p: PropsConfigItem) => {
+            clog('hide', p)
+            return !!p['title']
+        },
+        hideListenerKey: 'title',
     },
     width: {
         category: 'input',
         value: '',
         label: '宽度',
-        // overFields: ['value'],
-        key: '',
+        key: 'width',
     },
     placement: {
         category: 'select',
@@ -163,11 +154,9 @@ let Modal: PropsConfigItem = {
             {label: 'top', value: 'top'},
             {label: 'bottom', value: 'bottom'},
         ],
-        // value: 'center',
         value: '',
-        label: '宽度',
-        // overFields: ['value'],
-        key: '',
+        label: '位置',
+        key: 'placement',
     },
 }
 let Form: PropsConfigItem = {
@@ -177,11 +166,9 @@ let Form: PropsConfigItem = {
             { label: '水平', value: 'horizontal' },
             { label: '竖直', value: 'vertical' },
         ],
-        // value: true,
         value: 'horizontal',
         label: '排版',
-        // overFields: ['value'],
-        key: '',
+        key: 'layout',
     },
     isCancel: {
         category: 'switch',
@@ -191,8 +178,7 @@ let Form: PropsConfigItem = {
         ],
         value: true,
         label: '是否有取消按钮',
-        // overFields: ['value'],
-        key: '',
+        key: 'isCancel',
     },
     isSubmit: {
         category: 'switch',
@@ -202,8 +188,7 @@ let Form: PropsConfigItem = {
         ],
         value: true,
         label: '是否有提交按钮',
-        // overFields: ['value'],
-        key: '',
+        key: 'isSubmit',
     },
 }
 let Table: PropsConfigItem = {

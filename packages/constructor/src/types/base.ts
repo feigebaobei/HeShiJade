@@ -72,6 +72,7 @@ interface ConfigItemNumber {
   minLength: N
   hide?: FT<B>
   hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItemSwitch {
   category: 'switch'
@@ -81,6 +82,7 @@ interface ConfigItemSwitch {
   key: S
   hide?: FT<B>
   hideListenerKey?: S
+  hideCalc?: B
 }
 interface ConfigItmeOption {
   category: 'options'
@@ -90,6 +92,7 @@ interface ConfigItmeOption {
   template: Options<S, S>
   hide?: FT<B>
   hideListenerKey?: S
+  hideCalc?: B
 }
 // type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput
