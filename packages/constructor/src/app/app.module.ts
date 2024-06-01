@@ -13,7 +13,7 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BehaviorModule } from './behavior/behavior.module';
-import { SlotModule } from './slot/slot.module';
+// import { SlotModule } from './slot/slot.module';
 import { ItemsModule } from './items/items.module';
 import { ComponentsModule } from './components/components.module';
 
@@ -88,7 +88,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     FormsModule,
     HttpClientModule,
     BehaviorModule,
-    SlotModule,
+    // SlotModule,
     ItemsModule,
     ComponentsModule,
   ],
