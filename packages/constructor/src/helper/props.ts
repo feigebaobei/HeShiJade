@@ -135,11 +135,11 @@ let Modal: PropsConfigItem = {
         value: true,
         label: '是否显示',
         key: 'visible',
-        hide: (p: PropsConfigItem) => {
-            clog('hide', p)
-            return !!p['title']
-        },
-        hideListenerKey: 'title',
+        // hide: (p: PropsConfigItem) => {
+        //     clog('hide', p)
+        //     return !!p['title']
+        // },
+        // hideListenerKey: 'title',
     },
     width: {
         category: 'input',
