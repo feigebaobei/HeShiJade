@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+// 模块
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
@@ -21,6 +21,7 @@ import { ComponentsModule } from './components/components.module';
 import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
 import { ItemCategoryDirective } from './item-category.directive';
+import { PropsDirective } from './props.directive';
 
 // devui
 import { DevUIModule, 
@@ -33,16 +34,16 @@ import { InputGroupModule } from 'ng-devui/input-group';
 // pipe
 import { UpperCasePipe } from '@angular/common';
 import { JsonPipe } from '@angular/common';
+
+// 组件
 import { DialogComponent } from './list/dialog/dialog.component';
 import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
-
 import { PropsBoxComponent } from './setup/props-box/props-box.component';
 import { PropsInputComponent } from './setup/props-input/props-input.component';
 import { PropsSelectComponent } from './setup/props-select/props-select.component';
 import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
-import { PropsDirective } from './props.directive';
 import { PropsItemComponent } from './setup/props-item/props-item.component';
 import { PropsOptionComponent } from './setup/props-option/props-option.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
