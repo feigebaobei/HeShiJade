@@ -1,4 +1,5 @@
-<header>
+<section class="section">
+<header class="header">
     <p>
         <span>{{curApp?.key}}</span>
         <span *ngIf="curPage?.key">/</span>
@@ -8,54 +9,47 @@
         <d-button (click)="viewBtClickH()">预览</d-button>
     </aside>
 </header>
-<main>
-    <d-row [dGutter]="12" [dSpace]="12">
-        <!-- page & component -->
-        <d-col [dSpan]="8">
-            <d-tabs [type]="'tabs'" [(activeTab)]="leftTabActive" (activeTabChange)="activeTabChange($event)">
-                <d-tab id="page" title="页面">
-                    <app-page-list></app-page-list>
-                </d-tab>
-                <d-tab id="component" title="组件">
-                    <app-component-list></app-component-list>
-                </d-tab>
-            </d-tabs>
-        </d-col>
-        <!-- stage -->
-        <d-col
-            [dSpan]="8"
-            dDroppable
-            (dropEvent)="onDrop($event, pageData)"
-            class="stage"
-            (click)="stageClickH($event)"
-        >
-            <p>stage</p>
-            <div *ngIf="componentByPage.length">
-                <app-comp-box
-                    *ngFor="let comp of componentByPage"
-                    [comp]="comp"
-                    (deleteComp)="deleteComponentByUlidH($event)"
-                ></app-comp-box>
-            </div>
-        </d-col>
-        <!-- setter -->
-        <d-col [dSpan]="8">
-            <d-tabs [type]="'tabs'" [(activeTab)]="rightTabActive" (activeTabChange)="activeTabChange($event)">
-                <d-tab id="props" title="props">
-                  <app-props-box></app-props-box>
-                </d-tab>
-                <d-tab id="behavior" title="behavior">
-                  <app-behavior-box></app-behavior-box>
-                </d-tab>
-                <d-tab id="items" title="items">
-                  <app-items-box></app-items-box>
-                </d-tab>
-                <d-tab id="slot" title="slot">
-                    子组件（应该不显示此面板）
-                  <app-slot-box></app-slot-box>
-                </d-tab>
-            </d-tabs>
-        </d-col>
-    </d-row>
-</main>
+    <!-- page & component -->
+    <div class="left">
+        <d-tabs [type]="'tabs'" [(activeTab)]="leftTabActive" (activeTabChange)="activeTabChange($event)">
+            <d-tab id="page" title="页面">
+                <app-page-list></app-page-list>
+            </d-tab>
+            <d-tab id="component" title="组件">
+                <app-component-list></app-component-list>
+            </d-tab>
+        </d-tabs>
+    </div>
+    <!-- stage -->
+    <div class="center"
+        dDroppable
+        (dropEvent)="onDrop($event, pageData)"
+        (click)="stageClickH($event)"
+    >
+        <p>stage</p>
+        <div *ngIf="componentByPage.length">
+            <app-comp-box
+                *ngFor="let comp of componentByPage"
+                [comp]="comp"
+                (deleteComp)="deleteComponentByUlidH($event)"
+            ></app-comp-box>
+        </div>
+    </div>
+    <!-- setter -->
+    <div class="right">
+        <d-tabs [type]="'tabs'" [(activeTab)]="rightTabActive" (activeTabChange)="activeTabChange($event)">
+            <d-tab id="props" title="props">
+                <app-props-box></app-props-box>
+            </d-tab>
+            <d-tab id="behavior" title="behavior">
+                <app-behavior-box></app-behavior-box>
+            </d-tab>
+            <d-tab id="items" title="items">
+                <div class="item-box">
+                    <app-items-box></app-items-box>
+                </div>
+            </d-tab>
+        </d-tabs>
+    </div>
+</section>
 <d-toast [value]="msg"></d-toast>
