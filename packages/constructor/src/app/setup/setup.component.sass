@@ -1,23 +1,32 @@
-header
-    display: flex
-    justify-content: center
-    align-items: center
-    padding: 4px 0
+.section
+    display: grid
+    grid-gap: 12px
+    grid-template-columns: 280px auto 380px
+    grid-template-rows: 36px auto
+    grid-template-areas: 'header header header' 'left stage right'
+    height: 100vh
+    margin: 0
 
-    p
-        flex-basis: 80%
-        flex-grow: 1
-        flex-shrink: 1
-        text-align: center
-        margin: 0
+    .header
+        grid-area: header
+        p
+            flex-basis: 80%
+            flex-grow: 1
+            flex-shrink: 1
+            text-align: center
+            margin: 0
 
-    aside
-        flex-basis: 20%
-        flex-grow: 0
-        flex-shrink: 0
-        display: flex
-        justify-content: flex-end
-        padding: 0 8px
-    
-.stage
-    border: 1px solid red
+        aside
+            flex-basis: 20%
+            flex-grow: 0
+            flex-shrink: 0
+            display: flex
+            justify-content: flex-end
+            padding: 0 8px
+    .left
+        overflow: auto
+    .center
+        overflow: auto
+        border: 1px solid red
+    .right
+        overflow: auto
