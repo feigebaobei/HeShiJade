@@ -3,11 +3,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/service/app.service';
 import { VersionsService } from 'src/app/service/versions.service';
 import { serviceUrl } from 'src/helper/config';
+import { FormLayout } from 'ng-devui/form';
 import type { ResponseData } from 'src/types';
-import type { A, N, ULID } from 'src/types/base';
+import type { A, N, S, ULID } from 'src/types/base';
 
 let clog = console.log
-
+interface EnvObj {
+  version: N
+  remarks: S
+}
 @Component({
   selector: 'app-publish-dialog',
   templateUrl: './publish-dialog.component.html',
@@ -20,6 +24,12 @@ export class PublishDialogComponent implements OnInit {
   preVersion: N
   prodVersion: N
   newVersion: N
+  layoutDirection: FormLayout
+
+  devObj: EnvObj
+  testObj: EnvObj
+  preObj: EnvObj
+  prodObj: EnvObj
   constructor(
     private appService: AppService,
     private versionService: VersionsService,
@@ -37,9 +47,30 @@ export class PublishDialogComponent implements OnInit {
     this.preVersion = 0
     this.prodVersion = 0
     this.newVersion = 0 + 1 // 默认加1
+
+    this.layoutDirection = FormLayout.Vertical;
+    this.devObj = {
+      version: 1,
+      remarks: 'rema',
+    }
+    this.testObj = {
+      version: -1,
+      remarks: 'remarks',
+    }
+    this.preObj = {
+      version: -1,
+      remarks: 'remarks',
+    }
+    this.prodObj = {
+      version: -1,
+      remarks: 'remarks',
+    }
   }
   ngOnInit() {
     this.versionService.reqVersions(this.data.appUlid)
+  }
+  devVersionChangeH(v: N) {
+    clog('devVersionChangeH', v, this.devObj.version)
   }
   devOkBtClickH() {
     this.http.post<ResponseData>(`${serviceUrl()}/apps/versions`, {
@@ -94,5 +125,14 @@ export class PublishDialogComponent implements OnInit {
         this.prodVersion = this.preVersion
       }
     })
+  }
+  testToDevClickH() {
+    clog('testToDevClickH')
+  }
+  preToDevClickH() {
+    clog('preToDevClickH')
+  }
+  prodToDevClickH() {
+    clog('prodToDevClickH')
   }
 }
