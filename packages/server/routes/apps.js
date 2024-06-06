@@ -7,8 +7,9 @@ let bodyParser = require('body-parser');
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules, auth, } = require('../helper');
+const { rules, auth, sqlVersion, } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
+const { DB } = require('../helper/config')
 
 // let md5 = require('md5');
 let clog = console.log
@@ -62,7 +63,7 @@ router.route('/')
     if (rules.required(req.body.key) &&
     rules.required(req.body.name) &&
     rules.required(req.body.ulid) &&
-    rules.required(req.body.prevUlid) &&
+    rules.exist(req.body.prevUlid) &&
     rules.required(req.body.collaborator)) {
       s(true)
     } else {
@@ -104,13 +105,14 @@ router.route('/')
               name: req.body.name,
               ulid: req.body.ulid,
               theme: req.body.theme,
-              version: req.body.version || 0, // todo 只增加
+              version: req.body.version || 0,
               owner: user.ulid,
               collaborator: req.body.collaborator, // ulid[]
               firstPageUlid: '',
               lastPageUlid: '',
               prevUlid: req.body.prevUlid,
-              nextUlid: '',
+              nextUlid: '', // 创建都是加在最后
+              remarks: '',
             }
           },
         }
@@ -143,6 +145,7 @@ router.route('/')
         lastPageUlid: '',
         prevUlid: '',
         nextUlid: '',
+        remarks: '',
       })
       return Promise.all([p1, p2]).then(([r1, r2]) => {
         return [r1, r2]
@@ -250,99 +253,46 @@ router.route('/versions')
   // 校验参数
   // 取出数据
   new Promise((s, j) => {
-    if (rules.required(req.query.appUlid)) {
+    clog('rules.required(req.query.appUlid)', rules.required(req.query.appUlid))
+    clog('rules.isArray(req.query.envs)', rules.isArray(req.query.envs))
+    if (rules.required(req.query.appUlid) && rules.isArray(req.query.envs)) {
       s(true)
     } else {
       j(100100)
     }
   }).then(() => {
-    // let tableName = ''
-    let p // p0, p1, p2, p3
-    switch (req.query.env) {
-      case 'dev':
-        // p0 = 
-        p = lowcodeDb.collection('apps_dev').findOne({
-          ulid: req.query.appUlid
-        }).then((app) => {
-          return {dev: app.version}
-        }).catch(() => {
-          return Promise.reject(300000)
-        })
-        // p = Promise.all([p0]).catch(() => {
-        //   return Promise.reject(300000)
-        // })
-        break
-      case 'test':
-        p = lowcodeDb.collection('apps_test').findOne({
-          ulid: req.query.appUlid
-        }).then((app) => {
-          return {test: app.version}
-        }).catch(() => {
-          return Promise.reject(300000)
-        })
-        break
-      case 'pre':
-        p = lowcodeDb.collection('apps_pre').findOne({
-          ulid: req.query.appUlid
-        }).then(() => {
-          return {pre: app.version}
-        }).catch(() => {
-          return Promise.reject(300000)
-        })
-        break
-      case 'prod':
-        p = lowcodeDb.collection('apps_prod').findOne({
-          ulid: req.query.appUlid
-        }).then((app) => {
-          return {prod: app.version}
-        }).catch(() => {
-          return Promise.reject(300000)
-        })
-        break
-      default:
-        let p0 = lowcodeDb.collection('apps_dev').findOne({
-          ulid: req.query.appUlid
-        })
-        let p1 = lowcodeDb.collection('apps_test').findOne({
-          ulid: req.query.appUlid
-        }) // 有可能为null
-        let p2 = lowcodeDb.collection('apps_pre').findOne({
-          ulid: req.query.appUlid
-        })
-        let p3 = lowcodeDb.collection('apps_prod').findOne({
-          ulid: req.query.appUlid
-        })
-        // 
-        p = Promise.all([p0, p1, p2, p3]).then(([r0, r1, r2, r3]) => {
-          clog(r0)
-          clog(r1)
-          clog(r2)
-          clog(r3)
-          return {
-            dev: r0?.version,
-            test: r1?.version,
-            pre: r2?.version,
-            prod: r3?.version,
-          }
-        }).catch((e) => {{
-          clog(e)
-          return Promise.reject(200010)
-        }})
-        break
+    let ps = []
+    if (req.query.envs.includes(DB.dev.env)) {
+      ps.push(sqlVersion(DB.dev.appTable, req.query.appUlid, DB.dev.env))
     }
-    return p
-  }).then((obj) => {
-    return res.status(200).json({
-      code: 0,
-      message: '',
-      data: {
-        dev: obj.dev,
-        test: obj.test,
-        pre: obj.pre,
-        prod: obj.prod,
-      }
+    if (req.query.envs.includes(DB.test.env)) {
+      ps.push(sqlVersion(DB.test.appTable, req.query.appUlid, DB.test.env))
+    }
+    if (req.query.envs.includes(DB.pre.env)) {
+      ps.push(sqlVersion(DB.pre.appTable, req.query.appUlid, DB.pre.env))
+    }
+    if (req.query.envs.includes(DB.prod.env)) {
+      ps.push(sqlVersion(DB.prod.appTable, req.query.appUlid, DB.prod.env))
+    }
+    return Promise.all(ps).then(arr => {
+      return res.status(200).json({
+        code: 0,
+        message: '',
+        data: arr.reduce((r, c) => {
+          r = {
+            ...r,
+            ...c
+          }
+          return r
+        }, {})
+      })
+    }).catch((error) => {
+      clog('error', error)
+      return Promise.reject(200010)
     })
+
   }).catch((code) => {
+    clog('code', code)
     return res.status(200).json({
       code,
       message: errorCode[code],

@@ -1,3 +1,7 @@
+let {
+    lowcodeDb,
+  } = require('../mongodb');
+  
 // let required = (params) => {
 //     return params !== undefined && params !== null
 // }
@@ -6,8 +10,13 @@ let {instance} = require('./req')
 let {auth} = require('./auth')
 
 let rules = {
+    exist: (params) => {
+        return params !== undefined && params !== null
+    },
+    // todo 修改使用它的地方
     required: (params) => {
         return params !== undefined && params !== null
+        // return this.exist(params) && params !== ''
     },
     email: (str) => {
         // 1234@qq.com
@@ -67,6 +76,22 @@ let resParamsError = (res) => {
         data: {},
       })
 }
+let sqlVersion = (tableName, appUlid, key) => {
+    return lowcodeDb.collection(tableName).findOne({
+        ulid: appUlid
+      }).then(app => {
+        return {
+          [`${key}`]: {
+            version: app.version,
+            remarks: app.remarks,
+          }
+        }
+      }).catch(() => {
+        return Promise.resolve({
+            [`${key}`]: {}
+        })
+      })
+}
 
 
 module.exports = {
@@ -76,4 +101,5 @@ module.exports = {
     resParamsError,
     instance,
     auth,
+    sqlVersion,
 }
