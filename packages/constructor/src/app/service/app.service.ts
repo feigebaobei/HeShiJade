@@ -6,7 +6,7 @@ import { serviceUrl } from 'src/helper/config';
 import { createTree } from 'src/helper/tree';
 import { initAppMeta } from 'src/helper';
 import type { ResponseData } from 'src/types';
-import type { App } from 'src/types/app';
+import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
   // B,
    Email, S, ULID, } from 'src/types/base';
@@ -32,6 +32,7 @@ export class AppService {
   appList$: Subject<App[]>
   // appSubject$: Subject<AppOrUn> // 04.29+ 删除
   tree: Tree<App>
+  private _versionMap: Map<ULID, SyntheticVersion>
   constructor(
     private http: HttpClient,
     private userService: UserService,
@@ -40,6 +41,7 @@ export class AppService {
     this.appList$ = new Subject<App[]>()
     // this.appSubject$ = new Subject<AppOrUn>()
     this.tree = createTree()
+    this._versionMap = new Map()
   }
   private _find(appUlid?: S) {
     return this._appList.find(item => item.ulid === appUlid)
@@ -127,15 +129,19 @@ export class AppService {
       this._createApp({
         key: appObj.key,
         name: appObj.name,
-        theme: appObj.theme,
-        collaborator: appObj.collaborator,
-        prevUlid: appObj.prevUlid,
         ulid: appObj.ulid,
+        theme: appObj.theme,
+        version: appObj.version,
+        owner: appObj.owner,
+        collaborator: appObj.collaborator,
+        firstPageUlid: appObj.firstPageUlid,
+        prevUlid: appObj.prevUlid,
+        nextUlid: appObj.nextUlid,
       })
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
-  private _createApp(data: ReqCreateData & {ulid: ULID}) {
+  private _createApp(data: App) {
     return new Promise((s, j) => {
       this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
         ...data,
@@ -171,5 +177,29 @@ export class AppService {
       }
     }
   }
-  
+
+  getVersion(appUlid: ULID, envs: S[]) {
+    let o = this._versionMap.get(appUlid)
+    if (o) {
+      return Promise.resolve(o)
+    } else {
+      return new Promise<SyntheticVersion>((s, j) => {
+        this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+          params: {
+            appUlid,
+            envs,
+            // envs: ['dev', 'test', 'pre', 'prod'],
+          },
+          withCredentials: true,
+        }).subscribe(res => {
+          if (res.code === 0) {
+            this._versionMap.set(appUlid, res.data)
+            s(res.data)
+          } else {
+            j(new Error(res.message))
+          }
+        })
+      })
+    }
+  }
 }

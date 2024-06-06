@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/service/app.service';
-import { VersionsService } from 'src/app/service/versions.service';
+// import { VersionsService } from 'src/app/service/versions.service';
 import { serviceUrl } from 'src/helper/config';
 import { FormLayout } from 'ng-devui/form';
 import type { ResponseData } from 'src/types';
@@ -32,16 +32,16 @@ export class PublishDialogComponent implements OnInit {
   prodObj: EnvObj
   constructor(
     private appService: AppService,
-    private versionService: VersionsService,
+    // private versionService: VersionsService,
     private http: HttpClient
   ) {
-    this.versionService.versions$.subscribe((v) => {
-      this.devVersion = v.dev
-      this.testVersion = v.test
-      this.preVersion = v.pre
-      this.prodVersion = v.prod
-      this.newVersion = v.dev + 1 // 默认加1
-    })
+    // this.versionService.versions$.subscribe((v) => {
+    //   this.devVersion = v.dev
+    //   this.testVersion = v.test
+    //   this.preVersion = v.pre
+    //   this.prodVersion = v.prod
+    //   this.newVersion = v.dev + 1 // 默认加1
+    // })
     this.devVersion = 0
     this.testVersion = 0
     this.preVersion = 0
@@ -67,12 +67,24 @@ export class PublishDialogComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.versionService.reqVersions(this.data.appUlid)
+    // this.versionService.reqVersions(this.data.appUlid)
+    this.appService.getVersion(this.data.appUlid, ['dev', 'test', 'pre', 'prod']).then(syntheticVersion => {
+      clog('syntheticVersion', syntheticVersion)
+      this.devObj.version = syntheticVersion.dev?.version ?? -1
+      this.devObj.remarks = syntheticVersion.dev?.remarks ?? ''
+      this.testObj.version = syntheticVersion.test?.version ?? -1
+      this.testObj.remarks = syntheticVersion.test?.remarks ?? ''
+      this.preObj.version = syntheticVersion.pre?.version ?? -1
+      this.preObj.remarks = syntheticVersion.pre?.remarks ?? ''
+      this.prodObj.version = syntheticVersion.prod?.version ?? -1
+      this.prodObj.remarks = syntheticVersion.prod?.remarks ?? ''
+    })
   }
   devVersionChangeH(v: N) {
     clog('devVersionChangeH', v, this.devObj.version)
   }
   devOkBtClickH() {
+    // 全改为调用app.service中的方法
     this.http.post<ResponseData>(`${serviceUrl()}/apps/versions`, {
       appUlid: this.data.appUlid,
       newVersion: this.newVersion,

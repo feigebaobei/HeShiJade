@@ -1,3 +1,5 @@
+// 考虑删除它。
+// 把此文件的功能迁移到app.service中。
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { serviceUrl } from 'src/helper/config';
@@ -29,33 +31,33 @@ export class VersionsService {
     }
     this.versions$ = new Subject<Versions>()
   }
-  reqVersions(appUlid: ULID, env?: S) {
-    this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
-      params: {
-        appUlid,
-        env: env || '',
-      },
-      withCredentials: true
-    }).subscribe(res => {
-      if (res.code === 0) {
-        this.setVersions({
-          dev: res.data.dev,
-          test: res.data.test,
-          pre: res.data.pre,
-          prod: res.data.prod,
-        })
-      }
-    })
-  }
-  getVersions() {
-    return this._versions
-  }
-  // 设置版本
-  setVersions(versions: Versions) {
-    this._versions.dev = versions.dev
-    this._versions.test = versions.test
-    this._versions.pre = versions.pre
-    this._versions.prod = versions.prod
-    this.versions$.next(this._versions)
-  }
+  // reqVersions(appUlid: ULID, env?: S) {
+  //   this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+  //     params: {
+  //       appUlid,
+  //       env: env || '',
+  //     },
+  //     withCredentials: true
+  //   }).subscribe(res => {
+  //     if (res.code === 0) {
+  //       this.setVersions({
+  //         dev: res.data.dev,
+  //         test: res.data.test,
+  //         pre: res.data.pre,
+  //         prod: res.data.prod,
+  //       })
+  //     }
+  //   })
+  // }
+  // getVersions() {
+  //   return this._versions
+  // }
+  // // 设置版本
+  // setVersions(versions: Versions) {
+  //   this._versions.dev = versions.dev
+  //   this._versions.test = versions.test
+  //   this._versions.pre = versions.pre
+  //   this._versions.prod = versions.prod
+  //   this.versions$.next(this._versions)
+  // }
 }

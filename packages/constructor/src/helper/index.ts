@@ -11,7 +11,7 @@ import type { App } from 'src/types/app';
 let clog = console.log
 // clog('clone', clone)
 
-const VERSION = 3 // 按照圆周率的数值
+const VERSION = 0 // 按照圆周率的数值
 
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     return new Promise((s, j) => {
@@ -199,6 +199,7 @@ let cleanoutComponent = (p: A) => {
 }
 
 export {
+  VERSION,
   reqToPromise,
   cloneDeep,
   // createCompKey,

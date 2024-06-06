@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 // import type { ResponseData } from 'src/types';
-import type { A } from 'src/types/base';
+import type { A, N } from 'src/types/base';
+import { VERSION } from 'src/helper';
 
 let clog = console.log
 
@@ -12,8 +13,10 @@ let clog = console.log
 })
 export class DialogComponent {
   msg: {}[]
+  initVersion: N
   constructor(private http: HttpClient) {
     this.msg = []
+    this.initVersion = VERSION
   }
   @Input() data: A
   @Output() newEvent = new EventEmitter()

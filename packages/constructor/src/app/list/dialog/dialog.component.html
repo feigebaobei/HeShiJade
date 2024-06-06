@@ -30,6 +30,7 @@
     <d-form-item>
         <d-form-label>版本号</d-form-label>
         <d-form-control>
+            {{initVersion}}
             <!-- <d-select [options]="data.versionOptions" name="version" 
             [filterKey]="'label'" 
             [(ngModel)]="data.version"></d-select> -->
@@ -41,7 +42,7 @@
         </d-form-control>
     </d-form-item>
     <d-form-item>
-        <d-form-label>成员</d-form-label>
+        <d-form-label [hasHelp]="true" [helpTips]="'暂时不生效'">成员</d-form-label>
         <d-form-control>
             <textarea dTextarea
             name="members"
