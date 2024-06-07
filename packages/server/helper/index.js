@@ -8,6 +8,39 @@ let {
 
 let {instance} = require('./req')
 let {auth} = require('./auth')
+// let ENVS = ['dev', 'test', 'pre', 'prod']
+// let ENVS = [
+//     {
+//         name: 'dev',
+//         value: 10,
+//         appTable: 'apps_dev',
+//         pageTable: 'pages_dev',
+//         componentTable: 'components_dev',
+//     },
+//     {
+//         name: 'test',
+//         value: 20,
+//         appTable: 'apps_test',
+//         pageTable: 'pages_test',
+//         componentTable: 'components_test',
+//     },
+//     {
+//         name: 'pre',
+//         value: 30,
+//         appTable: 'apps_pre',
+//         pageTable: 'pages_pre',
+//         componentTable: 'components_pre',
+//     },
+//     {
+//         name: 'prod',
+//         value: 40,
+//         appTable: 'apps_prod',
+//         pageTable: 'pages_prod',
+//         componentTable: 'components_prod',
+//     },
+// ]
+
+
 
 let rules = {
     exist: (params) => {
@@ -52,8 +85,12 @@ let rules = {
         }
         return bool
     },
+    // todo 参数优化为先arr，再cur
     enum: (cur, arr) => {
         return arr.includes(cur)
+    },
+    isEnv: (v) => {
+        this.enum(v, ENVS.map(item => item.name))
     }
 }
 // let wrapCheck = (condition, res) => {
@@ -102,4 +139,5 @@ module.exports = {
     instance,
     auth,
     sqlVersion,
+    // ENVS,
 }

@@ -170,6 +170,7 @@ router.route('/')
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })
+// 删除指定应用
 .delete(cors.corsWithOptions, (req, res) => {
   res.send('delete')
 })
@@ -302,44 +303,28 @@ router.route('/versions')
 })
 // 设置dev环境的版本
 .post(cors.corsWithOptions, (req, res) => {
-  // 校验参数
-  // 检查是否大于当前版本号
-  // 在dev环境创建新版本。即设置
-  let newVersion = 0
+  res.send('post')
+})
+// 此方法只支持设置dev环境的版本号
+.put(cors.corsWithOptions, (req, res) => {
   new Promise((s, j) => {
-    if (rules.required(req.body.appUlid) && rules.required(req.body.newVersion)) {
-      // if (req.
-      // s(true)
-      newVersion = Number(req.body.newVersion)
-      if (newVersion) {
-        s(true)
-      } else {
-        j(100144)
-      }
+    if (rules.required(req.body.appUlid) && rules.isNumber(req.body.newVersion)) {
+      return true
     } else {
-      j(100100)
+      return j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection('apps_dev').findOne({
-      ulid: req.body.appUlid
-    }).catch(() => {
-      return Promise.reject(200010)
+    return lowcodeDb.collection(DB.dev.appTable).findOne({ulid: req.body.appUlid}).then((app) => {
+      if (app.version < req.body.newVersion) {
+        return app
+      } else {
+        return Promise.reject(100144)
+      }
     })
   }).then((app) => {
-    if (app.version < newVersion) {
-      return app
-    } else {
-      return Promise.reject(100144)
-    }
-  }).then((app) => {
-    // let p0 = lowcodeDb.collection('apps_dev').updateMany({ulid: app.ulid}, {$set: {version: newVersion}})
-    // // .catch(() => {
-    // //   return Promise.reject(200020)
-    // // })
-    // let p1 = lowcodeDb.collection('pages_dev').updateMany({appUlid: app.ulid}, {$set: {version: newVersion}})
-    // let p2 = lowcodeDb.collection('components_dev').updateMany({appUlid: app.ulid}, {$set})
-    // return Promise.all([p0, p1, p2])
-    return lowcodeDb.collection('apps_dev').updateOne({ulid: app.ulid}, {$set: {version: newVersion}}).catch(() => {
+    return lowcodeDb.collection(DB.dev.appTable).updateOne({
+      ulid: app.ulid
+    }, {$set: {version: req.body.newVersion}}).catch(() => {
       return Promise.reject(200020)
     })
   }).then(() => {
@@ -356,156 +341,70 @@ router.route('/versions')
     })
   })
 })
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send('delete')
+})
+
 // 发布
-.put(cors.corsWithOptions, (req, res) => {
-  // res.send('put')
-  // 校验参数
-  // 同步app/page/component
-  // 删除旧数据
-  // 应用、页面、组件都应该有版本号
-  let newVersion = 0
+router.route('/publish')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  // res.send('post')
+  let fromEnv
+  let toEnv
+  const appUlid = req.body.appUlid
   new Promise((s, j) => {
-    if (rules.required(req.body.appUlid) && 
-    rules.required(req.body.fromEnv) && 
-    rules.required(req.body.version)
+    if (rules.isEnv(req.body.fromEnv) &&
+      rules.isEnv(req.body.toEnv) &&
+      rules.required(appUlid)
     ) {
-      newVersion = Number(req.body.version)
-      s(true)
+      let dbArr = Object.values(DB)
+      let fromEnv = dbArr.find(item => item.name === req.body.fromEnv)
+      let toEnv = dbArr.find(item => item.name === req.body.toEnv)
+      if (!fromEnv || !toEnv) {
+        j(100144)
+      } else {
+        if (fromEnv.value < toEnv.value) {
+          s(true)
+        } else {
+          j(100144)
+        }
+      }
     } else {
       j(100100)
     }
   }).then(() => {
-    // 比较大小
-    let p
-    switch (req.body.fromEnv) {
-      case 'dev':
-        lowcodeDb.collection('apps_dev').findOne({ulid: req.body.appUlid}).then(app => {
-          if (app.version < newVersion) {
-            p = Promise.resolve(true)
-          } else {
-            p = Promise.reject(100144)
-          }
-        })
-        break
-      case 'test':
-        break
-      case 'pre':
-        break
-      case 'prod':
-        break
-    }
-    return p
-  }).then(() => {
-    // 删除现有数据
-    let p, 
-    p0, p1, p2
-    switch (req.body.fromEnv) {
-      case 'dev':
-        // 应用
-        // 取出dev环境的数据
-        // 保存到test环境
-        p0 = lowcodeDb.collection('apps_test').deleteMany({ulid: req.body.appUlid})
-        p1 = lowcodeDb.collection('pages_test').deleteMany({appUlid: req.body.appUlid})
-        p2 = lowcodeDb.collection('components_test').deleteMany({appUlid: req.body.appUlid})
-        p = Promise.all([p0, p1, p2]).catch(() => Promise.reject(200030))
-        // 页面
-        // 取出dev环境的数据
-        // 保存到test环境
-        
-        // 组件
-        // 取出dev环境的数据
-        // 保存到test环境
-        break
-      case 'test':
-        break
-      case 'pre':
-        break
-      case 'prod':
-        break
-    }
-    return p
-  }).then(() => {
-    // 取出数据
-    let p, 
-    p0, p1, p2
-    switch (req.body.fromEnv) {
-      case 'dev':
-        p0 = lowcodeDb.collection('apps_dev').findOne({ulid: req.body.appUlid})
-        p1 = lowcodeDb.collection('pages_dev').find({appUlid: req.body.appUlid}).toArray()
-        p2 = lowcodeDb.collection('components_dev').find({appUlid: req.body.appUlid}).toArray()
-        p = Promise.all([p0, p1, p2]).catch(() => Promise.reject(200010))
-        break
-      case 'test':
-        break
-      case 'pre':
-        break
-      case 'prod':
-        break
-    }
-    return p
-  }).then(([app, pageList, componentList]) => {
-    // 创建新数据
-    let p, 
-    p0, p1, p2
-    switch (req.body.fromEnv) {
-      case 'dev':
-        p0 = lowcodeDb.collection('apps_test').insertOne({
-          key: app.key,
-          name: app.name,
-          ulid: app.ulid,
-          theme: app.theme,
-          version: req.body.newVersion,
-          owner: app.owner,
-          collaborator: app.collaborator,
-          firstPageUlid: app.firstPageUlid,
-          lastPageUlid: app.lastPageUlid,
-          prevUlid: app.prevUlid,
-          nextUlid: app.nextUlid
-        })
-        p1 = lowcodeDb.collection('pages_test').insertMany(pageList.map(page => {
-          return {
-            key: page.key,
-            name: page.name,
-            ulid: page.ulid,
-            prevUlid: page.prevUlid,
-            nextUlid: page.nextUlid,
-            childUlid: page.childUlid,
-            firstComponentUlid: page.firstComponentUlid,
-            lastComponentUlid: page.lastComponentUlid,
-            appUlid: page.appUlid,
-          }
-        }))
-        p2 = lowcodeDb.collection('components_test').insertMany(componentList.map(comp => {
-          return {
-            ulid: comp.ulid, 
-            type: comp.type, 
-            prevUlid: comp.prevUlid,
-            nextUlid: comp.nextUlid,
-            props: comp.props, 
-            behavior: comp.behavior,
-            item: comp.item,
-            slot: comp.slot,
-            appUlid: comp.appUlid,
-            pageUlid: comp.pageUlid,
-          }
-        }))
-        p = Promise.all([p0, p1, p2]).catch(() => Promise.reject(保存数据时出错))
-        break
-      case 'test':
-        break
-      case 'pre':
-        break
-      case 'prod':
-        break
-    }
-    return p
-  }).then(() => {
-    return res.status(200).json({
-      code: 0,
-      message: '',
-      data: {}
+    return lowcodeDb.collection(fromEnv.appTable).find({ulid: appUlid}).toArray().then(appList => {
+      if (appList.length > 1) {
+        // 一个环境只能有该应用的一个版本。
+        // 只有在迁移时才有2个版本。迁移完就只有一个版本了。
+        return Promise.reject(200040)
+      } else {
+        return appList
+      }
     })
-  }).catch(code => {
+  }).then((appList) => {
+    let pa = lowcodeDb.collection(toEnv.appTable).insertMany(appList)
+    let pp = lowcodeDb.collection(fromEnv.pageTable).find({appUlid: appUlid}).toArray().then((pageList) => {
+      lowcodeDb.collection(toEnv.pageTable).insertMany(pageList)
+    })
+    let pc = lowcodeDb.collection(fromEnv.componentTable).find({appUlid: appUlid}).toArray().then(componentList => {
+      lowcodeDb.collection(toEnv.componentTable).insertMany(componentList)
+    })
+    
+    return Promise.all([pa, pp, pc]).then(() => {
+      return res.status(200).json({
+        code: 0,
+        message: '',
+        data: {}
+      })
+    })
+  }).catch((code) => {
     return res.status(200).json({
       code,
       message: errorCode[code],
@@ -513,8 +412,10 @@ router.route('/versions')
     })
   })
 })
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
 .delete(cors.corsWithOptions, (req, res) => {
   res.send('delete')
 })
-
 module.exports = router;
