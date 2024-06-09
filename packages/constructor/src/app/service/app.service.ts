@@ -9,7 +9,8 @@ import type { ResponseData } from 'src/types';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
   // B,
-   Email, S, ULID, } from 'src/types/base';
+   Email, S, ULID,
+  A, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 
 let clog = console.log
@@ -201,5 +202,37 @@ export class AppService {
         })
       })
     }
+  }
+  publish(data: A) {
+    return new Promise((s, j) => {
+      this.http.post<ResponseData>(`${serviceUrl()}/apps/publish`, {
+        ...data,
+      }, {
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 100000) {
+          s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  deleteApp(appUlid: ULID, env: S) {
+    return new Promise((s, j) => {
+      this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
+        params: {
+          appUlid,
+          env,
+        },
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
   }
 }

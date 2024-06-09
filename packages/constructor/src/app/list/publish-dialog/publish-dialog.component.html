@@ -33,6 +33,7 @@
         <p>{{testObj.version}}版本</p>
         <p>{{testObj.remarks}}</p>
         <d-button (click)="testToDevClickH()" class="button-box">回退到dev环境</d-button>
+        <!-- <d-button (click)="testDeleteBtClickH()" class="button-publish">删除</d-button> -->
     </div>
     <d-button (click)="testToPreBtClickH()" class="button-publish">发布 >></d-button>
     <!-- pre -->
@@ -51,3 +52,4 @@
         <d-button (click)="prodToDevClickH()" class="button-box">回退到dev环境</d-button>
     </div>
 </div>
+<d-toast [value]="msg"></d-toast>

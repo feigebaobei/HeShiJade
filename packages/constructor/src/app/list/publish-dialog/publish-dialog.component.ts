@@ -30,6 +30,7 @@ export class PublishDialogComponent implements OnInit {
   testObj: EnvObj
   preObj: EnvObj
   prodObj: EnvObj
+  msg: {}[]
   constructor(
     private appService: AppService,
     // private versionService: VersionsService,
@@ -65,6 +66,7 @@ export class PublishDialogComponent implements OnInit {
       version: -1,
       remarks: 'remarks',
     }
+    this.msg = []
   }
   ngOnInit() {
     // this.versionService.reqVersions(this.data.appUlid)
@@ -97,17 +99,27 @@ export class PublishDialogComponent implements OnInit {
     })
   }
   devToTestBtClickH() {
-    this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
+    // this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
+    //   appUlid: this.data.appUlid,
+    //   fromEnv: 'dev',
+    //   toEnv: 'test',
+    //   version: this.newVersion,
+    // }, {
+    //   withCredentials: true
+    // }).subscribe((res) => {
+    //   if (res.code === 0) {
+    //     clog('发布成功')
+    //     this.testVersion = this.newVersion
+    //   }
+    // })
+    this.appService.publish({
       appUlid: this.data.appUlid,
       fromEnv: 'dev',
-      version: this.newVersion,
-    }, {
-      withCredentials: true
-    }).subscribe((res) => {
-      if (res.code === 0) {
-        clog('发布成功')
-        this.testVersion = this.newVersion
-      }
+      toEnv: 'test',
+      newVersion: this.devObj.version,
+      remarks: this.devObj.remarks,
+    }).then(() => {
+      this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
     })
   }
   testToPreBtClickH() {
@@ -146,5 +158,9 @@ export class PublishDialogComponent implements OnInit {
   }
   prodToDevClickH() {
     clog('prodToDevClickH')
+  }
+  testDeleteBtClickH() {
+    this.appService.deleteApp(this.data.appUlid, 'test')
+    // this.appService.deleteApp('01HGKPCCA5E5F4DH42ZX8PENY8', 'test')
   }
 }
