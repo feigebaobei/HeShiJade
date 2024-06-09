@@ -31,5 +31,6 @@ const DB = {
 
 module.exports = {
     DB,
-    dbArr: Object.values(DB),
+    dbArr: Array.from(Object.values(DB)),
+    envs: Array.from(Object.keys(DB))
 }

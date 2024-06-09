@@ -1,46 +1,10 @@
 let {
     lowcodeDb,
-  } = require('../mongodb');
-  
-// let required = (params) => {
-//     return params !== undefined && params !== null
-// }
-
+} = require('../mongodb');
 let {instance} = require('./req')
 let {auth} = require('./auth')
-// let ENVS = ['dev', 'test', 'pre', 'prod']
-// let ENVS = [
-//     {
-//         name: 'dev',
-//         value: 10,
-//         appTable: 'apps_dev',
-//         pageTable: 'pages_dev',
-//         componentTable: 'components_dev',
-//     },
-//     {
-//         name: 'test',
-//         value: 20,
-//         appTable: 'apps_test',
-//         pageTable: 'pages_test',
-//         componentTable: 'components_test',
-//     },
-//     {
-//         name: 'pre',
-//         value: 30,
-//         appTable: 'apps_pre',
-//         pageTable: 'pages_pre',
-//         componentTable: 'components_pre',
-//     },
-//     {
-//         name: 'prod',
-//         value: 40,
-//         appTable: 'apps_prod',
-//         pageTable: 'pages_prod',
-//         componentTable: 'components_prod',
-//     },
-// ]
-
-
+let { envs } = require('./config')
+let clog = console.log
 
 let rules = {
     exist: (params) => {
@@ -90,22 +54,9 @@ let rules = {
         return arr.includes(cur)
     },
     isEnv: (v) => {
-        this.enum(v, ENVS.map(item => item.name))
+        return rules.enum(v, envs)
     }
 }
-// let wrapCheck = (condition, res) => {
-//     return new Promise((s, j) => {
-//         if (condition) {
-//             s()
-//         } else {
-//             return res.status(200).json({
-//                 code: 100100,
-//                 message: "请求参数错误",
-//                 data: {},
-//               })
-//         }
-//     })
-// }
 let resParamsError = (res) => {
     return res.status(200).json({
         code: 100100,
@@ -129,6 +80,75 @@ let sqlVersion = (tableName, appUlid, key) => {
         })
       })
 }
+let createAppEnvKey = (appUlid, env) => {
+    return `${appUlid}_${env}`
+}
+let stepRecorderPrototype = Object.create({}, {
+    create: {
+        value: function() {
+            this.updateStatus('doing')
+            clog('this', this, this.key, {...this})
+            return lowcodeDb.collection('temporary').insertOne({
+                key: this.key,
+                total: this.total,
+                done: this.done,
+                status: this.status,
+            })
+        }
+    },
+    add: {
+        value: function(s) {
+            this.done.push(s)
+            return lowcodeDb.collection('temporary').updateOne({
+                key: this.key,
+            }, {
+                $push: {
+                    done: s
+                }
+            })
+        }
+    },
+    delete: {
+        value: function() {
+            this.done.splice(0, this.done.length)
+            return lowcodeDb.collection('temporary').deleteOne({key: this.key})
+        }
+    },
+    updateStatus: {
+        value: function (v) {
+            this.status = v
+        }
+    },
+    isFinish: {
+        value: function () {
+            return this.done.length === this.total
+        }
+    }
+})
+let createStepRecorder = (appUlid, env, total) => {
+    let key = createAppEnvKey(appUlid, env)
+    let t = Object.create(stepRecorderPrototype, {
+        key: {
+            // writable: false, // 默认就是不可写。
+            value: key,
+        },
+        total: {
+            value: total,
+        },
+        done: {
+            value: [],
+        },
+        status: {
+            writable: true,
+            value: 'init', // init | doing | error | finish
+        }
+    })
+    return t
+}
+
+let compatibleArray = (a) => Array.isArray(a) ? Array.from(a) : []
+
+
 
 
 module.exports = {
@@ -140,4 +160,7 @@ module.exports = {
     auth,
     sqlVersion,
     // ENVS,
+    createAppEnvKey,
+    createStepRecorder,
+    compatibleArray,
 }
