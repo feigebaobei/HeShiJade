@@ -3,23 +3,14 @@ var cors = require('./cors')
 var router = express.Router();
 let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
-// const path = require('path')
+const path = require('path')
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, } = require('../helper');
+const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, log, } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 const { DB, dbArr } = require('../helper/config')
-const logger = require('pino')({
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true
-    }
-  }
-})
 
-// let md5 = require('md5');
 let clog = console.log
 
 router.use(bodyParser.json())
@@ -31,6 +22,7 @@ router.route('/')
 })
 // 取得应用列表
 .get(cors.corsWithOptions, auth, (req, res) => {
+  log({method: 'get', originalUrl: req.originalUrl, params: req.query}, 'info')
   // 是否登录
   // 是否有权限（暂不做）
   // 取数据
@@ -53,6 +45,7 @@ router.route('/')
       return Promise.reject(200010)
     })
   }).catch((code) => {
+    log({code}, 'error')
     return res.status(200).json({
       code,
       message: errorCode[code],
@@ -406,17 +399,11 @@ router.route('/publish')
 .post(
   cors.corsWithOptions, 
   (req, res) => {
-  // res.send('post')
   let fromEnv
   let toEnv
   const appUlid = req.body.appUlid
-  // let AppEnvKey
   const newVersion = req.body.newVersion
   let stepRecorder
-  // logger.info(req.body)
-  // clog('rules.isEnv(req.body.fromEnv)', rules.isEnv(req.body.fromEnv))
-  // clog('rules.isEnv(req.body.toEnv)', rules.isEnv(req.body.toEnv))
-  // clog('appUlid', appUlid)
   new Promise((s, j) => {
     if (rules.isEnv(req.body.fromEnv) &&
       rules.isEnv(req.body.toEnv) &&
@@ -515,7 +502,7 @@ router.route('/publish')
         stepRecorder.add('component_toEnv_write')
         return true
       }).catch((error) => {
-        clog(error, logger)
+        // clog(error, logger)
       })
     })
     // return 
@@ -543,20 +530,19 @@ router.route('/publish')
           stepRecorder.add('component_toEnv_delete')
         })
         return Promise.all([p0, p1])
-      }).catch((error) => {
-        clog('error', error)
+      }).catch(() => {
         Promise.reject(200030)
       })
     }).then(() => {
       stepRecorder.updateStatus('finish')
       stepRecorder.delete()
     }).catch((error) => {
-      // clog(error)
-      // todo 在此记录日志
+      log({error}, 'error')
       stepRecorder.updateStatus('error')
     })
     return Promise.reject(100000)
   }).catch((code) => {
+    log({code, originalUrl: req.originalUrl}, 'info')
     return res.status(200).json({
       code,
       message: errorCode[code],

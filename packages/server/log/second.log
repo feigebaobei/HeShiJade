@@ -1,0 +1,4 @@
+{"level":"info","message":"hi","service":"lc-server"}
+{"data":{"method":"get","params":{},"path":"/"},"level":"info","ms":1717986928126,"service":"lc-server","timeForHuman":"2024.6.10 10:35:28"}
+{"data":{"method":"get","params":{},"path":"/"},"level":"info","ms":1717987209324,"service":"lc-server","timeForHuman":"2024.6.10 10:40:9"}
+{"data":{"method":"get","originalUrl":"/apps","params":{}},"level":"info","ms":1717991780697,"service":"lc-server","timeForHuman":"2024.6.10 11:56:20"}

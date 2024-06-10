@@ -4,8 +4,21 @@ let {
 let {instance} = require('./req')
 let {auth} = require('./auth')
 let { envs } = require('./config')
-let clog = console.log
+const winston = require('winston')
+const path = require('path')
 
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    defaultMeta: { service: 'lc-server' },
+    transports: [
+      new winston.transports.File({filename: path.resolve(__dirname, '../log/second.log'), })
+    ]
+  })
+
+
+
+let clog = console.log
 let rules = {
     exist: (params) => {
         return params !== undefined && params !== null
@@ -148,6 +161,25 @@ let createStepRecorder = (appUlid, env, total) => {
 
 let compatibleArray = (a) => Array.isArray(a) ? Array.from(a) : []
 
+// const levels = {
+//     error: 0,
+//     warn: 1,
+//     info: 2,
+//     http: 3,
+//     verbose: 4,
+//     debug: 5,
+//     silly: 6
+//   };
+let log = (obj, level) => {
+    let date = new Date()
+    let [y, m, d, h, mn, s] = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]
+    logger.log({
+        level,
+        ms: date.getTime(),
+        timeForHuman: `${y}.${m+1}.${d} ${h}:${mn}:${s}`,
+        data: obj,
+    })
+}
 
 
 
@@ -163,4 +195,5 @@ module.exports = {
     createAppEnvKey,
     createStepRecorder,
     compatibleArray,
+    log,
 }
