@@ -99,42 +99,48 @@ export class PublishDialogComponent implements OnInit {
     })
   }
   devToTestBtClickH() {
-    // this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
-    //   appUlid: this.data.appUlid,
-    //   fromEnv: 'dev',
-    //   toEnv: 'test',
-    //   version: this.newVersion,
-    // }, {
-    //   withCredentials: true
-    // }).subscribe((res) => {
-    //   if (res.code === 0) {
-    //     clog('发布成功')
-    //     this.testVersion = this.newVersion
-    //   }
-    // })
     this.appService.publish({
       appUlid: this.data.appUlid,
       fromEnv: 'dev',
       toEnv: 'test',
       newVersion: this.devObj.version,
       remarks: this.devObj.remarks,
-    }).then(() => {
-      this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+    }).then((res: A) => {
+      switch (res.code) {
+        case 0:
+          this.msg = [{ severity: 'success', summary: 'Summary', content: '发布成功。' }]
+          break;
+        case 100000:
+          this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+          break;
+        default:
+          this.msg = [{ severity: 'error', summary: 'Summary', content: `发布失败。${res.message}` }]
+          break;
+      }
     })
   }
   testToPreBtClickH() {
-    this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
+    this.appService.publish({
       appUlid: this.data.appUlid,
       fromEnv: 'test',
-      version: this.testVersion,
-    }, {
-      withCredentials: true
-    }).subscribe((res) => {
-      if (res.code === 0) {
-        clog('发布成功')
-        this.preVersion = this.testVersion
-      }
+      toEnv: 'pre',
+      // newVersion: this.devObj.version,
+      // remarks: this.devObj.remarks,
+    }).then(() => {
+      this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
     })
+    // this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
+    //   appUlid: this.data.appUlid,
+    //   fromEnv: 'test',
+    //   version: this.testVersion,
+    // }, {
+    //   withCredentials: true
+    // }).subscribe((res) => {
+    //   if (res.code === 0) {
+    //     clog('发布成功')
+    //     this.preVersion = this.testVersion
+    //   }
+    // })
   }
   preToProdBtClickH() {
     this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {

@@ -210,8 +210,8 @@ export class AppService {
       }, {
         withCredentials: true
       }).subscribe(res => {
-        if (res.code === 100000) {
-          s(res.data)
+        if ([100000, 0].includes(res.code)) {
+          s(res)
         } else {
           j(new Error(res.message))
         }
