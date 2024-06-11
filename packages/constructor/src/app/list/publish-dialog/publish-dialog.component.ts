@@ -124,36 +124,17 @@ export class PublishDialogComponent implements OnInit {
       appUlid: this.data.appUlid,
       fromEnv: 'test',
       toEnv: 'pre',
-      // newVersion: this.devObj.version,
-      // remarks: this.devObj.remarks,
     }).then(() => {
       this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
     })
-    // this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
-    //   appUlid: this.data.appUlid,
-    //   fromEnv: 'test',
-    //   version: this.testVersion,
-    // }, {
-    //   withCredentials: true
-    // }).subscribe((res) => {
-    //   if (res.code === 0) {
-    //     clog('发布成功')
-    //     this.preVersion = this.testVersion
-    //   }
-    // })
   }
   preToProdBtClickH() {
-    this.http.put<ResponseData>(`${serviceUrl()}/apps/versions`, {
+    this.appService.publish({
       appUlid: this.data.appUlid,
       fromEnv: 'pre',
-      version: this.preVersion,
-    }, {
-      withCredentials: true
-    }).subscribe((res) => {
-      if (res.code === 0) {
-        clog('发布成功')
-        this.prodVersion = this.preVersion
-      }
+      toEnv: 'prod',
+    }).then(() => {
+      this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
     })
   }
   testToDevClickH() {

@@ -404,6 +404,7 @@ router.route('/publish')
   const appUlid = req.body.appUlid
   const newVersion = req.body.newVersion
   let stepRecorder
+  let toApp
   new Promise((s, j) => {
     if (rules.isEnv(req.body.fromEnv) &&
       rules.isEnv(req.body.toEnv) &&
@@ -442,6 +443,7 @@ router.route('/publish')
       pfv = lowcodeDb.collection(fromEnv.appTable).findOne({ulid: appUlid}).then(app => app.version)
     }
     let ptv = lowcodeDb.collection(toEnv.appTable).findOne({ulid: appUlid}).then((app) => {
+      toApp = app
       if (app) {
         return Promise.resolve(app.version)
       } else {
@@ -458,6 +460,7 @@ router.route('/publish')
       }
     })
   }).then(() => {
+    log({originalUrl: req.originalUrl, params: req.body, method: 'post'}, 'info')
     stepRecorder = createStepRecorder(appUlid, toEnv.env, 11)
     stepRecorder.create()
     return lowcodeDb.collection(fromEnv.appTable).findOne({ulid: appUlid}).then((app) => {
@@ -483,6 +486,7 @@ router.route('/publish')
     })
     let pReadFromPage = lowcodeDb.collection(fromEnv.pageTable).find({appUlid}).toArray().then((pageList) => {
       stepRecorder.add('page_fromEnv_read')
+      log({page_fromEnv_read: pageList.map(item => item.ulid)}, 'info')
       return lowcodeDb.collection(toEnv.pageTable).insertMany(pageList.map(item => {
         delete item._id
         return item
@@ -495,6 +499,7 @@ router.route('/publish')
     })
     let pReadFromComponent = lowcodeDb.collection(fromEnv.componentTable).find({appUlid}).toArray().then((componentList) => {
       stepRecorder.add('component_fromEnv_read')
+      log({component_toEnv_write: componentList.map(item => item.ulid)}, 'info')
       return lowcodeDb.collection(toEnv.componentTable).insertMany(componentList.map(item => {
         delete item._id
         return item
@@ -508,18 +513,39 @@ router.route('/publish')
     // return 
     Promise.all([pReadToPage, pReadToComponent, pReadFromPage, pReadFromComponent]).then(() => {
       // 使用bulkWrite去完成删除旧的添加新的，不使用update更新旧的。
-      return lowcodeDb.collection(toEnv.appTable).bulkWrite([
-        {
-          deleteOne: {
-            filter: {ulid: appUlid},
-          }
-        },
+      let arr = [
+        // {
+        //   deleteOne: {
+        //     filter: {ulid: appUlid},
+        //   }
+        // },
         {
           insertOne: {
             document: app
           }
         },
-      ])
+      ]
+      if (toApp) {
+        arr.unshift({deleteOne: {filter: {ulid: appUlid}}})
+      }
+      return lowcodeDb.collection(toEnv.appTable).bulkWrite(arr)
+      // return lowcodeDb.collection(toEnv.appTable).updateOne({
+      //   ulid: appUlid,
+      // }, {
+      //   $set: {
+      //     theme: app.theme,
+      //     version: app.version,
+      //     firstPageUlid: app.firstPageUlid,
+      //     lastPageUlid: app.lastPageUlid,
+      //     prevUlid: app.prevUlid,
+      //     nextUlid: app.nextUlid,
+      //     remarks: app.remarks,
+      //     // activated: app.activated,
+      //   }
+      // })
+      // {
+      //   $set: { lastApplicationUlid: req.body.ulid }
+      // })
       .then(() => {
         stepRecorder.add('app_toEnv_write')
         stepRecorder.add('app_toEnv_delete')
