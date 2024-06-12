@@ -510,15 +510,9 @@ router.route('/publish')
         // clog(error, logger)
       })
     })
-    // return 
-    Promise.all([pReadToPage, pReadToComponent, pReadFromPage, pReadFromComponent]).then(() => {
+    let pAll = Promise.all([pReadToPage, pReadToComponent, pReadFromPage, pReadFromComponent]).then(() => {
       // 使用bulkWrite去完成删除旧的添加新的，不使用update更新旧的。
       let arr = [
-        // {
-        //   deleteOne: {
-        //     filter: {ulid: appUlid},
-        //   }
-        // },
         {
           insertOne: {
             document: app
@@ -529,23 +523,6 @@ router.route('/publish')
         arr.unshift({deleteOne: {filter: {ulid: appUlid}}})
       }
       return lowcodeDb.collection(toEnv.appTable).bulkWrite(arr)
-      // return lowcodeDb.collection(toEnv.appTable).updateOne({
-      //   ulid: appUlid,
-      // }, {
-      //   $set: {
-      //     theme: app.theme,
-      //     version: app.version,
-      //     firstPageUlid: app.firstPageUlid,
-      //     lastPageUlid: app.lastPageUlid,
-      //     prevUlid: app.prevUlid,
-      //     nextUlid: app.nextUlid,
-      //     remarks: app.remarks,
-      //     // activated: app.activated,
-      //   }
-      // })
-      // {
-      //   $set: { lastApplicationUlid: req.body.ulid }
-      // })
       .then(() => {
         stepRecorder.add('app_toEnv_write')
         stepRecorder.add('app_toEnv_delete')
@@ -566,7 +543,19 @@ router.route('/publish')
       log({error}, 'error')
       stepRecorder.updateStatus('error')
     })
-    return Promise.reject(100000)
+    let pr = new Promise((s, j) => {
+      setTimeout(() => {
+        j(100000)
+      }, 2000)
+    })
+    return Promise.race([pAll, pr])
+    // return Promise.reject(100000)
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
   }).catch((code) => {
     log({code, originalUrl: req.originalUrl}, 'info')
     return res.status(200).json({
