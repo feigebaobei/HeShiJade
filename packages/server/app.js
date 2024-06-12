@@ -2,10 +2,11 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// var logger = require('morgan');
 let session = require('express-session')
 // let morganBody = require('morgan-body')
 // let MongoDBStore = require('connect-mongodb-session')(session)
+const { logger } = require('./helper/log')
 let clog = console.log
 
 var indexRouter = require('./routes/index');
@@ -34,7 +35,8 @@ app.set('view engine', 'jade');
 //   stream: fs.createWriteStream(path.join(__dirname, 'logs', 'access.log'), {flags: 'a'})
 // })
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
+logger.info('启动服务')
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

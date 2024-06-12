@@ -158,9 +158,9 @@ export class PublishDialogComponent implements OnInit {
         case 100000:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
           this.loop.launch().then(() => {
-            this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
-            this.testObj.version = this.devObj.version
-            this.testObj.remarks = this.devObj.remarks
+            this.appService.updateVersion(this.data.appUlid, 'pre', this.testObj.version, this.testObj.remarks)
+            this.preObj.version = this.testObj.version
+            this.preObj.remarks = this.testObj.remarks
           })
           break;
         default:
@@ -185,9 +185,9 @@ export class PublishDialogComponent implements OnInit {
         case 100000:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
           this.loop.launch().then(() => {
-            this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
-            this.testObj.version = this.devObj.version
-            this.testObj.remarks = this.devObj.remarks
+            this.appService.updateVersion(this.data.appUlid, 'prod', this.preObj.version, this.preObj.remarks)
+            this.prodObj.version = this.preObj.version
+            this.prodObj.remarks = this.preObj.remarks
           })
           break;
         default:

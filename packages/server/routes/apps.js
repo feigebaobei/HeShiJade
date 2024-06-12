@@ -1,15 +1,16 @@
-var express = require('express');
-var cors = require('./cors')
-var router = express.Router();
-let bodyParser = require('body-parser');
+const express = require('express');
+const cors = require('./cors')
+const router = express.Router();
+const bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 const path = require('path')
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, log, } = require('../helper');
+const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 const { DB, dbArr } = require('../helper/config')
+const { logger } = require('../helper/log')
 
 let clog = console.log
 
@@ -22,7 +23,7 @@ router.route('/')
 })
 // 取得应用列表
 .get(cors.corsWithOptions, auth, (req, res) => {
-  log({method: 'get', originalUrl: req.originalUrl, params: req.query}, 'info')
+  logger.info({method: 'get', originalUrl: req.originalUrl, params: req.query})
   // 是否登录
   // 是否有权限（暂不做）
   // 取数据
@@ -45,7 +46,7 @@ router.route('/')
       return Promise.reject(200010)
     })
   }).catch((code) => {
-    log({code}, 'error')
+    logger.error({code})
     return res.status(200).json({
       code,
       message: errorCode[code],
@@ -460,7 +461,7 @@ router.route('/publish')
       }
     })
   }).then(() => {
-    log({originalUrl: req.originalUrl, params: req.body, method: 'post'}, 'info')
+    logger.info({originalUrl: req.originalUrl, params: req.body, method: 'post'})
     stepRecorder = createStepRecorder(appUlid, toEnv.env, 11)
     stepRecorder.create()
     return lowcodeDb.collection(fromEnv.appTable).findOne({ulid: appUlid}).then((app) => {
@@ -486,7 +487,7 @@ router.route('/publish')
     })
     let pReadFromPage = lowcodeDb.collection(fromEnv.pageTable).find({appUlid}).toArray().then((pageList) => {
       stepRecorder.add('page_fromEnv_read')
-      log({page_fromEnv_read: pageList.map(item => item.ulid)}, 'info')
+      logger.info({page_fromEnv_read: pageList.map(item => item.ulid)})
       return lowcodeDb.collection(toEnv.pageTable).insertMany(pageList.map(item => {
         delete item._id
         return item
@@ -499,7 +500,7 @@ router.route('/publish')
     })
     let pReadFromComponent = lowcodeDb.collection(fromEnv.componentTable).find({appUlid}).toArray().then((componentList) => {
       stepRecorder.add('component_fromEnv_read')
-      log({component_toEnv_write: componentList.map(item => item.ulid)}, 'info')
+      logger.info({component_toEnv_write: componentList.map(item => item.ulid)})
       return lowcodeDb.collection(toEnv.componentTable).insertMany(componentList.map(item => {
         delete item._id
         return item
@@ -507,7 +508,6 @@ router.route('/publish')
         stepRecorder.add('component_toEnv_write')
         return true
       }).catch((error) => {
-        // clog(error, logger)
       })
     })
     let pAll = Promise.all([pReadToPage, pReadToComponent, pReadFromPage, pReadFromComponent]).then(() => {
@@ -540,7 +540,7 @@ router.route('/publish')
       stepRecorder.updateStatus('finish')
       stepRecorder.delete()
     }).catch((error) => {
-      log({error}, 'error')
+      logger.info({error})
       stepRecorder.updateStatus('error')
     })
     let pr = new Promise((s, j) => {
@@ -557,7 +557,7 @@ router.route('/publish')
       data: {}
     })
   }).catch((code) => {
-    log({code, originalUrl: req.originalUrl}, 'info')
+    logger.info({code, originalUrl: req.originalUrl})
     return res.status(200).json({
       code,
       message: errorCode[code],
