@@ -4,8 +4,10 @@ import { AppService } from 'src/app/service/app.service';
 // import { VersionsService } from 'src/app/service/versions.service';
 import { serviceUrl } from 'src/helper/config';
 import { FormLayout } from 'ng-devui/form';
+import { createLoop } from 'src/helper';
+import type { CreateLoop } from 'src/helper'
 import type { ResponseData } from 'src/types';
-import type { A, N, S, ULID } from 'src/types/base';
+import type { A, N, S, ULID, B } from 'src/types/base';
 
 let clog = console.log
 interface EnvObj {
@@ -31,6 +33,7 @@ export class PublishDialogComponent implements OnInit {
   preObj: EnvObj
   prodObj: EnvObj
   msg: {}[]
+  loop: CreateLoop
   constructor(
     private appService: AppService,
     // private versionService: VersionsService,
@@ -67,6 +70,18 @@ export class PublishDialogComponent implements OnInit {
       remarks: '',
     }
     this.msg = []
+    this.loop = createLoop(this.appService.reqProcess, (res: A) => {
+      let b: B
+      switch (res.code) {
+        case 0:
+          b = res.data.done.length / res.data.total < 1
+          break;
+        case 300000:
+          b = false
+          break;
+      }
+      return 
+    })
   }
   ngOnInit() {
     // this.versionService.reqVersions(this.data.appUlid)
@@ -115,6 +130,11 @@ export class PublishDialogComponent implements OnInit {
           break;
         case 100000:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+          this.loop.launch().then(() => {
+            this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
+            this.testObj.version = this.devObj.version
+            this.testObj.remarks = this.devObj.remarks
+          })
           break;
         default:
           this.msg = [{ severity: 'error', summary: 'Summary', content: `发布失败。${res.message}` }]
@@ -137,6 +157,11 @@ export class PublishDialogComponent implements OnInit {
           break;
         case 100000:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+          this.loop.launch().then(() => {
+            this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
+            this.testObj.version = this.devObj.version
+            this.testObj.remarks = this.devObj.remarks
+          })
           break;
         default:
           this.msg = [{ severity: 'error', summary: 'Summary', content: `发布失败。${res.message}` }]
@@ -159,6 +184,11 @@ export class PublishDialogComponent implements OnInit {
           break;
         case 100000:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+          this.loop.launch().then(() => {
+            this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
+            this.testObj.version = this.devObj.version
+            this.testObj.remarks = this.devObj.remarks
+          })
           break;
         default:
           this.msg = [{ severity: 'error', summary: 'Summary', content: `发布失败。${res.message}` }]

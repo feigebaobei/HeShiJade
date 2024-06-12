@@ -16,24 +16,37 @@ interface App {
   // 无子应用
 }
 
-interface SyntheticVersion {
-  dev?: {
-    version: N
-    remarks: S
-  }
-  test?: {
-    version: N
-    remarks: S
-  }
-  pre?: {
-    version: N
-    remarks: S
-  }
-  prod?: {
-    version: N
-    remarks: S
-  }
+interface VersionInfo {
+  version: N
+  remarks: S
 }
+
+type EnvKey = 'dev' | 'test' | 'pre' | 'prod'
+
+interface SyntheticVersion {
+  dev: VersionInfo
+  test: VersionInfo
+  pre: VersionInfo
+  prod: VersionInfo
+}
+// interface SyntheticVersion {
+//   dev?: {
+//     version: N
+//     remarks: S
+//   }
+//   test?: {
+//     version: N
+//     remarks: S
+//   }
+//   pre?: {
+//     version: N
+//     remarks: S
+//   }
+//   prod?: {
+//     version: N
+//     remarks: S
+//   }
+// }
 
 export type {
     App,

@@ -8,9 +8,9 @@ import { initAppMeta } from 'src/helper';
 import type { ResponseData } from 'src/types';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
-  // B,
-   Email, S, ULID,
-  A, } from 'src/types/base';
+   Email, S, ULID, N,
+  A,
+  B, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 
 let clog = console.log
@@ -184,23 +184,7 @@ export class AppService {
     if (o) {
       return Promise.resolve(o)
     } else {
-      return new Promise<SyntheticVersion>((s, j) => {
-        this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
-          params: {
-            appUlid,
-            envs,
-            // envs: ['dev', 'test', 'pre', 'prod'],
-          },
-          withCredentials: true,
-        }).subscribe(res => {
-          if (res.code === 0) {
-            this._versionMap.set(appUlid, res.data)
-            s(res.data)
-          } else {
-            j(new Error(res.message))
-          }
-        })
-      })
+      return this.reqVersion(appUlid, envs)
     }
   }
   publish(data: A) {
@@ -229,6 +213,69 @@ export class AppService {
       }).subscribe(res => {
         if (res.code === 0) {
           s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  reqVersion(appUlid: ULID, envs: S[]) {
+    return new Promise<SyntheticVersion>((s, j) => {
+      this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+        params: {
+          appUlid,
+          envs,
+          // envs: ['dev', 'test', 'pre', 'prod'],
+        },
+        withCredentials: true,
+      }).subscribe(res => {
+        if (res.code === 0) {
+          // 把脏数据处理为干净数据
+          let t = {
+            dev: {
+              version: res.data.dev.version ?? -1,
+              remarks: res.data.dev.remarks ?? '',
+            },
+            test: {
+              version: res.data.test.version ?? -1,
+              remarks: res.data.test.remarks ?? '',
+            },
+            pre: {
+              version: res.data.pre.version ?? -1,
+              remarks: res.data.pre.remarks ?? '',
+            },
+            prod: {
+              version: res.data.prod.version ?? -1,
+              remarks: res.data.prod.remarks ?? '',
+            },
+          }
+          this._versionMap.set(appUlid, t)
+          s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  updateVersion(appUlid: ULID, env: keyof Required<SyntheticVersion>, version: N, remarks: S): B {
+    let v = this._versionMap.get(appUlid)
+    if (v) {
+      v[env].remarks = remarks
+      v[env].version = version
+      return true
+    }
+    return false
+  }
+  reqProcess(ulid: ULID, env: S) {
+    return new Promise((s, j) => {
+      this.http.get<ResponseData>(`${serviceUrl()}/apps/process`, {
+        params: {
+          key: `${ulid}_${env}`
+        },
+        withCredentials: true,
+      }).subscribe(res => {
+        if ([0, 300000].includes(res.code)) {
+          s(res)
         } else {
           j(new Error(res.message))
         }
