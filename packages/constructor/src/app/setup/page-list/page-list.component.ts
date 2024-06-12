@@ -99,7 +99,9 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            let page = initPageMeta(data.key, data.name, ulid(), this.pageList[this.pageList.length - 1].ulid || '', '')
+            let page = initPageMeta(data.key, data.name, ulid(), 
+            this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
+              '')
             this.pageList.push(page)
             this.pageService.add(page)
             this.pageService.reqPostPage(data, page.ulid)

@@ -226,4 +226,9 @@ export class ListComponent implements OnInit {
   homeBtClickH() {
     this.router.navigate(['/home'])
   }
+  appDeleteClickH($event: Event, index: N) {
+    $event.stopPropagation()
+    let app = this.appList[index]
+    this.appService.deleteApp(app.ulid, 'dev') // 先写死
+  }
 }

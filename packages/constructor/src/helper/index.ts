@@ -2,7 +2,7 @@ import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
 // import clone from 'rfdc/default'
 // type
-import type { A, F, N, S, Ao } from 'src/types/base';
+import type { A, F, N, S, Ao, B } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component } from 'src/types/component';
@@ -11,7 +11,7 @@ import type { App } from 'src/types/app';
 let clog = console.log
 // clog('clone', clone)
 
-const VERSION = 3 // 按照圆周率的数值
+const VERSION = 0 // 按照圆周率的数值
 
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     return new Promise((s, j) => {
@@ -197,8 +197,52 @@ let cleanoutComponent = (p: A) => {
   initComponent.pageUlid = p.pageUlid
   return initComponent
 }
+interface LoopPropotype {
+  launch: (...p: A[]) => Promise<A>
+}
+interface CreateLoop extends LoopPropotype {
+  pFn: () => Promise<A>
+  bFn: (p: A) => B
+  interval: N
+}
+let sleep = (n: N = 0) => {
+  return new Promise((s) => {
+    setTimeout(() => {s(true)}, n)
+  })
+}
+// todo 迁移到web-stone
+let loopPropotype = Object.create({}, {
+  launch: {
+    value: function (...p: A[]) {
+      return this.pFn(...p).then((r: A) => {
+        if (this.bFn(r)) { // 若满足条件则继承，否则返回结果。
+          return sleep(this.interval).then(() => {
+            return this.launch(...p)
+          })
+        } else {
+          return r
+        }
+      })
+    }
+  }
+})
+let createLoop = (pFn: F, bFn: F, i: N = 0): CreateLoop => {
+  return Object.create(loopPropotype, {
+    pFn: {
+      value: pFn
+    },
+    bFn: {
+      value: bFn
+    },
+    interval: {
+      value: i
+    },
+  })
+}
+
 
 export {
+  VERSION,
   reqToPromise,
   cloneDeep,
   // createCompKey,
@@ -210,4 +254,8 @@ export {
   cleanoutApp,
   cleanoutPage,
   cleanoutComponent,
+  createLoop,
+}
+export type {
+  CreateLoop
 }

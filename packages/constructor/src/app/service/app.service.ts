@@ -6,10 +6,11 @@ import { serviceUrl } from 'src/helper/config';
 import { createTree } from 'src/helper/tree';
 import { initAppMeta } from 'src/helper';
 import type { ResponseData } from 'src/types';
-import type { App } from 'src/types/app';
+import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
-  // B,
-   Email, S, ULID, } from 'src/types/base';
+   Email, S, ULID, N,
+  A,
+  B, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 
 let clog = console.log
@@ -32,6 +33,7 @@ export class AppService {
   appList$: Subject<App[]>
   // appSubject$: Subject<AppOrUn> // 04.29+ 删除
   tree: Tree<App>
+  private _versionMap: Map<ULID, SyntheticVersion>
   constructor(
     private http: HttpClient,
     private userService: UserService,
@@ -40,6 +42,7 @@ export class AppService {
     this.appList$ = new Subject<App[]>()
     // this.appSubject$ = new Subject<AppOrUn>()
     this.tree = createTree()
+    this._versionMap = new Map()
   }
   private _find(appUlid?: S) {
     return this._appList.find(item => item.ulid === appUlid)
@@ -127,15 +130,19 @@ export class AppService {
       this._createApp({
         key: appObj.key,
         name: appObj.name,
-        theme: appObj.theme,
-        collaborator: appObj.collaborator,
-        prevUlid: appObj.prevUlid,
         ulid: appObj.ulid,
+        theme: appObj.theme,
+        version: appObj.version,
+        owner: appObj.owner,
+        collaborator: appObj.collaborator,
+        firstPageUlid: appObj.firstPageUlid,
+        prevUlid: appObj.prevUlid,
+        nextUlid: appObj.nextUlid,
       })
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
-  private _createApp(data: ReqCreateData & {ulid: ULID}) {
+  private _createApp(data: App) {
     return new Promise((s, j) => {
       this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
         ...data,
@@ -171,5 +178,108 @@ export class AppService {
       }
     }
   }
-  
+
+  getVersion(appUlid: ULID, envs: S[]) {
+    let o = this._versionMap.get(appUlid)
+    if (o) {
+      return Promise.resolve(o)
+    } else {
+      return this.reqVersion(appUlid, envs)
+    }
+  }
+  publish(data: A) {
+    return new Promise((s, j) => {
+      this.http.post<ResponseData>(`${serviceUrl()}/apps/publish`, {
+        ...data,
+      }, {
+        withCredentials: true
+      }).subscribe(res => {
+        if ([100000, 0].includes(res.code)) {
+          s(res)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  deleteApp(appUlid: ULID, env: S) {
+    return new Promise((s, j) => {
+      this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
+        params: {
+          appUlid,
+          env,
+        },
+        withCredentials: true
+      }).subscribe(res => {
+        if (res.code === 0) {
+          s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  reqVersion(appUlid: ULID, envs: S[]) {
+    return new Promise<SyntheticVersion>((s, j) => {
+      this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+        params: {
+          appUlid,
+          envs,
+          // envs: ['dev', 'test', 'pre', 'prod'],
+        },
+        withCredentials: true,
+      }).subscribe(res => {
+        if (res.code === 0) {
+          // 把脏数据处理为干净数据
+          let t = {
+            dev: {
+              version: res.data.dev.version ?? -1,
+              remarks: res.data.dev.remarks ?? '',
+            },
+            test: {
+              version: res.data.test.version ?? -1,
+              remarks: res.data.test.remarks ?? '',
+            },
+            pre: {
+              version: res.data.pre.version ?? -1,
+              remarks: res.data.pre.remarks ?? '',
+            },
+            prod: {
+              version: res.data.prod.version ?? -1,
+              remarks: res.data.prod.remarks ?? '',
+            },
+          }
+          this._versionMap.set(appUlid, t)
+          s(res.data)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
+  updateVersion(appUlid: ULID, env: keyof Required<SyntheticVersion>, version: N, remarks: S): B {
+    let v = this._versionMap.get(appUlid)
+    if (v) {
+      v[env].remarks = remarks
+      v[env].version = version
+      return true
+    }
+    return false
+  }
+  reqProcess(ulid: ULID, env: S) {
+    return new Promise((s, j) => {
+      this.http.get<ResponseData>(`${serviceUrl()}/apps/process`, {
+        params: {
+          key: `${ulid}_${env}`
+        },
+        withCredentials: true,
+      }).subscribe(res => {
+        if ([0, 300000].includes(res.code)) {
+          s(res)
+        } else {
+          j(new Error(res.message))
+        }
+      })
+    })
+  }
 }

@@ -1,31 +1,55 @@
 <div class="box">
-    <!-- dev -->
-    <!-- <P>{{data.appUlid}}</P> -->
-    <!-- <P>{{data.app}}</P> -->
     <div class="env-box">
         <h4>dev环境</h4>
-        <p><span>当前version</span><span class="version-number">{{devVersion}}</span></p>
-        <label>设置版本号</label>
-        <input [(ngModel)]="newVersion" placeholder="请设置新版本号" />
-        <!-- <br> -->
-        <d-button (click)="devOkBtClickH()">确定</d-button>
+        <form dForm [layout]="layoutDirection" ngForm>
+            <d-form-item>
+              <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'This is the plan name.'">版本号</d-form-label>
+              <d-form-control>
+                  <d-input-number
+                      [min]="0"
+                      name="version"
+                      [step]="1"
+                      [(ngModel)]="devObj.version"
+                      (ngModelChange)="devVersionChangeH($event)"
+                      class="input-number"
+                  >
+                  </d-input-number>
+              </d-form-control>
+            </d-form-item>
+            <d-form-item>
+              <d-form-label>备注</d-form-label>
+              <d-form-control>
+                <textarea dTextarea name="remarks" maxlength="20"
+                [(ngModel)]="devObj.remarks"
+                ></textarea>
+              </d-form-control>
+            </d-form-item>
+        </form>
     </div>
-    <d-button (click)="devToTestBtClickH()" class="button-box">发布-></d-button>
+    <d-button (click)="devToTestBtClickH()" class="button-publish">发布-></d-button>
     <!-- test -->
     <div class="env-box">
         <h4>test环境</h4>
-        <p><span>当前version</span><span class="version-number">{{testVersion}}</span></p>
+        <p>{{testObj.version}}版本</p>
+        <p>{{testObj.remarks}}</p>
+        <d-button (click)="testToDevClickH()" class="button-box">回退到dev环境</d-button>
+        <!-- <d-button (click)="testDeleteBtClickH()" class="button-publish">删除</d-button> -->
     </div>
-    <d-button (click)="testToPreBtClickH()" class="button-box">发布-></d-button>
+    <d-button (click)="testToPreBtClickH()" class="button-publish">发布 >></d-button>
     <!-- pre -->
     <div class="env-box">
         <h4>pre环境</h4>
-        <p><span>当前version</span><span class="version-number">{{preVersion}}</span></p>
+        <p>{{preObj.version}}版本</p>
+        <p>{{preObj.remarks}}</p>
+        <d-button (click)="preToDevClickH()" class="button-box">回退到dev环境</d-button>
     </div>
-    <d-button (click)="preToProdBtClickH()" class="button-box">发布-></d-button>
+    <d-button (click)="preToProdBtClickH()" class="button-publish">发布-></d-button>
     <!-- prod -->
     <div class="env-box">
         <h4>prod环境</h4>
-        <p><span>当前version</span><span class="version-number">{{prodVersion}}</span></p>
+        <p>{{prodObj.version}}版本</p>
+        <p>{{prodObj.remarks}}</p>
+        <d-button (click)="prodToDevClickH()" class="button-box">回退到dev环境</d-button>
     </div>
 </div>
+<d-toast [value]="msg"></d-toast>
