@@ -51,20 +51,20 @@ export class PublishDialogComponent implements OnInit {
 
     this.layoutDirection = FormLayout.Vertical;
     this.devObj = {
-      version: 1,
-      remarks: 'rema',
+      version: -1,
+      remarks: '',
     }
     this.testObj = {
       version: -1,
-      remarks: 'remarks',
+      remarks: '',
     }
     this.preObj = {
       version: -1,
-      remarks: 'remarks',
+      remarks: '',
     }
     this.prodObj = {
       version: -1,
-      remarks: 'remarks',
+      remarks: '',
     }
     this.msg = []
   }
@@ -109,6 +109,9 @@ export class PublishDialogComponent implements OnInit {
       switch (res.code) {
         case 0:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '发布成功。' }]
+          this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
+          this.testObj.version = this.devObj.version
+          this.testObj.remarks = this.devObj.remarks
           break;
         case 100000:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
@@ -124,8 +127,21 @@ export class PublishDialogComponent implements OnInit {
       appUlid: this.data.appUlid,
       fromEnv: 'test',
       toEnv: 'pre',
-    }).then(() => {
-      this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+    }).then((res: A) => {
+      switch (res.code) {
+        case 0:
+          this.msg = [{ severity: 'success', summary: 'Summary', content: '发布成功。' }]
+          this.appService.updateVersion(this.data.appUlid, 'pre', this.testObj.version, this.testObj.remarks)
+          this.preObj.version = this.testObj.version
+          this.preObj.remarks = this.testObj.remarks
+          break;
+        case 100000:
+          this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+          break;
+        default:
+          this.msg = [{ severity: 'error', summary: 'Summary', content: `发布失败。${res.message}` }]
+          break;
+      }
     })
   }
   preToProdBtClickH() {
@@ -133,8 +149,21 @@ export class PublishDialogComponent implements OnInit {
       appUlid: this.data.appUlid,
       fromEnv: 'pre',
       toEnv: 'prod',
-    }).then(() => {
-      this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+    }).then((res: A) => {
+      switch (res.code) {
+        case 0:
+          this.msg = [{ severity: 'success', summary: 'Summary', content: '发布成功。' }]
+          this.appService.updateVersion(this.data.appUlid, 'prod', this.preObj.version, this.preObj.remarks)
+          this.prodObj.version = this.preObj.version
+          this.prodObj.remarks = this.preObj.remarks
+          break;
+        case 100000:
+          this.msg = [{ severity: 'success', summary: 'Summary', content: '开始执行发布工作。' }]
+          break;
+        default:
+          this.msg = [{ severity: 'error', summary: 'Summary', content: `发布失败。${res.message}` }]
+          break;
+      }
     })
   }
   testToDevClickH() {
