@@ -200,6 +200,7 @@ let cleanoutComponent = (p: A) => {
 interface LoopPropotype {
   launch: (...p: A[]) => Promise<A>
 }
+// todo 改名为Loop
 interface CreateLoop extends LoopPropotype {
   pFn: () => Promise<A>
   bFn: (p: A) => B
