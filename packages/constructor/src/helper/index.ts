@@ -1,5 +1,6 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
+// import { HttpClient } from '@angular/common/http';
 // import clone from 'rfdc/default'
 // type
 import type { A, F, N, S, Ao, B } from 'src/types/base';
@@ -201,7 +202,7 @@ interface LoopPropotype {
   launch: (...p: A[]) => Promise<A>
 }
 // todo 改名为Loop
-interface CreateLoop extends LoopPropotype {
+interface Loop extends LoopPropotype {
   pFn: () => Promise<A>
   bFn: (p: A) => B
   interval: N
@@ -211,7 +212,7 @@ let sleep = (n: N = 0) => {
     setTimeout(() => {s(true)}, n)
   })
 }
-// todo 迁移到web-stone
+
 let loopPropotype = Object.create({}, {
   launch: {
     value: function (...p: A[]) {
@@ -227,7 +228,7 @@ let loopPropotype = Object.create({}, {
     }
   }
 })
-let createLoop = (pFn: F, bFn: F, i: N = 0): CreateLoop => {
+let createLoop = (pFn: F, bFn: F, i: N = 0): Loop => {
   return Object.create(loopPropotype, {
     pFn: {
       value: pFn
@@ -240,6 +241,14 @@ let createLoop = (pFn: F, bFn: F, i: N = 0): CreateLoop => {
     },
   })
 }
+
+// 处理为一个类
+// let wrapReq = () => {
+//   let http = new HttpClient()
+//   return new Promise((s, j) => {
+//     http
+//   })
+// }
 
 
 export {
@@ -256,7 +265,8 @@ export {
   cleanoutPage,
   cleanoutComponent,
   createLoop,
+  // wrapReq,
 }
 export type {
-  CreateLoop
+  Loop
 }
