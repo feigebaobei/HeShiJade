@@ -8,6 +8,7 @@ type O = object
 type D = Date
 // type At = '@'
 // type Email 
+// todo rename OA
 interface Ao {
     [k: S]: A
 }

@@ -1,4 +1,1 @@
-{"level":30,"time":1718234573350,"pid":740,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"hi"}
-{"level":30,"time":1718234573350,"pid":740,"hostname":"catdeMacBook-Pro.local","name":"logname","k":2,"b":true,"a":"str","name":"hi"}
-{"level":30,"time":1718234573350,"pid":740,"hostname":"catdeMacBook-Pro.local","name":"logname","k":2,"b":true,"a":"str","name":"hi","msg":"other str"}
-{"level":50,"time":1718234573350,"pid":740,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"error"}
+{"level":30,"time":1718374570207,"pid":13461,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}

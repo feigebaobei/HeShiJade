@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
@@ -11,6 +11,7 @@ import { createChildKey } from 'src/helper/index'
 import {categoryList} from 'src/helper/category'
 import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
+import { ReqService } from './req.service';
 // 类型
 // import { createCompKey } from 'src/helper/index'
 import type { Component, Category, 
@@ -29,6 +30,7 @@ import type { S, Ao, ULID, A,
   ConfigItem,
 } from 'src/types/base';
 import type { Tree, Node } from 'src/helper/tree';
+// import type { HttpParams } from '@angular/common/http';
 
 
 let clog = console.log
@@ -56,10 +58,10 @@ export class ComponentService {
   componentProps$: Subject<Component['props']>
 
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private pageService: PageService,
     private appService: AppService,
-
+    private reqService: ReqService,
   ) {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
@@ -100,21 +102,22 @@ export class ComponentService {
     }
   }
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
-    return new Promise<Component[]>((s, j) => {
-      this.http.get<ResponseData>(`${serviceUrl()}/components`, {
-        params: {
-          pageUlid,
-          env: 'dev',
-        },
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => res.data)
+    // return new Promise<Component[]>((s, j) => {
+    //   this.http.get<ResponseData>(`${serviceUrl()}/components`, {
+    //     params: {
+    //       pageUlid,
+    //       env: 'dev',
+    //     },
+    //     withCredentials: true
+    //   }).subscribe(res => {
+    //     if (res.code === 0) {
+    //       s(res.data)
+    //     } else {
+    //       j(new Error(res.message))
+    //     }
+    //   })
+    // })
   }
   // 把组件组装成树，再做映射。
   opCompList(componentList: Component[]): Tree<Component> {
@@ -285,36 +288,38 @@ export class ComponentService {
   }
   // 创建组件
   reqPostCompListByPage(obj: Component) {
-    return new Promise<B>((s, j) => {
-      this.http.post<ResponseData>(`${serviceUrl()}/components`, {
-        ...obj,
-      }, {
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          s(true)
-        } else {
-          j()
-        }
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
+    // return new Promise<B>((s, j) => {
+    //   this.http.post<ResponseData>(`${serviceUrl()}/components`, {
+    //     ...obj,
+    //   }, {
+    //     withCredentials: true
+    //   }).subscribe(res => {
+    //     if (res.code === 0) {
+    //       s(true)
+    //     } else {
+    //       j()
+    //     }
+    //   })
+    // })
   }
   reqDeleteComponent(ulid: ULID) {
-    return new Promise<B>((s, j) => {
-      this.http.delete<ResponseData>(`${serviceUrl()}/components`, {
-          params: {
-            ulid
-          },
-          withCredentials: true
-        }).subscribe(res => {
-          if (res.code === 0) {
-            clog('删除成功')
-            s(true)
-          } else {
-            j()
-          }
-        })
-    })
+    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid}).then(() => true)
+    // return new Promise<B>((s, j) => {
+    //   this.http.delete<ResponseData>(`${serviceUrl()}/components`, {
+    //       params: {
+    //         ulid
+    //       },
+    //       withCredentials: true
+    //     }).subscribe(res => {
+    //       if (res.code === 0) {
+    //         clog('删除成功')
+    //         s(true)
+    //       } else {
+    //         j()
+    //       }
+    //     })
+    // })
   }
   // for dev
   // 只在本地保存，不改变远端数据
@@ -437,62 +442,81 @@ export class ComponentService {
     }
   }
   reqChangeItems(index: N, key: S, value: A) {
-    this.http.put<ResponseData>(`${serviceUrl()}/components/items`, {
+    return this.reqService.req(`${serviceUrl()}/components/items`, 'put', {
       ulid: this.curComponent()?.ulid,
       index,
       key,
-      value,
-    }, {
-      withCredentials: true
-    })
-    .subscribe(res => {
-      clog('res', res)
-    })
+      value,})
+    // this.http.put<ResponseData>(`${serviceUrl()}/components/items`, {
+    //   ulid: this.curComponent()?.ulid,
+    //   index,
+    //   key,
+    //   value,
+    // }, {
+    //   withCredentials: true
+    // })
+    // .subscribe(res => {
+    //   clog('res', res)
+    // })
   }
   reqAddItems(obj: ItemsMetaItem) {
-    this.http.post<ResponseData>(`${serviceUrl()}/components/items`, {
-      ulid: this.curComponent()?.ulid,
-      value: obj
-    }, {
-      withCredentials: true
-    }).subscribe(() => {})
+    // this.http.post<ResponseData>(`${serviceUrl()}/components/items`, {
+    //   ulid: this.curComponent()?.ulid,
+    //   value: obj
+    // }, {
+    //   withCredentials: true
+    // }).subscribe(() => {})
+    return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
   removeItemsOfCurComponent(index: N) {
   }
 
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
-    return new Promise((s, j) => {
-      this.http.put<ResponseData>(`${serviceUrl()}/components`, {
-        ulid: this.curComponent()?.ulid || '',
-        type,
-        key,
-        value,
-      }).subscribe((res) => {
-        if (res.code === 0) {
-          // res.data
-          s(true)
-        }
-        j(res.message || '更新失败')
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/components`, 'put', {
+      ulid: this.curComponent()?.ulid || '',
+      type,
+      key,
+      value,
+    }).then(() => true)
+    // return new Promise((s, j) => {
+    //   this.http.put<ResponseData>(`${serviceUrl()}/components`, {
+    //     ulid: this.curComponent()?.ulid || '',
+    //     type,
+    //     key,
+    //     value,
+    //   }).subscribe((res) => {
+    //     if (res.code === 0) {
+    //       // res.data
+    //       s(true)
+    //     }
+    //     j(res.message || '更新失败')
+    //   })
+    // })
   }
   reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
-    return new Promise((s, j) => {
-      this.http.put<ResponseData>(`${serviceUrl()}/components`, {
-        ulid: this.curComponent()?.ulid || '',
-        type,
-        index,
-        key,
-        value,
-      }).subscribe((res) => {
-        if (res.code === 0) {
-          s(true)
-        } else {
-          j(res.message || '更新失败')
-        }
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/components`, 'put', {
+      ulid: this.curComponent()?.ulid || '',
+      type,
+      index,
+      key,
+      value,
+    }).then(() => true)
+    // return new Promise((s, j) => {
+    //   this.http.put<ResponseData>(`${serviceUrl()}/components`, {
+    //     ulid: this.curComponent()?.ulid || '',
+    //     type,
+    //     index,
+    //     key,
+    //     value,
+    //   }).subscribe((res) => {
+    //     if (res.code === 0) {
+    //       s(true)
+    //     } else {
+    //       j(res.message || '更新失败')
+    //     }
+    //   })
+    // })
   }
   // 删除组件
   delete(componentUlid: ULID) {

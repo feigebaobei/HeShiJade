@@ -5,7 +5,7 @@ import { AppService } from 'src/app/service/app.service';
 import { serviceUrl } from 'src/helper/config';
 import { FormLayout } from 'ng-devui/form';
 import { createLoop } from 'src/helper';
-import type { CreateLoop } from 'src/helper'
+import type { Loop } from 'src/helper'
 import type { ResponseData } from 'src/types';
 import type { A, N, S, ULID, B } from 'src/types/base';
 
@@ -33,7 +33,7 @@ export class PublishDialogComponent implements OnInit {
   preObj: EnvObj
   prodObj: EnvObj
   msg: {}[]
-  loop: CreateLoop
+  loop: Loop
   constructor(
     private appService: AppService,
     // private versionService: VersionsService,

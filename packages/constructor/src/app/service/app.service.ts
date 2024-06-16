@@ -1,10 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserService } from './user.service';
 import { serviceUrl } from 'src/helper/config';
 import { createTree } from 'src/helper/tree';
 import { initAppMeta } from 'src/helper';
+// import { Router } from '@angular/router';
+import { ReqService } from './req.service';
 import type { ResponseData } from 'src/types';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
@@ -12,6 +14,7 @@ import type {
   A,
   B, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
+import type { HttpParams } from '@angular/common/http';
 
 let clog = console.log
 
@@ -35,8 +38,10 @@ export class AppService {
   tree: Tree<App>
   private _versionMap: Map<ULID, SyntheticVersion>
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private userService: UserService,
+    // private router: Router,
+    private reqService: ReqService,
   ) {
     this._appList = []
     this.appList$ = new Subject<App[]>()
@@ -62,8 +67,8 @@ export class AppService {
       return Promise.resolve(al)
     } else {
       return this.reqAppList().then((appList: App[]) => {
-        this.opAppList(appList)
-        return true
+        return this.opAppList(appList)
+        // return true
       }).then(() => {
         let appList = this.tree.root?.toArray()
         return appList || []
@@ -75,7 +80,7 @@ export class AppService {
   }
   opAppList(appList: App[]) {
     // let curUser = this.userService.getUser()
-    this.userService.getUser().then(v => {
+    return this.userService.getUser().then(v => {
       let curUser = v
       // clog('curUser', curUser)
       if (curUser) {
@@ -104,17 +109,27 @@ export class AppService {
   // 暂时不开发。设置方法在请求appList时设置。
   // 获取应用列表
   reqAppList() {
-    return new Promise<App[]>((s, j) => {
-      this.http.get<ResponseData>(`${serviceUrl()}/apps`, {
-        withCredentials: true, // 控制是否带cookie
-      }).subscribe(res => {
-        if (res.code === 0) {
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
+    return this.reqService.req(`${serviceUrl()}/apps`, 'get', {}).then(res => {
+      return res.data
+    // }).catch((res) => {
+    //   jasmine()
     })
+    // return new Promise<App[]>((s, j) => {
+    //   this.http.get<ResponseData>(`${serviceUrl()}/apps`, {
+    //     withCredentials: true, // 控制是否带cookie
+    //   }).subscribe(res => {
+    //     clog('reqAppList', res)
+    //     if (res.code === 100130) {
+    //       this.router.navigate(['/home' ]);
+    //       j(new Error(res.message))
+    //     }
+    //     if (res.code === 0) {
+    //       s(res.data)
+    //     } else {
+    //       j(new Error(res.message))
+    //     }
+    //   })
+    // })
   }
   createApp(data: ReqCreateData) {
     this.userService.getUser().then(user => {
@@ -143,17 +158,19 @@ export class AppService {
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
   private _createApp(data: App) {
-    return new Promise((s, j) => {
-      this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
-        ...data,
-        // ulid: ulid()
-      }, {
-        withCredentials: true
-      }).subscribe(() => {
-        // s(void)
-        s(undefined)
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/apps`, 'post', data)
+    // .then(() => {
+    // })
+
+    // return new Promise((s, j) => {
+    //   this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
+    //     ...data,
+    //   }, {
+    //     withCredentials: true
+    //   }).subscribe(() => {
+    //     s(undefined)
+    //   })
+    // })
   }
   // 重铸
   // 获取应用列表+设置当前应用+返回应用列表
@@ -188,74 +205,98 @@ export class AppService {
     }
   }
   publish(data: A) {
-    return new Promise((s, j) => {
-      this.http.post<ResponseData>(`${serviceUrl()}/apps/publish`, {
-        ...data,
-      }, {
-        withCredentials: true
-      }).subscribe(res => {
-        if ([100000, 0].includes(res.code)) {
-          s(res)
-        } else {
-          j(new Error(res.message))
-        }
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/apps/publish`, 'post', data)
+    // return new Promise((s, j) => {
+    //   this.http.post<ResponseData>(`${serviceUrl()}/apps/publish`, {
+    //     ...data,
+    //   }, {
+    //     withCredentials: true
+    //   }).subscribe(res => {
+    //     if ([100000, 0].includes(res.code)) {
+    //       s(res)
+    //     } else {
+    //       j(new Error(res.message))
+    //     }
+    //   })
+    // })
   }
   deleteApp(appUlid: ULID, env: S) {
-    return new Promise((s, j) => {
-      this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
-        params: {
-          appUlid,
-          env,
-        },
-        withCredentials: true
-      }).subscribe(res => {
-        if (res.code === 0) {
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, env})
+    // return new Promise((s, j) => {
+    //   this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
+    //     params: {
+    //       appUlid,
+    //       env,
+    //     },
+    //     withCredentials: true
+    //   }).subscribe(res => {
+    //     if (res.code === 0) {
+    //       s(res.data)
+    //     } else {
+    //       j(new Error(res.message))
+    //     }
+    //   })
+    // })
   }
   reqVersion(appUlid: ULID, envs: S[]) {
-    return new Promise<SyntheticVersion>((s, j) => {
-      this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
-        params: {
-          appUlid,
-          envs,
-          // envs: ['dev', 'test', 'pre', 'prod'],
+    return this.reqService.req(`${serviceUrl()}/apps/versions`, 'get', {appUlid, envs}).then((res) => {
+      let t = {
+        dev: {
+          version: res.data.dev.version ?? -1,
+          remarks: res.data.dev.remarks ?? '',
         },
-        withCredentials: true,
-      }).subscribe(res => {
-        if (res.code === 0) {
-          // 把脏数据处理为干净数据
-          let t = {
-            dev: {
-              version: res.data.dev.version ?? -1,
-              remarks: res.data.dev.remarks ?? '',
-            },
-            test: {
-              version: res.data.test.version ?? -1,
-              remarks: res.data.test.remarks ?? '',
-            },
-            pre: {
-              version: res.data.pre.version ?? -1,
-              remarks: res.data.pre.remarks ?? '',
-            },
-            prod: {
-              version: res.data.prod.version ?? -1,
-              remarks: res.data.prod.remarks ?? '',
-            },
-          }
-          this._versionMap.set(appUlid, t)
-          s(res.data)
-        } else {
-          j(new Error(res.message))
-        }
-      })
+        test: {
+          version: res.data.test.version ?? -1,
+          remarks: res.data.test.remarks ?? '',
+        },
+        pre: {
+          version: res.data.pre.version ?? -1,
+          remarks: res.data.pre.remarks ?? '',
+        },
+        prod: {
+          version: res.data.prod.version ?? -1,
+          remarks: res.data.prod.remarks ?? '',
+        },
+      }
+      this._versionMap.set(appUlid, t)
+      return res.data
     })
+    // return new Promise<SyntheticVersion>((s, j) => {
+    //   this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
+    //     params: {
+    //       appUlid,
+    //       envs,
+    //       // envs: ['dev', 'test', 'pre', 'prod'],
+    //     },
+    //     withCredentials: true,
+    //   }).subscribe(res => {
+    //     if (res.code === 0) {
+    //       // 把脏数据处理为干净数据
+    //       let t = {
+    //         dev: {
+    //           version: res.data.dev.version ?? -1,
+    //           remarks: res.data.dev.remarks ?? '',
+    //         },
+    //         test: {
+    //           version: res.data.test.version ?? -1,
+    //           remarks: res.data.test.remarks ?? '',
+    //         },
+    //         pre: {
+    //           version: res.data.pre.version ?? -1,
+    //           remarks: res.data.pre.remarks ?? '',
+    //         },
+    //         prod: {
+    //           version: res.data.prod.version ?? -1,
+    //           remarks: res.data.prod.remarks ?? '',
+    //         },
+    //       }
+    //       this._versionMap.set(appUlid, t)
+    //       s(res.data)
+    //     } else {
+    //       j(new Error(res.message))
+    //     }
+    //   })
+    // })
   }
   updateVersion(appUlid: ULID, env: keyof Required<SyntheticVersion>, version: N, remarks: S): B {
     let v = this._versionMap.get(appUlid)
@@ -267,19 +308,20 @@ export class AppService {
     return false
   }
   reqProcess(ulid: ULID, env: S) {
-    return new Promise((s, j) => {
-      this.http.get<ResponseData>(`${serviceUrl()}/apps/process`, {
-        params: {
-          key: `${ulid}_${env}`
-        },
-        withCredentials: true,
-      }).subscribe(res => {
-        if ([0, 300000].includes(res.code)) {
-          s(res)
-        } else {
-          j(new Error(res.message))
-        }
-      })
-    })
+    return this.reqService.req(`${serviceUrl()}/apps/process`, 'get', {key: `${ulid}_${env}`})
+    // return new Promise((s, j) => {
+    //   this.http.get<ResponseData>(`${serviceUrl()}/apps/process`, {
+    //     params: {
+    //       key: `${ulid}_${env}`
+    //     },
+    //     withCredentials: true,
+    //   }).subscribe(res => {
+    //     if ([0, 300000].includes(res.code)) {
+    //       s(res)
+    //     } else {
+    //       j(new Error(res.message))
+    //     }
+    //   })
+    // })
   }
 }
