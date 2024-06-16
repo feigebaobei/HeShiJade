@@ -15,7 +15,7 @@ export class ReqService {
     private http: HttpClient,
     private router: Router
   ) { }
-  req(url: S, method: Method, params: HttpParams, options: Ao = {withCredentials: true}): Promise<ResponseData> {
+  req(url: S, method: Method, params: Ao, options: Ao = {withCredentials: true}): Promise<ResponseData> {
     return new Promise((s, j) => {
       // this.http[method]()
       let h
@@ -37,13 +37,13 @@ export class ReqService {
           })
           break;
         case 'delete':
-          h = this.http.get<ResponseData>(url, {
+          h = this.http.delete<ResponseData>(url, {
             params,
             withCredentials: options['withCredentials'],
           })
           break
         case 'option':
-          h = this.http.get<ResponseData>(url, {
+          h = this.http.options<ResponseData>(url, {
             params,
             withCredentials: options['withCredentials'],
           })

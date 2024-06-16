@@ -109,7 +109,7 @@ export class AppService {
   // 暂时不开发。设置方法在请求appList时设置。
   // 获取应用列表
   reqAppList() {
-    return this.reqService.req(`${serviceUrl()}/apps`, 'get', {} as HttpParams).then(res => {
+    return this.reqService.req(`${serviceUrl()}/apps`, 'get', {}).then(res => {
       return res.data
     // }).catch((res) => {
     //   jasmine()
@@ -158,7 +158,7 @@ export class AppService {
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
   private _createApp(data: App) {
-    return this.reqService.req(`${serviceUrl()}/apps`, 'post', data as unknown as HttpParams)
+    return this.reqService.req(`${serviceUrl()}/apps`, 'post', data)
     // .then(() => {
     // })
 
@@ -221,7 +221,7 @@ export class AppService {
     // })
   }
   deleteApp(appUlid: ULID, env: S) {
-    return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, env} as unknown as HttpParams)
+    return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, env})
     // return new Promise((s, j) => {
     //   this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
     //     params: {
@@ -239,7 +239,7 @@ export class AppService {
     // })
   }
   reqVersion(appUlid: ULID, envs: S[]) {
-    return this.reqService.req(`${serviceUrl()}/apps/versions`, 'get', {appUlid, envs} as unknown as HttpParams).then((res) => {
+    return this.reqService.req(`${serviceUrl()}/apps/versions`, 'get', {appUlid, envs}).then((res) => {
       let t = {
         dev: {
           version: res.data.dev.version ?? -1,
@@ -308,7 +308,7 @@ export class AppService {
     return false
   }
   reqProcess(ulid: ULID, env: S) {
-    return this.reqService.req(`${serviceUrl()}/apps/process`, 'get', {key: `${ulid}_${env}`} as unknown as HttpParams)
+    return this.reqService.req(`${serviceUrl()}/apps/process`, 'get', {key: `${ulid}_${env}`})
     // return new Promise((s, j) => {
     //   this.http.get<ResponseData>(`${serviceUrl()}/apps/process`, {
     //     params: {

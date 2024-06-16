@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { reqToPromise } from 'src/helper';
 import { Subject, type Observable } from 'rxjs';
@@ -27,7 +26,7 @@ export class UserService {
   regularTime: N
   regularTimeId: N
   ssoClient: SsoClient
-  constructor(private http: HttpClient) {
+  constructor() {
     this.user = undefined
     this.user$ = new Subject()
     // todo delete 06.01+
