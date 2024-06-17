@@ -213,8 +213,8 @@ export class AppService {
     //   })
     // })
   }
-  deleteApp(appUlid: ULID, env: S[]) {
-    return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, env})
+  deleteApp(appUlid: ULID, envs: S[]) {
+    return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, envs})
     // return new Promise((s, j) => {
     //   this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
     //     params: {

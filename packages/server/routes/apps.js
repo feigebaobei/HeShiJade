@@ -7,7 +7,7 @@ const path = require('path')
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, } = require('../helper');
+const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, sleep, } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 const { DB, dbArr } = require('../helper/config')
 const { logger } = require('../helper/log')
@@ -176,41 +176,85 @@ router.route('/')
 })
 // 删除指定应用
 .delete(cors.corsWithOptions, (req, res) => { // 未做到原子性
-  // res.send('delete')
+  logger.info({method: 'delete', originalUrl: req.originalUrl, params: req.query})
   new Promise((s, j) => {
-    if (rules.isArray(req.query.env) && rules.required(req.query.appUlid)) {
+    if (rules.isArray(req.query.envs) && rules.required(req.query.appUlid)) {
       s(true)
     } else {
       j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
+    // envObj = dbArr.find(item => item.env === req.query.env)
+    let pu = lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
       return user
     }).catch(() => Promise.reject(200010))
-  }).then((user) => {
-    let envObj = dbArr.find(item => item.env === req.query.env)
-    // clog(req.query)
-    // clog(envObj) 
-    let pa = lowcodeDb.collection(envObj.appTable).deleteOne({ulid: req.query.appUlid}).then(() => true).catch(() => {
-      return Promise.reject(200030)
+    let pa = lowcodeDb.collection(envObj.appTable).findOne({ulid: req.query.appUlid}).then((app) => {
+      return app
+    }).catch(() => Promise.reject(200010))
+    return Promise.all([pu, pa]).then(([user, app]) => ({user, app}))
+  }).then(({user, app}) => {
+    // todo 整理key
+    let stepRecorder = createStepRecorder(appUlid, 'delete', req.query.envs.includes('dev') ? (req.query.envs.length * 3 + 1) : (req.query.envs.length * 3))
+    stepRecorder.create()
+    let pArr = []
+    req.query.envs.forEach(env => {
+      let envObj = dbArr.find(item => item.env === env)
+      if (env === 'dev') {
+        if (user.firstApplicationUlid === req.query.appUlid) {
+          if (app.nextUlid) {
+            pArr.push(lowcodeDb.collection('users').updateOne({ ulid: app.ulid }, {$set: {firstApplicationUlid: app.nextUlid}}))
+          } else {
+            pArr.push(lowcodeDb.collection('users').updateOne({ ulid: app.ulid }, {$set: {firstApplicationUlid: '', lastApplicationUlid: ''}}))
+          }
+        }
+        if (user.lastApplicationUlid === req.query.appUlid) {
+          if (app.prevUlid) {
+            pArr.push(lowcodeDb.collection('users').updateOne({ ulid: app.ulid }, {$set: {lastApplicationUlid: app.prevUlid}}))
+          } else {
+            pArr.push(lowcodeDb.collection('users').updateOne({ ulid: app.ulid }, {$set: {firstApplicationUlid: '', lastApplicationUlid: ''}}))
+          }
+        }
+        stepRecorder.add('user_update')
+      }
+
+      pArr.push(lowcodeDb.collection(envObj.appTable).deleteOne({ulid: req.query.appUlid}).then(() => {
+        stepRecorder.add(`app_${env}`)
+        return true
+      }).catch(() => {
+        return Promise.reject(200030)
+      }))
+      pArr.push(lowcodeDb.collection(envObj.pageTable).deleteMany({appUlid: req.query.appUlid}).then(() => {
+        stepRecorder.add(`page_${env}`)
+        return true
+      }).catch(() => {
+        return Promise.reject(200030)
+      }))
+      pArr.push(lowcodeDb.collection(envObj.componentTable).deleteMany({appUlid: req.query.appUlid}).then(() => {
+        stepRecorder.add(`component_${env}`)
+        return true
+      }).catch(() => {
+        return Promise.reject(200030)
+      }))
     })
-    let pp = lowcodeDb.collection(envObj.pageTable).deleteMany({appUlid: req.query.appUlid}).then(() => true).catch(() => {
-      return Promise.reject(200030)
-    })
-    let pc = lowcodeDb.collection(envObj.componentTable).deleteMany({appUlid: req.query.appUlid}).then(() => true).catch(() => {
-      return Promise.reject(200030)
-    })
-    return Promise.all([pa, pp, pc]).then(() => {
-      return res.status(200).json({
-        code: 0,
-        message: '',
-        data: {}
-      })
+    let pAll = Promise.all(pAll).then(() => {
+      stepRecorder.updateStatus('finish')
+      stepRecorder.delete()
     }).catch(() => {
-      return Promise.reject(200030)
+      stepRecorder.updateStatus('error')
+    })
+    let pr = new Promise((_s, j) => {
+      setTimeout(() => j(100000))
+    }, 2000)
+    return Promise.race([pArr, pr])
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
     })
   }).catch((code) => {
-    clog(code)
+    // clog(code)
+    logger.info({code, originalUrl: req.originalUrl})
     return res.status(200).json({
       code,
       message: errorCode[code],
@@ -543,7 +587,7 @@ router.route('/publish')
       logger.info({error})
       stepRecorder.updateStatus('error')
     })
-    let pr = new Promise((s, j) => {
+    let pr = new Promise((_s, j) => {
       setTimeout(() => {
         j(100000)
       }, 2000)

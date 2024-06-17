@@ -266,6 +266,7 @@ export {
   cleanoutComponent,
   createLoop,
   // wrapReq,
+  sleep,
 }
 export type {
   Loop
