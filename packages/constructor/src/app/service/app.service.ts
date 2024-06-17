@@ -7,14 +7,12 @@ import { createTree } from 'src/helper/tree';
 import { initAppMeta } from 'src/helper';
 // import { Router } from '@angular/router';
 import { ReqService } from './req.service';
-import type { ResponseData } from 'src/types';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
    Email, S, ULID, N,
   A,
   B, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
-import type { HttpParams } from '@angular/common/http';
 
 let clog = console.log
 
@@ -34,18 +32,14 @@ export class AppService {
   private _appList: App[]  // 缓存应用列表
   private _curApp: AppOrUn // 缓存当前应用
   appList$: Subject<App[]>
-  // appSubject$: Subject<AppOrUn> // 04.29+ 删除
   tree: Tree<App>
   private _versionMap: Map<ULID, SyntheticVersion>
   constructor(
-    // private http: HttpClient,
     private userService: UserService,
-    // private router: Router,
     private reqService: ReqService,
   ) {
     this._appList = []
     this.appList$ = new Subject<App[]>()
-    // this.appSubject$ = new Subject<AppOrUn>()
     this.tree = createTree()
     this._versionMap = new Map()
   }
@@ -58,7 +52,6 @@ export class AppService {
   // 根据ulid设置指定app为当前激活状态。
   setCurApp(appUlid?: S) {
     this._curApp = this._find(appUlid)
-    // this.appSubject$.next(this._curApp)
   }
   getAppList() {
     // return this._appList
@@ -220,7 +213,7 @@ export class AppService {
     //   })
     // })
   }
-  deleteApp(appUlid: ULID, env: S) {
+  deleteApp(appUlid: ULID, env: S[]) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, env})
     // return new Promise((s, j) => {
     //   this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {

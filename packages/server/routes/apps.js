@@ -178,7 +178,7 @@ router.route('/')
 .delete(cors.corsWithOptions, (req, res) => { // 未做到原子性
   // res.send('delete')
   new Promise((s, j) => {
-    if (rules.isEnv(req.query.env) && rules.required(req.query.appUlid)) {
+    if (rules.isArray(req.query.env) && rules.required(req.query.appUlid)) {
       s(true)
     } else {
       j(100100)
