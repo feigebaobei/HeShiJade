@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
@@ -10,6 +10,8 @@ import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
 import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './publish-dialog/publish-dialog.component';
+import { PageService } from '../service/page.service';
+import { ComponentService } from '../service/component.service';
 
 interface FormData {
   key: S
@@ -38,10 +40,12 @@ export class ListComponent implements OnInit {
   msg: {}[]
   constructor(
     private router: Router, 
-    private http: HttpClient, 
+    // private http: HttpClient, 
     private dialogService: DialogService,
     private appService: AppService,
     private userService: UserService,
+    private pageService: PageService,
+    private componentService: ComponentService,
   ) {
     this.userService.getUser().then((v) => {
       this.user = v
@@ -230,5 +234,9 @@ export class ListComponent implements OnInit {
     $event.stopPropagation()
     let app = this.appList[index]
     this.appService.deleteApp(app.ulid, ['dev', 'test', 'pre', 'prod'])
+    // this.userService.deleteApp(app.ulid)
+    // this.appService.deleteApp(app.ulid)
+    // this.pageService.deleteApp(app.ulid)
+    // this.componentService.deleteComponentByAppUlid(app.ulid)
   }
 }

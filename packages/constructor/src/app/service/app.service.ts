@@ -1,11 +1,9 @@
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserService } from './user.service';
 import { serviceUrl } from 'src/helper/config';
 import { createTree } from 'src/helper/tree';
 import { initAppMeta } from 'src/helper';
-// import { Router } from '@angular/router';
 import { ReqService } from './req.service';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
@@ -104,25 +102,7 @@ export class AppService {
   reqAppList() {
     return this.reqService.req(`${serviceUrl()}/apps`, 'get', {}).then(res => {
       return res.data
-    // }).catch((res) => {
-    //   jasmine()
     })
-    // return new Promise<App[]>((s, j) => {
-    //   this.http.get<ResponseData>(`${serviceUrl()}/apps`, {
-    //     withCredentials: true, // 控制是否带cookie
-    //   }).subscribe(res => {
-    //     clog('reqAppList', res)
-    //     if (res.code === 100130) {
-    //       this.router.navigate(['/home' ]);
-    //       j(new Error(res.message))
-    //     }
-    //     if (res.code === 0) {
-    //       s(res.data)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   createApp(data: ReqCreateData) {
     this.userService.getUser().then(user => {
@@ -152,18 +132,6 @@ export class AppService {
   }
   private _createApp(data: App) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'post', data)
-    // .then(() => {
-    // })
-
-    // return new Promise((s, j) => {
-    //   this.http.post<ResponseData>(`${serviceUrl()}/apps`, {
-    //     ...data,
-    //   }, {
-    //     withCredentials: true
-    //   }).subscribe(() => {
-    //     s(undefined)
-    //   })
-    // })
   }
   // 重铸
   // 获取应用列表+设置当前应用+返回应用列表
@@ -188,7 +156,6 @@ export class AppService {
       }
     }
   }
-
   getVersion(appUlid: ULID, envs: S[]) {
     let o = this._versionMap.get(appUlid)
     if (o) {
@@ -199,37 +166,9 @@ export class AppService {
   }
   publish(data: A) {
     return this.reqService.req(`${serviceUrl()}/apps/publish`, 'post', data)
-    // return new Promise((s, j) => {
-    //   this.http.post<ResponseData>(`${serviceUrl()}/apps/publish`, {
-    //     ...data,
-    //   }, {
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if ([100000, 0].includes(res.code)) {
-    //       s(res)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
-  deleteApp(appUlid: ULID, envs: S[]) {
+  reqDeleteApp(appUlid: ULID, envs: S[]) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'delete', {appUlid, envs})
-    // return new Promise((s, j) => {
-    //   this.http.delete<ResponseData>(`${serviceUrl()}/apps`, {
-    //     params: {
-    //       appUlid,
-    //       env,
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(res.data)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   reqVersion(appUlid: ULID, envs: S[]) {
     return this.reqService.req(`${serviceUrl()}/apps/versions`, 'get', {appUlid, envs}).then((res) => {
@@ -254,42 +193,6 @@ export class AppService {
       this._versionMap.set(appUlid, t)
       return res.data
     })
-    // return new Promise<SyntheticVersion>((s, j) => {
-    //   this.http.get<ResponseData>(`${serviceUrl()}/apps/versions`, {
-    //     params: {
-    //       appUlid,
-    //       envs,
-    //       // envs: ['dev', 'test', 'pre', 'prod'],
-    //     },
-    //     withCredentials: true,
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       // 把脏数据处理为干净数据
-    //       let t = {
-    //         dev: {
-    //           version: res.data.dev.version ?? -1,
-    //           remarks: res.data.dev.remarks ?? '',
-    //         },
-    //         test: {
-    //           version: res.data.test.version ?? -1,
-    //           remarks: res.data.test.remarks ?? '',
-    //         },
-    //         pre: {
-    //           version: res.data.pre.version ?? -1,
-    //           remarks: res.data.pre.remarks ?? '',
-    //         },
-    //         prod: {
-    //           version: res.data.prod.version ?? -1,
-    //           remarks: res.data.prod.remarks ?? '',
-    //         },
-    //       }
-    //       this._versionMap.set(appUlid, t)
-    //       s(res.data)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   updateVersion(appUlid: ULID, env: keyof Required<SyntheticVersion>, version: N, remarks: S): B {
     let v = this._versionMap.get(appUlid)
@@ -302,19 +205,8 @@ export class AppService {
   }
   reqProcess(ulid: ULID, env: S) {
     return this.reqService.req(`${serviceUrl()}/apps/process`, 'get', {key: `${ulid}_${env}`})
-    // return new Promise((s, j) => {
-    //   this.http.get<ResponseData>(`${serviceUrl()}/apps/process`, {
-    //     params: {
-    //       key: `${ulid}_${env}`
-    //     },
-    //     withCredentials: true,
-    //   }).subscribe(res => {
-    //     if ([0, 300000].includes(res.code)) {
-    //       s(res)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
+  }
+  deleteApp(appUlid: ULID) {
+    this.tree.unmount(appUlid)
   }
 }
