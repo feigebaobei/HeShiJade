@@ -233,7 +233,7 @@ export class ListComponent implements OnInit {
   appDeleteClickH($event: Event, index: N) {
     $event.stopPropagation()
     let app = this.appList[index]
-    this.appService.deleteApp(app.ulid, ['dev', 'test', 'pre', 'prod'])
+    this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod'])
     // this.userService.deleteApp(app.ulid)
     // this.appService.deleteApp(app.ulid)
     // this.pageService.deleteApp(app.ulid)

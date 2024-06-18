@@ -1,15 +1,9 @@
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, } from 'rxjs';
-// import { DoublyChain } from 'data-footstone'
 import { createTree } from 'src/helper/tree';
-import { ulid } from 'ulid';
-import { reqToPromise } from 'src/helper';
 import { AppService } from './app.service';
 import { serviceUrl } from 'src/helper/config';
-// import { ComponentService } from './component.service';
 import { ReqService } from './req.service';
-import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
 import type { S, ULID, A } from 'src/types/base';
@@ -29,22 +23,19 @@ interface AddData {
 })
 export class PageService {
   _pageList: Page[]
-  _find: (p: ULID, appUlid?: ULID) => PageOrUn
+  _find: (p: ULID, appUlid: ULID) => PageOrUn // todo 调整参数顺序
   pageSubject$: Subject<PageOrUn>
   _curPage: PageOrUn
   pageList$: Subject<Page[]>
   private _map: Map<ULID, Tree<Page>>
   constructor(
-    // private http: HttpClient,
     private appService: AppService,
-    // private componentService: ComponentService
     private reqService: ReqService,
   ) {
     this._pageList = []
     this.pageSubject$ = new Subject<PageOrUn>()
-    this._find = (pageUlid: ULID, appUlid?: ULID) => {
+    this._find = (pageUlid: ULID, appUlid: ULID) => {
       appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
-      // return this._map.get(appUlid)?.toArray().find(item => item.ulid === pageUlid)
       return this._map.get(appUlid)?.find(pageUlid)?.value
     }
     this.pageList$ = new Subject<Page[]>()
@@ -68,62 +59,10 @@ export class PageService {
       }
     }
   }
-  // 把无序页面列表排序为有序
-  // 返回指定应用的有序页面列表
-  // 05.15+ delete
-  // private _opPageList(appUlid: ULID) {
-  //   let dc = this._map.get(appUlid)
-  //   if (!dc) {
-  //     return this.reqPageList(appUlid).then((pageList: Page[]) => {
-  //       // todo 应该兼容子页面
-  //       let tree = createTree<Page>()
-  //       let app = this.appService.getCurApp()
-  //       let curPageUlid = app?.firstPageUlid
-  //       if (curPageUlid) {
-  //         let curPage = pageList.find(item => item.ulid === curPageUlid)
-  //         if (curPage) {
-  //           tree.mountRoot(curPage)
-  //           while(curPage) {
-  //             let nextPage = pageList.find(item => item.ulid === curPage!.nextUlid)
-  //             if (nextPage) {
-  //               tree.mountNext(nextPage, curPage.ulid)
-  //             }
-  //             curPage = nextPage
-  //           }
-  //           this._map.set(appUlid, tree)
-  //           this.pageList$.next(tree.root!.toArray())
-  //         } else {
-  //           this.pageList$.next([])
-  //         }
-  //       } else {
-  //         this.pageList$.next([])
-  //       }
-  //     })
-  //   } else {
-  //     return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
-  //   }
-  // }
   reqPageList(appUlid: ULID) {
-    // clog(12345, `${serviceUrl()}/pages`)
     return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => res.data)
-    // return new Promise<Page[]>((s, j) => {
-    //   this.http.get<ResponseData>(`${serviceUrl()}/pages`, {
-    //     params: {
-    //       appUlid,
-    //       env: 'dev'
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(res.data)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   getPageList(appUlid?: ULID): Promise<Page[]> {
-    // clog('getPageList', appUlid)
     let appUlid2 = appUlid || String(this.appService.getCurApp()?.ulid)
     let pageTree = this._map.get(appUlid2)
     if (pageTree) {
@@ -149,9 +88,9 @@ export class PageService {
   getCurPage() {
     return this._curPage
   }
-  setCurPage(p: Page | ULID): void {
+  setCurPage(appUlid: ULID, p: Page | ULID): void {
     if (typeof p === 'string') {
-      this._curPage = this._find(p)
+      this._curPage = this._find(p, appUlid)
     } else if (typeof p === 'object') {
       this._curPage = p
     }
@@ -193,20 +132,6 @@ export class PageService {
         }).catch(() => {
           j()
         })
-        // this.http.post<ResponseData>(`${serviceUrl()}/pages`, {
-        //   key: data.key,
-        //   name: data.name,
-        //   ulid: u,
-        //   appUlid,
-        // }, {
-        //   withCredentials: true,
-        // }).subscribe(res => {
-        //   if (res.code === 0) {
-        //     s(true)
-        //   } else {
-        //     j()
-        //   }
-        // })
       } else {
         j(new Error('无此应用'))
       }
@@ -236,20 +161,6 @@ export class PageService {
   }
   reqDeletePage(ulid: ULID) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'delete', {ulid}).then(() => true)
-    // return new Promise((s, j) => {
-    //   this.http.delete<ResponseData>(`${serviceUrl()}/pages`, {
-    //     params: {
-    //       ulid
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(true)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   update(ulid: ULID, key: keyof Page, value: S) {
     // 更新tree中的数据
@@ -261,18 +172,8 @@ export class PageService {
   }
   reqUpdate(ulid: ULID, key: keyof Page, value: S) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key}) // .then(() => true)
-    // return new Promise((s, j) => {
-    //   this.http.put<ResponseData>(`${serviceUrl()}/pages`, {
-    //     ulid, key, value
-    //   }, {
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(true)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
+  }
+  deletePageByAppUlid(appUlid: ULID) {
+
   }
 }
