@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { createChildKey } from 'src/helper/index'
+import { initComponentMeta } from 'src/helper';
+import { PageService } from 'src/app/service/page.service';
 // type
 import type { N, S, D, A, ULID } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
-import { initComponentMeta } from 'src/helper';
-import { PageService } from 'src/app/service/page.service';
+import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
 
 let clog = console.log
@@ -44,6 +45,7 @@ export class TableComponent implements OnInit {
   // }
   compObj: {[k: S]: Comp[]}
   createChildKey: typeof createChildKey
+  curPage: Page
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -115,10 +117,12 @@ export class TableComponent implements OnInit {
       // <field>: Comp[]
     }
     this.createChildKey = createChildKey
+    this.curPage = this.pageService.getCurPage()!
   }
   ngOnInit(): void {
     this.compObj = {}
-    let tree = this.componentService.getTreeByKey()
+    // let curPage = this.pageService.getCurPage()
+    let tree = this.componentService.getTreeByKey(this.curPage.ulid)
     this.data.items.forEach((item, index) => {
       if (item['category'] === 'slots') {
         let node = tree?.find(item['childUlid'])
@@ -131,14 +135,14 @@ export class TableComponent implements OnInit {
   }
   dropH(e: DropEvent, field: S, itemIndex: N) {
     // 在本组件内添加新组件
-    let curPage = this.pageService.getCurPage()
+    // let curPage = this.pageService.getCurPage()
     let comp: Comp
     let key = createChildKey('items', itemIndex, 'component')
     clog('key', key)
     if (this.compObj[key]?.length) {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
-        curPage!.appUlid, curPage!.ulid,
+        this.curPage.appUlid, this.curPage.ulid,
         this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
         {area: 'items', itemIndex}
         )
@@ -146,7 +150,7 @@ export class TableComponent implements OnInit {
     } else {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
-        curPage!.appUlid, curPage!.ulid,
+        this.curPage.appUlid, this.curPage.ulid,
         '', '', this.data.ulid,
         {area: 'items', itemIndex}
       )
@@ -161,7 +165,7 @@ export class TableComponent implements OnInit {
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
     this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
-    this.componentService.delete(ulid)
+    this.componentService.deleteByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid)
   }
 }

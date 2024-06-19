@@ -9,6 +9,7 @@ import type { A, ULID } from 'src/types/base';
 import type {Component as Comp, 
   ComponentMountItems,
   ComponentMountSlots,} from 'src/types/component'
+import { Page } from 'src/types/page';
 let clog = console.log
 
 
@@ -23,6 +24,7 @@ export class ModalComponent implements OnInit{
   childrenBody: Comp[]
   childrenFooter: Comp[]
   // curComponent: Comp
+  page: Page
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -32,9 +34,10 @@ export class ModalComponent implements OnInit{
     this.childrenBody = [
     ]
     this.childrenFooter = []
+    this.page = this.pageService.getCurPage()!
   }
   ngOnInit() {
-    let tree = this.componentService.getTreeByKey()
+    let tree = this.componentService.getTreeByKey(this.page!.ulid)
     if (tree) {
       let node = tree.find(this.data.ulid)
       let headerNode = node?.children[createChildKey('slots', 'header', 'node')]
@@ -84,10 +87,8 @@ export class ModalComponent implements OnInit{
         appUlid, pageUlid,
         '', '', this.data.ulid,
         {area: 'slots', slotKey: 'body'})
-      clog('component', component)
       this.childrenBody.push(component)
       this.componentService.mountComponent(component)
-      clog('tree', this.componentService.getTreeByKey())
       this.componentService.reqPostCompListByPage(component).then(() => {
         clog('成功在远端保存组件')
       }).catch((error) => {
@@ -97,12 +98,12 @@ export class ModalComponent implements OnInit{
   }
   deleteComponentByUlidH(ulid: ULID) {
     this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
-    this.componentService.delete(ulid)
+    this.componentService.deleteByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid)
   }
   bodyDeleteComponentByUlidH(ulid: ULID) {
     this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
-    this.componentService.delete(ulid)
+    this.componentService.deleteByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid)
 
   }

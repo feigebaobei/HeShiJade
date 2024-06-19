@@ -61,9 +61,11 @@ export class SetupComponent implements OnInit {
     // })
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
-      this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
-        this.componentByPage = cl
-      })
+      if (this.curPage) {
+        this.componentService.getComponentList(this.curPage).then((cl) => {
+          this.componentByPage = cl
+        })
+      }
     })
     // this.componentService.componentListByCurPage$.subscribe(compArr => {
     //   this.componentByPage = compArr
@@ -156,7 +158,7 @@ export class SetupComponent implements OnInit {
   }
   deleteComponentByUlidH(ulid: ULID) {
     this.componentByPage = this.componentByPage.filter(item => item.ulid !== ulid)
-    this.componentService.delete(ulid)
+    this.componentService.deleteByUlid(this.curPage!.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid)
   }
 }
