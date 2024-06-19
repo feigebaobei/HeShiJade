@@ -1,5 +1,4 @@
 import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked } from '@angular/core';
-// import { AdDirective } from 'src/app/ad.directive';
 import { CompDirective } from '../comp.directive'
 // 组件
 import { ButtonComponent } from '../button/button.component';
@@ -8,12 +7,13 @@ import { InputComponent } from '../input/input.component';
 import { ModalComponent } from '../modal/modal.component';
 import { SelectComponent } from '../select/select.component';
 import { TableComponent } from '../table/table.component';
-
 // service
+import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 // type
 import type { A, S, Ao, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
+import type { Page } from 'src/types/page';
 // 数据
 // import { Button as buttonDefaultData,
 //   Input as inputDefaultData,
@@ -50,8 +50,10 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   @Output() deleteComp = new EventEmitter<ULID>()
   curComp?: Comp | null
   componentRef: A
+  curPage: Page
   constructor(
     private componentService: ComponentService,
+    private pageService: PageService
     // private http: HttpClient,
   ) {
     this.curComp = null
@@ -60,12 +62,13 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       this.curComp = p
       this.update()
     })
+    this.curPage = this.pageService.getCurPage()!
   }
   boxClickh($event: A) {
     // 选中组件
     $event.stopPropagation()
     clog(this.comp)
-    this.componentService.setCurComponent(this.comp.ulid)
+    this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
   }
   ngOnInit() {
     // this.init()

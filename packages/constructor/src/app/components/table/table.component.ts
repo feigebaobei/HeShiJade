@@ -157,8 +157,7 @@ export class TableComponent implements OnInit {
       this.compObj[key] = [comp]
     }
     // 在service中添加新组件
-    // this.componentService.mountComponent(comp, this.data.ulid, 'items', field, 'field')
-    this.componentService.mountComponent(comp)
+    this.componentService.mountComponent(this.curPage.ulid, comp)
     // 在服务端保存新组件
     this.componentService.reqPostCompListByPage(comp)
   }

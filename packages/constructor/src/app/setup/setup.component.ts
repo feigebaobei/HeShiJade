@@ -142,8 +142,7 @@ export class SetupComponent implements OnInit {
       {area: ''},
     )
     this.componentByPage.push(obj)
-    // this.componentService.mountComponent(obj, this.componentByPage[this.componentByPage.length - 1].ulid, 'next')
-    this.componentService.mountComponent(obj)
+    this.componentService.mountComponent(curPage!.ulid, obj)
     this.componentService.reqPostCompListByPage(obj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
@@ -153,7 +152,9 @@ export class SetupComponent implements OnInit {
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {
-      this.componentService.setCurComponent()
+      if (this.curPage) {
+        this.componentService.setCurComponent(this.curPage.ulid, '')
+      }
     }
   }
   deleteComponentByUlidH(ulid: ULID) {

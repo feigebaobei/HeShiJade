@@ -204,8 +204,8 @@ export class ComponentService {
     }
     return n
   }
-  mountComponent(comp: Component,): B {
-    let tree = this._map.get(this.createTreeKey())
+  mountComponent(pageUlid: ULID, comp: Component,): B {
+    let tree = this._map.get(pageUlid)
     if (tree) {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
@@ -287,26 +287,25 @@ export class ComponentService {
   //     return []
   //   }
   // }
-  createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
-    let au: ULID, pu: ULID
-    if (appUlid) {
-      au = appUlid
-    } else {
-      let app = this.appService.getCurApp()
-      au = app?.ulid || ''
-    }
-    if (pageUlid) {
-      pu = pageUlid
-    } else {
-      let page = this.pageService.getCurPage()
-      pu = page?.ulid || ''
-    }
-    return `${au}_${pu}_`
-  }
+  // createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
+  //   let au: ULID, pu: ULID
+  //   if (appUlid) {
+  //     au = appUlid
+  //   } else {
+  //     let app = this.appService.getCurApp()
+  //     au = app?.ulid || ''
+  //   }
+  //   if (pageUlid) {
+  //     pu = pageUlid
+  //   } else {
+  //     let page = this.pageService.getCurPage()
+  //     pu = page?.ulid || ''
+  //   }
+  //   return `${au}_${pu}_`
+  // }
   // 在当前页面中查找
-  private _find(compUlid: S): CompOrUn {
-    // let pageUlid = this.pageService.getCurPage()?.ulid
-    return this._map.get(this.createTreeKey())?.find(compUlid)?.value
+  private _find(pageUlid: ULID, compUlid: ULID): CompOrUn {
+    return this._map.get(pageUlid)?.find(compUlid)?.value
   }
   private _findCategory(categoryUlid: ULID) {
     return this.categoryList.find(item => item.ulid === categoryUlid)
@@ -314,9 +313,9 @@ export class ComponentService {
   curComponent() {
     return this._curComponent
   }
-  setCurComponent(compUlid?: S) {
+  setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
-      this._curComponent = this._find(compUlid)
+      this._curComponent = this._find(pageUlid, compUlid)
       this.curComponent$.next(this._curComponent)
     } else {
       this._curComponent = undefined

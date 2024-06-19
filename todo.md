@@ -5,7 +5,10 @@
 |2min后删除error状态的记录数据|||
 ||||
 
-|整理4种处理方式到doc|||
+|doc中写
+      this._curComponent = this._find(compUlid)
+      this.curComponent$.next(this._curComponent) 二级缓存|||
+|整理发布应用的4种处理方式到doc|||
 |在新创建的应用中一口气操作下去会出现问题|||
 |舞台区使用拖动布局组件|||
 |上生产|||

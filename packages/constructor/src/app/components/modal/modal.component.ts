@@ -57,7 +57,7 @@ export class ModalComponent implements OnInit{
       '', '', this.data.ulid,
       {area: 'slots', slotKey: 'header'},)
     this.childrenHeader.push(component)
-    this.componentService.mountComponent(component)
+    this.componentService.mountComponent(this.page.ulid, component)
     // 请求保存组件的接口
     this.componentService.reqPostCompListByPage(component).then(() => {
       clog('成功在远端保存组件')
@@ -75,7 +75,7 @@ export class ModalComponent implements OnInit{
         this.childrenBody[this.childrenBody.length - 1].ulid, '', this.data.ulid,
         {area: 'slots', slotKey: 'body'})
       this.childrenBody.push(component)
-      this.componentService.mountComponent(component)
+      this.componentService.mountComponent(this.page.ulid, component)
       this.componentService.reqPostCompListByPage(component).then(() => {
         clog('成功在远端保存组件')
       }).catch((error) => {
@@ -88,7 +88,7 @@ export class ModalComponent implements OnInit{
         '', '', this.data.ulid,
         {area: 'slots', slotKey: 'body'})
       this.childrenBody.push(component)
-      this.componentService.mountComponent(component)
+      this.componentService.mountComponent(this.page.ulid, component)
       this.componentService.reqPostCompListByPage(component).then(() => {
         clog('成功在远端保存组件')
       }).catch((error) => {
