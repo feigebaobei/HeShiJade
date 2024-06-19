@@ -103,8 +103,9 @@ export class PageListComponent implements OnInit {
             this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
               '')
             this.pageList.push(page)
-            this.pageService.add(page)
-            this.pageService.reqPostPage(data, page.ulid)
+            let app = this.appService.getCurApp()
+            this.pageService.add(app!.ulid, page)
+            this.pageService.reqPostPage(data, app!.ulid, page.ulid)
             results.modalInstance.hide();
           }
         },
@@ -120,7 +121,10 @@ export class PageListComponent implements OnInit {
     })
   }
   pageItemClickH(pageUlid: S) {
-    this.pageService.setCurPage(pageUlid)
+    let app = this.appService.getCurApp()
+    if (app) {
+      this.pageService.setCurPage(app.ulid, pageUlid)
+    }
     // this.curPage = this.pageList.find(item => item.ulid === pageUlid)
   }
   reReqPageButtonClickH() {

@@ -97,23 +97,14 @@ export class SetupComponent implements OnInit {
         return Promise.reject('该应用不存在')
       }
     }).then(() => { // 取组件列表 setCurPage
-      return this.pageService.getPageList(this.curApp?.ulid).then(pl => {
-        // this.curPage = pl[0]
-        // if (this.curPage) {
-          // this.pageService.setCurPage(this.curPage.ulid)
+      return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
         if (pl[0]) {
-          this.pageService.setCurPage(pl[0])
+          this.pageService.setCurPage(this.curApp!.ulid, pl[0])
           return true
         } else {
           return Promise.reject('无页面')
         }
       })
-    // }).then(() => {
-    //   clog('cg', this.curPage?.ulid)
-    //   return this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
-    //     this.componentByPage = cl
-    //     clog('cg', cl)
-    //   })
     }).catch((msg) => {
       clog(msg)
     })

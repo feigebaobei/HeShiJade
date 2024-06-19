@@ -35,7 +35,6 @@ export class PageService {
     this._pageList = []
     this.pageSubject$ = new Subject<PageOrUn>()
     this._find = (pageUlid: ULID, appUlid: ULID) => {
-      appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
       return this._map.get(appUlid)?.find(pageUlid)?.value
     }
     this.pageList$ = new Subject<Page[]>()
@@ -62,8 +61,8 @@ export class PageService {
   reqPageList(appUlid: ULID) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => res.data)
   }
-  getPageList(appUlid?: ULID): Promise<Page[]> {
-    let appUlid2 = appUlid || String(this.appService.getCurApp()?.ulid)
+  getPageList(appUlid: ULID): Promise<Page[]> {
+    let appUlid2 = appUlid
     let pageTree = this._map.get(appUlid2)
     if (pageTree) {
       return Promise.resolve(pageTree.root?.toArray() || [])
@@ -100,41 +99,27 @@ export class PageService {
   recast() {
   }
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
-  // add(data: AddData) {
-  add(page: Page) {
-    let app = this.appService.getCurApp()
-    if (app) {
-      // let u: ULID = ulid()
-      let appUlid = app.ulid
-      let pageDc = this._map.get(appUlid)
-      let pageObj = page
-      if (this._pageList) {
-        pageDc?.mountNext(pageObj, pageObj.prevUlid)
-      } else {
-        pageDc?.mountRoot(pageObj)
-      }
+  add(appUlid: ULID, page: Page) {
+    let pageTree = this._map.get(appUlid)
+    if (pageTree?.root) {
+      pageTree?.mountNext(page, page.prevUlid)
+    } else {
+      pageTree?.mountRoot(page)
     }
   }
-  reqPostPage(data: AddData, pageUlid: ULID) {
+  reqPostPage(data: AddData, appUlid: ULID, pageUlid: ULID) {
     return new Promise((s, j) => {
-      let app = this.appService.getCurApp()
-      if (app) {
-        // let u: ULID = ulid()
-        let u: ULID = pageUlid
-        let appUlid = app.ulid
-        this.reqService.req(`${serviceUrl()}/pages`, 'post', {
-          key: data.key,
-          name: data.name,
-          ulid: u,
-          appUlid,
-        }).then(() => {
-          s(true)
-        }).catch(() => {
-          j()
-        })
-      } else {
-        j(new Error('无此应用'))
-      }
+      let u: ULID = pageUlid
+      this.reqService.req(`${serviceUrl()}/pages`, 'post', {
+        key: data.key,
+        name: data.name,
+        ulid: u,
+        appUlid,
+      }).then(() => {
+        s(true)
+      }).catch(() => {
+        j()
+      })
     })
   }
   // 计划不支持lastComponentUlid了。
@@ -174,6 +159,6 @@ export class PageService {
     return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key}) // .then(() => true)
   }
   deletePageByAppUlid(appUlid: ULID) {
-
+    this._map.delete(appUlid)
   }
 }
