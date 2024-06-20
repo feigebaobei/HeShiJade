@@ -46,7 +46,7 @@ export class ComponentService {
   componentListByCurPage$: Subject<Component[]> // 当前页面的组件
   _curCompUlid: S
   _curComponent: CompOrUn
-  _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
+  private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
   // ulid是pageUlid
   componentProps$: Subject<Component['props']>
 
@@ -408,9 +408,10 @@ export class ComponentService {
   // }
 
   deleteComponentByPageUlid(pageUlid: ULID) {
-    let app = this.appService.getCurApp()
-    let key = `${app?.ulid}_${pageUlid}_`
-    this._map.delete(key)
+    // let app = this.appService.getCurApp()
+    // let key = `${app?.ulid}_${pageUlid}_`
+    // this._map.delete(key)
+    this._map.delete(pageUlid)
   }
   // deleteComponentByAppUlid(appUlid: ULID) {
   //   let app = this.appService.getCurApp()

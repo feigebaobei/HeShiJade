@@ -1,6 +1,7 @@
 ||完成日期||
 |-|-|-|
 |删除应用|doing||
+||删除组件|doing|
 |整理createStepRecorder的key|||
 |2min后删除error状态的记录数据|||
 ||||
