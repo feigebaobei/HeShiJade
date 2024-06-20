@@ -52,17 +52,11 @@ export class ListComponent implements OnInit {
     })
     this.msg = []
     this.appList = []
-    // this.appService.appList$.subscribe(arr => {
-    //   this.appList = arr
-    // })
   }
   ngOnInit(): void {
     this.init()
   }
   init(): void {
-    // if (!this.appList.length) {
-    //   this.reqAppList()
-    // }
     this.appService.getAppList().then(al => {
       this.appList = al
     })
@@ -232,8 +226,11 @@ export class ListComponent implements OnInit {
   }
   appDeleteClickH($event: Event, index: N) {
     $event.stopPropagation()
+    // 在本组件中删除
     let app = this.appList[index]
+    // 在服务器中删除
     this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod'])
+    // 在service中删除
     // this.userService.deleteApp(app.ulid)
     // this.appService.deleteApp(app.ulid)
     // this.pageService.deleteApp(app.ulid)

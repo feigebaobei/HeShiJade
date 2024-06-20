@@ -30,7 +30,7 @@ export class AppService {
   private _appList: App[]  // 缓存应用列表
   private _curApp: AppOrUn // 缓存当前应用
   appList$: Subject<App[]>
-  tree: Tree<App>
+  tree: Tree<App> // 只记录当前用户的应用，所以只有一棵树。
   private _versionMap: Map<ULID, SyntheticVersion>
   constructor(
     private userService: UserService,
@@ -59,7 +59,6 @@ export class AppService {
     } else {
       return this.reqAppList().then((appList: App[]) => {
         return this.opAppList(appList)
-        // return true
       }).then(() => {
         let appList = this.tree.root?.toArray()
         return appList || []
