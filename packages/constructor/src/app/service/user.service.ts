@@ -4,7 +4,6 @@ import { Subject, type Observable } from 'rxjs';
 import { createSsoClient } from 'src/helper/sso-saml-client';
 // 配置项
 import { ssoUrl, serviceUrl, ssoClientConfig } from 'src/helper/config';
-import { AppService } from './app.service';
 // 类型
 import type { ResponseData } from 'src/types';
 import type { S, ULID, A, N } from 'src/types/base';
@@ -27,9 +26,7 @@ export class UserService {
   regularTime: N
   regularTimeId: N
   ssoClient: SsoClient
-  constructor(
-    private appService: AppService
-  ) {
+  constructor() {
     this.user = undefined
     this.user$ = new Subject()
     // todo delete 06.01+
@@ -111,27 +108,30 @@ export class UserService {
   }
   deleteApp(appUlid: ULID) {
     if (this.user?.firstApplicationUlid === appUlid) {
-      this.appService.getAppList().then(appList => {
-        let app = appList.find(appItem => appItem.ulid === appUlid)
-        if (app) {
-          this.user!.firstApplicationUlid = app.nextUlid
-          if (app.nextUlid) {} else {
-            this.user!.lastApplicationUlid = ''
-          }
-        }
-      })
-    } else {
-      if (this.user?.lastApplicationUlid === appUlid) {
-        this.appService.getAppList().then(appList => {
-          let app = appList.find(appItem => appItem.ulid === appUlid)
-          if (app) {
-            this.user!.lastApplicationUlid = app.prevUlid
-            if (app.prevUlid) {} else {
-              this.user!.firstApplicationUlid = ''
-            }
-          }
-        })
-      }
+      this.user.firstApplicationUlid = ''
     }
+    // if (this.user?.firstApplicationUlid === appUlid) {
+    //   this.appService.getAppList().then(appList => {
+    //     let app = appList.find(appItem => appItem.ulid === appUlid)
+    //     if (app) {
+    //       this.user!.firstApplicationUlid = app.nextUlid
+    //       if (app.nextUlid) {} else {
+    //         this.user!.lastApplicationUlid = ''
+    //       }
+    //     }
+    //   })
+    // } else {
+    //   if (this.user?.lastApplicationUlid === appUlid) {
+    //     this.appService.getAppList().then(appList => {
+    //       let app = appList.find(appItem => appItem.ulid === appUlid)
+    //       if (app) {
+    //         this.user!.lastApplicationUlid = app.prevUlid
+    //         if (app.prevUlid) {} else {
+    //           this.user!.firstApplicationUlid = ''
+    //         }
+    //       }
+    //     })
+    //   }
+    // }
   }
 }

@@ -61,15 +61,20 @@ export class PageService {
   reqPageList(appUlid: ULID) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => res.data)
   }
-  getPageList(appUlid: ULID): Promise<Page[]> {
-    let appUlid2 = appUlid
-    let pageTree = this._map.get(appUlid2)
+  // todo 应用也统一使用hard参数
+  getPageList(appUlid: ULID, hard = false): Promise<Page[]> {
+    // clog(this._map)
+    // return Promise.resolve([] as Page[])
+    let pageTree = this._map.get(appUlid)
+    if (hard) {
+      return Promise.resolve(pageTree?.root?.toArray() || [])
+    }
     if (pageTree) {
       return Promise.resolve(pageTree.root?.toArray() || [])
     } else {
-      return this.reqPageList(appUlid2).then((pageList: Page[]) => {
+      return this.reqPageList(appUlid).then((pageList: Page[]) => {
         return this.appService.getAppList().then(appList => {
-          let app = appList.find(item => item.ulid === appUlid2)
+          let app = appList.find(item => item.ulid === appUlid)
           if (app) {
             this.storePageList(app, pageList)
             return true
@@ -78,7 +83,7 @@ export class PageService {
           }
         })
       }).then(() => {
-        return Promise.resolve(this._map.get(appUlid2)?.root?.toArray() || [])
+        return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
       }).catch(error => {
         return Promise.reject(error)
       })

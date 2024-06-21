@@ -4,6 +4,9 @@
 ||删除组件|done|
 |整理createStepRecorder的key|||
 |2min后删除error状态的记录数据|||
+|user使用firstApplicationUlid.不使用lastApplicationUlid|||
+|page使用firstComponentUlid.不使用lastComponentUlid|||
+||||
 ||||
 
 |doc中写

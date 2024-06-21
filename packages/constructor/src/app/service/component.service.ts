@@ -79,8 +79,11 @@ export class ComponentService {
       s(this.categoryList)
     })
   }
-  getComponentList(page: Page): Promise<Component[]>{
+  getComponentList(page: Page, hard = false): Promise<Component[]>{
     let tree = this._map.get(page.ulid)
+    if (hard) {
+      return Promise.resolve(tree?.root?.toArray() || [])
+    }
     if (tree) {
       return Promise.resolve(tree.root?.toArray() || [])
     } else {
@@ -402,7 +405,6 @@ export class ComponentService {
   // deleteComponentList(appUlid: ULID, pageUlid?: ULID) {
   //   if (pageUlid) {} else {
   //     this.pageService.getPageList(appUlid).then(pageList => {
-
   //     })
   //   }
   // }
@@ -413,12 +415,13 @@ export class ComponentService {
     // this._map.delete(key)
     this._map.delete(pageUlid)
   }
+  // 不应用有根据页面应用删除组件的方法
   // deleteComponentByAppUlid(appUlid: ULID) {
-  //   let app = this.appService.getCurApp()
-  //   this.pageService.getPageList().then(pageList => {
-  //     pageList.forEach((page) => {
-  //       this.deleteComponentByPageUlid(page.ulid)
-  //     })
-  //   })
+    // let app = this.appService.getCurApp()
+    // this.pageService.getPageList().then(pageList => {
+    //   pageList.forEach((page) => {
+    //     this.deleteComponentByPageUlid(page.ulid)
+    //   })
+    // })
   // }
 }

@@ -228,12 +228,20 @@ export class ListComponent implements OnInit {
     $event.stopPropagation()
     // 在本组件中删除
     let app = this.appList[index]
+    // clog(app)
+    this.appList.splice(index, 1)
     // 在服务器中删除
-    this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod'])
+    // this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod']) // todo fix
     // 在service中删除
-    // this.userService.deleteApp(app.ulid)
-    // this.appService.deleteApp(app.ulid)
-    // this.pageService.deleteApp(app.ulid)
-    // this.componentService.deleteComponentByAppUlid(app.ulid)
+    this.pageService.getPageList(app.ulid, true).then((pageList) => { // 删除指定应用下的所有页面的组件
+      // clog(pageList)
+      pageList.forEach((page) => {
+        this.componentService.deleteComponentByPageUlid(page.ulid)
+        // this.componentService.getComponentList(page, true).then(r => clog(r))
+      })
+    })
+    this.pageService.deletePageByAppUlid(app.ulid)
+    this.appService.deleteApp(app.ulid)
+    this.userService.deleteApp(app.ulid)
   }
 }
