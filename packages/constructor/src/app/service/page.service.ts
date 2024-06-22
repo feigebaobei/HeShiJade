@@ -23,7 +23,7 @@ interface AddData {
 })
 export class PageService {
   _pageList: Page[]
-  _find: (p: ULID, appUlid: ULID) => PageOrUn // todo 调整参数顺序
+  private _find: (appUlid: ULID, p: ULID, ) => PageOrUn // todo 调整参数顺序
   pageSubject$: Subject<PageOrUn>
   _curPage: PageOrUn
   pageList$: Subject<Page[]>
@@ -34,8 +34,9 @@ export class PageService {
   ) {
     this._pageList = []
     this.pageSubject$ = new Subject<PageOrUn>()
-    this._find = (pageUlid: ULID, appUlid: ULID) => {
-      return this._map.get(appUlid)?.find(pageUlid)?.value
+    this._find = (appUlid: ULID, pageUlid: ULID, ) => {
+      let treePage = this._map.get(appUlid)
+      return treePage?.find(pageUlid)?.value
     }
     this.pageList$ = new Subject<Page[]>()
     this._map = new Map()
@@ -92,12 +93,12 @@ export class PageService {
   getCurPage() {
     return this._curPage
   }
-  setCurPage(appUlid: ULID, p: Page | ULID): void {
-    if (typeof p === 'string') {
-      this._curPage = this._find(p, appUlid)
-    } else if (typeof p === 'object') {
-      this._curPage = p
-    }
+  setCurPage(appUlid: ULID, p: ULID): void {
+    this._curPage = this._find(appUlid, p)
+    // if (typeof p === 'string') {
+    // } else if (typeof p === 'object') {
+    //   this._curPage = p
+    // }
     this.pageSubject$.next(this._curPage)
   }
   // 重铸

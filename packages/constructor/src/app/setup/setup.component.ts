@@ -101,7 +101,7 @@ export class SetupComponent implements OnInit {
     }).then(() => { // 取组件列表 setCurPage
       return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
         if (pl[0]) {
-          this.pageService.setCurPage(this.curApp!.ulid, pl[0])
+          this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
           return true
         } else {
           return Promise.reject('无页面')

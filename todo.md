@@ -1,9 +1,8 @@
 ||完成日期||
 |-|-|-|
-|user使用firstApplicationUlid.不使用lastApplicationUlid|done||
-|page使用firstComponentUlid.不使用lastComponentUlid|done||
 |在新创建的应用中一口气操作下去会出现问题|doing||
-||创建应用后未及时显示出来|doing|
+||创建应用后未及时显示出来|done|
+||新创建的页面无法选中|doing|
 |整理createStepRecorder的key|||
 |2min后删除error状态的记录数据。考虑是否这样做。|||
 |server中的日志兼容error|||

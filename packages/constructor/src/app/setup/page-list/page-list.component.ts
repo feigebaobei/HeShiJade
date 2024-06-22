@@ -43,12 +43,6 @@ export class PageListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.pageList = []
-    // this.pageService.pageList$.subscribe(pl => {
-    //   this.pageList = pl
-    //   if (pl.length) {
-    //     this.pageService.setCurPage(pl[0].ulid) // 设置第一个页面为默认打开的页面
-    //   }
-    // })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
@@ -99,9 +93,11 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            let page = initPageMeta(data.key, data.name, ulid(), 
-            this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
-              '')
+            let page = initPageMeta(data.key, data.name,
+              this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
+              '',
+              ulid(),
+            )
             this.pageList.push(page)
             let app = this.appService.getCurApp()
             this.pageService.add(app!.ulid, page)
