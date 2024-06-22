@@ -1,12 +1,10 @@
 ||完成日期||
 |-|-|-|
-|删除应用|done||
-||删除组件|done|
-|整理createStepRecorder的key|||
-|2min后删除error状态的记录数据|||
 |user使用firstApplicationUlid.不使用lastApplicationUlid|||
 |page使用firstComponentUlid.不使用lastComponentUlid|||
-||||
+|整理createStepRecorder的key|||
+|2min后删除error状态的记录数据。考虑是否这样做。|||
+|server中的日志兼容error|||
 ||||
 
 |doc中写

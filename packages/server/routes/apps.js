@@ -184,17 +184,29 @@ router.route('/')
       j(100100)
     }
   }).then(() => {
-    // envObj = dbArr.find(item => item.env === req.query.env)
+    // 当前用户是否可删除
+    return lowcodeDb.collection(DB.dev.appTable).find({owner: req.session.user.ulid}).toArray().then((appList) => {
+      if (appList.some(app => app.ulid === req.query.appUlid)) {
+        return true
+      } else {
+        return Promise.reject(400000)
+      }
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then(() => {
+    // let envObj = dbArr.find(item => item.env === 'dev')
+    // let envObj = DB.dev
     let pu = lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
       return user
     }).catch(() => Promise.reject(200010))
-    let pa = lowcodeDb.collection(envObj.appTable).findOne({ulid: req.query.appUlid}).then((app) => {
+    let pa = lowcodeDb.collection(DB.dev.appTable).findOne({ulid: req.query.appUlid}).then((app) => {
       return app
     }).catch(() => Promise.reject(200010))
     return Promise.all([pu, pa]).then(([user, app]) => ({user, app}))
   }).then(({user, app}) => {
     // todo 整理key
-    let stepRecorder = createStepRecorder(appUlid, 'delete', req.query.envs.includes('dev') ? (req.query.envs.length * 3 + 1) : (req.query.envs.length * 3))
+    let stepRecorder = createStepRecorder(req.query.appUlid, 'delete', req.query.envs.includes('dev') ? (req.query.envs.length * 3 + 1) : (req.query.envs.length * 3))
     stepRecorder.create()
     let pArr = []
     req.query.envs.forEach(env => {
@@ -236,7 +248,7 @@ router.route('/')
         return Promise.reject(200030)
       }))
     })
-    let pAll = Promise.all(pAll).then(() => {
+    let pAll = Promise.all(pArr).then(() => {
       stepRecorder.updateStatus('finish')
       stepRecorder.delete()
     }).catch(() => {
@@ -245,7 +257,7 @@ router.route('/')
     let pr = new Promise((_s, j) => {
       setTimeout(() => j(100000))
     }, 2000)
-    return Promise.race([pArr, pr])
+    return Promise.race([pAll, pr])
   }).then(() => {
     return res.status(200).json({
       code: 0,
@@ -253,7 +265,7 @@ router.route('/')
       data: {}
     })
   }).catch((code) => {
-    // clog(code)
+    clog(code)
     logger.info({code, originalUrl: req.originalUrl})
     return res.status(200).json({
       code,

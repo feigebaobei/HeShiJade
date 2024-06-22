@@ -231,7 +231,7 @@ export class ListComponent implements OnInit {
     // clog(app)
     this.appList.splice(index, 1)
     // 在服务器中删除
-    // this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod']) // todo fix
+    this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod']) // todo fix
     // 在service中删除
     this.pageService.getPageList(app.ulid, true).then((pageList) => { // 删除指定应用下的所有页面的组件
       // clog(pageList)
