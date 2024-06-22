@@ -130,7 +130,6 @@ router.route('/sign')
     return lowcodeDb.collection('users').insertOne({
       ulid: result.ulid,
       firstApplicationUlid: '',
-      lastApplicationUlid: '',
     }).then(() => {
       let obj = {
         ulid: result.ulid,
@@ -138,7 +137,6 @@ router.route('/sign')
         accessToken: result.accessToken,
         refreshToken: result.refreshToken,
         firstApplicationUlid: '',
-        lastApplicationUlid: '',
       }
       req.session.user = obj
       req.session.isAuth = true

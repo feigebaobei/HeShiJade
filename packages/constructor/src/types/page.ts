@@ -8,7 +8,7 @@ interface Page {
   nextUlid: ULID
   childUlid?: ULID
   firstComponentUlid: ULID
-  lastComponentUlid: ULID
+  // lastComponentUlid: ULID
   appUlid: ULID
 }
 

@@ -136,7 +136,7 @@ let initPageMeta = (key: S = '', name: S = '',prevUlid: S = '', nextUlid: S = ''
     appUlid,
     childUlid: '',
     firstComponentUlid: '',
-    lastComponentUlid: '',
+    // lastComponentUlid: '',
   }
 }
 let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', version:N = VERSION): App => {
@@ -188,7 +188,7 @@ let cleanoutPage = (p: A) => {
   initPage.appUlid = p.appUlid
   initPage.childUlid = p.childUlid
   initPage.firstComponentUlid = p.firstComponentUlid
-  initPage.lastComponentUlid = p.lastComponentUlid
+  // initPage.lastComponentUlid = p.lastComponentUlid
   return initPage
 }
 let cleanoutComponent = (p: A) => {

@@ -78,18 +78,17 @@ export class UserService {
       }
     })
   }
-  // 注册server
-  // todo delete 06.01+
-  signSelf(data: {account: S, password: S}) {
-    return 
-  }
   appendApp(appUlid: ULID) {
     let u = this.user!
-    if (u?.firstApplicationUlid) {
-      u.lastApplicationUlid = appUlid
+    // if (u?.firstApplicationUlid) {
+    //   u.lastApplicationUlid = appUlid
+    // } else {
+    //   u.firstApplicationUlid = appUlid
+    //   u.lastApplicationUlid = appUlid
+    // }
+    if (u.firstApplicationUlid) {
     } else {
       u.firstApplicationUlid = appUlid
-      u.lastApplicationUlid = appUlid
     }
     this.setUser(u)
   }
@@ -110,28 +109,5 @@ export class UserService {
     if (this.user?.firstApplicationUlid === appUlid) {
       this.user.firstApplicationUlid = ''
     }
-    // if (this.user?.firstApplicationUlid === appUlid) {
-    //   this.appService.getAppList().then(appList => {
-    //     let app = appList.find(appItem => appItem.ulid === appUlid)
-    //     if (app) {
-    //       this.user!.firstApplicationUlid = app.nextUlid
-    //       if (app.nextUlid) {} else {
-    //         this.user!.lastApplicationUlid = ''
-    //       }
-    //     }
-    //   })
-    // } else {
-    //   if (this.user?.lastApplicationUlid === appUlid) {
-    //     this.appService.getAppList().then(appList => {
-    //       let app = appList.find(appItem => appItem.ulid === appUlid)
-    //       if (app) {
-    //         this.user!.lastApplicationUlid = app.prevUlid
-    //         if (app.prevUlid) {} else {
-    //           this.user!.firstApplicationUlid = ''
-    //         }
-    //       }
-    //     })
-    //   }
-    // }
   }
 }

@@ -1,17 +1,18 @@
 ||完成日期||
 |-|-|-|
-|user使用firstApplicationUlid.不使用lastApplicationUlid|||
-|page使用firstComponentUlid.不使用lastComponentUlid|||
+|user使用firstApplicationUlid.不使用lastApplicationUlid|done||
+|page使用firstComponentUlid.不使用lastComponentUlid|done||
+|在新创建的应用中一口气操作下去会出现问题|doing||
+||创建应用后未及时显示出来||
 |整理createStepRecorder的key|||
 |2min后删除error状态的记录数据。考虑是否这样做。|||
 |server中的日志兼容error|||
-||||
-
 |doc中写
       this._curComponent = this._find(compUlid)
       this.curComponent$.next(this._curComponent) 二级缓存|||
 |整理发布应用的4种处理方式到doc|||
-|在新创建的应用中一口气操作下去会出现问题|||
+|f_delete|||
+
 |舞台区使用拖动布局组件|||
 |上生产|||
 |丰富组件|||

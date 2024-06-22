@@ -22,7 +22,7 @@ interface User {
   accessToken: S
   refreshToken: S
   firstApplicationUlid: S
-  lastApplicationUlid: S
+  // lastApplicationUlid: S
 }
 
 

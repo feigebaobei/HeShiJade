@@ -243,7 +243,6 @@ tree的逻辑
 |nextUlid|下一个页面的ulid|暂未使用||
 |childUlid|当前页面的第一个子页面|暂未使用||
 |firstComponentUlid|第一个组件的ulid|||
-|lastComponentUlid|第一个组件的ulid|||
 |appUlid|属于哪个应用|||
 
 ##### comps 组件全量表
