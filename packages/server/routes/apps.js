@@ -85,7 +85,7 @@ router.route('/')
     })
   }).then((user) => {
     let pArr = []
-    if (user.firstApplicationUlid) {
+    if (!user.firstApplicationUlid) {
       pArr.push(lowcodeDb.collection('users').updateOne({ulid: req.session.user.ulid}, {$set: {firstApplicationUlid: req.body.ulid}}))
     }
       pArr.push(lowcodeDb.collection(DB.dev.appTable).bulkWrite([

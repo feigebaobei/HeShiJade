@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { UserService } from './user.service';
 import { serviceUrl } from 'src/helper/config';
 import { createTree } from 'src/helper/tree';
-import { initAppMeta } from 'src/helper';
+// import { initAppMeta } from 'src/helper';
 import { ReqService } from './req.service';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
@@ -103,9 +103,10 @@ export class AppService {
       return res.data
     })
   }
-  createApp(data: ReqCreateData) {
+  // createApp(data: ReqCreateData) {
+  createApp(appObj: App) {
     this.userService.getUser().then(user => {
-      let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+      // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
       if (this._appList.length) {
         let last = this._appList[this._appList.length - 1]
         last.nextUlid = appObj.ulid

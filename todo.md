@@ -3,7 +3,7 @@
 |user使用firstApplicationUlid.不使用lastApplicationUlid|done||
 |page使用firstComponentUlid.不使用lastComponentUlid|done||
 |在新创建的应用中一口气操作下去会出现问题|doing||
-||创建应用后未及时显示出来||
+||创建应用后未及时显示出来|doing|
 |整理createStepRecorder的key|||
 |2min后删除error状态的记录数据。考虑是否这样做。|||
 |server中的日志兼容error|||
@@ -15,6 +15,7 @@
 
 |舞台区使用拖动布局组件|||
 |上生产|||
+|是否需要把修改service与发请求分开|||
 |丰富组件|||
 |回退功能|||
 |改变button的类型时未调用接口|||
@@ -80,4 +81,9 @@ subject&promise不同
 当切换用户时应不保存以前用户的数据
 为以后支持应用可拖动排序，应该保留firstApplicationUlid
 
-
+# 树型结构
+## 优点
+- 结构整齐
+## 缺点
+- 为维持结构，需要较多操作
+有没有树型结构数据库

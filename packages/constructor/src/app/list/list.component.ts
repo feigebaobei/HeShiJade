@@ -3,15 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
-import type { ResponseData, User } from 'src/types';
-import type { A, B, S, N } from 'src/types/base';
-import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
 import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './publish-dialog/publish-dialog.component';
 import { PageService } from '../service/page.service';
 import { ComponentService } from '../service/component.service';
+import { initAppMeta } from 'src/helper';
+import type { ResponseData, User } from 'src/types';
+import type { A, B, S, N, Email, } from 'src/types/base';
+import type { App } from 'src/types/app';
+
 
 interface FormData {
   key: S
@@ -101,10 +103,7 @@ export class ListComponent implements OnInit {
           value: 'yellow',
           label: '黄'
         },],
-      }, // as FormData,
-      // dialogtype: 'standard',
-      // showAnimation: showAnimation,
-      // buttons: [],
+      },
       buttons: [
         {
           cssClass: 'primary',
@@ -112,15 +111,19 @@ export class ListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: FormData = results.modalContentInstance.data
-            // let {key, name} = data
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
-            this.appService.createApp({
-              key: data.key,
-              name: data.name,
-              theme: data.theme,
-              collaborator: members,
-              prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
+            // this.appService.createApp({
+            //   key: data.key,
+            //   name: data.name,
+            //   theme: data.theme,
+            //   collaborator: members,
+            //   prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
+            // })
+            this.userService.getUser().then(user => {
+              let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+              this.appService.createApp(appObj)
+              this.appList.push(appObj)
             })
             results.modalInstance.hide();
           },
