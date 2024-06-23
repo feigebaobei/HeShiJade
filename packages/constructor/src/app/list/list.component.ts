@@ -122,8 +122,12 @@ export class ListComponent implements OnInit {
             // })
             this.userService.getUser().then(user => {
               let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
-              this.appService.createApp(appObj)
+              // 操作本组件的数据
               this.appList.push(appObj)
+              // 操作service中的数据
+              this.userService.appendApp(appObj.ulid)
+              this.appService.createApp(appObj)
+              this.pageService.createApp(appObj.ulid)
             })
             results.modalInstance.hide();
           },
@@ -149,7 +153,9 @@ export class ListComponent implements OnInit {
     this.reqAppList()
   }
   reqAppList() {
-    this.appService.reqAppList()
+    this.appService.reqAppList().then(appList => {
+      this.appService.opAppList(appList)
+    })
   }
   configBtClickH($event: Event, index: N) {
     $event.stopPropagation() // 阻止事件冒泡

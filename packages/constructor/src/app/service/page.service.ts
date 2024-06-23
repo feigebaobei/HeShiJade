@@ -112,6 +112,7 @@ export class PageService {
     } else {
       pageTree?.mountRoot(page)
     }
+    // clog('add', pageTree, pageTree?.root?.toArray(), page, appUlid)
   }
   reqPostPage(data: AddData, appUlid: ULID, pageUlid: ULID) {
     return new Promise((s, j) => {
@@ -166,5 +167,8 @@ export class PageService {
   }
   deletePageByAppUlid(appUlid: ULID) {
     this._map.delete(appUlid)
+  }
+  createApp(appUlid: ULID) {
+    this._map.set(appUlid, createTree<Page>())
   }
 }

@@ -80,12 +80,6 @@ export class UserService {
   }
   appendApp(appUlid: ULID) {
     let u = this.user!
-    // if (u?.firstApplicationUlid) {
-    //   u.lastApplicationUlid = appUlid
-    // } else {
-    //   u.firstApplicationUlid = appUlid
-    //   u.lastApplicationUlid = appUlid
-    // }
     if (u.firstApplicationUlid) {
     } else {
       u.firstApplicationUlid = appUlid
@@ -94,7 +88,7 @@ export class UserService {
   }
   login(account: S, password: S) {
     return this.ssoClient.login({email: account, password}).then((res) => {
-      clog('res', res)
+      // clog('res', res)
       this.setUser({
         ...res.idpRes.data,
         ...res.spRes.data,
