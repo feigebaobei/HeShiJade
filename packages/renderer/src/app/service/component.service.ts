@@ -40,8 +40,10 @@ export class ComponentService {
     this._componentList = []
     this.componentList$ = new Subject()
     this.pageService.cur$.subscribe(curPage => {
+      clog('curPage', curPage)
       if (curPage) {
         let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
+        clog('arr', arr)
         if (arr.length) {
           this.setList(arr)
         } else {
@@ -165,7 +167,8 @@ export class ComponentService {
         this._map.set(page?.ulid || '', tree)
         this.setList(tree.root?.toArray() || [])
       } else {
-
+        this._map.set(page?.ulid || '', tree)
+        this.setList(tree.root?.toArray() || [])
       }
     })
   }

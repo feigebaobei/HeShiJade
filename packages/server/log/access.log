@@ -38,3 +38,17 @@
 {"level":30,"time":1719148446266,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1719148458215,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1719148458226,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1719148611901,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J12GJCA7WQ81MM07BD7V31C9&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J12GJCA7WQ81MM07BD7V31C9","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1719148612035,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J12GJCA7WQ81MM07BD7V31C9&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1719148619382,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J118HWECSPW876PWQ7RSXK1M&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J118HWECSPW876PWQ7RSXK1M","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1719148619502,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J118HWECSPW876PWQ7RSXK1M&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1719148620192,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J11GEWEA26CA99YVE0XQVR85&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J11GEWEA26CA99YVE0XQVR85","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1719148620319,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J11GEWEA26CA99YVE0XQVR85&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1719148620725,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J12FBFTKVEX7Q1NTW2EA0B0M&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J12FBFTKVEX7Q1NTW2EA0B0M","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1719148620843,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J12FBFTKVEX7Q1NTW2EA0B0M&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1719148621161,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J12FDWKDY9KCCJJJAVT2SQ2M&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J12FDWKDY9KCCJJJAVT2SQ2M","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1719148621274,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J12FDWKDY9KCCJJJAVT2SQ2M&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1719148631681,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1719148631682,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1719148696350,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1719148696353,"pid":6240,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
