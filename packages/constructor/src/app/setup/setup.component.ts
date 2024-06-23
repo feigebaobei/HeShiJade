@@ -67,9 +67,6 @@ export class SetupComponent implements OnInit {
         })
       }
     })
-    // this.componentService.componentListByCurPage$.subscribe(compArr => {
-    //   this.componentByPage = compArr
-    // })
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
