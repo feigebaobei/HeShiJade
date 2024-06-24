@@ -102,6 +102,7 @@ export class UserService {
   deleteApp(appUlid: ULID) {
     if (this.user?.firstApplicationUlid === appUlid) {
       this.user.firstApplicationUlid = ''
+      this.setUser(this.user)
     }
   }
 }
