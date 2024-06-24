@@ -113,13 +113,6 @@ export class ListComponent implements OnInit {
             let data: FormData = results.modalContentInstance.data
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
-            // this.appService.createApp({
-            //   key: data.key,
-            //   name: data.name,
-            //   theme: data.theme,
-            //   collaborator: members,
-            //   prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
-            // })
             this.userService.getUser().then(user => {
               let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
               // 操作本组件的数据

@@ -115,7 +115,8 @@ export class AppService {
       }
       this._appList.push(appObj)
       // this.userService.appendApp(appObj.ulid)
-      this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
+      // this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
+      this.tree.mountNext(appObj, appObj.prevUlid)
       this._createApp({
         key: appObj.key,
         name: appObj.name,
