@@ -1,9 +1,9 @@
 ||完成日期||
 |-|-|-|
-|新建应用后进入应用，再返回，应该看到新创建的应用|doing||
+|新建应用后进入应用，再返回，应该看到新创建的应用|done||
 |整理createStepRecorder的key|||
 |2min后删除error状态的记录数据。考虑是否这样做。|||
-|server中的日志兼容error|||
+|server中的日志兼容error|doing||
 |doc中写
       this._curComponent = this._find(compUlid)
       this.curComponent$.next(this._curComponent) 二级缓存|||

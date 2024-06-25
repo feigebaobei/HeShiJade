@@ -7,7 +7,9 @@ const path = require('path')
 let {appsDb, usersDb,
   lowcodeDb,
 } = require('../mongodb');
-const { rules, auth, sqlVersion, createAppEnvKey, createStepRecorder, compatibleArray, sleep, } = require('../helper');
+const { rules, auth, sqlVersion, createStepRecorder, sleep,
+  compatibleCode,
+ } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 const { DB, dbArr } = require('../helper/config')
 const { logger } = require('../helper/log')
@@ -46,7 +48,7 @@ router.route('/')
       return Promise.reject(200010)
     })
   }).catch((code) => {
-    logger.error({code})
+    logger.info({code: compatibleCode(code), originalUrl: req.originalUrl})
     return res.status(200).json({
       code,
       message: errorCode[code],
@@ -126,6 +128,7 @@ router.route('/')
       data: {}
     })
   }).catch(code => {
+    logger.info({code: compatibleCode(code), originalUrl: req.originalUrl})
     return res.status(200).json({
       code,
       message: errorCode[code],
