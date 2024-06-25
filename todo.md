@@ -1,13 +1,12 @@
 ||完成日期||
 |-|-|-|
-|新建应用后进入应用，再返回，应该看到新创建的应用|done||
-|整理createStepRecorder的key|||
-|2min后删除error状态的记录数据。考虑是否这样做。|||
-|server中的日志兼容error|doing||
 |doc中写
       this._curComponent = this._find(compUlid)
-      this.curComponent$.next(this._curComponent) 二级缓存|||
-|整理发布应用的4种处理方式到doc|||
+      this.curComponent$.next(this._curComponent) 二级缓存|done||
+|整理createStepRecorder的key|||
+|2min后删除error状态的记录数据。考虑是否这样做。|不这样做||
+|整理发布应用的4种处理方式到doc|done||
+|server中的日志兼容error|done||
 |f_delete|||
 
 |舞台区使用拖动布局组件|||
@@ -24,11 +23,6 @@
 |lc官网（包括：使用方法）计划使用angular|||
 ||||
 
-props 一对kv就能搞定的
-items 子元素
-slots 子组件
-meta  保存在数据库中，渲染组件时使用
-config 配置面板中使用
 
 
 做收敛。
@@ -36,17 +30,6 @@ config 配置面板中使用
 若干用法中，指定一种用法。
 api只暴露几个用户关心的、使用简单的api.
 
-
-table支持操作列
-1. 使用死数据在舞台区渲染出组件的操作列
-2. 确定组件的配置数据
-3. 在舞台区渲染出组件
-4. 配置组件的配置数据
-5. 当改变配置项时更新舞台区的组件渲染效果。
-6. 分别操作table组件的items、service中的tree型数据、服务端的数据。
-7. 在渲染侧使用死数据渲染出table的操作列。
-8. 在渲染侧增强tree支持items[x].child<ulid>。
-9. 由死数据改为活数据。
 
 ## 兼容脏数据
 1. 为数据设置版本号
@@ -74,30 +57,7 @@ subject&promise不同
 
 # 每6个月升级一次技术栈
 
-
-
 当切换用户时应不保存以前用户的数据
-为以后支持应用可拖动排序，应该保留firstApplicationUlid
-
-# 树型结构
-## 优点
-- 结构整齐
-## 缺点
-- 为维持结构，需要较多操作
-有没有树型结构数据库
-
-# 二级缓存
-||||
-|-|-|-|
-|xxx$|Subject对象|响应式|
-|xxx|any对象|非响应式|
-
-# 统一使用promise
-例如：getAppList
-若已经存在，则使用`Promise.resolve`返回。
-否则，使用请求接口后返回。
-
-# 4种解决方法
 
 # 收获
 - 项目增强的过程是迭代的过程。每次迭代都会在现有基础上统筹整体做若干调整。
