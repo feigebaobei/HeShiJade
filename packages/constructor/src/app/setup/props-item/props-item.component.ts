@@ -38,17 +38,24 @@ export class PropsItemComponent implements OnInit {
         componentRef.instance.data = this.propItem
         // 绑定事件
         componentRef.instance.change.subscribe((v: A) => {
-          // clog('change', v)
           this.itemChange.emit({key: this.propItem.key, value: v})
         })
         break
       case 'select':
         componentRef = viewContainerRef.createComponent(PropsSelectComponent)
         componentRef.instance.data = this.propItem
+        // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
         break
       case 'switch':
         componentRef = viewContainerRef.createComponent(PropsSwitchComponent)
         componentRef.instance.data = this.propItem
+        // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
         break
       // 暂时不渲染option
       // todo 需要支持option
