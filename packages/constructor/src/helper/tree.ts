@@ -110,7 +110,7 @@ let createNode = <T>(v: T): Node<T> => {
         },
     })
 }
-let obj = Object.create({}, {
+let treePrototype = Object.create({}, {
     // 根据特定ulid取得节点
     find: {
         writable: false,
@@ -277,7 +277,7 @@ let obj = Object.create({}, {
 })
 
 let createTree = <T>(): Tree<T> => {
-    return Object.create(obj, {
+    return Object.create(treePrototype, {
         root: {
             writable: true,
             value: null

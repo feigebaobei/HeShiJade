@@ -1,4 +1,3 @@
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
@@ -13,7 +12,6 @@ import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
 // 类型
-// import { createCompKey } from 'src/helper/index'
 import type { Component, Category, 
   PropsValue, 
   BehaviorItemKey,
@@ -22,7 +20,6 @@ import type { Component, Category,
   ComponentMountSlots,
  } from '../../types/component'
 import type { ResponseData } from '../../types/index'
-// import type { ComponentPropsMeta } from '../../types/props'
 import type { ConfigItemsCategoryType } from 'src/types/base'
 import type { S, Ao, ULID, A,
   N,
@@ -30,7 +27,7 @@ import type { S, Ao, ULID, A,
   ConfigItem,
 } from 'src/types/base';
 import type { Tree, Node } from 'src/helper/tree';
-// import type { HttpParams } from '@angular/common/http';
+import type { Page } from 'src/types/page';
 
 
 let clog = console.log
@@ -45,34 +42,26 @@ type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin'
 export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   private categoryList: Category[] // 这里应该使用组件种类的类型
-  // componentListByPage: Component[] // 应该使用组件的类型 // 考虑是否可删除
   curComponent$: Subject<CompOrUn> // 组件的subject
-  // categorySubject$: Subject<CompOrUn> // 组件的subject
   componentListByCurPage$: Subject<Component[]> // 当前页面的组件
   _curCompUlid: S
   _curComponent: CompOrUn
-  // _curCategory: ComponentOrUn
-  // _map: Map<ULID, DoublyChain<Component>> // 日后改为4向的数据结构
-  _map: Map<S, Tree<Component>> // key: appUlid+pageUlid+componentUlid
+  private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
   // ulid是pageUlid
   componentProps$: Subject<Component['props']>
 
   constructor(
-    // private http: HttpClient,
     private pageService: PageService,
     private appService: AppService,
     private reqService: ReqService,
   ) {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
-    // this.componentListByPage = []
     this.curComponent$ = new Subject<CompOrUn>()
-    // this.categorySubject$ = new Subject<ComponentOrUn>()
     this.componentListByCurPage$ = new Subject<Component[]>()
     this.componentProps$ = new Subject<Component['props']>()
     this._curCompUlid = ''
     this._curComponent = undefined
-    // this._curCategory = undefined
     this._map = new Map()
     // 当页面改变时更新组件列表
     // this.pageService.pageSubject$.subscribe(curPage => {
@@ -90,39 +79,26 @@ export class ComponentService {
       s(this.categoryList)
     })
   }
-  getComponentList(pageUlid: ULID): Promise<Component[]>{
-    let tree = this._map.get(this.createTreeKey('', pageUlid))
+  getComponentList(page: Page, hard = false): Promise<Component[]>{
+    let tree = this._map.get(page.ulid)
+    if (hard) {
+      return Promise.resolve(tree?.root?.toArray() || [])
+    }
     if (tree) {
       return Promise.resolve(tree.root?.toArray() || [])
     } else {
-      return this.reqComponentListByPage(pageUlid).then((cl) => {
-        let tree = this.opCompList(cl)
+      return this.reqComponentListByPage(page.ulid).then((componentList) => {
+        let tree = this.opCompList(page, componentList)
         return Promise.resolve(tree.root?.toArray() || [])
       })
     }
   }
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
     return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => res.data)
-    // return new Promise<Component[]>((s, j) => {
-    //   this.http.get<ResponseData>(`${serviceUrl()}/components`, {
-    //     params: {
-    //       pageUlid,
-    //       env: 'dev',
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(res.data)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   // 把组件组装成树，再做映射。
-  opCompList(componentList: Component[]): Tree<Component> {
-    let curPage = this.pageService.getCurPage()
-    let curComponentUlid = curPage?.firstComponentUlid
+  opCompList(page: Page, componentList: Component[]): Tree<Component> {
+    let curComponentUlid = page.firstComponentUlid
     let tree = createTree<Component>()
     if (curComponentUlid) {
       let curComp = componentList.find(item => item.ulid === curComponentUlid)
@@ -203,7 +179,7 @@ export class ComponentService {
         }
       }
     }
-    this._map.set(this.createTreeKey(), tree)
+    this._map.set(page.ulid, tree)
     return tree
   }
   // 作为哪种节点返回
@@ -231,9 +207,8 @@ export class ComponentService {
     }
     return n
   }
-  // mountComponent(comp: Component, ulid: ULID, position: 'next' | 'slots' | 'items', key: S = '', itemsKey: S = ''): B {
-  mountComponent(comp: Component,): B {
-    let tree = this._map.get(this.createTreeKey())
+  mountComponent(pageUlid: ULID, comp: Component,): B {
+    let tree = this._map.get(pageUlid)
     if (tree) {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
@@ -289,37 +264,9 @@ export class ComponentService {
   // 创建组件
   reqPostCompListByPage(obj: Component) {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
-    // return new Promise<B>((s, j) => {
-    //   this.http.post<ResponseData>(`${serviceUrl()}/components`, {
-    //     ...obj,
-    //   }, {
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(true)
-    //     } else {
-    //       j()
-    //     }
-    //   })
-    // })
   }
   reqDeleteComponent(ulid: ULID) {
     return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid}).then(() => true)
-    // return new Promise<B>((s, j) => {
-    //   this.http.delete<ResponseData>(`${serviceUrl()}/components`, {
-    //       params: {
-    //         ulid
-    //       },
-    //       withCredentials: true
-    //     }).subscribe(res => {
-    //       if (res.code === 0) {
-    //         clog('删除成功')
-    //         s(true)
-    //       } else {
-    //         j()
-    //       }
-    //     })
-    // })
   }
   // for dev
   // 只在本地保存，不改变远端数据
@@ -328,12 +275,6 @@ export class ComponentService {
     new Promise((s, j) => {
       let has = this._map.has(obj['pageUlid'])
       if (has) {
-        // let d = this._map.get(obj.pageUlid)
-        // d!.append(obj)
-        // let arr = this._map.get(obj.pageUlid)!.toArray()
-        // this.componentListByCurPage$.next(arr)
-        // s(arr)
-
       } else {
         j()
       }
@@ -349,26 +290,25 @@ export class ComponentService {
   //     return []
   //   }
   // }
-  createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
-    let au: ULID, pu: ULID
-    if (appUlid) {
-      au = appUlid
-    } else {
-      let app = this.appService.getCurApp()
-      au = app?.ulid || ''
-    }
-    if (pageUlid) {
-      pu = pageUlid
-    } else {
-      let page = this.pageService.getCurPage()
-      pu = page?.ulid || ''
-    }
-    return `${au}_${pu}_`
-  }
+  // createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
+  //   let au: ULID, pu: ULID
+  //   if (appUlid) {
+  //     au = appUlid
+  //   } else {
+  //     let app = this.appService.getCurApp()
+  //     au = app?.ulid || ''
+  //   }
+  //   if (pageUlid) {
+  //     pu = pageUlid
+  //   } else {
+  //     let page = this.pageService.getCurPage()
+  //     pu = page?.ulid || ''
+  //   }
+  //   return `${au}_${pu}_`
+  // }
   // 在当前页面中查找
-  private _find(compUlid: S): CompOrUn {
-    // let pageUlid = this.pageService.getCurPage()?.ulid
-    return this._map.get(this.createTreeKey())?.find(compUlid)?.value
+  private _find(pageUlid: ULID, compUlid: ULID): CompOrUn {
+    return this._map.get(pageUlid)?.find(compUlid)?.value
   }
   private _findCategory(categoryUlid: ULID) {
     return this.categoryList.find(item => item.ulid === categoryUlid)
@@ -376,9 +316,9 @@ export class ComponentService {
   curComponent() {
     return this._curComponent
   }
-  setCurComponent(compUlid?: S) {
+  setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
-      this._curComponent = this._find(compUlid)
+      this._curComponent = this._find(pageUlid, compUlid)
       this.curComponent$.next(this._curComponent)
     } else {
       this._curComponent = undefined
@@ -387,22 +327,6 @@ export class ComponentService {
   }
   // 设置当前组件的prop
   setCurComponentProp(key: S, value: PropsValue) {
-    // let curComp = this.curComponent()
-    // let curPage = this.pageService.getCurPage()
-    // if (curPage && curComp) {
-    //   let cur = this._map.get(curPage.ulid)?.head
-    //   while (cur) {
-    //     if (cur.value.ulid === curComp.ulid) {
-    //       cur.value.props[key] = value
-    //       break
-    //     }
-    //     cur = cur.next
-    //   }
-    //   if (cur) {
-    //     this.curComponent$.next(cur.value)
-    //     this.componentListByCurPage$.next(this._map.get(curPage.ulid)?.toArray() || [])
-    //   }
-    // }
     if (this._curComponent) {
       this._curComponent.props[key] = value
     }
@@ -447,30 +371,12 @@ export class ComponentService {
       index,
       key,
       value,})
-    // this.http.put<ResponseData>(`${serviceUrl()}/components/items`, {
-    //   ulid: this.curComponent()?.ulid,
-    //   index,
-    //   key,
-    //   value,
-    // }, {
-    //   withCredentials: true
-    // })
-    // .subscribe(res => {
-    //   clog('res', res)
-    // })
   }
   reqAddItems(obj: ItemsMetaItem) {
-    // this.http.post<ResponseData>(`${serviceUrl()}/components/items`, {
-    //   ulid: this.curComponent()?.ulid,
-    //   value: obj
-    // }, {
-    //   withCredentials: true
-    // }).subscribe(() => {})
     return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
   removeItemsOfCurComponent(index: N) {
   }
-
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
@@ -479,20 +385,6 @@ export class ComponentService {
       key,
       value,
     }).then(() => true)
-    // return new Promise((s, j) => {
-    //   this.http.put<ResponseData>(`${serviceUrl()}/components`, {
-    //     ulid: this.curComponent()?.ulid || '',
-    //     type,
-    //     key,
-    //     value,
-    //   }).subscribe((res) => {
-    //     if (res.code === 0) {
-    //       // res.data
-    //       s(true)
-    //     }
-    //     j(res.message || '更新失败')
-    //   })
-    // })
   }
   reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
@@ -502,32 +394,34 @@ export class ComponentService {
       key,
       value,
     }).then(() => true)
-    // return new Promise((s, j) => {
-    //   this.http.put<ResponseData>(`${serviceUrl()}/components`, {
-    //     ulid: this.curComponent()?.ulid || '',
-    //     type,
-    //     index,
-    //     key,
-    //     value,
-    //   }).subscribe((res) => {
-    //     if (res.code === 0) {
-    //       s(true)
-    //     } else {
-    //       j(res.message || '更新失败')
-    //     }
-    //   })
-    // })
   }
-  // 删除组件
-  delete(componentUlid: ULID) {
-    return this._map.get(this.createTreeKey())?.unmount(componentUlid)
-  }
-  getTreeByKey(key = this.createTreeKey()): Tree<Component> | undefined {
+  getTreeByKey(key: ULID): Tree<Component> | undefined {
     return this._map.get(key)
   }
-  deleteComponentByPageUlid(pageUlid: ULID) {
-    let app = this.appService.getCurApp()
-    let key = `${app?.ulid}_${pageUlid}_`
-    this._map.delete(key)
+  // 删除组件
+  deleteByUlid(pageUlid: ULID, componentUlid: ULID) {
+    return this._map.get(pageUlid)?.unmount(componentUlid)
   }
+  // deleteComponentList(appUlid: ULID, pageUlid?: ULID) {
+  //   if (pageUlid) {} else {
+  //     this.pageService.getPageList(appUlid).then(pageList => {
+  //     })
+  //   }
+  // }
+
+  deleteComponentByPageUlid(pageUlid: ULID) {
+    // let app = this.appService.getCurApp()
+    // let key = `${app?.ulid}_${pageUlid}_`
+    // this._map.delete(key)
+    this._map.delete(pageUlid)
+  }
+  // 不应用有根据页面应用删除组件的方法
+  // deleteComponentByAppUlid(appUlid: ULID) {
+    // let app = this.appService.getCurApp()
+    // this.pageService.getPageList().then(pageList => {
+    //   pageList.forEach((page) => {
+    //     this.deleteComponentByPageUlid(page.ulid)
+    //   })
+    // })
+  // }
 }

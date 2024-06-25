@@ -6,6 +6,7 @@ let {appsDb, componentsDb, lowcodeDb} = require('../mongodb');
 const { rules } = require('../helper');
 let clog = console.log
 const { errorCode } = require('../helper/errorCode');
+const { DB } = require('../helper/config');
 
 router.use(bodyParser.json())
 
@@ -73,19 +74,12 @@ router.route('/')
   })
 })
 // 创建组件
-// req.body: {
-//   component: Component
-//   itemIndex: N
-// }
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 创建+更新组件
   // 更新页面
   // 检查必要参数
-  // clog('post')
-  // clog('post09')
   new Promise((s, j) => {
-    // clog('88')
     if (rules.required(req.body.ulid) && 
       rules.required(req.body.type) && 
       rules.required(req.body.props) && 
@@ -96,23 +90,14 @@ router.route('/')
       rules.required(req.body.appUlid) && 
       rules.required(req.body.pageUlid)
     ) {
-      // clog('trree')
       s(true)
     } else {
-      // clog('12345')
       j(100100)
     }
   })
-  // 找到页面
-  .then(() => {
-    // clog('dev page')
-    return lowcodeDb.collection('pages_dev').findOne({ulid: req.body.pageUlid}).catch(() => {
-      return Promise.reject(300000)
-    })
-  })
   // 操作页面和组件
-  .then((curPage) => {
-    // clog('curPage', curPage)
+  .then(() => {
+    let p2
     let componentUpdateArr = [
       {
         insertOne: { // 插入一个组件
@@ -145,6 +130,9 @@ router.route('/')
           }
         }
       })
+      p2 = Promise.resolve(true)
+    } else {
+      p2 = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: req.body.pageUlid}, {$set: {firstComponentUlid: req.body.ulid}})
     }
     if (req.body.nextUlid) {
       componentUpdateArr.unshift({
@@ -158,14 +146,6 @@ router.route('/')
     }
     // 更新父组件
     if (req.body.parentUlid) {
-      // componentUpdateArr.unshift({
-      //   filter: {ulid: req.body.parentUlid},
-      //   update: {
-      //     $setOnInsert: {
-      //       [`${req.body.mountArea}_${req.body.mountKey}`]: req.body.ulid
-      //     }
-      //   }
-      // })
       switch(req.body.mount.area) {
         case 'items':
           componentUpdateArr.unshift({
@@ -196,30 +176,8 @@ router.route('/')
           break;
       }
     }
-
-    let pageUpdateObj
-    // 更新最后一个组件
-    if (curPage.lastComponentUlid) {
-      pageUpdateObj = {
-        $set: {
-          lastComponentUlid: req.body.ulid
-        }
-      }
-    } else {
-      pageUpdateObj = {
-        $set: {
-          firstComponentUlid: req.body.ulid,
-          lastComponentUlid: req.body.ulid,
-        }
-      }
-    }
-    // clog('componentUpdateArr',componentUpdateArr)
     let p1 = lowcodeDb.collection('components_dev').bulkWrite(componentUpdateArr)
-    let p2 = lowcodeDb.collection('pages_dev').updateOne({
-      ulid: req.body.pageUlid
-    }, pageUpdateObj)
-    return Promise.all([p1, p2]).catch((error) => {
-      // clog('error', error)
+    return Promise.all([p1, p2]).catch(() => {
       return Promise.reject(200000)
     })
   })
@@ -231,7 +189,7 @@ router.route('/')
       data: {}
     })
   }).catch(code => {
-    // clog('code', code)
+    logger.info({code, originalUrl: req.originalUrl})
     return res.status(200).json({
       code,
       message: errorCode[code],

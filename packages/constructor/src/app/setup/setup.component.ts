@@ -61,13 +61,12 @@ export class SetupComponent implements OnInit {
     // })
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
-      this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
-        this.componentByPage = cl
-      })
+      if (this.curPage) {
+        this.componentService.getComponentList(this.curPage).then((cl) => {
+          this.componentByPage = cl
+        })
+      }
     })
-    // this.componentService.componentListByCurPage$.subscribe(compArr => {
-    //   this.componentByPage = compArr
-    // })
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -97,23 +96,14 @@ export class SetupComponent implements OnInit {
         return Promise.reject('该应用不存在')
       }
     }).then(() => { // 取组件列表 setCurPage
-      return this.pageService.getPageList(this.curApp?.ulid).then(pl => {
-        // this.curPage = pl[0]
-        // if (this.curPage) {
-          // this.pageService.setCurPage(this.curPage.ulid)
+      return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
         if (pl[0]) {
-          this.pageService.setCurPage(pl[0])
+          this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
           return true
         } else {
           return Promise.reject('无页面')
         }
       })
-    // }).then(() => {
-    //   clog('cg', this.curPage?.ulid)
-    //   return this.componentService.getComponentList(this.curPage?.ulid || '').then((cl) => {
-    //     this.componentByPage = cl
-    //     clog('cg', cl)
-    //   })
     }).catch((msg) => {
       clog(msg)
     })
@@ -149,8 +139,7 @@ export class SetupComponent implements OnInit {
       {area: ''},
     )
     this.componentByPage.push(obj)
-    // this.componentService.mountComponent(obj, this.componentByPage[this.componentByPage.length - 1].ulid, 'next')
-    this.componentService.mountComponent(obj)
+    this.componentService.mountComponent(curPage!.ulid, obj)
     this.componentService.reqPostCompListByPage(obj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
@@ -160,12 +149,14 @@ export class SetupComponent implements OnInit {
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('stage')) {
-      this.componentService.setCurComponent()
+      if (this.curPage) {
+        this.componentService.setCurComponent(this.curPage.ulid, '')
+      }
     }
   }
   deleteComponentByUlidH(ulid: ULID) {
     this.componentByPage = this.componentByPage.filter(item => item.ulid !== ulid)
-    this.componentService.delete(ulid)
+    this.componentService.deleteByUlid(this.curPage!.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid)
   }
 }

@@ -1,15 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
-import type { ResponseData, User } from 'src/types';
-import type { A, B, S, N } from 'src/types/base';
-import type { App } from 'src/types/app';
 import { AppService } from '../service/app.service';
 import { UserService } from '../service/user.service';
 import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './publish-dialog/publish-dialog.component';
+import { PageService } from '../service/page.service';
+import { ComponentService } from '../service/component.service';
+import { initAppMeta } from 'src/helper';
+import type { ResponseData, User } from 'src/types';
+import type { A, B, S, N, Email, } from 'src/types/base';
+import type { App } from 'src/types/app';
+
 
 interface FormData {
   key: S
@@ -38,27 +42,23 @@ export class ListComponent implements OnInit {
   msg: {}[]
   constructor(
     private router: Router, 
-    private http: HttpClient, 
+    // private http: HttpClient, 
     private dialogService: DialogService,
     private appService: AppService,
     private userService: UserService,
+    private pageService: PageService,
+    private componentService: ComponentService,
   ) {
     this.userService.getUser().then((v) => {
       this.user = v
     })
     this.msg = []
     this.appList = []
-    // this.appService.appList$.subscribe(arr => {
-    //   this.appList = arr
-    // })
   }
   ngOnInit(): void {
     this.init()
   }
   init(): void {
-    // if (!this.appList.length) {
-    //   this.reqAppList()
-    // }
     this.appService.getAppList().then(al => {
       this.appList = al
     })
@@ -103,10 +103,7 @@ export class ListComponent implements OnInit {
           value: 'yellow',
           label: '黄'
         },],
-      }, // as FormData,
-      // dialogtype: 'standard',
-      // showAnimation: showAnimation,
-      // buttons: [],
+      },
       buttons: [
         {
           cssClass: 'primary',
@@ -114,15 +111,16 @@ export class ListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: FormData = results.modalContentInstance.data
-            // let {key, name} = data
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
-            this.appService.createApp({
-              key: data.key,
-              name: data.name,
-              theme: data.theme,
-              collaborator: members,
-              prevUlid: this.appList.length ? this.appList[this.appList.length - 1].ulid : '',
+            this.userService.getUser().then(user => {
+              let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+              // 操作本组件的数据
+              this.appList.push(appObj)
+              // 操作service中的数据
+              this.userService.appendApp(appObj.ulid)
+              this.appService.createApp(appObj)
+              this.pageService.createApp(appObj.ulid)
             })
             results.modalInstance.hide();
           },
@@ -148,7 +146,9 @@ export class ListComponent implements OnInit {
     this.reqAppList()
   }
   reqAppList() {
-    this.appService.reqAppList()
+    this.appService.reqAppList().then(appList => {
+      this.appService.opAppList(appList)
+    })
   }
   configBtClickH($event: Event, index: N) {
     $event.stopPropagation() // 阻止事件冒泡
@@ -228,7 +228,22 @@ export class ListComponent implements OnInit {
   }
   appDeleteClickH($event: Event, index: N) {
     $event.stopPropagation()
+    // 在本组件中删除
     let app = this.appList[index]
-    this.appService.deleteApp(app.ulid, 'dev') // 先写死
+    // clog(app)
+    this.appList.splice(index, 1)
+    // 在服务器中删除
+    this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod']) // todo fix
+    // 在service中删除
+    this.pageService.getPageList(app.ulid, true).then((pageList) => { // 删除指定应用下的所有页面的组件
+      // clog(pageList)
+      pageList.forEach((page) => {
+        this.componentService.deleteComponentByPageUlid(page.ulid)
+        // this.componentService.getComponentList(page, true).then(r => clog(r))
+      })
+    })
+    this.pageService.deletePageByAppUlid(app.ulid)
+    this.appService.deleteApp(app.ulid)
+    this.userService.deleteApp(app.ulid)
   }
 }

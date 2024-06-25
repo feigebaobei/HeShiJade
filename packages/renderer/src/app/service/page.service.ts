@@ -101,46 +101,6 @@ export class PageService {
         }
       })
     })
-    // return new Promise((s, j) => {
-    //   s([
-    //     {
-    //         // "_id": "64f20a5f371b34da631a9ac7",
-    //         "key": "p0",
-    //         "name": "p0",
-    //         "ulid": "01H98QH03RWN0PVN9Y7FFA81XJ",
-    //         "prevUlid": "",
-    //         "nextUlid": "01H98QJ0W5CMSSA3GE80MJH2N6",
-    //         "childUlid": "",
-    //         "firstComponentUlid": "01HDXS0S6860PYXHS9F712XSEP",
-    //         // "lastComponentUlid": "",
-    //         "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR"
-    //     },
-    //     {
-    //         // "_id": "64f20a7f371b34da631a9ac8",
-    //         "key": "p1",
-    //         "name": "p1",
-    //         "ulid": "01H98QJ0W5CMSSA3GE80MJH2N6",
-    //         "prevUlid": "01H98QH03RWN0PVN9Y7FFA81XJ",
-    //         "nextUlid": "01H98QJ6PVGJDGYANZ6GPXENKS",
-    //         "childUlid": "",
-    //         "firstComponentUlid": "",
-    //         // "lastComponentUlid": "",
-    //         "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR"
-    //     },
-    //     {
-    //         // "_id": "64f20a85371b34da631a9ac9",
-    //         "key": "p2",
-    //         "name": "p2",
-    //         "ulid": "01H98QJ6PVGJDGYANZ6GPXENKS",
-    //         "prevUlid": "01H98QJ0W5CMSSA3GE80MJH2N6",
-    //         "nextUlid": "",
-    //         "childUlid": "",
-    //         "firstComponentUlid": "",
-    //         // "lastComponentUlid": "",
-    //         "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR"
-    //     }
-    // ])
-    // })
   }
   // 根据pageUlid设置当前页面
   setCur(pageUlid?: ULID) {

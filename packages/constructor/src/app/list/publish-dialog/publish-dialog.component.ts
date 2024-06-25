@@ -206,7 +206,7 @@ export class PublishDialogComponent implements OnInit {
     clog('prodToDevClickH')
   }
   testDeleteBtClickH() {
-    this.appService.deleteApp(this.data.appUlid, 'test')
+    // this.appService.deleteApp(this.data.appUlid, ['test'])
     // this.appService.deleteApp('01HGKPCCA5E5F4DH42ZX8PENY8', 'test')
   }
 }

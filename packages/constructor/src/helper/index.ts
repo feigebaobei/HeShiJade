@@ -9,6 +9,15 @@ import type { Observable } from 'rxjs';
 import type { Component } from 'src/types/component';
 import type { App } from 'src/types/app';
 
+interface LoopPropotype {
+  launch: (...p: A[]) => Promise<A>
+}
+interface Loop extends LoopPropotype {
+  pFn: () => Promise<A>
+  bFn: (p: A) => B
+  interval: N
+}
+
 let clog = console.log
 // clog('clone', clone)
 
@@ -127,7 +136,7 @@ let initPageMeta = (key: S = '', name: S = '',prevUlid: S = '', nextUlid: S = ''
     appUlid,
     childUlid: '',
     firstComponentUlid: '',
-    lastComponentUlid: '',
+    // lastComponentUlid: '',
   }
 }
 let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', version:N = VERSION): App => {
@@ -179,7 +188,7 @@ let cleanoutPage = (p: A) => {
   initPage.appUlid = p.appUlid
   initPage.childUlid = p.childUlid
   initPage.firstComponentUlid = p.firstComponentUlid
-  initPage.lastComponentUlid = p.lastComponentUlid
+  // initPage.lastComponentUlid = p.lastComponentUlid
   return initPage
 }
 let cleanoutComponent = (p: A) => {
@@ -197,15 +206,6 @@ let cleanoutComponent = (p: A) => {
   initComponent.appUlid = p.appUlid
   initComponent.pageUlid = p.pageUlid
   return initComponent
-}
-interface LoopPropotype {
-  launch: (...p: A[]) => Promise<A>
-}
-// todo 改名为Loop
-interface Loop extends LoopPropotype {
-  pFn: () => Promise<A>
-  bFn: (p: A) => B
-  interval: N
 }
 let sleep = (n: N = 0) => {
   return new Promise((s) => {
@@ -266,6 +266,7 @@ export {
   cleanoutComponent,
   createLoop,
   // wrapReq,
+  sleep,
 }
 export type {
   Loop

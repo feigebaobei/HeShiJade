@@ -1,15 +1,9 @@
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, } from 'rxjs';
-// import { DoublyChain } from 'data-footstone'
 import { createTree } from 'src/helper/tree';
-import { ulid } from 'ulid';
-import { reqToPromise } from 'src/helper';
 import { AppService } from './app.service';
 import { serviceUrl } from 'src/helper/config';
-// import { ComponentService } from './component.service';
 import { ReqService } from './req.service';
-import type { ResponseData } from 'src/types';
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
 import type { S, ULID, A } from 'src/types/base';
@@ -29,23 +23,20 @@ interface AddData {
 })
 export class PageService {
   _pageList: Page[]
-  _find: (p: ULID, appUlid?: ULID) => PageOrUn
+  private _find: (appUlid: ULID, p: ULID, ) => PageOrUn // todo 调整参数顺序
   pageSubject$: Subject<PageOrUn>
   _curPage: PageOrUn
   pageList$: Subject<Page[]>
   private _map: Map<ULID, Tree<Page>>
   constructor(
-    // private http: HttpClient,
     private appService: AppService,
-    // private componentService: ComponentService
     private reqService: ReqService,
   ) {
     this._pageList = []
     this.pageSubject$ = new Subject<PageOrUn>()
-    this._find = (pageUlid: ULID, appUlid?: ULID) => {
-      appUlid = appUlid || String(this.appService.getCurApp()?.ulid)
-      // return this._map.get(appUlid)?.toArray().find(item => item.ulid === pageUlid)
-      return this._map.get(appUlid)?.find(pageUlid)?.value
+    this._find = (appUlid: ULID, pageUlid: ULID, ) => {
+      let treePage = this._map.get(appUlid)
+      return treePage?.find(pageUlid)?.value
     }
     this.pageList$ = new Subject<Page[]>()
     this._map = new Map()
@@ -68,70 +59,23 @@ export class PageService {
       }
     }
   }
-  // 把无序页面列表排序为有序
-  // 返回指定应用的有序页面列表
-  // 05.15+ delete
-  // private _opPageList(appUlid: ULID) {
-  //   let dc = this._map.get(appUlid)
-  //   if (!dc) {
-  //     return this.reqPageList(appUlid).then((pageList: Page[]) => {
-  //       // todo 应该兼容子页面
-  //       let tree = createTree<Page>()
-  //       let app = this.appService.getCurApp()
-  //       let curPageUlid = app?.firstPageUlid
-  //       if (curPageUlid) {
-  //         let curPage = pageList.find(item => item.ulid === curPageUlid)
-  //         if (curPage) {
-  //           tree.mountRoot(curPage)
-  //           while(curPage) {
-  //             let nextPage = pageList.find(item => item.ulid === curPage!.nextUlid)
-  //             if (nextPage) {
-  //               tree.mountNext(nextPage, curPage.ulid)
-  //             }
-  //             curPage = nextPage
-  //           }
-  //           this._map.set(appUlid, tree)
-  //           this.pageList$.next(tree.root!.toArray())
-  //         } else {
-  //           this.pageList$.next([])
-  //         }
-  //       } else {
-  //         this.pageList$.next([])
-  //       }
-  //     })
-  //   } else {
-  //     return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
-  //   }
-  // }
   reqPageList(appUlid: ULID) {
-    // clog(12345, `${serviceUrl()}/pages`)
     return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => res.data)
-    // return new Promise<Page[]>((s, j) => {
-    //   this.http.get<ResponseData>(`${serviceUrl()}/pages`, {
-    //     params: {
-    //       appUlid,
-    //       env: 'dev'
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(res.data)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
-  getPageList(appUlid?: ULID): Promise<Page[]> {
-    // clog('getPageList', appUlid)
-    let appUlid2 = appUlid || String(this.appService.getCurApp()?.ulid)
-    let pageTree = this._map.get(appUlid2)
+  // todo 应用也统一使用hard参数
+  getPageList(appUlid: ULID, hard = false): Promise<Page[]> {
+    // clog(this._map)
+    // return Promise.resolve([] as Page[])
+    let pageTree = this._map.get(appUlid)
+    if (hard) {
+      return Promise.resolve(pageTree?.root?.toArray() || [])
+    }
     if (pageTree) {
       return Promise.resolve(pageTree.root?.toArray() || [])
     } else {
-      return this.reqPageList(appUlid2).then((pageList: Page[]) => {
+      return this.reqPageList(appUlid).then((pageList: Page[]) => {
         return this.appService.getAppList().then(appList => {
-          let app = appList.find(item => item.ulid === appUlid2)
+          let app = appList.find(item => item.ulid === appUlid)
           if (app) {
             this.storePageList(app, pageList)
             return true
@@ -140,7 +84,7 @@ export class PageService {
           }
         })
       }).then(() => {
-        return Promise.resolve(this._map.get(appUlid2)?.root?.toArray() || [])
+        return Promise.resolve(this._map.get(appUlid)?.root?.toArray() || [])
       }).catch(error => {
         return Promise.reject(error)
       })
@@ -149,67 +93,40 @@ export class PageService {
   getCurPage() {
     return this._curPage
   }
-  setCurPage(p: Page | ULID): void {
-    if (typeof p === 'string') {
-      this._curPage = this._find(p)
-    } else if (typeof p === 'object') {
-      this._curPage = p
-    }
+  setCurPage(appUlid: ULID, p: ULID): void {
+    this._curPage = this._find(appUlid, p)
+    // if (typeof p === 'string') {
+    // } else if (typeof p === 'object') {
+    //   this._curPage = p
+    // }
     this.pageSubject$.next(this._curPage)
   }
   // 重铸
   recast() {
   }
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
-  // add(data: AddData) {
-  add(page: Page) {
-    let app = this.appService.getCurApp()
-    if (app) {
-      // let u: ULID = ulid()
-      let appUlid = app.ulid
-      let pageDc = this._map.get(appUlid)
-      let pageObj = page
-      if (this._pageList) {
-        pageDc?.mountNext(pageObj, pageObj.prevUlid)
-      } else {
-        pageDc?.mountRoot(pageObj)
-      }
+  add(appUlid: ULID, page: Page) {
+    let pageTree = this._map.get(appUlid)
+    if (pageTree?.root) {
+      pageTree?.mountNext(page, page.prevUlid)
+    } else {
+      pageTree?.mountRoot(page)
     }
+    // clog('add', pageTree, pageTree?.root?.toArray(), page, appUlid)
   }
-  reqPostPage(data: AddData, pageUlid: ULID) {
+  reqPostPage(data: AddData, appUlid: ULID, pageUlid: ULID) {
     return new Promise((s, j) => {
-      let app = this.appService.getCurApp()
-      if (app) {
-        // let u: ULID = ulid()
-        let u: ULID = pageUlid
-        let appUlid = app.ulid
-        this.reqService.req(`${serviceUrl()}/pages`, 'post', {
-          key: data.key,
-          name: data.name,
-          ulid: u,
-          appUlid,
-        }).then(() => {
-          s(true)
-        }).catch(() => {
-          j()
-        })
-        // this.http.post<ResponseData>(`${serviceUrl()}/pages`, {
-        //   key: data.key,
-        //   name: data.name,
-        //   ulid: u,
-        //   appUlid,
-        // }, {
-        //   withCredentials: true,
-        // }).subscribe(res => {
-        //   if (res.code === 0) {
-        //     s(true)
-        //   } else {
-        //     j()
-        //   }
-        // })
-      } else {
-        j(new Error('无此应用'))
-      }
+      let u: ULID = pageUlid
+      this.reqService.req(`${serviceUrl()}/pages`, 'post', {
+        key: data.key,
+        name: data.name,
+        ulid: u,
+        appUlid,
+      }).then(() => {
+        s(true)
+      }).catch(() => {
+        j()
+      })
     })
   }
   // 计划不支持lastComponentUlid了。
@@ -236,20 +153,6 @@ export class PageService {
   }
   reqDeletePage(ulid: ULID) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'delete', {ulid}).then(() => true)
-    // return new Promise((s, j) => {
-    //   this.http.delete<ResponseData>(`${serviceUrl()}/pages`, {
-    //     params: {
-    //       ulid
-    //     },
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(true)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
   }
   update(ulid: ULID, key: keyof Page, value: S) {
     // 更新tree中的数据
@@ -261,18 +164,11 @@ export class PageService {
   }
   reqUpdate(ulid: ULID, key: keyof Page, value: S) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key}) // .then(() => true)
-    // return new Promise((s, j) => {
-    //   this.http.put<ResponseData>(`${serviceUrl()}/pages`, {
-    //     ulid, key, value
-    //   }, {
-    //     withCredentials: true
-    //   }).subscribe(res => {
-    //     if (res.code === 0) {
-    //       s(true)
-    //     } else {
-    //       j(new Error(res.message))
-    //     }
-    //   })
-    // })
+  }
+  deletePageByAppUlid(appUlid: ULID) {
+    this._map.delete(appUlid)
+  }
+  createApp(appUlid: ULID) {
+    this._map.set(appUlid, createTree<Page>())
   }
 }

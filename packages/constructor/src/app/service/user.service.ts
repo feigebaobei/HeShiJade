@@ -78,24 +78,17 @@ export class UserService {
       }
     })
   }
-  // 注册server
-  // todo delete 06.01+
-  signSelf(data: {account: S, password: S}) {
-    return 
-  }
   appendApp(appUlid: ULID) {
     let u = this.user!
-    if (u?.firstApplicationUlid) {
-      u.lastApplicationUlid = appUlid
+    if (u.firstApplicationUlid) {
     } else {
       u.firstApplicationUlid = appUlid
-      u.lastApplicationUlid = appUlid
     }
     this.setUser(u)
   }
   login(account: S, password: S) {
     return this.ssoClient.login({email: account, password}).then((res) => {
-      clog('res', res)
+      // clog('res', res)
       this.setUser({
         ...res.idpRes.data,
         ...res.spRes.data,
@@ -105,5 +98,11 @@ export class UserService {
   }
   sendVerification(data: A) {
     return this.ssoClient.sendVerification(data)
+  }
+  deleteApp(appUlid: ULID) {
+    if (this.user?.firstApplicationUlid === appUlid) {
+      this.user.firstApplicationUlid = ''
+      this.setUser(this.user)
+    }
   }
 }

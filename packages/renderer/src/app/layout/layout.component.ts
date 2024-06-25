@@ -16,13 +16,13 @@ let clog = console.log
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
-  componenntList: Comp[]
+  componentList: Comp[]
   constructor(private route: ActivatedRoute,
     private appService: AppService,
     private envService: EnvService,
     private componentService: ComponentService,
   ) {
-    this.componenntList = []
+    this.componentList = []
     this.route.paramMap.subscribe((data: any) => {
       // clog('paramMap data', data)
       // clog('paramMap data', data.get('appKey'))
@@ -36,7 +36,7 @@ export class LayoutComponent implements OnInit {
       }
     })
     this.componentService.componentList$.subscribe(p => {
-      this.componenntList = p
+      this.componentList = p
     })
   }
   ngOnInit(): void {

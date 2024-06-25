@@ -43,12 +43,6 @@ export class PageListComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.pageList = []
-    // this.pageService.pageList$.subscribe(pl => {
-    //   this.pageList = pl
-    //   if (pl.length) {
-    //     this.pageService.setCurPage(pl[0].ulid) // 设置第一个页面为默认打开的页面
-    //   }
-    // })
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
@@ -99,12 +93,15 @@ export class PageListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: PageData = results.modalContentInstance.data
-            let page = initPageMeta(data.key, data.name, ulid(), 
-            this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
-              '')
+            let page = initPageMeta(data.key, data.name,
+              this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
+              '',
+              ulid(),
+            )
             this.pageList.push(page)
-            this.pageService.add(page)
-            this.pageService.reqPostPage(data, page.ulid)
+            let app = this.appService.getCurApp()
+            this.pageService.add(app!.ulid, page)
+            this.pageService.reqPostPage(data, app!.ulid, page.ulid)
             results.modalInstance.hide();
           }
         },
@@ -120,7 +117,10 @@ export class PageListComponent implements OnInit {
     })
   }
   pageItemClickH(pageUlid: S) {
-    this.pageService.setCurPage(pageUlid)
+    let app = this.appService.getCurApp()
+    if (app) {
+      this.pageService.setCurPage(app.ulid, pageUlid)
+    }
     // this.curPage = this.pageList.find(item => item.ulid === pageUlid)
   }
   reReqPageButtonClickH() {
@@ -156,11 +156,7 @@ export class PageListComponent implements OnInit {
     // 在store中删除
     this.pageService.deletePageByUlid(page.ulid)
     this.componentService.deleteComponentByPageUlid(page.ulid)
-    // this.pageService.getPageList().then((pl) => {
-    //   clog(pl)
-    // })
-    // clog(this.componentService._map)
-    // // 在服务端中删除
+    // 在服务端中删除
     this.pageService.reqDeletePage(page.ulid)
   }
 }

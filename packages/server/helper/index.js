@@ -158,8 +158,25 @@ let createStepRecorder = (appUlid, env, total) => {
     })
     return t
 }
-
+// 获取数据类型
+let getType = (o) => Object.prototype.toString.call(o).slice(8, -1)
 let compatibleArray = (a) => Array.isArray(a) ? Array.from(a) : []
+let compatibleCode = (p) => {
+    let type = getType(p)
+    let res
+    switch (type) {
+        case 'Number':
+            res = p
+            break;
+        case 'Error':
+            res = p.message
+            break;
+        default:
+            res = '未知错误'
+            break;
+    }
+    return res
+}
 
 // const levels = {
 //     error: 0,
@@ -196,4 +213,5 @@ module.exports = {
     createStepRecorder,
     compatibleArray,
     // log,
+    compatibleCode,
 }
