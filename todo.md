@@ -1,21 +1,19 @@
 ||完成日期||
 |-|-|-|
-|doc中写
-      this._curComponent = this._find(compUlid)
-      this.curComponent$.next(this._curComponent) 二级缓存|done||
-|整理createStepRecorder的key|||
-|2min后删除error状态的记录数据。考虑是否这样做。|不这样做||
-|整理发布应用的4种处理方式到doc|done||
-|server中的日志兼容error|done||
-|f_delete|||
+|改变button的类型时未调用接口|||
+|上生产|||
+|买服务器|||
+|部署|||
+|删除login里的默认数据|||
+|验证注册用户、创建（应用、页面、组件）、发布、浏览|||
+|在生产环境验证使用过程，创建一个基本的查询页面。|||
+|f_prod|||
 
 |舞台区使用拖动布局组件|||
 |整理props面板|||
-|上生产|||
-|是否需要把修改service与发请求分开|||
+|是否需要把修改service与发请求分开|分开||
 |丰富组件|||
 |回退功能|||
-|改变button的类型时未调用接口|||
 |“注销用户”功能|||
 |核验idp提供的token|||
 |验证saml数据是否有效|||
@@ -62,4 +60,46 @@ subject&promise不同
 # 收获
 - 项目增强的过程是迭代的过程。每次迭代都会在现有基础上统筹整体做若干调整。
 - promise/数据结构/单一原则为项目做了很多贡献。
-- 
+
+# 连接云服务器
+买1vcpu&1g
+```shell
+ssh -p 22 root@8.222.185.99
+在控制台创建“安全组”
+yum install git -y
+git -v
+# 若看到版本号，则证明安装成功。
+# 安装nvm
+git clone https://gitee.com/mirrors/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
+# 配置环境变量
+echo ". ~/.nvm/nvm.sh" >> /etc/profile
+source /etc/profile
+# 改变npm源为阿里的，也可以不做。
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
+# 查看远端node版本
+nvm list-remote
+nvm install v20.14.0 # 可安装多个
+# nvm use v18.20.0 # 可切换
+touch example.js
+vim example.js
+# 键入以下内容 start
+const http = require('http');
+const hostname = '0.0.0.0';
+const port = 3000;
+const server = http.createServer((req, res) => { 
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World\n');
+}); 
+server.listen(port, hostname, () => { 
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
+# 键入以下内容 end
+# 保存并退出
+node example.js & netstat -tpln # 列入系统已在监听的端口信息。
+# 在浏览器中访问 http://<公网ip>:3000
+```
+
+
+
+client_loop: send disconnect: Broken pipe
