@@ -1,10 +1,34 @@
-import { A } from "src/types/base"
+import { A, S } from "src/types/base"
 // import type { SsoClientParams } from "./sso-saml-client"
 import type { Method, } from './axios'
 
 // 日后使用环境变量判断
-let ssoUrl = () => 'http://localhost:5020'
-let serviceUrl = () => 'http://localhost:5000'
+let ssoUrl = () => {
+    let location = window.location
+    let r: S
+    switch (location.hostname) {
+        case 'heshijade.com':
+            r = `${location.protocol}//${location.hostname}:5020` // host包括接口号
+            break;
+        default:
+            r = 'http://localhost:5020'
+            break;
+    }
+    return r
+}
+let serviceUrl = () => {
+    let location = window.location
+    let r: S
+    switch (location.hostname) {
+        case 'heshijade.com':
+            r = `${location.protocol}//${location.hostname}:5000` // host包括接口号
+            break;
+        default:
+            r = 'http://localhost:5000'
+            break;
+    }
+    return r
+}
 const APPTOTALMAX = 10
 const PAGETOTALMAXOFAPP = 20
 const COMPONENTTOTALMAXOFPAGE = 30
