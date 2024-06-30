@@ -1,15 +1,1 @@
-{"level":30,"time":1719324677007,"pid":14947,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324701761,"pid":15678,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324738484,"pid":15987,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324750139,"pid":15987,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1719324791083,"pid":16086,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324799185,"pid":16086,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1719324799186,"pid":16086,"hostname":"catdeMacBook-Pro.local","name":"logname","code":{},"originalUrl":"/apps"}
-{"level":30,"time":1719324889190,"pid":16177,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324900028,"pid":16177,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1719324900028,"pid":16177,"hostname":"catdeMacBook-Pro.local","name":"logname","code":"dfd is not defined","originalUrl":"/apps"}
-{"level":30,"time":1719324945653,"pid":16277,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324975322,"pid":16344,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324976278,"pid":16408,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324985008,"pid":16542,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1719324987121,"pid":16666,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1719526801523,"pid":36339,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
