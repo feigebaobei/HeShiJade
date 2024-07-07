@@ -71,7 +71,6 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
   }
   ngOnInit() {
-    // this.init()
   }
   init() {
     // components模块内
@@ -135,24 +134,20 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     }
   }
   ngAfterViewInit() {
-    // this.init()
-    // setTimeout(() => {
-    //   this.init()
-    // }, 2000)
-    // console.log(this.compHost);
   }
   ngAfterContentInit() {
+    clog('ngAfterContentInit')
     this.init()
   }
   ngAfterViewChecked(): void {
   }
-  update() {
-    if (this.comp.ulid === this.curComp?.ulid) {
-      this.init()
-    }
+  update() { // 通常指的是当Angular更新DOM或执行数据绑定
+    // clog('update')
+    // if (this.comp.ulid === this.curComp?.ulid) {
+    //   this.init()
+    // }
   }
   // ngOnChanges() {
-  //   // this.init()
   // }
   ngOnDestroy() {
     this.compHost.viewContainerRef.clear();

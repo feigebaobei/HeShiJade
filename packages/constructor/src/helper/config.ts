@@ -11,7 +11,8 @@ let ssoUrl = () => {
             r = `${location.protocol}//${location.hostname}:5020` // host包括接口号
             break;
         default:
-            r = 'http://localhost:5020'
+            r = 'http://heshijade.com:5020' // host包括接口号
+            // r = 'http://localhost:5020'
             break;
     }
     return r
@@ -24,6 +25,7 @@ let serviceUrl = () => {
             r = `${location.protocol}//${location.hostname}:5000` // host包括接口号
             break;
         default:
+            // r = 'http://heshijade.com:5000' // host包括接口号
             r = 'http://localhost:5000'
             break;
     }
