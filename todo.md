@@ -1,11 +1,12 @@
 ||完成日期||
 |-|-|-|
-|改变button的类型时未调用接口|doing||
-|配置面板不能及时切换|doing||
+|改变props后及时在舞台区使用|doing||
+|设置props时使用去抖|||
 |验证注册用户、创建（应用、页面、组件）、发布、浏览|doing||
 |在生产环境验证使用过程，创建一个基本的查询页面。|||
-|本地constructor使用远端的server/sso|server因cookie不匹配，所以不能使用远端的server||
-|调研“轻量服务器”能运行heshijade吗？|done|可以|
+|本地constructor使用远端的server/sso|server因cookie不匹配，所以不能使用远端的server|done|
+|改变button的类型时未调用接口|done||
+|配置面板不能及时切换|done||
 |f_prod|||
 
 |把lixiaodan.com的内容搬到8.222.xxx.xx上。|||

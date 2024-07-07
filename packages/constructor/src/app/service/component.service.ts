@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
 import { createTree } from 'src/helper/tree';
@@ -20,12 +20,13 @@ import type { Component, Category,
   ComponentMountSlots,
  } from '../../types/component'
 import type { ResponseData } from '../../types/index'
-import type { ConfigItemsCategoryType } from 'src/types/base'
+import { O, type ConfigItemsCategoryType } from 'src/types/base'
 import type { S, Ao, ULID, A,
   N,
   B,
   ConfigItem,
 } from 'src/types/base';
+import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
 
@@ -49,6 +50,9 @@ export class ComponentService {
   private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
   // ulid是pageUlid
   componentProps$: Subject<Component['props']>
+  // private propsS = signal({})
+  // readonly propsSReadonly = this.propsS.asReadonly()
+  props$: Subject<PropsTransfer>
 
   constructor(
     private pageService: PageService,
@@ -63,17 +67,17 @@ export class ComponentService {
     this._curCompUlid = ''
     this._curComponent = undefined
     this._map = new Map()
-    // 当页面改变时更新组件列表
-    // this.pageService.pageSubject$.subscribe(curPage => {
-    //   let pageUlid = curPage?.ulid
-    //   if (pageUlid) {
-    //     this._opCompList(pageUlid)
-    //     .then((arr) => {
-    //       this.componentListByCurPage$.next(arr)
-    //     })
-    //   }
-    // })
+    this.props$ = new Subject<PropsTransfer>()
   }
+  // setPropsS(v: A) {
+  //   this.propsS.set(v)
+  // }
+  // getPropsS() {
+  //   return this.propsS
+  // }
+  // updatePropsS(v: A) {
+  //   return this.propsS.update(() => v)
+  // }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
       s(this.categoryList)
@@ -339,7 +343,6 @@ export class ComponentService {
       curComp.props[key] = value
     }
   }
-  
   setComponentsBehavior(
     // type: UpdateType, 
     index: N, key: BehaviorItemKey, value: S) {
