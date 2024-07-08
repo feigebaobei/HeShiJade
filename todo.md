@@ -2,6 +2,8 @@
 |-|-|-|
 |验证注册用户、创建（应用、页面、组件）、发布、浏览|doing||
 |设置props时使用去抖|||
+|renderer中使用方法输出服务器地址|||
+|web-site升级依赖后可以正常打包、访问|||
 |在生产环境验证使用过程，创建一个基本的查询页面。|||
 |改变props后及时在舞台区使用|done||
 |本地constructor使用远端的server/sso|server因cookie不匹配，所以不能使用远端的server|done|

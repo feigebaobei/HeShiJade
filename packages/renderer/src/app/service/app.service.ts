@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { serviceUrl } from 'src/helper/config';
 import { ResponseData } from 'src/types';
 import type { A, S, ENV } from 'src/types/base';
 import type { App } from 'src/types/app'
@@ -36,7 +37,7 @@ export class AppService {
   }
   private _reqAppDetail(appKey: S, env: ENV): Promise<App> {
     return new Promise((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/apps/detail', {
+      this.http.get<ResponseData>(`${serviceUrl()}/apps/detail`, {
         params: {
           appKey: appKey,
           env: env

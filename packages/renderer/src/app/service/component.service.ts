@@ -10,6 +10,7 @@ import { ENV, S } from 'src/types/base';
 import { EnvService } from './env.service';
 // import { arrToChain } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
+import { serviceUrl } from 'src/helper/config'
 // type
 import type { ResponseData, ULID } from 'src/types';
 import type { Component,
@@ -174,7 +175,7 @@ export class ComponentService {
   }
   private _reqComponentByPage(pageUlid: ULID, env: ENV): Promise<Component[]> {
     return new Promise((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/components/', {
+      this.http.get<ResponseData>(`${serviceUrl()}/components/`, {
         params: {
           pageUlid,
           env,
