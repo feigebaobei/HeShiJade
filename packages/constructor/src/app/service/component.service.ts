@@ -405,26 +405,8 @@ export class ComponentService {
   deleteByUlid(pageUlid: ULID, componentUlid: ULID) {
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
-  // deleteComponentList(appUlid: ULID, pageUlid?: ULID) {
-  //   if (pageUlid) {} else {
-  //     this.pageService.getPageList(appUlid).then(pageList => {
-  //     })
-  //   }
-  // }
 
   deleteComponentByPageUlid(pageUlid: ULID) {
-    // let app = this.appService.getCurApp()
-    // let key = `${app?.ulid}_${pageUlid}_`
-    // this._map.delete(key)
     this._map.delete(pageUlid)
   }
-  // 不应用有根据页面应用删除组件的方法
-  // deleteComponentByAppUlid(appUlid: ULID) {
-    // let app = this.appService.getCurApp()
-    // this.pageService.getPageList().then(pageList => {
-    //   pageList.forEach((page) => {
-    //     this.deleteComponentByPageUlid(page.ulid)
-    //   })
-    // })
-  // }
 }

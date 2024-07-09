@@ -102,6 +102,7 @@ export class PageListComponent implements OnInit {
             let app = this.appService.getCurApp()
             this.pageService.add(app!.ulid, page)
             this.pageService.reqPostPage(data, app!.ulid, page.ulid)
+            this.appService.addPage(page.ulid)
             results.modalInstance.hide();
           }
         },

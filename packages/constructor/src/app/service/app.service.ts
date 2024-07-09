@@ -211,4 +211,13 @@ export class AppService {
   deleteApp(appUlid: ULID) {
     this.tree.unmount(appUlid)
   }
+  addPage(pageUlid: ULID) {
+    let curApp = this.getCurApp()
+    if (curApp) {
+      if (curApp.firstPageUlid) {
+      } else {
+        curApp.firstPageUlid = pageUlid
+      }
+    }
+  }
 }

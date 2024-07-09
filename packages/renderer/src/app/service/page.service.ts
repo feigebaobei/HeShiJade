@@ -88,7 +88,7 @@ export class PageService {
   // 请求页面列表
   private _reqList(appUlid: ULID, env: ENV): Promise<Page[]> {
     return new Promise((s, j) => {
-      this.http.get<ResponseData>(`${serviceUrl()}/pages, {
+      this.http.get<ResponseData>(`${serviceUrl()}/pages`, {
         params: {
           appUlid,
           env,
