@@ -505,6 +505,7 @@ router.route('/publish')
         return true
       }).catch((error) => {
         clog(error)
+        return Promise.reject(200050)
       })
     })
     let pReadFromComponent = lowcodeDb.collection(fromEnv.componentTable).find({appUlid}).toArray().then((componentList) => {
@@ -517,6 +518,8 @@ router.route('/publish')
         stepRecorder.add('component_toEnv_write')
         return true
       }).catch((error) => {
+        clog('error', error)
+        return Promise.reject(200050)
       })
     })
     let pAll = Promise.all([pReadToPage, pReadToComponent, pReadFromPage, pReadFromComponent]).then(() => {
@@ -547,6 +550,7 @@ router.route('/publish')
       })
     }).then(() => {
       stepRecorder.updateStatus('finish')
+      logger.info({status: 'finish', done: stepRecorder.done, total: stepRecorder.total})
       stepRecorder.delete()
     }).catch((error) => {
       logger.info({error})
