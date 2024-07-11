@@ -92,18 +92,6 @@ let cloneDeep = (v: A): A => {
 //     port1.postMessage(v)
 //   }) 
 // }
-let createDebounceFn = (fn: F, t = 250, self?: A) => {
-  var timer: N
-  return (...rest: A[]) => {
-    var context = self
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = window.setTimeout(() => {
-      fn.apply(context, rest)
-    }, t)
-  }
-}
 let initComponentMeta = (
   category: S = '',
   appUlid: ULID = '', pageUlid: ULID = '',
@@ -249,7 +237,22 @@ let createLoop = (pFn: F, bFn: F, i: N = 0): Loop => {
 //     http
 //   })
 // }
-
+let createDebounceFn = (fn: F, t = 250, self?: A) => {
+  let timer: N
+  return (...rest: A[]) => {
+    let context = self
+    if (timer) {
+      clearTimeout(timer)
+      timer = 0
+    // } else {
+    }
+    timer = window.setTimeout(() => {
+      fn.apply(context, rest)
+      clearTimeout(timer)
+      timer = 0
+    }, t)
+  }
+}
 
 export {
   VERSION,

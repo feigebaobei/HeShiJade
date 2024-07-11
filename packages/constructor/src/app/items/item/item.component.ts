@@ -49,7 +49,7 @@ export class ItemComponent implements OnInit, OnChanges {
   }
   hideListener(key: S,) {
     let hlk = (this.groupItem).hideListenerKey
-    clog('hlk', hlk, this.group)
+    // clog('hlk', hlk, this.group)
     if (hlk === key) {
       this._hideListener()
     }
