@@ -419,7 +419,6 @@ router.route('/publish')
     if (rules.isEnv(req.body.fromEnv) &&
       rules.isEnv(req.body.toEnv) &&
       rules.required(appUlid)
-      // rules.isNumber(newVersion)
     ) {
       let dbArr = Object.values(DB)
       fromEnv = dbArr.find(item => item.env === req.body.fromEnv)
@@ -488,19 +487,23 @@ router.route('/publish')
     // 删除目录环境的旧数据
     let pReadToPage = lowcodeDb.collection(toEnv.pageTable).find({appUlid: appUlid}).toArray().then((pageList) => {
       stepRecorder.add('page_toEnv_read')
-      toDeletePageUlidArr = pageList.map(item => item.ulid)
+      // toDeletePageUlidArr = pageList.map(item => item.ulid)
+      toDeletePageUlidArr = pageList.map(item => item._id)
     })
     let pReadToComponent = lowcodeDb.collection(toEnv.componentTable).find({appUlid: appUlid}).toArray().then((componentList) => {
       stepRecorder.add('component_toEnv_read')
-      toDeleteComponentUlidArr = componentList.map(item => item.ulid)
+      // toDeleteComponentUlidArr = componentList.map(item => item.ulid)
+      toDeleteComponentUlidArr = componentList.map(item => item._id)
     })
     let pReadFromPage = lowcodeDb.collection(fromEnv.pageTable).find({appUlid}).toArray().then((pageList) => {
       stepRecorder.add('page_fromEnv_read')
       logger.info({page_fromEnv_read: pageList.map(item => item.ulid)})
-      return lowcodeDb.collection(toEnv.pageTable).insertMany(pageList.map(item => {
+      let arr = pageList.map(item => {
         delete item._id
         return item
-      })).then(() => {
+      })
+      clog('arr', toEnv, arr)
+      return lowcodeDb.collection(toEnv.pageTable).insertMany(arr).then(() => {
         stepRecorder.add('page_toEnv_write')
         return true
       }).catch((error) => {
@@ -524,6 +527,7 @@ router.route('/publish')
     })
     let pAll = Promise.all([pReadToPage, pReadToComponent, pReadFromPage, pReadFromComponent]).then(() => {
       // 使用bulkWrite去完成删除旧的添加新的，不使用update更新旧的。
+      // 默认是有序执行的。
       let arr = [
         {
           insertOne: {
@@ -538,10 +542,12 @@ router.route('/publish')
       .then(() => {
         stepRecorder.add('app_toEnv_write')
         stepRecorder.add('app_toEnv_delete')
-        let p0 = lowcodeDb.collection(toEnv.pageTable).deleteMany({ulid: {$in: toDeletePageUlidArr}}).then(() => {
+        // let p0 = lowcodeDb.collection(toEnv.pageTable).deleteMany({ulid: {$in: toDeletePageUlidArr}}).then(() => {
+        let p0 = lowcodeDb.collection(toEnv.pageTable).deleteMany({_id: {$in: toDeletePageUlidArr}}).then(() => {
           stepRecorder.add('page_toEnv_delete')
         })
-        let p1 =lowcodeDb.collection(toEnv.componentTable).deleteMany({ulid: {$in: toDeleteComponentUlidArr}}).then(() => {
+        // let p1 =lowcodeDb.collection(toEnv.componentTable).deleteMany({ulid: {$in: toDeleteComponentUlidArr}}).then(() => {
+        let p1 =lowcodeDb.collection(toEnv.componentTable).deleteMany({_id: {$in: toDeleteComponentUlidArr}}).then(() => {
           stepRecorder.add('component_toEnv_delete')
         })
         return Promise.all([p0, p1])
