@@ -67,6 +67,7 @@ export class StackComponent {
       case 'Form':
         this.componentRef.instance.data = {
           props: this.data.props,
+          behavior: this.data.behavior,
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,

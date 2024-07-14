@@ -3,6 +3,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { DataService } from 'src/app/service/data.service';
 import { cdir, clog } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
+import {shareEvent} from 'src/helper';
 // type
 import type { A, S, ULID, N, D, ReqMethod, } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
@@ -62,7 +63,9 @@ export class TableComponent implements OnInit {
         }
       }
     })
-    clog('compObj',this.compObj)
+    shareEvent.listen(this.data.ulid, (payload) => {
+      this.basicDataSource = payload
+    })
   }
   req() {
     this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {
