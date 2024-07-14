@@ -68,3 +68,5 @@ subject&promise不同
 
 # 端口
 lc官网使用80端口。sso使用5020端口。服务侧使用5000端口。搭建侧使用4200。渲染则使用4210。测试端口3000
+
+http://localhost:5030/components/table
