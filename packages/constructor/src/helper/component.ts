@@ -79,7 +79,13 @@ let Form: ComponentDefaultConfig = {
         isCancel: true,
         isSubmit: true,
     },
-    behavior: [],
+    behavior: [
+        {
+            event: 'submit',
+            target: '',
+            payload: '',
+        },
+    ],
     items: [
         {
             category: 'input',
