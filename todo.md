@@ -3,6 +3,7 @@
 |form与table联动起来|doing||
 |验证注册用户、创建（应用、页面、组件）、发布、浏览|doing||
 |无法复制ulid|||
+|mock-server修改启动文件名|done||
 |排查发布后无页面的问题|done||
 |打开发布弹层时发现，dev环境的版本号不对。|||
 |新页面创建第一个组件时页面对象中firstComponentUlid为空|||

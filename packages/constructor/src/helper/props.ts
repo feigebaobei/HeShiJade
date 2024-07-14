@@ -190,6 +190,12 @@ let Form: PropsConfigItem = {
         label: '是否有提交按钮',
         key: 'isSubmit',
     },
+    url: {
+        category: 'input',
+        value: '',
+        label: 'url',
+        key: 'url',
+    },
 }
 let Table: PropsConfigItem = {
     size: {
