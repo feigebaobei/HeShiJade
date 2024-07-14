@@ -253,7 +253,27 @@ let createDebounceFn = (fn: F, t = 250, self?: A) => {
     }, t)
   }
 }
-
+let copy = (str: S): Promise<void> | Promise<boolean> => {
+  let p
+  if (window.isSecureContext && navigator.clipboard) {
+    p = navigator.clipboard.writeText(str)
+  } else {
+    let ele = document.createElement('textarea')
+    let styles = ele.style
+    styles.position = 'fixed'
+    styles.zIndex = '0'
+    styles.left = '-500px'
+    styles.top = '-500px'
+    ele.value = str
+    document.body.appendChild(ele)
+    ele.focus()
+    ele.select()
+    let result = document.execCommand('copy')
+    ele.remove()
+    p = Promise.resolve(true)
+  }
+  return p
+}
 export {
   VERSION,
   reqToPromise,
@@ -270,6 +290,7 @@ export {
   createLoop,
   // wrapReq,
   sleep,
+  copy,
 }
 export type {
   Loop

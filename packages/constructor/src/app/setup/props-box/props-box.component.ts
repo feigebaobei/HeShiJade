@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { PropsDirective } from 'src/app/props.directive';
 import { ComponentService } from 'src/app/service/component.service';
+import { copy } from 'src/helper';
 // type
 import type {Component as Comp, } from 'src/types/component'
 import type { PropsConfigItem } from 'src/types/config'
@@ -174,13 +175,9 @@ export class PropsBoxComponent {
     })
   }
   compUlidClickH (ref: HTMLElement) {
-    let range = document.createRange()
-    range.selectNode(ref)
-    window.getSelection()?.removeAllRanges()
-    window.getSelection()?.addRange(range)
-    document.execCommand('copy')
-    this.msg = [{ severity: 'success', summary: '', content: '已经复制' }];
-    window.getSelection()?.removeAllRanges()
+    copy(ref.innerText).then(() => {
+      this.msg = [{ severity: 'success', summary: '', content: '已经复制' }];
+    })
   }
   listenerChange(listenerKey: S, propsObj: Comp['props']) {
     let obj = this.propsMap.get(listenerKey)
