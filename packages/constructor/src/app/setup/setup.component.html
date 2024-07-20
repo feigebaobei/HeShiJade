@@ -26,13 +26,15 @@
         (dropEvent)="onDrop($event, pageData)"
         (click)="stageClickH($event)"
     >
-        <p>stage</p>
         <div *ngIf="componentByPage.length">
             <app-comp-box
                 *ngFor="let comp of componentByPage"
                 [comp]="comp"
                 (deleteComp)="deleteComponentByUlidH($event)"
             ></app-comp-box>
+        </div>
+        <div *ngIf="!componentByPage.length">
+            <p class="center">此页面无组件</p>
         </div>
     </div>
     <!-- setter -->

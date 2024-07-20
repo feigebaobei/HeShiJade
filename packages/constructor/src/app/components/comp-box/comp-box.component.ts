@@ -61,7 +61,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.componentRef
     this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
-      this.update()
+      // this.update()
     })
     this.curPage = this.pageService.getCurPage()!
     // this.propsSReadonly = this.componentService.propsSReadonly
@@ -74,7 +74,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   boxClickh($event: A) {
     // 选中组件
     $event.stopPropagation()
-    clog(this.comp)
+    // clog(this.comp)
     this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
   }
   ngOnInit() {
@@ -143,14 +143,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   }
   ngAfterViewChecked(): void {
   }
-  update() { // 通常指的是当Angular更新DOM或执行数据绑定
-    clog('update')
-    // todo 删除不使用的此方法
-    // if (this.comp.ulid === this.curComp?.ulid) {
-    //   this.init()
-    // }
-    // this.init()
-  }
+  // update() { // 通常指的是当Angular更新DOM或执行数据绑定
+  //   // clog('update')
+  //   // todo 删除不使用的此方法
+  //   // if (this.comp.ulid === this.curComp?.ulid) {
+  //   //   this.init()
+  //   // }
+  //   // this.init()
+  // }
   // ngOnChanges() {
   // }
   ngOnDestroy() {

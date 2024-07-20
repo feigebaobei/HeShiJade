@@ -188,25 +188,28 @@ export class ComponentService {
   }
   // 作为哪种节点返回
   private mountPosition(comp: Component): N {
-    let n = 0
-    if (comp.prevUlid && !comp.nextUlid) {
-      n = 2
-    } else if (!comp.prevUlid && comp.nextUlid) {
-      n = 1
-    } else if (comp.prevUlid && comp.nextUlid) {
-      n = 2
-    } else {
+    // 0 根组件
+    // 1 前组件
+    // 2 后组件
+    // 3 items组件
+    // 4 slots组件
+    let n: N = 0
+    if (comp.parentUlid) {
       switch (comp.mount.area) {
-        case '':
-        default:
-          n = 0
-          break;
         case 'slots':
           n = 4
           break;
         case 'items':
           n = 3
           break;
+      }
+    } else {
+      if (!comp.prevUlid && !comp.nextUlid) {
+        n = 0
+      } else if (!comp.prevUlid && comp.nextUlid) {
+        n = 1
+      } else if (comp.prevUlid && !comp.nextUlid) {
+        n = 2
       }
     }
     return n
@@ -217,6 +220,9 @@ export class ComponentService {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
       switch(this.mountPosition(comp)) {
+        case 0:
+          tree.mountRoot(comp)
+          break
         case 1: // prev
           b = !!tree.mountPrev(comp, comp.parentUlid)
           node = tree.find(comp.prevUlid)
@@ -260,6 +266,7 @@ export class ComponentService {
           }
           break;
       }
+      clog('tree', tree)
       return b
     } else {
       return false

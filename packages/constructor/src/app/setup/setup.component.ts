@@ -108,27 +108,6 @@ export class SetupComponent implements OnInit {
       clog(msg)
     })
   }
-  // 检查当前app是否在应用列表中
-  // checkApp(): Promise<B> {
-  //   let appUlid = this.route.snapshot.queryParamMap.get('app')
-  //   return this.appService.getAppList().then(appList => {
-  //     if (appList.length) {
-  //       return Promise.resolve(appList.some(item => item.ulid === appUlid))
-  //     } else {
-  //       return this.appService.reqAppList().then(appList => {
-  //         return appList.some(item => item.ulid === appUlid)
-  //       })
-  //     }
-  //   })
-  //   // let appList = this.appService.getAppList()
-  //   // if (appList.length) {
-  //   //   return Promise.resolve(appList.some(item => item.ulid === appUlid))
-  //   // } else {
-  //   //   return this.appService.reqAppList().then(appList => {
-  //   //     return appList.some(item => item.ulid === appUlid)
-  //   //   })
-  //   // }
-  // }
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
