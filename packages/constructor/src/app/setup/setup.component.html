@@ -1,14 +1,14 @@
 <section class="section">
-<header class="header">
-    <p>
-        <span>{{curApp?.key}}</span>
-        <span *ngIf="curPage?.key">/</span>
-        <span>{{curPage?.key}}</span>
-    </p>
-    <aside>
-        <d-button (click)="viewBtClickH()">预览</d-button>
-    </aside>
-</header>
+    <header class="header">
+        <p>
+            <span>{{curApp?.key}}</span>
+            <span *ngIf="curPage?.key">/</span>
+            <span>{{curPage?.key}}</span>
+        </p>
+        <aside>
+            <d-button (click)="viewBtClickH()">预览</d-button>
+        </aside>
+    </header>
     <!-- page & component -->
     <div class="left">
         <d-tabs [type]="'tabs'" [(activeTab)]="leftTabActive" (activeTabChange)="activeTabChange($event)">

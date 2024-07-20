@@ -3,9 +3,9 @@ import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
 // import * as componentDefaultConfigAll from '../../helper/component'
 import addableAll from 'src/helper/addable'
-import { cloneDeep } from 'src/helper/index'
+import { cloneDeep, compatibleArray } from 'src/helper/index'
 // type
-import type { B, ConfigItem, N } from 'src/types/base';
+import type { B, ConfigItem, N, S } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
  } from 'src/types/component';
 
@@ -29,7 +29,8 @@ export class ItemsBoxComponent {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          let group: ConfigItem[] = cloneDeep(groupTemplate[p.type])
+          // let group: ConfigItem[] = cloneDeep(compatibleArray(groupTemplate[p.type]).map(t => t.show)) // 取出要显示的
+          let group = this.groupForConfig(p.type)
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
@@ -47,10 +48,13 @@ export class ItemsBoxComponent {
   }
   addH() {
     if (this.curComponent) {
-      let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
+      // let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
+      let group = this.groupForConfig(this.curComponent.type)
+      clog('group', group)
       this.groupList.push(group)
       let obj: ItemsMetaItem = {} as ItemsMetaItem
-      group.forEach((item) => {
+      // group.forEach((item) => {
+      groupTemplate[this.curComponent.type].forEach((item) => {
         let k: keyof ItemsMetaItem = item.key as unknown as keyof ItemsMetaItem
         obj[k] = item.value
       })
@@ -60,5 +64,8 @@ export class ItemsBoxComponent {
   }
   removeH(i: N) {
     this.componentService.removeItemsOfCurComponent(i)
+  }
+  groupForConfig(type: S): ConfigItem[] {
+    return cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
   }
 }

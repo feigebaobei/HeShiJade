@@ -115,11 +115,6 @@ let Table: ComponentDefaultConfig = {
     },
     behavior: [],
     items: [
-        // {
-        //     field: 'key',
-        //     header: 'str',
-        //     width: '150px',
-        // }
     ],
     slots: {},
 }

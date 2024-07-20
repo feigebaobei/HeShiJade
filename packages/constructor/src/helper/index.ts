@@ -274,6 +274,9 @@ let copy = (str: S): Promise<void> | Promise<boolean> => {
   }
   return p
 }
+// 兼容的数组，常用于处理脏数据。
+let compatibleArray = (a: A) => Array.isArray(a) ? Array.from(a) : []
+
 export {
   VERSION,
   reqToPromise,
@@ -291,6 +294,7 @@ export {
   // wrapReq,
   sleep,
   copy,
+  compatibleArray,
 }
 export type {
   Loop

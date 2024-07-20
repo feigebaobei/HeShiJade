@@ -138,7 +138,7 @@ export class TableComponent implements OnInit {
     // let curPage = this.pageService.getCurPage()
     let comp: Comp
     let key = createChildKey('items', itemIndex, 'component')
-    clog('key', key)
+    clog('drop', key, this.data, this.data.ulid)
     if (this.compObj[key]?.length) {
       comp = initComponentMeta(
         e.dragData.item.componentCategory,
