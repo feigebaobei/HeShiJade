@@ -124,6 +124,7 @@ export class PublishDialogComponent implements OnInit {
       switch (res.code) {
         case 0:
           this.msg = [{ severity: 'success', summary: 'Summary', content: '发布成功。' }]
+          this.appService.updateVersion(this.data.appUlid, 'dev', this.devObj.version, this.devObj.remarks)
           this.appService.updateVersion(this.data.appUlid, 'test', this.devObj.version, this.devObj.remarks)
           this.testObj.version = this.devObj.version
           this.testObj.remarks = this.devObj.remarks
