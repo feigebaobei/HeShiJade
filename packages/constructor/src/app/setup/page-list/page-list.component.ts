@@ -92,16 +92,18 @@ export class PageListComponent implements OnInit {
           text: '创建',
           disabled: false,
           handler: ($event: Event) => {
+            let app = this.appService.getCurApp()
             let data: PageData = results.modalContentInstance.data
             let page = initPageMeta(data.key, data.name,
               this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
               '',
-              ulid(),
+              // ulid(),
+              app!.ulid,
             )
             this.pageList.push(page)
-            let app = this.appService.getCurApp()
             this.pageService.add(app!.ulid, page)
             this.pageService.reqPostPage(data, app!.ulid, page.ulid)
+            this.appService.addPage(page.ulid)
             results.modalInstance.hide();
           }
         },

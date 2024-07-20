@@ -1,14 +1,14 @@
 <section class="section">
-<header class="header">
-    <p>
-        <span>{{curApp?.key}}</span>
-        <span *ngIf="curPage?.key">/</span>
-        <span>{{curPage?.key}}</span>
-    </p>
-    <aside>
-        <d-button (click)="viewBtClickH()">预览</d-button>
-    </aside>
-</header>
+    <header class="header">
+        <p>
+            <span>{{curApp?.key}}</span>
+            <span *ngIf="curPage?.key">/</span>
+            <span>{{curPage?.key}}</span>
+        </p>
+        <aside>
+            <d-button (click)="viewBtClickH()">预览</d-button>
+        </aside>
+    </header>
     <!-- page & component -->
     <div class="left">
         <d-tabs [type]="'tabs'" [(activeTab)]="leftTabActive" (activeTabChange)="activeTabChange($event)">
@@ -26,13 +26,15 @@
         (dropEvent)="onDrop($event, pageData)"
         (click)="stageClickH($event)"
     >
-        <p>stage</p>
         <div *ngIf="componentByPage.length">
             <app-comp-box
                 *ngFor="let comp of componentByPage"
                 [comp]="comp"
                 (deleteComp)="deleteComponentByUlidH($event)"
             ></app-comp-box>
+        </div>
+        <div *ngIf="!componentByPage.length">
+            <p class="center">此页面无组件</p>
         </div>
     </div>
     <!-- setter -->

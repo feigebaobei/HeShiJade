@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { PropsDirective } from 'src/app/props.directive';
 // 组件
 import { PropsInputComponent } from '../props-input/props-input.component';
@@ -16,7 +16,7 @@ let clog = console.log
   templateUrl: './props-item.component.html',
   styleUrls: ['./props-item.component.sass']
 })
-export class PropsItemComponent implements OnInit {
+export class PropsItemComponent implements OnInit, AfterContentInit {
   // @Input() propItem!: ComponentPropsMetaItem
   @Input() propItem!: ConfigItem
   @ViewChild(PropsDirective, {static: true}) propsHost!: PropsDirective
@@ -26,6 +26,9 @@ export class PropsItemComponent implements OnInit {
     this.propArr = []
   }
   ngOnInit() {
+  }
+  init() {
+    if (!this.propsHost) return
     let viewContainerRef = this.propsHost.viewContainerRef
     viewContainerRef.clear() // 先清空
 
@@ -38,17 +41,24 @@ export class PropsItemComponent implements OnInit {
         componentRef.instance.data = this.propItem
         // 绑定事件
         componentRef.instance.change.subscribe((v: A) => {
-          // clog('change', v)
           this.itemChange.emit({key: this.propItem.key, value: v})
         })
         break
       case 'select':
         componentRef = viewContainerRef.createComponent(PropsSelectComponent)
         componentRef.instance.data = this.propItem
+        // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
         break
       case 'switch':
         componentRef = viewContainerRef.createComponent(PropsSwitchComponent)
         componentRef.instance.data = this.propItem
+        // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
         break
       // 暂时不渲染option
       // todo 需要支持option
@@ -57,5 +67,8 @@ export class PropsItemComponent implements OnInit {
       //   componentRef.instance.data = this.propItem
         // break
     }
+  }
+  ngAfterContentInit() { // 当指令的全部内容都初始化完成后只执行一次。一般用于执行初始化任务。
+    this.init()
   }
 }

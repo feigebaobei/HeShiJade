@@ -20,24 +20,28 @@ let Form: ConfigItem[] = [
         ],
         key: 'category',
         value: 'input',
+        // show: true,
     },
     {
         label: 'key',      // 在配置面板中的显示的文本
         category: 'input', // 在配置面板中显示的种类
         key: 'key',        // 配置组中项的key
         value: '',      // 在配置面板中设置的值
+        // show: true,
     },
     {
         label: 'label',
         category: 'input',
         key: 'label',
         value: '',
+        // show: true,
     },
     {
         label: 'value',
         category: 'input',
         key: 'value',
         value: '',
+        // show: true,
     },
     {
         label: '',
@@ -56,6 +60,7 @@ let Form: ConfigItem[] = [
             return r
         },
         hideListenerKey: 'category',
+        // show: true,
     }
 ]
 
@@ -81,24 +86,36 @@ let Table: ConfigItem[] = [
         ],
         key: 'category',
         value: 'fill',
+        // show: true,
     },
     {
         label: 'field',
         category: 'input',
         key: 'field',
         value: '', // 配置项的默认值
+        // show: true,
     },
     {
         label: 'header',
         category: 'input',
         key: 'header',
         value: '',
+        // show: true,
     },
     {
         label: 'width',
         category: 'input',
         key: 'width',
         value: '150px',
+        // show: true,
+    },
+    {
+        label: 'childUlid',
+        category: 'input',
+        key: 'childUlid',
+        value: '',
+        // show: false,
+        hideConfig: true,
     },
 ]
 let all: {[k: S]: ConfigItem[]} = {

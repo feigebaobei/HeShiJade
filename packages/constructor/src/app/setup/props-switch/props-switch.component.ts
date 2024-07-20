@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service'; {}
-import { A } from 'src/types/base';
+import { createDebounceFn } from 'src/helper/index'
+import { A, F, S } from 'src/types/base';
 
 @Component({
   selector: 'app-props-switch',
@@ -9,9 +10,17 @@ import { A } from 'src/types/base';
 })
 export class PropsSwitchComponent {
   @Input() data: A
-  constructor(private componentService: ComponentService) {}
-  change() {
-    // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
-    this.componentService.setComponentProp(this.data.propKey, this.data.value)
+  @Output() change = new EventEmitter()
+  modelChangeH: F
+  constructor(private componentService: ComponentService) {
+    this.modelChangeH = createDebounceFn((v: S) => {
+      this.componentService.setComponentProp(this.data.key, this.data.value)
+      this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
+      this.change.emit(v)
+    }, 400)
   }
+  // modelChangeH(v: S) {
+  //   // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
+  //   // this.componentService.setComponentProp(this.data.propKey, this.data.value)
+  // }
 }

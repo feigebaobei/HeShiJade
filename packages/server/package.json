@@ -5,9 +5,9 @@
   "type": "commonjs",
   "scripts": {
     "dev": "yarn nm",
-    "start": "node ./bin/www",
+    "start": "node ./bin/server",
     "s": "node ./bin/start",
-    "nm": "npm run s && nodemon ./bin/www"
+    "nm": "npm run s && nodemon ./bin/server"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

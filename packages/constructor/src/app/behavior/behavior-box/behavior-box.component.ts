@@ -3,7 +3,8 @@ import { ComponentService } from 'src/app/service/component.service';
 import { cloneDeep } from 'src/helper/index'
 import type { Component as Comp } from 'src/types/component';
 import {
-  Button as buttonBehaviorMeta
+  Button as buttonBehaviorMeta,
+  Form as FormBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
@@ -56,6 +57,7 @@ export class BehaviorBoxComponent {
   }
   curComponentChange() {
     this.componentBehaviorList = []
+    clog('curComponentChange', this.curComp)
     switch (this.curComp?.type) {
       case 'Button':
         this.componentBehaviorMeta = buttonBehaviorMeta
@@ -74,6 +76,26 @@ export class BehaviorBoxComponent {
           this.componentBehaviorList.push(o)
         })
         break;
-    }
+      case 'Form':
+      // default:
+      
+        this.componentBehaviorMeta = FormBehaviorMeta
+        this.curComp.behavior.forEach(item => {
+          clog('cloneDeep', cloneDeep)
+          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
+          clog('o', o);
+          // .then((v: BehaviorConfigItem) => {
+          // })
+          // o = v;
+          (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
+            if (item.hasOwnProperty(key)) {
+              o[key].value = item[key]
+            }
+          })
+          this.componentBehaviorList.push(o)
+        })
+        clog('componentBehaviorList', this.componentBehaviorList)
+        break;
+      }
   }
 }

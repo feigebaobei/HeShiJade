@@ -79,7 +79,13 @@ let Form: ComponentDefaultConfig = {
         isCancel: true,
         isSubmit: true,
     },
-    behavior: [],
+    behavior: [
+        {
+            event: 'submit',
+            target: '',
+            payload: '',
+        },
+    ],
     items: [
         {
             category: 'input',
@@ -109,11 +115,6 @@ let Table: ComponentDefaultConfig = {
     },
     behavior: [],
     items: [
-        // {
-        //     field: 'key',
-        //     header: 'str',
-        //     width: '150px',
-        // }
     ],
     slots: {},
 }

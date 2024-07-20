@@ -92,18 +92,6 @@ let cloneDeep = (v: A): A => {
 //     port1.postMessage(v)
 //   }) 
 // }
-let createDebounceFn = (fn: F, t = 250, self?: A) => {
-  var timer: N
-  return (...rest: A[]) => {
-    var context = self
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = window.setTimeout(() => {
-      fn.apply(context, rest)
-    }, t)
-  }
-}
 let initComponentMeta = (
   category: S = '',
   appUlid: ULID = '', pageUlid: ULID = '',
@@ -249,7 +237,45 @@ let createLoop = (pFn: F, bFn: F, i: N = 0): Loop => {
 //     http
 //   })
 // }
-
+let createDebounceFn = (fn: F, t = 250, self?: A) => {
+  let timer: N
+  return (...rest: A[]) => {
+    let context = self
+    if (timer) {
+      clearTimeout(timer)
+      timer = 0
+    // } else {
+    }
+    timer = window.setTimeout(() => {
+      fn.apply(context, rest)
+      clearTimeout(timer)
+      timer = 0
+    }, t)
+  }
+}
+let copy = (str: S): Promise<void> | Promise<boolean> => {
+  let p
+  if (window.isSecureContext && navigator.clipboard) {
+    p = navigator.clipboard.writeText(str)
+  } else {
+    let ele = document.createElement('textarea')
+    let styles = ele.style
+    styles.position = 'fixed'
+    styles.zIndex = '0'
+    styles.left = '-500px'
+    styles.top = '-500px'
+    ele.value = str
+    document.body.appendChild(ele)
+    ele.focus()
+    ele.select()
+    let result = document.execCommand('copy')
+    ele.remove()
+    p = Promise.resolve(true)
+  }
+  return p
+}
+// 兼容的数组，常用于处理脏数据。
+let compatibleArray = (a: A) => Array.isArray(a) ? Array.from(a) : []
 
 export {
   VERSION,
@@ -267,6 +293,8 @@ export {
   createLoop,
   // wrapReq,
   sleep,
+  copy,
+  compatibleArray,
 }
 export type {
   Loop

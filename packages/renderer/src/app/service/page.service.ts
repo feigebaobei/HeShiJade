@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { EnvService } from './env.service';
 // import { DoublyChain } from 'data-footstone';
 import { createTree } from 'src/helper/tree';
+import { serviceUrl } from 'src/helper/config'
 // type
 import type { ResponseData, ULID } from 'src/types'
 import type { ENV } from 'src/types/base';
@@ -87,7 +88,7 @@ export class PageService {
   // 请求页面列表
   private _reqList(appUlid: ULID, env: ENV): Promise<Page[]> {
     return new Promise((s, j) => {
-      this.http.get<ResponseData>('http://localhost:5000/pages', {
+      this.http.get<ResponseData>(`${serviceUrl()}/pages`, {
         params: {
           appUlid,
           env,

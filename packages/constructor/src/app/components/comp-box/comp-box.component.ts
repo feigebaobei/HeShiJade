@@ -1,4 +1,4 @@
-import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked, computed } from '@angular/core';
 import { CompDirective } from '../comp.directive'
 // 组件
 import { ButtonComponent } from '../button/button.component';
@@ -51,6 +51,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   curComp?: Comp | null
   componentRef: A
   curPage: Page
+  // propsSReadonly: A
   constructor(
     private componentService: ComponentService,
     private pageService: PageService
@@ -60,24 +61,25 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     this.componentRef
     this.componentService.curComponent$.subscribe(p => {
       this.curComp = p
-      this.update()
+      // this.update()
     })
     this.curPage = this.pageService.getCurPage()!
+    // this.propsSReadonly = this.componentService.propsSReadonly
+    this.componentService.props$.subscribe((v) => {
+      if (this.comp.ulid === v.componentUlid) {
+        this.init()
+      }
+    })
   }
   boxClickh($event: A) {
     // 选中组件
     $event.stopPropagation()
-    clog(this.comp)
+    // clog(this.comp)
     this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
   }
   ngOnInit() {
-    // this.init()
   }
   init() {
-    // components模块内
-    // clog('components模块内', compMap, this.comp, compMap[this.comp.type])
-    // clog('components模块内', this.adHost) // undefined
-    // clog('components模块内', this.compHost) 
     if (!this.compHost) return
     const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
@@ -135,24 +137,21 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     }
   }
   ngAfterViewInit() {
-    // this.init()
-    // setTimeout(() => {
-    //   this.init()
-    // }, 2000)
-    // console.log(this.compHost);
   }
   ngAfterContentInit() {
     this.init()
   }
   ngAfterViewChecked(): void {
   }
-  update() {
-    if (this.comp.ulid === this.curComp?.ulid) {
-      this.init()
-    }
-  }
-  // ngOnChanges() {
+  // update() { // 通常指的是当Angular更新DOM或执行数据绑定
+  //   // clog('update')
+  //   // todo 删除不使用的此方法
+  //   // if (this.comp.ulid === this.curComp?.ulid) {
+  //   //   this.init()
+  //   // }
   //   // this.init()
+  // }
+  // ngOnChanges() {
   // }
   ngOnDestroy() {
     this.compHost.viewContainerRef.clear();

@@ -32,9 +32,11 @@
     <d-form-operation>
         <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
             *ngIf="data.props.isSubmit"
+            (click)="submitClickH()"
         >Submit</d-button>
         <d-button bsStyle="common" circled="true"
             *ngIf="data.props.isCancel"
         >Cancel</d-button>
     </d-form-operation>
   </form>
+  

@@ -135,11 +135,11 @@ let Modal: PropsConfigItem = {
         value: true,
         label: '是否显示',
         key: 'visible',
-        hide: (p: PropsConfigItem) => {
-            clog('hide', p)
-            return !!p['title']
-        },
-        hideListenerKey: 'title',
+        // hide: (p: PropsConfigItem) => {
+        //     clog('hide', p)
+        //     return !!p['title']
+        // },
+        // hideListenerKey: 'title',
     },
     width: {
         category: 'input',
@@ -189,6 +189,12 @@ let Form: PropsConfigItem = {
         value: true,
         label: '是否有提交按钮',
         key: 'isSubmit',
+    },
+    url: {
+        category: 'input',
+        value: '',
+        label: 'url',
+        key: 'url',
     },
 }
 let Table: PropsConfigItem = {

@@ -78,6 +78,11 @@ interface ComponentDefaultConfigAll {
 }
 type BehaviorItemKey = 'event' | 'target' | 'payload' // keyof typeof BehaviorItem
 
+interface PropsTransfer {
+  componentUlid: ULID
+  key: S
+  value: A
+}
 
 export type {
   PropsValue,
@@ -96,4 +101,5 @@ export type {
   ComponentMountEmpty,
   ComponentMountItems,
   ComponentMountSlots,
+  PropsTransfer,
 }

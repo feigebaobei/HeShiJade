@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { DoublyChain } from 'data-footstone'
 import { createTree } from 'src/helper/tree';
@@ -20,12 +20,13 @@ import type { Component, Category,
   ComponentMountSlots,
  } from '../../types/component'
 import type { ResponseData } from '../../types/index'
-import type { ConfigItemsCategoryType } from 'src/types/base'
+import { O, type ConfigItemsCategoryType } from 'src/types/base'
 import type { S, Ao, ULID, A,
   N,
   B,
   ConfigItem,
 } from 'src/types/base';
+import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
 
@@ -49,6 +50,9 @@ export class ComponentService {
   private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
   // ulid是pageUlid
   componentProps$: Subject<Component['props']>
+  // private propsS = signal({})
+  // readonly propsSReadonly = this.propsS.asReadonly()
+  props$: Subject<PropsTransfer>
 
   constructor(
     private pageService: PageService,
@@ -63,17 +67,17 @@ export class ComponentService {
     this._curCompUlid = ''
     this._curComponent = undefined
     this._map = new Map()
-    // 当页面改变时更新组件列表
-    // this.pageService.pageSubject$.subscribe(curPage => {
-    //   let pageUlid = curPage?.ulid
-    //   if (pageUlid) {
-    //     this._opCompList(pageUlid)
-    //     .then((arr) => {
-    //       this.componentListByCurPage$.next(arr)
-    //     })
-    //   }
-    // })
+    this.props$ = new Subject<PropsTransfer>()
   }
+  // setPropsS(v: A) {
+  //   this.propsS.set(v)
+  // }
+  // getPropsS() {
+  //   return this.propsS
+  // }
+  // updatePropsS(v: A) {
+  //   return this.propsS.update(() => v)
+  // }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
       s(this.categoryList)
@@ -184,25 +188,28 @@ export class ComponentService {
   }
   // 作为哪种节点返回
   private mountPosition(comp: Component): N {
-    let n = 0
-    if (comp.prevUlid && !comp.nextUlid) {
-      n = 2
-    } else if (!comp.prevUlid && comp.nextUlid) {
-      n = 1
-    } else if (comp.prevUlid && comp.nextUlid) {
-      n = 2
-    } else {
+    // 0 根组件
+    // 1 前组件
+    // 2 后组件
+    // 3 items组件
+    // 4 slots组件
+    let n: N = 0
+    if (comp.parentUlid) {
       switch (comp.mount.area) {
-        case '':
-        default:
-          n = 0
-          break;
         case 'slots':
           n = 4
           break;
         case 'items':
           n = 3
           break;
+      }
+    } else {
+      if (!comp.prevUlid && !comp.nextUlid) {
+        n = 0
+      } else if (!comp.prevUlid && comp.nextUlid) {
+        n = 1
+      } else if (comp.prevUlid && !comp.nextUlid) {
+        n = 2
       }
     }
     return n
@@ -213,6 +220,9 @@ export class ComponentService {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
       switch(this.mountPosition(comp)) {
+        case 0:
+          tree.mountRoot(comp)
+          break
         case 1: // prev
           b = !!tree.mountPrev(comp, comp.parentUlid)
           node = tree.find(comp.prevUlid)
@@ -256,6 +266,7 @@ export class ComponentService {
           }
           break;
       }
+      clog('tree', tree)
       return b
     } else {
       return false
@@ -339,7 +350,6 @@ export class ComponentService {
       curComp.props[key] = value
     }
   }
-  
   setComponentsBehavior(
     // type: UpdateType, 
     index: N, key: BehaviorItemKey, value: S) {
@@ -353,7 +363,6 @@ export class ComponentService {
   // setItemsOfCurComponent(index: N, key: S, value: A) {
   // todo 可优化key的类型
   setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options', value: A) {
-    // clog('setItemsOfCurComponent', index, key, value)
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
@@ -402,26 +411,8 @@ export class ComponentService {
   deleteByUlid(pageUlid: ULID, componentUlid: ULID) {
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
-  // deleteComponentList(appUlid: ULID, pageUlid?: ULID) {
-  //   if (pageUlid) {} else {
-  //     this.pageService.getPageList(appUlid).then(pageList => {
-  //     })
-  //   }
-  // }
 
   deleteComponentByPageUlid(pageUlid: ULID) {
-    // let app = this.appService.getCurApp()
-    // let key = `${app?.ulid}_${pageUlid}_`
-    // this._map.delete(key)
     this._map.delete(pageUlid)
   }
-  // 不应用有根据页面应用删除组件的方法
-  // deleteComponentByAppUlid(appUlid: ULID) {
-    // let app = this.appService.getCurApp()
-    // this.pageService.getPageList().then(pageList => {
-    //   pageList.forEach((page) => {
-    //     this.deleteComponentByPageUlid(page.ulid)
-    //   })
-    // })
-  // }
 }

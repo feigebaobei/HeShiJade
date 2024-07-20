@@ -1,7 +1,9 @@
 var cors = require('cors')
 
 var whiteList = ['http://localhost:4200', 'http://127.0.0.1:4200',
-'http://localhost:4210', 'http://127.0.0.1:4210'
+'http://localhost:4210', 'http://127.0.0.1:4210',
+'http://heshijade.com:4200', 'http://heshijade.com:4210',
+'http://heshijade.com:80', 'http://heshijade.com',
 ]
 var corsOptionDelegate = (req, cb) => {
   var corsOptions
