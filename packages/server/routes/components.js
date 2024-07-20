@@ -7,6 +7,7 @@ const { rules } = require('../helper');
 let clog = console.log
 const { errorCode } = require('../helper/errorCode');
 const { DB } = require('../helper/config');
+const { logger } = require('../helper/log')
 
 router.use(bodyParser.json())
 
@@ -79,6 +80,7 @@ router.route('/')
   // 创建+更新组件
   // 更新页面
   // 检查必要参数
+  let pPage, componentUpdateArr
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && 
       rules.required(req.body.type) && 
@@ -97,8 +99,9 @@ router.route('/')
   })
   // 操作页面和组件
   .then(() => {
-    let p2
-    let componentUpdateArr = [
+    // let p2
+    // 创建组件
+    componentUpdateArr = [
       {
         insertOne: { // 插入一个组件
           document: {
@@ -121,22 +124,21 @@ router.route('/')
         }
       }
     ]
+    // 更新前组件
     if (req.body.prevUlid) {
       componentUpdateArr.unshift({
-        updateOne: { // 更新前组件
+        updateOne: {
           filter: {ulid: req.body.prevUlid},
           update: {
             $set: {nextUlid: req.body.ulid}
           }
         }
       })
-      p2 = Promise.resolve(true)
-    } else {
-      p2 = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: req.body.pageUlid}, {$set: {firstComponentUlid: req.body.ulid}})
     }
+    // 更新后组件
     if (req.body.nextUlid) {
       componentUpdateArr.unshift({
-        updateOne: { // 更新后组件
+        updateOne: {
           filter: {ulid: req.body.nextUlid},
           update: {
             $set: {prevUlid: req.body.ulid}
@@ -146,38 +148,58 @@ router.route('/')
     }
     // 更新父组件
     if (req.body.parentUlid) {
-      switch(req.body.mount.area) {
-        case 'items':
-          componentUpdateArr.unshift({
-            updateOne: {
-              filter: {ulid: req.body.parentUlid},
-              update: {
-                $setOnInsert: {// 待测试
-                  [`items.${req.body.mount.itemIndex}.childUlid`]: req.body.ulid
+      return lowcodeDb.collection(DB.dev.componentTable).findOne({ulid: req.body.parentUlid}).then(comp => {
+        switch(req.body.mount.area) {
+          case 'items': // 已测试
+            if (comp.items[req.body.mount.itemIndex].childUlid) {
+              // 无操作
+            } else {
+              componentUpdateArr.unshift({
+                updateOne: {
+                  filter: {ulid: req.body.parentUlid},
+                  update: {
+                    $set: {
+                      [`items.${req.body.mount.itemIndex}.childUlid`]: req.body.ulid
+                    }
+                  }
+                }
+  
+              })
+              logger.info({componentUpdateArr})
+            }
+            break;
+          case 'slots': // 未测试
+            if (comp.slots[req.body.mountPosition]) {
+              // 无操作
+            }
+            componentUpdateArr.unshift({
+              updateOne: {
+                filter: {ulid: req.body.parentUlid},
+                update: {
+                  $set: {
+                    [`slots.${req.body.mountPosition}`]: req.body.ulid
+                  }
                 }
               }
-            }
-          })
-          break;
-        case 'slots':
-          componentUpdateArr.unshift({
-            updateOne: {
-              filter: {ulid: req.body.parentUlid},
-              update: {
-                // $set: { // 覆盖
-                //   [`slots.${req.body.mountPosition}`]: req.body.ulid
-                // }
-                $setOnInsert: { // 不可覆盖。若存在，则不覆盖。
-                  [`slots.${req.body.mountPosition}`]: req.body.ulid
-                }
-              }
-            }
-          })
-          break;
+            })
+            logger.info({componentUpdateArr})
+            break;
+        }
+        return componentUpdateArr
+      })
+    } else {
+      if (!req.body.prevUlid) {
+        return pPage = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: req.body.pageUlid}, {$set: {firstComponentUlid: req.body.ulid}}).catch((error) => {
+          return Promise.reject(200020)
+        })
+      } else {
+        return pPage = Promise.resolve()
       }
     }
-    let p1 = lowcodeDb.collection('components_dev').bulkWrite(componentUpdateArr)
-    return Promise.all([p1, p2]).catch(() => {
+  }).then(() => {
+    let p1 = lowcodeDb.collection(DB.dev.componentTable).bulkWrite(componentUpdateArr)
+    return Promise.all([p1, pPage]).catch((error) => {
+      logger.error({error})
       return Promise.reject(200000)
     })
   })
