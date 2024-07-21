@@ -562,9 +562,25 @@ router.route('/items')
       j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection('components_dev').updateOne({ulid: req.query.ulid}, {$pull: {
-      items: index
-    }}).catch(() => {
+    return lowcodeDb.collection(DB.dev.componentTable).bulkWrite([
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $unset: {[`items.${req.query.index}`]: null},
+          },
+        },
+      },
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $pull: {items: null}
+          },
+        },
+      },
+    ])
+    .catch(() => {
       return Promise.reject(200020)
     })
   })

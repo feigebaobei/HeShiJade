@@ -68,10 +68,10 @@ export class ItemsBoxComponent {
   removeH(i: N) {
     this.groupList.splice(i, 1)
     this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
-    // let curComp = this.componentService.curComponent()
-    // if (curComp) {
-    //   this.componentService.reqRemoveItems(curComp.ulid, i)
-    // }
+    let curComp = this.componentService.curComponent()
+    if (curComp) {
+      this.componentService.reqRemoveItems(curComp.ulid, i)
+    }
   }
   groupForConfig(type: S): ConfigItem[] {
     let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
