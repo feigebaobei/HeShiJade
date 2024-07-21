@@ -1,11 +1,8 @@
 ||完成日期||
 |-|-|-|
-|要求item可以删除|doing||
+|init网站|todo||
 |web-site中说明数据结构|||
-|init网站|||
-|改变选中page时应该清空当前组件|done||
-|新创建table并设置item后再创建tabel不应该默认有item|done|bug|
-|table中多放几个组件，刷新后少了第一个组件。|无法复现|bug|
+|要求item可以删除|done||
 |f_web|||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||

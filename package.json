@@ -11,6 +11,7 @@
     "ds": "cd packages/server && pnpm dev",
     "dc": "cd packages/constructor && pnpm start",
     "dr": "cd packages/renderer && pnpm start",
-    "dms": "cd packages/mock-server && pnpm dev"
+    "dms": "cd packages/mock-server && pnpm dev",
+    "dw": "cd packages/web-site && pnpm dev"
   }
 }
