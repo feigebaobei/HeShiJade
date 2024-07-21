@@ -1,9 +1,9 @@
 ||完成日期||
 |-|-|-|
-|改变选中page时应该清空当前组件|doing||
+|要求item可以删除|doing||
 |web-site中说明数据结构|||
-|要求item可以删除|||
 |init网站|||
+|改变选中page时应该清空当前组件|done||
 |新创建table并设置item后再创建tabel不应该默认有item|done|bug|
 |table中多放几个组件，刷新后少了第一个组件。|无法复现|bug|
 |f_web|||

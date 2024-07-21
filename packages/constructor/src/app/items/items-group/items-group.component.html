@@ -1,5 +1,8 @@
-<section class="box">
+<div class="group-box">
     <div *ngFor="let item of itemList; let i = index">
+        <div class="toolbox">
+            <d-button bsSize="xs" icon="icon-delete" (click)="deleteButtonClickH()"></d-button>
+        </div>
         <div [ngSwitch]="item.category">
             <ng-template [ngSwitchCase]="'input'">
                 <div>
@@ -54,4 +57,4 @@
             </ng-template>
         </div>
     </div>
-</section>
+</div>

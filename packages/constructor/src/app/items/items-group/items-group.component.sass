@@ -1,4 +1,16 @@
-.box
+.group-box
+    position: relative
     border: 1px solid #ddd
     padding: 4px 
     margin: 8px 0
+    &:hover
+        background: #edeffe
+        .toolbox
+            display: block
+
+    .toolbox
+        display: none
+        position: absolute
+        right: 8px
+        top: -24px
+       

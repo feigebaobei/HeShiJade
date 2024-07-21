@@ -63,7 +63,12 @@ export class ItemsBoxComponent {
     }
   }
   removeH(i: N) {
-    this.componentService.removeItemsOfCurComponent(i)
+    this.groupList.splice(i, 1)
+    // this.componentService.removeItemsOfCurComponent(i)
+    // let curComp = this.componentService.curComponent()
+    // if (curComp) {
+    //   this.componentService.reqRemoveItems(curComp.ulid, i)
+    // }
   }
   groupForConfig(type: S): ConfigItem[] {
     let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
