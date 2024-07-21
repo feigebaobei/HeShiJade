@@ -50,7 +50,7 @@ export class ItemsBoxComponent {
     if (this.curComponent) {
       // let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
       let group = this.groupForConfig(this.curComponent.type)
-      clog('group', group)
+      // clog('group', group)
       this.groupList.push(group)
       let obj: ItemsMetaItem = {} as ItemsMetaItem
       // group.forEach((item) => {
@@ -66,6 +66,8 @@ export class ItemsBoxComponent {
     this.componentService.removeItemsOfCurComponent(i)
   }
   groupForConfig(type: S): ConfigItem[] {
-    return cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
+    let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
+    // clog('groupForConfig', r)
+    return r
   }
 }
