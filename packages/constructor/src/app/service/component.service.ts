@@ -384,7 +384,12 @@ export class ComponentService {
   reqAddItems(obj: ItemsMetaItem) {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
-  removeItemsOfCurComponent(index: N) {
+  removeItemsOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
+    let tree = this._map.get(pageUlid)
+    if (tree) {
+      let component = tree.find(componentUlid)
+      component?.value.items.splice(index, 1)
+    }
   }
   // 更新组件
   reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
@@ -394,6 +399,12 @@ export class ComponentService {
       key,
       value,
     }).then(() => true)
+  }
+  reqRemoveItems(componentUlid: ULID, itemsIndex: N) {
+    return this.reqService.req(`${serviceUrl()}/components/items`, 'delete', {
+      ulid: componentUlid,
+      index: itemsIndex,
+    })
   }
   reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
