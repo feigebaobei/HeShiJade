@@ -24,4 +24,7 @@ export class HomeComponent {
     clog('designClickH')
     this.router.navigate(['/doc'])
   }
+  githubSpanClickH() {
+    window.location.href='https://github.com/feigebaobei/HeShiJade';
+  }
 }
