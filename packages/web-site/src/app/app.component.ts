@@ -16,23 +16,18 @@ export class AppComponent {
     this.router.navigate(['/home'])
   }
   constructorClickH() {
-    clog('constructorClickH')
     window.location.href='http://heshijade.com:4200';
   }
   docClickH() {
-    clog('docClickH')
     this.router.navigate(['/doc'])
   }
   designClickH() {
-    clog('designClickH')
     this.router.navigate(['/design'])
   }
   dataClickH() {
-    clog('dataClickH')
     this.router.navigate(['/data'])
   }
   changelogClickH() {
-    clog('changelogClickH')
     this.router.navigate(['/changelog'])
   }
 }

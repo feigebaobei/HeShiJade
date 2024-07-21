@@ -15,19 +15,13 @@ export class HomeComponent {
   }
   constructorClickH() {
     clog('constructorClickH')
-    this.router.navigate(['http://heshijade.com:4200'])
   }
-  docClickH() {
+  startButtonClickH() {
     clog('docClickH')
-    this.router.navigate(['/doc'])
+    window.location.href='http://heshijade.com:4200';
   }
-  designClickH() {
+  docButtonClickH() {
     clog('designClickH')
-  }
-  dataClickH() {
-    clog('dataClickH')
-  }
-  changelogClickH() {
-    clog('changelogClickH')
+    this.router.navigate(['/doc'])
   }
 }
