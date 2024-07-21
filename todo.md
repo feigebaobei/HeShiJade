@@ -1,11 +1,13 @@
 ||完成日期||
 |-|-|-|
-|新创建table并设置item后再创建tabel不应该默认有item||bug|
-|table中多放几个组件，刷新后少了第一个组件。||bug|
+|改变选中page时应该清空当前组件|doing||
 |web-site中说明数据结构|||
 |要求item可以删除|||
 |init网站|||
-|web|||
+|新创建table并设置item后再创建tabel不应该默认有item|done|bug|
+|table中多放几个组件，刷新后少了第一个组件。|无法复现|bug|
+|f_web|||
+
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |把lixiaodan.com的内容搬到8.222.xxx.xx上。|||
 |无页面时提示创建页面|||
