@@ -1,1 +1,41 @@
-<p>doc works!</p>
+<section class="content-box">
+    <h1>setup</h1>
+    <ol>
+        <li>使用您的邮箱注册一个账号。当前只支持邮箱注册。邮箱是您在HeShiJade的惟一凭证，请慎重处理。</li>
+        <li>登录后会进入应用列表页面。这时您没有应用。请点击“创建新应用”。再录入若干信息后，点击“创建”。这时您就有一个应用了。</li>
+        <li>点击no.2创建的应用。会进入搭建页面。点击“创建新页面”，再录入信息后点击“创建”。</li>
+        <li>选中no.3创建的页面。切换到“组件”tabs。拖动“button”（也可以是别的组件）到舞台区。</li>
+        <li>这时舞台就有一个组件。选中此组件，在props面板中设置相关属性。</li>
+        <li>点击页面右上角的“预览”按钮。会打开新的浏览器页面。此页面的内容是no.4创建的组件。</li>
+        <li>回到应用列表页面，即no.3的页面。点击一个应用的“版本&发布”按钮。设置dev环境的版本号大于test环境的版本号，比如：`1`。点击dev环境与test环境的“发布”按钮。打开一个新的浏览器页面，设置url为`http://heshijade.com:4210/您的应用key/test/该应用的一个页面的key`</li>
+        <li>dev环境的链接是`http://heshijade.com:4210/您的应用key/dev/该应用的一个页面的key`。<br>test环境的链接是`http://heshijade.com:4210/您的应用key/test/该应用的一个页面的key`。<br>pre环境的链接是`http://heshijade.com:4210/您的应用key/pre/该应用的一个页面的key`。<br>prod环境的链接是`http://heshijade.com:4210/您的应用key/prod/该应用的一个页面的key`。</li>
+    </ol>
+    <h1>搭建页面</h1>
+    <img src="assets/constructorPage.png" width="640px">
+    <ul>
+        <li>左侧是当前应用的所有页面，组件列表。</li>
+        <li>中间是舞台区，用于显示当前页面的组件。舞台区的效果不是渲染出的效果。</li>
+        <li>右侧是配置面板。有三个,props是配置组件属性的。behavior为组件配置事件的。items是为组件配置子元素的。</li>
+    </ul>
+    <h1>版本&发布</h1>
+    <ul>
+        <li>每个应用都有4个环境（dev/test/pre/prod）。每个环境都有自己的版本号。</li>
+        <li>每个环境的版本只能增加。</li>
+        <li>发布顺序只能是dev -> test -> pre -> prod.</li>
+        <li>只能为dev环境设置版本号。其他环境使用直接或间接由dev环境设置的版本号。</li>
+    </ul>
+    <h1>子组件</h1>
+    <p>子组件可分为slots子组件和items子组件。</p>
+    <ul>
+        <li>有一类组件的子元素是特定的，（如form组件内只能是inpug等元素）不能设置任意子元素。在items配置面板中处理这部分组件与子元素。</li>
+        <li>有一类组件的子元素是任务的，（如model组件内可以是任意组件）。为这类组件组件开辟若干插槽。每个插槽都可以插件任意子元素。</li>
+    </ul>
+    <h1>低代码能力（doing）</h1>
+    <h1>插件能力（doing）</h1>
+    <h1>数据传递（doing）</h1>
+    <h1>动态配置（doing）</h1>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</section>

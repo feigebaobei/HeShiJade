@@ -1,7 +1,9 @@
 ||完成日期||
 |-|-|-|
-|init网站|todo||
+|web-site中说明使用文档|todo||
 |web-site中说明数据结构|||
+|web-site中说明设计原理|||
+|init网站|done||
 |要求item可以删除|done||
 |f_web|||
 

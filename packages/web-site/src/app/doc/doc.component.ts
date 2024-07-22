@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+// import constructorPage from '../../images/constructorPage.png'
 @Component({
   selector: 'app-doc',
   standalone: true,
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './doc.component.sass'
 })
 export class DocComponent {
+  // imgSrc: String
+  constructor() {
+    // this.imgSrc = constructorPage
+  }
 
 }
