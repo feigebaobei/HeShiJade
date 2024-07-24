@@ -119,6 +119,10 @@ export class PageListComponent implements OnInit {
     })
   }
   pageItemClickH(pageUlid: S) {
+    let curPage = this.pageService.getCurPage()
+    if (curPage) {
+      this.componentService.setCurComponent(curPage.ulid)
+    }
     let app = this.appService.getCurApp()
     if (app) {
       this.pageService.setCurPage(app.ulid, pageUlid)

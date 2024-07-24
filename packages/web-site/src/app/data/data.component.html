@@ -1,0 +1,171 @@
+<section class="content-box">
+    <h1>基本的数据结构</h1>
+    <pre>
+        type S = string     类型简写
+        type N = number
+        type A = any
+        type B = boolean
+        type ULID = S
+        type F = Function
+        type O = object
+        type D = Date
+
+        App                     应用
+            key: S              用于人读的键
+            name: S             应用的名称
+            ulid: ULID          应用的惟一键
+            theme: S            主题（预留字段）
+            // members: S[]     
+            version: N          版本号
+            owner: S            拥有者
+            collaborator: S[]   协作者
+            // child: S
+            firstPageUlid: ULID 第一个页面的ulid
+            prevUlid: ULID      前一个应用的ulid
+            nextUlid: ULID      后一个应用的ulid
+
+        EnvKey = 'dev' | 'test' | 'pre' | 'prod'
+
+        type ConfigItem&gt;T = S&gt; = ConfigItemInput
+            | ConfigItemTextarea
+            | ConfigItemSelect&lt;T&gt;
+            | ConfigItemNumber
+            | ConfigItemSwitch
+            | ConfigItmeOption
+
+        ConfigItemInput     // 以它为例
+            category: 'input'       用哪种表单元素渲染
+            value: S                默认值
+            label: S                文本
+            key: S                  组件内运行时使用的key
+            hide?: FT&lt;B&gt;      xxx
+            hideListenerKey?: S     当哪个key变动时重新计算显隐逻辑
+            hideCalc?: B            xxx
+            // show: B
+            hideConfig?: B          xxx
+        
+        type PropsValue = S | B | N    props的值类型
+
+        BehaviorMetaItem           行为
+            event: S               事件
+            target: S              作用的目标
+            payload: S             传递的数据
+        
+        ItemsMeta                                   items
+            category: S                             表单元素分类
+            label: S                                label
+            key: S                                  
+            value: A
+            options?: Options&lt;S, S&gt;[]         select/switch的选项
+            child?: ULID                            items子组件的ulid
+
+        Options&lt;T, G&gt;       选项
+            label: T,
+            value: G,
+
+        Component                       组件
+            ulid: S                     组件的ulid。惟一键。
+            type: S                     类型
+            nextUlid: ULID              后组件的ulid
+            prevUlid: ULID              前组件的ulid
+            parentUlid: ULID            父组件的ulid
+            mount: ComponentMountEmpty | ComponentMountItems | ComponentMountSlots     挂载到父组件的位置
+            props: PropsMeta            属性
+            behavior: BehaviorMeta      行为
+            items:                      items
+                [k: S]: A
+            []
+            slots: SlotsMeta            slots
+            appUlid: ULID               该组件所在应用的ulid
+            pageUlid: ULID              该组件所在页面的ulid
+        
+        Category                        组件分类，用于组件列表
+            name: S                 名称，用于渲染文本
+            componentCategory: S    组件的分类
+            ulid: ULID
+
+        ResponseData            接口返回的数据类型
+            code: N
+            data: A
+            message: S
+
+        User                        用户。从idp/sp来的数据
+            ulid: ULID,
+            profile:               用户的信息
+                email: Email,
+            accessToken: S          预留字段
+            refreshToken: S         预留字段
+            firstApplicationUlid: S     第一个应用的ulid
+
+        Page                                页面
+            key: S
+            name: S
+            ulid: S
+            prevUlid: ULID                  前页面的ulid
+            nextUlid: ULID                  后页面的ulid
+            childUlid?: ULID                子页面的ulid。预留字段。
+            firstComponentUlid: ULID        第一个组件的ulid
+            appUlid: ULID                   该页面所在应用的ulid
+        
+        Tree&lt;T&gt;           树
+            根节点
+            root: Node&lt;T&gt; | null
+            根据ulid找节点
+            find: (ulid: ULID) =&gt; Node&lt;T&gt; | undefined
+            挂载为根节点
+            mountRoot: (component: T) =&gt; Node&lt;T&gt;
+            挂载为前节点
+            mountPrev: (component: T, ulid: ULID) =&gt; Node&lt;T&gt; | undefined,
+            挂载为后节点
+            mountNext: (component: T, ulid: ULID) =&gt; Node&lt;T&gt; | undefined,
+            挂载为子节点
+            mountChild: (component: T, ulid: ULID, key: S) =&gt; Node&lt;T&gt; | undefined,
+            unmount: (ulid: ULID) =&gt; Node&lt;T&gt; | undefined,
+        
+        interface NodePropotype&lt;T&gt;    node对象的原型对象
+            isTop: () =&gt; B               是否是最前面的节点
+            isRoot: () =&gt; B              是否是根节点
+            isTail: () =&gt; B              是否是最后面的节点
+            isBottom: () =&gt; B            是否是叶子节点
+            toArray: () =&gt; T[]           从（含）当前节点开始把其后面的节点的value元素组成数组并返回
+        
+        Node&lt;T&gt; extends NodePropotype&lt;T&gt;      node对象
+            prev: Node&lt;T&gt; | null                    前节点
+            next: Node&lt;T&gt; | null                    后节点
+            parent: Node&lt;T&gt; | null                  父节点
+            children:                                     子节点们
+                [k: S]: Node&lt;T&gt;
+            ,
+            mountPosition: S,                             挂载到父节点的children字段的哪个位置
+            value: T,                                     当前节点的值
+        
+    </pre>
+    <h1>app.service</h1>
+    <p>this.tree其内的每个节点包含一个应用的数据。</p>
+    <!-- todo优化为可折叠的元素 -->
+    <pre>
+        this.tree
+            root
+                prev
+                next
+                    &lt;node&gt;
+                parent
+                chilren
+                mountPosition
+                value
+                    &lt;app&gt;
+    </pre>
+    <h1>page.service</h1>
+    <pre>
+        this._map
+            key: appUlid
+            value: tree    结构同app
+
+    </pre>
+    <h1>component.service</h1>
+    <pre>
+        this._map
+            key: pageUlid
+            value: tree    结构同app
+    </pre>
+</section>

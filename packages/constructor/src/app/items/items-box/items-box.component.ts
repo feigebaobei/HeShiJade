@@ -8,6 +8,7 @@ import { cloneDeep, compatibleArray } from 'src/helper/index'
 import type { B, ConfigItem, N, S } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
  } from 'src/types/component';
+import { PageService } from 'src/app/service/page.service';
 
 let clog = console.log
 
@@ -22,7 +23,9 @@ export class ItemsBoxComponent {
   addable: B = false
   groupList: ConfigItem[][] = []
   curComponent: Comp | null = null
-  constructor(private componentService: ComponentService) {
+  constructor(
+    private pageService: PageService,
+    private componentService: ComponentService) {
     this.groupList = []
     this.componentService.curComponent$.subscribe(p => {
       if (p) {
@@ -50,7 +53,7 @@ export class ItemsBoxComponent {
     if (this.curComponent) {
       // let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
       let group = this.groupForConfig(this.curComponent.type)
-      clog('group', group)
+      // clog('group', group)
       this.groupList.push(group)
       let obj: ItemsMetaItem = {} as ItemsMetaItem
       // group.forEach((item) => {
@@ -63,9 +66,16 @@ export class ItemsBoxComponent {
     }
   }
   removeH(i: N) {
-    this.componentService.removeItemsOfCurComponent(i)
+    this.groupList.splice(i, 1)
+    this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
+    let curComp = this.componentService.curComponent()
+    if (curComp) {
+      this.componentService.reqRemoveItems(curComp.ulid, i)
+    }
   }
   groupForConfig(type: S): ConfigItem[] {
-    return cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
+    let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
+    // clog('groupForConfig', r)
+    return r
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+let clog = console.log
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,25 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'web-site';
+  constructor(
+    private router: Router
+  ) {}
+  homeClickH() {
+    this.router.navigate(['/home'])
+  }
+  constructorClickH() {
+    window.location.href='http://heshijade.com:4200';
+  }
+  docClickH() {
+    this.router.navigate(['/doc'])
+  }
+  designClickH() {
+    this.router.navigate(['/design'])
+  }
+  dataClickH() {
+    this.router.navigate(['/data'])
+  }
+  changelogClickH() {
+    this.router.navigate(['/changelog'])
+  }
 }
