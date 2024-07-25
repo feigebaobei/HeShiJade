@@ -1,12 +1,9 @@
 ||完成日期||
 |-|-|-|
-|web-site中说明数据结构|doing||
-|整理类型文件|||
-|init网站|done||
-|要求item可以删除|done||
-|web-site中说明设计原理|done||
-|web-site中说明使用文档|done||
-|f_web|||
+|修正web-site中的拼写错误|done||
+|增加4个组件|||
+|丰富组件的配置面板|||
+|f_comp|||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |把lixiaodan.com的内容搬到8.222.xxx.xx上。|||
