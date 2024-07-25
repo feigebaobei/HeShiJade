@@ -9,7 +9,7 @@ let clog = console.log
 
 // 指定组件的配置项
 let Button: PropsConfigItem = {
-    type: {
+    type: { // 类型
         category: 'select',
         options: [
             {label: 'button', value: 'button'},
@@ -19,6 +19,18 @@ let Button: PropsConfigItem = {
         value: 'button',
         label: '类型',
         key: 'type',
+    },
+    bsStyle: { // 风格
+        category: 'select',
+        options: [
+            {label: 'primary', value: 'primary'},
+            {label: 'common', value: 'common'},
+            {label: 'text', value: 'text'},
+            {label: 'danger', value: 'danger'},
+        ],
+        value: 'primary',
+        label: '风格',
+        key: 'bsStyle',
     },
     bsSize: {
         category: 'select',
@@ -32,7 +44,7 @@ let Button: PropsConfigItem = {
         label: '大小',
         key: 'bsSize',
     },
-    bordered: {
+    bordered: { // 是否有边框
         category: 'switch',
         options: [
             {label: 'false', value: false},
@@ -42,7 +54,39 @@ let Button: PropsConfigItem = {
         label: '边框',
         key: 'bordered',
     },
-    disabled: {
+    icon: {
+        category: 'input',
+        value: '',
+        label: '图标',
+        key: 'icon',
+    }, // icon
+    shape: {
+        category: 'select',
+        options: [
+            {label: '圆形', value: 'circle'},
+            {label: '矩形', value: ''},
+        ],
+        value: '',
+        label: '形状',
+        key: 'shape',
+    }, // 是否圆形
+    showLoading: {
+        category: 'switch',
+        options: [
+            {label: '显示', value: true},
+            {label: '隐藏', value: false},
+        ],
+        value: false,
+        label: '是否显示加载提示',
+        key: 'showLoading',
+    }, // 是否显示加载提示
+    width: { // 宽度
+        category: 'input',
+        value: '',
+        label: '宽度',
+        key: 'width',
+    },
+    disabled: { // 是否禁用
         category: 'switch',
         options: [
             {label: 'false', value: false},
@@ -51,12 +95,6 @@ let Button: PropsConfigItem = {
         value: false,
         label: '禁用',
         key: 'disabled',
-    },
-    width: {
-        category: 'input',
-        value: '',
-        label: '宽度',
-        key: 'width',
     },
     text: {
         category: 'input',
