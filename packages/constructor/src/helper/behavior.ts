@@ -8,11 +8,12 @@ let Button: BehaviorConfigItem = {
     category: 'select',
     options: [
       {label: '单击', value: 'click'},
-      {label: '双击', value: 'dbClick'},
+      // {label: '双击', value: 'dbClick'},
     ],
     value: '',
     label: '事件',
     key: 'event',
+    allowClear: true,
   },
   target: {
     category: 'input',
@@ -33,7 +34,6 @@ let Button: BehaviorConfigItem = {
     },
     hideListenerKey: 'target',
     // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-
   },
 }
 let Form: BehaviorConfigItem = {

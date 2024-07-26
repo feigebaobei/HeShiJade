@@ -6,6 +6,7 @@
                 name="event"
                 [filterKey]="'label'"
                 [valueKey]="'value'"
+                [allowClear]="!!itemGroup.event.allowClear"
                 [(ngModel)]="itemGroup.event.value"
                 (ngModelChange)="eventValueChange(itemGroup.event.value)"
             ></d-select>

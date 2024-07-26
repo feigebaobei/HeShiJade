@@ -66,6 +66,7 @@ interface ConfigItemSelect<T> {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
+  allowClear?: B
   // show: B
 }
 interface ConfigItemNumber {
