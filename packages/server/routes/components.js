@@ -237,7 +237,7 @@ router.route('/')
           }
           break;
         case 'behavior':
-          if (rules.isNumber(req.body.index) && rules.required(req.body.key) && rules.required(req.body.value)) {
+          if (rules.isNumber(req.body.index) && rules.required(req.body.key)) {
             s(true)
           } else {
             j(100100)
