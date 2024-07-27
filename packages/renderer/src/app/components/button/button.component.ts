@@ -19,9 +19,4 @@ export class ButtonComponent {
       shareEvent.emit(item.target, item.payload)
     })
   }
-  buttonDbClickH() {
-    this.data.behavior.filter((item: A) => item.event === 'dbClick').forEach((item: A) => {
-      shareEvent.emit(item.target, item.payload)
-    })
-  }
 }

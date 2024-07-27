@@ -1,13 +1,14 @@
-<!-- {{data | json}} -->
+<!-- icon="icon-add" -->
 <d-button
-    [bordered]="data.props.bordered"
-    [bsSize]="data.props.bsSize"
-    [disabled]="data.props.disabled"
     [type]="data.props.type"
+    [bsStyle]="data.props.bsStyle"
+    [bsSize]="data.props.bsSize"
+    [bordered]="data.props.bordered"
+    [shape]="data.props.shape"
+    [showLoading]="data.props.showLoading"
     [width]="data.props.width"
+    [disabled]="data.props.disabled"
     (click)="buttonClickH()"
-    (dblclick)="buttonDbClickH()"
 >
-    <!-- {{data.slot}} -->
     {{data.props.text}}
 </d-button>

@@ -1,18 +1,19 @@
 ||完成日期||
 |-|-|-|
-|修正web-site中的拼写错误|done||
 |增加4个组件|||
 ||icon||
 ||checkbox||
 ||tabs||
 ||pagination||
 |丰富组件的配置面板|||
-|button|doing||
+|button|done||
 |modal|||
 |form|||
 |table|||
 |input|||
 |select|||
+|button的icon属性不生效|||
+|修正web-site中的拼写错误|done||
 |f_comp|||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
