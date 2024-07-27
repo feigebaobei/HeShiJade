@@ -1,6 +1,8 @@
-<span>{{data.label}}</span>
-<input dTextInput placeholder="Please Enter" id="textInput" 
-[(ngModel)]="data.value"
-(ngModelChange)="modelChangeH($event)"
-/>
+<div class="input_box">
+    <span>{{data.label}}</span>
+    <input dTextInput placeholder="Please Enter" id="textInput" 
+    [(ngModel)]="data.value"
+    (ngModelChange)="modelChangeH($event)"
+    />
+</div>
 <!-- ngModelChange 监听数据变化， -->
