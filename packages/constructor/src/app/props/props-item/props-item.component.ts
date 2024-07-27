@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterContentInit } from '@angular/core';
-import { PropsDirective } from 'src/app/props.directive';
+import { PropsDirective } from '../props.directive';
 // 组件
 import { PropsInputComponent } from '../props-input/props-input.component';
 import { PropsSelectComponent } from '../props-select/props-select.component';

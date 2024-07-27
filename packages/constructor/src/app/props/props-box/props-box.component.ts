@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { PropsDirective } from 'src/app/props.directive';
+import { PropsDirective } from '../props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 import { copy } from 'src/helper';
 // type
