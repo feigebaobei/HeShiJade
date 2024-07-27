@@ -7,7 +7,7 @@ import { ListComponent } from './list/list.component';
 import { SetupComponent } from './setup/setup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
-import { AppItemComponent } from './app-item/app-item.component';
+// import { AppItemComponent } from './app-item/app-item.component'; // delete 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -15,12 +15,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BehaviorModule } from './behavior/behavior.module';
 import { ItemsModule } from './items/items.module';
 import { ComponentsModule } from './components/components.module';
+import { PropsModule } from './props/props.module';
 
 // 指令
 import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
 import { ItemCategoryDirective } from './item-category.directive';
-import { PropsDirective } from './props.directive';
+// import { PropsDirective } from './props.directive'; // 只能在一个module中声明
+
 
 // devui
 import { DevUIModule, 
@@ -28,7 +30,7 @@ import { DevUIModule,
   // LayoutModule
   // LayoutModule,
 } from 'ng-devui';
-import { InputGroupModule } from 'ng-devui/input-group';
+// import { InputGroupModule } from 'ng-devui/input-group'; // delete
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
@@ -39,12 +41,12 @@ import { DialogComponent } from './list/dialog/dialog.component';
 import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
-import { PropsBoxComponent } from './setup/props-box/props-box.component';
-import { PropsInputComponent } from './setup/props-input/props-input.component';
-import { PropsSelectComponent } from './setup/props-select/props-select.component';
-import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
-import { PropsItemComponent } from './setup/props-item/props-item.component';
-import { PropsOptionComponent } from './setup/props-option/props-option.component';
+// import { PropsBoxComponent } from './setup/props-box/props-box.component';
+// import { PropsInputComponent } from './setup/props-input/props-input.component';
+// import { PropsSelectComponent } from './setup/props-select/props-select.component';
+// import { PropsSwitchComponent } from './setup/props-switch/props-switch.component';
+// import { PropsItemComponent } from './setup/props-item/props-item.component';
+// import { PropsOptionComponent } from './setup/props-option/props-option.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
 
@@ -53,24 +55,24 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     AdDirective,
     ItemsDirective,
     ItemCategoryDirective,
+    // PropsDirective,
     AppComponent,
     ListComponent,
     SetupComponent,
     NotFoundComponent,
     HomeComponent,
-    AppItemComponent,
+    // AppItemComponent,
     DialogComponent,
     PageDialogComponent,
     PageListComponent,
     ComponentListComponent,
 
-    PropsBoxComponent,
-    PropsInputComponent,
-    PropsSelectComponent,
-    PropsSwitchComponent,
-    PropsDirective,
-    PropsItemComponent,
-    PropsOptionComponent,
+    // PropsBoxComponent,
+    // PropsInputComponent,
+    // PropsSelectComponent,
+    // PropsSwitchComponent,
+    // PropsItemComponent,
+    // PropsOptionComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
   ],
@@ -83,12 +85,13 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     JsonPipe,
     DevUIModule,
     // LayoutModule,
-    InputGroupModule,
+    // InputGroupModule,
     FormsModule,
     HttpClientModule,
     BehaviorModule,
     ItemsModule,
     ComponentsModule,
+    PropsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

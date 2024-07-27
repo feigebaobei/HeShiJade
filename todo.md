@@ -5,7 +5,7 @@
 ||checkbox||
 ||tabs||
 ||pagination||
-|整理props面板为模块|todo||
+|整理props面板为模块|doing||
 |丰富组件的配置面板|||
 |button|done||
 |modal|todo||
@@ -13,13 +13,16 @@
 |table|||
 |input|||
 |select|||
-|props搞些间距，保持同行。|doing||
+|把lixiaodan.com的内容搬到8.222.xxx.xx上。|todo||
 |button的icon属性不生效|||
+|props搞些间距，保持同行。|done||
 |修正web-site中的拼写错误|done||
-|f_comp|||
+|本次分支f_comp|||
+|上生产内容|||
+|web-site|修正拼写||
+|constructor|修改props样式||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
-|把lixiaodan.com的内容搬到8.222.xxx.xx上。|||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
 |分包|||
