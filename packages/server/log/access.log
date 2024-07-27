@@ -1,4 +1,10 @@
-{"level":30,"time":1722122998739,"pid":90967,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1722123014933,"pid":90967,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1722123110707,"pid":90967,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1722123110769,"pid":90967,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722123830783,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1722124097195,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124100251,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124100318,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124117652,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124117660,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124175056,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124175082,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124215366,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1722124215377,"pid":94181,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
