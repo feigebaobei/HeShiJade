@@ -54,12 +54,12 @@ let Button: PropsConfigItem = {
         label: '边框',
         key: 'bordered',
     },
-    icon: {
-        category: 'input',
-        value: '',
-        label: '图标',
-        key: 'icon',
-    }, // icon
+    // icon: {
+    //     category: 'input',
+    //     value: '',
+    //     label: '图标',
+    //     key: 'icon',
+    // }, // icon
     shape: {
         category: 'select',
         options: [

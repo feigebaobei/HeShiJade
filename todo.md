@@ -5,13 +5,15 @@
 ||checkbox||
 ||tabs||
 ||pagination||
+|整理props面板为模块|todo||
 |丰富组件的配置面板|||
 |button|done||
-|modal|||
+|modal|todo||
 |form|||
 |table|||
 |input|||
 |select|||
+|props搞些间距，保持同行。|doing||
 |button的icon属性不生效|||
 |修正web-site中的拼写错误|done||
 |f_comp|||
@@ -22,7 +24,6 @@
 |无组件时提示创建组件|||
 |分包|||
 |舞台区使用拖动布局组件|||
-|整理props面板|||
 |是否需要把修改service与发请求分开|分开||
 |丰富组件|||
 ||accordion||
