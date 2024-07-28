@@ -15,7 +15,7 @@ import { BehaviorModule } from './behavior/behavior.module';
 import { ItemsModule } from './items/items.module';
 import { ComponentsModule } from './components/components.module';
 import { PropsModule } from './props/props.module';
-
+import { PageListModule } from './page-list/page-list.module';
 // 指令
 import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
@@ -31,8 +31,8 @@ import { JsonPipe } from '@angular/common';
 
 // 组件
 import { DialogComponent } from './list/dialog/dialog.component';
-import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
-import { PageListComponent } from './setup/page-list/page-list.component';
+// import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
+// import { PageListComponent } from './setup/page-list/page-list.component';
 import { ComponentListComponent } from './setup/component-list/component-list.component';
 import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
 import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
@@ -48,8 +48,8 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     NotFoundComponent,
     HomeComponent,
     DialogComponent,
-    PageDialogComponent,
-    PageListComponent,
+    // PageDialogComponent,
+    // PageListComponent,
     ComponentListComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
@@ -68,6 +68,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     ItemsModule,
     ComponentsModule,
     PropsModule,
+    PageListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

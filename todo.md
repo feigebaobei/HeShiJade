@@ -5,7 +5,8 @@
 ||checkbox||
 ||tabs||
 ||pagination||
-|整理props面板为模块|doing||
+|page-list组件中应该可以使用d-input-group|doing|可能重写一次这个组件就好了。|
+|改变页面名称时失败了|todo||
 |丰富组件的配置面板|||
 |button|done||
 |modal|todo||
@@ -15,6 +16,7 @@
 |select|||
 |把lixiaodan.com的内容搬到8.222.xxx.xx上。|todo||
 |button的icon属性不生效|||
+|整理props面板为模块|done||
 |props搞些间距，保持同行。|done||
 |修正web-site中的拼写错误|done||
 |本次分支f_comp|||
