@@ -163,7 +163,7 @@ export class PageService {
     }
   }
   reqUpdate(ulid: ULID, key: keyof Page, value: S) {
-    return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key}) // .then(() => true)
+    return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key, value}) // .then(() => true)
   }
   deletePageByAppUlid(appUlid: ULID) {
     this._map.delete(appUlid)
