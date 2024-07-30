@@ -3,10 +3,11 @@
 |丰富组件的配置面板|||
 |modal|doing||
 ||增加props|done|
-||在mock组件中使用props||
+||在mock组件中使用props|done|
 ||在渲染侧使用props||
 ||增加behavior.没有对应的回调方法|done，使用修正脏数据的方法解决了|
 |modal组件可嵌入组件|||
+|props的switch应该在点击它时切换|||
 
 |统一处理behavior|todo||
 |组件的初始属性从配置数据中来|todo||
