@@ -164,6 +164,20 @@ let Modal: PropsConfigItem = {
         label: 'title',
         key: 'title',
     },
+    width: {
+        category: 'input',
+        value: '',
+        label: '宽度',
+        key: 'width',
+    },
+    zIndex: {
+        category: 'number',
+        value: 150,
+        // maxLength
+        // minLength
+        label: 'zIndex',
+        key: 'zIndex',
+    },
     visible: {
         category: 'switch',
         options: [
@@ -171,7 +185,7 @@ let Modal: PropsConfigItem = {
             {label: 'true', value: true},
         ],
         value: true,
-        label: '是否显示',
+        label: '是否默认显示', // 默认显示 与 显示 共用一个。
         key: 'visible',
         // hide: (p: PropsConfigItem) => {
         //     clog('hide', p)
@@ -179,11 +193,25 @@ let Modal: PropsConfigItem = {
         // },
         // hideListenerKey: 'title',
     },
-    width: {
-        category: 'input',
-        value: '',
-        label: '宽度',
-        key: 'width',
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        value: true,
+        label: '是否使用动画',
+        key: 'showAnimation',
+    },
+    backdropCloseable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        value: true,
+        label: '点击空白是否关闭',
+        key: 'backdropCloseable',
     },
     placement: {
         category: 'select',
@@ -191,10 +219,53 @@ let Modal: PropsConfigItem = {
             {label: 'center', value: 'center'},
             {label: 'top', value: 'top'},
             {label: 'bottom', value: 'bottom'},
+            {label: 'unset', value: 'unset'},
         ],
-        value: '',
+        value: 'center',
         label: '位置',
         key: 'placement',
+    },
+    offsetX: {
+        category: 'input',
+        value: '0px',
+        label: '横向偏移',
+        key: 'offsetX',
+    },
+    offsetY: {
+        category: 'input',
+        value: '0px',
+        label: '纵向偏移',
+        key: 'offsetY',
+    },
+    bodyScrollable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '外层是否可滚动',
+        key: 'bodyScrollable',
+    },
+    escapable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '外层支持esc关闭',
+        key: 'escapable',
+    },
+    dMoveable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '是否可拖动',
+        key: 'dMoveable',
     },
 }
 let Form: PropsConfigItem = {
