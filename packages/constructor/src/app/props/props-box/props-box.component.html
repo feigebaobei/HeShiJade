@@ -1,3 +1,7 @@
+<div *ngIf="curComp?.ulid" class="compType">
+    <span>组件类型</span>
+    <span>{{curComp?.type}}</span>
+</div>
 <div *ngIf="curComp?.ulid"
     class="compUlidBox"
     (click)="compUlidClickH(ref)"

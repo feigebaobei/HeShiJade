@@ -6,14 +6,14 @@
 ||tabs||
 ||pagination||
 |丰富组件的配置面板|||
-|button|done||
-|modal|todo||
+|modal|doing||
 |form|||
 |table|||
 |input|||
 |select|||
-|把lixiaodan.com的内容搬到8.222.xxx.xx上。|todo||
 |button的icon属性不生效|||
+|button|done||
+|把lixiaodan.com的内容搬到8.222.xxx.xx上。|done||
 |page-list组件中应该可以使用d-input-group|done|page-list整理为模块并引入InputGroupModule|
 |改变页面名称时失败了|done||
 |本次分支f_comp|||
@@ -21,6 +21,7 @@
 |web-site|修正拼写||
 |constructor|修改props样式||
 |constructor|修正无法修改页面名称的问题||
+|constructor|增加6个组件的配置面板 button||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |无页面时提示创建页面|||
@@ -89,3 +90,7 @@ subject&promise不同
 # 每6个月升级一次技术栈
 
 当切换用户时应不保存以前用户的数据
+
+
+yargs
+just
