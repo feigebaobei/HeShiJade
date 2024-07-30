@@ -50,7 +50,9 @@ let Modal: ComponentDefaultConfig = {
         width: '',
         placement: 'center',
     },
-    behavior: [],
+    behavior: [
+        {event: '', target: '', payload: ''},
+    ],
     items: [],
     slots: {
         // header: '', // value是ulid
