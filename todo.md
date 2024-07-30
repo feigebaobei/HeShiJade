@@ -11,6 +11,7 @@
 ||在mock组件中使用props||
 ||在渲染侧使用props||
 ||增加behavior.没有对应的回调方法|doing|
+|统一处理behavior|todo||
 |form|||
 |table|||
 |input|||

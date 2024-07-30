@@ -4,6 +4,7 @@ import { cloneDeep } from 'src/helper/index'
 import type { Component as Comp } from 'src/types/component';
 import {
   Button as buttonBehaviorMeta,
+  Modal as modalBehaviorMeta,
   Form as FormBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
@@ -76,9 +77,36 @@ export class BehaviorBoxComponent {
           this.componentBehaviorList.push(o)
         })
         break;
+      case 'Modal':
+        // this.componentBehaviorMeta = modalBehaviorMeta
+        // this.curComp.behavior.forEach(item => {
+        //   let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta)
+        //   (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key: (keyof typeof this.componentBehaviorMeta)) => {
+        //     if (item.hasOwnProperty(key)) {
+        //       o[key].value = item[key]
+        //     }
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+
+        // Object.values(modalBehaviorMeta).forEach(item => {
+        //   item.value = this.curComp?.behavior[item.key]
+        //   this.componentBehaviorList.push(item)
+        // })
+
+        if (this.curComp.behavior.length) {
+          this.curComp.behavior.forEach(item => {
+            let o = cloneDeep(modalBehaviorMeta)
+            Object.entries(item).forEach(([k, v]) => {
+              o[k].value = v
+            })
+            this.componentBehaviorList.push(o)
+          })
+        } else {
+          this.componentBehaviorList.push(cloneDeep(modalBehaviorMeta))
+        }
+        break;
       case 'Form':
-      // default:
-      
         this.componentBehaviorMeta = FormBehaviorMeta
         this.curComp.behavior.forEach(item => {
           clog('cloneDeep', cloneDeep)
@@ -97,5 +125,6 @@ export class BehaviorBoxComponent {
         clog('componentBehaviorList', this.componentBehaviorList)
         break;
       }
+    clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
   }
 }

@@ -36,6 +36,31 @@ let Button: BehaviorConfigItem = {
     // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
   },
 }
+let Modal: BehaviorConfigItem = {
+  event: {
+    category: 'select',
+    options: [
+      {label: '关闭后', value: 'onClose'},
+      {label: '关闭前', value: 'beforeHidden'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  target: {
+    category: 'input',
+    value: '',
+    label: '目标',
+    key: 'target',
+  },
+  payload: {
+    category: 'textarea',
+    value: '',
+    label: '载荷',
+    key: 'payload',
+    hide: () => false
+  },
+}
 let Form: BehaviorConfigItem = {
   event: {
     category: 'select',
@@ -71,5 +96,6 @@ let Form: BehaviorConfigItem = {
 
 export {
     Button,
+    Modal,
     Form,
 }
