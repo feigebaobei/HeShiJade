@@ -148,11 +148,11 @@ router.route('/')
     }
     // 更新父组件
     if (req.body.parentUlid) {
-      return lowcodeDb.collection(DB.dev.componentTable).findOne({ulid: req.body.parentUlid}).then(comp => {
+      return lowcodeDb.collection(DB.dev.componentTable).findOne({ulid: req.body.parentUlid}).then(parentComponent => {
         switch(req.body.mount.area) {
           case 'items': // 已测试
-            if (comp.items[req.body.mount.itemIndex].childUlid) {
-              // 无操作
+            if (parentComponent.items[req.body.mount.itemIndex].childUlid) {
+              // 当父组件的items[index]中存在子组件信息时，无操作。
             } else {
               componentUpdateArr.unshift({
                 updateOne: {
@@ -168,16 +168,16 @@ router.route('/')
               logger.info({componentUpdateArr})
             }
             break;
-          case 'slots': // 未测试
-            if (comp.slots[req.body.mountPosition]) {
-              // 无操作
+          case 'slots': // 已测试
+            if (parentComponent.slots[req.body.mount.slotKey]) {
+              // 当父组件的slots[slotkey]中存在子组件信息时，无操作。
             }
             componentUpdateArr.unshift({
               updateOne: {
                 filter: {ulid: req.body.parentUlid},
                 update: {
                   $set: {
-                    [`slots.${req.body.mountPosition}`]: req.body.ulid
+                    [`slots.${req.body.mount.slotKey}`]: req.body.ulid
                   }
                 }
               }
