@@ -54,7 +54,8 @@ export class ModalComponent implements OnInit{
     let component = initComponentMeta(
       $event.dragData.item.componentCategory, 
       appUlid, pageUlid,
-      '', '', this.data.ulid,
+      this.childrenHeader.length ? this.childrenHeader[this.childrenHeader.length - 1].ulid : '',
+      '', this.data.ulid,
       {area: 'slots', slotKey: 'header'},)
     this.childrenHeader.push(component)
     this.componentService.mountComponent(this.page.ulid, component)
