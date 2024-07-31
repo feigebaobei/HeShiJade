@@ -110,9 +110,6 @@ router.route('/')
             prevUlid: req.body.prevUlid,
             nextUlid: '',
             parentUlid: req.body.parentUlid,
-            // mountPosition: req.body.mountPosition,
-            // mountArea: req.body.mountArea,
-            // mountKey: req.body.mountKey,
             mount: req.body.mount,
             props: req.body.props,
             behavior: req.body.behavior,
@@ -171,17 +168,18 @@ router.route('/')
           case 'slots': // 已测试
             if (parentComponent.slots[req.body.mount.slotKey]) {
               // 当父组件的slots[slotkey]中存在子组件信息时，无操作。
-            }
-            componentUpdateArr.unshift({
-              updateOne: {
-                filter: {ulid: req.body.parentUlid},
-                update: {
-                  $set: {
-                    [`slots.${req.body.mount.slotKey}`]: req.body.ulid
+            } else {
+              componentUpdateArr.unshift({
+                updateOne: {
+                  filter: {ulid: req.body.parentUlid},
+                  update: {
+                    $set: {
+                      [`slots.${req.body.mount.slotKey}`]: req.body.ulid
+                    }
                   }
                 }
-              }
-            })
+              })
+            }
             logger.info({componentUpdateArr})
             break;
         }
@@ -197,8 +195,8 @@ router.route('/')
       }
     }
   }).then(() => {
-    let p1 = lowcodeDb.collection(DB.dev.componentTable).bulkWrite(componentUpdateArr)
-    return Promise.all([p1, pPage]).catch((error) => {
+    let pComponent = lowcodeDb.collection(DB.dev.componentTable).bulkWrite(componentUpdateArr)
+    return Promise.all([pComponent, pPage]).catch((error) => {
       logger.error({error})
       return Promise.reject(200000)
     })

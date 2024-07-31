@@ -4,6 +4,8 @@
 |modal组件可嵌入组件|doing||
 ||constructor modal组件中接收组件|done|
 ||render modal组件中递归渲染组件|todo|
+|||修正搭建侧的组件树丢组件的问题|doing|
+|||修正渲染侧的组件树丢组件的问题|doing|
 |props的switch应该在点击它时切换|||
 |删除最后一个页面后，app.firstPageUlid/app.lastPageUlid应该无值|done||
 |删除最后一个页面后再创建页面，app.firstPageUlid应该有值|done||
