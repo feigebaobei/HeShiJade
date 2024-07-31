@@ -1,13 +1,12 @@
 ||完成日期||
 |-|-|-|
 |丰富组件的配置面板|||
-|modal|doing||
-||增加props|done|
-||在mock组件中使用props|done|
-||在渲染侧使用props||
-||增加behavior.没有对应的回调方法|done，使用修正脏数据的方法解决了|
-|modal组件可嵌入组件|||
+|modal组件可嵌入组件|doing||
+||constructor modal组件中接收组件|doing|
+||render modal组件中递归渲染组件|todo|
 |props的switch应该在点击它时切换|||
+|props设置placeholder及它的默认值|||
+|取消选中组件|||
 
 |统一处理behavior|todo||
 |组件的初始属性从配置数据中来|todo||
@@ -21,10 +20,12 @@
 ||tabs||
 ||pagination||
 |button的icon属性不生效|||
+|modal|done||
+||增加props|done|
+||在mock组件中使用props|done|
+||在渲染侧使用props|done|
+||增加behavior.没有对应的回调方法|done，使用修正脏数据的方法解决了|
 |button|done||
-|把lixiaodan.com的内容搬到8.222.xxx.xx上。|done||
-|page-list组件中应该可以使用d-input-group|done|page-list整理为模块并引入InputGroupModule|
-|改变页面名称时失败了|done||
 |本次分支f_comp|||
 |上生产内容|||
 |web-site|修正拼写||
