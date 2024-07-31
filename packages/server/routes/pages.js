@@ -142,11 +142,11 @@ router.route('/')
         }
       }
     }
-    let p1 = lowcodeDb.collection('pages_dev').bulkWrite(arr)
-    let p2 = lowcodeDb.collection('apps_dev').updateOne({
+    let pPage = lowcodeDb.collection('pages_dev').bulkWrite(arr)
+    let pApp = lowcodeDb.collection('apps_dev').updateOne({
       ulid: curApp.ulid
     }, updateObj)
-    return Promise.all([p1, p2]).catch(() => {
+    return Promise.all([pPage, pApp]).catch(() => {
       return Promise.reject(200000)
     })
   }).then(() => {
@@ -218,16 +218,27 @@ router.route('/')
       return Promise.reject(200010)
     })
   }).then(() => {
-    let p1
+    let pApp
     if (page.ulid === app.firstPageUlid) {
-      let appUpdateObj = {
-        $set: {firstPageUlid: page.nextUlid}
+      let setObj
+      if (app.firstPageUlid === app.lastPageUlid) { // 删除最后一个页面，应该清空app中的页面数据。
+        setObj = {
+          firstPageUlid: '',
+          lastPageUlid: '',
+        }
+      } else {
+        setObj = {
+          firstPageUlid: page.nextUlid,
+        }
       }
-      p1 = lowcodeDb.collection('apps_dev').updateOne({
+      let appUpdateObj = {
+        $set: setObj,
+      }
+      pApp = lowcodeDb.collection('apps_dev').updateOne({
         ulid: app.ulid
       }, appUpdateObj)
     } else {
-      p1 = Promise.resolve(true)
+      pApp = Promise.resolve(true)
     }
     let pageUpdateArr = []
     // 删除当前的。
@@ -276,17 +287,13 @@ router.route('/')
         },
       })
     }
-    clog('page', page)
-    clog('app', app)
-    let p2 = lowcodeDb.collection('pages_dev').bulkWrite(pageUpdateArr)
-    let p3 = lowcodeDb.collection('components_dev').deleteMany({pageUlid: page.ulid}).then(() => {
+    let pPage = lowcodeDb.collection('pages_dev').bulkWrite(pageUpdateArr)
+    let pComponent = lowcodeDb.collection('components_dev').deleteMany({pageUlid: page.ulid}).then(() => {
       return true
     }).catch((error) => {
-      clog(123, error)
       return Promise.reject(200030)
     })
-    return Promise.all([p1, p2, p3]).catch((error) => {
-      clog(456, error)
+    return Promise.all([pApp, pPage, pComponent]).catch((error) => {
       return Promise.reject(200030)
     })
   }).then(() => {

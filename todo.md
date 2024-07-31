@@ -2,10 +2,12 @@
 |-|-|-|
 |丰富组件的配置面板|||
 |modal组件可嵌入组件|doing||
-||constructor modal组件中接收组件|doing|
+||constructor modal组件中接收组件|done|
 ||render modal组件中递归渲染组件|todo|
 |props的switch应该在点击它时切换|||
-|排查删除页面后未清空firstPageUlid的问题|doing||
+|删除最后一个页面后，app.firstPageUlid/app.lastPageUlid应该无值|doing||
+|删除最后一个页面后再创建页面，app.firstPageUlid应该有值|doing||
+|排查删除页面后未清空firstPageUlid的问题|done||
 |props设置placeholder及它的默认值|||
 |取消选中组件|||
 
