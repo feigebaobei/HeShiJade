@@ -1,16 +1,16 @@
 ||完成日期||
 |-|-|-|
 |丰富组件的配置面板|||
-|modal组件可嵌入组件|doing||
+|modal组件可嵌入组件|done||
 ||constructor modal组件中接收组件|done|
-||render modal组件中递归渲染组件|todo|
-|||修正搭建侧的组件树丢组件的问题|doing|
-|||修正渲染侧的组件树丢组件的问题|doing|
-|props的switch应该在点击它时切换|||
+||render modal组件中递归渲染组件|done|
+|||修正搭建侧的组件树丢组件的问题|done|
+|||修正渲染侧的组件树丢组件的问题|done|
+|props的switch应该在点击它时切换|done||
 |删除最后一个页面后，app.firstPageUlid/app.lastPageUlid应该无值|done||
 |删除最后一个页面后再创建页面，app.firstPageUlid应该有值|done||
 |排查删除页面后未清空firstPageUlid的问题|done||
-|props设置placeholder及它的默认值|||
+|props设置placeholder及它的默认值|doing||
 |取消选中组件|||
 
 |统一处理behavior|todo||

@@ -1,13 +1,10 @@
 <div class="switch_box">
     <span>{{data.label}}</span>
-    <!-- <d-toggle [checked]="true" [size]="'lg'"></d-toggle>
-    <d-toggle [checked]="true" [size]="'lg'"></d-toggle> -->
-    <!-- (change)="onChange($event)" -->
-    <!-- [beforeChange]="beforeChange" -->
-    <d-toggle
-    [(ngModel)]="data.value"
-    (ngModelChange)="modelChangeH($event)"
-    class="toggle"
-    ></d-toggle>
-    <!-- <span>state: {{ enable }}</span> -->
+    <div class="toggle_box">
+        <d-toggle
+        [(ngModel)]="data.value"
+        (ngModelChange)="modelChangeH($event)"
+        class="toggle"
+        ></d-toggle>
+    </div>
 </div>
