@@ -2,19 +2,36 @@
 // component文件 定义数据。
 // props文件     定义结构
 // 这是所有组件的默认配置数据
-
-import type { ComponentDefaultConfig, ComponentDefaultConfigAll } from 'src/types/component'
+import { Button as ButtonProps,
+    Input as InputProps,
+    Select as SelectProps,
+    Modal as ModalProps,
+    Form as FormProps,
+    Table as TableProps,
+ } from 'src/helper/props'
+import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta, } from 'src/types/component'
 // import type { S } from 'src/types/base'
+import type { PropsConfigItem } from 'src/types/config'
+
+let opProps = (pci: PropsConfigItem) => {
+    let o: PropsMeta = {}
+    Object.entries(pci).forEach(([k, v]) => {
+        o[k] = v.value
+    })
+    return o
+}
+
 
 let Button: ComponentDefaultConfig = {
-    props: {
-        type: 'button',
-        bsSize: 'md',
-        bordered: true,
-        disabled: false,
-        width: '100px',
-        text: 'button',
-    },
+    // props: {
+    //     type: 'button',
+    //     bsSize: 'md',
+    //     bordered: true,
+    //     disabled: false,
+    //     width: '100px',
+    //     text: 'button',
+    // },
+    props: opProps(ButtonProps),
     behavior: [
         {
             event: 'click',
@@ -33,23 +50,25 @@ let Button: ComponentDefaultConfig = {
     slots: {}, // 子组件
 }
 let Input: ComponentDefaultConfig = {
-    props: {
-        error: false,
-        size: '',
-        showGrowStyle: true,
-        styleType: 'default',
-    },
+    // props: {
+    //     error: false,
+    //     size: '',
+    //     showGrowStyle: true,
+    //     styleType: 'default',
+    // },
+    props: opProps(InputProps),
     behavior: [],
     items: [],
     slots: {},
 }
 let Modal: ComponentDefaultConfig = {
-    props: {
-        title: '标题',
-        visible: false,
-        width: '',
-        placement: 'center',
-    },
+    // props: {
+    //     title: '标题',
+    //     visible: false,
+    //     width: '',
+    //     placement: 'center',
+    // },
+    props: opProps(ModalProps),
     behavior: [
         {event: '', target: '', payload: ''},
     ],
@@ -61,26 +80,28 @@ let Modal: ComponentDefaultConfig = {
     },
 }
 let Select: ComponentDefaultConfig = {
-    props: {
-        // options: [
-        //     {label: 'one', value: 'one',},
-        //     {label: 'two', value: 'two',},
-        //     {label: 'three', value: 'three',},
-        // ],
-        isSearch: false,
-        size: '',
-        placeholder: '',
-    },
+    // props: {
+    //     // options: [
+    //     //     {label: 'one', value: 'one',},
+    //     //     {label: 'two', value: 'two',},
+    //     //     {label: 'three', value: 'three',},
+    //     // ],
+    //     isSearch: false,
+    //     size: '',
+    //     placeholder: '',
+    // },
+    props: opProps(SelectProps),
     behavior: [],
     items: [],
     slots: {},
 }
 let Form: ComponentDefaultConfig = {
-    props: {
-        layout: 'horizontal',
-        isCancel: true,
-        isSubmit: true,
-    },
+    // props: {
+    //     layout: 'horizontal',
+    //     isCancel: true,
+    //     isSubmit: true,
+    // },
+    props: opProps(FormProps),
     behavior: [
         {
             event: 'submit',
@@ -112,9 +133,10 @@ let Form: ComponentDefaultConfig = {
     slots: {},
 }
 let Table: ComponentDefaultConfig = {
-    props: {
-        size: 'sm',
-    },
+    // props: {
+    //     size: 'sm',
+    // },
+    props: opProps(TableProps),
     behavior: [],
     items: [
     ],

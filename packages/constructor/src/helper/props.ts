@@ -166,7 +166,7 @@ let Modal: PropsConfigItem = {
     },
     width: {
         category: 'input',
-        value: '',
+        value: '640px',
         label: '宽度',
         key: 'width',
     },
@@ -184,7 +184,7 @@ let Modal: PropsConfigItem = {
             {label: 'false', value: false},
             {label: 'true', value: true},
         ],
-        value: true,
+        value: false,
         label: '是否默认显示', // 默认显示 与 显示 共用一个。
         key: 'visible',
         // hide: (p: PropsConfigItem) => {
@@ -230,12 +230,14 @@ let Modal: PropsConfigItem = {
         value: '0px',
         label: '横向偏移',
         key: 'offsetX',
+        placeholder: '如：0px'
     },
     offsetY: {
         category: 'input',
         value: '0px',
         label: '纵向偏移',
         key: 'offsetY',
+        placeholder: '如：0px'
     },
     bodyScrollable: {
         category: 'switch',
@@ -257,16 +259,16 @@ let Modal: PropsConfigItem = {
         label: '外层支持esc关闭',
         key: 'escapable',
     },
-    dMoveable: {
-        category: 'switch',
-        options: [
-            {label: 'false', value: false},
-            {label: 'true', value: true},
-        ],
-        value: true,
-        label: '是否可拖动',
-        key: 'dMoveable',
-    },
+    // dMoveable: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'false', value: false},
+    //         {label: 'true', value: true},
+    //     ],
+    //     value: true,
+    //     label: '是否可拖动',
+    //     key: 'dMoveable',
+    // },
 }
 let Form: PropsConfigItem = {
     layout: {
