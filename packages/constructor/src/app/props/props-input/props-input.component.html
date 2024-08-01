@@ -1,6 +1,6 @@
 <div class="input_box">
     <span>{{data.label}}</span>
-    <input dTextInput placeholder="Please Enter" id="textInput" 
+    <input dTextInput [placeholder]="data.placeholder" id="textInput" 
     [(ngModel)]="data.value"
     (ngModelChange)="modelChangeH($event)"
     />

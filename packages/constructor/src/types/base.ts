@@ -36,6 +36,7 @@ interface ConfigItemInput {
   hideCalc?: B
   // show: B
   hideConfig?: B
+  placeholder?: S
 }
 type ConfigItemKeys = keyof ConfigItem
 interface ConfigItemTextarea {

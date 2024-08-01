@@ -10,11 +10,11 @@
 |删除最后一个页面后，app.firstPageUlid/app.lastPageUlid应该无值|done||
 |删除最后一个页面后再创建页面，app.firstPageUlid应该有值|done||
 |排查删除页面后未清空firstPageUlid的问题|done||
-|props设置placeholder及它的默认值|doing||
+|props设置placeholder及它的默认值|done||
 |取消选中组件|||
 
 |统一处理behavior|todo||
-|组件的初始属性从配置数据中来|todo||
+|组件的初始属性从配置数据中来|done||
 ||form||
 ||table||
 ||input||
