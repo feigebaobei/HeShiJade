@@ -8,7 +8,6 @@ let Button: BehaviorConfigItem = {
     category: 'select',
     options: [
       {label: '单击', value: 'click'},
-      // {label: '双击', value: 'dbClick'},
     ],
     value: '',
     label: '事件',

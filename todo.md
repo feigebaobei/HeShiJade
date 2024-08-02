@@ -1,21 +1,12 @@
 ||完成日期||
 |-|-|-|
+|统一处理behavior-box中处理远端与配置项的逻辑|done||
+|取消选中组件|doing||
 |丰富组件的配置面板|||
-|modal组件可嵌入组件|done||
-||constructor modal组件中接收组件|done|
-||render modal组件中递归渲染组件|done|
-|||修正搭建侧的组件树丢组件的问题|done|
-|||修正渲染侧的组件树丢组件的问题|done|
-|props的switch应该在点击它时切换|done||
-|删除最后一个页面后，app.firstPageUlid/app.lastPageUlid应该无值|done||
-|删除最后一个页面后再创建页面，app.firstPageUlid应该有值|done||
-|排查删除页面后未清空firstPageUlid的问题|done||
-|props设置placeholder及它的默认值|done||
-|取消选中组件|||
+|form|todo||
+||搭建侧增强props||
+||渲染侧使用props||
 
-|统一处理behavior|todo||
-|组件的初始属性从配置数据中来|done||
-||form||
 ||table||
 ||input||
 ||select||
@@ -25,18 +16,14 @@
 ||tabs||
 ||pagination||
 |button的icon属性不生效|||
-|modal|done||
-||增加props|done|
-||在mock组件中使用props|done|
-||在渲染侧使用props|done|
-||增加behavior.没有对应的回调方法|done，使用修正脏数据的方法解决了|
-|button|done||
+|组件的初始属性从配置数据中来|done||
 |本次分支f_comp|||
 |上生产内容|||
 |web-site|修正拼写||
 |constructor|修改props样式||
 |constructor|修正无法修改页面名称的问题||
 |constructor|增加6个组件的配置面板 button||
+|constructor|增加6个组件的配置面板 modal||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |无页面时提示创建页面|||
