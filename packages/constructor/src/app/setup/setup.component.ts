@@ -127,8 +127,9 @@ export class SetupComponent implements OnInit {
     // this.componentService.postCompListByPageForLocal(obj)
   }
   stageClickH($event: A) {
-    if (Array.from($event.target.classList).includes('stage')) {
+    if (Array.from($event.target.classList).includes('center')) {
       if (this.curPage) {
+        clog('stageClickH', this.curPage)
         this.componentService.setCurComponent(this.curPage.ulid, '')
       }
     }
