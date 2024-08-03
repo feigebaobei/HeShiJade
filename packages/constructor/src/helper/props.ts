@@ -299,24 +299,6 @@ let Form: PropsConfigItem = {
         label: 'label的对齐方式',
         key: 'labelAlign',
     },
-    // labelSize: {
-    //     category: 'input',
-    //     value: '',
-    //     label: 'label的宽度',
-    //     key: 'labelSize',
-    // },
-    // labelSize: {
-    //     category: 'input',
-    //     value: '',
-    //     label: 'label的宽度',
-    //     key: 'labelSize',
-    // },
-    // labelSize: {
-    //     category: 'input',
-    //     value: '',
-    //     label: 'label的宽度',
-    //     key: 'labelSize',
-    // },
     isCancel: {
         category: 'switch',
         options: [
