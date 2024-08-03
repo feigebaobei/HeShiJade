@@ -65,7 +65,8 @@ let Form: BehaviorConfigItem = {
     category: 'select',
     options: [
       {label: '提交', value: 'submit'},
-      {label: '取消', value: 'cancel'},
+      {label: '重置', value: 'reset'},
+      // {label: '取消', value: 'cancel'},
     ],
     value: 'submit',
     label: '事件',

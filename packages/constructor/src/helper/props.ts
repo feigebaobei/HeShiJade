@@ -281,6 +281,42 @@ let Form: PropsConfigItem = {
         label: '排版',
         key: 'layout',
     },
+    labelSize: {
+        category: 'input',
+        value: '100px',
+        label: 'label的宽度',
+        key: 'labelSize',
+        placeholder: '如：100px'
+    },
+    labelAlign: {
+        category: 'select',
+        options: [
+            {label: 'start', value: 'start'},
+            {label: 'center', value: 'center'},
+            {label: 'end', value: 'end'},
+        ],
+        value: 'start',
+        label: 'label的对齐方式',
+        key: 'labelAlign',
+    },
+    // labelSize: {
+    //     category: 'input',
+    //     value: '',
+    //     label: 'label的宽度',
+    //     key: 'labelSize',
+    // },
+    // labelSize: {
+    //     category: 'input',
+    //     value: '',
+    //     label: 'label的宽度',
+    //     key: 'labelSize',
+    // },
+    // labelSize: {
+    //     category: 'input',
+    //     value: '',
+    //     label: 'label的宽度',
+    //     key: 'labelSize',
+    // },
     isCancel: {
         category: 'switch',
         options: [

@@ -5,6 +5,8 @@ import type {
     ItemsMeta } from 'src/types/items';
 // 指定组件的配置项
 
+let clog = console.log
+
 let Input: ConfigItem[] = []
 let Select: ConfigItem[] = []
 let Button: ConfigItem[] = []
@@ -52,16 +54,54 @@ let Form: ConfigItem[] = [
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             let r = false
-            if (o) {
+            if (o) { // 存在且不为select，则隐藏
                 r = o.value !== 'select'
-            } else {
+            } else { // 不存在，则隐藏
                 r = true
             }
             return r
         },
         hideListenerKey: 'category',
         // show: true,
-    }
+    },
+    {
+        label: '必填',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        key: 'required',
+        value: false,
+    },
+    {
+        label: '显示帮助',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        key: 'hasHelp',
+        value: false,
+    },
+    {
+        label: '帮助文本',
+        category: 'input',
+        key: 'helpTips',
+        value: '',
+        hide: function (p: ConfigItem[]) { // 是否隐藏
+            let o = p.find(item => item.key === 'hasHelp')
+            clog('hide', o)
+            return !o!.value
+        },
+        hideListenerKey: 'hasHelp',
+    },
+    {
+        label: '附加信息',
+        category: 'input',
+        key: 'extraInfo',
+        value: '',
+    },
 ]
 
 let FormItemCategory = [

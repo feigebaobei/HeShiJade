@@ -121,9 +121,9 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Form':
         this.componentRef.instance.data = {
+          ulid: this.comp.ulid,
           props: this.comp.props,
           items: this.comp.items,
-          ulid: this.comp.ulid,
           mount: this.comp.mount,
         }
         break
