@@ -1,20 +1,10 @@
 ||完成日期||
 |-|-|-|
 |丰富组件的配置面板|||
-|form|todo||
-||搭建侧增强props|done|
-||渲染侧使用props|done|
-||搭建侧增强behavior|done|
-||渲染侧使用behavior|done|
-||搭建侧增强item|done|
-||渲染侧使用item|done|
-|form组件的item不能根据条件隐藏了|done||
+|table|todo||
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
-|取消选中组件|done||
-|统一处理behavior-box中处理远端与配置项的逻辑|
-done||
-|删除依赖项 @angular/material|||
+|删除依赖项 @angular/material|done||
 
 ||table||
 ||input||
@@ -31,7 +21,7 @@ done||
 |web-site|修正拼写||
 |constructor|修改props样式||
 |constructor|修正无法修改页面名称的问题||
-|constructor|增加6个组件的配置面板 button||
+|constructor|增加6个组件的配置面板 button form||
 |这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、|||
 |mock-server|表单的提交接口||
 
