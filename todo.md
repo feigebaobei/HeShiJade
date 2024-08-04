@@ -3,12 +3,12 @@
 |丰富组件的配置面板|||
 |form|todo||
 ||搭建侧增强props|done|
-||渲染侧使用props||
+||渲染侧使用props|done|
 ||搭建侧增强behavior|done|
-||渲染侧使用behavior||
+||渲染侧使用behavior|done|
 ||搭建侧增强item|done|
-||渲染侧使用item||
-|form组件的item不能隐藏了|||
+||渲染侧使用item|done|
+|form组件的item不能根据条件隐藏了|done||
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
 |取消选中组件|done||

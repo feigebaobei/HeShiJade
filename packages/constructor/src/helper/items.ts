@@ -53,6 +53,7 @@ let Form: ConfigItem[] = [
         template: {label: '', value: ''},
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
+            // clog('o', o)
             let r = false
             if (o) { // 存在且不为select，则隐藏
                 r = o.value !== 'select'
@@ -91,7 +92,7 @@ let Form: ConfigItem[] = [
         value: '',
         hide: function (p: ConfigItem[]) { // 是否隐藏
             let o = p.find(item => item.key === 'hasHelp')
-            clog('hide', o)
+            // clog('hide', o)
             return !o!.value
         },
         hideListenerKey: 'hasHelp',
