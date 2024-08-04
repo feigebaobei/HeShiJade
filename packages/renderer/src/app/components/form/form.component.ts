@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import {shareEvent} from 'src/helper';
 import type { A, S } from 'src/types/base';
@@ -10,16 +10,14 @@ let clog = console.log
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.sass']
 })
-export class FormComponent implements OnInit, OnChanges {
+export class FormComponent implements OnInit {
   @Input() data: A
   props: A
   items: A
   rules: A
-  first: S
   constructor(private dataService: DataService) {
     this.props = {} // this.data.props
     this.items = {} //this.data.items
-    this.first = 'str'
     this.rules = {
       validators: [
         { required: true },
@@ -30,13 +28,8 @@ export class FormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.props = this.data.props
     this.items = this.data.items
-    clog('props', this.props, this.items)
-  }
-  ngOnChanges() {
-    clog('ngOnChanges')
   }
   submitClickH() {
-    clog(this.data)
     let data: A = {}
     this.data.items.forEach((item: A) => {
       data[item.key] = item.value
