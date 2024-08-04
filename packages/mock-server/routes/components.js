@@ -191,4 +191,24 @@ router.route('/form')
 .delete(cors.corsWithOptions, (req, res) => {
   res.send(200)
 })
+router.route('/form/submit')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send(200)
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.status(200).json({
+    code: 0,
+    message: '',
+    data: {},
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send(200)
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send(200)
+})
 module.exports = router;
