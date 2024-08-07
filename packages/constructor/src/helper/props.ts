@@ -1,5 +1,5 @@
 // import type { ConfigItem } from 'src/types/props'
-// import type { ConfigItem, S } from 'src/types/base'
+import type { B, ConfigItem } from 'src/types/base'
 import type { PropsConfigItem } from 'src/types/config'
 // interface PropsConfigItem {
 //     [k: S]: ConfigItem
@@ -327,6 +327,43 @@ let Form: PropsConfigItem = {
     },
 }
 let Table: PropsConfigItem = {
+    url: {
+        category: 'input',
+        value: '',
+        label: 'url',
+        key: 'url',
+    },
+    tableWidth: {
+        category: 'input',
+        value: '100%',
+        label: '表格宽度',
+        key: 'tableWidth',
+        placeholder: '如：100px',
+    },
+    maxWidth: {
+        category: 'input',
+        value: '',
+        label: '最大宽度',
+        key: 'maxWidth',
+    },
+    tableHeight: {
+        category: 'input',
+        value: '',
+        label: '表格高度',
+        key: 'tableHeight',
+    },
+    maxHeight: {
+        category: 'input',
+        value: '',
+        label: '最大高度',
+        key: 'maxHeight',
+    },
+    minHeight: {
+        category: 'input',
+        value: '',
+        label: '最小高度',
+        key: 'minHeight',
+    },
     size: {
         category: 'select',
         options: [
@@ -340,12 +377,152 @@ let Table: PropsConfigItem = {
         label: '大小',
         key: 'size',
     },
-    url: {
+    rowHoveredHighLight: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '悬浮行时是否高亮',
+        key: 'rowHoveredHighLight',
+    },
+    fixHeader: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '表头是否固定',
+        key: 'fixHeader',
+    },
+    colDraggable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '列是否可拖动排序',
+        key: 'colDraggable',
+    },
+    virtualScroll: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '是否虚拟滚动',
+        key: 'virtualScroll',
+    },
+    virtualItemSize: {
         category: 'input',
+        value: '40px',
+        label: '虚拟滚动时每一行的高度',
+        key: 'virtualItemSize',
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'virtualScroll')
+            // clog('o', o)
+            return o!.value as B
+        },
+        hideListenerKey: 'virtualScroll',
+    },
+    virtualMinBufferPx: {
+        category: 'input',
+        value: '80',
+        label: '虚拟滚动时缓冲区最小高度',
+        key: 'virtualMinBufferPx',
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'virtualScroll')
+            // clog('o', o)
+            return o!.value as B
+        },
+        hideListenerKey: 'virtualScroll',
+        placeholder: '如：80',
+    },
+    checkable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '是否可勾选行',
+        key: 'checkable',
+    },
+    resizeable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '是否可以拖拽调整列宽',
+        key: 'resizeable',
+    },
+    headerBg: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '表头是否显示背景色',
+        key: 'headerBg',
+    },
+    tableLayout: {
+        category: 'select',
+        options: [
+            {label: 'fixed', value: 'fixed'},
+            {label: 'auto', value: 'auto'},
+        ],
+        value: 'fixed',
+        label: '表格布局',
+        key: 'tableLayout',
+    },
+    borderType: {
+        category: 'select',
+        options: [
+            {label: '只有横线', value: ''},
+            {label: '只无边框', value: 'borderless'},
+            {label: '全边框', value: 'bordered'},
+        ],
         value: '',
-        label: 'url',
-        key: 'url',
-    }
+        label: '表格边框',
+        key: 'borderType',
+    },
+    striped: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '是否展示为斑马纹间隔',
+        key: 'striped',
+    },
+    shadowType: {
+        category: 'select',
+        options: [
+            {label: '无阴影', value: 'normal'},
+            {label: '有阴影', value: 'embed'},
+        ],
+        value: 'normal',
+        label: '阴影类型',
+        key: 'shadowType',
+    },
+    tableOverflowType: {
+        category: 'select',
+        options: [
+            {label: '自动', value: 'auto'},
+            {label: '悬浮时出现', value: 'overlay'},
+        ],
+        value: 'auto',
+        label: '滚动条类型',
+        key: 'tableOverflowType',
+    },
 }
 export {
     Button,

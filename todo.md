@@ -2,11 +2,16 @@
 |-|-|-|
 |丰富组件的配置面板|||
 |table|todo||
+||搭建侧配置prop|todo|
+||搭建侧配置behavior|todo|
+||搭建侧配置item|todo|
+||渲染侧配置prop||
+||渲染侧配置behavior||
+||渲染侧配置item||
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
 |删除依赖项 @angular/material|done||
 
-||table||
 ||input||
 ||select||
 |增加4个组件|||
@@ -18,12 +23,12 @@
 |组件的初始属性从配置数据中来|done||
 |本次分支f_comp|||
 |上生产内容|||
-|web-site|修正拼写||
-|constructor|修改props样式||
-|constructor|修正无法修改页面名称的问题||
-|constructor|增加6个组件的配置面板 button form||
-|这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、|||
-|mock-server|表单的提交接口||
+||web-site|修正拼写|
+||constructor|修改props样式|
+||constructor|修正无法修改页面名称的问题|
+||constructor|增加6个组件的配置面板 button form|
+||这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、||
+||mock-server|表单的提交接口|
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |无页面时提示创建页面|||

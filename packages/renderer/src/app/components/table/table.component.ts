@@ -84,4 +84,12 @@ export class TableComponent implements OnInit {
   // ngOnInit() {
   //   this.req()
   // }
+  // dataTable组件的方法 start
+  // getCheckedRows
+  // setRowCheckStatus
+  // setTableCheckStatus
+  // getRowChildToggleStatus
+  // setTableChildrenToggleStatus
+  // cancelEditingStatus
+  // dataTable组件的方法 end
 }

@@ -144,6 +144,22 @@ let Table: ConfigItem[] = [
         // show: true,
     },
     {
+        label: '列宽度是否可调整',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'resizeEnabled',
+        value: false,
+    },
+    {
+        label: '最大宽度',
+        category: 'input',
+        key: 'maxWidth',
+        value: '',
+    },
+    {
         label: 'width',
         category: 'input',
         key: 'width',
@@ -151,11 +167,75 @@ let Table: ConfigItem[] = [
         // show: true,
     },
     {
+        label: '最小宽度',
+        category: 'input',
+        key: 'minWidth',
+        value: '',
+    },
+    {
+        label: '是否可过滤',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'filterable',
+        value: false,
+    },
+    {
+        label: '过滤时是否多选',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'filterMultiple',
+        value: false,
+        hide: function (p: ConfigItem[]) { // 是否隐藏
+            let o = p.find(item => item.key === 'filterable')
+            return !o!.value
+        },
+        hideListenerKey: 'filterable',
+    },
+    {
+        label: '表格或者body滚动时是否关闭过滤框',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'closeFilterWhenScroll',
+        value: false,
+    },
+    {
+        label: '是否可排序',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'sortable',
+        value: false,
+    },
+    {
+        label: '该列固定到左侧的距离',
+        category: 'input',
+        key: 'fixedLeft',
+        value: '',
+    },
+    {
+        label: '该列固定到右侧的距离',
+        category: 'input',
+        key: 'fixedRight',
+        value: '',
+    },
+    {
         label: 'childUlid',
         category: 'input',
         key: 'childUlid',
         value: '',
         // show: false,
+        // hide: () => true, // todo 测试
         hideConfig: true,
     },
 ]
