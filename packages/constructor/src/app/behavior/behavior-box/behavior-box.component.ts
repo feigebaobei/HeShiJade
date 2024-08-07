@@ -6,6 +6,7 @@ import {
   Button as buttonBehaviorMeta,
   Modal as modalBehaviorMeta,
   Form as FormBehaviorMeta,
+  Table as TableBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
@@ -61,21 +62,6 @@ export class BehaviorBoxComponent {
     clog('curComponentChange', this.curComp)
     switch (this.curComp?.type) {
       case 'Button':
-        // this.componentBehaviorMeta = buttonBehaviorMeta
-        // this.curComp.behavior.forEach(item => {
-        //   clog('cloneDeep', cloneDeep)
-        //   let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
-        //   clog('o', o);
-        //   // .then((v: BehaviorConfigItem) => {
-        //   // })
-        //   // o = v;
-        //   (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
-        //     if (item.hasOwnProperty(key)) {
-        //       o[key].value = item[key]
-        //     }
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.curComp.behavior.forEach(item => {
           let o = cloneDeep(buttonBehaviorMeta)
           Object.entries(item).forEach(([k, v]) => {
@@ -92,31 +78,19 @@ export class BehaviorBoxComponent {
           })
           this.componentBehaviorList.push(o)
         })
-        // if (this.curComp.behavior.length) {
-        // } else {
-        //   this.componentBehaviorList.push(cloneDeep(modalBehaviorMeta))
-        // }
         break;
       case 'Form':
-        // this.componentBehaviorMeta = FormBehaviorMeta
-        // this.curComp.behavior.forEach(item => {
-        //   clog('cloneDeep', cloneDeep)
-        //   let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
-        //   clog('o', o);
-        //   // .then((v: BehaviorConfigItem) => {
-        //   // })
-        //   // o = v;
-        //   (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
-        //     if (item.hasOwnProperty(key)) {
-        //       o[key].value = item[key]
-        //     }
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
-        // clog('componentBehaviorList', this.componentBehaviorList)
-
         this.curComp.behavior.forEach(item => {
           let o = cloneDeep(FormBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Table':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(TableBehaviorMeta)
           Object.entries(item).forEach(([k, v]) => {
             o[k].value = v
           })

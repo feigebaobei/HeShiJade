@@ -13,6 +13,7 @@ import {
     Button as ButtonBehavior,
     Modal as ModalBehavior,
     Form as FormBehavior,
+    Table as TableBehavior,
 } from 'src/helper/behavior'
 import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
     BehaviorMetaItem,
@@ -39,22 +40,7 @@ let opBehavior = (p: BehaviorConfigItem) => {
 
 
 let Button: ComponentDefaultConfig = {
-    // props: {
-    //     type: 'button',
-    //     bsSize: 'md',
-    //     bordered: true,
-    //     disabled: false,
-    //     width: '100px',
-    //     text: 'button',
-    // },
     props: opProps(ButtonProps),
-    // behavior: [
-    //     {
-    //         event: 'click',
-    //         target: 'ulid',
-    //         payload: '{"visible": true}',
-    //     },
-    // ],
     behavior: opBehavior(ButtonBehavior),
     items: [
         {
@@ -67,12 +53,6 @@ let Button: ComponentDefaultConfig = {
     slots: {}, // 子组件
 }
 let Input: ComponentDefaultConfig = {
-    // props: {
-    //     error: false,
-    //     size: '',
-    //     showGrowStyle: true,
-    //     styleType: 'default',
-    // },
     props: opProps(InputProps),
     behavior: [],
     items: [],
@@ -80,9 +60,6 @@ let Input: ComponentDefaultConfig = {
 }
 let Modal: ComponentDefaultConfig = {
     props: opProps(ModalProps),
-    // behavior: [
-    //     {event: '', target: '', payload: ''},
-    // ],
     behavior: opBehavior(ModalBehavior),
     items: [],
     slots: {
@@ -99,13 +76,6 @@ let Select: ComponentDefaultConfig = {
 }
 let Form: ComponentDefaultConfig = {
     props: opProps(FormProps),
-    // behavior: [
-    //     {
-    //         event: 'submit',
-    //         target: '',
-    //         payload: '',
-    //     },
-    // ],
     behavior: opBehavior(FormBehavior),
     items: [
         {
@@ -130,7 +100,7 @@ let Form: ComponentDefaultConfig = {
 }
 let Table: ComponentDefaultConfig = {
     props: opProps(TableProps),
-    behavior: [],
+    behavior: opBehavior(TableBehavior),
     items: [
     ],
     slots: {},

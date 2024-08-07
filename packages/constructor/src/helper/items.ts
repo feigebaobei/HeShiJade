@@ -160,7 +160,7 @@ let Table: ConfigItem[] = [
         value: '',
     },
     {
-        label: 'width',
+        label: '宽度',
         category: 'input',
         key: 'width',
         value: '150px',
