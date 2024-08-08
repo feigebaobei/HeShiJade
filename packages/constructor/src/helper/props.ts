@@ -533,6 +533,12 @@ let Input: PropsConfigItem = {
         label: '风格',
         key: 'styleType',
     },
+    placeholder: {
+        category: 'input',
+        value: 'Please Enter',
+        label: '占位符',
+        key: 'placeholder',
+    },
 }
 export {
     Button,
