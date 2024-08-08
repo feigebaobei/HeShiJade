@@ -26,7 +26,15 @@
     *ngFor="let colOption of data.items; let i = index"
     [field]="colOption['field']"
     [header]="colOption['header']"
+    [maxWidth]="colOption['maxWidth']"
     [width]="colOption['width']"
+    [minWidth]="colOption['minWidth']"
+    [filterable]="colOption['filterable']"
+    [filterMultiple]="colOption['filterMultiple']"
+    [closeFilterWhenScroll]="colOption['closeFilterWhenScroll']"
+    [sortable]="colOption['sortable']"
+    [fixedLeft]="colOption['fixedLeft']"
+    [fixedRight]="colOption['fixedRight']"
   >
     <d-cell>
       <ng-template let-rowItem="rowItem" let-column="column">

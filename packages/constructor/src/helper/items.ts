@@ -143,16 +143,16 @@ let Table: ConfigItem[] = [
         value: '',
         // show: true,
     },
-    {
-        label: '列宽度是否可调整',
-        category: 'switch',
-        options: [
-            {label: 'false', value: false,},
-            {label: 'true', value: true,},
-        ],
-        key: 'resizeEnabled',
-        value: false,
-    },
+    // {
+    //     label: '列宽度是否可调整',
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'false', value: false,},
+    //         {label: 'true', value: true,},
+    //     ],
+    //     key: 'resizeEnabled',
+    //     value: false,
+    // },
     {
         label: '最大宽度',
         category: 'input',

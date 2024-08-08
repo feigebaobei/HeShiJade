@@ -4,13 +4,12 @@
 |table|todo||
 ||搭建侧配置prop|donee|
 ||搭建侧配置behavior|done|
-||搭建侧配置item|doing|
-||渲染侧配置prop||
-||渲染侧配置behavior||
-||渲染侧配置item||
+||搭建侧配置item|done|
+||渲染侧配置prop|done|
+||渲染侧配置behavior|本期不做了|
+||渲染侧配置item|done|
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
-|删除依赖项 @angular/material|done||
 
 ||input||
 ||select||

@@ -26,8 +26,19 @@
     *ngFor="let colOption of data.items; let i = index"
     [field]="colOption['field']"
     [header]="colOption['header']"
+    [maxWidth]="colOption['maxWidth']"
     [width]="colOption['width']"
-  >
+    [minWidth]="colOption['minWidth']"
+    [filterable]="colOption['filterable']"
+    [filterMultiple]="colOption['filterMultiple']"
+    [closeFilterWhenScroll]="colOption['closeFilterWhenScroll']"
+    [sortable]="colOption['sortable']"
+    [fixedLeft]="colOption['fixedLeft']"
+    [fixedRight]="colOption['fixedRight']"
+    >
+    <!-- [sortable]="colOption['sortable']" -->
+    <!-- [resizeEnabled]="colOption['resizeEnabled']" -->
+    <!-- [childUlid]="colOption['childUlid']" -->
     <d-cell>
       <!-- 不知道为什么要使用ng-template -->
       <ng-template>
