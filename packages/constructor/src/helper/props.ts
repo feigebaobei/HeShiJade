@@ -499,15 +499,15 @@ let Input: PropsConfigItem = {
             { label: 'true', value: true },
         ],
         value: false,
-        label: '是否出现错误状态',
+        label: '是否显示错误状态',
         key: 'error',
     },
     size: {
         category: 'select',
         options: [
-            { label: 'sm', value: 'sm' },
-            { label: '""', value: '' },
-            { label: 'lg', value: 'lg' },
+            { label: '小', value: 'sm' },
+            { label: '中', value: '' },
+            { label: '大', value: 'lg' },
         ],
         value: '',
         label: '尺寸',
@@ -526,8 +526,8 @@ let Input: PropsConfigItem = {
     styleType: {
         category: 'select',
         options: [
-            { label: 'default', value: 'default' },
-            { label: 'grey', value: 'grey' },
+            { label: '有线框白底风格', value: 'default' },
+            { label: '无线框灰底风格', value: 'gray' },
         ],
         value: 'default',
         label: '风格',

@@ -1,10 +1,12 @@
 <!-- <div class="box">
 </div> -->
+{{data | json}}
     <input dTextInput 
         placeholder="Please Enter"
         [error]="data.props.error"
-        [size]="data.props.size.value"
-        [styleType]="data.props.styleType.value"
+        [size]="data.props.size"
+        [showGlowStyle]="data.props.showGlowStyle"
+        [styleType]="data.props.styleType"
         />
         <!-- [showGlowStyle]="false" -->
         <!-- [showGlowStyle]="data.props.showGlowStyle" -->
