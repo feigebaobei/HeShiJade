@@ -103,39 +103,6 @@ let Button: PropsConfigItem = {
         key: 'text',
     }
 }
-let Input: PropsConfigItem = {
-    error: {
-        category: 'switch',
-        options: [
-            { label: 'false', value: false },
-            { label: 'true', value: true },
-        ],
-        value: false,
-        label: '是否出现错误状态',
-        key: 'error',
-    },
-    size: {
-        category: 'select',
-        options: [
-            { label: 'sm', value: 'sm' },
-            { label: '""', value: '' },
-            { label: 'lg', value: 'lg' },
-        ],
-        value: '',
-        label: '尺寸',
-        key: 'size',
-    },
-    styleType: {
-        category: 'select',
-        options: [
-            { label: 'default', value: 'default' },
-            { label: 'grey', value: 'grey' },
-        ],
-        value: 'default',
-        label: '风格',
-        key: 'styleType',
-    },
-}
 let Select: PropsConfigItem = {
     styleType: {
         category: 'select',
@@ -524,11 +491,54 @@ let Table: PropsConfigItem = {
         key: 'tableOverflowType',
     },
 }
+let Input: PropsConfigItem = {
+    error: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否出现错误状态',
+        key: 'error',
+    },
+    size: {
+        category: 'select',
+        options: [
+            { label: 'sm', value: 'sm' },
+            { label: '""', value: '' },
+            { label: 'lg', value: 'lg' },
+        ],
+        value: '',
+        label: '尺寸',
+        key: 'size',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: true,
+        label: '是否显示悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+    styleType: {
+        category: 'select',
+        options: [
+            { label: 'default', value: 'default' },
+            { label: 'grey', value: 'grey' },
+        ],
+        value: 'default',
+        label: '风格',
+        key: 'styleType',
+    },
+}
 export {
     Button,
-    Input,
     Select,
     Modal,
     Form,
     Table,
+    Input,
 }

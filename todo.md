@@ -1,8 +1,15 @@
 ||完成日期||
 |-|-|-|
 |丰富组件的配置面板|||
-|table|todo||
-||搭建侧配置prop|donee|
+|input|todo||
+||搭建侧配置prop|doing|
+||搭建侧配置behavior|doing|
+||搭建侧配置item|doing|
+||渲染侧配置prop|todo|
+||渲染侧配置behavior|todo|
+||渲染侧配置item|todo|
+|table|done||
+||搭建侧配置prop|done|
 ||搭建侧配置behavior|done|
 ||搭建侧配置item|done|
 ||渲染侧配置prop|done|
@@ -18,6 +25,7 @@
 ||checkbox||
 ||tabs||
 ||pagination||
+|web-site|开辟周边知识储备||
 |button的icon属性不生效|||
 |组件的初始属性从配置数据中来|done||
 |本次分支f_comp|||
@@ -102,3 +110,11 @@ subject&promise不同
 
 yargs
 just
+
+
+# 零代码，低代码，富代码 之间的边界
+||零代码|低代码|富代码|
+|-|-|-|-|
+|职责范围|各种配置|定义使用配置的代码。包括：方法、hooks、业务逻辑|完整的项目代码|
+|||||
+|||||
