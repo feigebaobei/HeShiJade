@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
@@ -10,6 +10,8 @@ import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
+import { DataTableComponent } from 'ng-devui/data-table';
+
 
 let clog = console.log
 
@@ -35,17 +37,20 @@ interface TableData {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.sass']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, 
+AfterViewInit
+// AfterContentInit
+ {
   // @Input() data: A
   @Input() data!: TableData
   basicDataSource: basicDataSourceItem[]
-  dataTableOptions: {columns: A[]}
-  // @Input() props: {[k: S]: A} = {
-  //   size: 'lg', // 'mini'| 'xs' |'sm'|'md'|'lg'
-  // }
+  // dataTableOptions: {columns: A[]}
   compObj: {[k: S]: Comp[]}
   createChildKey: typeof createChildKey
   curPage: Page
+
+  // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
+  @ViewChild('datatable') datatable!: DataTableComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -85,34 +90,34 @@ export class TableComponent implements OnInit {
         dob: new Date(1991, 3, 1),
       },
     ]
-    this.dataTableOptions = {
-      columns: [
-        {
-          field: 'firstName',
-          header: 'First Name',
-          fieldType: 'text',
-          // order: 10
-        },
-        {
-          field: 'lastName',
-          header: 'Last Name',
-          fieldType: 'text',
-          // order: 2
-        },
-        {
-          field: 'gender',
-          header: 'Gender',
-          fieldType: 'text',
-          // order: 4
-        },
-        {
-          field: 'dob',
-          header: 'Date of birth',
-          fieldType: 'date',
-          // order: 30
-        }
-      ]
-    }
+    // this.dataTableOptions = {
+    //   columns: [
+    //     {
+    //       field: 'firstName',
+    //       header: 'First Name',
+    //       fieldType: 'text',
+    //       // order: 10
+    //     },
+    //     {
+    //       field: 'lastName',
+    //       header: 'Last Name',
+    //       fieldType: 'text',
+    //       // order: 2
+    //     },
+    //     {
+    //       field: 'gender',
+    //       header: 'Gender',
+    //       fieldType: 'text',
+    //       // order: 4
+    //     },
+    //     {
+    //       field: 'dob',
+    //       header: 'Date of birth',
+    //       fieldType: 'date',
+    //       // order: 30
+    //     }
+    //   ]
+    // }
     this.compObj = {
       // <field>: Comp[]
     }
@@ -121,6 +126,8 @@ export class TableComponent implements OnInit {
   }
   ngOnInit(): void {
     this.compObj = {}
+    // this.datatable.getCheckedRows()
+    
     // let curPage = this.pageService.getCurPage()
     let tree = this.componentService.getTreeByKey(this.curPage.ulid)
     this.data.items.forEach((item, index) => {
@@ -166,5 +173,16 @@ export class TableComponent implements OnInit {
     this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
     this.componentService.deleteByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid)
+  }
+  // ngAfterContentInit() {
+  //   this.afterContentInit()
+  // }
+  // afterContentInit() {
+  //   clog('afterContentInit datatable', this, this.datatable)
+  // }
+  ngAfterViewInit() {
+    clog('ngAfterViewInit datatable', this, this.datatable)
+    // 这时才有得到datatable组件
+    
   }
 }

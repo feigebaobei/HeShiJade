@@ -377,16 +377,16 @@ let Table: PropsConfigItem = {
         label: '大小',
         key: 'size',
     },
-    rowHoveredHighLight: {
-        category: 'switch',
-        options: [
-            {label: 'false', value: false},
-            {label: 'true', value: true},
-        ],
-        value: true,
-        label: '悬浮行时是否高亮',
-        key: 'rowHoveredHighLight',
-    },
+    // rowHoveredHighLight: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'false', value: false},
+    //         {label: 'true', value: true},
+    //     ],
+    //     value: true,
+    //     label: '悬浮行时是否高亮',
+    //     key: 'rowHoveredHighLight',
+    // },
     fixHeader: {
         category: 'switch',
         options: [
