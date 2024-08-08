@@ -248,15 +248,5 @@ let all: {[k: S]: ConfigItem[]} = {
     // FormItemCategory,
     Table,
 }
-// export {
-//     // Button,
-//     // Input,
-//     // Select,
-//     // Modal,
-//     Form,
-//     FormItemCategory,
-//     // Button,
-//     Table,
-// }
 
 export default all

@@ -97,6 +97,7 @@ export class StackComponent {
       case 'Table':
         this.componentRef.instance.data = {
           props: this.data.props,
+          behavior: this.data.behavior,
           items: this.data.items,
           ulid: this.data.ulid,
         }

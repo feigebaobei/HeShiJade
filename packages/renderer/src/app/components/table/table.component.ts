@@ -32,7 +32,6 @@ interface TableData {
   styleUrls: ['./table.component.sass']
 })
 export class TableComponent implements OnInit {
-  // @Input() data: A
   @Input() data!: TableData
   basicDataSource: A[]
   createChildKey: typeof createChildKey
@@ -41,12 +40,6 @@ export class TableComponent implements OnInit {
     private componentService: ComponentService
     ) {
     this.basicDataSource = [
-      // {
-      //   id: 1,
-      //   name: 'name',
-      //   a: 'a',
-      //   d: 'd',
-      // },
     ]
     this.createChildKey = createChildKey
     this.compObj = {}

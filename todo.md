@@ -2,8 +2,8 @@
 |-|-|-|
 |丰富组件的配置面板|||
 |table|todo||
-||搭建侧配置prop|doing|
-||搭建侧配置behavior|doing|
+||搭建侧配置prop|donee|
+||搭建侧配置behavior|done|
 ||搭建侧配置item|doing|
 ||渲染侧配置prop||
 ||渲染侧配置behavior||
