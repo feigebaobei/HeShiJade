@@ -471,6 +471,12 @@ let Table: PropsConfigItem = {
     },
 }
 let Input: PropsConfigItem = {
+    value: {
+        category: 'input',
+        value: '',
+        label: '值',
+        key: 'value',
+    },
     error: {
         category: 'switch',
         options: [
@@ -514,7 +520,7 @@ let Input: PropsConfigItem = {
     },
     placeholder: {
         category: 'input',
-        value: 'Please Enter',
+        value: '请输入',
         label: '占位符',
         key: 'placeholder',
     },

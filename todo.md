@@ -9,7 +9,7 @@
 ||渲染侧配置prop|done|
 ||渲染侧配置behavior|不需要此功能|
 ||渲染侧配置item|不需要此功能|
-|input增加props.value|||
+|input增加props.value|done||
 |select增加props.value|done||
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
