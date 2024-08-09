@@ -130,10 +130,36 @@ let Table: BehaviorConfigItem = {
     key: 'payload',
   },
 }
+let Select: BehaviorConfigItem = {
+  event: {
+    category: 'select',
+    options: [
+      {label: '改变行勾选', value: 'valueChange'},
+      {label: '改变全勾选', value: 'toggleChange'},
+      {label: '改变列宽', value: 'loadMore'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  target: {
+    category: 'input',
+    value: '',
+    label: '目标',
+    key: 'target',
+  },
+  payload: {
+    category: 'textarea',
+    value: '',
+    label: '载荷',
+    key: 'payload',
+  },
+}
 
 export {
     Button,
     Modal,
     Form,
     Table,
+    Select,
 }

@@ -2,15 +2,15 @@
 |-|-|-|
 |丰富组件的配置面板|||
 |select|todo||
-||搭建侧配置prop|doing|
-||搭建侧配置behavior|doing|
-||搭建侧props中使用options|doing|
+||搭建侧配置prop|done|
+||搭建侧配置behavior|done|
+||搭建侧props中使用options|done|
 ||搭建侧配置item|doing|
 ||渲染侧配置prop|todo|
 ||渲染侧配置behavior|todo|
 ||渲染侧配置item|todo|
 |input增加props.value|||
-|select增加props.value|||
+|select增加props.value|done||
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
 
@@ -21,13 +21,13 @@
 ||pagination||
 |web-site|开辟周边知识储备||
 |button的icon属性不生效|||
-|组件的初始属性从配置数据中来|done||
+|所有组件的item是否应该有“增加一行”|||
 |本次分支f_comp|||
 |上生产内容|||
 ||web-site|修正拼写|
 ||constructor|修改props样式|
 ||constructor|修正无法修改页面名称的问题|
-||constructor|增加6个组件的配置面板 button modal form table|
+||constructor|增加6个组件的配置面板 button modal form table input|
 ||这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、||
 ||mock-server|表单的提交接口|
 
