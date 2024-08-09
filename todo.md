@@ -1,17 +1,24 @@
 ||完成日期||
 |-|-|-|
 |丰富组件的配置面板|||
-|input|todo||
+|select|todo||
 ||搭建侧配置prop|doing|
 ||搭建侧配置behavior|doing|
+||搭建侧props中使用options|doing|
 ||搭建侧配置item|doing|
 ||渲染侧配置prop|todo|
 ||渲染侧配置behavior|todo|
 ||渲染侧配置item|todo|
+|input|done||
+||搭建侧配置prop|done|
+||搭建侧配置behavior|done|
+||搭建侧配置item|done|
+||渲染侧配置prop|done|
+||渲染侧配置behavior|done|
+||渲染侧配置item|done|
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
 
-||select||
 |增加4个组件|||
 ||icon||
 ||checkbox||

@@ -126,6 +126,7 @@ export type {
   ConfigItemTextarea,
   ConfigItemSelect,
   ConfigItemSwitch,
+  ConfigItmeOption,
   ConfigItemKeys,
   ConfigItemsCategoryType,
 }

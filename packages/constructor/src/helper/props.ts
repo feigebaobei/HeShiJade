@@ -103,27 +103,6 @@ let Button: PropsConfigItem = {
         key: 'text',
     }
 }
-let Select: PropsConfigItem = {
-    styleType: {
-        category: 'select',
-        options: [
-            { label: 'default', value: 'default' },
-            { label: 'grey', value: 'grey' },
-        ],
-        value: 'default',
-        label: '风格',
-        key: 'styleType',
-    },
-    options: {
-        category: 'select',
-        options: [
-            { label: 'oneLabel', value: 'oneVlaue' },
-        ],
-        value: '',
-        label: '选项',
-        key: 'options',
-    }
-}
 let Modal: PropsConfigItem = {
     title: {
         category: 'input',
@@ -540,11 +519,33 @@ let Input: PropsConfigItem = {
         key: 'placeholder',
     },
 }
+let Select: PropsConfigItem = {
+    styleType: {
+        category: 'select',
+        options: [
+            { label: 'default', value: 'default' },
+            { label: 'gray', value: 'gray' },
+        ],
+        value: 'default',
+        label: '风格',
+        key: 'styleType',
+    },
+    options: {
+        category: 'options',
+        // options: [
+        //     { label: 'oneLabel', value: 'oneVlaue' },
+        // ],
+        template: { label: 'oneLabel', value: 'oneVlaue' },
+        value: [],
+        label: '选项',
+        key: 'options',
+    }
+}
 export {
     Button,
-    Select,
     Modal,
     Form,
     Table,
     Input,
+    Select,
 }

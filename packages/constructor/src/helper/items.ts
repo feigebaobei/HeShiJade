@@ -8,7 +8,6 @@ import type {
 let clog = console.log
 
 let Input: ConfigItem[] = []
-let Select: ConfigItem[] = []
 let Button: ConfigItem[] = []
 let Modal: ConfigItem[] = []
 let Form: ConfigItem[] = [
@@ -104,7 +103,6 @@ let Form: ConfigItem[] = [
         value: '',
     },
 ]
-
 let FormItemCategory = [
     { label: 'input', value: 'input', },
     { label: 'select', value: 'select', },
@@ -239,14 +237,17 @@ let Table: ConfigItem[] = [
         hideConfig: true,
     },
 ]
+let Select: ConfigItem[] = [
+    
+]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
-    Select,
     Button,
     Modal,
     Form,
     // FormItemCategory,
     Table,
+    Select,
 }
 
 export default all
