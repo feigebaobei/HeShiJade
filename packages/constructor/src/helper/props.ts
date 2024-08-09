@@ -520,6 +520,12 @@ let Input: PropsConfigItem = {
     },
 }
 let Select: PropsConfigItem = {
+    value: {
+        category: 'input',
+        value: '',
+        label: '值',
+        key: 'value',
+    },
     styleType: {
         category: 'select',
         options: [
@@ -532,14 +538,157 @@ let Select: PropsConfigItem = {
     },
     options: {
         category: 'options',
-        // options: [
-        //     { label: 'oneLabel', value: 'oneVlaue' },
-        // ],
-        template: { label: 'oneLabel', value: 'oneVlaue' },
+        template: { label: '', value: '' },
         value: [],
         label: '选项',
         key: 'options',
-    }
+    },
+    isSearch: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否支持过滤搜索',
+        key: 'isSearch',
+    },
+    optscrollHightons: {
+        category: 'input',
+        value: '300px',
+        label: '选项',
+        key: 'scrollHight',
+    },
+    multiple: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否支持多选',
+        key: 'multiple',
+    },
+    isSelectAll: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否显示全选',
+        key: 'isSelectAll',
+    },
+    readonly: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否可以输入',
+        key: 'readonly',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '选项',
+        key: 'disabled',
+    },
+    size: {
+        category: 'select',
+        options: [
+            { label: '小', value: 'sm' },
+            { label: '中', value: '' },
+            { label: '大', value: 'lg' },
+        ],
+        value: '',
+        label: '大小',
+        key: 'size',
+    },
+    placeholder: {
+        category: 'input',
+        value: '请输入',
+        label: '点位符',
+        key: 'placeholder',
+    },
+    searchPlaceholder: {
+        category: 'input',
+        value: '',
+        label: '搜索功能的点位符',
+        key: 'searchPlaceholder',
+    },
+    direction: {
+        category: 'select',
+        options: [
+            { label: 'auto', value: 'auto' },
+            { label: 'up', value: 'up' },
+            { label: 'down', value: 'down' },
+        ],
+        value: 'auto',
+        label: '下拉选框弹出方向',
+        key: 'direction',
+    },
+    overview: {
+        category: 'select',
+        options: [
+            { label: 'border', value: 'border' },
+            { label: 'underlined', value: 'underlined' },
+        ],
+        value: 'border',
+        label: '决定选择框样式显示',
+        key: 'overview',
+    },
+    appendToBody: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否附加到body',
+        key: 'appendToBody',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '清空',
+        key: 'allowClear',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: true,
+        label: '是否开启动画',
+        key: 'showAnimation',
+    },
+    color: {
+        category: 'input',
+        value: '',
+        label: '复选框颜色',
+        key: 'color',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: true,
+        label: '是否显示悬浮发光效果',
+        key: 'showGlowStyle',
+    },
 }
 export {
     Button,

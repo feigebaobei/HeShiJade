@@ -9,13 +9,8 @@
 ||渲染侧配置prop|todo|
 ||渲染侧配置behavior|todo|
 ||渲染侧配置item|todo|
-|input|done||
-||搭建侧配置prop|done|
-||搭建侧配置behavior|done|
-||搭建侧配置item|done|
-||渲染侧配置prop|done|
-||渲染侧配置behavior|done|
-||渲染侧配置item|done|
+|input增加props.value|||
+|select增加props.value|||
 |删除嵌套组件时，未删除干净。|||
 |新创建的页面无法选中|||
 
@@ -117,3 +112,7 @@ just
 |职责范围|各种配置|定义使用配置的代码。包括：方法、hooks、业务逻辑|完整的项目代码|
 |||||
 |||||
+
+# devui
+api众多。其中好多不通用的。
+
