@@ -8,6 +8,7 @@ let {pagesDb, appsDb, lowcodeDb} = require('../mongodb');
 const { rules, resParamsError } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 // let md5 = require('md5');
+const { logger } = require('../helper/log')
 let clog = console.log
 
 router.use(bodyParser.json())
@@ -204,6 +205,7 @@ router.route('/')
       j()
     }
   }).then(() => {
+    logger.info({method: 'delete', originalUrl: req.originalUrl, ulid: req.query.ulid})
     return lowcodeDb.collection('pages_dev').findOne({ulid: req.query.ulid}).then((p) => {
       page = p
       return true
@@ -298,7 +300,7 @@ router.route('/')
     })
   }).then(() => {
     return res.status(200).json({
-      code,
+      code: 0,
       message: '',
       data: {},
     })
