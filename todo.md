@@ -1,17 +1,6 @@
 ||完成日期||
 |-|-|-|
-|丰富组件的配置面板|||
-|select|todo||
-||搭建侧配置prop|done|
-||搭建侧配置behavior|done|
-||搭建侧props中使用options|done|
-||搭建侧配置item|不需要此功能|
-||渲染侧配置prop|done|
-||渲染侧配置behavior|不需要此功能|
-||渲染侧配置item|不需要此功能|
-|input增加props.value|done||
-|select增加props.value|done||
-|删除嵌套组件时，未删除干净。|||
+|删除嵌套组件时，未删除干净。|doing||
 |新创建的页面无法选中|||
 
 |增加4个组件|||
@@ -27,7 +16,7 @@
 ||web-site|修正拼写|
 ||constructor|修改props样式|
 ||constructor|修正无法修改页面名称的问题|
-||constructor|增加6个组件的配置面板 button modal form table input|
+||constructor|增加6个组件的配置面板 button modal form table input select|
 ||这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、||
 ||mock-server|表单的提交接口|
 

@@ -315,24 +315,23 @@ router.route('/')
       return Promise.reject(2000101)
     })
   })
-  // 删除组件及页面
+  // 删除组件及更新页面
   .then(() => {
-    let arr = [lowcodeDb.collection(DB.dev.componentTable).deleteOne({ulid: component.ulid})]
+    let arr = [
+      lowcodeDb.collection(DB.dev.componentTable).deleteMany({ulid: {$in: [component.ulid, ...req.query.childrenUlid]}}),
+    ]
     if (component.prevUlid) { // 前面有组件
-      // tested
       if (component.nextUlid === '') { // 后面无组件
         let p1 = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: page.ulid}, {$set: {lastComponentUlid: component.prevUlid}})
         let p2 = lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: component.prevUlid}, {$set: {nextUlid: ''}})
         arr.push(p1, p2)
       } else { // 后面有组件 等效于 它在中间
         // page不变
-        // tested
         let p1 = lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: component.prevUlid}, {$set: {nextUlid: component.nextUlid}})
         let p2 = lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: component.nextUlid}, {$set: {prevUlid: component.prevUlid}})
         arr.push(p1, p2)
       }
     } else { // 前面没有组件
-      // tested
       if (component.nextUlid === '') { // 等效于 page.firstComponentUlid === page.lastComponentUlid // 只有一个组件
         let p1 = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: page.ulid}, {$set: {
           firstComponentUlid: '',
@@ -340,7 +339,6 @@ router.route('/')
         }})
         arr.push(p1)
       } else {
-        // tested
         let p1 = lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: component.nextUlid}, {$set: {prevUlid: ''}})
         let p2
         if (component.parentUlid) {
