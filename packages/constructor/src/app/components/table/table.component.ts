@@ -129,7 +129,7 @@ AfterViewInit
     // this.datatable.getCheckedRows()
     
     // let curPage = this.pageService.getCurPage()
-    let tree = this.componentService.getTreeByKey(this.curPage.ulid)
+    let tree = this.componentService.getTree(this.curPage.ulid)
     this.data.items.forEach((item, index) => {
       if (item['category'] === 'slots') {
         let node = tree?.find(item['childUlid'])
@@ -171,8 +171,9 @@ AfterViewInit
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
     this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
   // ngAfterContentInit() {
   //   this.afterContentInit()

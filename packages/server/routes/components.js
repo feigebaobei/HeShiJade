@@ -288,7 +288,7 @@ router.route('/')
   // 校验参数：必填+存在
   // 处理页面级数据
   // 处理组件级数据
-  let component, page
+  let component, page, childrenUlid
   // 检查必填项
   new Promise((s, j) => {
     if (rules.required(req.query.ulid)) {
@@ -317,8 +317,17 @@ router.route('/')
   })
   // 删除组件及更新页面
   .then(() => {
+    if (req.query.childrenUlid) {
+      if (Array.isArray(req.query.childrenUlid)) {
+        childrenUlid = req.query.childrenUlid
+      } else {
+        childrenUlid = [req.query.childrenUlid]
+      }
+    } else {
+      childrenUlid = []
+    }
     let arr = [
-      lowcodeDb.collection(DB.dev.componentTable).deleteMany({ulid: {$in: [component.ulid, ...req.query.childrenUlid]}}),
+      lowcodeDb.collection(DB.dev.componentTable).deleteMany({ulid: {$in: [component.ulid, ...childrenUlid]}}),
     ]
     if (component.prevUlid) { // 前面有组件
       if (component.nextUlid === '') { // 后面无组件

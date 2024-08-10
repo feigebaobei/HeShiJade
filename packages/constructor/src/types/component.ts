@@ -51,7 +51,7 @@ interface ComponentMountEmpty {area: ''}
 interface ComponentMountItems {area: 'items', itemIndex: N}
 interface ComponentMountSlots {area: 'slots', slotKey: S}
 interface Component {
-  ulid: S
+  ulid: ULID
   type: S
   nextUlid: ULID
   prevUlid: ULID

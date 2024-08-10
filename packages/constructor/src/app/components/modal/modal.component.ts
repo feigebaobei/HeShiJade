@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit{
     this.page = this.pageService.getCurPage()!
   }
   ngOnInit() {
-    let tree = this.componentService.getTreeByKey(this.page!.ulid)
+    let tree = this.componentService.getTree(this.page!.ulid)
     if (tree) {
       let node = tree.find(this.data.ulid)
       let headerNode = node?.children[createChildKey('slots', 'header', 'node')]
@@ -85,13 +85,15 @@ export class ModalComponent implements OnInit{
   }
   deleteComponentByUlidH(ulid: ULID) {
     this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.page.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
   bodyDeleteComponentByUlidH(ulid: ULID) {
     this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.page.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
 
   }
 }
