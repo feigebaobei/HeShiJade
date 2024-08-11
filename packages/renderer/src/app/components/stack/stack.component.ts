@@ -9,6 +9,7 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { InputComponent } from 'src/app/components/input/input.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
 import { TableComponent } from 'src/app/components/table/table.component';
+import { IconComponent } from 'src/app/components/icon/icon.component';
 // type
 import type { A, S } from 'src/types/base';
 
@@ -22,6 +23,7 @@ let compMap: {[k: S]: A} = {
   Input: InputComponent,
   Select: SelectComponent,
   Table: TableComponent,
+  Icon: IconComponent,
 }
 
 @Component({
@@ -99,6 +101,14 @@ export class StackComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           items: this.data.items,
+          ulid: this.data.ulid,
+        }
+        break;
+      case 'Icon':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          // behavior: this.data.behavior,
+          // items: this.data.items,
           ulid: this.data.ulid,
         }
         break;
