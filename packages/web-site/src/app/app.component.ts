@@ -21,6 +21,9 @@ export class AppComponent {
   docClickH() {
     this.router.navigate(['/doc'])
   }
+  boundaryClickH() {
+    this.router.navigate(['/boundary'])
+  }
   designClickH() {
     this.router.navigate(['/design'])
   }
