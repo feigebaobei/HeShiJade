@@ -14,6 +14,7 @@ import { InputComponent } from './input/input.component';
 import { ModalComponent } from './modal/modal.component';
 import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
+import { IconComponent } from './icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TableComponent } from './table/table.component';
     SelectComponent,
     TableComponent,
     CompBoxComponent,
+    IconComponent,
   ],
   imports: [
     CommonModule,

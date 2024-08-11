@@ -118,8 +118,9 @@ api众多。其中好多不通用的。
 1. 在组件列表中增加组件项
 2. 在`constructor/src/helper/props.ts``constructor/src/helper/behavior.ts``constructor/src/helper/items.ts`设置组件的配置项props/behavior/items
 3. 在`constructor/src/helper/components.ts`中引入no.2中创建的props/behavior/items设置该组件的默认值
-4. 初始化组件。在constructor目录下执行`ng g c component/newComp`
-5. 注释`constructor/src/app/components/icon/icon.component.ts`中的`template``imports`。
-6. 在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。
-7. 重新启动constructor项目
-8. 
+4. 在`constructor/src/app/components/comp-box/comp-box.component.ts`中为新组件传入数据
+5. 初始化组件。在constructor目录下执行`ng g c component/newComp`
+6. 注释`constructor/src/app/components/icon/icon.component.ts`中的`template``imports`。
+7. 在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。
+8. 重新启动constructor项目
+9. 在新组件中接收数据、处理逻辑、调整事件。
