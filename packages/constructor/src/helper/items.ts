@@ -248,6 +248,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // FormItemCategory,
     Table,
     Select,
+    // Icon, // 没有子元素
 }
 
 export default all

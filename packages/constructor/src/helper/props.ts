@@ -696,6 +696,46 @@ let Select: PropsConfigItem = {
         key: 'showGlowStyle',
     },
 }
+let Icon: PropsConfigItem = {
+    icon: {
+        category: 'input',
+        value: 'icon-add',
+        label: '名称',
+        key: 'icon',
+    },
+    operable: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否可操作',
+        key: 'operable',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否禁用',
+        key: 'disabled',
+    },
+    rotate: {
+        category: 'input',
+        value: '',
+        label: '旋转角度',
+        key: 'icon',
+    },
+    color: {
+        category: 'input',
+        value: '#333',
+        label: '颜色',
+        key: 'color',
+    },
+}
 export {
     Button,
     Modal,
@@ -703,4 +743,5 @@ export {
     Table,
     Input,
     Select,
+    Icon,
 }
