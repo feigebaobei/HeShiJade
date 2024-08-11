@@ -45,6 +45,7 @@ export class PageListComponent implements OnInit {
     this.pageList = []
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
+      clog('page变了', p)
       this.curPage = p
     })
     this.msg = []
@@ -97,9 +98,10 @@ export class PageListComponent implements OnInit {
             let page = initPageMeta(data.key, data.name,
               this.pageList.length ? this.pageList[this.pageList.length - 1].ulid : '',
               '',
-              // ulid(),
               app!.ulid,
             )
+
+            clog('page', page)
             this.pageList.push(page)
             this.pageService.add(app!.ulid, page)
             this.pageService.reqPostPage(data, app!.ulid, page.ulid)
@@ -119,15 +121,14 @@ export class PageListComponent implements OnInit {
     })
   }
   pageItemClickH(pageUlid: S) {
-    let curPage = this.pageService.getCurPage()
-    if (curPage) {
-      this.componentService.setCurComponent(curPage.ulid)
-    }
     let app = this.appService.getCurApp()
     if (app) {
       this.pageService.setCurPage(app.ulid, pageUlid)
     }
-    // this.curPage = this.pageList.find(item => item.ulid === pageUlid)
+    let curPage = this.pageService.getCurPage()
+    if (curPage) {
+      this.componentService.setCurComponent(curPage.ulid)
+    }
   }
   reReqPageButtonClickH() {
     // this.pageService.reqPageList()

@@ -113,7 +113,9 @@ let initComponentMeta = (
     pageUlid,
   }
 }
-let initPageMeta = (key: S = '', name: S = '',prevUlid: S = '', nextUlid: S = '', appUlid: ULID = '') => {
+let initPageMeta = (key: S = '', name: S = '',
+  prevUlid: S = '', nextUlid: S = '', 
+  appUlid: ULID = '') => {
   // let app = this.appService.getCurApp()
   return {
     key,
