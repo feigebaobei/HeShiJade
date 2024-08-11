@@ -2,10 +2,13 @@
 |-|-|-|
 |icon|todo||
 |设置组件列表|done||
-|设置配置面板|doing||
-|搭建侧使用配置项|||
+|设置配置面板|done||
+|搭建侧创建组件|doing||
+|搭建侧使用配置项|doing||
+|渲染侧创建组件|||
 |渲染侧使用配置项|||
 |整理当前支持的配置项类型|||
+|整理增加组件的过程|doing||
 |删除嵌套组件时，未删除干净。|done||
 |新创建的页面无法选中|done||
 
@@ -111,3 +114,12 @@ just
 # devui
 api众多。其中好多不通用的。
 
+# 增加组件的过程
+1. 在组件列表中增加组件项
+2. 在`constructor/src/helper/props.ts``constructor/src/helper/behavior.ts``constructor/src/helper/items.ts`设置组件的配置项props/behavior/items
+3. 在`constructor/src/helper/components.ts`中引入no.2中创建的props/behavior/items设置该组件的默认值
+4. 初始化组件。在constructor目录下执行`ng g c component/newComp`
+5. 注释`constructor/src/app/components/icon/icon.component.ts`中的`template``imports`。
+6. 在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。
+7. 重新启动constructor项目
+8. 

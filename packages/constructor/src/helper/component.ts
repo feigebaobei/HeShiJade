@@ -8,6 +8,7 @@ import { Button as ButtonProps,
     Modal as ModalProps,
     Form as FormProps,
     Table as TableProps,
+    Icon as IconProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -105,6 +106,12 @@ let Table: ComponentDefaultConfig = {
     ],
     slots: {},
 }
+let Icon: ComponentDefaultConfig = {
+    props: opProps(IconProps),
+    behavior: [],
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -113,4 +120,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Select,
     Form,
     Table,
+    Icon,
 }
