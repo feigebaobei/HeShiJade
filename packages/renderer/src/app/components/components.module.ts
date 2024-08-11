@@ -15,6 +15,7 @@ import { InputComponent } from './input/input.component';
 import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
 import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
+import { IconComponent } from './icon/icon.component';
 
 
 
@@ -30,6 +31,7 @@ import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
     SelectComponent,
     TableComponent,
     ModalCompComponent,
+    IconComponent,
   ],
   imports: [
     CommonModule,
