@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { A } from 'src/types/base';
 
 @Component({
   selector: 'app-icon',
@@ -8,5 +9,6 @@ import { Component } from '@angular/core';
   styleUrl: './icon.component.sass'
 })
 export class IconComponent {
-
+  @Input() data: A
+  constructor() {}
 }

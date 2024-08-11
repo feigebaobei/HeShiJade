@@ -134,4 +134,5 @@ api众多。其中好多不通用的。
 2. 注释`renderer/src/app/components/newComp/newComp.components.ts`中的`template``imports`。
 3. 在`renderer/src/app/components/components.module.ts`引入新组件并声明
 4. 在`renderer/src/app/components/stack/stack.component.ts`中引入新组件并为其传入数据
-5. 重新启动renderer项目
+5. 在新组件中接收数据、处理逻辑、调整事件。
+6. 重新启动renderer项目
