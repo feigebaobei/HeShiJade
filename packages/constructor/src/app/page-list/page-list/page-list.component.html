@@ -1,14 +1,11 @@
 <div dDroppable (dropEvent)="onDrop($event, pageList)">
     <div dSortable>
-        ulid: {{this.curPage?.ulid}}
         <div dDraggable
             *ngFor="let page of pageList; let i = index"
             class="page_item"
             [ngClass]="{selected: page.ulid === curPage?.ulid}"
             (click)="pageItemClickH(page.ulid)"
         >
-            ulid: {{this.curPage?.ulid}}
-            <br/>
             <div *ngIf="editIndex === i; else read">
                 <d-input-group [suffixContent]="ok">
                     <input class="duration-value" dTextInput [(ngModel)]="pageNameEdit" [placeholder]="'页面名称'" (blur)="editInputBlurH" />

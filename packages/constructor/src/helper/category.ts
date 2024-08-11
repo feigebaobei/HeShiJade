@@ -36,6 +36,26 @@ let categoryList = [
         componentCategory: 'Select',
         ulid: '12345asdfgb'
     },
+    {
+        name: 'icon',
+        componentCategory: 'Icon',
+        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+    },
+    {
+        name: 'checkbox',
+        componentCategory: 'Checkbox',
+        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+    },
+    {
+        name: 'tabs',
+        componentCategory: 'Tabs',
+        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+    },
+    {
+        name: 'pagination',
+        componentCategory: 'Pagination',
+        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+    },
   ]
 export {
     categoryList

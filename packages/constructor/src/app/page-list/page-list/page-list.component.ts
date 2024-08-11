@@ -45,7 +45,6 @@ export class PageListComponent implements OnInit {
     this.pageList = []
     this.curPage = null
     this.pageService.pageSubject$.subscribe(p => {
-      clog('page变了', p)
       this.curPage = p
     })
     this.msg = []
@@ -100,8 +99,6 @@ export class PageListComponent implements OnInit {
               '',
               app!.ulid,
             )
-
-            clog('page', page)
             this.pageList.push(page)
             this.pageService.add(app!.ulid, page)
             this.pageService.reqPostPage(data, app!.ulid, page.ulid)
