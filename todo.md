@@ -1,17 +1,26 @@
 ||完成日期||
 |-|-|-|
+|checkbox|todo||
+|设置组件列表|done||
+|设置配置面板|todo||
+|搭建侧创建组件|todo||
+|搭建侧使用配置项|todo||
+|排查配置项不显示的问题|todo||
+|渲染侧创建组件|todo||
+|渲染侧使用配置项|todo||
+|整理增加组件的过程|todo||
 |icon|todo||
 |设置组件列表|done||
 |设置配置面板|done||
 |搭建侧创建组件|done||
 |搭建侧使用配置项|done||
 |排查配置项不显示的问题|done||
-|渲染侧创建组件|doing||
-|渲染侧使用配置项|||
-|整理增加组件的过程|doing||
+|渲染侧创建组件|done||
+|渲染侧使用配置项|done||
+|整理增加组件的过程|done||
 |web-site增加能力边界导航|列出支持哪些setter|done|
 |web-site增加能力增强导航|列出如何增加新组件|todo|
-|整理当前支持的配置项类型|||
+|整理当前支持的配置项类型|done||
 |删除嵌套组件时，未删除干净。|done||
 |新创建的页面无法选中|done||
 
@@ -24,7 +33,7 @@
 |所有组件的item是否应该有“增加一行”|||
 |本次分支f_comp|||
 |上生产内容|||
-||增加4个组件||
+||增加4个组件|icon|
 ||web-site|修正拼写|
 ||constructor|修改props样式|
 ||constructor|修正无法修改页面名称的问题|
@@ -116,23 +125,3 @@ just
 
 # devui
 api众多。其中好多不通用的。
-
-# 增加组件的过程
-## 搭建侧增加组件
-1. 在组件列表中增加组件项
-2. 在`constructor/src/helper/props.ts``constructor/src/helper/behavior.ts``constructor/src/helper/items.ts`设置组件的配置项props/behavior/items
-3. 在`constructor/src/helper/components.ts`中引入no.2中创建的props/behavior/items设置该组件的默认值
-4. 在`constructor/src/app/props/props-box/props-box.component.ts`/`constructor/src/app/behavior/behavior-box/behavior-box.component.ts`中分别引入并处理props、behavior
-5. 在`constructor/src/app/components/comp-box/comp-box.component.ts`中为新组件传入数据
-6. 初始化组件。在constructor目录下执行`ng g c component/newComp`
-7. 注释`constructor/src/app/components/newComp/newComp.component.ts`中的`template``imports`。
-8. 在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。
-9. 重新启动constructor项目
-10. 在新组件中接收数据、处理逻辑、调整事件。
-## 渲染侧增加组件
-1. 在`renderer`目录下执行`ng g c components/newComp`
-2. 注释`renderer/src/app/components/newComp/newComp.components.ts`中的`template``imports`。
-3. 在`renderer/src/app/components/components.module.ts`引入新组件并声明
-4. 在`renderer/src/app/components/stack/stack.component.ts`中引入新组件并为其传入数据
-5. 在新组件中接收数据、处理逻辑、调整事件。
-6. 重新启动renderer项目

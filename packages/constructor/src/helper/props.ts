@@ -736,6 +736,60 @@ let Icon: PropsConfigItem = {
         key: 'color',
     },
 }
+let Checkbox: PropsConfigItem = {
+    label: {
+        category: 'input',
+        value: '',
+        label: 'label',
+        key: 'label',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '名称',
+        key: 'disabled',
+    },
+    halfchecked: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '半选状态',
+        key: 'halfchecked',
+    },
+    color: {
+        category: 'input',
+        value: '#5e7ce0',
+        label: '复选框颜色',
+        key: 'color',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否显示动画',
+        key: 'showAnimation',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '是否显示悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+}
 export {
     Button,
     Modal,
@@ -744,4 +798,5 @@ export {
     Input,
     Select,
     Icon,
+    Checkbox,
 }
