@@ -7,6 +7,7 @@ import {
   Modal as modalBehaviorMeta,
   Form as FormBehaviorMeta,
   Table as TableBehaviorMeta,
+  Checkbox as CheckboxBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
@@ -91,6 +92,15 @@ export class BehaviorBoxComponent {
       case 'Table':
         this.curComp.behavior.forEach(item => {
           let o = cloneDeep(TableBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Checkbox':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(CheckboxBehaviorMeta)
           Object.entries(item).forEach(([k, v]) => {
             o[k].value = v
           })
