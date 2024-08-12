@@ -8,6 +8,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { SelectComponent } from '../select/select.component';
 import { TableComponent } from '../table/table.component';
 import { IconComponent } from '../icon/icon.component';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -39,6 +40,7 @@ let compMap: Ao = {
   Select: SelectComponent,
   Table: TableComponent,
   Icon: IconComponent,
+  Checkbox: CheckboxComponent,
 }
 
 @Component({
@@ -139,6 +141,13 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Icon':
         this.componentRef.instance.data = {
           props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Checkbox':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          // behavior: this.comp.behavior,
           ulid: this.comp.ulid,
         }
         break

@@ -15,6 +15,7 @@ import { ModalComponent } from './modal/modal.component';
 import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
 import { IconComponent } from './icon/icon.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { IconComponent } from './icon/icon.component';
     TableComponent,
     CompBoxComponent,
     IconComponent,
+    CheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -38,12 +40,6 @@ import { IconComponent } from './icon/icon.component';
   providers: [],
   exports: [
     CompBoxComponent,
-    // ButtonComponent,
-    // FormComponent,
-    // InputComponent,
-    // ModalComponent,
-    // SelectComponent,
-    // TableComponent,
   ],
 })
 export class ComponentsModule { }
