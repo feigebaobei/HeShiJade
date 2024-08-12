@@ -9,12 +9,14 @@ import { Button as ButtonProps,
     Form as FormProps,
     Table as TableProps,
     Icon as IconProps,
+    Checkbox as CheckboxProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
     Modal as ModalBehavior,
     Form as FormBehavior,
     Table as TableBehavior,
+    Checkbox as CheckboxBehavior,
 } from 'src/helper/behavior'
 import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
     BehaviorMetaItem,
@@ -112,6 +114,12 @@ let Icon: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Checkbox: ComponentDefaultConfig = {
+    props: opProps(CheckboxProps),
+    behavior: opBehavior(CheckboxBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -121,4 +129,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Form,
     Table,
     Icon,
+    Checkbox,
 }
