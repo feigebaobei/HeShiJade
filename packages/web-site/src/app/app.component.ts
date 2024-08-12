@@ -24,6 +24,9 @@ export class AppComponent {
   boundaryClickH() {
     this.router.navigate(['/boundary'])
   }
+  extendClickH() {
+    this.router.navigate(['/extend'])
+  }
   designClickH() {
     this.router.navigate(['/design'])
   }
