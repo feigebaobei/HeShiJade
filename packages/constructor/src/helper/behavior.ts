@@ -156,6 +156,31 @@ let Select: BehaviorConfigItem = {
   },
 }
 
+let Checkbox: BehaviorConfigItem = {
+  event: {
+    category: 'select',
+    options: [
+      {label: '改变前', value: 'beforeChange'},
+      {label: '改变后', value: 'change'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  target: {
+    category: 'input',
+    value: '',
+    label: '目标',
+    key: 'target',
+  },
+  payload: {
+    category: 'textarea',
+    value: '',
+    label: '载荷',
+    key: 'payload',
+  },
+}
+
 export {
     Button,
     Modal,
@@ -163,4 +188,5 @@ export {
     Table,
     Select,
     // Icon, // 没有行为
+    Checkbox,
 }

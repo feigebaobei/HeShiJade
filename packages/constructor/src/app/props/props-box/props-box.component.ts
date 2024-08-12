@@ -22,6 +22,7 @@ import {
   Form as formPropsMeta,
   Table as tablePropsMeta,
   Icon as iconPropsMeta,
+  Checkbox as CheckPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -144,6 +145,12 @@ export class PropsBoxComponent {
         // todo把其他组件也改为从配置文件中取配置项。
         // todo配置文件改为数组
         Object.values(iconPropsMeta).forEach((item: ConfigItem) => {
+          item.value = this.curComp!.props[item.key] // value
+          this.componentPropsList.push(item)
+        })
+        break;
+      case 'Checkbox':
+        Object.values(CheckPropsMeta).forEach((item: ConfigItem) => {
           item.value = this.curComp!.props[item.key] // value
           this.componentPropsList.push(item)
         })

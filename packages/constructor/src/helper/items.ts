@@ -249,6 +249,7 @@ let all: {[k: S]: ConfigItem[]} = {
     Table,
     Select,
     // Icon, // 没有子元素
+    // Checkbox, // 没有子元素
 }
 
 export default all
