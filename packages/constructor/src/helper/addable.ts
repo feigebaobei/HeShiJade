@@ -36,6 +36,16 @@ let Modal: CompConfigAddabel = {
     items: true,
     slots: false,
 }
+let Icon: CompConfigAddabel = {
+    behavior: false,
+    items: false,
+    slots: false,
+}
+let Checkbox: CompConfigAddabel = {
+    behavior: false,
+    items: false,
+    slots: false,
+}
 
 let all: {[k: S]: CompConfigAddabel} = {
     Button,
@@ -44,6 +54,8 @@ let all: {[k: S]: CompConfigAddabel} = {
     Input,
     Select,
     Modal,
+    Icon,
+    Checkbox,
 }
 
 export {
