@@ -36,4 +36,7 @@ export class AppComponent {
   changelogClickH() {
     this.router.navigate(['/changelog'])
   }
+  circumClickH() {
+    this.router.navigate(['/circum'])
+  }
 }

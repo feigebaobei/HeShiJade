@@ -4,15 +4,15 @@
 |设置组件列表|done||
 |设置配置面板|done||
 |搭建侧创建组件|done||
-|搭建侧使用配置项|doing||
-|排查不显示行为、items的问题|todo||
+|搭建侧使用配置项|done||
+|排查不显示行为、items的问题|done||
 |渲染侧创建组件|todo||
 |渲染侧使用配置项|todo||
 
 |增加4个组件|||
 ||tabs||
 ||pagination||
-|web-site|开辟周边知识储备||
+|web-site|开辟周边知识储备|doing|
 |button的icon属性不生效|||
 |所有组件的item是否应该有“增加一行”|||
 |本次分支f_comp|||
