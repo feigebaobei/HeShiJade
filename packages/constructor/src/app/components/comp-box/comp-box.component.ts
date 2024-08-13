@@ -79,7 +79,11 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     // 选中组件
     $event.stopPropagation()
     // clog(this.comp)
-    this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
+    if (this.curComp?.ulid === this.comp.ulid) {
+      // 已经是当前组件了，不切换。
+    } else {
+      this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
+    }
   }
   ngOnInit() {
   }
