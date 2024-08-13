@@ -160,7 +160,7 @@ let Checkbox: BehaviorConfigItem = {
   event: {
     category: 'select',
     options: [
-      {label: '改变前', value: 'beforeChange'},
+      // {label: '改变前', value: 'beforeChange'},
       {label: '改变后', value: 'change'},
     ],
     value: '',

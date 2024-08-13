@@ -743,6 +743,16 @@ let Checkbox: PropsConfigItem = {
         label: 'label',
         key: 'label',
     },
+    value: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '值',
+        key: 'value',
+    },
     disabled: {
         category: 'switch',
         options: [
