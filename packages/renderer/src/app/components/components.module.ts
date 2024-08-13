@@ -16,7 +16,7 @@ import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
 import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
 import { IconComponent } from './icon/icon.component';
-
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 
 
@@ -32,6 +32,7 @@ import { IconComponent } from './icon/icon.component';
     TableComponent,
     ModalCompComponent,
     IconComponent,
+    CheckboxComponent,
   ],
   imports: [
     CommonModule,

@@ -6,13 +6,13 @@
 |搭建侧创建组件|done||
 |搭建侧使用配置项|done||
 |排查不显示行为、items的问题|done||
-|渲染侧创建组件|todo||
+|渲染侧创建组件|doing||
 |渲染侧使用配置项|todo||
 
 |增加4个组件|||
 ||tabs||
 ||pagination||
-|web-site|开辟周边知识储备|doing|
+|web-site|开辟周边知识储备|done|
 |button的icon属性不生效|||
 |所有组件的item是否应该有“增加一行”|||
 |本次分支f_comp|||

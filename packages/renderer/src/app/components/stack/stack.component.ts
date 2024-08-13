@@ -10,6 +10,7 @@ import { InputComponent } from 'src/app/components/input/input.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
 import { TableComponent } from 'src/app/components/table/table.component';
 import { IconComponent } from 'src/app/components/icon/icon.component';
+import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 // type
 import type { A, S } from 'src/types/base';
 
@@ -24,6 +25,7 @@ let compMap: {[k: S]: A} = {
   Select: SelectComponent,
   Table: TableComponent,
   Icon: IconComponent,
+  Checkbox: CheckboxComponent,
 }
 
 @Component({
@@ -108,6 +110,14 @@ export class StackComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           // behavior: this.data.behavior,
+          // items: this.data.items,
+          ulid: this.data.ulid,
+        }
+        break;
+      case 'Checkbox':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
           // items: this.data.items,
           ulid: this.data.ulid,
         }
