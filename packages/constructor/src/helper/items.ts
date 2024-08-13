@@ -240,6 +240,30 @@ let Table: ConfigItem[] = [
 let Select: ConfigItem[] = [
     
 ]
+let Tabs: ConfigItem[] = [
+    {
+        label: 'id',
+        category: 'input',
+        key: 'id',
+        value: '',
+    },
+    {
+        label: '标题',
+        category: 'input',
+        key: 'title',
+        value: '',
+    },
+    {
+        label: '是否禁用',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'disabled',
+        value: false,
+    },
+]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
     Button,
@@ -250,6 +274,7 @@ let all: {[k: S]: ConfigItem[]} = {
     Select,
     // Icon, // 没有子元素
     // Checkbox, // 没有子元素
+    Tabs,
 }
 
 export default all

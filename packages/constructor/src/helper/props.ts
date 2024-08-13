@@ -800,6 +800,74 @@ let Checkbox: PropsConfigItem = {
         key: 'showGlowStyle',
     },
 }
+let Tabs: PropsConfigItem = {
+    activeTag: {
+        category: 'input',
+        value: '',
+        label: '当前激活的选项卡Id',
+        key: 'activeTag',
+    },
+    type: {
+        category: 'select',
+        options: [
+            { label: 'tabs', value: 'tabs', },
+            { label: 'pills', value: 'pills', },
+            { label: 'wrapped', value: 'wrapped', },
+            { label: 'slider', value: 'slider', },
+        ],
+        value: 'tabs',
+        label: 'label',
+        key: 'type',
+    },
+    size: {
+        category: 'select',
+        options: [
+            { label: '超小', value: 'xs', },
+            { label: '小', value: 'sm', },
+            { label: '中', value: 'md', },
+            { label: '大', value: 'lg', },
+        ],
+        value: 'md',
+        label: 'label',
+        key: 'size',
+    },
+    customWidth: {
+        category: 'input',
+        value: '',
+        label: '选项卡的宽度',
+        key: 'customWidth',
+    },
+    closeable: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否显示删除图标',
+        key: 'closeable',
+    },
+    scrollMode: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否启用大数据滚动显示',
+        key: 'scrollMode',
+    },
+    isHidden: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '选项卡内容隐藏时是否销毁',
+        key: 'isHidden',
+    },
+}
 export {
     Button,
     Modal,
@@ -809,4 +877,5 @@ export {
     Select,
     Icon,
     Checkbox,
+    Tabs,
 }

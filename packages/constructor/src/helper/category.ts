@@ -44,17 +44,17 @@ let categoryList = [
     {
         name: 'checkbox',
         componentCategory: 'Checkbox',
-        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+        ulid: '01J50SW599JKFBDBMKX78GAKXE'
     },
     {
         name: 'tabs',
         componentCategory: 'Tabs',
-        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+        ulid: '01J50SWE1J1NY7KK9E6R5R9W61'
     },
     {
         name: 'pagination',
         componentCategory: 'Pagination',
-        ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
+        ulid: '01J50ZGTCKEC10HWAJBZND487B'
     },
   ]
 export {

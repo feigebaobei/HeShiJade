@@ -181,6 +181,32 @@ let Checkbox: BehaviorConfigItem = {
   },
 }
 
+let Tabs: BehaviorConfigItem = {
+  event: {
+    category: 'select',
+    options: [
+      {label: '切换', value: 'activeTabChange'},
+      {label: '添加', value: 'addTabChange'},
+      {label: '删除', value: 'deleteTabChange'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  target: {
+    category: 'input',
+    value: '',
+    label: '目标',
+    key: 'target',
+  },
+  payload: {
+    category: 'textarea',
+    value: '',
+    label: '载荷',
+    key: 'payload',
+  },
+}
+
 export {
     Button,
     Modal,
@@ -189,4 +215,5 @@ export {
     Select,
     // Icon, // 没有行为
     Checkbox,
+    Tabs,
 }
