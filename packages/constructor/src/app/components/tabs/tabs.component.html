@@ -9,12 +9,22 @@
     [isHidden]="data.props['isHidden']"
 >
     <d-tab
-        *ngFor="let ele of data.items"
+        *ngFor="let ele of data.items; let i = index"
         [id]="ele['id']"
         [title]="ele['title']"
         [disabled]="ele['disabled']"
     >
-        <p>Tab1 Content</p>
+        <div dDroppable
+            class="dropArea"
+            (dropEvent)="dropH($event, i)"
+        >
+            <span *ngIf="!compatibleArray(getChildrenComponent(i)).length">此区域可接收子组件</span>
+            <app-comp-box
+            *ngFor="let comp of compatibleArray(getChildrenComponent(i))"
+            [comp]="comp"
+            (deleteComp)="deleteComponentByUlidH($event, i)"
+            ></app-comp-box>
+        </div>
     </d-tab>
 </d-tabs>
 <div *ngIf="!data.items.length">placeholder for Tabs</div>
