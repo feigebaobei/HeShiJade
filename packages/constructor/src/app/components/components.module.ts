@@ -16,6 +16,7 @@ import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
 import { IconComponent } from './icon/icon.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
     TableComponent,
     CompBoxComponent,
     IconComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    TabsComponent,
   ],
   imports: [
     CommonModule,

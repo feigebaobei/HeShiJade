@@ -9,6 +9,7 @@ import { SelectComponent } from '../select/select.component';
 import { TableComponent } from '../table/table.component';
 import { IconComponent } from '../icon/icon.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { TabsComponent } from '../tabs/tabs.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -41,6 +42,7 @@ let compMap: Ao = {
   Table: TableComponent,
   Icon: IconComponent,
   Checkbox: CheckboxComponent,
+  Tabs: TabsComponent,
 }
 
 @Component({
@@ -152,6 +154,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         this.componentRef.instance.data = {
           props: this.comp.props,
           // behavior: this.comp.behavior,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Tabs':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          // behavior: this.comp.behavior,
+          items: this.comp.items,
           ulid: this.comp.ulid,
         }
         break

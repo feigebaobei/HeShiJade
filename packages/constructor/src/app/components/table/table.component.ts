@@ -90,34 +90,6 @@ AfterViewInit
         dob: new Date(1991, 3, 1),
       },
     ]
-    // this.dataTableOptions = {
-    //   columns: [
-    //     {
-    //       field: 'firstName',
-    //       header: 'First Name',
-    //       fieldType: 'text',
-    //       // order: 10
-    //     },
-    //     {
-    //       field: 'lastName',
-    //       header: 'Last Name',
-    //       fieldType: 'text',
-    //       // order: 2
-    //     },
-    //     {
-    //       field: 'gender',
-    //       header: 'Gender',
-    //       fieldType: 'text',
-    //       // order: 4
-    //     },
-    //     {
-    //       field: 'dob',
-    //       header: 'Date of birth',
-    //       fieldType: 'date',
-    //       // order: 30
-    //     }
-    //   ]
-    // }
     this.compObj = {
       // <field>: Comp[]
     }
