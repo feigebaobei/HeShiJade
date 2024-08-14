@@ -104,8 +104,7 @@ let Form: ComponentDefaultConfig = {
 let Table: ComponentDefaultConfig = {
     props: opProps(TableProps),
     behavior: opBehavior(TableBehavior),
-    items: [
-    ],
+    items: [],
     slots: {},
 }
 let Icon: ComponentDefaultConfig = {
@@ -120,6 +119,18 @@ let Checkbox: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Tabs: ComponentDefaultConfig = {
+    props: opProps(CheckboxProps),
+    behavior: opBehavior(CheckboxBehavior),
+    items: [
+        {
+            id: 'id',
+            title: 'title',
+            disabled: false,
+        },
+    ],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -130,4 +141,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Table,
     Icon,
     Checkbox,
+    Tabs,
 }

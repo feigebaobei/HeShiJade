@@ -107,6 +107,15 @@ export class BehaviorBoxComponent {
           this.componentBehaviorList.push(o)
         })
         break;
+      case 'Tabs':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(CheckboxBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
       }
     clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
   }

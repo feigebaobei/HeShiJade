@@ -46,6 +46,12 @@ let Checkbox: CompConfigAddabel = {
     items: false,
     slots: false,
 }
+let Tabs: CompConfigAddabel = {
+    behavior: false,
+    items: true,
+    slots: false,
+}
+
 
 let all: {[k: S]: CompConfigAddabel} = {
     Button,
@@ -56,6 +62,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Modal,
     Icon,
     Checkbox,
+    Tabs,
 }
 
 export {

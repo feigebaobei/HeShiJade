@@ -2,20 +2,12 @@
 |-|-|-|
 |tabs|todo||
 |设置组件列表|done||
-|设置配置面板|doing||
-|搭建侧创建组件|todo||
+|设置配置面板|done||
+|搭建侧创建组件|doing||
 |搭建侧使用配置项|todo||
 |渲染侧创建组件|todo||
 |渲染侧使用配置项|todo||
 |checkbox的beforeChange是属性|todo||
-|checkbox|todo||
-|设置组件列表|done||
-|设置配置面板|done||
-|搭建侧创建组件|done||
-|搭建侧使用配置项|done||
-|排查不显示行为、items的问题|done||
-|渲染侧创建组件|done||
-|渲染侧使用配置项|done||
 
 |增加4个组件|||
 ||tabs||
@@ -60,6 +52,7 @@
 ||tag||
 |应用把非dev环境的版本回退到dev环境|||
 |丰富配置面板的setter|||
+||number||
 |“注销用户”功能|||
 |核验idp提供的token|||
 |验证saml数据是否有效|||
