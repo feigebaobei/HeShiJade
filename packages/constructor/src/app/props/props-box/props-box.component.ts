@@ -23,6 +23,7 @@ import {
   Table as tablePropsMeta,
   Icon as iconPropsMeta,
   Checkbox as CheckPropsMeta,
+  Tabs as TabsPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -151,6 +152,12 @@ export class PropsBoxComponent {
         break;
       case 'Checkbox':
         Object.values(CheckPropsMeta).forEach((item: ConfigItem) => {
+          item.value = this.curComp!.props[item.key] // value
+          this.componentPropsList.push(item)
+        })
+        break;
+      case 'Tabs':
+        Object.values(TabsPropsMeta).forEach((item: ConfigItem) => {
           item.value = this.curComp!.props[item.key] // value
           this.componentPropsList.push(item)
         })

@@ -10,6 +10,7 @@ import { Button as ButtonProps,
     Table as TableProps,
     Icon as IconProps,
     Checkbox as CheckboxProps,
+    Tabs as TabsProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -17,6 +18,7 @@ import {
     Form as FormBehavior,
     Table as TableBehavior,
     Checkbox as CheckboxBehavior,
+    Tabs as TabsBehavior,
 } from 'src/helper/behavior'
 import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
     BehaviorMetaItem,
@@ -120,8 +122,8 @@ let Checkbox: ComponentDefaultConfig = {
     slots: {},
 }
 let Tabs: ComponentDefaultConfig = {
-    props: opProps(CheckboxProps),
-    behavior: opBehavior(CheckboxBehavior),
+    props: opProps(TabsProps),
+    behavior: opBehavior(TabsBehavior),
     items: [
         {
             id: 'id',
