@@ -6,8 +6,8 @@
 |搭建侧创建组件|done||
 |搭建侧使用配置项|done||
 |开辟插槽为子组件|done||
-|渲染侧创建组件|todo||
-|渲染侧使用配置项|todo||
+|渲染侧创建组件|done||
+|渲染侧使用配置项|done||
 |checkbox的beforeChange是属性|todo||
 
 |增加4个组件|||

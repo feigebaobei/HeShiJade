@@ -8,6 +8,7 @@ import {
   Form as FormBehaviorMeta,
   Table as TableBehaviorMeta,
   Checkbox as CheckboxBehaviorMeta,
+  Tabs as TabsBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
@@ -109,7 +110,7 @@ export class BehaviorBoxComponent {
         break;
       case 'Tabs':
         this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(CheckboxBehaviorMeta)
+          let o = cloneDeep(TabsBehaviorMeta)
           Object.entries(item).forEach(([k, v]) => {
             o[k].value = v
           })

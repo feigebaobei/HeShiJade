@@ -186,7 +186,7 @@ let Tabs: BehaviorConfigItem = {
     category: 'select',
     options: [
       {label: '切换', value: 'activeTabChange'},
-      {label: '添加', value: 'addTabChange'},
+      // {label: '添加', value: 'addTabChange'},
       {label: '删除', value: 'deleteTabChange'},
     ],
     value: '',

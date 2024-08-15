@@ -847,6 +847,16 @@ let Tabs: PropsConfigItem = {
         label: '是否显示删除图标',
         key: 'closeable',
     },
+    // addable: {
+    //     category: 'switch',
+    //     options: [
+    //         { label: 'false', value: false, },
+    //         { label: 'true', value: true, },
+    //     ],
+    //     value: false,
+    //     label: '是否显示添加选项卡',
+    //     key: 'addable',
+    // },
     scrollMode: {
         category: 'switch',
         options: [

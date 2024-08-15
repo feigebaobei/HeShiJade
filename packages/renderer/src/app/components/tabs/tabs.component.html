@@ -1,11 +1,13 @@
 <d-tabs
-    [(activeTab)]="data.props['activeTab']"
+    [(activeTab)]="activeTab"
     [type]="data.props['type']"
     [size]="data.props['size']"
     [customWidth]="data.props['customWidth']"
     [closeable]="data.props['closeable']"
     [scrollMode]="data.props['scrollMode']"
     [isHidden]="data.props['isHidden']"
+    (activeTabChange)="activeTabChangeH($event)"
+    (addOrDeleteTabChange)="addOrDeleteTabChangeH($event)"
 >
     <d-tab
         *ngFor="let ele of data.items; let i = index"
