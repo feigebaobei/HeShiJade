@@ -1,0 +1,18 @@
+<d-tabs
+    [(activeTab)]="data.props['activeTab']"
+    [type]="data.props['type']"
+    [size]="data.props['size']"
+    [customWidth]="data.props['customWidth']"
+    [closeable]="data.props['closeable']"
+    [scrollMode]="data.props['scrollMode']"
+    [isHidden]="data.props['isHidden']"
+>
+    <d-tab
+        *ngFor="let ele of data.items; let i = index"
+        [id]="ele['id']"
+        [title]="ele['title']"
+        [disabled]="ele['disabled']"
+    >
+        <app-stack *ngFor="let comp of (compObj[createChildKey('items', i, 'component')])" [data]="comp"></app-stack>
+    </d-tab>
+</d-tabs>

@@ -11,6 +11,7 @@ import { SelectComponent } from 'src/app/components/select/select.component';
 import { TableComponent } from 'src/app/components/table/table.component';
 import { IconComponent } from 'src/app/components/icon/icon.component';
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
+import { TabsComponent } from '../tabs/tabs.component';
 // type
 import type { A, S } from 'src/types/base';
 
@@ -26,6 +27,7 @@ let compMap: {[k: S]: A} = {
   Table: TableComponent,
   Icon: IconComponent,
   Checkbox: CheckboxComponent,
+  Tabs: TabsComponent,
 }
 
 @Component({
@@ -119,6 +121,15 @@ export class StackComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           // items: this.data.items,
+          ulid: this.data.ulid,
+        }
+        break;
+      case 'Tabs':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;

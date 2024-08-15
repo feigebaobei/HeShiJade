@@ -17,7 +17,7 @@ import { TableComponent } from './table/table.component';
 import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
 import { IconComponent } from './icon/icon.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-
+import { TabsComponent } from './tabs/tabs.component';
 
 
 @NgModule({
@@ -33,6 +33,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
     ModalCompComponent,
     IconComponent,
     CheckboxComponent,
+    TabsComponent,
   ],
   imports: [
     CommonModule,
