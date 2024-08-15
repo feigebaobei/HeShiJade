@@ -341,12 +341,36 @@ router.route('/')
         arr.push(p1, p2)
       }
     } else { // 前面没有组件
-      if (component.nextUlid === '') { // 等效于 page.firstComponentUlid === page.lastComponentUlid // 只有一个组件
-        let p1 = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: page.ulid}, {$set: {
-          firstComponentUlid: '',
-          lastComponentUlid: '',
-        }})
-        arr.push(p1)
+      if (component.nextUlid === '') {
+        // 是否是顶级组件
+        let pPage, pComponent
+        clog('component', component)
+        if (component.parentUlid) {
+          let updateObj = {}
+          switch (component.mount.area) {
+            case 'slots':
+              updateObj = {
+                $unset: {
+                  // [slots[component.mount.slotKey]]: null
+                  [`slots.${component.mount.slotKey}`]: null
+                }
+              }
+              break;
+            case 'items':
+              // 未遇到
+              break;
+          }
+          pComponent = lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: component.parentUlid}, updateObj)
+          pPage = Promise.resolve(true)
+        } else {
+          // 等效于 page.firstComponentUlid === page.lastComponentUlid // 只有一个组件
+          pComponent = Promise.resolve(true)
+          pPage = lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: page.ulid}, {$set: {
+            firstComponentUlid: '',
+            lastComponentUlid: '',
+          }})
+        }
+        arr.push(pPage, pComponent)
       } else {
         let p1 = lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: component.nextUlid}, {$set: {prevUlid: ''}})
         let p2

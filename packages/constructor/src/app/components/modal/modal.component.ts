@@ -33,7 +33,7 @@ export class ModalComponent implements OnInit{
     this.childrenHeader = []
     this.childrenBody = [
     ]
-    this.childrenFooter = []
+    this.childrenFooter = [] // 预留字段
     this.page = this.pageService.getCurPage()!
   }
   ngOnInit() {
@@ -94,6 +94,5 @@ export class ModalComponent implements OnInit{
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
-
   }
 }
