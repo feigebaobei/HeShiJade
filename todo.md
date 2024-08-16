@@ -1,6 +1,6 @@
 ||完成日期||
 |-|-|-|
-|删除tabs时未删除完子组件|doing||
+|删除tabs时未删除完子组件|done||
 |button的icon属性不生效|done||
 |number代替string|done||
 
