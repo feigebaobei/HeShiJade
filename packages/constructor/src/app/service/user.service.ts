@@ -29,20 +29,16 @@ export class UserService {
   constructor() {
     this.user = undefined
     this.user$ = new Subject()
-    // todo delete 06.01+
     let v = window.sessionStorage.getItem('lc-user')
     if (v) {
-      // this.setUser(JSON.parse(v))
       this.user = JSON.parse(v || '{}')
     }
     this.regularTime = 10 * 60 * 1000 // 10min
     // this.regularTime = 2000 // for dev
-    // this.regularRefresh()
     this.regularTimeId = 0
     this.ssoClient = createSsoClient(ssoClientConfig.idp, ssoClientConfig.sp)
   }
   getUser() {
-    // return this.user
     if (this.user) {
       return Promise.resolve(this.user)
     } else {

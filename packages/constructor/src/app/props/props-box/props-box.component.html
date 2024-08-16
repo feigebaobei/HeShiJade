@@ -1,0 +1,24 @@
+<div *ngIf="curComp?.ulid" class="compType">
+    <span>组件类型</span>
+    <span>{{curComp?.type}}</span>
+</div>
+<div *ngIf="curComp?.ulid"
+    class="compUlidBox"
+    (click)="compUlidClickH(ref)"
+>
+    <span>组件标识</span>
+    <span #ref>{{curComp?.ulid}}</span>
+</div>
+<ng-container
+*ngFor="let propItem of componentPropsList"
+>
+<app-props-item 
+    *ngIf="!propItem.hideCalc"
+    [propItem]="propItem"
+    (itemChange)="itemChangeH($event)"
+    class="props_item"
+></app-props-item>
+
+</ng-container>
+
+<d-toast [value]="msg"></d-toast>

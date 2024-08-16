@@ -1,0 +1,8 @@
+<div class="input_box">
+    <span>{{data.label}}</span>
+    <input dTextInput [placeholder]="data.placeholder || '请输入'" id="textInput" 
+    [(ngModel)]="data.value"
+    (ngModelChange)="modelChangeH($event)"
+    />
+</div>
+<!-- ngModelChange 监听数据变化， -->

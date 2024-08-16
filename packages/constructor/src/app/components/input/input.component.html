@@ -1,10 +1,8 @@
-<!-- <div class="box">
-</div> -->
-    <input dTextInput 
-        placeholder="Please Enter"
-        [error]="data.props.error"
-        [size]="data.props.size.value"
-        [styleType]="data.props.styleType.value"
-        />
-        <!-- [showGlowStyle]="false" -->
-        <!-- [showGlowStyle]="data.props.showGlowStyle" -->
+<input dTextInput
+    [ngModel]="data.props.value"
+    [placeholder]="data.props.placeholder"
+    [error]="data.props.error"
+    [size]="data.props.size"
+    [showGlowStyle]="data.props.showGlowStyle"
+    [styleType]="data.props.styleType"
+/>

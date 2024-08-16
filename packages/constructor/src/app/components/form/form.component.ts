@@ -13,17 +13,17 @@ let clog = console.log
 export class FormComponent {
   @Input() data: A
   // layout: FormLayout
-  selectOptions
-  formData: A
+  // selectOptions
+  // formData: A
   constructor() {
-    this.selectOptions = [
-      { label: 'one', value: 'one' },
-      { label: 'two', value: 'two' },
-    ]
-    this.formData = {
-      selectValue: '',
-      toggleValue: '',
-    }
+    // this.selectOptions = [
+    //   { label: 'one', value: 'one' },
+    //   { label: 'two', value: 'two' },
+    // ]
+    // this.formData = {
+    //   selectValue: '',
+    //   toggleValue: '',
+    // }
   }
   layoutDirection: FormLayout = FormLayout.Vertical;
   ngOnInit() {

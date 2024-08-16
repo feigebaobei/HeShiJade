@@ -1,24 +1,39 @@
 <!-- todo 使用service中的数据渲染 -->
-<form dForm [layout]="data.props.layout" ngForm>
+<div style="padding-left: 16px">
+  <form dForm ngForm
+    [layout]="props.layout"
+    [labelSize]="props.labelSize"
+    [labelAlign]="props.labelAlign"
+  >
     <!-- todo 考虑使用动态组件。不喜欢使用div包裹。-->
     <!-- 不需要双向绑定表单项的值 -->
-    <div *ngFor="let ele of data.items">
+    <div *ngFor="let ele of items">
       <d-form-item>
-        <d-form-label [required]="false">{{ele.label}}</d-form-label>
-        <d-form-control>
-          <div>
+        <d-form-label
+          [required]="true"
+          [hasHelp]="ele.hasHelp"
+          [helpTips]="ele.helpTips"
+        >{{ele.label}}</d-form-label>
+        <d-form-control
+          [extraInfo]="ele.extraInfo"
+        >
+        <div>{{ ele | json}}
             <input
               *ngIf="ele.category === 'input'"
               dTextInput
+              [name]="ele.key"
               autocomplete="off"
-              [value]="ele.value"
+              [(ngModel)]="ele.value"
+              [dValidateRules]="rules"
             />
             <d-select
               *ngIf="ele.category === 'select'"
               [options]="ele.options" 
               [filterKey]="'label'" 
-              name="value"
-              [ngModel]="ele.value"
+              [valueKey]="'value'"
+              [name]="ele.key"
+              [(ngModel)]="ele.value"
+              [dValidateRules]="rules"
               ></d-select>
             <d-toggle
               *ngIf="ele.category === 'switch'"
@@ -28,15 +43,16 @@
         </d-form-control>
       </d-form-item>
     </div>
-  
     <d-form-operation>
         <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
             *ngIf="data.props.isSubmit"
             (click)="submitClickH()"
+
+            dFormSubmit
         >Submit</d-button>
         <d-button bsStyle="common" circled="true"
             *ngIf="data.props.isCancel"
         >Cancel</d-button>
     </d-form-operation>
   </form>
-  
+</div>

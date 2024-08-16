@@ -36,6 +36,7 @@ interface ConfigItemInput {
   hideCalc?: B
   // show: B
   hideConfig?: B
+  placeholder?: S
 }
 type ConfigItemKeys = keyof ConfigItem
 interface ConfigItemTextarea {
@@ -66,6 +67,7 @@ interface ConfigItemSelect<T> {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
+  allowClear?: B
   // show: B
 }
 interface ConfigItemNumber {
@@ -73,8 +75,8 @@ interface ConfigItemNumber {
   value: N
   label: S
   key: S
-  maxLength: N
-  minLength: N
+  maxLength?: N
+  minLength?: N
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
@@ -124,6 +126,7 @@ export type {
   ConfigItemTextarea,
   ConfigItemSelect,
   ConfigItemSwitch,
+  ConfigItmeOption,
   ConfigItemKeys,
   ConfigItemsCategoryType,
 }

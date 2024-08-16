@@ -1,0 +1,11 @@
+<div class="select_box">
+    <span>{{data.label}}</span>
+    <d-select [placeholder]="''"
+    [options]="data.options"
+    [(ngModel)]="data.value"
+    [filterKey]="'label'"
+    [valueKey]="'value'" 
+    (ngModelChange)="modelChangeH($event)"
+    class="select"
+    ></d-select>
+</div>

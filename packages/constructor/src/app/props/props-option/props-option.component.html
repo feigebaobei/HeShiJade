@@ -1,0 +1,66 @@
+<!-- 日后做成可拖动排序的 -->
+<!-- options -->
+<!-- <div class="box">
+    <span>{{data.label}}</span>
+    <div class="row"
+        *ngFor="let optionItem of data.options; let i = index"
+    >
+        <input
+            dTextInput
+            class="input"
+            placeholder="lable"
+            [(ngModel)]="optionItem.label"
+            (ngModelChange)="labelChange(i)"
+        />
+        <input
+            dTextInput
+            class="input"
+            placeholder="value"
+            [(ngModel)]="optionItem.value"
+            (ngModelChange)="valueChange(i)"
+        />
+    </div>
+</div> -->
+
+<div class="option_box">
+    <span>{{data.label}}</span>
+    <div>
+        <d-row *ngFor="let item of optionsList; let i = index">
+            <d-col [dSpan]="10">
+                <d-form-item>
+                <d-form-control>
+                    <input dTextInput
+                    [(ngModel)]="item.label"
+                    (ngModelChange)="labelChangeH($event, i)"
+                    placeholder="label"
+                    />
+                </d-form-control>
+                </d-form-item>
+            </d-col>
+            <d-col [dSpan]="10">
+                <d-form-item>
+                    <d-form-control>
+                        <input dTextInput
+                        [(ngModel)]="item.value"
+                        (ngModelChange)="valueChangeH(i)"
+                        placeholder="value"
+                        />
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+            <d-col [dSpan]="4">
+                <d-icon-group>
+                    <d-icon [icon]="'icon-add'" [operable]="true" [disabled]="true"></d-icon>
+                    <d-icon [icon]="'icon-minus'" [operable]="true" [disabled]="true"></d-icon>
+                </d-icon-group>
+            </d-col>
+        </d-row>
+    </div>
+</div>
+
+<!-- {{data | json}} -->
+<d-button
+    bsStyle="common"
+    circled="true"
+    (click)="addH()"
+>增加一个选项</d-button>

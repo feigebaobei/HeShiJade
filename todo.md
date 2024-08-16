@@ -1,24 +1,53 @@
 ||完成日期||
 |-|-|-|
-|修正web-site中的拼写错误|done||
-|增加4个组件|||
-|丰富组件的配置面板|||
-|f_comp|||
+|删除tabs时未删除完子组件|done||
+|button的icon属性不生效|done||
+|number代替string|done||
+
+|本次分支f_comp|||
+|上生产内容|||
+||增加4个组件|icon checkbox tabs pagination|
+||web-site|修正拼写|
+||constructor|修改props样式|
+||constructor|修正无法修改页面名称的问题|
+||constructor|增加6个组件的配置面板 button modal form table input select|
+||这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、||
+||mock-server|表单的提交接口|
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
-|把lixiaodan.com的内容搬到8.222.xxx.xx上。|||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
+|组件之间传递数据|以table、pagination、form为例||
+|在指定时机，如进入搭建页面时，清洗脏数据。|||
+|分包|||
 |舞台区使用拖动布局组件|||
-|整理props面板|||
 |是否需要把修改service与发请求分开|分开||
 |丰富组件|||
-|回退功能|||
+||accordion||
+||breadcrumb||
+||cascader||
+||datapicker||
+||inputNumber||
+||radio||
+||slider||
+||textarea||
+||toggle||
+||drawer||
+||avatar||
+||badge||
+||card||
+||imagePreview||
+||progress||
+||rate||
+||tag||
+|应用把非dev环境的版本回退到dev环境|||
+|丰富配置面板的setter|||
+||number||
 |“注销用户”功能|||
 |核验idp提供的token|||
 |验证saml数据是否有效|||
 |sso官网（包括：使用方法）计划使用react 19|||
-|lc官网（包括：使用方法）计划使用angular 18.反正用16打包后会出错|||
+|lc官网（包括：使用方法）计划使用angular 18|||
 ||||
 
 
@@ -56,3 +85,18 @@ subject&promise不同
 # 每6个月升级一次技术栈
 
 当切换用户时应不保存以前用户的数据
+
+
+yargs
+just
+
+
+# 零代码，低代码，富代码 之间的边界
+||零代码|低代码|富代码|
+|-|-|-|-|
+|职责范围|各种配置|定义使用配置的代码。包括：方法、hooks、业务逻辑|完整的项目代码|
+|||||
+|||||
+
+# devui
+api众多。其中好多不通用的。

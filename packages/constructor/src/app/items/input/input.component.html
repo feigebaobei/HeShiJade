@@ -1,4 +1,4 @@
-<d-form-item>
+<!-- <d-form-item>
     <d-form-label>{{_label}}</d-form-label>
     <d-form-control>
         <input dTextInput
@@ -6,4 +6,12 @@
         (ngModelChange)="changeH()"
         />
     </d-form-control>
-</d-form-item>
+</d-form-item> -->
+
+<div class="input_box">
+    <span>{{_label}}</span>
+    <input dTextInput
+        [(ngModel)]="_value"
+        (ngModelChange)="changeH()"
+    />
+</div>

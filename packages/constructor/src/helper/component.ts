@@ -2,26 +2,53 @@
 // component文件 定义数据。
 // props文件     定义结构
 // 这是所有组件的默认配置数据
-
-import type { ComponentDefaultConfig, ComponentDefaultConfigAll } from 'src/types/component'
+import { Button as ButtonProps,
+    Input as InputProps,
+    Select as SelectProps,
+    Modal as ModalProps,
+    Form as FormProps,
+    Table as TableProps,
+    Icon as IconProps,
+    Checkbox as CheckboxProps,
+    Tabs as TabsProps,
+    Pagination as PaginationProps,
+ } from 'src/helper/props'
+import {
+    Button as ButtonBehavior,
+    Modal as ModalBehavior,
+    Form as FormBehavior,
+    Table as TableBehavior,
+    Checkbox as CheckboxBehavior,
+    Tabs as TabsBehavior,
+    Pagination as PaginationBehavior,
+} from 'src/helper/behavior'
+import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
+    BehaviorMetaItem,
+ } from 'src/types/component'
 // import type { S } from 'src/types/base'
+import type { PropsConfigItem, BehaviorConfigItem } from 'src/types/config'
+
+let opProps = (pci: PropsConfigItem) => {
+    let o: PropsMeta = {}
+    Object.entries(pci).forEach(([k, v]) => {
+        o[k] = v.value
+    })
+    return o
+}
+let opBehavior = (p: BehaviorConfigItem) => {
+    let arr: BehaviorMetaItem[] = []
+    let o: BehaviorMetaItem = {} as BehaviorMetaItem
+    Object.entries(p).forEach((a) => {
+        o[a[0] as keyof BehaviorConfigItem] = a[1].value
+    })
+    arr.push(o)
+    return arr
+}
+
 
 let Button: ComponentDefaultConfig = {
-    props: {
-        type: 'button',
-        bsSize: 'md',
-        bordered: true,
-        disabled: false,
-        width: '100px',
-        text: 'button',
-    },
-    behavior: [
-        {
-            event: 'click',
-            target: 'ulid',
-            payload: '{"visible": true}',
-        },
-    ],
+    props: opProps(ButtonProps),
+    behavior: opBehavior(ButtonBehavior),
     items: [
         {
             category: 'input',
@@ -33,24 +60,14 @@ let Button: ComponentDefaultConfig = {
     slots: {}, // 子组件
 }
 let Input: ComponentDefaultConfig = {
-    props: {
-        error: false,
-        size: '',
-        showGrowStyle: true,
-        styleType: 'default',
-    },
+    props: opProps(InputProps),
     behavior: [],
     items: [],
     slots: {},
 }
 let Modal: ComponentDefaultConfig = {
-    props: {
-        title: '标题',
-        visible: false,
-        width: '',
-        placement: 'center',
-    },
-    behavior: [],
+    props: opProps(ModalProps),
+    behavior: opBehavior(ModalBehavior),
     items: [],
     slots: {
         // header: '', // value是ulid
@@ -59,33 +76,14 @@ let Modal: ComponentDefaultConfig = {
     },
 }
 let Select: ComponentDefaultConfig = {
-    props: {
-        // options: [
-        //     {label: 'one', value: 'one',},
-        //     {label: 'two', value: 'two',},
-        //     {label: 'three', value: 'three',},
-        // ],
-        isSearch: false,
-        size: '',
-        placeholder: '',
-    },
+    props: opProps(SelectProps),
     behavior: [],
     items: [],
     slots: {},
 }
 let Form: ComponentDefaultConfig = {
-    props: {
-        layout: 'horizontal',
-        isCancel: true,
-        isSubmit: true,
-    },
-    behavior: [
-        {
-            event: 'submit',
-            target: '',
-            payload: '',
-        },
-    ],
+    props: opProps(FormProps),
+    behavior: opBehavior(FormBehavior),
     items: [
         {
             category: 'input',
@@ -94,39 +92,56 @@ let Form: ComponentDefaultConfig = {
             value: '张三',
         },
         {
-            category: 'input',
-            // options: [],
-            key: 'name',
-            label: '姓名',
-            value: '张三',
-        },
-        {
-            category: 'input',
-            key: 'name',
-            label: '姓名',
-            value: '张三',
+            category: 'select',
+            options: [
+                {label: 'one', value: 'one'},
+                {label: 'two', value: 'two'},
+                {label: 'three', value: 'three'},
+            ],
+            key: 'org',
+            label: '组织',
+            value: 'one',
         },
     ],
     slots: {},
 }
 let Table: ComponentDefaultConfig = {
-    props: {
-        size: 'sm',
-    },
+    props: opProps(TableProps),
+    behavior: opBehavior(TableBehavior),
+    items: [],
+    slots: {},
+}
+let Icon: ComponentDefaultConfig = {
+    props: opProps(IconProps),
     behavior: [],
+    items: [],
+    slots: {},
+}
+let Checkbox: ComponentDefaultConfig = {
+    props: opProps(CheckboxProps),
+    behavior: opBehavior(CheckboxBehavior),
+    items: [],
+    slots: {},
+}
+let Tabs: ComponentDefaultConfig = {
+    props: opProps(TabsProps),
+    behavior: opBehavior(TabsBehavior),
     items: [
+        {
+            id: 'id',
+            title: 'title',
+            disabled: false,
+        },
     ],
     slots: {},
 }
+let Pagination: ComponentDefaultConfig = {
+    props: opProps(PaginationProps),
+    behavior: opBehavior(PaginationBehavior),
+    items: [],
+    slots: {},
+}
 
-// export {
-//     Button,
-//     Input,
-//     Modal,
-//     Select,
-//     Form,
-//     Table,
-// }
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
     Input,
@@ -134,6 +149,8 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Select,
     Form,
     Table,
+    Icon,
+    Checkbox,
+    Tabs,
+    Pagination,
 }
-// export {all}
-// export default all

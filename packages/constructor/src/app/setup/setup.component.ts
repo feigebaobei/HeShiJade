@@ -55,7 +55,6 @@ export class SetupComponent implements OnInit {
     this.pageList = []
     this.msg = []
     this.pageData = []
-
     // this.appService.appSubject$.subscribe(p => {
     //   this.curApp = p
     // })
@@ -71,7 +70,6 @@ export class SetupComponent implements OnInit {
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
   }
-
   activeTabChange(tab: A) {
     console.log(tab);
   }
@@ -127,15 +125,17 @@ export class SetupComponent implements OnInit {
     // this.componentService.postCompListByPageForLocal(obj)
   }
   stageClickH($event: A) {
-    if (Array.from($event.target.classList).includes('stage')) {
+    if (Array.from($event.target.classList).includes('center')) {
       if (this.curPage) {
+        clog('stageClickH', this.curPage)
         this.componentService.setCurComponent(this.curPage.ulid, '')
       }
     }
   }
   deleteComponentByUlidH(ulid: ULID) {
     this.componentByPage = this.componentByPage.filter(item => item.ulid !== ulid)
+    let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage!.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid)
+    this.componentService.reqDeleteComponent(ulid, compUlid)
   }
 }

@@ -93,12 +93,9 @@ export class PageService {
   getCurPage() {
     return this._curPage
   }
-  setCurPage(appUlid: ULID, p: ULID): void {
-    this._curPage = this._find(appUlid, p)
-    // if (typeof p === 'string') {
-    // } else if (typeof p === 'object') {
-    //   this._curPage = p
-    // }
+  setCurPage(appUlid: ULID, pageUlid: ULID): void {
+    this._curPage = this._find(appUlid, pageUlid)
+    // clog('_curPage', this._curPage)
     this.pageSubject$.next(this._curPage)
   }
   // 重铸
@@ -163,7 +160,7 @@ export class PageService {
     }
   }
   reqUpdate(ulid: ULID, key: keyof Page, value: S) {
-    return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key}) // .then(() => true)
+    return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key, value}) // .then(() => true)
   }
   deletePageByAppUlid(appUlid: ULID) {
     this._map.delete(appUlid)

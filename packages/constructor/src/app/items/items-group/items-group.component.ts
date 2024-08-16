@@ -40,9 +40,13 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     this.inputChangeH = createDebounceFn((p: {
         key: 'label' | 'key' | 'value'
         value: S
-      }) => {
+      }, subIndex: N) => {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
-      this.componentService.reqChangeItems(this.index, p.key, p.value)
+      // this.componentService.reqChangeItems(this.index, p.key, p.value)
+      this.reqChangeItems(this.index, p.key, p.value)
+      let item = this.itemList[subIndex]
+      item.value = p.value
+      this.listenerChange(p.key, this.itemList)
     }, 400)
     this.selectChangeH = createDebounceFn((p: {
         key: 'category'
@@ -57,9 +61,12 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     this.switchChangeH = createDebounceFn((p: {
       key: 'value'
       value: B
-    }) => {
+    }, subIndex: N) => {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
+      let item = this.itemList[subIndex]
+      item.value = p.value
+      this.listenerChange(p.key, this.itemList)
     }, 400)
     this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
@@ -115,7 +122,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       if (t) {
         t.hideCalc = obj.f(group)
       }
-      clog('curItem', this.itemList)
+      // clog('curItem', this.itemList)
     }
   }
   deleteButtonClickH() {

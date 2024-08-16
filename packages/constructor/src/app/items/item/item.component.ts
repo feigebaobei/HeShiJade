@@ -57,7 +57,7 @@ export class ItemComponent implements OnInit, OnChanges {
   inputChangeH (v: S) {
     // console.log('inputChangeH', v)
     this.inputChange.emit({key: this.groupItem.key, value: v})
-    this.hideListener(this.groupItem.key)
+    // this.hideListener(this.groupItem.key)
   }
   selectChangeH (v: S) {
     this.selectChange.emit({key: this.groupItem.key, value: v})
@@ -65,11 +65,11 @@ export class ItemComponent implements OnInit, OnChanges {
   }
   switchChangeH (v: B) {
     this.switchChange.emit({key: this.groupItem.key, value: v})
-    this.hideListener(this.groupItem.key)
+    // this.hideListener(this.groupItem.key)
   }
   optionsChangeH (v: Options<S, S>[]) {
     // console.log('optionsChangeH v', v)
     this.optionsChange.emit({key: this.groupItem.key as 'options', value: v})
-    this.hideListener(this.groupItem.key)
+    // this.hideListener(this.groupItem.key)
   }
 }

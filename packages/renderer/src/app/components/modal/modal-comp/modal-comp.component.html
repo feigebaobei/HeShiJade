@@ -1,14 +1,24 @@
 <header>
-    header
-    {{data.title}}
-    <app-stack *ngFor="let comp of componenntListHeader" [data]="comp"></app-stack>
+    <!-- header -->
+    <!-- {{data.props.title}} -->
+    <div class="title_box">
+        <h2 class="title">{{data.props.title}}</h2>
+        <d-icon class="icon" [icon]="'icon-close'"></d-icon>
+    </div>
 </header>
-<main>
-    main
+<section class="header_slot_box">
+    <app-stack *ngFor="let comp of componenntListHeader" [data]="comp"></app-stack>
+</section>
+<main class="body_slot_box">
+    <!-- main -->
+    <!-- {{data.ulid}}
+    {{componenntListBody}} -->
     <app-stack *ngFor="let comp of componenntListBody" [data]="comp"></app-stack>
     <!-- {{title}} -->
 </main>
-<footer>
-    footer
+<footer class="footer">
+    <!-- footer -->
     <!-- {{title}} -->
+    <d-button>取消</d-button>
+    <d-button>确定</d-button>
 </footer>

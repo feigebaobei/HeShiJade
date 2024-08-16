@@ -7,6 +7,10 @@ import { InputComponent } from '../input/input.component';
 import { ModalComponent } from '../modal/modal.component';
 import { SelectComponent } from '../select/select.component';
 import { TableComponent } from '../table/table.component';
+import { IconComponent } from '../icon/icon.component';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { TabsComponent } from '../tabs/tabs.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -37,6 +41,10 @@ let compMap: Ao = {
   Modal: ModalComponent,
   Select: SelectComponent,
   Table: TableComponent,
+  Icon: IconComponent,
+  Checkbox: CheckboxComponent,
+  Tabs: TabsComponent,
+  Pagination: PaginationComponent,
 }
 
 @Component({
@@ -75,7 +83,11 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     // 选中组件
     $event.stopPropagation()
     // clog(this.comp)
-    this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
+    if (this.curComp?.ulid === this.comp.ulid) {
+      // 已经是当前组件了，不切换。
+    } else {
+      this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
+    }
   }
   ngOnInit() {
   }
@@ -121,13 +133,40 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Form':
         this.componentRef.instance.data = {
+          ulid: this.comp.ulid,
           props: this.comp.props,
           items: this.comp.items,
-          ulid: this.comp.ulid,
           mount: this.comp.mount,
         }
         break
       case 'Table':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Icon':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Checkbox':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          // behavior: this.comp.behavior, // 搭建侧可以不需要使用行为
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Tabs':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Pagination':
         this.componentRef.instance.data = {
           props: this.comp.props,
           items: this.comp.items,

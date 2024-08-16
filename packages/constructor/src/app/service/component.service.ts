@@ -276,8 +276,8 @@ export class ComponentService {
   reqPostCompListByPage(obj: Component) {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
-  reqDeleteComponent(ulid: ULID) {
-    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid}).then(() => true)
+  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
+    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid, childrenUlid}).then(() => true)
   }
   // for dev
   // 只在本地保存，不改变远端数据
@@ -415,7 +415,7 @@ export class ComponentService {
       value,
     }).then(() => true)
   }
-  getTreeByKey(key: ULID): Tree<Component> | undefined {
+  getTree(key: ULID): Tree<Component> | undefined {
     return this._map.get(key)
   }
   // 删除组件
@@ -425,5 +425,10 @@ export class ComponentService {
 
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
+  }
+  getChildrenComponent(pageUlid: ULID, componentUlid: ULID) {
+    let tree = this.getTree(pageUlid)
+    let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
+    return childrenComponent
   }
 }

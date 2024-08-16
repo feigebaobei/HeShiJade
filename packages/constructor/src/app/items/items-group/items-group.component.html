@@ -5,38 +5,41 @@
         </div>
         <div [ngSwitch]="item.category">
             <ng-template [ngSwitchCase]="'input'">
-                <div>
+                <div *ngIf="!item.hideCalc">
                     <app-item
                         [groupItem]="item"
                         [group]="itemList"
-                        (inputChange)="inputChangeH($event)"
+                        (inputChange)="inputChangeH($event, i)"
                         (selectChange)="selectChangeH($event, i)"
-                        (switchChange)="switchChangeH($event)"
-                        (optionsChange)="optionsChangeH($event)"
+                        (switchChange)="switchChangeH($event, i)"
+                        (optionsChange)="optionsChangeH($event, i)"
+                        class="app_item"
                     ></app-item>
                 </div>
             </ng-template>
             <ng-template [ngSwitchCase]="'select'">
-                <div>
+                <div *ngIf="!item.hideCalc">
                     <app-item
                         [groupItem]="item"
                         [group]="itemList"
-                        (inputChange)="inputChangeH($event)"
+                        (inputChange)="inputChangeH($event, i)"
                         (selectChange)="selectChangeH($event, i)"
-                        (switchChange)="switchChangeH($event)"
-                        (optionsChange)="optionsChangeH($event)"
+                        (switchChange)="switchChangeH($event, i)"
+                        (optionsChange)="optionsChangeH($event, i)"
+                        class="app_item"
                     ></app-item>
                 </div>
             </ng-template>
             <ng-template [ngSwitchCase]="'switch'">
-                <div>
+                <div *ngIf="!item.hideCalc">
                     <app-item
                         [groupItem]="item"
                         [group]="itemList"
-                        (inputChange)="inputChangeH($event)"
+                        (inputChange)="inputChangeH($event, i)"
                         (selectChange)="selectChangeH($event, i)"
-                        (switchChange)="switchChangeH($event)"
-                        (optionsChange)="optionsChangeH($event)"
+                        (switchChange)="switchChangeH($event, i)"
+                        (optionsChange)="optionsChangeH($event, i)"
+                        class="app_item"
                     ></app-item>
                 </div>
             </ng-template>
@@ -45,10 +48,11 @@
                     <app-item
                         [groupItem]="item"
                         [group]="itemList"
-                        (inputChange)="inputChangeH($event)"
+                        (inputChange)="inputChangeH($event, i)"
                         (selectChange)="selectChangeH($event, i)"
-                        (switchChange)="switchChangeH($event)"
-                        (optionsChange)="optionsChangeH($event)"
+                        (switchChange)="switchChangeH($event, i)"
+                        (optionsChange)="optionsChangeH($event, i)"
+                        class="app_item"
                     ></app-item>
                 </div>
             </ng-template>

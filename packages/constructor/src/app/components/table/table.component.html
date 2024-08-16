@@ -1,13 +1,44 @@
-<!-- {{data | json}} -->
-<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [tableOverflowType]="'overlay'"
-    [size]="data.props['size']"
->
+<d-data-table #datatable
+  [tableWidth]="data.props['tableWidth']"
+  [maxWidth]="data.props['maxWidth']"
+  [maxHeight]="data.props['maxHeight']"
+  [minHeight]="data.props['minHeight']"
+  [size]="data.props['size']"
+  
+  [fixHeader]="data.props['fixHeader']"
+  [colDraggable]="data.props['colDraggable']"
+  [virtualScroll]="data.props['virtualScroll']"
+  [virtualItemSize]="data.props['virtualItemSize']"
+  [virtualMinBufferPx]="data.props['virtualMinBufferPx']"
+  [checkable]="data.props['checkable']"
+  [resizeable]="data.props['resizeable']"
+  [headerBg]="data.props['headerBg']"
+  [tableLayout]="data.props['tableLayout']"
+  [borderType]="data.props['borderType']"
+  [striped]="data.props['striped']"
+  [shadowType]="data.props['shadowType']"
+  [tableOverflowType]="data.props['tableOverflowType']"
+  [dataSource]="basicDataSource"
+  [scrollable]="true"
+  >
+  <!-- 不支持[rowHoveredHighLight]="data.props['rowHoveredHighLight']" -->
   <d-column
     *ngFor="let colOption of data.items; let i = index"
     [field]="colOption['field']"
     [header]="colOption['header']"
+    [maxWidth]="colOption['maxWidth']"
     [width]="colOption['width']"
-  >
+    [minWidth]="colOption['minWidth']"
+    [filterable]="colOption['filterable']"
+    [filterMultiple]="colOption['filterMultiple']"
+    [closeFilterWhenScroll]="colOption['closeFilterWhenScroll']"
+    [sortable]="colOption['sortable']"
+    [fixedLeft]="colOption['fixedLeft']"
+    [fixedRight]="colOption['fixedRight']"
+    >
+    <!-- [sortable]="colOption['sortable']" -->
+    <!-- [resizeEnabled]="colOption['resizeEnabled']" -->
+    <!-- [childUlid]="colOption['childUlid']" -->
     <d-cell>
       <!-- 不知道为什么要使用ng-template -->
       <ng-template>
@@ -32,5 +63,5 @@
 <div *ngIf="!data.items.length"
   class="placeholderBox"
 >
-  placeholder for table
+  placeholder for Table
 </div>

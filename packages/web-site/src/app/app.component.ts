@@ -21,6 +21,12 @@ export class AppComponent {
   docClickH() {
     this.router.navigate(['/doc'])
   }
+  boundaryClickH() {
+    this.router.navigate(['/boundary'])
+  }
+  extendClickH() {
+    this.router.navigate(['/extend'])
+  }
   designClickH() {
     this.router.navigate(['/design'])
   }
@@ -29,5 +35,8 @@ export class AppComponent {
   }
   changelogClickH() {
     this.router.navigate(['/changelog'])
+  }
+  circumClickH() {
+    this.router.navigate(['/circum'])
   }
 }

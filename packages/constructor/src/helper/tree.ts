@@ -12,6 +12,7 @@ interface NodePropotype<T> {
     isTail: () => B
     isBottom: () => B
     toArray: () => T[]
+    allChildren: () => T[]
 }
 interface Node<T> extends NodePropotype<T>{
     prev: Node<T> | null
@@ -81,6 +82,34 @@ let nodePropotype: NodePropotype<Component> = Object.create({}, {
             return arr
         }
     },
+    allChildren: {
+        value: function () {
+            let arr: Component[] = []
+            let curNode = this
+            let q = new Queue<Node<Component>>();
+            (Array.from(Object.values(curNode.children)) as Node<Component>[]).forEach(nodeItem => {
+                q.enqueue(nodeItem)
+                let nodeNext = nodeItem.next
+                while (nodeNext) {
+                    q.enqueue(nodeNext)
+                    nodeNext = nodeNext.next
+                }
+            })
+            while (q.size()) {
+                let curNode = q.dequeue()
+                Array.from(Object.values(curNode.children)).forEach(nodeItem => {
+                    q.enqueue(nodeItem)
+                    let nodeNext = nodeItem.next
+                    while (nodeNext) {
+                        q.enqueue(nodeNext)
+                        nodeNext = nodeNext.next
+                    }
+                })
+                arr.push(curNode.value)
+            }
+            return arr
+        }
+    }
 })
 let createNode = <T>(v: T): Node<T> => {
     return Object.create(nodePropotype, {

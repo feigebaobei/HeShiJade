@@ -14,6 +14,10 @@ import { InputComponent } from './input/input.component';
 import { ModalComponent } from './modal/modal.component';
 import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
+import { IconComponent } from './icon/icon.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,10 @@ import { TableComponent } from './table/table.component';
     SelectComponent,
     TableComponent,
     CompBoxComponent,
+    IconComponent,
+    CheckboxComponent,
+    TabsComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
@@ -36,12 +44,6 @@ import { TableComponent } from './table/table.component';
   providers: [],
   exports: [
     CompBoxComponent,
-    // ButtonComponent,
-    // FormComponent,
-    // InputComponent,
-    // ModalComponent,
-    // SelectComponent,
-    // TableComponent,
   ],
 })
 export class ComponentsModule { }

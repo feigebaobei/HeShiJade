@@ -8,12 +8,12 @@ import type { A, S } from 'src/types/base';
 })
 export class SelectComponent {
   @Input() data: A
-  options: S[]
+  // options: S[]
   constructor() {
-    this.options = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    ]
+    // this.options = [
+    // 'Option 1',
+    // 'Option 2',
+    // 'Option 3',
+    // ]
   }
 }

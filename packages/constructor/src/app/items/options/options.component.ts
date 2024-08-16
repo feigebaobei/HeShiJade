@@ -16,6 +16,7 @@ export class OptionsComponent {
   @Output() changeOptions = new EventEmitter<Options<S, S>[]>()
   // _label: S
   // _value: B
+  // todo 修正 _optionsList optionsList
   _optionsList: Options<S, A>[] = []
   constructor() {
     // this._label = this.label

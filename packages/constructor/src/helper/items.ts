@@ -5,8 +5,9 @@ import type {
     ItemsMeta } from 'src/types/items';
 // 指定组件的配置项
 
+let clog = console.log
+
 let Input: ConfigItem[] = []
-let Select: ConfigItem[] = []
 let Button: ConfigItem[] = []
 let Modal: ConfigItem[] = []
 let Form: ConfigItem[] = [
@@ -51,19 +52,57 @@ let Form: ConfigItem[] = [
         template: {label: '', value: ''},
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
+            // clog('o', o)
             let r = false
-            if (o) {
+            if (o) { // 存在且不为select，则隐藏
                 r = o.value !== 'select'
-            } else {
+            } else { // 不存在，则隐藏
                 r = true
             }
             return r
         },
         hideListenerKey: 'category',
         // show: true,
-    }
+    },
+    {
+        label: '必填',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        key: 'required',
+        value: false,
+    },
+    {
+        label: '显示帮助',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        key: 'hasHelp',
+        value: false,
+    },
+    {
+        label: '帮助文本',
+        category: 'input',
+        key: 'helpTips',
+        value: '',
+        hide: function (p: ConfigItem[]) { // 是否隐藏
+            let o = p.find(item => item.key === 'hasHelp')
+            // clog('hide', o)
+            return !o!.value
+        },
+        hideListenerKey: 'hasHelp',
+    },
+    {
+        label: '附加信息',
+        category: 'input',
+        key: 'extraInfo',
+        value: '',
+    },
 ]
-
 let FormItemCategory = [
     { label: 'input', value: 'input', },
     { label: 'select', value: 'select', },
@@ -102,12 +141,91 @@ let Table: ConfigItem[] = [
         value: '',
         // show: true,
     },
+    // {
+    //     label: '列宽度是否可调整',
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'false', value: false,},
+    //         {label: 'true', value: true,},
+    //     ],
+    //     key: 'resizeEnabled',
+    //     value: false,
+    // },
     {
-        label: 'width',
+        label: '最大宽度',
+        category: 'input',
+        key: 'maxWidth',
+        value: '',
+    },
+    {
+        label: '宽度',
         category: 'input',
         key: 'width',
         value: '150px',
         // show: true,
+    },
+    {
+        label: '最小宽度',
+        category: 'input',
+        key: 'minWidth',
+        value: '',
+    },
+    {
+        label: '是否可过滤',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'filterable',
+        value: false,
+    },
+    {
+        label: '过滤时是否多选',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'filterMultiple',
+        value: false,
+        hide: function (p: ConfigItem[]) { // 是否隐藏
+            let o = p.find(item => item.key === 'filterable')
+            return !o!.value
+        },
+        hideListenerKey: 'filterable',
+    },
+    {
+        label: '表格或者body滚动时是否关闭过滤框',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'closeFilterWhenScroll',
+        value: false,
+    },
+    {
+        label: '是否可排序',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'sortable',
+        value: false,
+    },
+    {
+        label: '该列固定到左侧的距离',
+        category: 'input',
+        key: 'fixedLeft',
+        value: '',
+    },
+    {
+        label: '该列固定到右侧的距离',
+        category: 'input',
+        key: 'fixedRight',
+        value: '',
     },
     {
         label: 'childUlid',
@@ -115,27 +233,49 @@ let Table: ConfigItem[] = [
         key: 'childUlid',
         value: '',
         // show: false,
+        // hide: () => true, // todo 测试
         hideConfig: true,
+    },
+]
+let Select: ConfigItem[] = [
+    
+]
+let Tabs: ConfigItem[] = [
+    {
+        label: 'id',
+        category: 'input',
+        key: 'id',
+        value: '',
+    },
+    {
+        label: '标题',
+        category: 'input',
+        key: 'title',
+        value: '',
+    },
+    {
+        label: '是否禁用',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'disabled',
+        value: false,
     },
 ]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
-    Select,
     Button,
     Modal,
     Form,
     // FormItemCategory,
     Table,
+    Select,
+    // Icon, // 没有子元素
+    // Checkbox, // 没有子元素
+    Tabs,
+    // Pagination, // 没有子元素
 }
-// export {
-//     // Button,
-//     // Input,
-//     // Select,
-//     // Modal,
-//     Form,
-//     FormItemCategory,
-//     // Button,
-//     Table,
-// }
 
 export default all

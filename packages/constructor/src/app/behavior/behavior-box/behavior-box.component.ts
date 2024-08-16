@@ -4,7 +4,12 @@ import { cloneDeep } from 'src/helper/index'
 import type { Component as Comp } from 'src/types/component';
 import {
   Button as buttonBehaviorMeta,
+  Modal as modalBehaviorMeta,
   Form as FormBehaviorMeta,
+  Table as TableBehaviorMeta,
+  Checkbox as CheckboxBehaviorMeta,
+  Tabs as TabsBehaviorMeta,
+  Pagination as PaginationBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
@@ -60,42 +65,69 @@ export class BehaviorBoxComponent {
     clog('curComponentChange', this.curComp)
     switch (this.curComp?.type) {
       case 'Button':
-        this.componentBehaviorMeta = buttonBehaviorMeta
         this.curComp.behavior.forEach(item => {
-          clog('cloneDeep', cloneDeep)
-          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
-          clog('o', o);
-          // .then((v: BehaviorConfigItem) => {
-          // })
-          // o = v;
-          (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
-            if (item.hasOwnProperty(key)) {
-              o[key].value = item[key]
-            }
+          let o = cloneDeep(buttonBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Modal':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(modalBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
           })
           this.componentBehaviorList.push(o)
         })
         break;
       case 'Form':
-      // default:
-      
-        this.componentBehaviorMeta = FormBehaviorMeta
         this.curComp.behavior.forEach(item => {
-          clog('cloneDeep', cloneDeep)
-          let o: BehaviorConfigItem = cloneDeep(this.componentBehaviorMeta);
-          clog('o', o);
-          // .then((v: BehaviorConfigItem) => {
-          // })
-          // o = v;
-          (Object.keys(this.componentBehaviorMeta) as Array<keyof typeof this.componentBehaviorMeta>).forEach((key : (keyof typeof this.componentBehaviorMeta)) => {
-            if (item.hasOwnProperty(key)) {
-              o[key].value = item[key]
-            }
+          let o = cloneDeep(FormBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
           })
           this.componentBehaviorList.push(o)
         })
-        clog('componentBehaviorList', this.componentBehaviorList)
+        break;
+      case 'Table':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(TableBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Checkbox':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(CheckboxBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Tabs':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(TabsBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Pagination':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(PaginationBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
         break;
       }
+    clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
   }
 }

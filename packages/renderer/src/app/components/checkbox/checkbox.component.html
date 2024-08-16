@@ -1,0 +1,11 @@
+<d-checkbox
+    [label]="data.props['label']"
+    [ngModel]="data.props['value']"
+    [disabled]="data.props['disabled']"
+    [halfchecked]="data.props['halfchecked']"
+    [color]="data.props['color']"
+    [showAnimation]="data.props['showAnimation']"
+    [showGlowStyle]="data.props['showGlowStyle']"
+    (change)="changeH($event)"
+></d-checkbox>
+    <!-- (beforeChange)="beforeChangeH()" -->

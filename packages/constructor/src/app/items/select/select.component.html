@@ -1,4 +1,4 @@
-
+<!-- 
 <d-form-item>
     <d-form-label>{{_label}}</d-form-label>
     <d-form-control>
@@ -10,4 +10,15 @@
             (ngModelChange)="changeH()"
         ></d-select>
     </d-form-control>
-</d-form-item>
+</d-form-item> -->
+<div class="select_box">
+    <span>{{_label}}</span>
+    <d-select
+        [options]="options"
+        [filterKey]="'label'"
+        [valueKey]="'value'" 
+        [(ngModel)]="value"
+        (ngModelChange)="changeH()"
+        class="select"
+    ></d-select>
+</div>
