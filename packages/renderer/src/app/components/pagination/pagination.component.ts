@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // type
 import type { Component as Comp } from 'src/types/component';
 import type { ULID } from 'src/types';
-import { N, } from 'src/types/base';
+import type { N, S, } from 'src/types/base';
 
 let clog = console.log
 
@@ -23,9 +23,15 @@ interface PaginationData {
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.sass'
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit {
   @Input() data!: PaginationData
-  constructor() {}
+  pageSizeOptions: N[]
+  constructor() {
+    this.pageSizeOptions = []
+  }
+  ngOnInit(): void {
+    this.pageSizeOptions = this.data.props['pageSizeOptions'].split(',').map((item: S) => Number(item))
+  }
   pageIndexChangeH(n: N) {
     clog('pageIndexChangeH', n)
   }

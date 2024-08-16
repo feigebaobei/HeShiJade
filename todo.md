@@ -1,7 +1,7 @@
 ||完成日期||
 |-|-|-|
-|创建number setter.|doing||
-|number代替string|todo||
+|创建number setter.|done||
+|number代替string|doing||
 |pagination|todo||
 |设置组件列表|done||
 |使用string代替number,设置配置面板|done||
