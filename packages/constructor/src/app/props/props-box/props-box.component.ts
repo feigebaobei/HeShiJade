@@ -24,6 +24,7 @@ import {
   Icon as iconPropsMeta,
   Checkbox as CheckPropsMeta,
   Tabs as TabsPropsMeta,
+  Pagination as PaginationPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -158,6 +159,12 @@ export class PropsBoxComponent {
         break;
       case 'Tabs':
         Object.values(TabsPropsMeta).forEach((item: ConfigItem) => {
+          item.value = this.curComp!.props[item.key] // value
+          this.componentPropsList.push(item)
+        })
+        break;
+      case 'Pagination':
+        Object.values(PaginationPropsMeta).forEach((item: ConfigItem) => {
           item.value = this.curComp!.props[item.key] // value
           this.componentPropsList.push(item)
         })
