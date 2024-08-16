@@ -880,8 +880,8 @@ let Tabs: PropsConfigItem = {
 }
 let Pagination: PropsConfigItem = {
     pageSize: {
-        category: 'input',
-        value: '',
+        category: 'number',
+        value: 10,
         label: '分页容量',
         key: 'pageSize',
     },

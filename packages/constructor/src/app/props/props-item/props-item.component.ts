@@ -5,6 +5,7 @@ import { PropsInputComponent } from '../props-input/props-input.component';
 import { PropsSelectComponent } from '../props-select/props-select.component';
 import { PropsSwitchComponent } from '../props-switch/props-switch.component';
 import { PropsOptionComponent } from '../props-option/props-option.component'
+import { PropsNumberComponent } from '../props-number/props-number.component';
 // import { PropsOptionComponent } from '../props-option/props-option.component';
 // type
 import type { A, ConfigItem, } from 'src/types/base';
@@ -69,12 +70,15 @@ export class PropsItemComponent implements OnInit, AfterContentInit {
           this.itemChange.emit({key: this.propItem.key, value: v})
         })
         break;
-      // 暂时不渲染option
-      // todo 需要支持option
-      // case 'option':
-      //   componentRef = viewContainerRef.createComponent(PropsOptionComponent)
-      //   componentRef.instance.data = this.propItem
-        // break
+      case 'number':
+        componentRef = viewContainerRef.createComponent(PropsNumberComponent)
+        componentRef.instance.data = this.propItem
+        // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          clog('subscribe', v)
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
+        break;
     }
   }
   ngAfterContentInit() { // 当指令的全部内容都初始化完成后只执行一次。一般用于执行初始化任务。

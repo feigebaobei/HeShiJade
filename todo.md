@@ -1,5 +1,7 @@
 ||完成日期||
 |-|-|-|
+|创建number setter.|doing||
+|number代替string|todo||
 |pagination|todo||
 |设置组件列表|done||
 |使用string代替number,设置配置面板|done||
@@ -7,8 +9,6 @@
 |搭建侧使用配置项|done||
 |渲染侧创建组件|done||
 |渲染侧使用配置项|done||
-|创建number setter.|todo||
-|number代替string|todo||
 |所有组件的item是否应该有“增加一行”||done|
 
 |增加4个组件|||
@@ -28,6 +28,7 @@
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
+|组件之间传递数据|以table、pagination、form为例||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |分包|||
 |舞台区使用拖动布局组件|||
