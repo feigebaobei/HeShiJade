@@ -3,53 +3,58 @@ import type { S } from 'src/types/base'
 type CompConfigAddabel = {
     behavior: BehaviorConfig['addable']
     items: ItemsConfig['addable']
-    slots: SlotsConfig['addable']
+    // slots: SlotsConfig['addable']
 }
 let Button: CompConfigAddabel = {
     // props,
     behavior: true,
     items: false,
-    slots: false,
+    // slots: false,
 }
 let Form: CompConfigAddabel = {
     behavior: true,
     items: true,
-    slots: false,
+    // slots: false,
 }
 let Table: CompConfigAddabel = {
-    behavior: false,
+    behavior: true,
     items: true,
-    slots: false,
+    // slots: false,
 }
 let Input: CompConfigAddabel = {
-    behavior: false,
-    items: true,
-    slots: false,
+    behavior: true,
+    items: false,
+    // slots: false,
 }
 let Select: CompConfigAddabel = {
-    behavior: false,
-    items: true,
-    slots: false,
+    behavior: true,
+    items: false,
+    // slots: false,
 }
 let Modal: CompConfigAddabel = {
-    behavior: false,
-    items: true,
-    slots: false,
+    behavior: true,
+    items: false,
+    // slots: false,
 }
 let Icon: CompConfigAddabel = {
     behavior: false,
     items: false,
-    slots: false,
+    // slots: false,
 }
 let Checkbox: CompConfigAddabel = {
-    behavior: false,
+    behavior: true,
     items: false,
-    slots: false,
+    // slots: false,
 }
 let Tabs: CompConfigAddabel = {
-    behavior: false,
+    behavior: true,
     items: true,
-    slots: false,
+    // slots: false,
+}
+let Pagination: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+    // slots: false,
 }
 
 
@@ -63,6 +68,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Icon,
     Checkbox,
     Tabs,
+    Pagination,
 }
 
 export {
