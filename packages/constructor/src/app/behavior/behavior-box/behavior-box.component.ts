@@ -9,6 +9,7 @@ import {
   Table as TableBehaviorMeta,
   Checkbox as CheckboxBehaviorMeta,
   Tabs as TabsBehaviorMeta,
+  Pagination as PaginationBehaviorMeta,
 } from 'src/helper/behavior'
 import type { BehaviorConfigItem } from 'src/types/config'
 // import type { Options, S,
@@ -111,6 +112,15 @@ export class BehaviorBoxComponent {
       case 'Tabs':
         this.curComp.behavior.forEach(item => {
           let o = cloneDeep(TabsBehaviorMeta)
+          Object.entries(item).forEach(([k, v]) => {
+            o[k].value = v
+          })
+          this.componentBehaviorList.push(o)
+        })
+        break;
+      case 'Pagination':
+        this.curComp.behavior.forEach(item => {
+          let o = cloneDeep(PaginationBehaviorMeta)
           Object.entries(item).forEach(([k, v]) => {
             o[k].value = v
           })

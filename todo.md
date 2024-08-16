@@ -2,30 +2,19 @@
 |-|-|-|
 |pagination|todo||
 |设置组件列表|done||
-|使用string代替number,设置配置面板|doing||
+|使用string代替number,设置配置面板|done||
 |搭建侧创建组件|todo||
 |搭建侧使用配置项|todo||
-|开辟插槽为子组件|todo||
 |渲染侧创建组件|todo||
 |渲染侧使用配置项|todo||
 |创建number setter.|todo||
 |number代替string|todo||
-|tabs|todo||
-|设置组件列表|done||
-|设置配置面板|done||
-|搭建侧创建组件|done||
-|搭建侧使用配置项|done||
-|开辟插槽为子组件|done||
-|渲染侧创建组件|done||
-|渲染侧使用配置项|done||
-|checkbox的beforeChange是属性|done||
+|所有组件的item是否应该有“增加一行”||done|
 
 |增加4个组件|||
-||tabs||
 ||pagination||
 |web-site|开辟周边知识储备|done|
 |button的icon属性不生效|||
-|所有组件的item是否应该有“增加一行”|||
 |本次分支f_comp|||
 |上生产内容|||
 ||增加4个组件|icon checkbox tabs|
