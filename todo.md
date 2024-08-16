@@ -1,23 +1,13 @@
 ||完成日期||
 |-|-|-|
-|创建number setter.|done||
-|number代替string|doing||
-|pagination|todo||
-|设置组件列表|done||
-|使用string代替number,设置配置面板|done||
-|搭建侧创建组件|done||
-|搭建侧使用配置项|done||
-|渲染侧创建组件|done||
-|渲染侧使用配置项|done||
-|所有组件的item是否应该有“增加一行”||done|
+|button的icon属性不生效|done||
+|删除tabs时未删除完子组件|todo||
+|number代替string|done||
 
-|增加4个组件|||
-||pagination||
 |web-site|开辟周边知识储备|done|
-|button的icon属性不生效|||
 |本次分支f_comp|||
 |上生产内容|||
-||增加4个组件|icon checkbox tabs|
+||增加4个组件|icon checkbox tabs pagination|
 ||web-site|修正拼写|
 ||constructor|修改props样式|
 ||constructor|修正无法修改页面名称的问题|
