@@ -11,6 +11,7 @@ import { Button as ButtonProps,
     Icon as IconProps,
     Checkbox as CheckboxProps,
     Tabs as TabsProps,
+    Pagination as PaginationProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -19,6 +20,7 @@ import {
     Table as TableBehavior,
     Checkbox as CheckboxBehavior,
     Tabs as TabsBehavior,
+    Pagination as PaginationBehavior,
 } from 'src/helper/behavior'
 import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
     BehaviorMetaItem,
@@ -133,6 +135,12 @@ let Tabs: ComponentDefaultConfig = {
     ],
     slots: {},
 }
+let Pagination: ComponentDefaultConfig = {
+    props: opProps(PaginationProps),
+    behavior: opBehavior(PaginationBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -144,4 +152,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Icon,
     Checkbox,
     Tabs,
+    Pagination,
 }
