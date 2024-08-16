@@ -1,10 +1,9 @@
 ||完成日期||
 |-|-|-|
+|删除tabs时未删除完子组件|doing||
 |button的icon属性不生效|done||
-|删除tabs时未删除完子组件|todo||
 |number代替string|done||
 
-|web-site|开辟周边知识储备|done|
 |本次分支f_comp|||
 |上生产内容|||
 ||增加4个组件|icon checkbox tabs pagination|

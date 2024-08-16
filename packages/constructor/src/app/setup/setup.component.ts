@@ -55,7 +55,6 @@ export class SetupComponent implements OnInit {
     this.pageList = []
     this.msg = []
     this.pageData = []
-
     // this.appService.appSubject$.subscribe(p => {
     //   this.curApp = p
     // })
@@ -71,7 +70,6 @@ export class SetupComponent implements OnInit {
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
   }
-
   activeTabChange(tab: A) {
     console.log(tab);
   }
