@@ -1,5 +1,6 @@
 ||完成日期||
 |-|-|-|
+|整理上生产过程|todo||
 |删除tabs时未删除完子组件|done||
 |button的icon属性不生效|done||
 |number代替string|done||
@@ -100,3 +101,12 @@ just
 
 # devui
 api众多。其中好多不通用的。
+
+# 上生产过程
+1. 把当前的开发分支f_xxx推到远端。
+2. 合并f_xxx到master
+3. 打包web-site.
+4. 重启后端服务mock-server
+5. 重启后端服务server
+6. 打包renderer
+7. 打包constructor
