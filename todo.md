@@ -1,19 +1,13 @@
 ||完成日期||
 |-|-|-|
-|整理上生产过程|todo||
-|删除tabs时未删除完子组件|done||
-|button的icon属性不生效|done||
-|number代替string|done||
-
-|本次分支f_comp|||
-|上生产内容|||
-||增加4个组件|icon checkbox tabs pagination|
-||web-site|修正拼写|
-||constructor|修改props样式|
-||constructor|修正无法修改页面名称的问题|
-||constructor|增加6个组件的配置面板 button modal form table input select|
-||这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、||
-||mock-server|表单的提交接口|
+|舞台区使用拖动布局组件|doing||
+|学习使用方法|doing||
+|设计数据结构|todo||
+|存取数据|todo||
+|搭建侧使用布局数据|todo||
+|渲染侧使用布局数据|todo||
+|整理上生产过程|done||
+|分支|f_grid||
 
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |无页面时提示创建页面|||
@@ -21,7 +15,6 @@
 |组件之间传递数据|以table、pagination、form为例||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |分包|||
-|舞台区使用拖动布局组件|||
 |是否需要把修改service与发请求分开|分开||
 |丰富组件|||
 ||accordion||
@@ -108,5 +101,5 @@ api众多。其中好多不通用的。
 3. 打包web-site.
 4. 重启后端服务mock-server
 5. 重启后端服务server
-6. 打包renderer
-7. 打包constructor
+6. 打包renderer 或 本地打包后上传
+7. 打包constructor 或 本地打包后上传
