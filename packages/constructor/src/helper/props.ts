@@ -878,6 +878,179 @@ let Tabs: PropsConfigItem = {
         key: 'isHidden',
     },
 }
+let Pagination: PropsConfigItem = {
+    pageSize: {
+        category: 'input',
+        value: '',
+        label: '分页容量',
+        key: 'pageSize',
+    },
+    total: {
+        category: 'input',
+        value: '',
+        label: '总条目数',
+        key: 'total',
+    },
+    pageSizeOptions: {
+        category: 'input',
+        value: '5, 10, 20, 50',
+        label: '分页容量的枚举值',
+        key: 'pageSizeOptions',
+    },
+    pageSizeDirection: {
+        category: 'input',
+        value: '',
+        label: '分页容量下拉框的展开方向',
+        key: 'pageSizeDirection',
+    },
+    pageIndex: {
+        category: 'input',
+        value: '1',
+        label: '初始化页码',
+        key: 'pageIndex',
+    },
+    maxItems: {
+        category: 'input',
+        value: '10',
+        label: '分页最多显示按钮数',
+        key: 'maxItems',
+    },
+    preLink: {
+        category: 'input',
+        value: '',
+        label: '上一页按钮显示图标',
+        key: 'preLink',
+    },
+    nextLink: {
+        category: 'input',
+        value: '',
+        label: '下一页按钮显示图标',
+        key: 'nextLink',
+    },
+    size: {
+        category: 'select',
+        options: [
+            { label: '小', value: 'sm', },
+            { label: '中', value: '', },
+            { label: '大', value: 'lg', },
+        ],
+        value: '',
+        label: '选项卡的宽度',
+        key: 'size',
+    },
+    canJumpPage: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否显示分页输入跳转',
+        key: 'canJumpPage',
+    },
+    canChangePageSize: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否显示用于选择更改分页容量的下拉框',
+        key: 'canChangePageSize',
+    },
+    canViewTotal: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否显示总条目',
+        key: 'canViewTotal',
+    },
+    totalItemText: {
+        category: 'input',
+        value: '所有条目',
+        label: '总条目文本',
+        key: 'totalItemText',
+    },
+    goToText: {
+        category: 'input',
+        value: '',
+        label: '跳至',
+        key: 'goToText',
+    },
+    showJumpButton: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否显示跳转按钮',
+        key: 'showJumpButton',
+    },
+    showTruePageIndex: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '页码超出分页范围时候也显示当前页码的开关',
+        key: 'showTruePageIndex',
+    },
+    lite: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否切换为极简模式',
+        key: 'lite',
+    },
+    showPageSelector: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: true,
+        label: '极简模式下是否显示页码下拉',
+        key: 'showPageSelector',
+    },
+    haveConfigMenu: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '极简模式下是否显示配置',
+        key: 'haveConfigMenu',
+    },
+    autoFixPageIndex: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: true,
+        label: '改变分页容量时是否自动修正页码',
+        key: 'autoFixPageIndex',
+    },
+    autoHide: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false, },
+            { label: 'true', value: true, },
+        ],
+        value: false,
+        label: '是否自动隐藏',
+        key: 'autoHide',
+    },
+}
 export {
     Button,
     Modal,
@@ -888,4 +1061,5 @@ export {
     Icon,
     Checkbox,
     Tabs,
+    Pagination,
 }

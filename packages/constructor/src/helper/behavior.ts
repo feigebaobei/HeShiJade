@@ -207,6 +207,31 @@ let Tabs: BehaviorConfigItem = {
   },
 }
 
+let Pagination: BehaviorConfigItem = {
+  event: {
+    category: 'select',
+    options: [
+      {label: '改变页码', value: 'pageIndexChange'},
+      // {label: '添加', value: 'addTabChange'},
+      {label: '改变分页容量', value: 'pageSizeChange'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  target: {
+    category: 'input',
+    value: '',
+    label: '目标',
+    key: 'target',
+  },
+  payload: {
+    category: 'textarea',
+    value: '',
+    label: '载荷',
+    key: 'payload',
+  },
+}
 export {
     Button,
     Modal,
@@ -216,4 +241,5 @@ export {
     // Icon, // 没有行为
     Checkbox,
     Tabs,
+    Pagination,
 }

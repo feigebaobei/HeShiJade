@@ -25,4 +25,7 @@ export class CheckboxComponent {
   changeH(v: B) {
     console.log('changeH', v)
   }
+  beforeChangeH() {
+    return false
+  }
 }

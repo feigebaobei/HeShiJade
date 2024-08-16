@@ -275,6 +275,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Icon, // 没有子元素
     // Checkbox, // 没有子元素
     Tabs,
+    // Pagination, // 没有子元素
 }
 
 export default all
