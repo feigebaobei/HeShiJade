@@ -17,6 +17,7 @@ import { TableComponent } from './table/table.component';
 import { IconComponent } from './icon/icon.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { TabsComponent } from './tabs/tabs.component';
     IconComponent,
     CheckboxComponent,
     TabsComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,

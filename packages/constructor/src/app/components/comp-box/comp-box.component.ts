@@ -10,6 +10,7 @@ import { TableComponent } from '../table/table.component';
 import { IconComponent } from '../icon/icon.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { TabsComponent } from '../tabs/tabs.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -43,6 +44,7 @@ let compMap: Ao = {
   Icon: IconComponent,
   Checkbox: CheckboxComponent,
   Tabs: TabsComponent,
+  Pagination: PaginationComponent,
 }
 
 @Component({
@@ -153,14 +155,20 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Checkbox':
         this.componentRef.instance.data = {
           props: this.comp.props,
-          // behavior: this.comp.behavior,
+          // behavior: this.comp.behavior, // 搭建侧可以不需要使用行为
           ulid: this.comp.ulid,
         }
         break
       case 'Tabs':
         this.componentRef.instance.data = {
           props: this.comp.props,
-          // behavior: this.comp.behavior,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Pagination':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
           items: this.comp.items,
           ulid: this.comp.ulid,
         }
