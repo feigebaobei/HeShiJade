@@ -12,6 +12,7 @@ import { TableComponent } from 'src/app/components/table/table.component';
 import { IconComponent } from 'src/app/components/icon/icon.component';
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 import { TabsComponent } from '../tabs/tabs.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 // type
 import type { A, S } from 'src/types/base';
 
@@ -28,6 +29,7 @@ let compMap: {[k: S]: A} = {
   Icon: IconComponent,
   Checkbox: CheckboxComponent,
   Tabs: TabsComponent,
+  Pagination: PaginationComponent,
 }
 
 @Component({
@@ -130,6 +132,15 @@ export class StackComponent {
           behavior: this.data.behavior,
           items: this.data.items,
           slots: this.data.slots,
+          ulid: this.data.ulid,
+        }
+        break;
+      case 'Pagination':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          // items: this.data.items,
+          // slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
