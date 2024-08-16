@@ -935,7 +935,7 @@ let Pagination: PropsConfigItem = {
             { label: '大', value: 'lg', },
         ],
         value: '',
-        label: '选项卡的宽度',
+        label: '大小',
         key: 'size',
     },
     canJumpPage: {

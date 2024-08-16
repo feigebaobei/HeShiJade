@@ -3,7 +3,7 @@
 |pagination|todo||
 |设置组件列表|done||
 |使用string代替number,设置配置面板|done||
-|搭建侧创建组件|todo||
+|搭建侧创建组件|done||
 |搭建侧使用配置项|todo||
 |渲染侧创建组件|todo||
 |渲染侧使用配置项|todo||
