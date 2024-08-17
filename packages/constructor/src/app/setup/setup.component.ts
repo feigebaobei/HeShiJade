@@ -5,6 +5,7 @@ import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
 import { ulid } from 'ulid';
 import { initComponentMeta } from 'src/helper'
+
 // 数据
 // import * as componentDefaultConfigAll from '../../helper/component'
 // import {componentDefaultConfigAll} from 'src/helper/component'
@@ -17,11 +18,20 @@ import type { Category, Component as Comp,
    } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 import type { App } from 'src/types/app';
+import type { GridStackOptions, GridStackWidget } from 'gridstack';
 
 // let componentDefaultConfigAll = all
 
 let clog = console.log
 // let CDM: Record<S, componentConfigT> = componentConfig
+
+// type SuperGridItem = GridStackWidget extends {
+//   comp: Comp
+// }
+interface SuperGridItem extends GridStackWidget {
+  comp: Comp
+}
+
 
 @Component({
   selector: 'app-setup',
@@ -41,6 +51,9 @@ export class SetupComponent implements OnInit {
   pageList: Page[]
   msg: {}[]
   pageData: A[]
+  gridOptions: GridStackOptions
+  // gridItem: GridStackWidget
+  gridItem: SuperGridItem[]
   constructor(
     private appService: AppService,
     private pageService: PageService,
@@ -61,11 +74,31 @@ export class SetupComponent implements OnInit {
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
       if (this.curPage) {
-        this.componentService.getComponentList(this.curPage).then((cl) => {
-          this.componentByPage = cl
+        this.componentService.getComponentList(this.curPage).then((componentList) => {
+          this.componentByPage = componentList
+          componentList.forEach(component => {
+            this.gridItem.push({
+              id: component.ulid,
+              comp: component,
+            })
+          })
         })
+        clog('this.gridItem', this.gridItem)
       }
     })
+    this.gridOptions = {
+      margin: 5,
+      // children: [
+      //   {x: 0, y: 0, minW: 2, content: 'item1'},
+      //   {x: 1, y: 0, content: 'item2'},
+      //   {x: 0, y: 1, content: 'item3'},
+      // ],
+    }
+    this.gridItem = [
+      // {x:0, y:0, minW:2, id:'1'}, // must have unique id used for trackBy
+      // {x:1, y:0, id:'2'},
+      // {x:0, y:1, id:'3'},
+    ]
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -115,7 +148,8 @@ export class SetupComponent implements OnInit {
       this.componentByPage[this.componentByPage.length - 1]?.ulid || '', '', '',
       {area: ''},
     )
-    this.componentByPage.push(obj)
+    // this.componentByPage.push(obj)
+    this.gridItem.push({id: obj.ulid, comp: obj})
     this.componentService.mountComponent(curPage!.ulid, obj)
     this.componentService.reqPostCompListByPage(obj).then(() => {
       clog('成功在远端保存组件')
@@ -137,5 +171,14 @@ export class SetupComponent implements OnInit {
     let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage!.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, compUlid)
+  }
+  identify(index: number, w: GridStackWidget) {
+    return w.id; // or use index if no id is set and you only modify at the end...
+  }
+  changeCBH(a: A) {
+    clog('changeCBH', a)
+  }
+  resizeH(a: A) {
+    clog('resizeH', a)
   }
 }
