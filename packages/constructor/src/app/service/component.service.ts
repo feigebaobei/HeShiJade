@@ -273,7 +273,7 @@ export class ComponentService {
     }
   }
   // 创建组件
-  reqPostCompListByPage(obj: Component) { // todo rename
+  reqCreateComponent(obj: Component) {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
   reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
@@ -337,16 +337,14 @@ export class ComponentService {
     }
   }
   // 设置当前组件的prop
+  // todo delete 2024.09.01+
   // setCurComponentProp(key: S, value: PropsValue) {
-  setCurComponentProp(key: S, value: A) {
-    if (this._curComponent) {
-      this._curComponent.props[key] = value
-    }
-  }
-  // todo 应该删除一个设置prop的方法
+  // setCurComponentProp(key: S, value: A) {
+  //   if (this._curComponent) {
+  //     this._curComponent.props[key] = value
+  //   }
+  // }
   // 直接改变属性
-  // setComponentProp(key: S, value: PropsValue) {
-  // todo 修改PropValue类型
   setComponentProp(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {

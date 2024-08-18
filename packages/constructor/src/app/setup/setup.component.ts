@@ -197,7 +197,7 @@ export class SetupComponent implements OnInit {
     })
     this.componentByPage.push(obj) // todo 整理gridItem componentByPage为一个变量
     this.componentService.mountComponent(curPage!.ulid, obj)
-    this.componentService.reqPostCompListByPage(obj).then(() => {
+    this.componentService.reqCreateComponent(obj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
       clog('error', error)

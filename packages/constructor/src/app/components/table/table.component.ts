@@ -138,7 +138,7 @@ AfterViewInit
     // 在service中添加新组件
     this.componentService.mountComponent(this.curPage.ulid, comp)
     // 在服务端保存新组件
-    this.componentService.reqPostCompListByPage(comp)
+    this.componentService.reqCreateComponent(comp)
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')

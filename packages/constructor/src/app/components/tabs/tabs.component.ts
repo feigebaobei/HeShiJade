@@ -72,7 +72,7 @@ export class TabsComponent implements OnInit{
       this.compObj[key] = [comp]
     }
     this.componentService.mountComponent(this.curPage.ulid, comp)
-    this.componentService.reqPostCompListByPage(comp)
+    this.componentService.reqCreateComponent(comp)
   }
   deleteComponentByUlidH(ulid: ULID, index : N) {
     let key = createChildKey('slots', index, 'component')
