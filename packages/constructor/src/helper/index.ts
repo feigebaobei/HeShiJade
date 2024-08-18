@@ -96,7 +96,7 @@ let initComponentMeta = (
   appUlid: ULID = '', pageUlid: ULID = '',
   prevUlid: S = '', nextUlid: S = '', parentUlid: S = '',
   mount: Component['mount'] = {area: ''},
-  gridLayout: GridLayout = {x: 4, y: 4, w: 4, h: 4} // todo 在调用时设置
+  gridLayout: GridLayout, // = {x: 4, y: 4, w: 4, h: 4}
 ): Component => {
   return {
     ulid: ulid(),
@@ -182,22 +182,22 @@ let cleanoutPage = (p: A) => {
   // initPage.lastComponentUlid = p.lastComponentUlid
   return initPage
 }
-let cleanoutComponent = (p: A) => {
-  let initComponent = initComponentMeta()
-  initComponent.ulid = p.ulid
-  initComponent.type = p.type
-  initComponent.prevUlid = p.prevUlid
-  initComponent.nextUlid = p.nextUlid
-  initComponent.parentUlid = p.parentUlid
-  initComponent.mount = p.mount
-  initComponent.props = p.props
-  initComponent.behavior = p.behavior
-  initComponent.items = p.items
-  initComponent.slots = p.slots
-  initComponent.appUlid = p.appUlid
-  initComponent.pageUlid = p.pageUlid
-  return initComponent
-}
+// let cleanoutComponent = (p: A) => {
+//   let initComponent = initComponentMeta()
+//   initComponent.ulid = p.ulid
+//   initComponent.type = p.type
+//   initComponent.prevUlid = p.prevUlid
+//   initComponent.nextUlid = p.nextUlid
+//   initComponent.parentUlid = p.parentUlid
+//   initComponent.mount = p.mount
+//   initComponent.props = p.props
+//   initComponent.behavior = p.behavior
+//   initComponent.items = p.items
+//   initComponent.slots = p.slots
+//   initComponent.appUlid = p.appUlid
+//   initComponent.pageUlid = p.pageUlid
+//   return initComponent
+// }
 let sleep = (n: N = 0) => {
   return new Promise((s) => {
     setTimeout(() => {s(true)}, n)
@@ -292,7 +292,7 @@ export {
   createChildKey,
   cleanoutApp,
   cleanoutPage,
-  cleanoutComponent,
+  // cleanoutComponent,
   createLoop,
   // wrapReq,
   sleep,

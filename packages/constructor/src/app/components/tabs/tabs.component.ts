@@ -3,13 +3,39 @@ import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { createChildKey, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
+
+// 数据
+import {
+  Button as gridLayoutButtonDefault,
+  Modal as gridLayoutModalDefault,
+  Form as gridLayoutFormDefault,
+  Table as gridLayoutTableDefault,
+  Input as gridLayoutInputDefault,
+  Select as gridLayoutSelectDefault,
+  Icon as gridLayoutIconDefault,
+  Checkbox as gridLayoutCheckboxDefault,
+  Tabs as gridLayoutTabsDefault,
+  Pagination as gridLayoutPaginationDefault,
+} from 'src/helper/gridLayout'
+
 // type
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { ULID } from 'src/types';
 import type { N, S } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
-
+let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+  Button: gridLayoutButtonDefault,
+  Modal: gridLayoutModalDefault,
+  Form: gridLayoutFormDefault,
+  Table: gridLayoutTableDefault,
+  Input: gridLayoutInputDefault,
+  Select: gridLayoutSelectDefault,
+  Icon: gridLayoutIconDefault,
+  Checkbox: gridLayoutCheckboxDefault,
+  Tabs: gridLayoutTabsDefault,
+  Pagination: gridLayoutPaginationDefault,
+}
 interface TabsData {
   props: Comp['props']
   items: Comp['items']
@@ -59,12 +85,15 @@ export class TabsComponent implements OnInit{
     let comp: Comp
     // 因items的id会变。index不会变。所以使用index为key.
     let key = createChildKey('slots', itemIndex, 'component')
+    let componentCategory = e.dragData.item.componentCategory
+    let compGridLayout = gridLayoutDefault[componentCategory]
     comp = initComponentMeta(
-      e.dragData.item.componentCategory,
+      componentCategory,
       this.curPage.appUlid, this.curPage.ulid,
       this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
       '', this.data.ulid,
-      {area: 'slots', slotKey: String(itemIndex)}
+      {area: 'slots', slotKey: String(itemIndex)},
+      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
     )
     if (this.compObj[key]?.length) {
       this.compObj[key].push(comp)

@@ -3,6 +3,20 @@ import { ComponentService } from 'src/app/service/component.service';
 import { createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
+// 数据
+import {
+  Button as gridLayoutButtonDefault,
+  Modal as gridLayoutModalDefault,
+  Form as gridLayoutFormDefault,
+  Table as gridLayoutTableDefault,
+  Input as gridLayoutInputDefault,
+  Select as gridLayoutSelectDefault,
+  Icon as gridLayoutIconDefault,
+  Checkbox as gridLayoutCheckboxDefault,
+  Tabs as gridLayoutTabsDefault,
+  Pagination as gridLayoutPaginationDefault,
+} from 'src/helper/gridLayout'
+
 // type
 import type { N, S, D, A, ULID } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
@@ -11,6 +25,19 @@ import type { DropEvent } from 'ng-devui';
 import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
 import { DataTableComponent } from 'ng-devui/data-table';
+
+let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+  Button: gridLayoutButtonDefault,
+  Modal: gridLayoutModalDefault,
+  Form: gridLayoutFormDefault,
+  Table: gridLayoutTableDefault,
+  Input: gridLayoutInputDefault,
+  Select: gridLayoutSelectDefault,
+  Icon: gridLayoutIconDefault,
+  Checkbox: gridLayoutCheckboxDefault,
+  Tabs: gridLayoutTabsDefault,
+  Pagination: gridLayoutPaginationDefault,
+}
 
 
 let clog = console.log
@@ -118,20 +145,25 @@ AfterViewInit
     let comp: Comp
     let key = createChildKey('items', itemIndex, 'component')
     clog('drop', key, this.data, this.data.ulid)
+
+    let componentCategory = e.dragData.item.componentCategory
+    let compGridLayout = gridLayoutDefault[componentCategory]
     if (this.compObj[key]?.length) {
       comp = initComponentMeta(
-        e.dragData.item.componentCategory,
+        componentCategory,
         this.curPage.appUlid, this.curPage.ulid,
         this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
-        {area: 'items', itemIndex}
+        {area: 'items', itemIndex},
+        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
         )
       this.compObj[key].push(comp)
     } else {
       comp = initComponentMeta(
-        e.dragData.item.componentCategory,
+        componentCategory,
         this.curPage.appUlid, this.curPage.ulid,
         '', '', this.data.ulid,
-        {area: 'items', itemIndex}
+        {area: 'items', itemIndex},
+        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
       )
       this.compObj[key] = [comp]
     }

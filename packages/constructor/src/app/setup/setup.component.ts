@@ -7,7 +7,6 @@ import { ulid } from 'ulid';
 import { initComponentMeta } from 'src/helper'
 
 // 数据
-// import * as gridLayoutDefault from 'src/helper/gridLayout'
 import {
   Button as gridLayoutButtonDefault,
   Modal as gridLayoutModalDefault,
@@ -187,11 +186,6 @@ export class SetupComponent implements OnInit {
     )
     this.gridItem.push({
       ...obj.gridLayout,
-      // x: 
-      // y: heightMax,
-      // // y: 0,
-      // w: 4, // todo 应该来自配置
-      // h: 4,
       id: obj.ulid,
       comp: obj
     })
