@@ -1,7 +1,6 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
-// import { HttpClient } from '@angular/common/http';
-// import clone from 'rfdc/default'
+
 // type
 import type { A, F, N, S, OA, B } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';

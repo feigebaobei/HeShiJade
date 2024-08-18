@@ -7,9 +7,19 @@ import { ulid } from 'ulid';
 import { initComponentMeta } from 'src/helper'
 
 // 数据
-// import * as componentDefaultConfigAll from '../../helper/component'
-// import {componentDefaultConfigAll} from 'src/helper/component'
-// import all from '../../helper/component'
+// import * as gridLayoutDefault from 'src/helper/gridLayout'
+import {
+  Button as gridLayoutButtonDefault,
+  Modal as gridLayoutModalDefault,
+  Form as gridLayoutFormDefault,
+  Table as gridLayoutTableDefault,
+  Input as gridLayoutInputDefault,
+  Select as gridLayoutSelectDefault,
+  Icon as gridLayoutIconDefault,
+  Checkbox as gridLayoutCheckboxDefault,
+  Tabs as gridLayoutTabsDefault,
+  Pagination as gridLayoutPaginationDefault,
+} from 'src/helper/gridLayout'
 // 类型
 import type { A, S, N, B, ULID, } from 'src/types/base';
 import type { Page } from 'src/types/page';
@@ -30,6 +40,18 @@ interface SuperGridItem extends GridStackWidget {
   comp: Comp
 }
 
+let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+  Button: gridLayoutButtonDefault,
+  Modal: gridLayoutModalDefault,
+  Form: gridLayoutFormDefault,
+  Table: gridLayoutTableDefault,
+  Input: gridLayoutInputDefault,
+  Select: gridLayoutSelectDefault,
+  Icon: gridLayoutIconDefault,
+  Checkbox: gridLayoutCheckboxDefault,
+  Tabs: gridLayoutTabsDefault,
+  Pagination: gridLayoutPaginationDefault,
+}
 
 @Component({
   selector: 'app-setup',
@@ -55,6 +77,7 @@ export class SetupComponent implements OnInit {
     private route: ActivatedRoute,
     // private router: Router,
   ) {
+
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
     this.componentCategoryList = []
@@ -82,6 +105,7 @@ export class SetupComponent implements OnInit {
             })
           })
           clog('this.gridItem', this.gridItem)
+          clog('gridLayoutDefault', gridLayoutDefault)
         })
       }
     })
@@ -108,6 +132,7 @@ export class SetupComponent implements OnInit {
   }
   ngOnInit(): void {
     this.opApp()
+    clog('gridLayoutDefault', gridLayoutDefault)
   }
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
@@ -149,19 +174,24 @@ export class SetupComponent implements OnInit {
         heightMax = n
       }
     })
+    let componentCategory: S = e.dragData.item.componentCategory
+    let compGridLayout = gridLayoutDefault[componentCategory]
     let obj: Comp = initComponentMeta(
-      e.dragData.item.componentCategory, 
+      componentCategory, 
       curPage!.appUlid, curPage!.ulid, 
       this.componentByPage[this.componentByPage.length - 1]?.ulid || '', '', '',
       {area: ''},
-      {x: 0, y: heightMax, w: 4, h: 4,}
+      {x: 0, y: heightMax, w: compGridLayout.w, h: compGridLayout.h,}
+      // {x: 0, y: heightMax, w: 4, h: 4,}
+      // compGridLayout,
     )
     this.gridItem.push({
-      x: 0,
-      y: heightMax,
-      // y: 0,
-      w: 4, // todo 应该来自配置
-      h: 4,
+      ...obj.gridLayout,
+      // x: 
+      // y: heightMax,
+      // // y: 0,
+      // w: 4, // todo 应该来自配置
+      // h: 4,
       id: obj.ulid,
       comp: obj
     })
