@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Method } from 'src/helper/axios';
 import { serviceUrl } from 'src/helper/config';
 import { ResponseData } from 'src/types';
-import { Ao, O, S } from 'src/types/base';
+import { OA, O, S } from 'src/types/base';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ReqService {
     private http: HttpClient,
     private router: Router
   ) { }
-  req(url: S, method: Method, params: Ao, options: Ao = {withCredentials: true}): Promise<ResponseData> {
+  req(url: S, method: Method, params: OA, options: OA = {withCredentials: true}): Promise<ResponseData> {
     return new Promise((s, j) => {
       // this.http[method]()
       let h

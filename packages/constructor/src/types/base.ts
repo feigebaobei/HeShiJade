@@ -7,15 +7,12 @@ type F = Function
 type O = object
 type D = Date
 // type At = '@'
-// type Email 
-// todo rename OA
-interface Ao {
+interface OA {
     [k: S]: A
 }
 type FT<T = A> = (...p: A[]) => T
 type Email = `${S}@${S}`
 type ValueType = 'string' | 'number' | 'switch'
-// todo 完善类型
 interface SelectOptionsItem {
     label: S
     value: A
@@ -115,7 +112,7 @@ type ConfigItemsCategoryType = ConfigItem['category']
 export type {
   S, N, A, B, ULID, 
   Email,
-  F, Ao, O, D,
+  F, OA, O, D,
   FT,
   ValueType,
   SelectOptionsItem,

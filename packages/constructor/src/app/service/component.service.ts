@@ -21,7 +21,7 @@ import type { Component, Category,
  } from '../../types/component'
 import type { ResponseData } from '../../types/index'
 import { O, type ConfigItemsCategoryType } from 'src/types/base'
-import type { S, Ao, ULID, A,
+import type { S, OA, ULID, A,
   N,
   B,
   ConfigItem,
@@ -292,7 +292,7 @@ export class ComponentService {
     })
   }
   // 重排序
-  // putCompListByPage(obj: Ao) {}
+  // putCompListByPage(obj: OA) {}
   // getComponentByPage(pageUlid?: ULID): Component[] {
   //   if (pageUlid) {
   //     clog('getComponentByPage', this._map.get(pageUlid)?.toArray())
