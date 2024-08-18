@@ -80,14 +80,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     })
   }
   boxClickh($event: A) {
-    // 选中组件
-    $event.stopPropagation()
-    // clog(this.comp)
-    if (this.curComp?.ulid === this.comp.ulid) {
-      // 已经是当前组件了，不切换。
-    } else {
-      this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
-    }
+    // // 选中组件
+    // $event.stopPropagation()
+    // // clog(this.comp)
+    // if (this.curComp?.ulid === this.comp.ulid) {
+    //   // 已经是当前组件了，不切换。
+    // } else {
+    //   this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
+    // }
   }
   ngOnInit() {
   }

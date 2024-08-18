@@ -291,32 +291,6 @@ export class ComponentService {
       }
     })
   }
-  // 重排序
-  // putCompListByPage(obj: OA) {}
-  // getComponentByPage(pageUlid?: ULID): Component[] {
-  //   if (pageUlid) {
-  //     clog('getComponentByPage', this._map.get(pageUlid)?.toArray())
-  //     return (this._map.get(pageUlid)?.toArray() as Component[])
-  //   } else {
-  //     return []
-  //   }
-  // }
-  // createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
-  //   let au: ULID, pu: ULID
-  //   if (appUlid) {
-  //     au = appUlid
-  //   } else {
-  //     let app = this.appService.getCurApp()
-  //     au = app?.ulid || ''
-  //   }
-  //   if (pageUlid) {
-  //     pu = pageUlid
-  //   } else {
-  //     let page = this.pageService.getCurPage()
-  //     pu = page?.ulid || ''
-  //   }
-  //   return `${au}_${pu}_`
-  // }
   // 在当前页面中查找
   private _find(pageUlid: ULID, compUlid: ULID): CompOrUn {
     return this._map.get(pageUlid)?.find(compUlid)?.value

@@ -237,4 +237,18 @@ export class SetupComponent implements OnInit {
     // }
     clog('resizeH', $event)
   }
+  gridStackItemClickH($event: MouseEvent, item: SuperGridItem) {
+    $event.stopPropagation()
+    let curPage = this.pageService.getCurPage()
+    if (curPage) {
+      let curComponent = this.componentService.curComponent()
+      if (curComponent) {
+        if (item.id === curComponent.ulid) {} else {
+          this.componentService.setCurComponent(curPage.ulid, item.id)
+        }
+      } else {
+        this.componentService.setCurComponent(curPage.ulid, item.id)
+      }
+    }
+  }
 }

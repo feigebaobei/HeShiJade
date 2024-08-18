@@ -2,6 +2,7 @@
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
 |搭建侧取数据|done||
+|点击gridItem时选中组件|done||
 |搭建侧使用布局数据|todo||
 |渲染侧使用布局数据|todo||
 |处理嵌套时gridstack布局|todo||
