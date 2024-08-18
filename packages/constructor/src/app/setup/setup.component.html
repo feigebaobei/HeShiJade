@@ -26,33 +26,24 @@
         (dropEvent)="onDrop($event, pageData)"
         (click)="stageClickH($event)"
     >
-        <!-- <div *ngIf="componentByPage.length">
-            <app-comp-box
-                *ngFor="let comp of componentByPage"
-                [comp]="comp"
-                (deleteComp)="deleteComponentByUlidH($event)"
-            ></app-comp-box>
-        </div> -->
         <div *ngIf="gridItem.length">
             <gridstack [options]="gridOptions" (changeCB)="changeCBH($event)" (resizeCB)="resizeH($event)">
-                <gridstack-item *ngFor="let item of gridItem; trackBy: identify" [options]="item">
+                <gridstack-item *ngFor="let item of gridItem; trackBy: identify"
+                [options]="(item)"
+                >
+                    <!-- item.id {{item.id}} -->
                     <app-comp-box
                         [comp]="item.comp"
                         (deleteComp)="deleteComponentByUlidH($event)"
                     ></app-comp-box>
                 </gridstack-item>
             </gridstack>
-            <!-- <app-comp-box
-                *ngFor="let comp of componentByPage"
-                [comp]="comp"
-                (deleteComp)="deleteComponentByUlidH($event)"
-            ></app-comp-box> -->
         </div>
-        <div *ngIf="!componentByPage.length">
+        <div *ngIf="!gridItem.length">
             <p class="text_center">此页面无组件</p>
         </div>
     </div>
-    <!-- setter -->
+    <!-- config panel -->
     <div class="right">
         <d-tabs [type]="'tabs'" [(activeTab)]="rightTabActive" (activeTabChange)="activeTabChange($event)">
             <d-tab id="props" title="props">

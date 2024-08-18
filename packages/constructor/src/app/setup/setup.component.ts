@@ -18,16 +18,14 @@ import type { Category, Component as Comp,
    } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 import type { App } from 'src/types/app';
-import type { GridStackOptions, GridStackWidget } from 'gridstack';
+import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
+// import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/angular';
 
 // let componentDefaultConfigAll = all
 
 let clog = console.log
 // let CDM: Record<S, componentConfigT> = componentConfig
 
-// type SuperGridItem = GridStackWidget extends {
-//   comp: Comp
-// }
 interface SuperGridItem extends GridStackWidget {
   comp: Comp
 }
@@ -39,9 +37,6 @@ interface SuperGridItem extends GridStackWidget {
   styleUrls: ['./setup.component.sass']
 })
 export class SetupComponent implements OnInit {
-  // tabActiveId: string | number = 'tab2';
-  // appKey: S
-  // pageKey: S
   curApp: App | undefined
   curPage: Page | undefined
   leftTabActive: S | N
@@ -52,7 +47,6 @@ export class SetupComponent implements OnInit {
   msg: {}[]
   pageData: A[]
   gridOptions: GridStackOptions
-  // gridItem: GridStackWidget
   gridItem: SuperGridItem[]
   constructor(
     private appService: AppService,
@@ -76,18 +70,24 @@ export class SetupComponent implements OnInit {
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {
           this.componentByPage = componentList
+          this.gridItem = []
           componentList.forEach(component => {
             this.gridItem.push({
+              x: component.gridLayout.x,
+              y: component.gridLayout.y,
+              w: component.gridLayout.w,
+              h: component.gridLayout.h,
               id: component.ulid,
               comp: component,
             })
           })
+          clog('this.gridItem', this.gridItem)
         })
-        clog('this.gridItem', this.gridItem)
       }
     })
     this.gridOptions = {
       margin: 5,
+      float: true,
       // children: [
       //   {x: 0, y: 0, minW: 2, content: 'item1'},
       //   {x: 1, y: 0, content: 'item2'},
@@ -142,21 +142,37 @@ export class SetupComponent implements OnInit {
   onDrop(e: DropEvent, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
+    let heightMax = 0
+    this.gridItem.forEach(item => {
+      let n = (item.y || 0) + (item.h || 0)
+      if (n > heightMax) {
+        heightMax = n
+      }
+    })
     let obj: Comp = initComponentMeta(
       e.dragData.item.componentCategory, 
       curPage!.appUlid, curPage!.ulid, 
       this.componentByPage[this.componentByPage.length - 1]?.ulid || '', '', '',
       {area: ''},
+      {x: 0, y: heightMax, w: 4, h: 4,}
     )
-    // this.componentByPage.push(obj)
-    this.gridItem.push({id: obj.ulid, comp: obj})
+    this.gridItem.push({
+      x: 0,
+      y: heightMax,
+      // y: 0,
+      w: 4, // todo 应该来自配置
+      h: 4,
+      id: obj.ulid,
+      comp: obj
+    })
+    this.componentByPage.push(obj) // todo 整理gridItem componentByPage为一个变量
     this.componentService.mountComponent(curPage!.ulid, obj)
     this.componentService.reqPostCompListByPage(obj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
       clog('error', error)
     })
-    // this.componentService.postCompListByPageForLocal(obj)
+    clog('gridItem', this.gridItem)
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('center')) {
@@ -189,13 +205,33 @@ export class SetupComponent implements OnInit {
     //   }[]
     //   ...
     // }
-    clog('changeCBH', $event)
+    clog('changeCBH', $event, this.gridItem)
+    let curNode = this.gridItem.find(item => {
+      return item.id === $event.nodes[0].id
+    })
+    if (curNode) {
+      curNode.x = $event.nodes[0].x
+      curNode.y = $event.nodes[0].y
+      curNode.w = $event.nodes[0].w
+      curNode.h = $event.nodes[0].h
+      this.componentService.setComponentProp('gridLayout', {
+        x: $event.nodes[0].x,
+        y: $event.nodes[0].y,
+        w: $event.nodes[0].w,
+        h: $event.nodes[0].h,
+      })
+      this.componentService.reqUpdateComponentProps('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
+      this.componentService.reqUpdateComponentProps('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
+      this.componentService.reqUpdateComponentProps('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
+      this.componentService.reqUpdateComponentProps('gridLayout', 'h', $event.nodes[0].h, curNode.comp.ulid)
+    }
   }
   resizeH($event: A) {
     // $event: {
     //   el: DOM,
     //   event: Event
     // }
-    clog('resizeH', $event)
+    clog('resizeH', $event, this.gridItem)
+    // clog(this.gridItem, this.gridItem2)
   }
 }

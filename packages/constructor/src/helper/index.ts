@@ -6,7 +6,7 @@ import {componentDefaultConfigAll} from 'src/helper/component'
 import type { A, F, N, S, Ao, B } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
-import type { Component } from 'src/types/component';
+import type { Component, GridLayout} from 'src/types/component';
 import type { App } from 'src/types/app';
 
 interface LoopPropotype {
@@ -97,6 +97,7 @@ let initComponentMeta = (
   appUlid: ULID = '', pageUlid: ULID = '',
   prevUlid: S = '', nextUlid: S = '', parentUlid: S = '',
   mount: Component['mount'] = {area: ''},
+  gridLayout: GridLayout = {x: 4, y: 4, w: 4, h: 4} // todo 在调用时设置
 ): Component => {
   return {
     ulid: ulid(),
@@ -111,6 +112,7 @@ let initComponentMeta = (
     slots: cloneDeep(componentDefaultConfigAll[category].slots),
     appUlid,
     pageUlid,
+    gridLayout,
   }
 }
 let initPageMeta = (key: S = '', name: S = '',
