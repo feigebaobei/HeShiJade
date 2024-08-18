@@ -35,7 +35,7 @@ let clog = console.log
 
 type CompOrUn = Component | undefined
 type ComponentOrUn = Component | undefined
-type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin'
+type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout'
 
 @Injectable({
   providedIn: 'root'
@@ -273,7 +273,7 @@ export class ComponentService {
     }
   }
   // 创建组件
-  reqPostCompListByPage(obj: Component) {
+  reqPostCompListByPage(obj: Component) { // todo rename
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
   reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
@@ -337,14 +337,17 @@ export class ComponentService {
     }
   }
   // 设置当前组件的prop
-  setCurComponentProp(key: S, value: PropsValue) {
+  // setCurComponentProp(key: S, value: PropsValue) {
+  setCurComponentProp(key: S, value: A) {
     if (this._curComponent) {
       this._curComponent.props[key] = value
     }
   }
   // todo 应该删除一个设置prop的方法
   // 直接改变属性
-  setComponentProp(key: S, value: PropsValue) {
+  // setComponentProp(key: S, value: PropsValue) {
+  // todo 修改PropValue类型
+  setComponentProp(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
@@ -392,9 +395,9 @@ export class ComponentService {
     }
   }
   // 更新组件
-  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
+  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
-      ulid: this.curComponent()?.ulid || '',
+      ulid: componentUlid,
       type,
       key,
       value,
@@ -431,4 +434,11 @@ export class ComponentService {
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
     return childrenComponent
   }
+  // getLastRow(pageUlid: ULID) {
+  //   let tree = this.getTree(pageUlid)
+  //   if (tree) {
+  //     let lastNode = tree!.lastNode()
+
+  //   }
+  // }
 }

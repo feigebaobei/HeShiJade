@@ -94,6 +94,7 @@ interface PropsTransfer {
 export type {
   PropsValue,
   PropsMeta,
+  GridLayout,
   BehaviorMeta,
   BehaviorMetaItem,
   BehaviorItemKey,

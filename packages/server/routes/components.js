@@ -90,6 +90,7 @@ router.route('/')
       rules.required(req.body.slots) &&
       rules.required(req.body.mount) && 
       rules.required(req.body.appUlid) && 
+      rules.required(req.body.gridLayout) && 
       rules.required(req.body.pageUlid)
     ) {
       s(true)
@@ -116,6 +117,7 @@ router.route('/')
             items: req.body.items,
             slots: req.body.slots,
             appUlid: req.body.appUlid,
+            gridLayout: req.body.gridLayout,
             pageUlid: req.body.pageUlid,
           }
         }
@@ -241,6 +243,13 @@ router.route('/')
             j(100100)
           }
           break;
+        case 'gridLayout':
+          if (rules.required(req.body.key) && rules.required(req.body.value)) {
+            s(true)
+          } else {
+            j(100100)
+          }
+          break;
         case 'slots':
           break;
       }
@@ -255,6 +264,9 @@ router.route('/')
         break;
       case 'behavior':
         k = `behavior.${req.body.index}.${req.body.key}`
+        break;
+      case 'gridLayout':
+        k = `gridLayout.${req.body.key}`
         break;
     }
     let updateObj = {
