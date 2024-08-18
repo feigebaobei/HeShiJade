@@ -13,7 +13,12 @@ interface PropsMeta {
     // [k: S]: PropsValue
     [k: S]: A
 }
-
+interface GridLayout {
+  x: N
+  y: N
+  w: N
+  h: N
+}
 interface BehaviorMetaItem {
   event: S
   target: S
@@ -66,6 +71,7 @@ interface Component {
   slots: SlotsMeta
   appUlid: ULID
   pageUlid: ULID
+  gridLayout: GridLayout
 }
 
 interface Category {

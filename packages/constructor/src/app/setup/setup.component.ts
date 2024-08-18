@@ -175,10 +175,27 @@ export class SetupComponent implements OnInit {
   identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
   }
-  changeCBH(a: A) {
-    clog('changeCBH', a)
+  changeCBH($event: A) {
+    // $event: {
+    //   event: Event,
+    //   nodes: {
+    //     comp: Comp,
+    //     el: DOM,
+    //     w: N
+    //     h: N
+    //     x: N
+    //     y: N
+    //     grid: GridStack
+    //   }[]
+    //   ...
+    // }
+    clog('changeCBH', $event)
   }
-  resizeH(a: A) {
-    clog('resizeH', a)
+  resizeH($event: A) {
+    // $event: {
+    //   el: DOM,
+    //   event: Event
+    // }
+    clog('resizeH', $event)
   }
 }
