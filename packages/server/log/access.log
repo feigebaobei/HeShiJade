@@ -1,1 +1,2 @@
 {"level":30,"time":1724022636241,"pid":74111,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1724024177400,"pid":74111,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
