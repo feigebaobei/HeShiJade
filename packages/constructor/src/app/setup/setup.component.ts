@@ -63,18 +63,16 @@ export class SetupComponent implements OnInit {
   leftTabActive: S | N
   rightTabActive: S | N
   componentCategoryList: Category[]
-  componentByPage: Comp[]
+  componentByPage: SuperGridItem[]
   pageList: Page[]
   msg: {}[]
   pageData: A[]
   gridOptions: GridStackOptions
-  gridItem: SuperGridItem[]
   constructor(
     private appService: AppService,
     private pageService: PageService,
     private componentService: ComponentService,
     private route: ActivatedRoute,
-    // private router: Router,
   ) {
 
     this.leftTabActive = 'page'
@@ -84,17 +82,13 @@ export class SetupComponent implements OnInit {
     this.pageList = []
     this.msg = []
     this.pageData = []
-    // this.appService.appSubject$.subscribe(p => {
-    //   this.curApp = p
-    // })
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {
-          this.componentByPage = componentList
-          this.gridItem = []
+          this.componentByPage = []
           componentList.forEach(component => {
-            this.gridItem.push({
+            this.componentByPage.push({
               x: component.gridLayout.x,
               y: component.gridLayout.y,
               w: component.gridLayout.w,
@@ -103,25 +97,13 @@ export class SetupComponent implements OnInit {
               comp: component,
             })
           })
-          clog('this.gridItem', this.gridItem)
-          clog('gridLayoutDefault', gridLayoutDefault)
         })
       }
     })
     this.gridOptions = {
       margin: 5,
       float: true,
-      // children: [
-      //   {x: 0, y: 0, minW: 2, content: 'item1'},
-      //   {x: 1, y: 0, content: 'item2'},
-      //   {x: 0, y: 1, content: 'item3'},
-      // ],
     }
-    this.gridItem = [
-      // {x:0, y:0, minW:2, id:'1'}, // must have unique id used for trackBy
-      // {x:1, y:0, id:'2'},
-      // {x:0, y:1, id:'3'},
-    ]
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -167,7 +149,7 @@ export class SetupComponent implements OnInit {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     let heightMax = 0
-    this.gridItem.forEach(item => {
+    this.componentByPage.forEach(item => {
       let n = (item.y || 0) + (item.h || 0)
       if (n > heightMax) {
         heightMax = n
@@ -175,28 +157,25 @@ export class SetupComponent implements OnInit {
     })
     let componentCategory: S = e.dragData.item.componentCategory
     let compGridLayout = gridLayoutDefault[componentCategory]
-    let obj: Comp = initComponentMeta(
+    let compObj: Comp = initComponentMeta(
       componentCategory, 
       curPage!.appUlid, curPage!.ulid, 
-      this.componentByPage[this.componentByPage.length - 1]?.ulid || '', '', '',
+      this.componentByPage[this.componentByPage.length - 1]?.comp.ulid || '', '', '',
       {area: ''},
       {x: 0, y: heightMax, w: compGridLayout.w, h: compGridLayout.h,}
-      // {x: 0, y: heightMax, w: 4, h: 4,}
-      // compGridLayout,
     )
-    this.gridItem.push({
-      ...obj.gridLayout,
-      id: obj.ulid,
-      comp: obj
-    })
-    this.componentByPage.push(obj) // todo 整理gridItem componentByPage为一个变量
-    this.componentService.mountComponent(curPage!.ulid, obj)
-    this.componentService.reqCreateComponent(obj).then(() => {
+    let gridObj = {
+        ...compObj.gridLayout,
+        id: compObj.ulid,
+        comp: compObj
+      }
+    this.componentByPage.push(gridObj)
+    this.componentService.mountComponent(curPage!.ulid, compObj)
+    this.componentService.reqCreateComponent(compObj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
       clog('error', error)
     })
-    clog('gridItem', this.gridItem)
   }
   stageClickH($event: A) {
     if (Array.from($event.target.classList).includes('center')) {
@@ -207,7 +186,7 @@ export class SetupComponent implements OnInit {
     }
   }
   deleteComponentByUlidH(ulid: ULID) {
-    this.componentByPage = this.componentByPage.filter(item => item.ulid !== ulid)
+    this.componentByPage = this.componentByPage.filter(item => item.id !== ulid)
     let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage!.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, compUlid)
@@ -229,8 +208,7 @@ export class SetupComponent implements OnInit {
     //   }[]
     //   ...
     // }
-    clog('changeCBH', $event, this.gridItem)
-    let curNode = this.gridItem.find(item => {
+    let curNode = this.componentByPage.find(item => {
       return item.id === $event.nodes[0].id
     })
     if (curNode) {
@@ -244,6 +222,7 @@ export class SetupComponent implements OnInit {
         w: $event.nodes[0].w,
         h: $event.nodes[0].h,
       })
+      // todo 参数改为kv对的object
       this.componentService.reqUpdateComponentProps('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
       this.componentService.reqUpdateComponentProps('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
       this.componentService.reqUpdateComponentProps('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
@@ -255,7 +234,6 @@ export class SetupComponent implements OnInit {
     //   el: DOM,
     //   event: Event
     // }
-    clog('resizeH', $event, this.gridItem)
-    // clog(this.gridItem, this.gridItem2)
+    clog('resizeH', $event)
   }
 }

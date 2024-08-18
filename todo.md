@@ -6,15 +6,8 @@
 |渲染侧使用布局数据|todo||
 |处理嵌套时gridstack布局|todo||
 |添加了井布局后删除组件的功能|todo||
-|可能需要增加一个配置面板|todo||
+|可能需要增加一个layout配置面板|todo||
 |完成todo|todo||
-|设置组件的布局配置文件|done||
-|在扩展功能的文档中添加井布局的过程|done||
-|学习girdstack使用方法|done||
-|编写设计文档|done||
-|设计数据结构|done||
-|存数据|done||
-|整理上生产过程|done||
 |分支|f_grid2||
 |要上生产的内容|||
 ||constructor井布局||
