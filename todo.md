@@ -2,13 +2,13 @@
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
 |搭建侧取数据|done||
-|点击gridItem时选中组件|done||
-|搭建侧使用布局数据|todo||
-|渲染侧使用布局数据|todo||
+|搭建侧使用布局数据|done||
+|渲染侧使用布局数据|doing||
 |处理嵌套时gridstack布局|todo||
-|添加了井布局后删除组件的功能|todo||
+|添加了井布局后，删除组件的功能|todo||
 |可能需要增加一个layout配置面板|todo||
 |完成todo|todo||
+|点击gridItem时选中组件|done||
 |分支|f_grid2||
 |要上生产的内容|||
 ||constructor井布局||
