@@ -101,7 +101,8 @@ export class SetupComponent implements OnInit {
       }
     })
     this.gridOptions = {
-      margin: 5,
+      margin: 2,
+      // padding: 8,
       float: true,
     }
   }
