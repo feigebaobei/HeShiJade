@@ -13,8 +13,6 @@ import type { PropsValue } from 'src/types/component';
   styleUrls: ['./props-option.component.sass']
 })
 export class PropsOptionComponent {
-  // @Input() data!: ComponentPropsMetaItem
-  // todo 待完善
   @Input() data!: ConfigItmeOption
   @Output() change = new EventEmitter()
   modelChangeH: F

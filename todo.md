@@ -1,15 +1,15 @@
 ||完成日期||
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
+|搭建侧取数据|done||
+|搭建侧使用布局数据|todo||
+|渲染侧使用布局数据|todo||
+|处理嵌套时gridstack布局|todo||
+|完成todo|doing||
 |学习girdstack使用方法|done||
 |编写设计文档|done||
 |设计数据结构|done||
 |存数据|done||
-|取数据|todo||
-|搭建侧使用布局数据|todo||
-|渲染侧使用布局数据|todo||
-|处理嵌套时gridstack布局|todo||
-|完成todo|todo||
 |整理上生产过程|done||
 |分支|f_grid2||
 

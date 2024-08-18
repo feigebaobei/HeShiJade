@@ -183,12 +183,6 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   ngAfterViewChecked(): void {
   }
   // update() { // 通常指的是当Angular更新DOM或执行数据绑定
-  //   // clog('update')
-  //   // todo 删除不使用的此方法
-  //   // if (this.comp.ulid === this.curComp?.ulid) {
-  //   //   this.init()
-  //   // }
-  //   // this.init()
   // }
   // ngOnChanges() {
   // }
