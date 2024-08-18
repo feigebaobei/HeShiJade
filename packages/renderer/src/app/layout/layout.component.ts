@@ -3,12 +3,19 @@ import { ActivatedRoute } from '@angular/router';
 // 服务
 import { AppService } from '../service/app.service';
 import { EnvService } from '../service/env.service';
-// type
-import { App } from 'src/types/app';
-import { Component as Comp } from 'src/types/component';
 import { ComponentService } from '../service/component.service';
+// type
+import type { App } from 'src/types/app';
+import type { Component as Comp } from 'src/types/component';
+import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
+import type { N } from 'src/types/base';
 
 let clog = console.log
+
+interface SuperGridItem extends GridStackWidget {
+  comp: Comp
+}
+
 
 @Component({
   selector: 'app-layout',
@@ -16,7 +23,9 @@ let clog = console.log
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
-  componentList: Comp[]
+  // componentList: Comp[]
+  componentList: SuperGridItem[]
+  gridOptions: GridStackOptions
   constructor(private route: ActivatedRoute,
     private appService: AppService,
     private envService: EnvService,
@@ -35,10 +44,31 @@ export class LayoutComponent implements OnInit {
         this.envService.setCur(data.get('env'))
       }
     })
-    this.componentService.componentList$.subscribe(p => {
-      this.componentList = p
+    this.componentService.componentList$.subscribe(componentList => {
+      // this.componentList = p
+      this.componentList = []
+      componentList.forEach(component => {
+        this.componentList.push({
+          x: component.gridLayout.x,
+          y: component.gridLayout.y,
+          w: component.gridLayout.w,
+          h: component.gridLayout.h,
+          id: component.ulid,
+          comp: component,
+        })
+      })
     })
+    this.gridOptions = {
+      margin: 2,
+      float: true,
+      staticGrid: true,
+      // resizable: false,
+      // removable: false,
+    }
   }
   ngOnInit(): void {
+  }
+  identify(index: N, w: GridStackWidget) {
+    return w.id
   }
 }

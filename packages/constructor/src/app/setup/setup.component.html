@@ -29,8 +29,8 @@
         <div *ngIf="componentByPage.length">
             <gridstack [options]="gridOptions" (changeCB)="changeCBH($event)" (resizeCB)="resizeH($event)">
                 <gridstack-item *ngFor="let item of componentByPage; trackBy: identify"
-                [options]="(item)"
-                (click)="gridStackItemClickH($event, item)"
+                    [options]="item"
+                    (click)="gridStackItemClickH($event, item)"
                 >
                     <app-comp-box
                         [comp]="item.comp"
