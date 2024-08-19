@@ -1,11 +1,3 @@
-<div (click)="boxClickh($event)" class="comp-box"
->
-<!-- [ngClass]="{selected: comp.ulid === curComp?.ulid}" -->
-    <div 
-        *ngIf="comp.ulid === curComp?.ulid"
-        class="toolbox"
-    >
-        <d-button bsSize="xs" icon="icon-delete" (click)="deleteButtonClickH()"></d-button>
-    </div>
+<div class="comp-box">
     <ng-template compHost></ng-template>
 </div>

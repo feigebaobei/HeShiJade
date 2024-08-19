@@ -2,7 +2,7 @@
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
 |搭建侧的选中框放在gridItem上|done||
-|选中时的删除icon放在栅格元素上|todo||
+|选中时的删除icon放在栅格元素上|doing||
 |12格改为24格|done||
 |渲染侧，弹层类组件不占栅格|todo||
 |处理嵌套时gridstack布局|todo||
