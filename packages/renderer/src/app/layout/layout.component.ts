@@ -62,6 +62,7 @@ export class LayoutComponent implements OnInit {
       margin: 2,
       float: true,
       staticGrid: true,
+      column: 24,
       // resizable: false,
       // removable: false,
     }
