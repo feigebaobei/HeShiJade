@@ -60,6 +60,7 @@ let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
 export class SetupComponent implements OnInit {
   curApp: App | undefined
   curPage: Page | undefined
+  curComponent: Comp | undefined
   leftTabActive: S | N
   rightTabActive: S | N
   componentCategoryList: Category[]
@@ -74,7 +75,6 @@ export class SetupComponent implements OnInit {
     private componentService: ComponentService,
     private route: ActivatedRoute,
   ) {
-
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
     this.componentCategoryList = []
@@ -106,6 +106,7 @@ export class SetupComponent implements OnInit {
       float: true,
       column: 24,
     }
+    this.curComponent = undefined
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -243,12 +244,15 @@ export class SetupComponent implements OnInit {
     let curPage = this.pageService.getCurPage()
     if (curPage) {
       let curComponent = this.componentService.curComponent()
+      this.curComponent = this.componentService.curComponent()
       if (curComponent) {
-        if (item.id === curComponent.ulid) {} else {
+        if (item.id !== curComponent.ulid) {
           this.componentService.setCurComponent(curPage.ulid, item.id)
+          this.curComponent = item.comp
         }
       } else {
         this.componentService.setCurComponent(curPage.ulid, item.id)
+        this.curComponent = item.comp
       }
     }
   }

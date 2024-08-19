@@ -30,6 +30,7 @@
             <gridstack [options]="gridOptions" (changeCB)="changeCBH($event)" (resizeCB)="resizeH($event)">
                 <gridstack-item *ngFor="let item of componentByPage; trackBy: identify"
                     [options]="item"
+                    [ngClass]="{selected: item.id === curComponent?.ulid}"
                     (click)="gridStackItemClickH($event, item)"
                 >
                     <app-comp-box

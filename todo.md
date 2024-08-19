@@ -1,10 +1,12 @@
 ||完成日期||
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
-|12格改为24格|doing||
+|搭建侧的选中框放在gridItem上|done||
+|选中时的删除icon放在栅格元素上|todo||
+|12格改为24格|done||
+|渲染侧，弹层类组件不占栅格|todo||
 |处理嵌套时gridstack布局|todo||
 |可能需要增加一个layout配置面板|todo||
-|搭建侧的选中框放在gridItem上|todo||
 |完成todo|todo||
 |上生产前注释搭建侧的全局样式|todo||
 |渲染侧使用布局数据|done||
