@@ -104,6 +104,7 @@ export class SetupComponent implements OnInit {
       margin: 2,
       // padding: 8,
       float: true,
+      column: 24,
     }
   }
   viewBtClickH() {
