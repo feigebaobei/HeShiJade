@@ -8,7 +8,7 @@ import { Queue } from "data-footstone"
 import { createChildKey } from 'src/helper/index'
 // 数据
 import {categoryList} from 'src/helper/category'
-import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
+// import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
 // 类型
@@ -19,8 +19,8 @@ import type { Component, Category,
   ComponentMountItems,
   ComponentMountSlots,
  } from '../../types/component'
-import type { ResponseData } from '../../types/index'
-import { O, type ConfigItemsCategoryType } from 'src/types/base'
+// import type { ResponseData } from '../../types/index'
+// import { O, type ConfigItemsCategoryType } from 'src/types/base'
 import type { S, OA, ULID, A,
   N,
   B,
@@ -295,9 +295,9 @@ export class ComponentService {
   private _find(pageUlid: ULID, compUlid: ULID): CompOrUn {
     return this._map.get(pageUlid)?.find(compUlid)?.value
   }
-  private _findCategory(categoryUlid: ULID) {
-    return this.categoryList.find(item => item.ulid === categoryUlid)
-  }
+  // private _findCategory(categoryUlid: ULID) {
+  //   return this.categoryList.find(item => item.ulid === categoryUlid)
+  // }
   curComponent() {
     return this._curComponent
   }

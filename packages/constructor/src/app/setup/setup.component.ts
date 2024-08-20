@@ -106,7 +106,10 @@ export class SetupComponent implements OnInit {
       float: true,
       column: 24,
     }
-    this.curComponent = undefined
+    // this.curComponent = undefined
+    this.componentService.curComponent$.subscribe(p => {
+      this.curComponent = p
+    })
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
@@ -181,7 +184,8 @@ export class SetupComponent implements OnInit {
     })
   }
   stageClickH($event: A) {
-    if (Array.from($event.target.classList).includes('center')) {
+    // if (Array.from($event.target.classList).includes('center')) {
+    if (Array.from($event.target.classList).includes('grid-stack')) {
       if (this.curPage) {
         clog('stageClickH', this.curPage)
         this.componentService.setCurComponent(this.curPage.ulid, '')
@@ -243,16 +247,16 @@ export class SetupComponent implements OnInit {
     $event.stopPropagation()
     let curPage = this.pageService.getCurPage()
     if (curPage) {
-      let curComponent = this.componentService.curComponent()
-      this.curComponent = this.componentService.curComponent()
-      if (curComponent) {
-        if (item.id !== curComponent.ulid) {
+      // let curComponent = this.componentService.curComponent()
+      // this.curComponent = this.componentService.curComponent()
+      if (this.curComponent) {
+        if (item.id !== this.curComponent.ulid) {
           this.componentService.setCurComponent(curPage.ulid, item.id)
-          this.curComponent = item.comp
+          // this.curComponent = item.comp
         }
       } else {
         this.componentService.setCurComponent(curPage.ulid, item.id)
-        this.curComponent = item.comp
+        // this.curComponent = item.comp
       }
     }
   }
