@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { popupsComponents } from 'src/helper/config'
 // 服务
 import { AppService } from '../service/app.service';
 import { EnvService } from '../service/env.service';
@@ -23,8 +24,8 @@ interface SuperGridItem extends GridStackWidget {
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
-  // componentList: Comp[]
   componentList: SuperGridItem[]
+  popupsComponentList: Comp[]
   gridOptions: GridStackOptions
   constructor(private route: ActivatedRoute,
     private appService: AppService,
@@ -32,6 +33,7 @@ export class LayoutComponent implements OnInit {
     private componentService: ComponentService,
   ) {
     this.componentList = []
+    this.popupsComponentList = []
     this.route.paramMap.subscribe((data: any) => {
       // clog('paramMap data', data)
       // clog('paramMap data', data.get('appKey'))
@@ -45,17 +47,31 @@ export class LayoutComponent implements OnInit {
       }
     })
     this.componentService.componentList$.subscribe(componentList => {
-      // this.componentList = p
       this.componentList = []
+      // for(let i = 0; i < componentList.length; i++) {
+      //   if (popupsComponents.includes(componentList[i].type)) {
+      //     let j = i + 1
+      //     let h = componentList[i].gridLayout.h
+      //     while (j < componentList.length) {
+      //       componentList[j].gridLayout.h -= h
+      //       j++
+      //     }
+      //   }
+      // }
+      // componentList.filter(component => !popupsComponents.includes(component.type))
       componentList.forEach(component => {
-        this.componentList.push({
-          x: component.gridLayout.x,
-          y: component.gridLayout.y,
-          w: component.gridLayout.w,
-          h: component.gridLayout.h,
-          id: component.ulid,
-          comp: component,
-        })
+        if (popupsComponents.includes(component.type)) {
+          this.popupsComponentList.push(component)
+        } else {
+          this.componentList.push({
+            x: component.gridLayout.x,
+            y: component.gridLayout.y,
+            w: component.gridLayout.w,
+            h: component.gridLayout.h,
+            id: component.ulid,
+            comp: component,
+          })
+        }
       })
     })
     this.gridOptions = {

@@ -14,8 +14,10 @@ let serviceUrl = () => {
     }
     return r
 }
+let popupsComponents = ['Modal']
 
 
 export {
     serviceUrl,
+    popupsComponents,
 }
