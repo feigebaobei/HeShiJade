@@ -24,9 +24,10 @@ import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
-import { DataTableComponent } from 'ng-devui/data-table';
+import type { DataTableComponent } from 'ng-devui/data-table';
+import type { GridLayoutDefault } from "src/types/component"
 
-let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
   Modal: gridLayoutModalDefault,
   Form: gridLayoutFormDefault,
@@ -154,7 +155,7 @@ AfterViewInit
         this.curPage.appUlid, this.curPage.ulid,
         this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
         {area: 'items', itemIndex},
-        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
+        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
         )
       this.compObj[key].push(comp)
     } else {
@@ -163,7 +164,7 @@ AfterViewInit
         this.curPage.appUlid, this.curPage.ulid,
         '', '', this.data.ulid,
         {area: 'items', itemIndex},
-        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
+        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
       )
       this.compObj[key] = [comp]
     }

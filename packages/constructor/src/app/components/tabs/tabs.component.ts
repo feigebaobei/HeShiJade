@@ -24,7 +24,9 @@ import type { ULID } from 'src/types';
 import type { N, S } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
-let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+import type { GridLayoutDefault } from "src/types/component"
+
+let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
   Modal: gridLayoutModalDefault,
   Form: gridLayoutFormDefault,
@@ -93,7 +95,7 @@ export class TabsComponent implements OnInit{
       this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
       '', this.data.ulid,
       {area: 'slots', slotKey: String(itemIndex)},
-      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
+      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     if (this.compObj[key]?.length) {
       this.compObj[key].push(comp)

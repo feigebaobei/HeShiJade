@@ -28,6 +28,7 @@ import type { Category, Component as Comp,
 import type { DropEvent } from 'ng-devui';
 import type { App } from 'src/types/app';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
+import type { GridLayoutDefault } from "src/types/component"
 // import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/angular';
 
 // let componentDefaultConfigAll = all
@@ -39,7 +40,7 @@ interface SuperGridItem extends GridStackWidget {
   comp: Comp
 }
 
-let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
   Modal: gridLayoutModalDefault,
   Form: gridLayoutFormDefault,
@@ -95,6 +96,7 @@ export class SetupComponent implements OnInit {
               h: component.gridLayout.h,
               id: component.ulid,
               comp: component,
+              noResize: component.gridLayout.noResize,
             })
           })
         })
@@ -168,7 +170,7 @@ export class SetupComponent implements OnInit {
       curPage!.appUlid, curPage!.ulid, 
       this.componentByPage[this.componentByPage.length - 1]?.comp.ulid || '', '', '',
       {area: ''},
-      {x: 0, y: heightMax, w: compGridLayout.w, h: compGridLayout.h,}
+      {x: 0, y: heightMax, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize}
     )
     let gridObj = {
         ...compObj.gridLayout,
@@ -247,16 +249,12 @@ export class SetupComponent implements OnInit {
     $event.stopPropagation()
     let curPage = this.pageService.getCurPage()
     if (curPage) {
-      // let curComponent = this.componentService.curComponent()
-      // this.curComponent = this.componentService.curComponent()
       if (this.curComponent) {
         if (item.id !== this.curComponent.ulid) {
           this.componentService.setCurComponent(curPage.ulid, item.id)
-          // this.curComponent = item.comp
         }
       } else {
         this.componentService.setCurComponent(curPage.ulid, item.id)
-        // this.curComponent = item.comp
       }
     }
   }

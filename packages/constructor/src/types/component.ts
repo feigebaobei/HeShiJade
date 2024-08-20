@@ -18,6 +18,13 @@ interface GridLayout {
   y: N
   w: N
   h: N
+  noResize: B
+}
+type PartialGridLayout = Partial<GridLayout>
+interface GridLayoutDefault {
+  w: N
+  h: N
+  noResize: B
 }
 interface BehaviorMetaItem {
   event: S
@@ -95,6 +102,8 @@ export type {
   PropsValue,
   PropsMeta,
   GridLayout,
+  PartialGridLayout,
+  GridLayoutDefault,
   BehaviorMeta,
   BehaviorMetaItem,
   BehaviorItemKey,

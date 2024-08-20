@@ -1,62 +1,74 @@
-let Button = {
+import type { GridLayoutDefault } from "src/types/component"
+
+let Button: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 2,
     h: 1,
+    noResize: false,
 }
-let Modal = {
+let Modal: GridLayoutDefault = {
     // x: 0,
     // y: 0,
-    w: 12,
-    h: 6,
+    w: 24,
+    h: 7,
+    noResize: false,
 }
-let Form = {
+let Form: GridLayoutDefault = {
     // x: 0,
     // y: 0,
-    w: 12,
+    w: 24,
     h: 6,
+    noResize: false,
 }
-let Table = {
+let Table: GridLayoutDefault = {
     // x: 0,
     // y: 0,
-    w: 12,
+    w: 24,
     h: 6,
+    noResize: false,
 }
-let Input = {
+let Input: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 4,
     h: 1,
+    noResize: false,
 }
-let Select = {
+let Select: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 4,
     h: 1,
+    noResize: false,
 }
-let Icon = {
+let Icon: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 1,
     h: 1,
+    noResize: false,
 }
-let Checkbox = {
+let Checkbox: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 2,
     h: 1,
+    noResize: false,
 }
-let Tabs = {
+let Tabs: GridLayoutDefault = {
     // x: 0,
     // y: 0,
-    w: 12,
+    w: 24,
     h: 6,
+    noResize: false,
 }
-let Pagination = {
+let Pagination: GridLayoutDefault = {
     // x: 0,
     // y: 0,
-    w: 12,
+    w: 24,
     h: 1,
+    noResize: false,
 }
 export {
     Button,

@@ -24,10 +24,11 @@ import type { A, ULID, S, N, } from 'src/types/base';
 import type {Component as Comp, 
   ComponentMountItems,
   ComponentMountSlots,} from 'src/types/component'
-import { Page } from 'src/types/page';
+import type { Page } from 'src/types/page';
+import type { GridLayoutDefault } from "src/types/component"
 let clog = console.log
 
-let gridLayoutDefault: {[k: S]: {w: N, h: N}} = {
+let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
   Modal: gridLayoutModalDefault,
   Form: gridLayoutFormDefault,
@@ -86,7 +87,7 @@ export class ModalComponent implements OnInit{
       this.childrenHeader.length ? this.childrenHeader[this.childrenHeader.length - 1].ulid : '',
       '', this.data.ulid,
       {area: 'slots', slotKey: 'header'},
-      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
+      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenHeader.push(component)
     this.componentService.mountComponent(this.page.ulid, component)
@@ -108,7 +109,7 @@ export class ModalComponent implements OnInit{
       this.childrenBody.length ? this.childrenBody[this.childrenBody.length - 1].ulid : '',
        '', this.data.ulid,
       {area: 'slots', slotKey: 'body'},
-      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h},
+      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenBody.push(component)
     this.componentService.mountComponent(this.page.ulid, component)
