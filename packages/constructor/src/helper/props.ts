@@ -116,14 +116,14 @@ let Modal: PropsConfigItem = {
         label: '宽度',
         key: 'width',
     },
-    zIndex: {
-        category: 'number',
-        value: 150,
-        // maxLength
-        // minLength
-        label: 'zIndex',
-        key: 'zIndex',
-    },
+    // zIndex: {
+    //     category: 'number',
+    //     value: 150,
+    //     // maxLength
+    //     // minLength
+    //     label: 'zIndex',
+    //     key: 'zIndex',
+    // },
     visible: {
         category: 'switch',
         options: [
