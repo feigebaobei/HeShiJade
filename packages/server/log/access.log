@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {"level":30,"time":1724156822739,"pid":81637,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
 {"level":30,"time":1724156855165,"pid":81637,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1724157186629,"pid":81637,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
@@ -50,3 +51,10 @@
 {"level":50,"time":1724251529298,"pid":88698,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:CFrQb6d5wRkOe14T6kRWtPoUka19tQZX.ixojJBl9zgwNLEQi7TDQ6Io3f3A2EQ+kESJHS/iNZwI"}}
 {"level":50,"time":1724251529303,"pid":88698,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:CFrQb6d5wRkOe14T6kRWtPoUka19tQZX.ixojJBl9zgwNLEQi7TDQ6Io3f3A2EQ+kESJHS/iNZwI"}}
 {"level":30,"time":1724251593784,"pid":88698,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+=======
+{"level":30,"time":1724195842541,"pid":85234,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":50,"time":1724196000379,"pid":85234,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:11w-zgzzF_Z3TTDv9SCXYJAGcJ8RYdq7.VMMek0MciJg+ggcNxJTX0CXCSeqj8lE0krbYfS6Ew8Q"}}
+{"level":50,"time":1724196000380,"pid":85234,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:11w-zgzzF_Z3TTDv9SCXYJAGcJ8RYdq7.VMMek0MciJg+ggcNxJTX0CXCSeqj8lE0krbYfS6Ew8Q"}}
+{"level":30,"time":1724196170385,"pid":85234,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724196195561,"pid":85234,"hostname":"catdeMacBook-Pro.local","name":"logname","componentUpdateArr":[{"updateOne":{"filter":{"ulid":"01J5S1KYF7B6X6H1J6R79BDC9K"},"update":{"$set":{"slots.header":"01J5S1M2ZQF7H409E7W30DBPH1"}}}},{"insertOne":{"document":{"ulid":"01J5S1M2ZQF7H409E7W30DBPH1","type":"Icon","prevUlid":"","nextUlid":"","parentUlid":"01J5S1KYF7B6X6H1J6R79BDC9K","mount":{"area":"slots","slotKey":"header"},"props":{"icon":"icon-add","operable":false,"disabled":false,"rotate":"","color":"#333"},"behavior":[],"items":[],"slots":{},"appUlid":"01J5DWYV0YSJQGZJG9XY9XA8NS","gridLayout":{"x":0,"y":0,"w":1,"h":1,"noResize":false},"pageUlid":"01J5S1KJV5ECFK1M1JNJQVRFB4"}}}]}
+>>>>>>> Stashed changes

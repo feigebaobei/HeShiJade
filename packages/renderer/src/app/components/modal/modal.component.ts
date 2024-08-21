@@ -91,7 +91,6 @@ export class ModalComponent implements OnInit {
     }
     // clog('12345', this.childrenHeader, this.childrenBody, this.childrenFooter)
   }
-  
   openDialog() {
     const results = this.modalService.open({
       ...this.config,
