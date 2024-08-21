@@ -8,6 +8,7 @@ import { DesignComponent } from './design/design.component';
 import { DataComponent } from './data/data.component';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { CircumComponent } from './circum/circum.component';
+import { SkillComponent } from './skill/skill.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'data', component: DataComponent },
   { path: 'changelog', component: ChangelogComponent },
   { path: 'circum', component: CircumComponent },
+  { path: 'skill', component: SkillComponent },
 ];
 
 @NgModule({
