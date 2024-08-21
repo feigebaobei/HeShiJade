@@ -187,7 +187,8 @@ export class SetupComponent implements OnInit {
   }
   stageClickH($event: A) {
     // if (Array.from($event.target.classList).includes('center')) {
-    if (Array.from($event.target.classList).includes('grid-stack')) {
+    let classList = Array.from($event.target.classList)
+    if (classList.includes('grid-stack') || classList.includes('center')) {
       if (this.curPage) {
         clog('stageClickH', this.curPage)
         this.componentService.setCurComponent(this.curPage.ulid, '')
