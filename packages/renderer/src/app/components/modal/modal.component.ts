@@ -28,7 +28,7 @@ export class ModalComponent implements OnInit {
       // id: 'dialog-service',
       title: 'title', // 使用传入的数据
       width: '346px',
-      zIndex: 150,
+      // zIndex: 150,
       showAnimation: true,
       backdropCloseable: true,
       placement: 'center',
@@ -56,7 +56,7 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     this.config.title = this.data.props.title
     this.config.width = this.data.props.width
-    this.config.zIndex = this.data.props.zIndex
+    // this.config.zIndex = this.data.props.zIndex
     this.config.showAnimation = this.data.props.showAnimation
     this.config.backdropCloseable = this.data.props.backdropCloseable
     this.config.placement = this.data.props.placement
