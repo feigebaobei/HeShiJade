@@ -131,4 +131,12 @@ export class ModalComponent implements OnInit{
     this.componentService.deleteByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
+  headerDeleteCompH(ulid: ULID) {
+    clog('deleteCompH', ulid)
+    this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
+  }
+  bodyDeleteCompH(ulid: ULID) {
+    clog('deleteCompH', ulid)
+    this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
+  }
 }

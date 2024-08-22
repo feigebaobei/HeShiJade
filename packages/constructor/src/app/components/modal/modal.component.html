@@ -15,7 +15,7 @@
             <!-- <app-comp-box *ngFor="let comp of childrenHeader" [comp]="comp"
             (deleteComp)="deleteComponentByUlidH($event)"
             ></app-comp-box> -->
-            <app-comp-stack [componentList]="childrenHeader"></app-comp-stack>
+            <app-comp-stack [componentList]="childrenHeader" (deleteComp)="headerDeleteCompH($event)"></app-comp-stack>
         </div>
     </header>
     <hr>
@@ -24,7 +24,7 @@
         <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
         (deleteComp)="bodyDeleteComponentByUlidH($event)"
         ></app-comp-box> -->
-        <app-comp-stack [componentList]="childrenBody"></app-comp-stack>
+        <app-comp-stack [componentList]="childrenBody" (deleteComp)="bodyDeleteCompH($event)"></app-comp-stack>
     </main>
     <footer>
         <d-button>取消</d-button>
