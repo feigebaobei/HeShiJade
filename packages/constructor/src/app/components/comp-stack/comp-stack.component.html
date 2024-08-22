@@ -1,0 +1,14 @@
+<p>comp-stack works!{{componentList.length}} {{curComponent?.ulid}}</p>
+
+<gridstack [options]="gridOptions"
+(changeCB)="changeCBH($event)"
+>
+    <gridstack-item
+        *ngFor="let item of _componentList"
+        [options]="item"
+        [ngClass]="{selected: item.id === curComponent?.ulid}"
+        (click)="gridStackItemClickH($event, item)"
+    >
+        <app-comp-box [comp]="item.comp" ></app-comp-box>
+    </gridstack-item>
+</gridstack>
