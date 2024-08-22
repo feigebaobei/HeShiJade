@@ -4,7 +4,7 @@ let Button: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 2,
-    h: 1,
+    h: 2,
     noResize: false,
 }
 let Modal: GridLayoutDefault = {
@@ -32,28 +32,28 @@ let Input: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 4,
-    h: 1,
+    h: 2,
     noResize: false,
 }
 let Select: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 4,
-    h: 1,
+    h: 2,
     noResize: false,
 }
 let Icon: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 1,
-    h: 1,
+    h: 2,
     noResize: false,
 }
 let Checkbox: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 2,
-    h: 1,
+    h: 2,
     noResize: false,
 }
 let Tabs: GridLayoutDefault = {
@@ -67,7 +67,7 @@ let Pagination: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 24,
-    h: 1,
+    h: 2,
     noResize: false,
 }
 export {

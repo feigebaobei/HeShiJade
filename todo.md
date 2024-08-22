@@ -2,7 +2,8 @@
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
 |处理嵌套时gridstack布局|todo||
-|布局値最小为2|todo||
+|布局値最小为2|done||
+|在web-site中说明零代码与低代码的边界|doing||
 |所有可嵌套的组件都使用app-comp-stack|todo||
 |app-comp-stack内可删除组件|todo||
 |modal内无子组件时应该显示提示文案|todo||
