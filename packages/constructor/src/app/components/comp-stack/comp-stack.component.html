@@ -1,4 +1,4 @@
-<p>comp-stack works!{{componentList.length}} {{curComponent?.ulid}}</p>
+<!-- <p>comp-stack works!{{componentList.length}} {{curComponent?.ulid}}</p> -->
 
 <gridstack [options]="gridOptions"
 (changeCB)="changeCBH($event)"
@@ -9,6 +9,9 @@
         [ngClass]="{selected: item.id === curComponent?.ulid}"
         (click)="gridStackItemClickH($event, item)"
     >
+        <div *ngIf="item.id === curComponent?.ulid" class="toolbox">
+            <d-button bsSize="xs" icon="icon-delete" (click)="deleteComponentByUlidH(item.comp.ulid)"></d-button>
+        </div>
         <app-comp-box [comp]="item.comp" ></app-comp-box>
     </gridstack-item>
 </gridstack>

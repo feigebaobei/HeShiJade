@@ -5,6 +5,7 @@
 |布局値最小为2|todo||
 |所有可嵌套的组件都使用app-comp-stack|todo||
 |app-comp-stack内可删除组件|todo||
+|modal内无子组件时应该显示提示文案|todo||
 |完成todo|todo||
 |上生产前注释搭建侧的全局样式|done||
 |点击舞台时取消选中组件|done||

@@ -4,7 +4,10 @@ import { PageService } from 'src/app/service/page.service';
 // type
 import type { Component as Comp } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
-import type { A } from 'src/types/base';
+import type { A, ULID } from 'src/types/base';
+import { Page } from 'src/types/page';
+
+let clog = console.log
 
 interface SuperGridItem extends GridStackWidget {
   comp: Comp
@@ -23,6 +26,7 @@ export class CompStackComponent implements OnInit{
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
   curComponent: Comp | undefined
+  curPage: Page | undefined
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -33,11 +37,15 @@ export class CompStackComponent implements OnInit{
       float: true,
       column: 24,
     }
+    // this.pageService.pageSubject$.subscribe(p => {
+    //   this.curPage = p
+    // })
     this.componentService.curComponent$.subscribe(p => {
       this.curComponent = p
     })
   }
   ngOnInit() {
+    this.curPage = this.pageService.getCurPage()
     this._componentList = this.componentList.map(item => {
       return {
         x: item.gridLayout.x,
@@ -98,5 +106,14 @@ export class CompStackComponent implements OnInit{
         this.componentService.setCurComponent(curPage.ulid, item.id)
       }
     }
+  }
+  deleteComponentByUlidH(ulid: ULID) {
+    this._componentList = this._componentList.filter(item => item.id !== ulid)
+    let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => {
+      clog('componentItem', componentItem)
+      return componentItem.ulid
+    })
+    this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
+    this.componentService.reqDeleteComponent(ulid, compUlid)
   }
 }
