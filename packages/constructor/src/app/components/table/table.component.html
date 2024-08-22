@@ -50,11 +50,12 @@
           (dropEvent)="dropH($event, colOption['field'], i)"
           class="dropArea"
         >
-          <app-comp-box
+          <!-- <app-comp-box
               *ngFor="let comp of (compObj[createChildKey('items', i, 'component')] || [])"
               [comp]="comp"
               (deleteComp)="deleteComponentByUlidH($event, i)"
-          ></app-comp-box>
+          ></app-comp-box> -->
+          <app-comp-stack [componentList]="(compObj[createChildKey('items', i, 'component')] || [])"></app-comp-stack>
         </div>
       </ng-template>
     </d-cell>

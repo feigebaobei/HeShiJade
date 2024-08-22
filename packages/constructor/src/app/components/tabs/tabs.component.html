@@ -19,11 +19,13 @@
             (dropEvent)="dropH($event, i)"
         >
             <span *ngIf="!compatibleArray(getChildrenComponent(i)).length">此区域可接收子组件</span>
-            <app-comp-box
+            <!-- <app-comp-box
             *ngFor="let comp of compatibleArray(getChildrenComponent(i))"
             [comp]="comp"
             (deleteComp)="deleteComponentByUlidH($event, i)"
-            ></app-comp-box>
+            ></app-comp-box> -->
+            <!-- todo 删除gridStack相关代码 -->
+            <app-comp-stack [componentList]="compatibleArray(getChildrenComponent(i))"></app-comp-stack>
         </div>
     </d-tab>
 </d-tabs>
