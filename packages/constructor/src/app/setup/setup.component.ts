@@ -69,7 +69,8 @@ export class SetupComponent implements OnInit {
   pageList: Page[]
   msg: {}[]
   pageData: A[]
-  gridOptions: GridStackOptions
+  gridOptions: GridStackOptions // todo 删除gridStack相关的代码
+  componentList: Comp[]
   constructor(
     private appService: AppService,
     private pageService: PageService,
@@ -83,11 +84,13 @@ export class SetupComponent implements OnInit {
     this.pageList = []
     this.msg = []
     this.pageData = []
+    this.componentList = []
     this.pageService.pageSubject$.subscribe(p => {
       this.curPage = p
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {
           this.componentByPage = []
+          this.componentList = componentList
           componentList.forEach(component => {
             this.componentByPage.push({
               x: component.gridLayout.x,

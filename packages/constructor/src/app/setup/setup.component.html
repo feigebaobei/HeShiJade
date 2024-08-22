@@ -27,7 +27,7 @@
         (click)="stageClickH($event)"
     >
         <div *ngIf="componentByPage.length">
-            <gridstack [options]="gridOptions" (changeCB)="changeCBH($event)" (resizeCB)="resizeH($event)">
+            <!-- <gridstack [options]="gridOptions" (changeCB)="changeCBH($event)" (resizeCB)="resizeH($event)">
                 <gridstack-item
                     *ngFor="let item of componentByPage; trackBy: identify"
                     [options]="item"
@@ -39,7 +39,8 @@
                     </div>
                     <app-comp-box [comp]="item.comp" (deleteComp)="deleteComponentByUlidH($event)"></app-comp-box>
                 </gridstack-item>
-            </gridstack>
+            </gridstack> -->
+            <app-comp-stack [componentList]="componentList"></app-comp-stack>
         </div>
         <div *ngIf="!componentByPage.length">
             <p class="text_center">此页面无组件</p>
