@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, } from '@angular/core';
 import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
@@ -30,6 +30,7 @@ import type { App } from 'src/types/app';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 import type { GridLayoutDefault } from "src/types/component"
 // import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/angular';
+import type { CompStackComponent } from '../components/comp-stack/comp-stack.component';
 
 // let componentDefaultConfigAll = all
 
@@ -71,6 +72,7 @@ export class SetupComponent implements OnInit {
   pageData: A[]
   gridOptions: GridStackOptions // todo 删除gridStack相关的代码
   componentList: Comp[]
+  @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private appService: AppService,
     private pageService: PageService,
@@ -181,12 +183,14 @@ export class SetupComponent implements OnInit {
         comp: compObj
       }
     this.componentByPage.push(gridObj)
+    this.componentList.push(compObj)
     this.componentService.mountComponent(curPage!.ulid, compObj)
     this.componentService.reqCreateComponent(compObj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
       clog('error', error)
     })
+    this.compStack.init()
   }
   stageClickH($event: A) {
     // if (Array.from($event.target.classList).includes('center')) {
