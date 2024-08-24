@@ -3,7 +3,7 @@ import type { GridLayoutDefault } from "src/types/component"
 let Button: GridLayoutDefault = {
     // x: 0,
     // y: 0,
-    w: 2,
+    w: 4,
     h: 2,
     noResize: false,
 }
@@ -46,7 +46,7 @@ let Icon: GridLayoutDefault = {
     // x: 0,
     // y: 0,
     w: 1,
-    h: 2,
+    h: 1,
     noResize: false,
 }
 let Checkbox: GridLayoutDefault = {

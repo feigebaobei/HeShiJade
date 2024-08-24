@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild,
+  // ChangeDetectorRef,
+ } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
+import { compatibleArray } from 'src/helper/index'
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -26,6 +29,7 @@ import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
 import type { DataTableComponent } from 'ng-devui/data-table';
 import type { GridLayoutDefault } from "src/types/component"
+// import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
 
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
@@ -79,10 +83,15 @@ AfterViewInit
 
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
+  // @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
+    // private cdRef: ChangeDetectorRef
   ) {
+    // 若使用4行占位，则使用table的slots列的组件不能都响应，只能当前行可以响应。
+    // 所以不得以改为一行。
+    // 日后想办法改为4行占位吧。
     this.basicDataSource = [
       {
         id: 1,
@@ -92,31 +101,31 @@ AfterViewInit
         gender: 'Male',
         description: 'handsome man'
       },
-      {
-        id: 2,
-        firstName: 'Jacob',
-        lastName: 'Thornton',
-        gender: 'Female',
-        dob: new Date(1989, 1, 1),
-        description: 'interesting man'
-      },
-      {
-        id: 3,
-        firstName: 'Danni',
-        lastName: 'Chen',
-        gender: 'Female',
-        dob: new Date(1991, 3, 1),
-        description: 'pretty man',
-        // expandConfig: {description: 'Danni is here'}
-      },
-      {
-        id: 4,
-        firstName: 'green',
-        lastName: 'gerong',
-        gender: 'Male',
-        description: 'interesting man',
-        dob: new Date(1991, 3, 1),
-      },
+      // {
+      //   id: 2,
+      //   firstName: 'Jacob',
+      //   lastName: 'Thornton',
+      //   gender: 'Female',
+      //   dob: new Date(1989, 1, 1),
+      //   description: 'interesting man'
+      // },
+      // {
+      //   id: 3,
+      //   firstName: 'Danni',
+      //   lastName: 'Chen',
+      //   gender: 'Female',
+      //   dob: new Date(1991, 3, 1),
+      //   description: 'pretty man',
+      //   // expandConfig: {description: 'Danni is here'}
+      // },
+      // {
+      //   id: 4,
+      //   firstName: 'green',
+      //   lastName: 'gerong',
+      //   gender: 'Male',
+      //   description: 'interesting man',
+      //   dob: new Date(1991, 3, 1),
+      // },
     ]
     this.compObj = {
       // <field>: Comp[]
@@ -124,9 +133,13 @@ AfterViewInit
     this.createChildKey = createChildKey
     this.curPage = this.pageService.getCurPage()!
   }
+  compCompList(index: N) {
+    return compatibleArray(this.compObj[createChildKey('items', index, 'component')])
+  }
   ngOnInit(): void {
     this.compObj = {}
     // this.datatable.getCheckedRows()
+    // clog('table init')
     
     // let curPage = this.pageService.getCurPage()
     let tree = this.componentService.getTree(this.curPage.ulid)
@@ -134,7 +147,6 @@ AfterViewInit
       if (item['category'] === 'slots') {
         let node = tree?.find(item['childUlid'])
         if (node) {
-          // this.compObj[`items_${index}`] = node.toArray()
           this.compObj[createChildKey('items', index, 'component')] = node.toArray()
         }
       }
@@ -172,6 +184,8 @@ AfterViewInit
     this.componentService.mountComponent(this.curPage.ulid, comp)
     // 在服务端保存新组件
     this.componentService.reqCreateComponent(comp)
+    // this.cdRef.detectChanges()
+    // this.compStack.init()
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
@@ -187,8 +201,20 @@ AfterViewInit
   //   clog('afterContentInit datatable', this, this.datatable)
   // }
   ngAfterViewInit() {
-    clog('ngAfterViewInit datatable', this, this.datatable)
+    // clog('ngAfterViewInit datatable', this, this.datatable, this.compStack)
     // 这时才有得到datatable组件
-    
+    // clog('')
+  }
+  deleteCompH(ulid: ULID, index: N) {
+    clog('deleteCompH', ulid, index)
+    let key = createChildKey('items', index, 'component')
+    this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+    clog(this.compObj[key])
+    // Array.from(Object.keys(this.compObj)).forEach(key => {
+    //   this.compObj[key] = [] // this.compObj[key]
+    //   // this.compObj = {}
+    // })
+    // this.cdRef.detectChanges()
+    // this.compStack.init()
   }
 }
