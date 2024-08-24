@@ -57,8 +57,8 @@
           ></app-comp-box> -->
           <!-- <app-comp-stack [componentList]="(compObj[createChildKey('items', i, 'component')] || [])" (deleteComp)="deleteCompH($event, i)"></app-comp-stack> -->
           <!-- compCompList(i):{{compCompList(i) | json}} -->
-          <!-- <app-comp-stack [componentList]="compCompList(i)" #compStack (deleteComp)="deleteCompH($event, i)"></app-comp-stack> -->
-          <app-comp-stack [componentList]="compCompList(i)" (deleteComp)="deleteCompH($event, i)"></app-comp-stack>
+          <app-comp-stack [componentList]="compCompList(i)" #compStack (deleteComp)="deleteCompH($event, i)"></app-comp-stack>
+          <!-- <app-comp-stack [componentList]="compCompList(i)" (deleteComp)="deleteCompH($event, i)"></app-comp-stack> -->
         </div>
       </ng-template>
     </d-cell>

@@ -212,3 +212,22 @@
 {"level":30,"time":1724495733904,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1724495742877,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1724495742895,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724495919811,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724495919836,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724495935303,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724495935449,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724495943064,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724495943085,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496059313,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496059398,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496079870,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496079885,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496148657,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","componentUpdateArr":[{"updateOne":{"filter":{"ulid":"01J61ZNP3WCKWKR7VTMCE7QGB7"},"update":{"$set":{"items.0.childUlid":"01J61ZNY2RZ7JF71NXS8PWCEWJ"}}}},{"insertOne":{"document":{"ulid":"01J61ZNY2RZ7JF71NXS8PWCEWJ","type":"Button","prevUlid":"","nextUlid":"","parentUlid":"01J61ZNP3WCKWKR7VTMCE7QGB7","mount":{"area":"items","itemIndex":0},"props":{"type":"button","bsStyle":"primary","bsSize":"md","bordered":false,"icon":"","shape":"","showLoading":false,"width":"","disabled":false,"text":"button"},"behavior":[{"event":"","target":"","payload":""}],"items":[{"category":"input","label":"文本","value":"button star","key":""}],"slots":{},"appUlid":"01J61XQDYX7YCK7A3M7FVR8KBA","gridLayout":{"x":0,"y":0,"w":4,"h":2,"noResize":false},"pageUlid":"01J61ZKMZX0B2T1MJ6ZSE352FW"}}}]}
+{"level":30,"time":1724496214872,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496214873,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496287006,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496287008,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496303842,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496303889,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496321128,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724496321135,"pid":4209,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}

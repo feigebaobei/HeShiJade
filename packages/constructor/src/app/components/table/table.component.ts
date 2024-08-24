@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild,
   // ChangeDetectorRef,
  } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-import { createChildKey } from 'src/helper/index'
+import { asyncFn, createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
 import { compatibleArray } from 'src/helper/index'
@@ -29,7 +29,7 @@ import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
 import type { DataTableComponent } from 'ng-devui/data-table';
 import type { GridLayoutDefault } from "src/types/component"
-// import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
+import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
 
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
@@ -83,7 +83,7 @@ AfterViewInit
 
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
-  // @ViewChild('compStack') compStack!: CompStackComponent
+  @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -186,7 +186,9 @@ AfterViewInit
     // 在服务端保存新组件
     this.componentService.reqCreateComponent(comp)
     // this.cdRef.detectChanges()
-    // this.compStack.init()
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
@@ -216,6 +218,8 @@ AfterViewInit
     //   // this.compObj = {}
     // })
     // this.cdRef.detectChanges()
-    // this.compStack.init()
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
 }
