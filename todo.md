@@ -1,12 +1,14 @@
 ||完成日期||
 |-|-|-|
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
-|舞台区使用拖动布局组件|done||
-|舞台区添加组件时及时显示出来|done||
+|删除组件、添加组件应该统一在一个级别的中|done|统一到使用comp-stack的组件级别|
+|舞台区删除组件时及时显示出来|done||
 |在嵌套的组件添加子组件时及时显示出来|doing||
 ||modal内添加子组件|doing|
 ||table内添加子组件|todo|
 ||tabs内添加子组件|todo|
+|舞台区使用拖动布局组件|done||
+|舞台区添加组件时及时显示出来|done||
 |处理嵌套时gridstack布局|done||
 ||modal组件内使用comp-stack|done|
 ||table组件内使用comp-stack|done|

@@ -130,14 +130,14 @@ export class CompStackComponent implements OnInit, OnChanges, DoCheck{
     this._componentList = this._componentList.filter(item => item.id !== ulid)
     // 通知父组件删除
     this.deleteComp.emit(ulid)
-    let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => {
-      // clog('componentItem', componentItem)
-      return componentItem.ulid
-    })
-    // service中删除相应的节点
-    this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
-    // 数据库中删除
-    this.componentService.reqDeleteComponent(ulid, compUlid)
+    // let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => {
+    //   // clog('componentItem', componentItem)
+    //   return componentItem.ulid
+    // })
+    // // service中删除相应的节点
+    // this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
+    // // 数据库中删除
+    // this.componentService.reqDeleteComponent(ulid, compUlid)
   }
 
   identify(index: number, w: GridStackWidget) {
