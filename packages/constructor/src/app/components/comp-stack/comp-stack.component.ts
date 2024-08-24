@@ -54,7 +54,6 @@ export class CompStackComponent implements OnInit, OnChanges, DoCheck{
     this.init()
   }
   init() {
-    clog('this.componentList', this.componentList)
     this._componentList = this.componentList.map(item => {
       return {
         x: item.gridLayout.x,
@@ -66,6 +65,7 @@ export class CompStackComponent implements OnInit, OnChanges, DoCheck{
         noResize: item.gridLayout.noResize,
       }
     })
+    clog('this._componentList', this._componentList)
   }
   ngOnChanges(changes: SimpleChanges) {
     // if (changes['componentList'] && !changes['componentList'].firstChange) {
@@ -138,5 +138,9 @@ export class CompStackComponent implements OnInit, OnChanges, DoCheck{
     this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
     // 数据库中删除
     this.componentService.reqDeleteComponent(ulid, compUlid)
+  }
+
+  identify(index: number, w: GridStackWidget) {
+    return w.id; // or use index if no id is set and you only modify at the end...
   }
 }

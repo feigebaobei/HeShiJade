@@ -4,7 +4,7 @@
 (changeCB)="changeCBH($event)"
 >
     <gridstack-item
-        *ngFor="let item of _componentList"
+        *ngFor="let item of _componentList; trackBy: identify"
         [options]="item"
         [ngClass]="{selected: item.id === curComponent?.ulid}"
         (click)="gridStackItemClickH($event, item)"

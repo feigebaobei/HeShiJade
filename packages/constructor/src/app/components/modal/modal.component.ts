@@ -98,7 +98,7 @@ export class ModalComponent implements OnInit{
       clog('error', error)
     })
   }
-  dropH($event: A) {
+  dropBodyH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''
     let componentCategory = $event.dragData.item.componentCategory

@@ -92,6 +92,7 @@ AfterViewInit
     // 若使用4行占位，则使用table的slots列的组件不能都响应，只能当前行可以响应。
     // 所以不得以改为一行。
     // 日后想办法改为4行占位吧。
+    // todo 在comp-stack中增加了trackBy.再尝试一次4行占位。
     this.basicDataSource = [
       {
         id: 1,

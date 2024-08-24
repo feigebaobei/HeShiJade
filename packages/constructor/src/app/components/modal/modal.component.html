@@ -19,7 +19,7 @@
         </div>
     </header>
     <hr>
-    <main dDroppable (dropEvent)="dropH($event)" class="droppable">
+    <main dDroppable (dropEvent)="dropBodyH($event)" class="droppable">
         <span *ngIf="!childrenBody.length">此区域可接收子组件</span>
         <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
         (deleteComp)="bodyDeleteComponentByUlidH($event)"
