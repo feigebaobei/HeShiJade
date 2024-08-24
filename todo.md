@@ -2,24 +2,22 @@
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
 |处理嵌套时gridstack布局|todo||
+|为可嵌套组件添加子组件中未及时渲染出来|todo||
 |布局値最小为2|done||
-|在web-site中说明零代码与低代码的边界|doing||
+|在web-site中说明零代码与低代码的边界|done||
 |所有可嵌套的组件都使用app-comp-stack|todo||
-|app-comp-stack内可删除组件|todo||
-|modal内无子组件时应该显示提示文案|todo||
+|app-comp-stack内可删除组件|done||
+|modal删除子组件|todo||
+|table删除子组件|todo||
+|tabs删除子组件|todo||
+|modal内无子组件时应该显示提示文案|done||
 |完成todo|todo||
-|上生产前注释搭建侧的全局样式|done||
-|点击舞台时取消选中组件|done||
-|web-site开辟使用技巧导航|done||
-|增加导航的文档|done||
-|渲染侧，弹层类组件不能关闭|done||
-|渲染侧，弹层类组件不占栅格|不好实现||
-|搭建侧，弹层类组件不可改变大小|不合适||
 |分支|f_grid2||
 |要上生产的内容|||
 |渲染侧，弹层类组件不能关闭|||
 ||constructor井布局||
 ||web-site扩展组件时增加井布局||
+||零代码与低代码的边界||
 
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
 |解决删除应用后视图中无应用的问题|todo||
@@ -52,6 +50,7 @@
 ||rate||
 ||tag||
 |应用把非dev环境的版本回退到dev环境|||
+|生命周期|||
 |丰富配置面板的setter|||
 ||number||
 |“注销用户”功能|||
@@ -120,3 +119,60 @@ api众多。其中好多不通用的。
 5. 重启后端服务server
 6. 打包renderer 或 本地打包后上传
 7. 打包constructor 或 本地打包后上传
+
+# 强制更新子组件
+// 父组件
+import { Component } from '@angular/core';
+ 
+@Component({
+  selector: 'app-parent',
+  template: `<app-child [refreshKey]="refreshKey"></app-child>`
+})
+export class ParentComponent {
+  refreshKey = 0;
+ 
+  refreshChild() {
+    this.refreshKey++;
+  }
+}
+// 子组件
+import { Component, Input, OnChanges } from '@angular/core';
+ 
+@Component({
+  selector: 'app-child',
+  template: `<div>Child content</div>`
+})
+export class ChildComponent implements OnChanges {
+  @Input() refreshKey: number;
+ 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.refreshKey && !changes.refreshKey.firstChange) {
+      // 这里可以添加你想要执行的刷新逻辑
+      console.log('Child refreshed');
+    }
+  }
+}
+# 强制更新当前组件
+import { Component, ChangeDetectorRef } from '@angular/core';
+ 
+@Component({
+  selector: 'app-my-component',
+  template: `
+    <p>{{ currentTime }}</p>
+  `
+})
+export class MyComponent {
+  currentTime: Date = new Date();
+ 
+  constructor(private cdRef: ChangeDetectorRef) {
+    setInterval(() => {
+      this.currentTime = new Date();
+      this.cdRef.detectChanges(); // 强制当前组件进行变更检测
+    }, 1000);
+  }
+}
+
+
+
+
+

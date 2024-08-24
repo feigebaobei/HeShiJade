@@ -9,7 +9,9 @@ let clog = console.log
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.sass']
 })
-export class ItemComponent implements OnInit, OnChanges {
+export class ItemComponent implements OnInit
+// OnChanges 
+{
   @Input() groupItem!: ConfigItem // = {} as ConfigItem
   @Input() group!: ConfigItem[] // = {} as ConfigItem
   @Output() inputChange = new EventEmitter()
@@ -38,9 +40,9 @@ export class ItemComponent implements OnInit, OnChanges {
 
     this._hideListener()
   }
-  ngOnChanges() {
-    clog('OnChanges', this.groupItem, this.group)
-  }
+  // ngOnChanges() {
+  //   // clog('OnChanges', this.groupItem, this.group)
+  // }
   _hideListener() {
     let hideF = this.groupItem.hide
     if (hideF) {

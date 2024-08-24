@@ -1,4 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter,
+  OnChanges,
+  SimpleChanges,
+  DoCheck,
+} from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // type
@@ -21,12 +25,13 @@ interface SuperGridItem extends GridStackWidget {
   templateUrl: './comp-stack.component.html',
   styleUrl: './comp-stack.component.sass'
 })
-export class CompStackComponent implements OnInit{
+export class CompStackComponent implements OnInit, OnChanges, DoCheck{
   @Input() componentList: Comp[] = []
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
   curComponent: Comp | undefined
   curPage: Page | undefined
+  @Output() deleteComp = new EventEmitter<ULID>()
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -46,6 +51,10 @@ export class CompStackComponent implements OnInit{
   }
   ngOnInit() {
     this.curPage = this.pageService.getCurPage()
+    this.init()
+  }
+  init() {
+    clog('this.componentList', this.componentList)
     this._componentList = this.componentList.map(item => {
       return {
         x: item.gridLayout.x,
@@ -57,6 +66,15 @@ export class CompStackComponent implements OnInit{
         noResize: item.gridLayout.noResize,
       }
     })
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    // if (changes['componentList'] && !changes['componentList'].firstChange) {
+    //   console.log('changie', changes, )
+    //   this.init()
+    // }
+  }
+  ngDoCheck(...p: A) {
+    // clog('ngDoCheck', p)
   }
 
   changeCBH($event: A) {
@@ -108,12 +126,17 @@ export class CompStackComponent implements OnInit{
     }
   }
   deleteComponentByUlidH(ulid: ULID) {
+    // 本组件内删除
     this._componentList = this._componentList.filter(item => item.id !== ulid)
+    // 通知父组件删除
+    this.deleteComp.emit(ulid)
     let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => {
-      clog('componentItem', componentItem)
+      // clog('componentItem', componentItem)
       return componentItem.ulid
     })
+    // service中删除相应的节点
     this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
+    // 数据库中删除
     this.componentService.reqDeleteComponent(ulid, compUlid)
   }
 }
