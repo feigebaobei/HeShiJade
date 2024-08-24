@@ -7,6 +7,7 @@
     [closeable]="data.props['closeable']"
     [scrollMode]="data.props['scrollMode']"
     [isHidden]="data.props['isHidden']"
+    (activeTabChange)="activeTabChangeH()"
 >
     <d-tab
         *ngFor="let ele of data.items; let i = index"
@@ -18,14 +19,15 @@
             class="dropArea"
             (dropEvent)="dropH($event, i)"
         >
-            <span *ngIf="!compatibleArray(getChildrenComponent(i)).length">此区域可接收子组件</span>
+            <span *ngIf="!componentList.length">此区域可接收子组件</span>
             <!-- <app-comp-box
             *ngFor="let comp of compatibleArray(getChildrenComponent(i))"
             [comp]="comp"
             (deleteComp)="deleteComponentByUlidH($event, i)"
             ></app-comp-box> -->
             <!-- todo 删除gridStack相关代码 -->
-            <app-comp-stack [componentList]="compatibleArray(getChildrenComponent(i))" (deleteComp)="deleteCompH($event, i)"></app-comp-stack>
+             {{getChildrenComponent(i).length}}
+            <app-comp-stack [componentList]="componentList" #compStack (deleteComp)="deleteComponentByUlidH($event, i)"></app-comp-stack>
         </div>
     </d-tab>
 </d-tabs>

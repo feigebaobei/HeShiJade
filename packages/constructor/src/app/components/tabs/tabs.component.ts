@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
-import { createChildKey, initComponentMeta } from 'src/helper';
+import { asyncFn, createChildKey, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
 
 // 数据
@@ -25,6 +25,9 @@ import type { N, S } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
 import type { GridLayoutDefault } from "src/types/component"
+import type { CompStackComponent } from '../comp-stack/comp-stack.component';
+
+let clog = console.log
 
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Button: gridLayoutButtonDefault,
@@ -52,12 +55,14 @@ interface TabsData {
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.sass'
 })
-export class TabsComponent implements OnInit{
+export class TabsComponent implements OnInit, AfterViewChecked{
   @Input() data!: TabsData
   compObj: {[k: S]: Comp[]}
   curPage: Page
   createChildKey: typeof createChildKey
   compatibleArray: typeof compatibleArray
+  componentList: Comp[]
+  @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -66,6 +71,7 @@ export class TabsComponent implements OnInit{
     this.curPage = this.pageService.getCurPage()!
     this.createChildKey = createChildKey
     this.compatibleArray = compatibleArray
+    this.componentList = []
   }
   ngOnInit() {
     this.compObj = {}
@@ -78,6 +84,15 @@ export class TabsComponent implements OnInit{
         this.compObj[key] = childNode.toArray()
       })
     }
+    this.setComponentList('0')
+  }
+  ngAfterViewChecked() {
+    // clog('AfterViewChecked', this.componentList)
+  }
+  setComponentList(k: S) {
+    // let k = this.data.props['activeTab']
+    let key = createChildKey('slots', k, 'component')
+    this.componentList = compatibleArray(this.compObj[key])
   }
   getChildrenComponent(itemIndex: N | S) {
     let key = createChildKey('slots', itemIndex, 'component')
@@ -104,6 +119,10 @@ export class TabsComponent implements OnInit{
     }
     this.componentService.mountComponent(this.curPage.ulid, comp)
     this.componentService.reqCreateComponent(comp)
+    clog('dropH', this.getChildrenComponent(itemIndex))
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
   deleteComponentByUlidH(ulid: ULID, index : N) {
     let key = createChildKey('slots', index, 'component')
@@ -111,8 +130,22 @@ export class TabsComponent implements OnInit{
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
-  deleteCompH(ulid: ULID, index: N) {
-    
+  activeTabChangeH() {
+    // todo 改为随机惟一值后再优化
+    let activeTab = this.data.props['activeTab']
+    let i = 0
+    Array.from(Object.entries(this.data.items)).forEach(([k, v], index: N) => {
+      if (v['id'] === activeTab) {
+        i = index
+      }
+    })
+    this.setComponentList(String(i))
+    asyncFn(() => {
+      this.compStack.init()
+    }, 1000)
   }
 }

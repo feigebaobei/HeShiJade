@@ -196,30 +196,27 @@ AfterViewInit
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
-  // ngAfterContentInit() {
-  //   this.afterContentInit()
-  // }
-  // afterContentInit() {
-  //   clog('afterContentInit datatable', this, this.datatable)
-  // }
   ngAfterViewInit() {
     // clog('ngAfterViewInit datatable', this, this.datatable, this.compStack)
     // 这时才有得到datatable组件
     // clog('')
   }
-  deleteCompH(ulid: ULID, index: N) {
-    clog('deleteCompH', ulid, index)
-    let key = createChildKey('items', index, 'component')
-    this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
-    clog(this.compObj[key])
-    // Array.from(Object.keys(this.compObj)).forEach(key => {
-    //   this.compObj[key] = [] // this.compObj[key]
-    //   // this.compObj = {}
-    // })
-    // this.cdRef.detectChanges()
-    asyncFn(() => {
-      this.compStack.init()
-    })
-  }
+  // deleteCompH(ulid: ULID, index: N) {
+  //   clog('deleteCompH', ulid, index)
+  //   let key = createChildKey('items', index, 'component')
+  //   this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+  //   clog(this.compObj[key])
+  //   // Array.from(Object.keys(this.compObj)).forEach(key => {
+  //   //   this.compObj[key] = [] // this.compObj[key]
+  //   //   // this.compObj = {}
+  //   // })
+  //   // this.cdRef.detectChanges()
+  //   asyncFn(() => {
+  //     this.compStack.init()
+  //   })
+  // }
 }

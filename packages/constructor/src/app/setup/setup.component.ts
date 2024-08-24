@@ -4,7 +4,7 @@ import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
 import { ulid } from 'ulid';
-import { initComponentMeta } from 'src/helper'
+import { asyncFn, initComponentMeta } from 'src/helper'
 
 // 数据
 import {
@@ -190,7 +190,9 @@ export class SetupComponent implements OnInit {
     }).catch(error => {
       clog('error', error)
     })
-    this.compStack.init()
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
   stageClickH($event: A) {
     // if (Array.from($event.target.classList).includes('center')) {
@@ -208,6 +210,7 @@ export class SetupComponent implements OnInit {
     let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
     this.componentService.reqDeleteComponent(ulid, compUlid)
+    // 这里不用使用comStack.init()
   }
   identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
