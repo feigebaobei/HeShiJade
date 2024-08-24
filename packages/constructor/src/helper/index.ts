@@ -279,6 +279,16 @@ let copy = (str: S): Promise<void> | Promise<boolean> => {
 }
 // 兼容的数组，常用于处理脏数据。
 let compatibleArray = (a: A) => Array.isArray(a) ? Array.from(a) : []
+let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
+  return new Promise((s, j) => {
+    setTimeout(() => {
+      // fn(...p)
+      s(p)
+    }, timing)
+  }).then((p: A) => {
+    fn(...p)
+  })
+}
 
 export {
   VERSION,
@@ -298,6 +308,7 @@ export {
   sleep,
   copy,
   compatibleArray,
+  asyncFn,
 }
 export type {
   Loop

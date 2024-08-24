@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, } from '@angular/core';
 import { AppService } from 'src/app/service/app.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
-import { initComponentMeta } from 'src/helper'
+import { asyncFn, initComponentMeta } from 'src/helper'
 import { createChildKey } from 'src/helper/index'
 
 // 数据
@@ -26,6 +26,8 @@ import type {Component as Comp,
   ComponentMountSlots,} from 'src/types/component'
 import type { Page } from 'src/types/page';
 import type { GridLayoutDefault } from "src/types/component"
+import type { CompStackComponent } from '../comp-stack/comp-stack.component';
+
 let clog = console.log
 
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
@@ -53,6 +55,8 @@ export class ModalComponent implements OnInit{
   childrenFooter: Comp[]
   // curComponent: Comp
   page: Page
+  @ViewChild('compStackHeader') compStackHeader!: CompStackComponent
+  @ViewChild('compStackBody') compStackBody!: CompStackComponent
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -97,6 +101,7 @@ export class ModalComponent implements OnInit{
     }).catch((error) => {
       clog('error', error)
     })
+    this.compStackHeader.init()
   }
   dropBodyH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
@@ -118,25 +123,24 @@ export class ModalComponent implements OnInit{
     }).catch((error) => {
       clog('error', error)
     })
+    this.compStackBody.init()
   }
-  deleteComponentByUlidH(ulid: ULID) {
+  headerDeleteComponentByUlidH(ulid: ULID) {
     this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
+    asyncFn(() => {
+      this.compStackHeader.init()
+    })
   }
   bodyDeleteComponentByUlidH(ulid: ULID) {
     this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
-  }
-  headerDeleteCompH(ulid: ULID) {
-    clog('deleteCompH', ulid)
-    this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
-  }
-  bodyDeleteCompH(ulid: ULID) {
-    clog('deleteCompH', ulid)
-    this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
+    asyncFn(() => {
+      this.compStackBody.init()
+    })
   }
 }

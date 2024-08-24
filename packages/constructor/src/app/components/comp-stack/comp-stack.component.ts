@@ -1,8 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  DoCheck,
-} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // type
@@ -25,7 +21,7 @@ interface SuperGridItem extends GridStackWidget {
   templateUrl: './comp-stack.component.html',
   styleUrl: './comp-stack.component.sass'
 })
-export class CompStackComponent implements OnInit, OnChanges, DoCheck{
+export class CompStackComponent implements OnInit {
   @Input() componentList: Comp[] = []
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
@@ -67,16 +63,6 @@ export class CompStackComponent implements OnInit, OnChanges, DoCheck{
     })
     clog('this._componentList', this._componentList)
   }
-  ngOnChanges(changes: SimpleChanges) {
-    // if (changes['componentList'] && !changes['componentList'].firstChange) {
-    //   console.log('changie', changes, )
-    //   this.init()
-    // }
-  }
-  ngDoCheck(...p: A) {
-    // clog('ngDoCheck', p)
-  }
-
   changeCBH($event: A) {
     // $event: {
     //   event: Event,
@@ -130,16 +116,7 @@ export class CompStackComponent implements OnInit, OnChanges, DoCheck{
     this._componentList = this._componentList.filter(item => item.id !== ulid)
     // 通知父组件删除
     this.deleteComp.emit(ulid)
-    // let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => {
-    //   // clog('componentItem', componentItem)
-    //   return componentItem.ulid
-    // })
-    // // service中删除相应的节点
-    // this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
-    // // 数据库中删除
-    // this.componentService.reqDeleteComponent(ulid, compUlid)
   }
-
   identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
   }
