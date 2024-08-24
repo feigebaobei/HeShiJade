@@ -2,6 +2,9 @@
 |-|-|-|
 |舞台区使用拖动布局组件|doing||
 |处理嵌套时gridstack布局|todo||
+||modal组件内使用comp-stack|done|
+||table组件内使用comp-stack|done|
+||tabs组件内使用comp-stack|done|
 |为可嵌套组件添加子组件中未及时渲染出来|todo||
 |布局値最小为2|done||
 |在web-site中说明零代码与低代码的边界|done||

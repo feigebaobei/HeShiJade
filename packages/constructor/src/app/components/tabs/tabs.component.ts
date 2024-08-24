@@ -112,4 +112,7 @@ export class TabsComponent implements OnInit{
     this.componentService.deleteByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
+  deleteCompH(ulid: ULID, index: N) {
+    
+  }
 }

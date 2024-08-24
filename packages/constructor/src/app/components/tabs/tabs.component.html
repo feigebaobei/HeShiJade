@@ -25,7 +25,7 @@
             (deleteComp)="deleteComponentByUlidH($event, i)"
             ></app-comp-box> -->
             <!-- todo 删除gridStack相关代码 -->
-            <app-comp-stack [componentList]="compatibleArray(getChildrenComponent(i))"></app-comp-stack>
+            <app-comp-stack [componentList]="compatibleArray(getChildrenComponent(i))" (deleteComp)="deleteCompH($event, i)"></app-comp-stack>
         </div>
     </d-tab>
 </d-tabs>
