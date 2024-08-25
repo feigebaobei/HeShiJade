@@ -5,7 +5,7 @@ import { PageService } from 'src/app/service/page.service';
 import type { Component as Comp } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 import type { A, ULID } from 'src/types/base';
-import { Page } from 'src/types/page';
+import type { Page } from 'src/types/page';
 
 let clog = console.log
 
@@ -50,8 +50,10 @@ export class CompStackComponent implements OnInit {
     this.init()
   }
   init() {
-    this._componentList = this.componentList.map(item => {
-      return {
+    this._componentList = []
+    // this._componentList = 
+    this.componentList.forEach(item => {
+      this._componentList.push({
         x: item.gridLayout.x,
         y: item.gridLayout.y,
         w: item.gridLayout.w,
@@ -59,7 +61,7 @@ export class CompStackComponent implements OnInit {
         id: item.ulid,
         comp: item,
         noResize: item.gridLayout.noResize,
-      }
+      })
     })
     clog('this._componentList', this._componentList)
   }
@@ -118,6 +120,7 @@ export class CompStackComponent implements OnInit {
     this.deleteComp.emit(ulid)
   }
   identify(index: number, w: GridStackWidget) {
-    return w.id; // or use index if no id is set and you only modify at the end...
+    // return w.id; // or use index if no id is set and you only modify at the end...
+    return index
   }
 }

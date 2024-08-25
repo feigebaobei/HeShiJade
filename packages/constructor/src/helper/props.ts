@@ -801,11 +801,11 @@ let Checkbox: PropsConfigItem = {
     },
 }
 let Tabs: PropsConfigItem = {
-    activeTag: {
+    activeTab: {
         category: 'input',
         value: '',
         label: '当前激活的选项卡Id',
-        key: 'activeTag',
+        key: 'activeTab',
     },
     type: {
         category: 'select',

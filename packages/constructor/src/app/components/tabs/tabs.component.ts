@@ -24,7 +24,7 @@ import {
 // type
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { ULID } from 'src/types';
-import type { N, S } from 'src/types/base';
+import type { B, N, S } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
 import type { GridLayoutDefault } from "src/types/component"
@@ -47,9 +47,9 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
 }
 interface TabsData {
   props: Comp['props']
-  items: Comp['items']
   slots: Comp['slots']
   ulid: ULID
+  items: Comp['items']
   // mount: ComponentMountItems
 }
 
@@ -68,6 +68,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
   compatibleArray: typeof compatibleArray
   componentList: Comp[]
   kvMap: KvMap<ULID, ULID>
+  show: B
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
@@ -79,6 +80,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     this.compatibleArray = compatibleArray
     this.componentList = []
     this.kvMap = createKvMap()
+    this.show = true
   }
   ngOnInit() {
     this.compObj = {}
@@ -92,7 +94,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       })
     }
     // this.setComponentList('0')
-    Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => {
+    Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => { // 当无子元素时，不运行此回调。
       // this.kvMap.set(k, v)
       this.kvMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
     })
@@ -109,7 +111,10 @@ export class TabsComponent implements OnInit, AfterViewChecked{
         break
       }
     }
-    this.setComponentList(this.kvMap.get(String(curIndex)))
+    let slotKey = this.kvMap.get(String(curIndex))
+    if (slotKey) {
+      this.setComponentList(slotKey)
+    }
     clog('init', this)
   }
   ngAfterViewChecked() {
@@ -163,6 +168,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     })
   }
   activeTabChangeH() {
+    this.show = false
     // todo 改为随机惟一值后再优化
     let activeTab = this.data.props['activeTab']
     let i = 0
@@ -173,7 +179,13 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     })
     this.setComponentList(this.kvMap.get(String(i)))
     asyncFn(() => {
-      this.compStack.init()
-    }, 1000)
+      this.show = true
+      // this.compStack.init()
+    }, 0)
   }
+  // identify(index: number, items: Comp['items']) {
+  // identify(index: number) {
+  //   clog('identify', index)
+  //   return index
+  // }
 }
