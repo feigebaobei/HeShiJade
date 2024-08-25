@@ -7,11 +7,11 @@
 ||添加一个tab|todo|
 ||切换tab|done|
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
-|fix  切换页面时未更新舞台区的视图|doing||
+|fix  切换页面时未更新舞台区的视图|done||
 |fix  子组件无法选中|todo||
 |fix  为什么新创建的tabs有activeTag属性|todo||
-|tabs的slotkey应该使用id或随机惟一值|doing||
-|舞台区最下面应该有120px的空间|todo||
+|tabs的slotkey应该使用id或随机惟一值|done||
+|舞台区最下面应该有120px的空间|done||
 |整理angular调用子组件的方法为文档|todo||
 |删除组件、添加组件应该统一在一个级别的中|done|统一到使用comp-stack的组件级别|
 |舞台区删除组件时及时显示出来|done||
