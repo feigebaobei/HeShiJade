@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ulid } from 'ulid';
 import { asyncFn, initComponentMeta } from 'src/helper'
 
+
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -72,6 +73,7 @@ export class SetupComponent implements OnInit {
   pageData: A[]
   gridOptions: GridStackOptions // todo 删除gridStack相关的代码
   componentList: Comp[]
+  show: B
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private appService: AppService,
@@ -91,6 +93,7 @@ export class SetupComponent implements OnInit {
       this.curPage = p
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {
+          this.show = false
           this.componentByPage = []
           this.componentList = componentList
           componentList.forEach(component => {
@@ -103,6 +106,10 @@ export class SetupComponent implements OnInit {
               comp: component,
               noResize: component.gridLayout.noResize,
             })
+          })
+          asyncFn(() => {
+            // this.compStack.init()
+            this.show = true
           })
         })
       }
@@ -117,6 +124,7 @@ export class SetupComponent implements OnInit {
     this.componentService.curComponent$.subscribe(p => {
       this.curComponent = p
     })
+    this.show = true
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')

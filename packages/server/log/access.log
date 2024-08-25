@@ -1,1 +1,12 @@
 {"level":30,"time":1724628336804,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":50,"time":1724628498324,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:DWrbtrC23lleT_10hF6Wg8-4V0bc8NhZ.oRUGNERegbldlCSM39f2W7DLUcy1/ViGwqu6kK1LLE4"}}
+{"level":50,"time":1724628498325,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:DWrbtrC23lleT_10hF6Wg8-4V0bc8NhZ.oRUGNERegbldlCSM39f2W7DLUcy1/ViGwqu6kK1LLE4"}}
+{"level":30,"time":1724628500210,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628727229,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628727235,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628749566,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628749681,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628819461,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628819493,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628947735,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724628947845,"pid":23024,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}

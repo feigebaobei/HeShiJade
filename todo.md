@@ -5,9 +5,9 @@
 ||删除一个组件|todo|
 ||删除一个tab|todo|
 ||添加一个tab|todo|
-||切换tab|doing|
+||切换tab|done|
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
-|fix  切换页面时未更新舞台区的视图|todo||
+|fix  切换页面时未更新舞台区的视图|doing||
 |fix  子组件无法选中|todo||
 |fix  为什么新创建的tabs有activeTag属性|todo||
 |tabs的slotkey应该使用id或随机惟一值|doing||

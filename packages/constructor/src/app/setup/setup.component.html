@@ -40,7 +40,12 @@
                     <app-comp-box [comp]="item.comp" (deleteComp)="deleteComponentByUlidH($event)"></app-comp-box>
                 </gridstack-item>
             </gridstack> -->
-            <app-comp-stack [componentList]="componentList" #compStack (deleteComp)="deleteComponentByUlidH($event)"></app-comp-stack>
+            <app-comp-stack
+                *ngIf="show"
+                [componentList]="componentList"
+                #compStack
+                (deleteComp)="deleteComponentByUlidH($event)"
+                ></app-comp-stack>
         </div>
         <div *ngIf="!componentByPage.length">
             <p class="text_center">此页面无组件</p>
