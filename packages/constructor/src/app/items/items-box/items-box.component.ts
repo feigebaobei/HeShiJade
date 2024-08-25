@@ -65,7 +65,7 @@ export class ItemsBoxComponent {
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
 
-      shareEvent.emit(shareEventName.TABSAADDITEM, {index: this.groupList.length})
+      shareEvent.emit(shareEventName.TABSAADDITEM, {index: this.groupList.length - 1})
     }
   }
   removeH(i: N) {

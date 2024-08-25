@@ -5,6 +5,8 @@ import { asyncFn, createChildKey, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
 import { shareEvent } from 'src/helper';
 import { shareEventName } from 'src/helper/config';
+import { createKvMap } from 'src/helper/kvMap';
+import { ulid } from 'ulid';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -27,6 +29,7 @@ import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
 import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
+import type { KvMap } from 'src/helper/kvMap';
 
 let clog = console.log
 
@@ -45,6 +48,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
 interface TabsData {
   props: Comp['props']
   items: Comp['items']
+  slots: Comp['slots']
   ulid: ULID
   // mount: ComponentMountItems
 }
@@ -63,6 +67,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
   createChildKey: typeof createChildKey
   compatibleArray: typeof compatibleArray
   componentList: Comp[]
+  kvMap: KvMap<ULID, ULID>
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
@@ -73,6 +78,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     this.createChildKey = createChildKey
     this.compatibleArray = compatibleArray
     this.componentList = []
+    this.kvMap = createKvMap()
   }
   ngOnInit() {
     this.compObj = {}
@@ -85,18 +91,35 @@ export class TabsComponent implements OnInit, AfterViewChecked{
         this.compObj[key] = childNode.toArray()
       })
     }
-    this.setComponentList('0')
+    // this.setComponentList('0')
+    Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => {
+      // this.kvMap.set(k, v)
+      this.kvMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
+    })
     shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
       clog('shareEventName', payload)
+      this.kvMap.set(String(payload.index), ulid())
     })
+    let activeTab = this.data.props['activeTab']
+    let items = this.data.items
+    let curIndex = 0
+    for(let i = 0; i < items.length; i++) {
+      if (items[i]['id'] === activeTab) {
+        curIndex = i
+        break
+      }
+    }
+    this.setComponentList(this.kvMap.get(String(curIndex)))
+    clog('init', this)
   }
   ngAfterViewChecked() {
     // clog('AfterViewChecked', this.componentList)
   }
-  setComponentList(k: S) {
+  setComponentList(slotKey: ULID) {
     // let k = this.data.props['activeTab']
-    let key = createChildKey('slots', k, 'component')
+    let key = createChildKey('slots', slotKey, 'component')
     this.componentList = compatibleArray(this.compObj[key])
+    clog('this.componentList', this.componentList)
   }
   getChildrenComponent(itemIndex: N | S) {
     let key = createChildKey('slots', itemIndex, 'component')
@@ -113,7 +136,8 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       this.curPage.appUlid, this.curPage.ulid,
       this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
       '', this.data.ulid,
-      {area: 'slots', slotKey: String(itemIndex)},
+      // {area: 'slots', slotKey: String(itemIndex)},
+      {area: 'slots', slotKey: this.kvMap.get(String(itemIndex))},
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     if (this.compObj[key]?.length) {
@@ -123,7 +147,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     }
     this.componentService.mountComponent(this.curPage.ulid, comp)
     this.componentService.reqCreateComponent(comp)
-    clog('dropH', this.getChildrenComponent(itemIndex))
+    clog('dropH', comp, this.getChildrenComponent(itemIndex))
     asyncFn(() => {
       this.compStack.init()
     })
@@ -147,7 +171,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
         i = index
       }
     })
-    this.setComponentList(String(i))
+    this.setComponentList(this.kvMap.get(String(i)))
     asyncFn(() => {
       this.compStack.init()
     }, 1000)

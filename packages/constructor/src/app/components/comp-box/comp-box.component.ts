@@ -153,6 +153,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         this.componentRef.instance.data = {
           props: this.comp.props,
           items: this.comp.items,
+          slots: this.comp.slots,
           ulid: this.comp.ulid,
         }
         break

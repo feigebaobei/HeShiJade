@@ -1,14 +1,14 @@
 // type
 import type { A, N, S, B, ULID, } from "src/types/base"
 
-interface KvMap<T, G> {
-    _map: Map<T, G>
-}
 // type isDoubleDirection
 interface KvMapPrototype<T, G> {
     get: (k: T) => G
     set: (k: T, v: G) => void
     delete: (k: T) => B
+}
+interface KvMap<T, G> extends KvMapPrototype<T, G> {
+    _map: Map<T, G>
 }
 
 let kvMapPrototype: KvMapPrototype<A, A> = Object.create({}, {
