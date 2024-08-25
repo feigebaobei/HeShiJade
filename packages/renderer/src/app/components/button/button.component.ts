@@ -1,5 +1,5 @@
 import { Component, Input, } from '@angular/core';
-import {shareEvent} from 'src/helper';
+import { shareEvent } from 'src/helper';
 // type
 import type { A } from 'src/types/base';
 

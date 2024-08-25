@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
-// import * as componentDefaultConfigAll from '../../helper/component'
 import addableAll from 'src/helper/addable'
 import { cloneDeep, compatibleArray } from 'src/helper/index'
+import { shareEvent } from 'src/helper';
+import { shareEventName } from 'src/helper/config';
 // type
 import type { B, ConfigItem, N, S } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
@@ -63,6 +64,8 @@ export class ItemsBoxComponent {
       })
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
+
+      shareEvent.emit(shareEventName.TABSAADDITEM, {index: this.groupList.length})
     }
   }
   removeH(i: N) {

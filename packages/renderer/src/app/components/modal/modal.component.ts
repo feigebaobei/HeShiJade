@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
 // import { PageService } from 'src/app/service/page.service';
-import {shareEvent} from 'src/helper';
+import { shareEvent } from 'src/helper';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
 import type { A } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';

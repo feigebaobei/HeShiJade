@@ -1,5 +1,6 @@
 import { Subject } from 'rxjs';
-import { A, S } from 'src/types/base';
+// type
+import type { A, S } from 'src/types/base';
 
 let clog = console.log
 

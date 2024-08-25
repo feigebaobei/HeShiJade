@@ -1,5 +1,6 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
+import shareEvent from './share-event';
 
 // type
 import type { A, F, N, S, OA, B } from 'src/types/base';
@@ -309,6 +310,7 @@ export {
   copy,
   compatibleArray,
   asyncFn,
+  shareEvent,
 }
 export type {
   Loop

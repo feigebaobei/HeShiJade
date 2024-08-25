@@ -3,7 +3,8 @@ import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, createChildKey, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
-
+import { shareEvent } from 'src/helper';
+import { shareEventName } from 'src/helper/config';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -85,6 +86,9 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       })
     }
     this.setComponentList('0')
+    shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
+      clog('shareEventName', payload)
+    })
   }
   ngAfterViewChecked() {
     // clog('AfterViewChecked', this.componentList)

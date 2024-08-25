@@ -65,6 +65,9 @@ let ssoClientConfig = {
         logoutMethod: 'delete' as Method,
     },
 }
+let shareEventName = {
+    'TABSAADDITEM': 'Tabs.addItem'
+}
 
 export {
     ssoUrl,
@@ -74,4 +77,5 @@ export {
     COMPONENTTOTALMAXOFPAGE,
     // ssoClientParams,
     ssoClientConfig,
+    shareEventName,
 }
