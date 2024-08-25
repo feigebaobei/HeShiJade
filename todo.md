@@ -4,10 +4,12 @@
 |fix  切换页面时未更新舞台区的视图|todo||
 |fix  子组件无法选中|todo||
 |fix  为什么新创建的tabs有activeTag属性|todo||
-|tabs的slotkey应该使用id或随机惟一值|todo||
+|tabs的slotkey应该使用id或随机惟一值|doing||
 |舞台区最下面应该有120px的空间|todo||
+|整理angular调用子组件的方法为文档|todo||
 |删除组件、添加组件应该统一在一个级别的中|done|统一到使用comp-stack的组件级别|
 |舞台区删除组件时及时显示出来|done||
+|web-site数据结构中增加SlotsMeta|todo||
 |在嵌套的组件添加子组件时及时显示出来|doing||
 ||modal内添加子组件|done|
 ||table内添加子组件|done|
@@ -27,6 +29,8 @@
 
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
 |解决删除应用后视图中无应用的问题|todo||
+|防抖阈值改为从配置文件中取|todo||
+|items面板支持删除功能|todo||
 |有时无法选中页面|不好复现||
 ||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
