@@ -12,6 +12,7 @@
 |整理angular调用子组件的方法为文档|todo||
 |web-site数据结构中增加SlotsMeta|todo||
 |为可嵌套组件添加子组件中未及时渲染出来|todo||
+|考虑：要不要为tab的item设置默认值。|todo||
 |完成todo|todo||
 |分支|f_grid2||
 |要上生产的内容|||

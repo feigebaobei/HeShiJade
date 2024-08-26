@@ -89,8 +89,8 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       let node = tree.find(this.data.ulid)
       Object.entries(node?.value.slots || {}).forEach(([k, v]) => {
         let key = createChildKey('slots', k, 'component')
-        let childNode = tree.find(v)!
-        this.compObj[key] = childNode.toArray()
+        let childNode = tree.find(v)
+        this.compObj[key] = compatibleArray(childNode?.toArray())
       })
     }
     // this.setComponentList('0')
@@ -98,10 +98,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       // this.kvMap.set(k, v)
       this.kvMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
     })
-    shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
-      clog('shareEventName', payload)
-      this.kvMap.set(String(payload.index), ulid())
-    })
+    clog('this.kvMap', this.kvMap)
     let activeTab = this.data.props['activeTab']
     let items = this.data.items
     let curIndex = 0
@@ -116,6 +113,15 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       this.setComponentList(slotKey)
     }
     clog('init', this)
+    this.listen()
+  }
+  listen() {
+    shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
+      clog('shareEventName', payload)
+      let u = ulid()
+      this.kvMap.set(String(payload.index), u)
+      this.componentService.reqAddSlots(u, '')
+    })
   }
   ngAfterViewChecked() {
     // clog('AfterViewChecked', this.componentList)
