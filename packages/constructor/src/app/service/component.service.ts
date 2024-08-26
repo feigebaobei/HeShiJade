@@ -349,6 +349,18 @@ export class ComponentService {
       curComp.items.push(obj)
     }
   }
+  addSlots(key: S, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      curComp.slots[key] = value
+    }
+  }
+  removeSlots(key: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      delete curComp.slots[key]
+    }
+  }
   reqChangeItems(index: N, key: S, value: A) {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'put', {
       ulid: this.curComponent()?.ulid,
@@ -389,6 +401,33 @@ export class ComponentService {
       key,
       value,
     }).then(() => true)
+  }
+  reqAddSlots(key: S, value: S = '') {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let ulid = curComp.ulid
+      let type = 'slots'
+      return this.reqService.req(`${serviceUrl()}/components`, 'put', {
+        // slots: this.curComponent()?.slots
+        ulid,
+        type,
+        key,
+        value,
+      }).then(() => true)
+    } else {
+      return Promise.reject('无选中组件')
+    }
+  }
+  reqRemoveSlots(key: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      return this.reqService.req(`${serviceUrl()}/components/items`, 'delete', {
+        ulid: curComp.ulid,
+        key,
+      })
+    } else {
+      return Promise.reject('无选中组件')
+    }
   }
   getTree(key: ULID): Tree<Component> | undefined {
     return this._map.get(key)
