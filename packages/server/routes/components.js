@@ -225,8 +225,10 @@ router.route('/')
   // 更新数据
   // 返回值
   new Promise((s, j) => {
-    // props     ulid,type,key,value,
-    // behavior  ulid,type,index,key,value,
+    // props       ulid,type,key,value,
+    // behavior    ulid,type,index,key,value,
+    // gridLayout  ulid,type,key,value,
+    // slots       ulid,type,key,value,
     if (rules.required(req.body.ulid) && rules.required(req.body.type)) {
       switch (req.body.type) {
         case 'props':
@@ -251,6 +253,11 @@ router.route('/')
           }
           break;
         case 'slots':
+          if (rules.required(req.body.key)) {
+            s(true)
+          } else {
+            j(100100)
+          }
           break;
       }
     } else {
@@ -268,15 +275,15 @@ router.route('/')
       case 'gridLayout':
         k = `gridLayout.${req.body.key}`
         break;
+      case 'slots':
+        k = `slots.${req.body.key}`
+        break
     }
     let updateObj = {
       [k]: req.body.value
     }
     clog('updateObj', updateObj)
     return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: 
-      // {
-      //   [`props.${req.body.key}`]: req.body.value
-      // }
       updateObj
     }).catch(() => {
       return Promise.reject(200020)
@@ -633,6 +640,51 @@ router.route('/items')
     })
   })
   .catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+
+router.route('/slots')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.send('post')
+  
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  // ulid,key
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) && rules.required(req.query.key)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.query.ulid}, {
+      $unset: {
+        [`slots.${req.query.key}`]: null
+      }
+    }).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {},
+    })
+  }).catch((code) => {
     return res.status(200).json({
       code,
       message: errorCode[code],
