@@ -93,27 +93,28 @@ export class TabsComponent implements OnInit, AfterViewChecked{
         this.compObj[key] = compatibleArray(childNode?.toArray())
       })
     }
-    // this.setComponentList('0')
     Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => { // 当无子元素时，不运行此回调。
-      // this.kvMap.set(k, v)
       this.kvMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
+      // items的下标就是slots中的顺序
     })
     clog('this.kvMap', this.kvMap)
-    let activeTab = this.data.props['activeTab']
-    let items = this.data.items
-    let curIndex = 0
-    for(let i = 0; i < items.length; i++) {
-      if (items[i]['id'] === activeTab) {
-        curIndex = i
-        break
-      }
-    }
-    let slotKey = this.kvMap.get(String(curIndex))
-    if (slotKey) {
-      this.setComponentList(slotKey)
-    }
     clog('init', this)
+    // 开始监听
     this.listen()
+    // 设置默认选中的tab对应的子组件列表
+    // let activeTab = this.data.props['activeTab']
+    // let items = this.data.items
+    // let curIndex = 0
+    // for(let i = 0; i < items.length; i++) {
+    //   if (items[i]['id'] === activeTab) {
+    //     curIndex = i
+    //     break
+    //   }
+    // }
+    // let slotKey = this.kvMap.get(String(curIndex))
+    // if (slotKey) {
+    //   this.setComponentList(slotKey)
+    // }
   }
   listen() {
     shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
@@ -137,11 +138,14 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     return this.compObj[key] || []
   }
   dropH(e: DropEvent, itemIndex: N) {
+    this.show = false
     let comp: Comp
     // 因items的id会变。index不会变。所以使用index为key.
-    let key = createChildKey('slots', itemIndex, 'component')
+    // let key = createChildKey('slots', itemIndex, 'component')
+    let key = createChildKey('slots', this.kvMap.get(String(itemIndex)), 'component')
     let componentCategory = e.dragData.item.componentCategory
     let compGridLayout = gridLayoutDefault[componentCategory]
+    // todo 可以优化到initComponentMeta内处理gridLayout
     comp = initComponentMeta(
       componentCategory,
       this.curPage.appUlid, this.curPage.ulid,
@@ -158,9 +162,11 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     }
     this.componentService.mountComponent(this.curPage.ulid, comp)
     this.componentService.reqCreateComponent(comp)
-    clog('dropH', comp, this.getChildrenComponent(itemIndex))
+    // clog('dropH', comp, this.getChildrenComponent(itemIndex))
+    this.setComponentList(this.kvMap.get(String(itemIndex)))
     asyncFn(() => {
-      this.compStack.init()
+      this.show = true
+      // this.compStack.init()
     })
   }
   deleteComponentByUlidH(ulid: ULID, index : N) {
