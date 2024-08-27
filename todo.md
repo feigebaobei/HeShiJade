@@ -1,10 +1,12 @@
 ||完成日期||
 |-|-|-|
 |tabs|doing||
-||删除一个子组件|doing|
+||删除一个子组件|done|
 ||删除一个tab|todo|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
-||tabs默认打开的tab不对|todo|
+||tabs默认打开的tab不对|doing|
+||为tabs添加items时会添加2倍slots|todo|
+||给非默认tab添加组件时失败|todo|
 ||添加子组件|done|
 ||选中一个子组件|done|
 ||添加一个tab|done|

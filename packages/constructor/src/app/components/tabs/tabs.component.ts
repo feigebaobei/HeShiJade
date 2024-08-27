@@ -88,7 +88,6 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     if (tree) {
       let node = tree.find(this.data.ulid)
       Object.entries(node?.value.slots || {}).forEach(([slotKey, v]) => {
-        // let key = createChildKey('slots', slotKey, 'component')
         let key = this.createChildKey({slotKey})
         let childNode = tree.find(v)
         this.compObj[key] = compatibleArray(childNode?.toArray())
@@ -127,16 +126,19 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       clog('shareEventName', payload)
       let u = ulid()
       this.kvMap.set(String(payload.index), u)
+      this.componentService.addSlots(u, '')
       this.componentService.reqAddSlots(u, '')
     })
   }
   selectTab() {
     let activeTab = this.data.props['activeTab']
+    clog('activeTab', activeTab)
     if (activeTab) {
       this.show = false
       // todo 优化为promise
       let index = this.data.items.findIndex(item => item['id'] === activeTab)
       let key = this.kvMap.get(String(index))
+      clog('key', key)
       this.setComponentList(key)
       // clog('activeTab', activeTab)
       asyncFn(() => {
@@ -161,8 +163,6 @@ export class TabsComponent implements OnInit, AfterViewChecked{
   dropH(e: DropEvent, itemIndex: N) {
     this.show = false
     let comp: Comp
-    // 因items的id会变。index不会变。所以使用index为key.
-    // let key = createChildKey('slots', itemIndex, 'component')
     let key = this.createChildKey({itemIndex})
     let componentCategory = e.dragData.item.componentCategory
     let compGridLayout = gridLayoutDefault[componentCategory]
@@ -172,7 +172,6 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       this.curPage.appUlid, this.curPage.ulid,
       this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
       '', this.data.ulid,
-      // {area: 'slots', slotKey: String(itemIndex)},
       {area: 'slots', slotKey: this.kvMap.get(String(itemIndex))},
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
