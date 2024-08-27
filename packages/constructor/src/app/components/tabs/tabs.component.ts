@@ -102,19 +102,6 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     // 开始监听
     this.listen()
     // 设置默认选中的tab对应的子组件列表
-    // let activeTab = this.data.props['activeTab']
-    // let items = this.data.items
-    // let curIndex = 0
-    // for(let i = 0; i < items.length; i++) {
-    //   if (items[i]['id'] === activeTab) {
-    //     curIndex = i
-    //     break
-    //   }
-    // }
-    // let slotKey = this.kvMap.get(String(curIndex))
-    // if (slotKey) {
-    //   this.setComponentList(slotKey)
-    // }
     this.selectTab()
   }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
@@ -131,20 +118,28 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     })
   }
   selectTab() {
-    let activeTab = this.data.props['activeTab']
-    clog('activeTab', activeTab)
-    if (activeTab) {
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
       this.show = false
-      // todo 优化为promise
-      let index = this.data.items.findIndex(item => item['id'] === activeTab)
-      let key = this.kvMap.get(String(index))
-      clog('key', key)
-      this.setComponentList(key)
+      let activeTab = this.data.props['activeTab']
       // clog('activeTab', activeTab)
-      asyncFn(() => {
-        this.show = true
-      })
-    }
+      if (activeTab) {
+        let index = this.data.items.findIndex(item => item['id'] === activeTab)
+        let key = this.kvMap.get(String(index))
+        // clog('key', key)
+        this.setComponentList(key)
+      }
+      // if (this.componentList.length) {
+      //   return
+      // }
+      // return true
+      return !!this.componentList.length
+    }).then((b) => {
+      // asyncFn(() => {
+        this.show = b
+      // })
+    })
   }
   ngAfterViewChecked() {
     // clog('AfterViewChecked', this.componentList)
@@ -161,61 +156,77 @@ export class TabsComponent implements OnInit, AfterViewChecked{
   //   return this.compObj[key] || []
   // }
   dropH(e: DropEvent, itemIndex: N) {
-    this.show = false
-    let comp: Comp
-    let key = this.createChildKey({itemIndex})
-    let componentCategory = e.dragData.item.componentCategory
-    let compGridLayout = gridLayoutDefault[componentCategory]
-    // todo 可以优化到initComponentMeta内处理gridLayout
-    comp = initComponentMeta(
-      componentCategory,
-      this.curPage.appUlid, this.curPage.ulid,
-      this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
-      '', this.data.ulid,
-      {area: 'slots', slotKey: this.kvMap.get(String(itemIndex))},
-      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
-    )
-    if (this.compObj[key]?.length) {
-      this.compObj[key].push(comp)
-    } else {
-      this.compObj[key] = [comp]
-    }
-    this.componentService.mountComponent(this.curPage.ulid, comp)
-    this.componentService.reqCreateComponent(comp)
-    this.setComponentList(this.kvMap.get(String(itemIndex)))
-    asyncFn(() => {
-      this.show = true
-      // this.compStack.init()
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
+      this.show = false
+      let comp: Comp
+      let key = this.createChildKey({itemIndex})
+      let componentCategory = e.dragData.item.componentCategory
+      let compGridLayout = gridLayoutDefault[componentCategory]
+      // todo 可以优化到initComponentMeta内处理gridLayout
+      comp = initComponentMeta(
+        componentCategory,
+        this.curPage.appUlid, this.curPage.ulid,
+        this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
+        '', this.data.ulid,
+        {area: 'slots', slotKey: this.kvMap.get(String(itemIndex))},
+        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
+      )
+      if (this.compObj[key]?.length) {
+        this.compObj[key].push(comp)
+      } else {
+        this.compObj[key] = [comp]
+      }
+      this.componentService.mountComponent(this.curPage.ulid, comp)
+      this.componentService.reqCreateComponent(comp)
+      this.setComponentList(this.kvMap.get(String(itemIndex)))
+      return true
+    }).then(() => {
+      // asyncFn(() => {
+        this.show = true
+        // this.compStack.init()
+      // })
     })
   }
   deleteComponentByUlidH(ulid: ULID, index : N) {
-    // let key = createChildKey('slots', index, 'component')
-    this.show = false
-    let key = this.createChildKey({itemIndex: index})
-    this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
-    this.componentList = compatibleArray(this.compObj[key])
-    let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.curPage.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid, childrenUlid)
-    asyncFn(() => {
-      this.show = true
-      // this.compStack.init()
+    new Promise((s, j) => {
+      this.show = false
+      s(true)
+    }).then(() => {
+      let key = this.createChildKey({itemIndex: index})
+      this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+      this.componentList = compatibleArray(this.compObj[key])
+      let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
+      this.componentService.deleteByUlid(this.curPage.ulid, ulid)
+      this.componentService.reqDeleteComponent(ulid, childrenUlid)
+      return true
+    }).then(() => {
+      // asyncFn(() => {
+        this.show = true
+      // })
     })
   }
   activeTabChangeH() {
-    this.show = false
-    // todo 改为随机惟一值后再优化
-    let activeTab = this.data.props['activeTab']
-    let i = 0
-    Array.from(Object.entries(this.data.items)).forEach(([k, v], index: N) => {
-      if (v['id'] === activeTab) {
-        i = index
-      }
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
+      this.show = false
+      // todo 改为随机惟一值后再优化
+      let activeTab = this.data.props['activeTab']
+      let i = 0
+      Array.from(Object.entries(this.data.items)).forEach(([k, v], index: N) => {
+        if (v['id'] === activeTab) {
+          i = index
+        }
+      })
+      this.setComponentList(this.kvMap.get(String(i)))
+      return true
+    }).then(() => {
+      // asyncFn(() => {
+        this.show = true
+        // this.compStack.init()
+      // }, 0)
     })
-    this.setComponentList(this.kvMap.get(String(i)))
-    asyncFn(() => {
-      this.show = true
-      // this.compStack.init()
-    }, 0)
   }
 }

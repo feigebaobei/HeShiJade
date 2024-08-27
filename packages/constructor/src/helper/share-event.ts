@@ -6,7 +6,9 @@ let clog = console.log
 
 export class ShareEventService {
   private subject = new Subject()
-  constructor() {}
+  constructor() {
+    
+  }
   emit(eventName: S, payload: A) {
     this.subject.next({eventName, payload})
   }
@@ -16,6 +18,9 @@ export class ShareEventService {
         cb(nextValue.payload)
       }
     })
+  }
+  unlisten(eventName: S, cb?: (payload: A) => void) {
+    this.subject.asObservable().subscribe
   }
 }
 
