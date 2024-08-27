@@ -3,17 +3,18 @@
 |tabs|doing||
 ||添加子组件|done|
 ||删除一个子组件|todo|
+||选中一个子组件|done|
 ||删除一个tab|todo|
 ||添加一个tab|done|
 ||切换tab|done|
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  子组件无法选中|todo||
 |fix  为什么新创建的tabs有activeTag属性|todo||
-|整理angular调用子组件的方法为文档|done||
-|web-site数据结构中增加SlotsMeta|done||
 |为可嵌套组件添加子组件中未及时渲染出来|todo||
 |考虑：要不要为tab的item设置默认值。|todo||
 |完成todo|todo||
+|整理angular调用子组件的方法为文档|done||
+|web-site数据结构中增加SlotsMeta|done||
 |分支|f_grid2||
 |要上生产的内容|||
 |渲染侧，弹层类组件不能关闭|||

@@ -97,8 +97,8 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       this.kvMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
       // items的下标就是slots中的顺序
     })
-    clog('this.kvMap', this.kvMap)
-    clog('init', this)
+    // clog('this.kvMap', this.kvMap)
+    // clog('init', this)
     // 开始监听
     this.listen()
     // 设置默认选中的tab对应的子组件列表
@@ -115,6 +115,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     // if (slotKey) {
     //   this.setComponentList(slotKey)
     // }
+    this.selectTab()
   }
   listen() {
     shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
@@ -124,9 +125,24 @@ export class TabsComponent implements OnInit, AfterViewChecked{
       this.componentService.reqAddSlots(u, '')
     })
   }
+  selectTab() {
+    let activeTab = this.data.props['activeTab']
+    if (activeTab) {
+      this.show = false
+      // todo 优化为promise
+      let index = this.data.items.findIndex(item => item['id'] === activeTab)
+      let key = this.kvMap.get(String(index))
+      this.setComponentList(key)
+      // clog('activeTab', activeTab)
+      asyncFn(() => {
+        this.show = true
+      })
+    }
+  }
   ngAfterViewChecked() {
     // clog('AfterViewChecked', this.componentList)
   }
+  // todo 可优化为根据item的index、slotsKey
   setComponentList(slotKey: ULID) {
     // let k = this.data.props['activeTab']
     let key = createChildKey('slots', slotKey, 'component')
