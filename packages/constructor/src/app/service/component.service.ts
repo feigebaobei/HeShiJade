@@ -5,7 +5,7 @@ import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
-import { createChildKey } from 'src/helper/index'
+import { compatibleArray, createChildKey } from 'src/helper/index'
 // 数据
 import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -444,6 +444,10 @@ export class ComponentService {
     let tree = this.getTree(pageUlid)
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
     return childrenComponent
+  }
+  getNextComponent(pageUlid: ULID, componentUlid: ULID) {
+    let tree = this.getTree(pageUlid)
+    return compatibleArray(tree?.find(componentUlid)?.toArray()) // .map(component => component.ulid)
   }
   // getLastRow(pageUlid: ULID) {
   //   let tree = this.getTree(pageUlid)

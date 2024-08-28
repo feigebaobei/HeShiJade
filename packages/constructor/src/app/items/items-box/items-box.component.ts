@@ -74,6 +74,7 @@ export class ItemsBoxComponent {
     let curComp = this.componentService.curComponent()
     if (curComp) {
       this.componentService.reqRemoveItems(curComp.ulid, i)
+      shareEvent.emit(shareEventName.TABSREMOVEITEM, {index: i})
     }
   }
   groupForConfig(type: S): ConfigItem[] {

@@ -70,6 +70,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   itemIndexSlotKeyMap: KvMap<ULID, ULID>
   show: B
   listenCb: (p: A) => void
+  listenRemoveItemCb: (p: A) => void
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
@@ -88,6 +89,17 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       this.itemIndexSlotKeyMap.set(String(payload.index), u)
       this.componentService.addSlots(u, '')
       this.componentService.reqAddSlots(u, '')
+    }
+    this.listenRemoveItemCb = (payload) => {
+      let slotKey = this.itemIndexSlotKeyMap.get(String(payload.index))
+      this.itemIndexSlotKeyMap.set(String(payload.index), '')
+      let firstComponentUlid = this.data.slots[slotKey]
+      let childrenUlid: ULID[] = []
+      this.componentService.getNextComponent(this.curPage.ulid, firstComponentUlid).forEach(component => {
+        childrenUlid.push(component.ulid)
+        childrenUlid.push(...this.componentService.getChildrenComponent(this.curPage.ulid, component.ulid).map(item => item.ulid))
+      })
+      this.componentService.reqDeleteComponent('', childrenUlid)
     }
   }
   ngOnInit() {
@@ -121,6 +133,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   }
   listen() {
     shareEvent.listen(shareEventName.TABSAADDITEM, this.listenCb)
+    shareEvent.listen(shareEventName.TABSREMOVEITEM, this.listenRemoveItemCb)
   }
   selectTab() {
     new Promise((s, _j) => {

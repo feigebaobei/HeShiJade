@@ -2,6 +2,7 @@
 |-|-|-|
 |tabs|doing||
 ||删除一个tab|doing|
+||重命名TABSAADDITEM|todo|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
 ||tabs默认打开的tab内未渲染出子组件|todo|
 ||给非默认tab添加组件时失败|todo|
