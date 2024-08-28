@@ -1,2 +1,9 @@
 {"level":30,"time":1724858607327,"pid":41927,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
 {"level":30,"time":1724858636713,"pid":41927,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1724859126707,"pid":42302,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1724859844710,"pid":42522,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1724859847059,"pid":42651,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1724859847418,"pid":42711,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1724859921619,"pid":42785,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":50,"time":1724860005190,"pid":42785,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:IxregsY0pcVmcJ2LKnr1rPv3dkX_k1r9.ydYJjsbGmZ9nppXjj4OXXoyHF+zF5dwONWo4QCnNge8"}}
+{"level":50,"time":1724860005206,"pid":42785,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:IxregsY0pcVmcJ2LKnr1rPv3dkX_k1r9.ydYJjsbGmZ9nppXjj4OXXoyHF+zF5dwONWo4QCnNge8"}}

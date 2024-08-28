@@ -67,7 +67,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   // createChildKey: typeof createChildKey
   compatibleArray: typeof compatibleArray
   componentList: Comp[]
-  kvMap: KvMap<ULID, ULID>
+  itemIndexSlotKeyMap: KvMap<ULID, ULID>
   show: B
   listenCb: (p: A) => void
   @ViewChild('compStack') compStack!: CompStackComponent
@@ -80,12 +80,12 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     // this.createChildKey = createChildKey
     this.compatibleArray = compatibleArray
     this.componentList = []
-    this.kvMap = createKvMap()
+    this.itemIndexSlotKeyMap = createKvMap()
     this.show = true
     this.listenCb = (payload) => {
       clog('shareEventName', payload)
       let u = ulid()
-      this.kvMap.set(String(payload.index), u)
+      this.itemIndexSlotKeyMap.set(String(payload.index), u)
       this.componentService.addSlots(u, '')
       this.componentService.reqAddSlots(u, '')
     }
@@ -102,10 +102,10 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       })
     }
     Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => { // 当无子元素时，不运行此回调。
-      this.kvMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
+      this.itemIndexSlotKeyMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
       // items的下标就是slots中的顺序
     })
-    // clog('this.kvMap', this.kvMap)
+    // clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
     // clog('init', this)
     // 开始监听
     this.listen()
@@ -116,7 +116,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     shareEvent.unListenCb(shareEventName.TABSAADDITEM, this.listenCb)
   }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
-    let k = p.slotKey || this.kvMap.get(String(p.itemIndex)) || ''
+    let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
     return cck('slots', k, 'component')
   }
   listen() {
@@ -131,7 +131,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       // clog('activeTab', activeTab)
       if (activeTab) {
         let index = this.data.items.findIndex(item => item['id'] === activeTab)
-        let key = this.kvMap.get(String(index))
+        let key = this.itemIndexSlotKeyMap.get(String(index))
         // clog('key', key)
         this.setComponentList(key)
       }
@@ -175,7 +175,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         this.curPage.appUlid, this.curPage.ulid,
         this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
         '', this.data.ulid,
-        {area: 'slots', slotKey: this.kvMap.get(String(itemIndex))},
+        {area: 'slots', slotKey: this.itemIndexSlotKeyMap.get(String(itemIndex))},
         {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
       )
       if (this.compObj[key]?.length) {
@@ -185,7 +185,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       }
       this.componentService.mountComponent(this.curPage.ulid, comp)
       this.componentService.reqCreateComponent(comp)
-      this.setComponentList(this.kvMap.get(String(itemIndex)))
+      this.setComponentList(this.itemIndexSlotKeyMap.get(String(itemIndex)))
       return true
     }).then(() => {
       // asyncFn(() => {
@@ -225,7 +225,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
           i = index
         }
       })
-      this.setComponentList(this.kvMap.get(String(i)))
+      this.setComponentList(this.itemIndexSlotKeyMap.get(String(i)))
       return true
     }).then(() => {
       // asyncFn(() => {
