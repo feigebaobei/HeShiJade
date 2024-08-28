@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewChecked, OnDestroy } from '@angular/core';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, createChildKey as cck, initComponentMeta } from 'src/helper';
@@ -24,7 +24,7 @@ import {
 // type
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { ULID } from 'src/types';
-import type { B, N, S } from 'src/types/base';
+import type { A, B, N, S } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
 import type { GridLayoutDefault } from "src/types/component"
@@ -60,7 +60,7 @@ interface TabsData {
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.sass'
 })
-export class TabsComponent implements OnInit, AfterViewChecked{
+export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   @Input() data!: TabsData
   compObj: {[k: S]: Comp[]}
   curPage: Page
@@ -69,6 +69,7 @@ export class TabsComponent implements OnInit, AfterViewChecked{
   componentList: Comp[]
   kvMap: KvMap<ULID, ULID>
   show: B
+  listenCb: (p: A) => void
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
@@ -81,6 +82,13 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     this.componentList = []
     this.kvMap = createKvMap()
     this.show = true
+    this.listenCb = (payload) => {
+      clog('shareEventName', payload)
+      let u = ulid()
+      this.kvMap.set(String(payload.index), u)
+      this.componentService.addSlots(u, '')
+      this.componentService.reqAddSlots(u, '')
+    }
   }
   ngOnInit() {
     this.compObj = {}
@@ -104,18 +112,15 @@ export class TabsComponent implements OnInit, AfterViewChecked{
     // 设置默认选中的tab对应的子组件列表
     this.selectTab()
   }
+  ngOnDestroy(): void {
+    shareEvent.unListenCb(shareEventName.TABSAADDITEM, this.listenCb)
+  }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
     let k = p.slotKey || this.kvMap.get(String(p.itemIndex)) || ''
     return cck('slots', k, 'component')
   }
   listen() {
-    shareEvent.listen(shareEventName.TABSAADDITEM, (payload) => {
-      clog('shareEventName', payload)
-      let u = ulid()
-      this.kvMap.set(String(payload.index), u)
-      this.componentService.addSlots(u, '')
-      this.componentService.reqAddSlots(u, '')
-    })
+    shareEvent.listen(shareEventName.TABSAADDITEM, this.listenCb)
   }
   selectTab() {
     new Promise((s, _j) => {

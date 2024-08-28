@@ -6,7 +6,7 @@
 ||tab内的子组件改变位置后切换tab后无效了|todo|
 ||tabs默认打开的tab不对|done|
 ||tabs默认打开的tab内未渲染出子组件|todo|
-||为tabs添加items时会添加2倍slots|doing|
+||为tabs添加items时会添加2倍slots|done|
 ||给非默认tab添加组件时失败|todo|
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  子组件无法选中|todo||
