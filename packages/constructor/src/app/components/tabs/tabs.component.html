@@ -9,9 +9,8 @@
     [isHidden]="data.props['isHidden']"
     (activeTabChange)="activeTabChangeH()"
 >
-<!-- *ngFor="let ele of data.items; let i = index; trackBy: identify" -->
-<d-tab
-*ngFor="let ele of data.items; let i = index;"
+    <d-tab
+        *ngFor="let ele of data.items; let i = index;"
         [id]="ele['id']"
         [title]="ele['title']"
         [disabled]="ele['disabled']"
@@ -21,18 +20,12 @@
             (dropEvent)="dropH($event, i)"
         >
             <span *ngIf="!componentList.length">此区域可接收子组件</span>
-            <!-- <app-comp-box
-            *ngFor="let comp of compatibleArray(getChildrenComponent(i))"
-            [comp]="comp"
-            (deleteComp)="deleteComponentByUlidH($event, i)"
-            ></app-comp-box> -->
-            <!-- todo 删除gridStack相关代码 -->
-            <!-- {{componentList.length}} -->
-            <!-- {{componentList | json}} -->
-            <!-- 总是解决不了切换tab里更新子组件列表的问题，不得以使用显隐逻辑处理。 -->
             <app-comp-stack
-            *ngIf="show"
-            [componentList]="componentList" #compStack (deleteComp)="deleteComponentByUlidH($event, i)"></app-comp-stack>
+                *ngIf="show"
+                [componentList]="componentList"
+                #compStack
+                (deleteComp)="deleteComponentByUlidH($event, i)"
+            ></app-comp-stack>
         </div>
     </d-tab>
 </d-tabs>

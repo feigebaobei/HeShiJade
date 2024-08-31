@@ -241,10 +241,10 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       this.setComponentList(this.itemIndexSlotKeyMap.get(String(i)))
       return true
     }).then(() => {
-      // asyncFn(() => {
+      asyncFn(() => {
         this.show = true
         // this.compStack.init()
-      // }, 0)
+      }, 0)
     })
   }
 }
