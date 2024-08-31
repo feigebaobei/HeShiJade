@@ -1,7 +1,8 @@
 ||完成日期||
 |-|-|-|
 |tabs|doing||
-||添加子组件|doing|
+||添加子组件|done|
+||改变子组件位置大小|done|
 ||删除一个tab|toTest|
 ||重命名TABSAADDITEM|todo|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
@@ -179,6 +180,10 @@ export class MyComponent {
 
 subject在取消订阅`subject.unsubscribe()`后不能再接收数据，否则会报错ObjectUnsubscribedErrorImpl
 
-
+数据三级缓存
+  后端数据库
+  tree
+  service中map
+  特定组件
 
 

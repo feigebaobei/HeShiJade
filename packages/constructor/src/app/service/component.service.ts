@@ -324,6 +324,7 @@ export class ComponentService {
     if (curComp) {
       curComp.props[key] = value
     }
+    clog('change after', curComp)
   }
   setComponentsBehavior(
     // type: UpdateType, 

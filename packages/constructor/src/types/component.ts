@@ -97,6 +97,13 @@ interface PropsTransfer {
   key: S
   value: A
 }
+interface ChangeGridLayoutParams {
+  ulid: ULID
+  x: GridLayout['x']
+  y: GridLayout['y']
+  w: GridLayout['w']
+  h: GridLayout['h']
+}
 
 export type {
   PropsValue,
@@ -119,4 +126,5 @@ export type {
   ComponentMountItems,
   ComponentMountSlots,
   PropsTransfer,
+  ChangeGridLayoutParams,
 }

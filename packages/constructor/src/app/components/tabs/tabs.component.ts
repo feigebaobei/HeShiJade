@@ -22,7 +22,7 @@ import {
 } from 'src/helper/gridLayout'
 
 // type
-import type { Component as Comp, ComponentMountItems } from 'src/types/component';
+import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { ULID } from 'src/types';
 import type { A, B, N, S } from 'src/types/base';
 import type { Page } from 'src/types/page';
@@ -246,5 +246,16 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         // this.compStack.init()
       }, 0)
     })
+  }
+  compStackChangeH(p: ChangeGridLayoutParams) {
+    let component = this.componentList.find(component => {
+      return component.ulid === p.ulid
+    })
+    if (component) {
+      component.gridLayout.x = p.x
+      component.gridLayout.y = p.y
+      component.gridLayout.w = p.w
+      component.gridLayout.h = p.h
+    }
   }
 }

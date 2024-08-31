@@ -25,6 +25,7 @@
                 [componentList]="componentList"
                 #compStack
                 (deleteComp)="deleteComponentByUlidH($event, i)"
+                (change)="compStackChangeH($event)"
             ></app-comp-stack>
         </div>
     </d-tab>

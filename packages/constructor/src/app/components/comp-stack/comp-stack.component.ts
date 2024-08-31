@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, } from '@ang
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // type
-import type { Component as Comp } from 'src/types/component';
+import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 import type { A, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
@@ -28,6 +28,7 @@ export class CompStackComponent implements OnInit, OnDestroy {
   curComponent: Comp | undefined
   curPage: Page | undefined
   @Output() deleteComp = new EventEmitter<ULID>()
+  @Output() change = new EventEmitter<ChangeGridLayoutParams>()
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -93,11 +94,18 @@ export class CompStackComponent implements OnInit, OnDestroy {
       curNode.y = $event.nodes[0].y
       curNode.w = $event.nodes[0].w
       curNode.h = $event.nodes[0].h
-      this.componentService.setComponentProp('gridLayout', {
+      clog(curNode)
+      let gridLayout = {
         x: $event.nodes[0].x,
         y: $event.nodes[0].y,
         w: $event.nodes[0].w,
         h: $event.nodes[0].h,
+      }
+      this.componentService.setComponentProp('gridLayout', gridLayout)
+      // 通知父组件
+      this.change.emit({
+        ulid: curNode.comp.ulid,
+        ...gridLayout,
       })
       // todo 参数改为kv对的object
       this.componentService.reqUpdateComponentProps('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
