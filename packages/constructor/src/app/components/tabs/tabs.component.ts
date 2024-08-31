@@ -99,6 +99,10 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         childrenUlid.push(component.ulid)
         childrenUlid.push(...this.componentService.getChildrenComponent(this.curPage.ulid, component.ulid).map(item => item.ulid))
       })
+      // 删除slots
+      this.componentService.removeSlots(slotKey)
+      this.componentService.reqRemoveSlots(slotKey)
+      // 删除子组件
       this.componentService.reqDeleteComponent('', childrenUlid)
     }
   }

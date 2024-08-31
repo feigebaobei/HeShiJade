@@ -1,9 +1,9 @@
 ||完成日期||
 |-|-|-|
 |tabs|doing||
-||添加子组件|done|
-||改变子组件位置大小|done|
-||删除一个tab|toTest|
+||删除一个tab|testing|
+|||删除slotKey|doing
+|||删除子组件|doing
 ||重命名TABSAADDITEM|todo|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
 ||tabs默认打开的tab内未渲染出子组件|todo|
@@ -13,6 +13,7 @@
 |fix  为什么新创建的tabs有activeTag属性|todo||
 |为可嵌套组件添加子组件中未及时渲染出来|todo||
 |修改shareEvent的方法|todo||
+|搭建侧table能支持多行吗|todo||
 |考虑：要不要为tab的item设置默认值。|todo||
 |分支|f_grid2||
 |要上生产的内容|||

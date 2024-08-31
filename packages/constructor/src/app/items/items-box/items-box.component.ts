@@ -64,18 +64,15 @@ export class ItemsBoxComponent {
       })
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
-      clog('emit add', this.groupList.length - 1)
       shareEvent.emit(shareEventName.TABSAADDITEM + this.curComponent.ulid, {index: this.groupList.length - 1})
     }
   }
   removeH(i: N) {
     this.groupList.splice(i, 1)
     this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
-    let curComp = this.componentService.curComponent()
-    if (curComp) {
-      this.componentService.reqRemoveItems(curComp.ulid, i)
-      clog('removeH', i)
-      shareEvent.emit(shareEventName.TABSREMOVEITEM, {index: i})
+    if (this.curComponent) {
+      this.componentService.reqRemoveItems(this.curComponent.ulid, i)
+      shareEvent.emit(shareEventName.TABSREMOVEITEM + this.curComponent.ulid, {index: i})
     }
   }
   groupForConfig(type: S): ConfigItem[] {

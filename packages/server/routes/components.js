@@ -675,15 +675,14 @@ router.route('/slots')
 })
 .post(cors.corsWithOptions, (req, res) => {
   res.send('post')
-  
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  // ulid,key
+  // ulid,slotKey
   new Promise((s, j) => {
-    if (rules.required(req.query.ulid) && rules.required(req.query.key)) {
+    if (rules.required(req.query.ulid) && rules.required(req.query.slotKey)) {
       s(true)
     } else {
       j(100100)
@@ -691,7 +690,7 @@ router.route('/slots')
   }).then(() => {
     return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.query.ulid}, {
       $unset: {
-        [`slots.${req.query.key}`]: null
+        [`slots.${req.query.slotKey}`]: null
       }
     }).catch(() => {
       return Promise.reject(200020)

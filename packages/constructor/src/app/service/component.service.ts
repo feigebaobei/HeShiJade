@@ -419,12 +419,12 @@ export class ComponentService {
       return Promise.reject('无选中组件')
     }
   }
-  reqRemoveSlots(key: S) {
+  reqRemoveSlots(slotKey: S) {
     let curComp = this.curComponent()
     if (curComp) {
-      return this.reqService.req(`${serviceUrl()}/components/items`, 'delete', {
+      return this.reqService.req(`${serviceUrl()}/components/slots`, 'delete', {
         ulid: curComp.ulid,
-        key,
+        slotKey,
       })
     } else {
       return Promise.reject('无选中组件')

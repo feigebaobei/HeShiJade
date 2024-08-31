@@ -1,7 +1,6 @@
 <gridstack [options]="gridOptions"
     (changeCB)="changeCBH($event)"
     >
-    <!-- (resizeCB)="resizeCBH($event)" -->
     <gridstack-item
         *ngFor="let item of _componentList; trackBy: identify"
         [options]="item"
