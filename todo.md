@@ -1,6 +1,7 @@
 ||完成日期||
 |-|-|-|
 |tabs|doing||
+||添加子组件|doing|
 ||删除一个tab|toTest|
 ||重命名TABSAADDITEM|todo|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
@@ -12,9 +13,6 @@
 |为可嵌套组件添加子组件中未及时渲染出来|todo||
 |修改shareEvent的方法|todo||
 |考虑：要不要为tab的item设置默认值。|todo||
-||删除一个子组件|done|
-||tabs默认打开的tab不对|done|
-||为tabs添加items时会添加2倍slots|done|
 |分支|f_grid2||
 |要上生产的内容|||
 |渲染侧，弹层类组件不能关闭|||

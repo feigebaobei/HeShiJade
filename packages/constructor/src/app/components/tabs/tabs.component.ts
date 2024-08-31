@@ -149,16 +149,14 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         let key = this.itemIndexSlotKeyMap.get(String(index))
         // clog('key', key)
         this.setComponentList(key)
+      } else {
+        this.setComponentList('')
       }
-      // if (this.componentList.length) {
-      //   return
-      // }
-      // return true
       return !!this.componentList.length
     }).then((b) => {
-      // asyncFn(() => {
+      asyncFn(() => {
         this.show = b
-      // })
+      })
     })
   }
   ngAfterViewChecked() {
@@ -203,10 +201,10 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       this.setComponentList(this.itemIndexSlotKeyMap.get(String(itemIndex)))
       return true
     }).then(() => {
-      // asyncFn(() => {
+      asyncFn(() => {
         this.show = true
         // this.compStack.init()
-      // })
+      })
     })
   }
   deleteComponentByUlidH(ulid: ULID, index : N) {
