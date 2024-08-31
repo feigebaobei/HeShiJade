@@ -10,10 +10,11 @@
 |fix  子组件无法选中|todo||
 |fix  为什么新创建的tabs有activeTag属性|todo||
 |为可嵌套组件添加子组件中未及时渲染出来|todo||
+|修改shareEvent的方法|todo||
 |考虑：要不要为tab的item设置默认值。|todo||
 ||删除一个子组件|done|
 ||tabs默认打开的tab不对|done|
-||为tabs添加items时会添加2倍slots|doing|
+||为tabs添加items时会添加2倍slots|done|
 |分支|f_grid2||
 |要上生产的内容|||
 |渲染侧，弹层类组件不能关闭|||
@@ -25,6 +26,8 @@
 |解决删除应用后视图中无应用的问题|todo||
 |防抖阈值改为从配置文件中取|todo||
 |items面板支持删除功能|todo||
+|解决进入搭建页面时请求2次page列表接口的问题|||
+|把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
 |有时无法选中页面|不好复现||
 ||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||

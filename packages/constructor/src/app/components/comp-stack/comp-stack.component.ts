@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // type
@@ -21,7 +21,7 @@ interface SuperGridItem extends GridStackWidget {
   templateUrl: './comp-stack.component.html',
   styleUrl: './comp-stack.component.sass'
 })
-export class CompStackComponent implements OnInit {
+export class CompStackComponent implements OnInit, OnDestroy {
   @Input() componentList: Comp[] = []
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
@@ -41,13 +41,19 @@ export class CompStackComponent implements OnInit {
     // this.pageService.pageSubject$.subscribe(p => {
     //   this.curPage = p
     // })
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComponent = p
-    })
   }
   ngOnInit() {
     this.curPage = this.pageService.getCurPage()
+    // clog('12345678 ngOnInit')
+    this.componentService.curComponent$.subscribe(p => {
+      // clog('curComponent$', p)
+      this.curComponent = p
+    })
     this.init()
+  }
+  ngOnDestroy() {
+    // clog('87654321 ngOnInit')
+    // this.componentService.curComponent$.unsubscribe()
   }
   init() {
     this._componentList = []

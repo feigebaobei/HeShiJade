@@ -64,8 +64,8 @@ export class ItemsBoxComponent {
       })
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
-
-      shareEvent.emit(shareEventName.TABSAADDITEM, {index: this.groupList.length - 1})
+      clog('emit add', this.groupList.length - 1)
+      shareEvent.emit(shareEventName.TABSAADDITEM + this.curComponent.ulid, {index: this.groupList.length - 1})
     }
   }
   removeH(i: N) {
@@ -74,6 +74,7 @@ export class ItemsBoxComponent {
     let curComp = this.componentService.curComponent()
     if (curComp) {
       this.componentService.reqRemoveItems(curComp.ulid, i)
+      clog('removeH', i)
       shareEvent.emit(shareEventName.TABSREMOVEITEM, {index: i})
     }
   }

@@ -134,7 +134,6 @@ export class SetupComponent implements OnInit {
   }
   ngOnInit(): void {
     this.opApp()
-    clog('gridLayoutDefault', gridLayoutDefault)
   }
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))

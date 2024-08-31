@@ -98,7 +98,12 @@ export class ShareEventService {
   }
   emit(eventName: S, payload: A) {
     let set = this.getCb(eventName)
-    compatibleArray(set?.values()).forEach(cb => cb(payload))
+    if (set) {
+      let arr = [...set]
+      arr.forEach(cb => {
+          cb(payload)
+        })
+    }
   }
   private getCb(eventName: S) {
     return this._map.get(eventName)

@@ -84,9 +84,9 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     this.itemIndexSlotKeyMap = createKvMap()
     this.show = true
     this.listenCb = (payload) => {
-      clog('shareEventName', payload)
       let u = ulid()
       this.itemIndexSlotKeyMap.set(String(payload.index), u)
+      clog('listenCb shareEventName', payload, this.itemIndexSlotKeyMap)
       this.componentService.addSlots(u, '')
       this.componentService.reqAddSlots(u, '')
     }
@@ -117,7 +117,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       this.itemIndexSlotKeyMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
       // items的下标就是slots中的顺序
     })
-    // clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
+    clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
     // clog('init', this)
     // 开始监听
     this.listen()
@@ -125,15 +125,17 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     this.selectTab()
   }
   ngOnDestroy(): void {
-    shareEvent.unListenCb(shareEventName.TABSAADDITEM, this.listenCb)
+    clog('ngOnDestroy', shareEvent)
+    shareEvent.unListenCb(shareEventName.TABSAADDITEM + this.data.ulid, this.listenCb)
+    shareEvent.unListenCb(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
     let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
     return cck('slots', k, 'component')
   }
   listen() {
-    shareEvent.listen(shareEventName.TABSAADDITEM, this.listenCb)
-    shareEvent.listen(shareEventName.TABSREMOVEITEM, this.listenRemoveItemCb)
+    shareEvent.listen(shareEventName.TABSAADDITEM + this.data.ulid, this.listenCb)
+    shareEvent.listen(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   selectTab() {
     new Promise((s, _j) => {
