@@ -2,7 +2,7 @@
 |-|-|-|
 |为可嵌套组件添加子组件中未及时渲染出来|done||
 |修改shareEvent的方法|done||
-|搭建侧table能支持多行吗|todo||
+|搭建侧table能支持多行吗|doing||
 |考虑：要不要为tab的item设置默认值。|todo||
 |渲染侧支持tabs及其子组件|todo||
 |分支|f_grid2||
@@ -15,6 +15,8 @@
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
 |modal组件的打开事件应该事件名+ulid|todo||
+|table组件在与items时的操作逻辑子组件|todo||
+||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
 |解决删除应用后视图中无应用的问题|todo||
 |防抖阈值改为从配置文件中取|todo||

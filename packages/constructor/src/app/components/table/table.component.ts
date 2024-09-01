@@ -21,7 +21,7 @@ import {
 } from 'src/helper/gridLayout'
 
 // type
-import type { N, S, D, A, ULID } from 'src/types/base';
+import type { N, S, D, B, ULID } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
@@ -80,7 +80,8 @@ AfterViewInit
   compObj: {[k: S]: Comp[]}
   createChildKey: typeof createChildKey
   curPage: Page
-
+  componentList: Comp[]
+  showList: B[]
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
   @ViewChild('compStack') compStack!: CompStackComponent
@@ -102,47 +103,46 @@ AfterViewInit
         gender: 'Male',
         description: 'handsome man'
       },
-      // {
-      //   id: 2,
-      //   firstName: 'Jacob',
-      //   lastName: 'Thornton',
-      //   gender: 'Female',
-      //   dob: new Date(1989, 1, 1),
-      //   description: 'interesting man'
-      // },
-      // {
-      //   id: 3,
-      //   firstName: 'Danni',
-      //   lastName: 'Chen',
-      //   gender: 'Female',
-      //   dob: new Date(1991, 3, 1),
-      //   description: 'pretty man',
-      //   // expandConfig: {description: 'Danni is here'}
-      // },
-      // {
-      //   id: 4,
-      //   firstName: 'green',
-      //   lastName: 'gerong',
-      //   gender: 'Male',
-      //   description: 'interesting man',
-      //   dob: new Date(1991, 3, 1),
-      // },
+      {
+        id: 2,
+        firstName: 'Jacob',
+        lastName: 'Thornton',
+        gender: 'Female',
+        dob: new Date(1989, 1, 1),
+        description: 'interesting man'
+      },
+      {
+        id: 3,
+        firstName: 'Danni',
+        lastName: 'Chen',
+        gender: 'Female',
+        dob: new Date(1991, 3, 1),
+        description: 'pretty man',
+        // expandConfig: {description: 'Danni is here'}
+      },
+      {
+        id: 4,
+        firstName: 'green',
+        lastName: 'gerong',
+        gender: 'Male',
+        description: 'interesting man',
+        dob: new Date(1991, 3, 1),
+      },
     ]
     this.compObj = {
       // <field>: Comp[]
     }
     this.createChildKey = createChildKey
     this.curPage = this.pageService.getCurPage()!
+    this.componentList = []
+    this.showList = []
   }
   compCompList(index: N) {
     return compatibleArray(this.compObj[createChildKey('items', index, 'component')])
+    // this.componentList = compatibleArray(this.compObj[createChildKey('items', index, 'component')])
   }
   ngOnInit(): void {
     this.compObj = {}
-    // this.datatable.getCheckedRows()
-    // clog('table init')
-    
-    // let curPage = this.pageService.getCurPage()
     let tree = this.componentService.getTree(this.curPage.ulid)
     this.data.items.forEach((item, index) => {
       if (item['category'] === 'slots') {
@@ -151,44 +151,51 @@ AfterViewInit
           this.compObj[createChildKey('items', index, 'component')] = node.toArray()
         }
       }
+      this.showList.push(true)
     })
   }
   dropH(e: DropEvent, field: S, itemIndex: N) {
     // 在本组件内添加新组件
     // let curPage = this.pageService.getCurPage()
-    let comp: Comp
-    let key = createChildKey('items', itemIndex, 'component')
-    clog('drop', key, this.data, this.data.ulid)
-
-    let componentCategory = e.dragData.item.componentCategory
-    let compGridLayout = gridLayoutDefault[componentCategory]
-    if (this.compObj[key]?.length) {
-      comp = initComponentMeta(
-        componentCategory,
-        this.curPage.appUlid, this.curPage.ulid,
-        this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
-        {area: 'items', itemIndex},
-        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
+      this.showList[itemIndex] = false
+      let comp: Comp
+      let key = createChildKey('items', itemIndex, 'component')
+      let componentCategory = e.dragData.item.componentCategory
+      let compGridLayout = gridLayoutDefault[componentCategory]
+      if (this.compObj[key]?.length) {
+        comp = initComponentMeta(
+          componentCategory,
+          this.curPage.appUlid, this.curPage.ulid,
+          this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
+          {area: 'items', itemIndex},
+          {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
+          )
+        this.compObj[key].push(comp)
+      } else {
+        comp = initComponentMeta(
+          componentCategory,
+          this.curPage.appUlid, this.curPage.ulid,
+          '', '', this.data.ulid,
+          {area: 'items', itemIndex},
+          {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
         )
-      this.compObj[key].push(comp)
-    } else {
-      comp = initComponentMeta(
-        componentCategory,
-        this.curPage.appUlid, this.curPage.ulid,
-        '', '', this.data.ulid,
-        {area: 'items', itemIndex},
-        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
-      )
-      this.compObj[key] = [comp]
-    }
-    // 在service中添加新组件
-    this.componentService.mountComponent(this.curPage.ulid, comp)
-    // 在服务端保存新组件
-    this.componentService.reqCreateComponent(comp)
-    // this.cdRef.detectChanges()
-    asyncFn(() => {
-      this.compStack.init()
+        this.compObj[key] = [comp]
+      }
+      // 在service中添加新组件
+      this.componentService.mountComponent(this.curPage.ulid, comp)
+      // 在服务端保存新组件
+      this.componentService.reqCreateComponent(comp)
+      return
+    }).then(() => {
+      asyncFn(() => {
+        // this.compStack.init()
+        this.showList[itemIndex] = true
+      })
     })
+    // this.cdRef.detectChanges()
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
