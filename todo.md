@@ -4,15 +4,14 @@
 ||删除一个tab|done|
 |||删除slotKey|done
 |||删除子组件|done
-||重命名TABSAADDITEM|doing|
-||tab内的子组件改变位置后切换tab后无效了|todo|
-||tabs默认打开的tab内未渲染出子组件|todo|
-||给非默认tab添加组件时失败|todo|
-|fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
-|fix  子组件无法选中|todo||
-|fix  为什么新创建的tabs有activeTag属性|todo||
-|为可嵌套组件添加子组件中未及时渲染出来|todo||
-|修改shareEvent的方法|todo||
+||重命名TABSAADDITEM|done|
+||tab内的子组件改变位置后切换tab后无效了|无法复现|
+||tabs默认打开的tab内未渲染出子组件|done|
+||给非默认tab添加组件时失败|done|
+|fix  子组件无法选中|done||
+|fix  为什么新创建的tabs有activeTag属性|done||
+|为可嵌套组件添加子组件中未及时渲染出来|done||
+|修改shareEvent的方法|doing||
 |搭建侧table能支持多行吗|todo||
 |考虑：要不要为tab的item设置默认值。|todo||
 |分支|f_grid2||
@@ -22,6 +21,7 @@
 ||web-site扩展组件时增加井布局||
 ||零代码与低代码的边界||
 
+|fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
 |解决删除应用后视图中无应用的问题|todo||
 |防抖阈值改为从配置文件中取|todo||
