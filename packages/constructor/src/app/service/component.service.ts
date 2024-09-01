@@ -434,7 +434,7 @@ export class ComponentService {
     return this._map.get(key)
   }
   // 删除组件
-  deleteByUlid(pageUlid: ULID, componentUlid: ULID) {
+  deleteByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteByUlid=>deleteComponentByUlid
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
 

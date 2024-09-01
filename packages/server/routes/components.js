@@ -430,7 +430,8 @@ router.route('/')
       })
     })
   } else {
-    let childrenUlid = compatibleArray(req.query.childUlid)
+    let childrenUlid = compatibleArray(req.query.childrenUlid)
+    clog('childrenUlid', childrenUlid)
     return lowcodeDb.collection(DB.dev.componentTable).deleteMany({ulid: {$in: childrenUlid}}).catch(() => {
       return Promise.reject(200020)
     }).then(() => {
