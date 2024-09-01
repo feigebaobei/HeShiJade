@@ -48,7 +48,6 @@ export class CompBoxComponent {
     this.init()
   }
   init() {
-    clog('sdsf', this.stack)
     let viewContainerRef = this.stack.viewContainerRef
     viewContainerRef.clear()
     // this.componentRef = viewContainerRef.createComponent(ButtonComponent)

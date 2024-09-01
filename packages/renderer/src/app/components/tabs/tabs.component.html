@@ -15,6 +15,9 @@
         [title]="ele['title']"
         [disabled]="ele['disabled']"
     >
-        <app-stack *ngFor="let comp of (compObj[createChildKey('items', i, 'component')])" [data]="comp"></app-stack>
+        <app-stack 
+            *ngIf="show"
+            [componentList]="compObj[createChildKey('slots', indexSlotKeyMap.get(i) || '', 'component')]"
+        ></app-stack>
     </d-tab>
 </d-tabs>

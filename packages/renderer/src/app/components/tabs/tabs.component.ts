@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { createChildKey } from 'src/helper/index'
+import { asyncFn, createChildKey } from 'src/helper/index'
 import { ComponentService } from 'src/app/service/component.service';
 // type
 import type { Component as Comp } from 'src/types/component';
@@ -28,19 +28,35 @@ export class TabsComponent implements OnInit {
   activeTab: S
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
+  show: B
+  indexSlotKeyMap: Map<N, ULID>
   constructor(private componentService: ComponentService) {
     this.activeTab = '' // this.data.props['activeTab']
     this.createChildKey = createChildKey
     this.compObj = {}
+    this.show = true
+    this.indexSlotKeyMap = new Map()
   }
   ngOnInit() {
-    this.activeTab = this.data.props['activeTab']
-    let tree = this.componentService.getTreeByKey()
-    Object.entries(this.data.slots).forEach(([k, v]) => {
-      let node = tree?.find(v)
-      if (node) {
-        this.compObj[createChildKey('items', k, 'component')] = node.toArray()
-      }
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
+      this.show = false
+      this.activeTab = this.data.props['activeTab']
+      let tree = this.componentService.getTreeByKey()
+
+      Object.entries(this.data.slots).forEach(([k, v], index) => {
+        this.indexSlotKeyMap.set(index, k)
+        let node = tree?.find(v)
+        if (node) {
+          this.compObj[createChildKey('slots', k, 'component')] = node.toArray()
+        }
+      })
+      return true
+    }).then(() => {
+      asyncFn(() => {
+        this.show = true
+      })
     })
   }
   activeTabChangeH(id: N | S) {
