@@ -1,10 +1,7 @@
 ||完成日期||
 |-|-|-|
-|为可嵌套组件添加子组件中未及时渲染出来|done||
-|修改shareEvent的方法|done||
-|搭建侧table能支持多行吗|done||
-|考虑：要不要为tab的item设置默认值。|不做||
-|渲染侧支持tabs及其子组件|todo||
+|渲染侧支持tabs及其子组件|done||
+|table不能渲染出fill了|doing||
 搭建侧的identify方法体是否正确？  todo
 |分支|f_grid2||
 |要上生产的内容|||
