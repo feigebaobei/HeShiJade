@@ -1,23 +1,21 @@
 <!-- <p>stack works!</p> -->
-<div>
-    <!-- {{data | json}} -->
-    <!-- {
-        "ulid": "01HDXS0S6860PYXHS9F712XSEP",
-        "type": "Button",
-        "next": "01HE5TKK9VB34ZNE4T7V220VWS",
-        "prev": "",
-        "props": {
-          "type": "button",
-          "bsSize": "md",
-          "bordered": false,
-          "disabled": false,
-          "width": "100px"
-        },
-        "behavior": {},
-        "item": {},
-        "slot": "button",
-        "appUlid": "01H90VXCNB7SQZCTEQDTN06FPR",
-        "pageUlid": "01H98QH03RWN0PVN9Y7FFA81XJ"
-      } -->
+<!-- <div>
     <ng-template appStack></ng-template>
-</div>
+</div> -->
+placement start
+{{_componentList | json}}
+placement end
+<gridstack [options]="gridOptions"
+  (changeCB)="changeCBH($event)"
+>
+  <gridstack-item
+      *ngFor="let item of _componentList; trackBy: identify"
+      [options]="item"
+  >
+      <!-- <div class="toolbox">
+          <d-button bsSize="xs" icon="icon-delete" (click)="deleteComponentByUlidH(item.comp.ulid)"></d-button>
+      </div> -->
+      {{item | json}}
+      <!-- <app-comp-box [data]="item" ></app-comp-box> -->
+  </gridstack-item>
+</gridstack>
