@@ -7,7 +7,6 @@ import { GridstackModule } from 'gridstack/dist/angular'
 // import { CompBoxModule } from 'src/app/comp-box/comp-box.module';
 // directive
 import { CompDirective } from './comp.directive'
-
 // import { AdDirective } from 'src/app/ad.directive';
 
 // component

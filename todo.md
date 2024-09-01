@@ -2,9 +2,10 @@
 |-|-|-|
 |为可嵌套组件添加子组件中未及时渲染出来|done||
 |修改shareEvent的方法|done||
-|搭建侧table能支持多行吗|doing||
-|考虑：要不要为tab的item设置默认值。|todo||
+|搭建侧table能支持多行吗|done||
+|考虑：要不要为tab的item设置默认值。|不做||
 |渲染侧支持tabs及其子组件|todo||
+搭建侧的identify方法体是否正确？  todo
 |分支|f_grid2||
 |要上生产的内容|||
 ||渲染侧，弹层类组件不能关闭||
@@ -19,6 +20,7 @@
 ||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
 |解决删除应用后视图中无应用的问题|todo||
+|替换掉subject触发的逻辑|todo||
 |防抖阈值改为从配置文件中取|todo||
 |items面板支持删除功能|todo||
 |解决进入搭建页面时请求2次page列表接口的问题|||

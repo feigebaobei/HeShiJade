@@ -9,6 +9,7 @@ interface GridLayout {
   y: N
   w: N
   h: N
+  noResize: B
 }
 
 interface Component {

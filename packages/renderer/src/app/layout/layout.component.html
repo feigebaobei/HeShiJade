@@ -5,14 +5,17 @@
             <app-page-list></app-page-list>
         </aside>
         <main>
-            <gridstack [options]="gridOptions">
+            <!-- <gridstack [options]="gridOptions">
                 <gridstack-item *ngFor="let item of componentList; trackBy identify"
                     [options]="item"
                 >
                     <app-stack [data]="item.comp"></app-stack>
                 </gridstack-item>
-            </gridstack>
-            <app-stack *ngFor="let comp of popupsComponentList" [data]="comp"></app-stack>
+            </gridstack> -->
+            <!-- <app-stack *ngFor="let comp of popupsComponentList" [data]="comp"></app-stack> -->
+            <app-stack 
+                *ngIf="show"
+            [componentList]="componentList"></app-stack>
         </main>
     </section>
 </section>
