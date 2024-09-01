@@ -33,7 +33,6 @@ export class ItemsBoxComponent {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          // let group: ConfigItem[] = cloneDeep(compatibleArray(groupTemplate[p.type]).map(t => t.show)) // 取出要显示的
           let group = this.groupForConfig(p.type)
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
@@ -52,7 +51,6 @@ export class ItemsBoxComponent {
   }
   addH() {
     if (this.curComponent) {
-      // let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
       let group = this.groupForConfig(this.curComponent.type)
       // clog('group', group)
       this.groupList.push(group)

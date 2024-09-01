@@ -1,9 +1,9 @@
 ||完成日期||
 |-|-|-|
 |tabs|doing||
-||删除一个tab|testing|
+||删除一个tab|done|
 |||删除slotKey|doing
-|||删除子组件|doing
+|||删除子组件|done
 ||重命名TABSAADDITEM|todo|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
 ||tabs默认打开的tab内未渲染出子组件|todo|

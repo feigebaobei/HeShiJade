@@ -94,15 +94,10 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     }
     this.listenRemoveItemCb = (payload) => {
       let slotKey = this.itemIndexSlotKeyMap.get(String(payload.index))
-      // let firstComponentUlid = this.itemIndexSlotKeyMap.get(String(payload.index))
-      this.itemIndexSlotKeyMap.delete(String(payload.index))
-      // let firstComponentUlid = this.data.slots[slotKey]
+      // this.itemIndexSlotKeyMap.delete(String(payload.index))
+      this.deleteItemIndexSlotKeyMap({itemIndex: payload.index})
+      clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
       let childrenUlid: ULID[] = []
-      // this.componentService.getNextComponent(this.curPage.ulid, firstComponentUlid).forEach(component => {
-      //   childrenUlid.push(component.ulid)
-      //   childrenUlid.push(...this.componentService.getChildrenComponent(this.curPage.ulid, component.ulid).map(item => item.ulid))
-      // })
-      // clog('firstComponentUlid', firstComponentUlid, slotKey, childrenUlid)
       // 删除slots
       this.componentService.removeSlots(slotKey)
       this.componentService.reqRemoveSlots(slotKey)
@@ -272,6 +267,23 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       component.gridLayout.y = p.y
       component.gridLayout.w = p.w
       component.gridLayout.h = p.h
+    }
+  }
+  deleteItemIndexSlotKeyMap(p: {slotKey?: ULID, itemIndex?: N}) {
+    let itemLength = this.data.items.length + 1 // 这样才能得到删除前的数量
+    if (p.slotKey) {
+      let indexStr = this.itemIndexSlotKeyMap.get(p.slotKey)
+      this.itemIndexSlotKeyMap.delete(p.slotKey)
+      for (let i = Number(indexStr); i < itemLength; i++) {
+        this.itemIndexSlotKeyMap.set(String(i), this.itemIndexSlotKeyMap.get(String(i + 1)))
+        this.itemIndexSlotKeyMap.delete(String(i))
+      }
+    } else if (Number(p.itemIndex) > -1) {
+      this.itemIndexSlotKeyMap.delete(String(p.itemIndex))
+      for(let i = Number(p.itemIndex); i < itemLength; i++) {
+        this.itemIndexSlotKeyMap.set(String(i), this.itemIndexSlotKeyMap.get(String(i + 1)))
+        this.itemIndexSlotKeyMap.delete(String(i))
+      }
     }
   }
 }
