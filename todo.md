@@ -1,10 +1,10 @@
 ||完成日期||
 |-|-|-|
-|tabs|doing||
+|tabs|done||
 ||删除一个tab|done|
-|||删除slotKey|doing
+|||删除slotKey|done
 |||删除子组件|done
-||重命名TABSAADDITEM|todo|
+||重命名TABSAADDITEM|doing|
 ||tab内的子组件改变位置后切换tab后无效了|todo|
 ||tabs默认打开的tab内未渲染出子组件|todo|
 ||给非默认tab添加组件时失败|todo|

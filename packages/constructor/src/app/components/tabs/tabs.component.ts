@@ -139,7 +139,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     this.selectTab()
   }
   ngOnDestroy(): void {
-    shareEvent.unListenCb(shareEventName.TABSAADDITEM + this.data.ulid, this.listenAddItemCb)
+    shareEvent.unListenCb(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
     shareEvent.unListenCb(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
@@ -147,7 +147,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     return cck('slots', k, 'component')
   }
   listen() {
-    shareEvent.listen(shareEventName.TABSAADDITEM + this.data.ulid, this.listenAddItemCb)
+    shareEvent.listen(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
     shareEvent.listen(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   selectTab() {

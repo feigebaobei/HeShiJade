@@ -66,7 +66,7 @@ let ssoClientConfig = {
     },
 }
 let shareEventName = {
-    'TABSAADDITEM': 'Tabs.addItem',
+    'TABSADDITEM': 'Tabs.addItem',
     'TABSREMOVEITEM': 'Tabs.removeItem',
 }
 
