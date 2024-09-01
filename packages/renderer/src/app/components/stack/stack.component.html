@@ -2,9 +2,9 @@
 <!-- <div>
     <ng-template appStack></ng-template>
 </div> -->
-placement start
+<!-- placement start
 {{_componentList | json}}
-placement end
+placement end -->
 <gridstack [options]="gridOptions"
   (changeCB)="changeCBH($event)"
 >
@@ -15,7 +15,7 @@ placement end
       <!-- <div class="toolbox">
           <d-button bsSize="xs" icon="icon-delete" (click)="deleteComponentByUlidH(item.comp.ulid)"></d-button>
       </div> -->
-      {{item | json}}
-      <!-- <app-comp-box [data]="item" ></app-comp-box> -->
+      <!-- {{item | json}} -->
+      <app-comp-box [data]="item.comp" ></app-comp-box>
   </gridstack-item>
 </gridstack>

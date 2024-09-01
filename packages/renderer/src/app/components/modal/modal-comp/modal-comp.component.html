@@ -7,13 +7,23 @@
     </div>
 </header>
 <section class="header_slot_box">
-    <app-stack *ngFor="let comp of componenntListHeader" [data]="comp"></app-stack>
+    <!-- app-stack -->
+    <!-- <app-stack *ngFor="let comp of componenntListHeader" [data]="comp"></app-stack> -->
+    <app-stack 
+        *ngIf="show"
+        [componentList]="componenntListHeader"
+    ></app-stack>
 </section>
 <main class="body_slot_box">
     <!-- main -->
     <!-- {{data.ulid}}
     {{componenntListBody}} -->
-    <app-stack *ngFor="let comp of componenntListBody" [data]="comp"></app-stack>
+    <!-- app-stack -->
+    <!-- <app-stack *ngFor="let comp of componenntListBody" [data]="comp"></app-stack> -->
+    <app-stack 
+        *ngIf="show"
+        [componentList]="componenntListBody"
+    ></app-stack>
     <!-- {{title}} -->
 </main>
 <footer class="footer">

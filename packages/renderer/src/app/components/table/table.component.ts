@@ -5,7 +5,7 @@ import { cdir, clog } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
 import {shareEvent} from 'src/helper';
 // type
-import type { A, S, ULID, N, D, ReqMethod, } from 'src/types/base';
+import type { A, S, ULID, N, D, ReqMethod, B, } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 
 // interface basicDataSourceItem {
@@ -36,6 +36,7 @@ export class TableComponent implements OnInit {
   basicDataSource: A[]
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
+  showList: B[]
   constructor(private dataService: DataService,
     private componentService: ComponentService
     ) {
@@ -43,18 +44,25 @@ export class TableComponent implements OnInit {
     ]
     this.createChildKey = createChildKey
     this.compObj = {}
+    this.showList= []
   }
   ngOnInit(): void {
-    this.req()
-    this.compObj = {}
-    let tree = this.componentService.getTreeByKey()
-    this.data.items.forEach((item, index) => {
-      if (item['category'] === 'slots') {
-        let node = tree?.find(item['childUlid'] || '')
-        if (node) {
-          this.compObj[createChildKey('items', index, 'component')] = node.toArray()
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
+      this.req()
+      this.compObj = {}
+      let tree = this.componentService.getTreeByKey()
+      this.data.items.forEach((item, index) => {
+        if (item['category'] === 'slots') {
+          let node = tree?.find(item['childUlid'] || '')
+          if (node) {
+            this.compObj[createChildKey('items', index, 'component')] = node.toArray()
+          }
         }
-      }
+        this.showList.push(true)
+      })
+      return true
     })
     shareEvent.on(this.data.ulid, (payload) => {
       this.basicDataSource = payload
