@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs';
+// import { Subject } from 'rxjs';
 import { A, S } from 'src/types/base';
 
 let clog = console.log
@@ -17,9 +17,9 @@ export class ShareEventService {
       this._map.set(eventName, new Set([cb]))
     }
   }
-  listen(eventName: S, cb: Cb) { // todo 请使用on
-    this.on(eventName, cb)
-  }
+  // listen(eventName: S, cb: Cb) { // todo 请使用on
+  //   this.on(eventName, cb)
+  // }
   off(eventName: S, cb?: Cb) {
     let set = this.getCb(eventName)
     if (set) {
@@ -30,12 +30,12 @@ export class ShareEventService {
       }
     }
   }
-  unListenEventName(eventName: S) { // todo 请使用off
-    this.off(eventName)
-  }
-  unListenCb(eventName: S, cb: Cb) { // todo 请使用off
-    this.off(eventName, cb)
-  }
+  // unListenEventName(eventName: S) { // todo 请使用off
+  //   this.off(eventName)
+  // }
+  // unListenCb(eventName: S, cb: Cb) { // todo 请使用off
+  //   this.off(eventName, cb)
+  // }
   emit(eventName: S, payload: A) {
     let set = this.getCb(eventName)
     if (set) {

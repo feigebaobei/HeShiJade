@@ -139,16 +139,16 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     this.selectTab()
   }
   ngOnDestroy(): void {
-    shareEvent.unListenCb(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
-    shareEvent.unListenCb(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
+    shareEvent.off(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
+    shareEvent.off(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
     let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
     return cck('slots', k, 'component')
   }
   listen() {
-    shareEvent.listen(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
-    shareEvent.listen(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
+    shareEvent.on(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
+    shareEvent.on(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   selectTab() {
     new Promise((s, _j) => {

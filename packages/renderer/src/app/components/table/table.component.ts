@@ -56,7 +56,7 @@ export class TableComponent implements OnInit {
         }
       }
     })
-    shareEvent.listen(this.data.ulid, (payload) => {
+    shareEvent.on(this.data.ulid, (payload) => {
       this.basicDataSource = payload
     })
   }
