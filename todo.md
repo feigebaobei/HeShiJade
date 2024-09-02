@@ -1,15 +1,16 @@
 ||完成日期||
 |-|-|-|
 |渲染侧支持tabs及其子组件|done||
-|table不能渲染出fill了|doing||
+|table不能渲染出fill了|done||
 搭建侧的identify方法体是否正确？  todo
+|打包上传|doing||
 |分支|f_grid2||
 |要上生产的内容|||
 ||渲染侧，弹层类组件不能关闭||
 ||constructor井布局||
-||web-site扩展组件时增加井布局||
-||零代码与低代码的边界||
+||零代码、低代码与富代码的边界||
 
+|web-site扩展组件时增加井布局|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
@@ -114,13 +115,13 @@ just
 api众多。其中好多不通用的。
 
 # 上生产过程
-1. 把当前的开发分支f_xxx推到远端。
-2. 合并f_xxx到master
-3. 打包web-site.
-4. 重启后端服务mock-server
-5. 重启后端服务server
-6. 打包renderer 或 本地打包后上传
-7. 打包constructor 或 本地打包后上传
+1. 打包web-site.
+2. 打包renderer 或 本地打包后上传
+3. 打包constructor 或 本地打包后上传
+4. 把当前的开发分支f_xxx推到远端。
+5. 合并f_xxx到master
+6. 重启后端服务mock-server
+7. 重启后端服务server
 
 # 强制更新子组件
 // 父组件
