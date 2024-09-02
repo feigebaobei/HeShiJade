@@ -62,7 +62,7 @@ export class BehaviorBoxComponent {
   }
   curComponentChange() {
     this.componentBehaviorList = []
-    clog('curComponentChange', this.curComp)
+    // clog('curComponentChange', this.curComp)
     switch (this.curComp?.type) {
       case 'Button':
         this.curComp.behavior.forEach(item => {
@@ -128,6 +128,6 @@ export class BehaviorBoxComponent {
         })
         break;
       }
-    clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
+    // clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
   }
 }

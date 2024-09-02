@@ -16,6 +16,7 @@ import { ItemsModule } from './items/items.module';
 import { ComponentsModule } from './components/components.module';
 import { PropsModule } from './props/props.module';
 import { PageListModule } from './page-list/page-list.module';
+import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
 import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
@@ -69,6 +70,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     ComponentsModule,
     PropsModule,
     PageListModule,
+    GridstackModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

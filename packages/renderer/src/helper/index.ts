@@ -1,4 +1,4 @@
-import { A, N, S } from 'src/types/base';
+import type { A, N, S, F } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 // import { DoublyChain } from 'data-footstone';
@@ -41,6 +41,16 @@ let {log: clog, dir: cdir} = console
 let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' | 'node' | 'component' = '') => {
   return `${prefix}_${key}_${type}`
 }
+let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
+  return new Promise((s, j) => {
+    setTimeout(() => {
+      // fn(...p)
+      s(p)
+    }, timing)
+  }).then((p: A) => {
+    fn(...p)
+  })
+}
 
 export {
   reqToPromise,
@@ -50,4 +60,5 @@ export {
   clog,
   cdir,
   createChildKey,
+  asyncFn
 }

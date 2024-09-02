@@ -127,11 +127,11 @@ let Tabs: ComponentDefaultConfig = {
     props: opProps(TabsProps),
     behavior: opBehavior(TabsBehavior),
     items: [
-        {
-            id: 'id',
-            title: 'title',
-            disabled: false,
-        },
+        // {
+        //     id: 'id',
+        //     title: 'title',
+        //     disabled: false,
+        // },
     ],
     slots: {},
 }

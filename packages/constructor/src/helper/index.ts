@@ -1,12 +1,12 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
-// import { HttpClient } from '@angular/common/http';
-// import clone from 'rfdc/default'
+import shareEvent from './share-event';
+
 // type
-import type { A, F, N, S, Ao, B } from 'src/types/base';
+import type { A, F, N, S, OA, B } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
-import type { Component } from 'src/types/component';
+import type { Component, GridLayout} from 'src/types/component';
 import type { App } from 'src/types/app';
 
 interface LoopPropotype {
@@ -97,6 +97,7 @@ let initComponentMeta = (
   appUlid: ULID = '', pageUlid: ULID = '',
   prevUlid: S = '', nextUlid: S = '', parentUlid: S = '',
   mount: Component['mount'] = {area: ''},
+  gridLayout: GridLayout, // = {x: 4, y: 4, w: 4, h: 4}
 ): Component => {
   return {
     ulid: ulid(),
@@ -111,6 +112,7 @@ let initComponentMeta = (
     slots: cloneDeep(componentDefaultConfigAll[category].slots),
     appUlid,
     pageUlid,
+    gridLayout,
   }
 }
 let initPageMeta = (key: S = '', name: S = '',
@@ -181,22 +183,22 @@ let cleanoutPage = (p: A) => {
   // initPage.lastComponentUlid = p.lastComponentUlid
   return initPage
 }
-let cleanoutComponent = (p: A) => {
-  let initComponent = initComponentMeta()
-  initComponent.ulid = p.ulid
-  initComponent.type = p.type
-  initComponent.prevUlid = p.prevUlid
-  initComponent.nextUlid = p.nextUlid
-  initComponent.parentUlid = p.parentUlid
-  initComponent.mount = p.mount
-  initComponent.props = p.props
-  initComponent.behavior = p.behavior
-  initComponent.items = p.items
-  initComponent.slots = p.slots
-  initComponent.appUlid = p.appUlid
-  initComponent.pageUlid = p.pageUlid
-  return initComponent
-}
+// let cleanoutComponent = (p: A) => {
+//   let initComponent = initComponentMeta()
+//   initComponent.ulid = p.ulid
+//   initComponent.type = p.type
+//   initComponent.prevUlid = p.prevUlid
+//   initComponent.nextUlid = p.nextUlid
+//   initComponent.parentUlid = p.parentUlid
+//   initComponent.mount = p.mount
+//   initComponent.props = p.props
+//   initComponent.behavior = p.behavior
+//   initComponent.items = p.items
+//   initComponent.slots = p.slots
+//   initComponent.appUlid = p.appUlid
+//   initComponent.pageUlid = p.pageUlid
+//   return initComponent
+// }
 let sleep = (n: N = 0) => {
   return new Promise((s) => {
     setTimeout(() => {s(true)}, n)
@@ -278,6 +280,16 @@ let copy = (str: S): Promise<void> | Promise<boolean> => {
 }
 // 兼容的数组，常用于处理脏数据。
 let compatibleArray = (a: A) => Array.isArray(a) ? Array.from(a) : []
+let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
+  return new Promise((s, j) => {
+    setTimeout(() => {
+      // fn(...p)
+      s(p)
+    }, timing)
+  }).then((p: A) => {
+    fn(...p)
+  })
+}
 
 export {
   VERSION,
@@ -291,12 +303,14 @@ export {
   createChildKey,
   cleanoutApp,
   cleanoutPage,
-  cleanoutComponent,
+  // cleanoutComponent,
   createLoop,
   // wrapReq,
   sleep,
   copy,
   compatibleArray,
+  asyncFn,
+  shareEvent,
 }
 export type {
   Loop

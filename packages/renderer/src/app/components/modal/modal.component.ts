@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
 // import { PageService } from 'src/app/service/page.service';
-import {shareEvent} from 'src/helper';
+import { shareEvent } from 'src/helper';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
 import type { A } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
@@ -28,7 +28,7 @@ export class ModalComponent implements OnInit {
       // id: 'dialog-service',
       title: 'title', // 使用传入的数据
       width: '346px',
-      zIndex: 150,
+      // zIndex: 150,
       showAnimation: true,
       backdropCloseable: true,
       placement: 'center',
@@ -56,7 +56,7 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     this.config.title = this.data.props.title
     this.config.width = this.data.props.width
-    this.config.zIndex = this.data.props.zIndex
+    // this.config.zIndex = this.data.props.zIndex
     this.config.showAnimation = this.data.props.showAnimation
     this.config.backdropCloseable = this.data.props.backdropCloseable
     this.config.placement = this.data.props.placement
@@ -73,7 +73,7 @@ export class ModalComponent implements OnInit {
     if (this.data.props.visible) {
       this.openDialog()
     }
-    shareEvent.listen(this.data.ulid, (payload) => {
+    shareEvent.on(this.data.ulid, (payload) => {
       // clog('payload', payload)
       let obj = JSON.parse(payload)
       // clog('obj', obj)
@@ -91,7 +91,6 @@ export class ModalComponent implements OnInit {
     }
     // clog('12345', this.childrenHeader, this.childrenBody, this.childrenFooter)
   }
-  
   openDialog() {
     const results = this.modalService.open({
       ...this.config,

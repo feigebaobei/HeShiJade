@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
-// import * as componentDefaultConfigAll from '../../helper/component'
 import addableAll from 'src/helper/addable'
 import { cloneDeep, compatibleArray } from 'src/helper/index'
+import { shareEvent } from 'src/helper';
+import { shareEventName } from 'src/helper/config';
 // type
 import type { B, ConfigItem, N, S } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
@@ -32,7 +33,6 @@ export class ItemsBoxComponent {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          // let group: ConfigItem[] = cloneDeep(compatibleArray(groupTemplate[p.type]).map(t => t.show)) // 取出要显示的
           let group = this.groupForConfig(p.type)
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
@@ -51,7 +51,6 @@ export class ItemsBoxComponent {
   }
   addH() {
     if (this.curComponent) {
-      // let group: ConfigItem[] = cloneDeep(groupTemplate[this.curComponent.type])
       let group = this.groupForConfig(this.curComponent.type)
       // clog('group', group)
       this.groupList.push(group)
@@ -63,14 +62,15 @@ export class ItemsBoxComponent {
       })
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
+      shareEvent.emit(shareEventName.TABSADDITEM + this.curComponent.ulid, {index: this.groupList.length - 1})
     }
   }
   removeH(i: N) {
     this.groupList.splice(i, 1)
     this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
-    let curComp = this.componentService.curComponent()
-    if (curComp) {
-      this.componentService.reqRemoveItems(curComp.ulid, i)
+    if (this.curComponent) {
+      this.componentService.reqRemoveItems(this.curComponent.ulid, i)
+      shareEvent.emit(shareEventName.TABSREMOVEITEM + this.curComponent.ulid, {index: i})
     }
   }
   groupForConfig(type: S): ConfigItem[] {

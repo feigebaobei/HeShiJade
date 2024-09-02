@@ -5,10 +5,10 @@ import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
-import { createChildKey } from 'src/helper/index'
+import { compatibleArray, createChildKey } from 'src/helper/index'
 // 数据
 import {categoryList} from 'src/helper/category'
-import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
+// import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
 // 类型
@@ -19,9 +19,9 @@ import type { Component, Category,
   ComponentMountItems,
   ComponentMountSlots,
  } from '../../types/component'
-import type { ResponseData } from '../../types/index'
-import { O, type ConfigItemsCategoryType } from 'src/types/base'
-import type { S, Ao, ULID, A,
+// import type { ResponseData } from '../../types/index'
+// import { O, type ConfigItemsCategoryType } from 'src/types/base'
+import type { S, OA, ULID, A,
   N,
   B,
   ConfigItem,
@@ -35,7 +35,7 @@ let clog = console.log
 
 type CompOrUn = Component | undefined
 type ComponentOrUn = Component | undefined
-type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin'
+type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout'
 
 @Injectable({
   providedIn: 'root'
@@ -273,7 +273,7 @@ export class ComponentService {
     }
   }
   // 创建组件
-  reqPostCompListByPage(obj: Component) {
+  reqCreateComponent(obj: Component) {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
   reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
@@ -291,39 +291,13 @@ export class ComponentService {
       }
     })
   }
-  // 重排序
-  // putCompListByPage(obj: Ao) {}
-  // getComponentByPage(pageUlid?: ULID): Component[] {
-  //   if (pageUlid) {
-  //     clog('getComponentByPage', this._map.get(pageUlid)?.toArray())
-  //     return (this._map.get(pageUlid)?.toArray() as Component[])
-  //   } else {
-  //     return []
-  //   }
-  // }
-  // createTreeKey(appUlid?: ULID, pageUlid?: ULID) {
-  //   let au: ULID, pu: ULID
-  //   if (appUlid) {
-  //     au = appUlid
-  //   } else {
-  //     let app = this.appService.getCurApp()
-  //     au = app?.ulid || ''
-  //   }
-  //   if (pageUlid) {
-  //     pu = pageUlid
-  //   } else {
-  //     let page = this.pageService.getCurPage()
-  //     pu = page?.ulid || ''
-  //   }
-  //   return `${au}_${pu}_`
-  // }
   // 在当前页面中查找
   private _find(pageUlid: ULID, compUlid: ULID): CompOrUn {
     return this._map.get(pageUlid)?.find(compUlid)?.value
   }
-  private _findCategory(categoryUlid: ULID) {
-    return this.categoryList.find(item => item.ulid === categoryUlid)
-  }
+  // private _findCategory(categoryUlid: ULID) {
+  //   return this.categoryList.find(item => item.ulid === categoryUlid)
+  // }
   curComponent() {
     return this._curComponent
   }
@@ -337,18 +311,20 @@ export class ComponentService {
     }
   }
   // 设置当前组件的prop
-  setCurComponentProp(key: S, value: PropsValue) {
-    if (this._curComponent) {
-      this._curComponent.props[key] = value
-    }
-  }
-  // todo 应该删除一个设置prop的方法
+  // todo delete 2024.09.01+
+  // setCurComponentProp(key: S, value: PropsValue) {
+  // setCurComponentProp(key: S, value: A) {
+  //   if (this._curComponent) {
+  //     this._curComponent.props[key] = value
+  //   }
+  // }
   // 直接改变属性
-  setComponentProp(key: S, value: PropsValue) {
+  setComponentProp(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
     }
+    clog('change after', curComp)
   }
   setComponentsBehavior(
     // type: UpdateType, 
@@ -374,6 +350,18 @@ export class ComponentService {
       curComp.items.push(obj)
     }
   }
+  addSlots(key: S, value: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      curComp.slots[key] = value
+    }
+  }
+  removeSlots(key: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      delete curComp.slots[key]
+    }
+  }
   reqChangeItems(index: N, key: S, value: A) {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'put', {
       ulid: this.curComponent()?.ulid,
@@ -392,9 +380,9 @@ export class ComponentService {
     }
   }
   // 更新组件
-  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue) {
+  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
-      ulid: this.curComponent()?.ulid || '',
+      ulid: componentUlid,
       type,
       key,
       value,
@@ -415,11 +403,38 @@ export class ComponentService {
       value,
     }).then(() => true)
   }
+  reqAddSlots(key: S, value: S = '') {
+    let curComp = this.curComponent()
+    if (curComp) {
+      let ulid = curComp.ulid
+      let type = 'slots'
+      return this.reqService.req(`${serviceUrl()}/components`, 'put', {
+        // slots: this.curComponent()?.slots
+        ulid,
+        type,
+        key,
+        value,
+      }).then(() => true)
+    } else {
+      return Promise.reject('无选中组件')
+    }
+  }
+  reqRemoveSlots(slotKey: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      return this.reqService.req(`${serviceUrl()}/components/slots`, 'delete', {
+        ulid: curComp.ulid,
+        slotKey,
+      })
+    } else {
+      return Promise.reject('无选中组件')
+    }
+  }
   getTree(key: ULID): Tree<Component> | undefined {
     return this._map.get(key)
   }
   // 删除组件
-  deleteByUlid(pageUlid: ULID, componentUlid: ULID) {
+  deleteByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteByUlid=>deleteComponentByUlid
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
 
@@ -431,4 +446,15 @@ export class ComponentService {
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
     return childrenComponent
   }
+  getNextComponent(pageUlid: ULID, componentUlid: ULID) {
+    let tree = this.getTree(pageUlid)
+    return compatibleArray(tree?.find(componentUlid)?.toArray()) // .map(component => component.ulid)
+  }
+  // getLastRow(pageUlid: ULID) {
+  //   let tree = this.getTree(pageUlid)
+  //   if (tree) {
+  //     let lastNode = tree!.lastNode()
+
+  //   }
+  // }
 }

@@ -23,7 +23,7 @@ interface AddData {
 })
 export class PageService {
   _pageList: Page[]
-  private _find: (appUlid: ULID, p: ULID, ) => PageOrUn // todo 调整参数顺序
+  private _find: (appUlid: ULID, pageUlid: ULID) => PageOrUn
   pageSubject$: Subject<PageOrUn>
   _curPage: PageOrUn
   pageList$: Subject<Page[]>
@@ -63,6 +63,7 @@ export class PageService {
     return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => res.data)
   }
   // todo 应用也统一使用hard参数
+  // hard表示是否强制。下面的逻辑写错了。应该是为true时从后端取。
   getPageList(appUlid: ULID, hard = false): Promise<Page[]> {
     // clog(this._map)
     // return Promise.resolve([] as Page[])

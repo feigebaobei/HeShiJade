@@ -116,14 +116,14 @@ let Modal: PropsConfigItem = {
         label: '宽度',
         key: 'width',
     },
-    zIndex: {
-        category: 'number',
-        value: 150,
-        // maxLength
-        // minLength
-        label: 'zIndex',
-        key: 'zIndex',
-    },
+    // zIndex: {
+    //     category: 'number',
+    //     value: 150,
+    //     // maxLength
+    //     // minLength
+    //     label: 'zIndex',
+    //     key: 'zIndex',
+    // },
     visible: {
         category: 'switch',
         options: [
@@ -801,11 +801,11 @@ let Checkbox: PropsConfigItem = {
     },
 }
 let Tabs: PropsConfigItem = {
-    activeTag: {
+    activeTab: {
         category: 'input',
         value: '',
         label: '当前激活的选项卡Id',
-        key: 'activeTag',
+        key: 'activeTab',
     },
     type: {
         category: 'select',

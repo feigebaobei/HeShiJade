@@ -38,6 +38,9 @@ dependencies:
   data-footstone:
     specifier: ^0.1.23
     version: 0.1.23
+  gridstack:
+    specifier: ^10.3.1
+    version: 10.3.1
   ng-devui:
     specifier: ^17.0.0
     version: 17.0.0(@angular/animations@17.3.7)(@angular/common@17.3.7)(@angular/core@17.3.7)(@angular/forms@17.3.7)(rxjs@7.8.0)
@@ -4840,6 +4843,10 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  /gridstack@10.3.1:
+    resolution: {integrity: sha512-Ra82k/88gdeiu3ZP40COS4bI4sGhNQlZAaAQ6szfPfr68zVpsXxiyLKr5zYcTpKX4jjcwyNsNNdcV1tDJc71fA==}
+    dev: false
 
   /handle-thing@2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}

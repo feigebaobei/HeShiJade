@@ -62,6 +62,9 @@
         Options&lt;T, G&gt;       选项
             label: T,
             value: G,
+        
+        SlotsMeta
+            [k: S]: ULID
 
         Component                       组件
             ulid: S                     组件的ulid。惟一键。
@@ -78,7 +81,14 @@
             slots: SlotsMeta            slots
             appUlid: ULID               该组件所在应用的ulid
             pageUlid: ULID              该组件所在页面的ulid
-        
+            gridLayout: GridLayout      布局方式
+
+        GridLayout
+            x: N
+            y: N
+            w: N
+            h: N
+
         Category                        组件分类，用于组件列表
             name: S                 名称，用于渲染文本
             componentCategory: S    组件的分类

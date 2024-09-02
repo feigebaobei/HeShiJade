@@ -7,9 +7,10 @@
     [closeable]="data.props['closeable']"
     [scrollMode]="data.props['scrollMode']"
     [isHidden]="data.props['isHidden']"
+    (activeTabChange)="activeTabChangeH()"
 >
     <d-tab
-        *ngFor="let ele of data.items; let i = index"
+        *ngFor="let ele of data.items; let i = index;"
         [id]="ele['id']"
         [title]="ele['title']"
         [disabled]="ele['disabled']"
@@ -18,12 +19,14 @@
             class="dropArea"
             (dropEvent)="dropH($event, i)"
         >
-            <span *ngIf="!compatibleArray(getChildrenComponent(i)).length">此区域可接收子组件</span>
-            <app-comp-box
-            *ngFor="let comp of compatibleArray(getChildrenComponent(i))"
-            [comp]="comp"
-            (deleteComp)="deleteComponentByUlidH($event, i)"
-            ></app-comp-box>
+            <span *ngIf="!componentList.length">此区域可接收子组件</span>
+            <app-comp-stack
+                *ngIf="show"
+                [componentList]="componentList"
+                #compStack
+                (deleteComp)="deleteComponentByUlidH($event, i)"
+                (change)="compStackChangeH($event)"
+            ></app-comp-stack>
         </div>
     </d-tab>
 </d-tabs>

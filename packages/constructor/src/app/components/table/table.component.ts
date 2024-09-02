@@ -1,16 +1,48 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild,
+  // ChangeDetectorRef,
+ } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-import { createChildKey } from 'src/helper/index'
+import { asyncFn, createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
+import { compatibleArray } from 'src/helper/index'
+// 数据
+import {
+  Button as gridLayoutButtonDefault,
+  Modal as gridLayoutModalDefault,
+  Form as gridLayoutFormDefault,
+  Table as gridLayoutTableDefault,
+  Input as gridLayoutInputDefault,
+  Select as gridLayoutSelectDefault,
+  Icon as gridLayoutIconDefault,
+  Checkbox as gridLayoutCheckboxDefault,
+  Tabs as gridLayoutTabsDefault,
+  Pagination as gridLayoutPaginationDefault,
+} from 'src/helper/gridLayout'
+
 // type
-import type { N, S, D, A, ULID } from 'src/types/base';
+import type { N, S, D, B, ULID } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
-import { DataTableComponent } from 'ng-devui/data-table';
+import type { DataTableComponent } from 'ng-devui/data-table';
+import type { GridLayoutDefault } from "src/types/component"
+import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
+
+let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
+  Button: gridLayoutButtonDefault,
+  Modal: gridLayoutModalDefault,
+  Form: gridLayoutFormDefault,
+  Table: gridLayoutTableDefault,
+  Input: gridLayoutInputDefault,
+  Select: gridLayoutSelectDefault,
+  Icon: gridLayoutIconDefault,
+  Checkbox: gridLayoutCheckboxDefault,
+  Tabs: gridLayoutTabsDefault,
+  Pagination: gridLayoutPaginationDefault,
+}
 
 
 let clog = console.log
@@ -48,13 +80,20 @@ AfterViewInit
   compObj: {[k: S]: Comp[]}
   createChildKey: typeof createChildKey
   curPage: Page
-
+  componentList: Comp[]
+  showList: B[]
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
+  @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
+    // private cdRef: ChangeDetectorRef
   ) {
+    // 若使用4行占位，则使用table的slots列的组件不能都响应，只能当前行可以响应。
+    // 所以不得以改为一行。
+    // 日后想办法改为4行占位吧。
+    // todo 在comp-stack中增加了trackBy.再尝试一次4行占位。
     this.basicDataSource = [
       {
         id: 1,
@@ -95,50 +134,68 @@ AfterViewInit
     }
     this.createChildKey = createChildKey
     this.curPage = this.pageService.getCurPage()!
+    this.componentList = []
+    this.showList = []
+  }
+  compCompList(index: N) {
+    return compatibleArray(this.compObj[createChildKey('items', index, 'component')])
+    // this.componentList = compatibleArray(this.compObj[createChildKey('items', index, 'component')])
   }
   ngOnInit(): void {
     this.compObj = {}
-    // this.datatable.getCheckedRows()
-    
-    // let curPage = this.pageService.getCurPage()
     let tree = this.componentService.getTree(this.curPage.ulid)
     this.data.items.forEach((item, index) => {
       if (item['category'] === 'slots') {
         let node = tree?.find(item['childUlid'])
         if (node) {
-          // this.compObj[`items_${index}`] = node.toArray()
           this.compObj[createChildKey('items', index, 'component')] = node.toArray()
         }
       }
+      this.showList.push(true)
     })
   }
   dropH(e: DropEvent, field: S, itemIndex: N) {
     // 在本组件内添加新组件
     // let curPage = this.pageService.getCurPage()
-    let comp: Comp
-    let key = createChildKey('items', itemIndex, 'component')
-    clog('drop', key, this.data, this.data.ulid)
-    if (this.compObj[key]?.length) {
-      comp = initComponentMeta(
-        e.dragData.item.componentCategory,
-        this.curPage.appUlid, this.curPage.ulid,
-        this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
-        {area: 'items', itemIndex}
+    new Promise((s, _j) => {
+      s(true)
+    }).then(() => {
+      this.showList[itemIndex] = false
+      let comp: Comp
+      let key = createChildKey('items', itemIndex, 'component')
+      let componentCategory = e.dragData.item.componentCategory
+      let compGridLayout = gridLayoutDefault[componentCategory]
+      if (this.compObj[key]?.length) {
+        comp = initComponentMeta(
+          componentCategory,
+          this.curPage.appUlid, this.curPage.ulid,
+          this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
+          {area: 'items', itemIndex},
+          {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
+          )
+        this.compObj[key].push(comp)
+      } else {
+        comp = initComponentMeta(
+          componentCategory,
+          this.curPage.appUlid, this.curPage.ulid,
+          '', '', this.data.ulid,
+          {area: 'items', itemIndex},
+          {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
         )
-      this.compObj[key].push(comp)
-    } else {
-      comp = initComponentMeta(
-        e.dragData.item.componentCategory,
-        this.curPage.appUlid, this.curPage.ulid,
-        '', '', this.data.ulid,
-        {area: 'items', itemIndex}
-      )
-      this.compObj[key] = [comp]
-    }
-    // 在service中添加新组件
-    this.componentService.mountComponent(this.curPage.ulid, comp)
-    // 在服务端保存新组件
-    this.componentService.reqPostCompListByPage(comp)
+        this.compObj[key] = [comp]
+      }
+      // 在service中添加新组件
+      this.componentService.mountComponent(this.curPage.ulid, comp)
+      // 在服务端保存新组件
+      this.componentService.reqCreateComponent(comp)
+      return
+    }).then(() => {
+      asyncFn(() => {
+        // this.compStack.init()
+        this.showList[itemIndex] = true
+      })
+    })
+    // this.cdRef.detectChanges()
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
@@ -146,16 +203,27 @@ AfterViewInit
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
+    asyncFn(() => {
+      this.compStack.init()
+    })
   }
-  // ngAfterContentInit() {
-  //   this.afterContentInit()
-  // }
-  // afterContentInit() {
-  //   clog('afterContentInit datatable', this, this.datatable)
-  // }
   ngAfterViewInit() {
-    clog('ngAfterViewInit datatable', this, this.datatable)
+    // clog('ngAfterViewInit datatable', this, this.datatable, this.compStack)
     // 这时才有得到datatable组件
-    
+    // clog('')
   }
+  // deleteCompH(ulid: ULID, index: N) {
+  //   clog('deleteCompH', ulid, index)
+  //   let key = createChildKey('items', index, 'component')
+  //   this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+  //   clog(this.compObj[key])
+  //   // Array.from(Object.keys(this.compObj)).forEach(key => {
+  //   //   this.compObj[key] = [] // this.compObj[key]
+  //   //   // this.compObj = {}
+  //   // })
+  //   // this.cdRef.detectChanges()
+  //   asyncFn(() => {
+  //     this.compStack.init()
+  //   })
+  // }
 }

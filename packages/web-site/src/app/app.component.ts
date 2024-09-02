@@ -39,4 +39,7 @@ export class AppComponent {
   circumClickH() {
     this.router.navigate(['/circum'])
   }
+  skillClickH() {
+    this.router.navigate(['/skill'])
+  }
 }

@@ -1,28 +1,39 @@
 ||完成日期||
 |-|-|-|
-|整理上生产过程|todo||
-|删除tabs时未删除完子组件|done||
-|button的icon属性不生效|done||
-|number代替string|done||
+|渲染侧支持tabs及其子组件|done||
+|table不能渲染出fill了|done||
+搭建侧的identify方法体是否正确？  todo
+|打包上传|doing||
+|分支|f_grid2||
+|要上生产的内容|||
+||渲染侧，弹层类组件不能关闭||
+||constructor井布局||
+||零代码、低代码与富代码的边界||
 
-|本次分支f_comp|||
-|上生产内容|||
-||增加4个组件|icon checkbox tabs pagination|
-||web-site|修正拼写|
-||constructor|修改props样式|
-||constructor|修正无法修改页面名称的问题|
-||constructor|增加6个组件的配置面板 button modal form table input select|
-||这次调整组件的配置项，可以达到50%。剩下的包括：优化默认值、配置面板的bug、整理适合低代码的配置、||
-||mock-server|表单的提交接口|
-
+|web-site扩展组件时增加井布局|todo||
+|fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
+|fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
+|多种布局方式：井布局、列布局、行布局、块布局|todo||
+|modal组件的打开事件应该事件名+ulid|todo||
+|table组件在与items时的操作逻辑子组件|todo||
+||table组件在删除items时删除子组件|todo|
+|table组件的打开事件应该事件名+ulid|todo||
+|解决删除应用后视图中无应用的问题|todo||
+|替换掉subject触发的逻辑|todo||
+|防抖阈值改为从配置文件中取|todo||
+|items面板支持删除功能|todo||
+|解决进入搭建页面时请求2次page列表接口的问题|||
+|把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
+|有时无法选中页面|不好复现||
+||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
 |组件之间传递数据|以table、pagination、form为例||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |分包|||
-|舞台区使用拖动布局组件|||
 |是否需要把修改service与发请求分开|分开||
+|界定低代码与零代码的边界|（事件&配置项）||
 |丰富组件|||
 ||accordion||
 ||breadcrumb||
@@ -42,6 +53,7 @@
 ||rate||
 ||tag||
 |应用把非dev环境的版本回退到dev环境|||
+|生命周期|||
 |丰富配置面板的setter|||
 ||number||
 |“注销用户”功能|||
@@ -103,10 +115,72 @@ just
 api众多。其中好多不通用的。
 
 # 上生产过程
-1. 把当前的开发分支f_xxx推到远端。
-2. 合并f_xxx到master
-3. 打包web-site.
-4. 重启后端服务mock-server
-5. 重启后端服务server
-6. 打包renderer
-7. 打包constructor
+1. 打包web-site.
+2. 打包renderer 或 本地打包后上传
+3. 打包constructor 或 本地打包后上传
+4. 把当前的开发分支f_xxx推到远端。
+5. 合并f_xxx到master
+6. 重启后端服务mock-server
+7. 重启后端服务server
+
+# 强制更新子组件
+// 父组件
+import { Component } from '@angular/core';
+ 
+@Component({
+  selector: 'app-parent',
+  template: `<app-child [refreshKey]="refreshKey"></app-child>`
+})
+export class ParentComponent {
+  refreshKey = 0;
+ 
+  refreshChild() {
+    this.refreshKey++;
+  }
+}
+// 子组件
+import { Component, Input, OnChanges } from '@angular/core';
+ 
+@Component({
+  selector: 'app-child',
+  template: `<div>Child content</div>`
+})
+export class ChildComponent implements OnChanges {
+  @Input() refreshKey: number;
+ 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.refreshKey && !changes.refreshKey.firstChange) {
+      // 这里可以添加你想要执行的刷新逻辑
+      console.log('Child refreshed');
+    }
+  }
+}
+# 强制更新当前组件
+import { Component, ChangeDetectorRef } from '@angular/core';
+ 
+@Component({
+  selector: 'app-my-component',
+  template: `
+    <p>{{ currentTime }}</p>
+  `
+})
+export class MyComponent {
+  currentTime: Date = new Date();
+ 
+  constructor(private cdRef: ChangeDetectorRef) {
+    setInterval(() => {
+      this.currentTime = new Date();
+      this.cdRef.detectChanges(); // 强制当前组件进行变更检测
+    }, 1000);
+  }
+}
+
+subject在取消订阅`subject.unsubscribe()`后不能再接收数据，否则会报错ObjectUnsubscribedErrorImpl
+
+数据三级缓存
+  后端数据库
+  tree
+  service中map
+  特定组件
+
+

@@ -1,4 +1,4 @@
-import { A, N, S, B, ULID, } from "src/types/base"
+import type { S, B, ULID, } from "src/types/base"
 import { Component } from "src/types/component"
 import { Queue } from "data-footstone"
 
@@ -32,6 +32,7 @@ interface Tree<T> {
     mountNext: (component: T, ulid: ULID) => Node<T> | undefined,
     mountChild: (component: T, ulid: ULID, key: S) => Node<T> | undefined,
     unmount: (ulid: ULID) => Node<T> | undefined,
+    // lastNode: Node<T> | null
 }
 type NC = Node<Component>
 type TC = Tree<Component>
@@ -303,6 +304,22 @@ let treePrototype = Object.create({}, {
             }
         }
     },
+    // // 顶级最后的节点
+    // lastNode: {
+    //     value: function() {
+    //         let curNode = this.root
+    //         if (curNode) {
+    //             let nextNode = curNode.next
+    //             while(nextNode) {
+    //                 curNode = nextNode
+    //                 nextNode = nextNode.next
+    //             }
+    //             return curNode
+    //         } else {
+    //             return null
+    //         }
+    //     }
+    // }
 })
 
 let createTree = <T>(): Tree<T> => {

@@ -4,6 +4,14 @@ type PropsValue = S | B | N | S[] | SelectOptionsItem[]
 interface ComponentMountEmpty {area: ''}
 interface ComponentMountItems {area: 'items', itemIndex: N}
 interface ComponentMountSlots {area: 'slots', slotKey: S}
+interface GridLayout {
+  x: N
+  y: N
+  w: N
+  h: N
+  noResize: B
+}
+
 interface Component {
   ulid: S
   type: S
@@ -33,6 +41,7 @@ interface Component {
   slots: {[k: S]: ULID}
   appUlid: ULID
   pageUlid: ULID
+  gridLayout: GridLayout
 }
 interface Category {
   name: S
@@ -50,6 +59,7 @@ interface componentConfig {
 
 export type {
   PropsValue,
+  GridLayout,  
   Component,
   Category,
   componentConfig,

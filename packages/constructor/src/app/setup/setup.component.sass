@@ -1,7 +1,7 @@
 .section
     display: grid
     grid-gap: 12px
-    grid-template-columns: 280px auto 380px
+    grid-template-columns: 240px auto 280px
     grid-template-rows: 36px auto
     grid-template-areas: 'header header header' 'left stage right'
     height: 100vh
@@ -28,9 +28,23 @@
     .center
         overflow: auto
         border: 1px solid red
-        padding: 16px 8px
+        // padding: 22px 0px
+        padding-bottom: 120px
     .right
         overflow: auto
 
 .text_center
     text-align: center
+
+.selected
+    border: 1px solid blue
+
+.toolbox
+    position: absolute
+    right: 0
+    top: 0px
+    z-index: 10
+    opacity: 0.5
+    &:hover
+        opacity: unset
+    

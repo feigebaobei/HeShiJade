@@ -108,13 +108,6 @@ let FormItemCategory = [
     { label: 'select', value: 'select', },
     { label: 'switch', value: 'switch', },
 ]
-// todo 以后再把addable与groups合并在一起
-// let Button: ConfigItem = {
-//         category: 'input',
-//         key: 'text',
-//         label: '文本',
-//         value: '',
-//     }
 let Table: ConfigItem[] = [
     {
         label: '类型',
@@ -233,7 +226,7 @@ let Table: ConfigItem[] = [
         key: 'childUlid',
         value: '',
         // show: false,
-        // hide: () => true, // todo 测试
+        // hide: () => true,
         hideConfig: true,
     },
 ]

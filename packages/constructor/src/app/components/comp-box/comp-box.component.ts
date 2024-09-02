@@ -15,7 +15,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 // type
-import type { A, S, Ao, ULID } from 'src/types/base';
+import type { A, S, OA, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
 // 数据
@@ -34,7 +34,7 @@ import type { Page } from 'src/types/page';
 
 let clog = console.log
 
-let compMap: Ao = {
+let compMap: OA = {
   Button: ButtonComponent,
   Form: FormComponent,
   Input: InputComponent,
@@ -78,16 +78,6 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         this.init()
       }
     })
-  }
-  boxClickh($event: A) {
-    // 选中组件
-    $event.stopPropagation()
-    // clog(this.comp)
-    if (this.curComp?.ulid === this.comp.ulid) {
-      // 已经是当前组件了，不切换。
-    } else {
-      this.componentService.setCurComponent(this.curPage.ulid, this.comp.ulid)
-    }
   }
   ngOnInit() {
   }
@@ -163,6 +153,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         this.componentRef.instance.data = {
           props: this.comp.props,
           items: this.comp.items,
+          slots: this.comp.slots,
           ulid: this.comp.ulid,
         }
         break
@@ -183,19 +174,10 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   ngAfterViewChecked(): void {
   }
   // update() { // 通常指的是当Angular更新DOM或执行数据绑定
-  //   // clog('update')
-  //   // todo 删除不使用的此方法
-  //   // if (this.comp.ulid === this.curComp?.ulid) {
-  //   //   this.init()
-  //   // }
-  //   // this.init()
   // }
   // ngOnChanges() {
   // }
   ngOnDestroy() {
     this.compHost.viewContainerRef.clear();
-  }
-  deleteButtonClickH() {
-    this.deleteComp.emit(this.curComp?.ulid)
   }
 }

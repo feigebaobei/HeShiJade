@@ -13,7 +13,19 @@ interface PropsMeta {
     // [k: S]: PropsValue
     [k: S]: A
 }
-
+interface GridLayout {
+  x: N
+  y: N
+  w: N
+  h: N
+  noResize: B
+}
+type PartialGridLayout = Partial<GridLayout>
+interface GridLayoutDefault {
+  w: N
+  h: N
+  noResize: B
+}
 interface BehaviorMetaItem {
   event: S
   target: S
@@ -66,6 +78,7 @@ interface Component {
   slots: SlotsMeta
   appUlid: ULID
   pageUlid: ULID
+  gridLayout: GridLayout
 }
 
 interface Category {
@@ -84,10 +97,20 @@ interface PropsTransfer {
   key: S
   value: A
 }
+interface ChangeGridLayoutParams {
+  ulid: ULID
+  x: GridLayout['x']
+  y: GridLayout['y']
+  w: GridLayout['w']
+  h: GridLayout['h']
+}
 
 export type {
   PropsValue,
   PropsMeta,
+  GridLayout,
+  PartialGridLayout,
+  GridLayoutDefault,
   BehaviorMeta,
   BehaviorMetaItem,
   BehaviorItemKey,
@@ -103,4 +126,5 @@ export type {
   ComponentMountItems,
   ComponentMountSlots,
   PropsTransfer,
+  ChangeGridLayoutParams,
 }
