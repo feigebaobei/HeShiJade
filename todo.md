@@ -3,7 +3,7 @@
 |-|-|-|
 搭建侧的identify方法体是否正确？  todo
 |升级angular版本|todo||
-||||
+||确定下要升级到的版本|doing|
 |替换掉subject触发的逻辑|todo||
 |防抖阈值改为从配置文件中取|todo||
 |解决进入搭建页面时请求2次page列表接口的问题|||
@@ -183,4 +183,7 @@ subject在取消订阅`subject.unsubscribe()`后不能再接收数据，否则�
   service中map
   特定组件
 
-
+# 升级的要求
+- node 18.19.1+
+- ts 5.2+
+执行`ng update @angular/core@17 @angular/cli@17`
