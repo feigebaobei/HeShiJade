@@ -262,15 +262,6 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cdk@~16.1.1":
-  version "16.1.8"
-  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-16.1.8.tgz#f8225eba4d8dea6aa26d3bffce1a382665019a3a"
-  integrity sha512-9vND9a/6GRFFLvQXRhQSr2Y6jhIAnJWxOVCMDLwnE2dSsmv17vaTI0Ij+41yWlK+mE1MTUiJaZZdW2PZlLnW9Q==
-  dependencies:
-    tslib "^2.3.0"
-  optionalDependencies:
-    parse5 "^7.1.2"
-
 "@angular/cli@~17.3.6":
   version "17.3.6"
   resolved "https://registry.npmjs.org/@angular/cli/-/cli-17.3.6.tgz#ceddb0b9aa950f265c3e48fc7f57fd9d6a48716b"
