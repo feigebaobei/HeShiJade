@@ -1,19 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// module
+import { FormsModule } from '@angular/forms';
 import { FormLayout } from 'ng-devui/form';
-// import { login } from 'src/helper/sso-saml-client';
-// import { ssoClientParams } from 'src/helper/config';
+import { CommonModule } from '@angular/common';
+import { DevUIModule } from 'ng-devui';
 
 import type { ResponseData, User } from 'src/types';
 // import type { SsoClientParams } from 'src/helper/sso-saml-client';
 import { UserService } from '../service/user.service';
 import { B, A, } from 'src/types/base';
+// pipe
+import { UpperCasePipe } from '@angular/common';
 
 let clog = console.log
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [
+    DevUIModule,
+    UpperCasePipe,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })

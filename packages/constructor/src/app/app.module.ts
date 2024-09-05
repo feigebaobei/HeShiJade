@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 // import { SetupComponent } from './setup/setup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HomeComponent } from './home/home.component';
+// import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -45,7 +45,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     ListComponent,
     // SetupComponent,
     NotFoundComponent,
-    HomeComponent,
+    // HomeComponent,
     DialogComponent,
     // PageDialogComponent,
     // PageListComponent,
