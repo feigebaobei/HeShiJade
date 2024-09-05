@@ -3,9 +3,6 @@
 |-|-|-|
 |删除app.module.ts中注释的代码及对应的文件|todo||
 搭建侧的identify方法体是否正确？  todo
-|升级angular版本|done||
-||确定下要升级到的版本|done|
-||是否可以支持拆包|done 可以|
 |替换掉subject触发的逻辑|todo||
 |防抖阈值改为从配置文件中取|todo||
 |解决进入搭建页面时请求2次page列表接口的问题|||
@@ -17,6 +14,7 @@
 ||standalone components|doing|
 ||使用异步加载路由|未看到减小包体积|
 ||使用独立组件|未看到减小包体积|
+||setup中使用组件列表组件|doing|
 |打包上传|done||
 |升级使用方法|todo||
 |分支|f_update||

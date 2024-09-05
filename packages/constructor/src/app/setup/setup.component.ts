@@ -12,6 +12,7 @@ import { ComponentsModule } from '../components/components.module';
 import { PageListModule } from '../page-list/page-list.module';
 // 组件
 // import { ComponentListComponent } from './component-list/component-list.component';
+import { ComponentListModule } from '../component-list/component-list.module';
 // devui
 import { DevUIModule } from 'ng-devui';
 // 数据
@@ -73,6 +74,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     ComponentsModule,
     PageListModule,
     // ComponentListComponent,
+    ComponentListModule,
   ],
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.sass']
