@@ -1,21 +1,28 @@
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
+|删除app.module.ts中注释的代码及对应的文件|todo||
 搭建侧的identify方法体是否正确？  todo
-|升级angular版本|todo||
-||确定下要升级到的版本|doing|
-||是否可以支持拆包|todo|
+|升级angular版本|done||
+||确定下要升级到的版本|done|
+||是否可以支持拆包|done 可以|
 |替换掉subject触发的逻辑|todo||
 |防抖阈值改为从配置文件中取|todo||
 |解决进入搭建页面时请求2次page列表接口的问题|||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
-|打包上传|dong||
+|分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
+||明确具体操作方式|done|
+||lazy laoding|需要把组件改为模块。不适合现有情况。|
+||standalone components|doing|
+||使用异步加载路由|未看到减小包体积|
+||使用独立组件|未看到减小包体积|
+|打包上传|done||
+|升级使用方法|todo||
 |分支|f_update||
 |要上生产的内容|||
-||angular升级到17.3.12||
+||constructor/renderer/web-site升级angular到17.3.12||
 
-|分包|||
 |web-site扩展组件时增加井布局|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
@@ -189,3 +196,15 @@ subject在取消订阅`subject.unsubscribe()`后不能再接收数据，否则�
 - ts 5.2+
 - zone.js 0.14+
 执行`ng update @angular/core@17 @angular/cli@17`
+
+# 缩小包体积
+- tree shaking
+  - 从最小的范围引入。
+- lazy laoding
+  1. 使用loadChildren加载模块
+  2. 在app.module.ts中不引入相关模块
+- module analyzer
+  1. 安装 webpack-bundler-analyzer
+- standalone components
+  - 以standalone方式开发组件
+  - 在routing文件中懒加载
