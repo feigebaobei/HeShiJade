@@ -205,6 +205,15 @@ subject在取消订阅`subject.unsubscribe()`后不能再接收数据，否则�
   - 以standalone方式开发组件
   - 在routing文件中懒加载
 
+# lazy load
+{
+  path: '', 
+  loadChildren: () => import("./components/login/login.module").then(m => m.LoginModule)
+}
+{
+  path: 'login',
+  loadComponent: () => import('./pages/login-page/login-page.component').then( m => m.LoginPageComponent)
+},
 # 分析包体积
 npm i -g webpack-bundle-analyzer
 ng build --stats-json
