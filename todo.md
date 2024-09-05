@@ -9,14 +9,10 @@
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
-||明确具体操作方式|done|
 ||lazy laoding|需要把组件改为模块。不适合现有情况。|
-||standalone components|doing|
+||standalone components|done|
 ||使用异步加载路由|未看到减小包体积|
-||异步引用list / home|done|
 ||使用独立组件|未看到减小包体积|
-||组件列表改为组件模块|done|
-||setup中使用组件列表|done|
 |打包上传|done||
 |升级使用方法|todo||
 |分支|f_update||
@@ -208,3 +204,10 @@ subject在取消订阅`subject.unsubscribe()`后不能再接收数据，否则�
 - standalone components
   - 以standalone方式开发组件
   - 在routing文件中懒加载
+
+# 分析包体积
+npm i -g webpack-bundle-analyzer
+ng build --stats-json
+cd dist/constructor
+webpack-bundle-analyzer stats.json
+在浏览器中打开localhost:8888
