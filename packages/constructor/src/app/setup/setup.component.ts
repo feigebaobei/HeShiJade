@@ -3,10 +3,17 @@ import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
-import { ulid } from 'ulid';
+// import { ulid } from 'ulid';
 import { asyncFn, initComponentMeta } from 'src/helper'
-
-
+import { ItemsModule } from '../items/items.module';
+import { BehaviorModule } from '../behavior/behavior.module';
+import { PropsModule } from '../props/props.module';
+import { ComponentsModule } from '../components/components.module';
+import { PageListModule } from '../page-list/page-list.module';
+// 组件
+// import { ComponentListComponent } from './component-list/component-list.component';
+// devui
+import { DevUIModule } from 'ng-devui';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -57,6 +64,16 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
 
 @Component({
   selector: 'app-setup',
+  standalone: true,
+  imports: [
+    DevUIModule,
+    ItemsModule,
+    BehaviorModule,
+    PropsModule,
+    ComponentsModule,
+    PageListModule,
+    // ComponentListComponent,
+  ],
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.sass']
 })
