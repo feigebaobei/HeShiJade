@@ -5,11 +5,13 @@ import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
 // import { ulid } from 'ulid';
 import { asyncFn, initComponentMeta } from 'src/helper'
+// module
 import { ItemsModule } from '../items/items.module';
 import { BehaviorModule } from '../behavior/behavior.module';
 import { PropsModule } from '../props/props.module';
 import { ComponentsModule } from '../components/components.module';
 import { PageListModule } from '../page-list/page-list.module';
+import { CommonModule } from '@angular/common';
 // 组件
 // import { ComponentListComponent } from './component-list/component-list.component';
 import { ComponentListModule } from '../component-list/component-list.module';
@@ -75,6 +77,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     PageListModule,
     // ComponentListComponent,
     ComponentListModule,
+    CommonModule,
   ],
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.sass']

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // 模块
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListComponent } from './list/list.component';
+// import { ListComponent } from './list/list.component';
 // import { SetupComponent } from './setup/setup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 // import { HomeComponent } from './home/home.component';
@@ -42,7 +42,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     ItemsDirective,
     ItemCategoryDirective,
     AppComponent,
-    ListComponent,
+    // ListComponent,
     // SetupComponent,
     NotFoundComponent,
     // HomeComponent,

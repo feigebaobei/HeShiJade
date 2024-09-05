@@ -1,6 +1,10 @@
 // import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// module
+import { DevUIModule } from 'ng-devui';
+import { CommonModule } from '@angular/common';
+// 组件
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogService } from 'ng-devui/modal';
 import { AppService } from '../service/app.service';
@@ -33,6 +37,11 @@ let clog = console.log
 
 @Component({
   selector: 'app-list',
+  standalone: true,
+  imports: [
+    DevUIModule,
+    CommonModule,
+  ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })

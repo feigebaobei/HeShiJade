@@ -13,8 +13,10 @@
 ||lazy laoding|需要把组件改为模块。不适合现有情况。|
 ||standalone components|doing|
 ||使用异步加载路由|未看到减小包体积|
+||异步引用list / home|done|
 ||使用独立组件|未看到减小包体积|
-||setup中使用组件列表组件|doing|
+||组件列表改为组件模块|done|
+||setup中使用组件列表|done|
 |打包上传|done||
 |升级使用方法|todo||
 |分支|f_update||
