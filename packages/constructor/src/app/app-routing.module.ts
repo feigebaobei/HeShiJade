@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)},
 
   // { path: 'list', component: ListComponent},
-  { path: 'list', loadComponent: () => import('./list/list.component').then(m => m.ListComponent)},
-  // { path: 'list', loadChildren: () => import('./app-list/app-list.module').then(m => m.AppListModule)},
+  // { path: 'list', loadComponent: () => import('./list/list.component').then(m => m.ListComponent)},
+  { path: 'list', loadChildren: () => import('./app-list/app-list.module').then(m => m.AppListModule)},
 
   // { path: 'setup', component: SetupComponent},
   // { path: 'setup', loadChildren: () => import('./setup/setup.component').then(m => m.SetupComponent)},

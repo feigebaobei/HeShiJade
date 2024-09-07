@@ -1,23 +1,25 @@
+// utils
 // import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { initAppMeta } from 'src/helper';
 // module
 // import { DevUIModule } from 'ng-devui';
 // import { CommonModule } from '@angular/common';
-// 组件
-import { DialogComponent } from '../dialog/dialog.component';
+// service
 import { DialogService } from 'ng-devui/modal';
 import { AppService } from '../../service/app.service';
 import { UserService } from '../../service/user.service';
-import { AppConfigDialogComponent } from '../app-config-dialog/app-config-dialog.component';
-import { PublishDialogComponent } from '../publish-dialog/publish-dialog.component';
 import { PageService } from '../../service/page.service';
 import { ComponentService } from '../../service/component.service';
-import { initAppMeta } from 'src/helper';
+// 组件
+// import { DialogComponent } from '../dialog/dialog.component';
+// import { AppConfigDialogComponent } from '../app-config-dialog/app-config-dialog.component';
+// import { PublishDialogComponent } from '../publish-dialog/publish-dialog.component';
+// type
 import type { ResponseData, User } from 'src/types';
 import type { A, B, S, N, Email, } from 'src/types/base';
 import type { App } from 'src/types/app';
-
 
 interface FormData {
   key: S
@@ -86,7 +88,7 @@ export class ListComponent implements OnInit {
       width: '346px',
       maxHeight: '600px',
       title: '创建新应用',
-      content: DialogComponent,
+      // content: DialogComponent,
       backdropCloseable: true,
       onClose: () => console.log('on dialog closed'),
       data: {
@@ -161,7 +163,7 @@ export class ListComponent implements OnInit {
       width: '346px',
       maxHeight: '600px',
       title: '应用配置',
-      content: AppConfigDialogComponent,
+      // content: AppConfigDialogComponent,
       backdropCloseable: true,
       onClose: () => clog('hi close'),
       data: {
@@ -197,7 +199,7 @@ export class ListComponent implements OnInit {
       width: '800px',
       maxHeight: '600px',
       title: '发布',
-      content: PublishDialogComponent,
+      // content: PublishDialogComponent,
       backdropCloseable: true,
       onClose: () => clog('close'),
       data: {
