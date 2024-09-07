@@ -25,6 +25,16 @@ npm run dc # 启动搭建侧
 npm run dr # 启动渲染侧
 ```
 
+## 依赖
+|||||
+|-|-|-|-|
+|全局依赖|webpack-bundle-analyzer|||
+|constructor||||
+|renderer||||
+|web-site||||
+|server||||
+|mock-server||||
+|components||||
 
 
 ## 项目结构

@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve --open",
     "build": "ng build",
+    "ba": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
+    "analyzer": "cd dist/constructor && webpack-bundle-analyzer stats.json",
     "test": "ng test"
   },
   "private": true,
