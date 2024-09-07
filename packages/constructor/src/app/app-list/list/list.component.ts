@@ -1,11 +1,8 @@
 // utils
-// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { initAppMeta } from 'src/helper';
 // module
-// import { DevUIModule } from 'ng-devui';
-// import { CommonModule } from '@angular/common';
 // service
 import { DialogService } from 'ng-devui/modal';
 import { AppService } from '../../service/app.service';

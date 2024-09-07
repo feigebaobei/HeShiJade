@@ -9,8 +9,9 @@
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
-||删除app.module.ts中的devui|doing|
-||lazy laoding|需要把组件改为模块。不适合现有情况。|
+||解决2个app-list/home的问题|doing|
+||删除app.module.ts中的devui|done|
+||lazy laoding|done|
 ||standalone components|done|
 ||使用异步加载路由|done|
 ||使用独立组件|done|
