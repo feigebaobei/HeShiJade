@@ -22,16 +22,16 @@ import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
 import { ItemCategoryDirective } from './item-category.directive';
 // devui
-import { DevUIModule } from 'ng-devui';
+// import { DevUIModule } from 'ng-devui';
 
 // pipe
 import { UpperCasePipe } from '@angular/common';
 import { JsonPipe } from '@angular/common';
 
 // 组件
-import { DialogComponent } from './list/dialog/dialog.component';
-import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
-import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
+// import { DialogComponent } from './list/dialog/dialog.component';
+// import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
+// import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
 // import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 // import { PageListComponent } from './setup/page-list/page-list.component';
 // import { ComponentListComponent } from './setup/component-list/component-list.component';
@@ -49,9 +49,9 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     // PageDialogComponent,
     // PageListComponent,
     // ComponentListComponent,
-    DialogComponent,
-    AppConfigDialogComponent,
-    PublishDialogComponent,
+    // DialogComponent,
+    // AppConfigDialogComponent,
+    // PublishDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +60,7 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     RouterOutlet,
     UpperCasePipe,
     JsonPipe,
-    DevUIModule,
+    // DevUIModule,
     FormsModule,
     HttpClientModule,
     // ItemsModule,
