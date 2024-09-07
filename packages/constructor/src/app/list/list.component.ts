@@ -18,20 +18,12 @@ import type { ResponseData, User } from 'src/types';
 import type { A, B, S, N, Email, } from 'src/types/base';
 import type { App } from 'src/types/app';
 
-
 interface FormData {
   key: S
   name: S
   members: S
   theme: S
 }
-// interface App {
-//   key: S
-//   name: S
-//   ulid: S
-//   members: S[]
-//   // theme: S
-// }
 
 let clog = console.log
 

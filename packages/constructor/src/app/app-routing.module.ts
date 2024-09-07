@@ -9,12 +9,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   // { path: 'home', component: HomeComponent},
-  // { path: 'home', component: () => import('./home/home.component')},
   { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)},
 
   // { path: 'list', component: ListComponent},
-  // { path: 'list', component: () => import('./list/list.component')},
   { path: 'list', loadComponent: () => import('./list/list.component').then(m => m.ListComponent)},
+  // { path: 'list', loadChildren: () => import('./app-list/app-list.module').then(m => m.AppListModule)},
 
   // { path: 'setup', component: SetupComponent},
   // { path: 'setup', loadChildren: () => import('./setup/setup.component').then(m => m.SetupComponent)},

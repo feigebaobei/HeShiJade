@@ -30,11 +30,11 @@ import { JsonPipe } from '@angular/common';
 
 // 组件
 import { DialogComponent } from './list/dialog/dialog.component';
+import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
+import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
 // import { PageDialogComponent } from './setup/page-list/dialog/page-dialog.component';
 // import { PageListComponent } from './setup/page-list/page-list.component';
 // import { ComponentListComponent } from './setup/component-list/component-list.component';
-import { AppConfigDialogComponent } from './list/app-config-dialog/app-config-dialog.component';
-import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,10 +46,10 @@ import { PublishDialogComponent } from './list/publish-dialog/publish-dialog.com
     // SetupComponent,
     NotFoundComponent,
     // HomeComponent,
-    DialogComponent,
     // PageDialogComponent,
     // PageListComponent,
     // ComponentListComponent,
+    DialogComponent,
     AppConfigDialogComponent,
     PublishDialogComponent,
   ],

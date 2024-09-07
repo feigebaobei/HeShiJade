@@ -11,8 +11,8 @@
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
 ||lazy laoding|需要把组件改为模块。不适合现有情况。|
 ||standalone components|done|
-||使用异步加载路由|未看到减小包体积|
-||使用独立组件|未看到减小包体积|
+||使用异步加载路由|done|
+||使用独立组件|done|
 |打包上传|done||
 |升级使用方法|todo||
 |分支|f_update||
@@ -220,3 +220,24 @@ ng build --stats-json
 cd dist/constructor
 webpack-bundle-analyzer stats.json
 在浏览器中打开localhost:8888
+
+# How to Reduce the Bundle Size?
+There are several strategies to optimize your bundle size:
+
+Lazy-load modules and components that are not required on the initial load
+Use the new @defer syntax in component templates. (Remember that it impacts SEO)
+Utilize TypeScript’s dynamic import expressions to lazy-load code on demand. This pattern is commonly used with dialog boxes.
+Replace external libraries with your own light-weight implementations. 
+Remove or relocate styles from global styles (styles.scss) to the components
+Use standalone components or the SCAM architecture (for Angular versions below 14.0.0) to take advantage of tree-shaking and remove unused components from your bundle.
+Remove all dead code from your application, including unused services, directives, pipes, modules, and so on. Additionally, remove unused dependencies and libraries from your bundle.
+
+
+
+示例
+import { RadioModule } from 'ng-devui/radio';
+import { RateModule } from 'ng-devui/rate';
+import { ReadTipModule } from 'ng-devui/read-tip';
+import { SearchModule } from 'ng-devui/search';
+
+
