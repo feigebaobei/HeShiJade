@@ -11,6 +11,7 @@
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
 ||目标是搞到500k-1m以下,2k-4k|doing|
 ||解决2个app-list/home的问题|doing|
+||删除app.module.ts中的pipe|todo|
 ||删除app.module.ts中的devui|done|
 |打包上传|done||
 |升级使用方法|todo||
@@ -265,3 +266,9 @@ all 整个应用的大小
 anyComponentStyle 任意组件的样式大小
 anyScript 任一js的大小
 any 任意文件的大小
+
+# 减小包体积的具体操作
+异步加载路由
+关键组件改为standalone components
+删除根模块（app.module.ts）中原来声明的组件、引入的通用模块（改为在子模板、子组件中按需引入）、引入的pipe
+按需引入devui

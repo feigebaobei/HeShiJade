@@ -1,21 +1,22 @@
+// utils
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormLayout } from 'ng-devui/form';
 // module
 import { FormsModule } from '@angular/forms';
-import { FormLayout } from 'ng-devui/form';
 import { CommonModule } from '@angular/common';
-// import { DevUIModule } from 'ng-devui';
 import { ButtonModule,
   ToastModule,
   FormModule,
- } from 'ng-devui';
-
-import type { ResponseData, User } from 'src/types';
-import { UserService } from '../service/user.service';
-import { B, A, } from 'src/types/base';
+} from 'ng-devui';
 // pipe
-import { UpperCasePipe } from '@angular/common';
+// import { UpperCasePipe } from '@angular/common';
+// service
+import { UserService } from '../service/user.service';
+// type
+import type { ResponseData, User } from 'src/types';
+import type { B, A, } from 'src/types/base';
 
 let clog = console.log
 
@@ -28,7 +29,7 @@ let clog = console.log
     ToastModule,
     FormModule,
 
-    UpperCasePipe,
+    // UpperCasePipe,
     FormsModule,
     CommonModule,
   ],
