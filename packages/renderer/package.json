@@ -5,7 +5,10 @@
     "ng": "ng",
     "start": "ng serve --port 4210",
     "build": "ng build",
+    "ba": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
+    "analyzer": "cd dist/renderer && webpack-bundle-analyzer stats.json",
+    "a": "npm run analyzer",
     "test": "ng test"
   },
   "private": true,

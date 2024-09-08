@@ -1,23 +1,20 @@
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
-|删除app.module.ts中注释的代码及对应的文件|todo||
+|删除app.module.ts中注释的代码及对应的文件|done||
 搭建侧的identify方法体是否正确？  todo
 |替换掉subject触发的逻辑|todo||
 |防抖阈值改为从配置文件中取|todo||
-|解决进入搭建页面时请求2次page列表接口的问题|||
+|解决进入搭建页面时请求2次page列表接口的问题|应该与subject触发多次有关||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
-|分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
-||目标是搞到500k-1m以下,2k-4k|未达到|
-||删除app.module.ts中的pipe|done|
-||删除app.module.ts中的非必要模块|done|
-||删除app.module.ts中的组件|done|
-||删除app.module.ts中的指令|done|
-|打包上传|done||
+|分包|为了减小main.xxx.js的体积，增加首页加载速度|done|
+|renderer再来一遍|目标是搞到500k-1m以下,2k-4k|doing|
 |升级使用方法|todo||
 |分支|f_update||
 |要上生产的内容|||
+||constructor 拆包，首页体积降到600+kb||
+||renderer 拆包，首页体积1.64mb -> xxxkb||
 ||路由懒加载||
 ||关键组件改为standalone components||
 ||constructor/renderer/web-site升级angular到17.3.12||
