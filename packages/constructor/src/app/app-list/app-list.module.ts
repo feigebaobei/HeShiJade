@@ -17,7 +17,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component'
 
 const routes: Routes = [
-  { path: '', component: ListComponent }	
+  { path: '', component: ListComponent }
 ]
 
 @NgModule({
