@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 // import { BrowserAnimationsModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { DevUIModule } from 'ng-devui';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ComponentsModule } from './components/components.module';
-import { GridstackModule } from 'gridstack/dist/angular'
+// import { ComponentsModule } from './components/components.module';
+// import { GridstackModule } from 'gridstack/dist/angular'
 // components
 import { AppComponent } from './app.component';
 // import { NotFoundComponent } from './not-found/not-found.component';
@@ -28,9 +28,9 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     // DevUIModule,
     HttpClientModule,
-    FormsModule,
-    ComponentsModule,
-    GridstackModule,
+    // FormsModule,
+    // ComponentsModule,
+    // GridstackModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
