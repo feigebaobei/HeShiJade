@@ -1,7 +1,20 @@
 // module
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DevUIModule } from 'ng-devui'
+import { 
+  DragDropModule,
+  TabsModule,
+  ButtonModule,
+  LayoutModule, 
+  DataTableModule,
+  SelectModule,
+  PaginationModule,
+  IconModule,
+  TextInputModule,
+  ToggleModule,
+  FormModule,
+  CheckBoxModule,
+} from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
 // import { CompBoxModule } from 'src/app/comp-box/comp-box.module';
@@ -42,10 +55,21 @@ import { CompStackComponent } from './comp-stack/comp-stack.component';
   ],
   imports: [
     CommonModule,
-    DevUIModule,
     FormsModule,
     GridstackModule,
     // CompBoxModule,
+    DragDropModule,
+    TabsModule,
+    ButtonModule,
+    LayoutModule,
+    DataTableModule,
+    SelectModule,
+    PaginationModule,
+    IconModule,
+    TextInputModule,
+    ToggleModule,
+    FormModule,
+    CheckBoxModule,
   ],
   providers: [],
   exports: [

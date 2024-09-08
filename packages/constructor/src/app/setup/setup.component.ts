@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 // import { ComponentListComponent } from './component-list/component-list.component';
 import { ComponentListModule } from '../component-list/component-list.module';
 // devui
-import { DevUIModule } from 'ng-devui';
+import { ToastModule, TabsModule, ButtonModule, DragDropModule, } from 'ng-devui';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -69,7 +69,12 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   selector: 'app-setup',
   standalone: true,
   imports: [
-    DevUIModule,
+    // DevUIModule,
+    ToastModule,
+    TabsModule,
+    ButtonModule,
+    DragDropModule,
+    
     ItemsModule,
     BehaviorModule,
     PropsModule,
@@ -187,7 +192,8 @@ export class SetupComponent implements OnInit {
       clog(msg)
     })
   }
-  onDrop(e: DropEvent, targetArray: A) {
+  onDrop(e: DropEvent) {
+  // onDrop(e: Event, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     let heightMax = 0

@@ -1,7 +1,14 @@
 // module
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DevUIModule } from 'ng-devui'
+import { 
+  FormModule,
+  IconModule,
+  SelectModule,
+  LayoutModule,
+  ButtonModule,
+  ToastModule,
+ } from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 // component
 import { PropsBoxComponent } from './props-box/props-box.component';
@@ -28,8 +35,14 @@ import { PropsDirective } from './props.directive';
   ],
   imports: [
     CommonModule,
-    DevUIModule,
     FormsModule,
+    // DevUIModule,
+    FormModule,
+    IconModule,
+    SelectModule,
+    LayoutModule,
+    ButtonModule,
+    ToastModule,
   ],
   providers: [],
   exports: [

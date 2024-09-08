@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentListComponent } from './component-list/component-list.component';
-import { DevUIModule } from 'ng-devui'
+import { 
+  DragDropModule,
+ } from 'ng-devui'
 
 @NgModule({
   declarations: [
@@ -9,7 +11,7 @@ import { DevUIModule } from 'ng-devui'
   ],
   imports: [
     CommonModule,
-    DevUIModule,
+    DragDropModule,
   ],
   providers: [],
   exports: [
