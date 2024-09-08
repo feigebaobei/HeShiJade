@@ -9,16 +9,15 @@
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
+||目标是搞到500k-1m以下,2k-4k|doing|
 ||解决2个app-list/home的问题|doing|
 ||删除app.module.ts中的devui|done|
-||lazy laoding|done|
-||standalone components|done|
-||使用异步加载路由|done|
-||使用独立组件|done|
 |打包上传|done||
 |升级使用方法|todo||
 |分支|f_update||
 |要上生产的内容|||
+||路由懒加载||
+||关键组件改为standalone components||
 ||constructor/renderer/web-site升级angular到17.3.12||
 
 |web-site扩展组件时增加井布局|todo||
@@ -234,7 +233,15 @@ Remove or relocate styles from global styles (styles.scss) to the components
 Use standalone components or the SCAM architecture (for Angular versions below 14.0.0) to take advantage of tree-shaking and remove unused components from your bundle.
 Remove all dead code from your application, including unused services, directives, pipes, modules, and so on. Additionally, remove unused dependencies and libraries from your bundle.
 
-
+# Can't bind to 'ngModel' since it isn't a known property of 'input'
+import { FormsModule } from '@angular/forms';
+@NgModule({
+  imports: [
+    [...]
+    FormsModule
+  ],
+  [...]
+})
 
 示例
 import { RadioModule } from 'ng-devui/radio';
@@ -242,4 +249,19 @@ import { RateModule } from 'ng-devui/rate';
 import { ReadTipModule } from 'ng-devui/read-tip';
 import { SearchModule } from 'ng-devui/search';
 
+concatenate 连接、连接的
+content 目录
+Realize 了解，意识到
 
+stat size webpack从入口文件打包递归到所有模块体积
+parsed size 解析与代码压缩优化后输出到dist目录的体积（dist目录内压缩后的js文件）
+putting 安置，投置
+
+# budget的类型
+bundle 特定包的大小
+initial 全部初始化脚本的体积之和的大小。与首页打开速度相关。很重要。
+allScript 所有js的大小
+all 整个应用的大小
+anyComponentStyle 任意组件的样式大小
+anyScript 任一js的大小
+any 任意文件的大小

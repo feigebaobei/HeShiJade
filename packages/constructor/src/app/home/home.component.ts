@@ -5,10 +5,13 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FormLayout } from 'ng-devui/form';
 import { CommonModule } from '@angular/common';
-import { DevUIModule } from 'ng-devui';
+// import { DevUIModule } from 'ng-devui';
+import { ButtonModule,
+  ToastModule,
+  FormModule,
+ } from 'ng-devui';
 
 import type { ResponseData, User } from 'src/types';
-// import type { SsoClientParams } from 'src/helper/sso-saml-client';
 import { UserService } from '../service/user.service';
 import { B, A, } from 'src/types/base';
 // pipe
@@ -20,7 +23,11 @@ let clog = console.log
   selector: 'app-home',
   standalone: true,
   imports: [
-    DevUIModule,
+    // DevUIModule,
+    ButtonModule,
+    ToastModule,
+    FormModule,
+
     UpperCasePipe,
     FormsModule,
     CommonModule,
