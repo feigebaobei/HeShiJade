@@ -257,6 +257,7 @@ Realize 了解，意识到
 stat size webpack从入口文件打包递归到所有模块体积
 parsed size 解析与代码压缩优化后输出到dist目录的体积（dist目录内压缩后的js文件）
 putting 安置，投置
+declarations 声明
 
 # budget的类型
 bundle 特定包的大小

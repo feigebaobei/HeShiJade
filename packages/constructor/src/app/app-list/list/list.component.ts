@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { initAppMeta } from 'src/helper';
 // module
 // service
-import { DialogService } from 'ng-devui/modal';
+// import { DialogService } from 'ng-devui/modal';
+// import { ModalModule } from 'ng-devui/modal';
 import { AppService } from '../../service/app.service';
 import { UserService } from '../../service/user.service';
 import { PageService } from '../../service/page.service';
@@ -17,6 +18,7 @@ import { PublishDialogComponent } from '../publish-dialog/publish-dialog.compone
 import type { ResponseData, User } from 'src/types';
 import type { A, B, S, N, Email, } from 'src/types/base';
 import type { App } from 'src/types/app';
+import { DialogService } from 'ng-devui/modal';
 
 interface FormData {
   key: S

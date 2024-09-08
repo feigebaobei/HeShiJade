@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { GridstackModule } from 'gridstack/dist/angular'
+// import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
 import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
@@ -34,7 +34,7 @@ import { JsonPipe } from '@angular/common';
     JsonPipe,
     FormsModule,
     HttpClientModule,
-    GridstackModule,
+    // GridstackModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

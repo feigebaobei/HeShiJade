@@ -5,6 +5,7 @@ import {
   IconModule,
   ButtonModule,
   ToastModule,
+  DevUIModule,
  } from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'ng-devui/input-group';
@@ -25,6 +26,7 @@ import { PageDialogComponent } from './page-list/dialog/page-dialog.component';
     IconModule,
     ButtonModule,
     ToastModule,
+    DevUIModule,
   ],
   providers: [],
   exports: [

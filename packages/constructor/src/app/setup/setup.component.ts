@@ -12,6 +12,7 @@ import { PropsModule } from '../props/props.module';
 import { ComponentsModule } from '../components/components.module';
 import { PageListModule } from '../page-list/page-list.module';
 import { CommonModule } from '@angular/common';
+// import { GridstackModule } from 'gridstack/dist/angular'
 // 组件
 // import { ComponentListComponent } from './component-list/component-list.component';
 import { ComponentListModule } from '../component-list/component-list.module';
@@ -74,7 +75,8 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     TabsModule,
     ButtonModule,
     DragDropModule,
-    
+    // GridstackModule,
+
     ItemsModule,
     BehaviorModule,
     PropsModule,
