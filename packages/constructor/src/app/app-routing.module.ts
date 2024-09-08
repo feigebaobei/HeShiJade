@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './not-found/not-found.component';
+// import { NotFoundComponent } from './not-found/not-found.component';
 
 // 按照定义路由时的顺序依次匹配的，一旦匹配就会立即终止。
 const routes: Routes = [
@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)},
   { path: 'list', loadChildren: () => import('./app-list/app-list.module').then(m => m.AppListModule)},
   { path: 'setup', loadComponent: () => import('./setup/setup.component').then(m => m.SetupComponent)},
-  { path: '**', component: NotFoundComponent},
+  // { path: '**', component: NotFoundComponent},
+  { path: '**', loadComponent: () => import('./not-found/not-found.component').then(m => m.NotFoundComponent)},
 ];
 
 @NgModule({
