@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // import 
 import { FormModule } from 'ng-devui';
-import { DevUIModule } from 'ng-devui';
+// import { DevUIModule } from 'ng-devui';
 import { ButtonModule } from 'ng-devui/button';
 import { SelectModule } from 'ng-devui/select';
 import { TextInputModule } from 'ng-devui/text-input';
@@ -32,7 +32,7 @@ const routes: Routes = [
     CommonModule,
     FormModule,
     FormsModule,
-    DevUIModule,
+    // DevUIModule,
     ButtonModule,
     SelectModule,
     TextInputModule,

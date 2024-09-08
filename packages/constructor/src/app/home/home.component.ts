@@ -11,7 +11,6 @@ import { ButtonModule,
   FormModule,
 } from 'ng-devui';
 // pipe
-// import { UpperCasePipe } from '@angular/common';
 // service
 import { UserService } from '../service/user.service';
 // type
@@ -24,12 +23,9 @@ let clog = console.log
   selector: 'app-home',
   standalone: true,
   imports: [
-    // DevUIModule,
     ButtonModule,
     ToastModule,
     FormModule,
-
-    // UpperCasePipe,
     FormsModule,
     CommonModule,
   ],
