@@ -7,7 +7,6 @@ import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
 import { StackDirective } from './stack.directive';
 // 组件
-// import { StackComponent } from './stack/stack.component';
 import { StackComponent } from './stack/stack.component';
 import { CompBoxComponent } from './comp-box/comp-box.component';
 import { ButtonComponent } from './button/button.component';

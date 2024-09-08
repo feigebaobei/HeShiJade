@@ -1,18 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
+import { compatibleArray } from 'src/helper';
 // 指令
-// import { StackDirective } from 'src/app/stack.directive';
 import { StackDirective } from '../stack.directive';
 // 组件
-// import { ButtonComponent } from 'src/app/components/button/button.component';
-// import { FormComponent } from 'src/app/components/form/form.component';
-// import { ModalComponent } from 'src/app/components/modal/modal.component';
-// import { InputComponent } from 'src/app/components/input/input.component';
-// import { SelectComponent } from 'src/app/components/select/select.component';
-// import { TableComponent } from 'src/app/components/table/table.component';
-// import { IconComponent } from 'src/app/components/icon/icon.component';
-// import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
-// import { TabsComponent } from '../tabs/tabs.component';
-// import { PaginationComponent } from '../pagination/pagination.component';
 // type
 import type { A, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -24,18 +14,6 @@ interface SuperGridItem extends GridStackWidget {
 }
 
 // data
-// let compMap: {[k: S]: A} = {
-//   Button: ButtonComponent,
-//   Form: FormComponent,
-//   Modal: ModalComponent,
-//   Input: InputComponent,
-//   Select: SelectComponent,
-//   Table: TableComponent,
-//   Icon: IconComponent,
-//   Checkbox: CheckboxComponent,
-//   Tabs: TabsComponent,
-//   Pagination: PaginationComponent,
-// }
 
 @Component({
   selector: 'app-stack',
@@ -43,7 +21,6 @@ interface SuperGridItem extends GridStackWidget {
   styleUrls: ['./stack.component.sass']
 })
 export class StackComponent {
-  // @Input() data: A
   @Input() componentList: Comp[] = []
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
@@ -64,7 +41,8 @@ export class StackComponent {
   init() {
     this._componentList = []
     clog('init', this.componentList)
-    this.componentList.forEach(item => {
+    // todo 解决这里为什么有时为undefined的问题
+    compatibleArray(this.componentList).forEach(item => {
       this._componentList.push({
         x: item.gridLayout.x,
         y: item.gridLayout.y,
