@@ -10,8 +10,8 @@
 |无组件时提示创建组件|||
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|doing|
 ||目标是搞到500k-1m以下,2k-4k|doing|
-||解决2个app-list/home的问题|doing|
-||删除app.module.ts中的pipe|todo|
+||解决2个app-list/home的问题|不用解决|
+||删除app.module.ts中的pipe|doing|
 ||删除app.module.ts中的devui|done|
 |打包上传|done||
 |升级使用方法|todo||

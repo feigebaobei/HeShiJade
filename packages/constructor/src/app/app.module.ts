@@ -14,8 +14,8 @@ import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
 import { ItemCategoryDirective } from './item-category.directive';
 // pipe
-import { UpperCasePipe } from '@angular/common';
-import { JsonPipe } from '@angular/common';
+// import { UpperCasePipe } from '@angular/common';
+// import { JsonPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,8 @@ import { JsonPipe } from '@angular/common';
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterOutlet,
-    UpperCasePipe,
-    JsonPipe,
+    // UpperCasePipe,
+    // JsonPipe,
     FormsModule,
     HttpClientModule,
     // GridstackModule,
