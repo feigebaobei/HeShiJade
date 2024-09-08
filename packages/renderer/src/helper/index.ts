@@ -51,6 +51,8 @@ let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
     fn(...p)
   })
 }
+// 兼容的数组，常用于处理脏数据。
+let compatibleArray = (a: A) => Array.isArray(a) ? Array.from(a) : []
 
 export {
   reqToPromise,
@@ -60,5 +62,6 @@ export {
   clog,
   cdir,
   createChildKey,
-  asyncFn
+  asyncFn,
+  compatibleArray,
 }
