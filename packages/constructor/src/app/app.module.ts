@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 // import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
@@ -14,8 +14,6 @@ import { AdDirective } from './ad.directive';
 import { ItemsDirective } from './items.directive';
 import { ItemCategoryDirective } from './item-category.directive';
 // pipe
-// import { UpperCasePipe } from '@angular/common';
-// import { JsonPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +30,7 @@ import { ItemCategoryDirective } from './item-category.directive';
     RouterOutlet,
     // UpperCasePipe,
     // JsonPipe,
-    FormsModule,
+    // FormsModule,
     HttpClientModule,
     // GridstackModule,
   ],
