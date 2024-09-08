@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { popupsComponents } from 'src/helper/config'
+// import { popupsComponents } from 'src/helper/config'
 import { asyncFn } from 'src/helper';
+// module
+import { CommonModule } from '@angular/common';
 // 服务
 import { AppService } from '../service/app.service';
 import { EnvService } from '../service/env.service';
 import { ComponentService } from '../service/component.service';
+import { ComponentsModule } from '../components/components.module';
+// component
+import { PageListComponent } from '../page/page-list/page-list.component';
 // type
-import type { App } from 'src/types/app';
+// import type { App } from 'src/types/app';
 import type { Component as Comp } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 import type { B, N } from 'src/types/base';
@@ -21,6 +26,13 @@ interface SuperGridItem extends GridStackWidget {
 
 @Component({
   selector: 'app-layout',
+  standalone: true,
+  imports: [
+    PageListComponent,
+    ComponentsModule,
+    CommonModule,
+  ],
+  // declarations: [],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.sass']
 })
