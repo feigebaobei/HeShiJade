@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 // import { BrowserAnimationsModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DevUIModule } from 'ng-devui';
+// import { DevUIModule } from 'ng-devui';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DevUIModule,
+    // DevUIModule,
     HttpClientModule,
     FormsModule,
     ComponentsModule,

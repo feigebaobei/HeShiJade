@@ -2,11 +2,17 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageService } from 'src/app/service/page.service';
 import { Page } from 'src/types/page';
+// module
+import { CommonModule } from '@angular/common';
 
 let clog = console.log
 
 @Component({
   selector: 'app-page-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+  ],
   templateUrl: './page-list.component.html',
   styleUrls: ['./page-list.component.sass']
 })
