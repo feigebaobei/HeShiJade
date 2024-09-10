@@ -3,22 +3,26 @@
 |-|-|-|
 |删除app.module.ts中注释的代码及对应的文件|done||
 搭建侧的identify方法体是否正确？  todo
-|替换掉subject触发的逻辑|todo||
+|替换掉subject触发的逻辑|doing||
+||找到使用subject触发的逻辑|todo|
+||subject => signal|todo|
+||web-site项目中练习使用signal|done|
 |防抖阈值改为从配置文件中取|todo||
 |解决进入搭建页面时请求2次page列表接口的问题|应该与subject触发多次有关||
 |无页面时提示创建页面|||
 |无组件时提示创建组件|||
 |HttpClientModule|这个module是做什么的？与优化有关吗？||
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|done|
-|renderer再来一遍|目标是搞到500k-1m以下,2k-4k|doing|
-||根模块中删除组件||
-||根模块中删除非必要模块||
-||路由懒加载||
+|web-site再来一遍|目标是搞到500k-1m以下,2k-4k|todo|
+|renderer再来一遍|目标是搞到500k-1m以下,2k-4k|done|
+||根模块中删除组件|done|
+||根模块中删除非必要模块|done|
+||路由懒加载|done|
 |升级使用方法|todo||
 |分支|f_update||
 |要上生产的内容|||
-||constructor 拆包，首页体积降到600+kb||
-||renderer 拆包，首页体积1.64mb -> xxxkb||
+||constructor 拆包，首页体积降到1.94mb -> 600+kb||
+||renderer 拆包，首页体积1.64mb -> 470kb||
 ||路由懒加载||
 ||关键组件改为standalone components||
 ||constructor/renderer/web-site升级angular到17.3.12||
@@ -279,3 +283,39 @@ any 任意文件的大小
 
 # 优化的本质
 性能与功能之间达到平衡。
+# 优化到什么为止
+1. init内只有必要的包。如commonModule/formsModule/xxx
+2. lazy loading路由
+3. 分情况异步加载组件
+
+4. 更看重解决具体问题的能力，而不是包装能力。
+5. 对专业的兴趣和热情
+6. 有找到清晰目标的能力
+7. 系统性思维
+
+main     1.74mb  1781.76
+polyfills 33.5kb
+runtime  1.13kb
+styles   176kb
+1.94mb
+
+# 动态引入组件
+export class HomeContainerComponent implements OnInit {
+  constructor(
+      private vcref: ViewContainerRef,
+      private cfr: ComponentFactoryResolver
+  ){}
+  
+  ngOnInit(){
+    this.loadGreetComponent()
+  }
+​
+  async loadGreetComponent(){
+      this.vcref.clear();
+      // 使用 import() 懒加载组件
+      const { HomeComponent } = await import('./home.component');
+      let createdComponent = this.vcref.createComponent(
+        this.cfr.resolveComponentFactory(HomeComponent)
+      );  
+  }
+}
