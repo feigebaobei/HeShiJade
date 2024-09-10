@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, } from '@angular/core';
+import { Component, effect, OnInit, ViewChild, } from '@angular/core';
 import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
@@ -150,8 +150,11 @@ export class SetupComponent implements OnInit {
       column: 24,
     }
     // this.curComponent = undefined
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComponent = p
+    // this.componentService.curComponent$.subscribe(p => {
+    //   this.curComponent = p
+    // })
+    effect(() => {
+      this.curComponent = this.componentService.curComponent$.get()
     })
     this.show = true
   }

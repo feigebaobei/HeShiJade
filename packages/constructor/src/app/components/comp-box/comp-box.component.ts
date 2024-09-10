@@ -1,4 +1,4 @@
-import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked, computed } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked, computed, effect } from '@angular/core';
 import { CompDirective } from '../comp.directive'
 // 组件
 import { ButtonComponent } from '../button/button.component';
@@ -67,9 +67,11 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   ) {
     this.curComp = null
     this.componentRef
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComp = p
-      // this.update()
+    // this.componentService.curComponent$.subscribe(p => {
+    //   this.curComp = p
+    // })
+    effect(() => {
+      this.curComp = this.componentService.curComponent$.get()
     })
     this.curPage = this.pageService.getCurPage()!
     // this.propsSReadonly = this.componentService.propsSReadonly

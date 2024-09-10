@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { cloneDeep } from 'src/helper/index'
 import type { Component as Comp } from 'src/types/component';
@@ -55,7 +55,12 @@ export class BehaviorBoxComponent {
       },
     }
     this.componentBehaviorList = []
-    this.componentService.curComponent$.subscribe(p => {
+    // this.componentService.curComponent$.subscribe(p => {
+    //   this.curComp = p
+    //   this.curComponentChange()
+    // })
+    effect(() => {
+      let p = this.componentService.curComponent$.get()
       this.curComp = p
       this.curComponentChange()
     })

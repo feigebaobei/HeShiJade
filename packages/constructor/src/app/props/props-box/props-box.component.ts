@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, effect, ViewChild } from '@angular/core';
 import { PropsDirective } from '../props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 import { copy } from 'src/helper';
@@ -58,7 +58,12 @@ export class PropsBoxComponent {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    this.componentService.curComponent$.subscribe(p => {
+    // this.componentService.curComponent$.subscribe(p => {
+    //   this.curComp = p
+    //   this.componentSelectedChange()
+    // })
+    effect(() => {
+      let p = this.componentService.curComponent$.get()
       this.curComp = p
       this.componentSelectedChange()
     })
