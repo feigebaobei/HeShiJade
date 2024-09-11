@@ -149,13 +149,13 @@ export class SetupComponent implements OnInit {
       float: true,
       column: 24,
     }
-    // this.curComponent = undefined
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComponent = p
-    // })
-    effect(() => {
-      this.curComponent = this.componentService.curComponent$.get()
+    this.curComponent = undefined
+    this.componentService.curComponent$.subscribe(p => {
+      this.curComponent = p
     })
+    // effect(() => {
+    //   this.curComponent = this.componentService.curComponent$.get()
+    // })
     this.show = true
   }
   viewBtClickH() {

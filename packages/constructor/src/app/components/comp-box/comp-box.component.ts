@@ -67,12 +67,15 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   ) {
     this.curComp = null
     this.componentRef
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComp = p
-    // })
-    effect(() => {
-      this.curComp = this.componentService.curComponent$.get()
+    this.componentService.curComponent$.subscribe(p => {
+      this.curComp = p
     })
+    // effect(() => {
+    //   let p = this.componentService.curComponent$.get()
+    //   if (p) {
+    //     this.curComp = p
+    //   }
+    // })
     this.curPage = this.pageService.getCurPage()!
     // this.propsSReadonly = this.componentService.propsSReadonly
     this.componentService.props$.subscribe((v) => {

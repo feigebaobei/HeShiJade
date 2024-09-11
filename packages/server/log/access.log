@@ -1,2 +1,2 @@
-{"level":30,"time":1725983950381,"pid":30551,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
-{"level":30,"time":1725984026084,"pid":30551,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1726097238508,"pid":33755,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1726097274584,"pid":33755,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}

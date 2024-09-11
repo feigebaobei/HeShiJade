@@ -39,23 +39,18 @@ export class CompStackComponent implements OnInit, OnDestroy {
       float: true,
       column: 24,
     }
-    // this.pageService.pageSubject$.subscribe(p => {
-    //   this.curPage = p
+    // effect(() => {
+    //   this.curComponent = this.componentService.curComponent$.get()
     // })
-    effect(() => {
-      this.curComponent = this.componentService.curComponent$.get()
-    })
   }
   ngOnInit() {
-    this.curPage = this.pageService.getCurPage()
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComponent = p
-    // })
+    // this.curPage = this.pageService.getCurPage()
+    this.componentService.curComponent$.subscribe(p => {
+      this.curComponent = p
+    })
     this.init()
   }
   ngOnDestroy() {
-    // clog('87654321 ngOnInit')
-    // this.componentService.curComponent$.unsubscribe()
   }
   init() {
     this._componentList = []
@@ -135,7 +130,7 @@ export class CompStackComponent implements OnInit, OnDestroy {
     this.deleteComp.emit(ulid)
   }
   identify(index: number, w: GridStackWidget) {
-    // return w.id; // or use index if no id is set and you only modify at the end...
-    return index
+    return w.id; // or use index if no id is set and you only modify at the end...
+    // return index
   }
 }

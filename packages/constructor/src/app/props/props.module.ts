@@ -8,6 +8,7 @@ import {
   LayoutModule,
   ButtonModule,
   ToastModule,
+  ToggleModule,
  } from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 // component
@@ -43,6 +44,7 @@ import { PropsDirective } from './props.directive';
     LayoutModule,
     ButtonModule,
     ToastModule,
+    ToggleModule,
   ],
   providers: [],
   exports: [
