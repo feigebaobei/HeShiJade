@@ -1,3 +1,14 @@
+在app-list/app-list.module.ts中引入ModalModule      done
+在page-list/page-list.module.ts中引入ModalModule    done
+props.ts中更新Tabs/type/size
+app-stack中的identify返回id
+import { TrackByFunction } from '@angular/core';
+    trackById: TrackByFunction<DropDownItem> = (index: number, item: DropDownItem) => item.value;
+
+
+
+
+
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|

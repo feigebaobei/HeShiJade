@@ -9,7 +9,7 @@
     <span>组件标识</span>
     <span #ref>{{curComp?.ulid}}</span>
 </div>
-<!-- <ng-container
+<ng-container
 *ngFor="let propItem of componentPropsList; trackBy: identify"
 >
 <app-props-item 
@@ -18,6 +18,6 @@
     (itemChange)="itemChangeH($event)"
     class="props_item"
 ></app-props-item>
-</ng-container> -->
+</ng-container>
 
 <d-toast [value]="msg"></d-toast>

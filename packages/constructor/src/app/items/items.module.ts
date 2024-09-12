@@ -7,6 +7,7 @@ import {
   IconModule,
   ButtonModule,
   LayoutModule,
+  ToggleModule,
 } from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 // 组件
@@ -42,6 +43,7 @@ import { CompDirective } from './comp.directive'
     IconModule,
     ButtonModule,
     LayoutModule,
+    ToggleModule,
   ],
   providers: [],
   exports: [
