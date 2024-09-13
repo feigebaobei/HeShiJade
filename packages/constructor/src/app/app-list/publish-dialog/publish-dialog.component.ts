@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/service/app.service';
-// import { VersionsService } from 'src/app/service/versions.service';
 import { serviceUrl } from 'src/helper/config';
 import { FormLayout } from 'ng-devui/form';
 import { createLoop } from 'src/helper';
