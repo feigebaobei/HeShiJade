@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
 // import { DoublyChain } from 'data-footstone'
 import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
@@ -11,6 +10,7 @@ import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
+import { ShareSignal } from 'src/helper/shareSignal';
 // 类型
 import type { Component, Category, 
   PropsValue, 
@@ -27,7 +27,6 @@ import type { S, OA, ULID, A,
 import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
-import { ShareSignal } from 'src/helper/shareSignal';
 
 
 let clog = console.log
