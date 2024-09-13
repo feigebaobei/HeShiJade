@@ -4,6 +4,7 @@ import { createTree } from 'src/helper/tree';
 import { AppService } from './app.service';
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
+import { ShareSignal } from 'src/helper/shareSignal';
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
 import type { S, ULID, A } from 'src/types/base';
@@ -24,7 +25,7 @@ interface AddData {
 export class PageService {
   _pageList: Page[]
   private _find: (appUlid: ULID, pageUlid: ULID) => PageOrUn
-  pageSubject$: Subject<PageOrUn>
+  pageS: ShareSignal<PageOrUn>
   _curPage: PageOrUn
   pageList$: Subject<Page[]>
   private _map: Map<ULID, Tree<Page>>
@@ -33,7 +34,7 @@ export class PageService {
     private reqService: ReqService,
   ) {
     this._pageList = []
-    this.pageSubject$ = new Subject<PageOrUn>()
+    this.pageS = new ShareSignal<PageOrUn>(undefined)
     this._find = (appUlid: ULID, pageUlid: ULID, ) => {
       let treePage = this._map.get(appUlid)
       return treePage?.find(pageUlid)?.value
@@ -96,8 +97,7 @@ export class PageService {
   }
   setCurPage(appUlid: ULID, pageUlid: ULID): void {
     this._curPage = this._find(appUlid, pageUlid)
-    // clog('_curPage', this._curPage)
-    this.pageSubject$.next(this._curPage)
+    this.pageS.set(this._curPage)
   }
   // 重铸
   recast() {

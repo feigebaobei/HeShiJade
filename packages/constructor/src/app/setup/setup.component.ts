@@ -118,7 +118,8 @@ export class SetupComponent implements OnInit {
     this.msg = []
     this.pageData = []
     this.componentList = []
-    this.pageService.pageSubject$.subscribe(p => {
+    effect(() => {
+      let p =this.pageService.pageS.get()
       this.curPage = p
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {

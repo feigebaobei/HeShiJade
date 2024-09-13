@@ -1,5 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { Component, 
+  effect, 
   // Input
    OnInit } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
@@ -44,8 +45,8 @@ export class PageListComponent implements OnInit {
   ) {
     this.pageList = []
     this.curPage = null
-    this.pageService.pageSubject$.subscribe(p => {
-      this.curPage = p
+    effect(() => {
+      this.curPage = this.pageService.pageS.get()
     })
     this.msg = []
     this.hoveredIndex = -1
