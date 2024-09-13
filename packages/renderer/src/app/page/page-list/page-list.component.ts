@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageService } from 'src/app/service/page.service';
 import { Page } from 'src/types/page';
@@ -36,8 +36,11 @@ export class PageListComponent {
         }
       })
     })
-    this.pageService.cur$.subscribe(page => {
-      this.cur = page
+    // this.pageService.cur$.subscribe(page => {
+    //   this.cur = page
+    // })
+    effect(() => {
+      this.cur = this.pageService.curS.get()
     })
   }
   pageItemClickH(page: Page) {

@@ -10,6 +10,7 @@ import { serviceUrl } from 'src/helper/config'
 import type { ResponseData, ULID } from 'src/types'
 import type { ENV } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
+import { ShareSignal } from 'src/helper/shareSignal';
 
 // 根据appUlid+env请求页面
 // 根据app的第一个页面的ulid把页面列表转化为双向链表。
@@ -25,7 +26,7 @@ export class PageService {
   private _list: Page[]
   list$: Subject<Page[]>
   private _cur: Page | undefined
-  cur$: Subject<Page | undefined>
+  curS: ShareSignal<Page | undefined>
   // private _map: Map<ULID, DoublyChain<Page>>
   private _map: Map<ULID, Tree<Page>>
   constructor(
@@ -36,7 +37,7 @@ export class PageService {
     this._list = []
     this.list$ = new Subject()
     this._cur = undefined
-    this.cur$ = new Subject()
+    this.curS = new ShareSignal(undefined)
     this._map = new Map()
     // 当应用改变时请求对应的页面数据
     effect(() => {
@@ -106,7 +107,7 @@ export class PageService {
   // 根据pageUlid设置当前页面
   setCur(pageUlid?: ULID) {
     this._cur = this.getPage(pageUlid)
-    this.cur$.next(this._cur)
+    this.curS.set(this._cur)
   }
   getCur() {
     return this._cur
