@@ -1,26 +1,20 @@
-pageSubjectS => pageS
-
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
-|删除app.module.ts中注释的代码及对应的文件|done||
 搭建侧的identify方法体是否正确？  todo
-|替换掉subject触发的逻辑|doing||
-||找到使用subject触发的逻辑|todo|
-||subject => signal|doing|
+|renderer|替换掉subject触发的逻辑|todo|
+|替换掉subject触发的逻辑|done||
+||找到使用subject触发的逻辑|done|
+||subject => signal|done|
 ||web-site项目中练习使用signal|done|
 |防抖阈值改为从配置文件中取|todo||
-|解决进入搭建页面时请求2次page列表接口的问题|应该与subject触发多次有关||
-|无页面时提示创建页面|||
-|无组件时提示创建组件|||
-|HttpClientModule|这个module是做什么的？与优化有关吗？||
+|解决进入搭建页面时请求2次page列表接口的问题|应该与subject触发多次有关|done|
+|无页面时提示创建页面|todo||
+|无组件时提示创建组件|todo||
+|HttpClientModule|这个module是做什么的？与优化有关吗？|todo|
 |分包|为了减小main.xxx.js的体积，增加首页加载速度|done|
-|web-site再来一遍|目标是搞到500k-1m以下,2k-4k|todo|
-|renderer再来一遍|目标是搞到500k-1m以下,2k-4k|done|
-||根模块中删除组件|done|
-||根模块中删除非必要模块|done|
-||路由懒加载|done|
-|升级使用方法|todo||
+|web-site再来一遍|目标是搞到500k-1m以下,2k-4k|doing|
+|升级使用方法|使用commonModule代替||
 |分支|f_update||
 |要上生产的内容|||
 ||constructor 拆包，首页体积降到1.94mb -> 600+kb||
