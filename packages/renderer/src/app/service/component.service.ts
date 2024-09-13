@@ -4,13 +4,11 @@ import { Injectable } from '@angular/core';
 import { Queue } from 'data-footstone'
 import { createTree } from 'src/helper/tree'
 import { PageService } from './page.service';
-import { Page } from 'src/types/page';
-import { Subject } from 'rxjs';
 import { ENV, S } from 'src/types/base';
 import { EnvService } from './env.service';
-// import { arrToChain } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
 import { serviceUrl } from 'src/helper/config'
+import { ShareSignal } from 'src/helper/shareSignal';
 // type
 import type { ResponseData, ULID } from 'src/types';
 import type { Component,
@@ -31,7 +29,8 @@ export class ComponentService {
   // private _map: Map<ULID, DoublyChain<Component>>
   private _map: Map<ULID, Tree<Component>>
   private _componentList: Component[]
-  componentList$: Subject<Component[]>
+  // componentList$: Subject<Component[]>
+  componentListS: ShareSignal<Component[]>
   constructor(
     private http: HttpClient,
     private pageService: PageService,
@@ -39,7 +38,8 @@ export class ComponentService {
   ) {
     this._map = new Map()
     this._componentList = []
-    this.componentList$ = new Subject()
+    // this.componentList$ = new Subject()
+    this.componentListS = new ShareSignal([])
     this.pageService.cur$.subscribe(curPage => {
       clog('curPage', curPage)
       if (curPage) {
@@ -285,7 +285,7 @@ export class ComponentService {
   }
   setList(p: Component[]) {
     this._componentList = p
-    this.componentList$.next(this._componentList)
+    this.componentListS.set(this._componentList)
   }
   getTreeByKey(key = this.pageService.getCur()?.ulid || '') {
     return this._map.get(key)

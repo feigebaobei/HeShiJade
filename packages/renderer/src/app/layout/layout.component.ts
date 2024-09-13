@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 // import { popupsComponents } from 'src/helper/config'
 import { asyncFn } from 'src/helper';
@@ -62,45 +62,13 @@ export class LayoutComponent implements OnInit {
         this.envService.setCur(data.get('env'))
       }
     })
-    this.componentService.componentList$.subscribe(componentList => {
-      new Promise((s, _j) => {
-        s(true)
-      }).then(() => {
-        this.show = false
-        this.componentList = []
-        // for(let i = 0; i < componentList.length; i++) {
-        //   if (popupsComponents.includes(componentList[i].type)) {
-        //     let j = i + 1
-        //     let h = componentList[i].gridLayout.h
-        //     while (j < componentList.length) {
-        //       componentList[j].gridLayout.h -= h
-        //       j++
-        //     }
-        //   }
-        // }
-        // componentList.filter(component => !popupsComponents.includes(component.type))
-        
-        // componentList.forEach(component => {
-        //   if (popupsComponents.includes(component.type)) {
-        //     this.popupsComponentList.push(component)
-        //   } else {
-        //     this.componentList.push({
-        //       x: component.gridLayout.x,
-        //       y: component.gridLayout.y,
-        //       w: component.gridLayout.w,
-        //       h: component.gridLayout.h,
-        //       id: component.ulid,
-        //       comp: component,
-        //     })
-        //   }
-        // })
-        
-        this.componentList = componentList
-        return true
-      }).then(() => {
-        asyncFn(() => {
-          this.show = true
-        })
+    effect(() => {
+      let componentList = this.componentService.componentListS.get()
+      this.show = false
+      this.componentList = []
+      this.componentList = componentList
+      asyncFn(() => {
+        this.show = true
       })
     })
     this.gridOptions = {

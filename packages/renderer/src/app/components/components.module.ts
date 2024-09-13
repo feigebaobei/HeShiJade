@@ -12,6 +12,7 @@ import { ButtonModule,
   TextInputModule,
   ToggleModule,
   CheckBoxModule,
+  ModalModule,
 } from 'ng-devui';
 import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
@@ -63,6 +64,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     TextInputModule,
     ToggleModule,
     CheckBoxModule,
+    ModalModule,
 
     FormsModule,
     GridstackModule,

@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
+import { effect, Injectable } from '@angular/core';
 import { Page } from 'src/types/page';
 import { HttpClient } from '@angular/common/http';
-// import { arrToChain, reqToPromise } from 'src/helper';
 import { Subject } from 'rxjs';
 import { AppService } from './app.service';
 import { EnvService } from './env.service';
-// import { DoublyChain } from 'data-footstone';
 import { createTree } from 'src/helper/tree';
 import { serviceUrl } from 'src/helper/config'
 // type
@@ -41,9 +39,11 @@ export class PageService {
     this.cur$ = new Subject()
     this._map = new Map()
     // 当应用改变时请求对应的页面数据
-    this.appService.curApp$.subscribe(curApp => {
-      this.reqList(curApp.ulid, this.envService.getCur())
-      // this.setCur()
+    effect(() => {
+      let p = this.appService.curAppS.get()
+      if (p) {
+        this.reqList(p.ulid, this.envService.getCur())
+      }
     })
   }
   getList() {
