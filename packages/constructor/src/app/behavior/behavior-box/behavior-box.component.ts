@@ -55,10 +55,6 @@ export class BehaviorBoxComponent {
       },
     }
     this.componentBehaviorList = []
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComp = p
-    //   this.curComponentChange()
-    // })
     effect(() => {
       let p = this.componentService.curComponentS.get()
       if (p) {

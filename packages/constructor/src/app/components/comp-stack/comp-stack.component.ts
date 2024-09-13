@@ -44,10 +44,6 @@ export class CompStackComponent implements OnInit, OnDestroy {
     })
   }
   ngOnInit() {
-    // this.curPage = this.pageService.getCurPage()
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComponent = p
-    // })
     this.init()
   }
   ngOnDestroy() {

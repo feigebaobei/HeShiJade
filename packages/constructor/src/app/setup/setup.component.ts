@@ -150,9 +150,6 @@ export class SetupComponent implements OnInit {
       column: 24,
     }
     this.curComponent = undefined
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComponent = p
-    // })
     effect(() => {
       this.curComponent = this.componentService.curComponentS.get()
     })

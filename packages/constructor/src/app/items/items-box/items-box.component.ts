@@ -28,26 +28,6 @@ export class ItemsBoxComponent {
     private pageService: PageService,
     private componentService: ComponentService) {
     this.groupList = []
-    // this.componentService.curComponent$.subscribe(p => {
-    //   if (p) {
-    //     this.curComponent = p
-    //     this.groupList = []
-    //     p.items.forEach(item => {
-    //       let group = this.groupForConfig(p.type)
-    //       Object.entries(item).forEach(([k, v]) => {
-    //         let gi = group.find(gi => gi.key === k)
-    //         if (gi) {
-    //           gi.value = v
-    //         }
-    //       })
-    //       this.groupList.push(group)
-    //     })
-    //     this.addable = addableAll[p.type].items
-    //   } else {
-    //     this.curComponent = null
-    //     this.groupList = []
-    //   }
-    // })
     effect(() => {
       let p = this.componentService.curComponentS.get()
       if (p) {

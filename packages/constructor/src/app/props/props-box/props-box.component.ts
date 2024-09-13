@@ -58,10 +58,6 @@ export class PropsBoxComponent {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    // this.componentService.curComponent$.subscribe(p => {
-    //   this.curComp = p
-    //   this.componentSelectedChange()
-    // })
     effect(() => {
       let p = this.componentService.curComponentS.get()
       this.curComp = p
