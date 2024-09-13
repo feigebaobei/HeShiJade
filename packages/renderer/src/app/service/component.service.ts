@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { effect, Injectable } from '@angular/core';
 import { Queue } from 'data-footstone'
 import { createTree } from 'src/helper/tree'
 import { PageService } from './page.service';
@@ -36,7 +36,8 @@ export class ComponentService {
     this._map = new Map()
     this._componentList = []
     this.componentListS = new ShareSignal([])
-    this.pageService.cur$.subscribe(curPage => {
+    effect(() => {
+      let curPage = this.pageService.curS.get()
       if (curPage) {
         let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
         if (arr.length) {

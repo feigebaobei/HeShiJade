@@ -4,6 +4,7 @@
 搭建侧的identify方法体是否正确？  todo
 |renderer|替换掉subject触发的逻辑|doing|
 ||复制来ShareSignal|doing|
+|renderer|从url中取出数据|todo|
 |防抖阈值改为从配置文件中取|todo||
 |无页面时提示创建页面|todo||
 |无组件时提示创建组件|todo||

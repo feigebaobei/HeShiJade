@@ -24,7 +24,8 @@ let clog = console.log
 })
 export class PageService {
   private _list: Page[]
-  list$: Subject<Page[]>
+  // list$: Subject<Page[]>
+  listS: ShareSignal<Page[]>
   private _cur: Page | undefined
   curS: ShareSignal<Page | undefined>
   // private _map: Map<ULID, DoublyChain<Page>>
@@ -35,7 +36,8 @@ export class PageService {
     private envService: EnvService,
   ) {
     this._list = []
-    this.list$ = new Subject()
+    // this.list$ = new Subject()
+    this.listS = new ShareSignal([])
     this._cur = undefined
     this.curS = new ShareSignal(undefined)
     this._map = new Map()
@@ -52,7 +54,7 @@ export class PageService {
   }
   setList(arr: Page[]) {
     this._list = arr
-    this.list$.next(this._list)
+    this.listS.set(this._list)
   }
   reqList(appUlid: ULID, env: ENV) {
     return this._reqList(appUlid, env).then((pageList: Page[]) => {
