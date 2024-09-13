@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject, } from 'rxjs';
 import { createTree } from 'src/helper/tree';
 import { AppService } from './app.service';
 import { serviceUrl } from 'src/helper/config';
@@ -27,7 +26,7 @@ export class PageService {
   private _find: (appUlid: ULID, pageUlid: ULID) => PageOrUn
   pageS: ShareSignal<PageOrUn>
   _curPage: PageOrUn
-  pageList$: Subject<Page[]>
+  pageListS: ShareSignal<Page[]>
   private _map: Map<ULID, Tree<Page>>
   constructor(
     private appService: AppService,
@@ -39,7 +38,7 @@ export class PageService {
       let treePage = this._map.get(appUlid)
       return treePage?.find(pageUlid)?.value
     }
-    this.pageList$ = new Subject<Page[]>()
+    this.pageListS = new ShareSignal<Page[]>([])
     this._map = new Map()
   }
   storePageList(app: App, pagsList: Page[]) {
@@ -145,7 +144,7 @@ export class PageService {
     let appUlid = String(this.appService.getCurApp()?.ulid)
     let tree = this._map.get(appUlid)
     tree?.unmount(ulid)
-    this.pageList$.next(tree?.root?.toArray() || [])
+    this.pageListS.set(tree?.root?.toArray() || [])
     // 在应用树中删除
     this.appService.deletePageByUlid(ulid)
   }
