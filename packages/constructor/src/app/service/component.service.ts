@@ -43,15 +43,13 @@ export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   private categoryList: Category[] // 这里应该使用组件种类的类型
   curComponentS: ShareSignal<CompOrUn>
-  componentListByCurPage$: Subject<Component[]> // 当前页面的组件
   _curCompUlid: S
   _curComponent: CompOrUn
   private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
   // ulid是pageUlid
-  componentProps$: Subject<Component['props']>
   // private propsS = signal({})
   // readonly propsSReadonly = this.propsS.asReadonly()
-  props$: Subject<PropsTransfer>
+  propsS: ShareSignal<PropsTransfer | undefined>
 
   constructor(
     private pageService: PageService,
@@ -61,12 +59,10 @@ export class ComponentService {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
     this.curComponentS = new ShareSignal<CompOrUn>(undefined)
-    this.componentListByCurPage$ = new Subject<Component[]>()
-    this.componentProps$ = new Subject<Component['props']>()
     this._curCompUlid = ''
     this._curComponent = undefined
     this._map = new Map()
-    this.props$ = new Subject<PropsTransfer>()
+    this.propsS = new ShareSignal<PropsTransfer | undefined>(undefined)
   }
   // setPropsS(v: A) {
   //   this.propsS.set(v)

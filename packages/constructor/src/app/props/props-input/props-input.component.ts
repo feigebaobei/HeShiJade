@@ -27,10 +27,10 @@ export class PropsInputComponent implements OnInit, OnChanges {
       // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
       this.componentService.setComponentProp(this.data.key, this.data.value)
       // this.componentService.setCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid)
-      this.componentService.props$.next({
-        componentUlid: this.componentService.curComponent()!.ulid,
-        key: this.data.key,
-        value: this.data.value,
+      this.componentService.propsS.set({
+          componentUlid: this.componentService.curComponent()!.ulid,
+          key: this.data.key,
+          value: this.data.value,
       })
       this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
       // clog('modelChangeH', v)
@@ -48,17 +48,4 @@ export class PropsInputComponent implements OnInit, OnChanges {
   ngModel(...p: A) {
     console.log('ngModel', p)
   }
-  // modelChangeH(v: S) {
-  //   // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
-  //   this.componentService.setComponentProp(this.data.key, this.data.value)
-  //   // this.componentService.setCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid)
-  //   this.componentService.props$.next({
-  //     componentUlid: this.componentService.curComponent()!.ulid,
-  //     key: this.data.key,
-  //     value: this.data.value,
-  //   })
-  //   this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
-  //   // clog('modelChangeH', v)
-  //   this.change.emit(v)
-  // }
 }
