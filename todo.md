@@ -1,14 +1,3 @@
-在app-list/app-list.module.ts中引入ModalModule      done
-在page-list/page-list.module.ts中引入ModalModule    done
-props.ts中更新Tabs/type/size
-app-stack中的identify返回id
-import { TrackByFunction } from '@angular/core';
-    trackById: TrackByFunction<DropDownItem> = (index: number, item: DropDownItem) => item.value;
-
-
-
-
-
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
@@ -16,7 +5,7 @@ import { TrackByFunction } from '@angular/core';
 搭建侧的identify方法体是否正确？  todo
 |替换掉subject触发的逻辑|doing||
 ||找到使用subject触发的逻辑|todo|
-||subject => signal|todo|
+||subject => signal|doing|
 ||web-site项目中练习使用signal|done|
 |防抖阈值改为从配置文件中取|todo||
 |解决进入搭建页面时请求2次page列表接口的问题|应该与subject触发多次有关||

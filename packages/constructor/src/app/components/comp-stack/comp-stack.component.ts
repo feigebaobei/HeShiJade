@@ -39,15 +39,15 @@ export class CompStackComponent implements OnInit, OnDestroy {
       float: true,
       column: 24,
     }
-    // effect(() => {
-    //   this.curComponent = this.componentService.curComponent$.get()
-    // })
+    effect(() => {
+      this.curComponent = this.componentService.curComponentS.get()
+    })
   }
   ngOnInit() {
     // this.curPage = this.pageService.getCurPage()
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComponent = p
-    })
+    // this.componentService.curComponent$.subscribe(p => {
+    //   this.curComponent = p
+    // })
     this.init()
   }
   ngOnDestroy() {
@@ -129,6 +129,8 @@ export class CompStackComponent implements OnInit, OnDestroy {
     // 通知父组件删除
     this.deleteComp.emit(ulid)
   }
+  // import { TrackByFunction } from '@angular/core';
+  //   trackById: TrackByFunction<DropDownItem> = (index: number, item: DropDownItem) => item.value;
   identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
     // return index

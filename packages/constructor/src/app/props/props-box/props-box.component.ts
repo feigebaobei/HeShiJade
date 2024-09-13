@@ -58,20 +58,15 @@ export class PropsBoxComponent {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    this.componentService.curComponent$.subscribe(p => {
+    // this.componentService.curComponent$.subscribe(p => {
+    //   this.curComp = p
+    //   this.componentSelectedChange()
+    // })
+    effect(() => {
+      let p = this.componentService.curComponentS.get()
       this.curComp = p
       this.componentSelectedChange()
     })
-    // effect(() => {
-    //   let p = this.componentService.curComponent$.get()
-    //   if (p) {
-    //     clog('props-box effect', JSON.parse(JSON.stringify(p)))
-    //     this.curComp = p
-    //     // this.componentSelectedChange()
-    //   } else {
-    //     clog('else ', p)
-    //   }
-    // })
     this.propsMap = new Map()
   }
   ngOnInit() {

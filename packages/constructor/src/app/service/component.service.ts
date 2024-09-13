@@ -43,7 +43,7 @@ export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   private categoryList: Category[] // 这里应该使用组件种类的类型
   curComponent$: Subject<CompOrUn> // 组件的subject
-  // curComponent$: ShareSignal<CompOrUn>
+  curComponentS: ShareSignal<CompOrUn>
   componentListByCurPage$: Subject<Component[]> // 当前页面的组件
   _curCompUlid: S
   _curComponent: CompOrUn
@@ -62,7 +62,7 @@ export class ComponentService {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
     this.curComponent$ = new Subject<CompOrUn>()
-    // this.curComponent$ = new ShareSignal<CompOrUn>(undefined)
+    this.curComponentS = new ShareSignal<CompOrUn>(undefined)
     this.componentListByCurPage$ = new Subject<Component[]>()
     this.componentProps$ = new Subject<Component['props']>()
     this._curCompUlid = ''
@@ -305,12 +305,12 @@ export class ComponentService {
   setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
       this._curComponent = this._find(pageUlid, compUlid)
-      this.curComponent$.next(this._curComponent)
-      // this.curComponent$.set(this._curComponent)
+      // this.curComponent$.next(this._curComponent)
+      this.curComponentS.set(this._curComponent)
     } else {
       this._curComponent = undefined
-      this.curComponent$.next(undefined)
-      // this.curComponent$.set(undefined)
+      // this.curComponent$.next(undefined)
+      this.curComponentS.set(undefined)
     }
   }
   // 设置当前组件的prop

@@ -816,7 +816,7 @@ let Tabs: PropsConfigItem = {
             { label: 'slider', value: 'slider', },
         ],
         value: 'tabs',
-        label: 'label',
+        label: 'type',
         key: 'type',
     },
     size: {
@@ -828,7 +828,7 @@ let Tabs: PropsConfigItem = {
             { label: '大', value: 'lg', },
         ],
         value: 'md',
-        label: 'label',
+        label: 'size',
         key: 'size',
     },
     customWidth: {
