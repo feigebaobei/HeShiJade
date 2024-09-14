@@ -5,7 +5,7 @@ import { createTree } from 'src/helper/tree'
 import { PageService } from './page.service';
 import { ENV, } from 'src/types/base';
 import { EnvService } from './env.service';
-import { createChildKey } from 'src/helper/index'
+import { asyncFn, createChildKey } from 'src/helper/index'
 import { serviceUrl } from 'src/helper/config'
 import { ShareSignal } from 'src/helper/shareSignal';
 // type
@@ -39,12 +39,14 @@ export class ComponentService {
     effect(() => {
       let curPage = this.pageService.curS.get()
       if (curPage) {
-        let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
-        if (arr.length) {
-          this.setList(arr)
-        } else {
-          this.reqList(curPage.ulid, this.envService.getCur())
-        }
+        asyncFn(() => {
+          let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
+          if (arr.length) {
+            this.setList(arr)
+          } else {
+            this.reqList(curPage.ulid, this.envService.getCur())
+          }
+        })  
       }
     })
   }

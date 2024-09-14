@@ -50,18 +50,18 @@ export class LayoutComponent implements OnInit {
     this.show = true
     this.componentList = []
     this.popupsComponentList = []
-    this.route.paramMap.subscribe((data: any) => {
-      // clog('paramMap data', data)
-      // clog('paramMap data', data.get('appKey'))
-      // clog('paramMap data', data.get('env'))
-      // clog('paramMap data', data.get('pageKey'))
-      if (data.get('appKey') && data.get('env')) {
-        this.appService.reqAppDetail(data.get('appKey'), data.get('env'))
-      }
-      if (data.get('env')) {
-        this.envService.setCur(data.get('env'))
-      }
-    })
+    // this.route.paramMap.subscribe((data: any) => {
+    //   // clog('paramMap data', data)
+    //   // clog('paramMap data', data.get('appKey'))
+    //   // clog('paramMap data', data.get('env'))
+    //   // clog('paramMap data', data.get('pageKey'))
+    //   if (data.get('appKey') && data.get('env')) {
+    //     this.appService.reqAppDetail(data.get('appKey'), data.get('env'))
+    //   }
+    //   if (data.get('env')) {
+    //     this.envService.setCur(data.get('env'))
+    //   }
+    // })
     effect(() => {
       let componentList = this.componentService.componentListS.get()
       this.show = false
@@ -81,6 +81,11 @@ export class LayoutComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    let {appKey, env} = this.route.snapshot.params
+    // clog('9', o)
+    this.appService.reqAppDetail(appKey, env)
+    this.envService.setCur(env)
+    // this.pageService.setCur(pageKey)
   }
   identify(index: N, w: GridStackWidget) {
     return w.id

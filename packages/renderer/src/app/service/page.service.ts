@@ -1,7 +1,6 @@
 import { effect, Injectable } from '@angular/core';
 import { Page } from 'src/types/page';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
 import { AppService } from './app.service';
 import { EnvService } from './env.service';
 import { createTree } from 'src/helper/tree';
@@ -24,7 +23,6 @@ let clog = console.log
 })
 export class PageService {
   private _list: Page[]
-  // list$: Subject<Page[]>
   listS: ShareSignal<Page[]>
   private _cur: Page | undefined
   curS: ShareSignal<Page | undefined>
@@ -36,7 +34,6 @@ export class PageService {
     private envService: EnvService,
   ) {
     this._list = []
-    // this.list$ = new Subject()
     this.listS = new ShareSignal([])
     this._cur = undefined
     this.curS = new ShareSignal(undefined)
@@ -61,10 +58,6 @@ export class PageService {
       return pageList
     }).then(pageList => {
       let app = this.appService.getCurApp()
-      // let dc = arrToChain(pageList, 'ulid', 'nextUlid', app?.firstPageUlid)
-      // this._map.set(app?.ulid || '', dc)
-      // this.setList(dc.toArray())
-      // return true
       if (app) {
         let tree = createTree<Page>()
         let curUlid = app.firstPageUlid

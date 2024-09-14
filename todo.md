@@ -2,9 +2,8 @@
 ||完成日期||
 |-|-|-|
 搭建侧的identify方法体是否正确？  todo
-|renderer|替换掉subject触发的逻辑|doing|
-||复制来ShareSignal|doing|
 |renderer|从url中取出数据|todo|
+||替换paramMap|todo|
 |防抖阈值改为从配置文件中取|todo||
 |无页面时提示创建页面|todo||
 |无组件时提示创建组件|todo||
@@ -18,6 +17,7 @@
 ||关键组件改为standalone components||
 ||constructor/renderer/web-site升级angular到17.3.12||
 
+|完成 shareEvent 的 todo |||
 |web-site扩展组件时增加井布局|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||

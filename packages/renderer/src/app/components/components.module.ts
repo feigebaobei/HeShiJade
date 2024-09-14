@@ -52,7 +52,6 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   imports: [
     CommonModule,
-    // DevUIModule,
     ButtonModule,
     TabsModule,
     LayoutModule,
