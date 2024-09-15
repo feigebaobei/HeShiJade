@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
+import { debounceTime } from 'src/helper/config';
 import { createDebounceFn } from 'src/helper/index'
 import { cloneDeep } from 'src/helper/index';
 // type
@@ -23,7 +24,7 @@ export class PropsOptionComponent {
       this.componentService.setComponentProp(this.data.key, this.data.value as unknown as PropsValue)
       this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value as unknown as PropsValue)
       this.change.emit(v)
-    })
+    }, debounceTime)
   }
   ngOnInit() {
     this.optionsList = cloneDeep(this.data.value)

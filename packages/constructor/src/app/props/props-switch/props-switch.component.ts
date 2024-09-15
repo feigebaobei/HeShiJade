@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, } from '@angular/core';
-import { ComponentService } from 'src/app/service/component.service'; {}
+import { ComponentService } from 'src/app/service/component.service';import { debounceTime } from 'src/helper/config';
+ {}
 import { createDebounceFn } from 'src/helper/index'
 import { A, F, S } from 'src/types/base';
 
@@ -17,7 +18,7 @@ export class PropsSwitchComponent {
       this.componentService.setComponentProp(this.data.key, this.data.value)
       this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
       this.change.emit(v)
-    }, 400)
+    }, debounceTime)
   }
   // modelChangeH(v: S) {
   //   // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)

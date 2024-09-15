@@ -1,18 +1,19 @@
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
-搭建侧的identify方法体是否正确？  todo
-|renderer|从url中取出数据|todo|
-||替换paramMap|todo|
-|防抖阈值改为从配置文件中取|todo||
+搭建侧的identify方法体是否正确？  改正确了。
+|renderer|从url中取出数据|done|
+||替换paramMap|已经无了|
+|修正tabs旋转角度默认值|||
+|防抖阈值改为从配置文件中取|doing||
 |无页面时提示创建页面|todo||
 |无组件时提示创建组件|todo||
-|HttpClientModule|这个module是做什么的？与优化有关吗？|todo|
-|web-site再来一遍|目标是搞到500k-1m以下,2k-4k|done|
+|HttpClientModule|这个module是做什么的？与优化有关吗？|与请求有关。在18版本时还有变化。下次技术栈升级时再办它。|
 |分支|f_update||
 |要上生产的内容|||
 ||constructor 拆包，首页体积降到1.94mb -> 600+kb||
 ||renderer 拆包，首页体积1.64mb -> 470kb||
+||web-site 拆包，首页体积xxxxmb -> 254kb||
 ||路由懒加载||
 ||关键组件改为standalone components||
 ||constructor/renderer/web-site升级angular到17.3.12||

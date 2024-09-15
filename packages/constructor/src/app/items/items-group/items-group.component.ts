@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { createDebounceFn } from 'src/helper/index'
+import { debounceTime } from 'src/helper/config';
 // import { CompDirective } from '../comp.directive'
 // type
 import type { A, ConfigItem, N, B, S, Options, ConfigItemSelect, F, } from 'src/types/base';
@@ -33,7 +34,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
   itemList: newConfigItem[]
   eventMap: Map<S, {f: F, targetKey: S}>
   constructor(private componentService: ComponentService) {
-    this.reqChangeItems = createDebounceFn(this.componentService.reqChangeItems, 400, this.componentService)
+    this.reqChangeItems = createDebounceFn(this.componentService.reqChangeItems, debounceTime, this.componentService)
     this.itemList = []
     this.eventMap = new Map()
 
@@ -47,7 +48,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       let item = this.itemList[subIndex]
       item.value = p.value
       this.listenerChange(p.key, this.itemList)
-    }, 400)
+    }, debounceTime)
     this.selectChangeH = createDebounceFn((p: {
         key: 'category'
         value: S
@@ -57,7 +58,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       let item = this.itemList[subIndex]
       item.value = p.value
       this.listenerChange(p.key, this.itemList)
-    }, 400)
+    }, debounceTime)
     this.switchChangeH = createDebounceFn((p: {
       key: 'value'
       value: B
@@ -67,11 +68,11 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       let item = this.itemList[subIndex]
       item.value = p.value
       this.listenerChange(p.key, this.itemList)
-    }, 400)
+    }, debounceTime)
     this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
-    }, 400)
+    }, debounceTime)
   }
   ngOnInit() {
     this.initCalc()

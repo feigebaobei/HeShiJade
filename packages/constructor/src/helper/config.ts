@@ -69,6 +69,7 @@ let shareEventName = {
     'TABSADDITEM': 'Tabs.addItem',
     'TABSREMOVEITEM': 'Tabs.removeItem',
 }
+let debounceTime = 400
 
 export {
     ssoUrl,
@@ -79,4 +80,5 @@ export {
     // ssoClientParams,
     ssoClientConfig,
     shareEventName,
+    debounceTime,
 }
