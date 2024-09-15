@@ -727,7 +727,7 @@ let Icon: PropsConfigItem = {
         category: 'input',
         value: '',
         label: '旋转角度',
-        key: 'icon',
+        key: 'rotate',
     },
     color: {
         category: 'input',
