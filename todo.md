@@ -1,15 +1,16 @@
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
-|修正icon旋转角度默认值|done||
 |防抖阈值改为从配置文件中取|done||
-|无页面时提示创建页面|todo||
+|无页面时提示创建页面|doing||
+|未选中页面时，舞台区应该无组件|todo||
 |无组件时提示创建组件|todo||
 |分支|f_update||
 |要上生产的内容|||
+||修正icon旋转角度默认值||
 ||constructor 拆包，首页体积降到1.94mb -> 600+kb||
 ||renderer 拆包，首页体积1.64mb -> 470kb||
-||web-site 拆包，首页体积xxxxmb -> 254kb||
+||web-site 拆包，首页体积280kb -> 254kb||
 ||路由懒加载||
 ||关键组件改为standalone components||
 ||constructor/renderer/web-site升级angular到17.3.12||
@@ -21,6 +22,7 @@
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
 |modal组件的打开事件应该事件名+ulid|todo||
 |table组件在与items时的操作逻辑子组件|todo||
+|位移时请求一次接口|todo||
 ||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
 |解决删除应用后视图中无应用的问题|todo||
@@ -307,3 +309,5 @@ export class HomeContainerComponent implements OnInit {
       );  
   }
 }
+
+1.2+34.6+243+0.3
