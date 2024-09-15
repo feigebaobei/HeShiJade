@@ -16,6 +16,7 @@
 ||constructor/renderer/web-site升级angular到17.3.12||
 
 |完成 shareEvent 的 todo |||
+|整理升级的要求|||
 |web-site扩展组件时增加井布局|todo||
 |解决setup页面请求2次app/page接口的问题|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
