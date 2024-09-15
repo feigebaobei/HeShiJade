@@ -160,7 +160,7 @@ export class PageListComponent implements OnInit {
     this.pageList.splice(i, 1)
     // 清空舞台区
     this.pageService.setCurPage(this.appService.getCurApp()!.ulid, '')
-    return
+    // return
     // 在store中删除
     this.pageService.deletePageByUlid(page.ulid)
     this.componentService.deleteComponentByPageUlid(page.ulid)

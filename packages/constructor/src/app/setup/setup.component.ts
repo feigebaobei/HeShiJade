@@ -315,4 +315,8 @@ export class SetupComponent implements OnInit {
       }
     }
   }
+  ngOnDestroy() {
+    this.pageService.setCurPage(this.curApp?.ulid || '', '')
+    // 可能还需要清空当前应用
+  }
 }
