@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/service/app.service';
-// import { VersionsService } from 'src/app/service/versions.service';
 import { serviceUrl } from 'src/helper/config';
 import { FormLayout } from 'ng-devui/form';
 import { createLoop } from 'src/helper';
 import type { Loop } from 'src/helper'
 import type { ResponseData } from 'src/types';
 import type { A, N, S, ULID, B } from 'src/types/base';
+// import { DevUIModule } from 'ng-devui';
 
 let clog = console.log
 interface EnvObj {

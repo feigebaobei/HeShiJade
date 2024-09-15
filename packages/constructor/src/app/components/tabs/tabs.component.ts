@@ -142,13 +142,13 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     shareEvent.off(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
     shareEvent.off(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
-  createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
-    let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
-    return cck('slots', k, 'component')
-  }
   listen() {
     shareEvent.on(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
     shareEvent.on(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
+  }
+  createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
+    let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
+    return cck('slots', k, 'component')
   }
   selectTab() {
     new Promise((s, _j) => {

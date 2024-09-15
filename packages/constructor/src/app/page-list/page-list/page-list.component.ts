@@ -1,5 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { Component, 
+  effect, 
   // Input
    OnInit } from '@angular/core';
 import { DialogService } from 'ng-devui/modal';
@@ -44,8 +45,8 @@ export class PageListComponent implements OnInit {
   ) {
     this.pageList = []
     this.curPage = null
-    this.pageService.pageSubject$.subscribe(p => {
-      this.curPage = p
+    effect(() => {
+      this.curPage = this.pageService.pageS.get()
     })
     this.msg = []
     this.hoveredIndex = -1
@@ -157,6 +158,9 @@ export class PageListComponent implements OnInit {
     let page = this.pageList[i]
     // 在本组件中删除该元素
     this.pageList.splice(i, 1)
+    // 清空舞台区
+    this.pageService.setCurPage(this.appService.getCurApp()!.ulid, '')
+    // return
     // 在store中删除
     this.pageService.deletePageByUlid(page.ulid)
     this.componentService.deleteComponentByPageUlid(page.ulid)

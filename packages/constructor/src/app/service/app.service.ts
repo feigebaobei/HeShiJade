@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, Signal } from '@angular/core';
 import { UserService } from './user.service';
 import { serviceUrl } from 'src/helper/config';
 import { createTree } from 'src/helper/tree';
 // import { initAppMeta } from 'src/helper';
 import { ReqService } from './req.service';
+import { ShareSignal } from 'src/helper/shareSignal';
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
    Email, S, ULID, N,
@@ -29,7 +29,7 @@ interface ReqCreateData {
 export class AppService {
   private _appList: App[]  // 缓存应用列表
   private _curApp: AppOrUn // 缓存当前应用
-  appList$: Subject<App[]>
+  appListS: ShareSignal<App[]>
   tree: Tree<App> // 只记录当前用户的应用，所以只有一棵树。
   private _versionMap: Map<ULID, SyntheticVersion>
   constructor(
@@ -37,7 +37,7 @@ export class AppService {
     private reqService: ReqService,
   ) {
     this._appList = []
-    this.appList$ = new Subject<App[]>()
+    this.appListS = new ShareSignal<App[]>([])
     this.tree = createTree()
     this._versionMap = new Map()
   }
@@ -66,7 +66,7 @@ export class AppService {
     }
   }
   setAppList() {
-    this.appList$.next(this._appList)
+    this.appListS.set(this._appList)
   }
   opAppList(appList: App[]) {
     // let curUser = this.userService.getUser()

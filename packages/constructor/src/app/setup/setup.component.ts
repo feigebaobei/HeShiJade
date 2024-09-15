@@ -1,12 +1,23 @@
-import { Component, OnInit, ViewChild, } from '@angular/core';
+import { Component, effect, OnInit, ViewChild, } from '@angular/core';
 import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
-import { ulid } from 'ulid';
+// import { ulid } from 'ulid';
 import { asyncFn, initComponentMeta } from 'src/helper'
-
-
+// module
+import { ItemsModule } from '../items/items.module';
+import { BehaviorModule } from '../behavior/behavior.module';
+import { PropsModule } from '../props/props.module';
+import { ComponentsModule } from '../components/components.module';
+import { PageListModule } from '../page-list/page-list.module';
+import { CommonModule } from '@angular/common';
+// import { GridstackModule } from 'gridstack/dist/angular'
+// 组件
+// import { ComponentListComponent } from './component-list/component-list.component';
+import { ComponentListModule } from '../component-list/component-list.module';
+// devui
+import { ToastModule, TabsModule, ButtonModule, DragDropModule, } from 'ng-devui';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -57,6 +68,24 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
 
 @Component({
   selector: 'app-setup',
+  standalone: true,
+  imports: [
+    // DevUIModule,
+    ToastModule,
+    TabsModule,
+    ButtonModule,
+    DragDropModule,
+    // GridstackModule,
+
+    ItemsModule,
+    BehaviorModule,
+    PropsModule,
+    ComponentsModule,
+    PageListModule,
+    // ComponentListComponent,
+    ComponentListModule,
+    CommonModule,
+  ],
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.sass']
 })
@@ -89,8 +118,10 @@ export class SetupComponent implements OnInit {
     this.msg = []
     this.pageData = []
     this.componentList = []
-    this.pageService.pageSubject$.subscribe(p => {
+    effect(() => {
+      let p =this.pageService.pageS.get()
       this.curPage = p
+      // 取出当前页面的组件
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {
           this.show = false
@@ -108,9 +139,14 @@ export class SetupComponent implements OnInit {
             })
           })
           asyncFn(() => {
-            // this.compStack.init()
             this.show = true
           })
+        })
+      } else {
+        this.componentByPage = []
+        this.componentList = []
+        asyncFn(() => {
+          this.show = true
         })
       }
     })
@@ -120,9 +156,9 @@ export class SetupComponent implements OnInit {
       float: true,
       column: 24,
     }
-    // this.curComponent = undefined
-    this.componentService.curComponent$.subscribe(p => {
-      this.curComponent = p
+    this.curComponent = undefined
+    effect(() => {
+      this.curComponent = this.componentService.curComponentS.get()
     })
     this.show = true
   }
@@ -133,11 +169,20 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
-    this.opApp()
+    this.opApp().then(() => { // 取组件列表 setCurPage
+      return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
+        if (pl[0]) {
+          this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
+          return true
+        } else {
+          return Promise.reject('无页面')
+        }
+      })
+    })
   }
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
-    this.appService.getAppList().then(appList => {
+    return this.appService.getAppList().then(appList => {
       if (appList) {
         this.appService.setCurApp(appUlid)
         return true
@@ -152,20 +197,13 @@ export class SetupComponent implements OnInit {
       } else {
         return Promise.reject('该应用不存在')
       }
-    }).then(() => { // 取组件列表 setCurPage
-      return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
-        if (pl[0]) {
-          this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
-          return true
-        } else {
-          return Promise.reject('无页面')
-        }
-      })
     }).catch((msg) => {
       clog(msg)
+      alert(msg)
     })
   }
-  onDrop(e: DropEvent, targetArray: A) {
+  onDrop(e: DropEvent) {
+  // onDrop(e: Event, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     let heightMax = 0
@@ -276,5 +314,9 @@ export class SetupComponent implements OnInit {
         this.componentService.setCurComponent(curPage.ulid, item.id)
       }
     }
+  }
+  ngOnDestroy() {
+    this.pageService.setCurPage(this.curApp?.ulid || '', '')
+    // 可能还需要清空当前应用
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
-import { DoublyChain } from 'data-footstone'
+// import { DoublyChain } from 'data-footstone'
 import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
 import { AppService } from './app.service';
@@ -11,6 +10,7 @@ import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
+import { ShareSignal } from 'src/helper/shareSignal';
 // 类型
 import type { Component, Category, 
   PropsValue, 
@@ -19,8 +19,6 @@ import type { Component, Category,
   ComponentMountItems,
   ComponentMountSlots,
  } from '../../types/component'
-// import type { ResponseData } from '../../types/index'
-// import { O, type ConfigItemsCategoryType } from 'src/types/base'
 import type { S, OA, ULID, A,
   N,
   B,
@@ -43,16 +41,14 @@ type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout'
 export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   private categoryList: Category[] // 这里应该使用组件种类的类型
-  curComponent$: Subject<CompOrUn> // 组件的subject
-  componentListByCurPage$: Subject<Component[]> // 当前页面的组件
+  curComponentS: ShareSignal<CompOrUn>
   _curCompUlid: S
   _curComponent: CompOrUn
   private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
   // ulid是pageUlid
-  componentProps$: Subject<Component['props']>
   // private propsS = signal({})
   // readonly propsSReadonly = this.propsS.asReadonly()
-  props$: Subject<PropsTransfer>
+  propsS: ShareSignal<PropsTransfer | undefined>
 
   constructor(
     private pageService: PageService,
@@ -61,13 +57,11 @@ export class ComponentService {
   ) {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
-    this.curComponent$ = new Subject<CompOrUn>()
-    this.componentListByCurPage$ = new Subject<Component[]>()
-    this.componentProps$ = new Subject<Component['props']>()
+    this.curComponentS = new ShareSignal<CompOrUn>(undefined)
     this._curCompUlid = ''
     this._curComponent = undefined
     this._map = new Map()
-    this.props$ = new Subject<PropsTransfer>()
+    this.propsS = new ShareSignal<PropsTransfer | undefined>(undefined)
   }
   // setPropsS(v: A) {
   //   this.propsS.set(v)
@@ -304,10 +298,10 @@ export class ComponentService {
   setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
       this._curComponent = this._find(pageUlid, compUlid)
-      this.curComponent$.next(this._curComponent)
+      this.curComponentS.set(this._curComponent)
     } else {
       this._curComponent = undefined
-      this.curComponent$.next(undefined)
+      this.curComponentS.set(undefined)
     }
   }
   // 设置当前组件的prop

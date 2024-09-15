@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DevUIModule } from 'ng-devui'
+import { 
+  FormModule,
+  IconModule,
+  ButtonModule,
+  ToastModule,
+  // DevUIModule,
+  ModalModule,
+ } from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'ng-devui/input-group';
 // 组件
@@ -14,9 +21,14 @@ import { PageDialogComponent } from './page-list/dialog/page-dialog.component';
   ],
   imports: [
     CommonModule,
-    DevUIModule,
     FormsModule,
     InputGroupModule,
+    FormModule,
+    IconModule,
+    ButtonModule,
+    ToastModule,
+    // DevUIModule,
+    ModalModule,
   ],
   providers: [],
   exports: [

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject, } from 'rxjs';
 import { createTree } from 'src/helper/tree';
 import { AppService } from './app.service';
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
+import { ShareSignal } from 'src/helper/shareSignal';
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
 import type { S, ULID, A } from 'src/types/base';
@@ -24,21 +24,21 @@ interface AddData {
 export class PageService {
   _pageList: Page[]
   private _find: (appUlid: ULID, pageUlid: ULID) => PageOrUn
-  pageSubject$: Subject<PageOrUn>
+  pageS: ShareSignal<PageOrUn>
   _curPage: PageOrUn
-  pageList$: Subject<Page[]>
+  pageListS: ShareSignal<Page[]>
   private _map: Map<ULID, Tree<Page>>
   constructor(
     private appService: AppService,
     private reqService: ReqService,
   ) {
     this._pageList = []
-    this.pageSubject$ = new Subject<PageOrUn>()
+    this.pageS = new ShareSignal<PageOrUn>(undefined)
     this._find = (appUlid: ULID, pageUlid: ULID, ) => {
       let treePage = this._map.get(appUlid)
       return treePage?.find(pageUlid)?.value
     }
-    this.pageList$ = new Subject<Page[]>()
+    this.pageListS = new ShareSignal<Page[]>([])
     this._map = new Map()
   }
   storePageList(app: App, pagsList: Page[]) {
@@ -96,8 +96,7 @@ export class PageService {
   }
   setCurPage(appUlid: ULID, pageUlid: ULID): void {
     this._curPage = this._find(appUlid, pageUlid)
-    // clog('_curPage', this._curPage)
-    this.pageSubject$.next(this._curPage)
+    this.pageS.set(this._curPage)
   }
   // 重铸
   recast() {
@@ -145,7 +144,7 @@ export class PageService {
     let appUlid = String(this.appService.getCurApp()?.ulid)
     let tree = this._map.get(appUlid)
     tree?.unmount(ulid)
-    this.pageList$.next(tree?.root?.toArray() || [])
+    this.pageListS.set(tree?.root?.toArray() || [])
     // 在应用树中删除
     this.appService.deletePageByUlid(ulid)
   }

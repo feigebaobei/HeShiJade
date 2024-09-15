@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { serviceUrl } from 'src/helper/config';
 import { ResponseData } from 'src/types';
 import type { A, S, ENV } from 'src/types/base';
 import type { App } from 'src/types/app'
+import { ShareSignal } from 'src/helper/shareSignal';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,13 @@ import type { App } from 'src/types/app'
 export class AppService {
   // curAppKey: S
   private _curApp?: App
-  curApp$: Subject<App>
+  curAppS: ShareSignal<App | undefined>
   constructor(
     private http: HttpClient
   ) {
     this._curApp = undefined
     // this.curAppKey = ''
-    this.curApp$ = new Subject()
+    this.curAppS = new ShareSignal(undefined)
   }
   getCurApp() {
     return this._curApp
@@ -28,7 +28,7 @@ export class AppService {
   // }
   setCurApp(app: App) {
     this._curApp = app
-    this.curApp$.next(this._curApp)
+    this.curAppS.set(this._curApp)
   }
   reqAppDetail(appKey: S, env: ENV) {
     this._reqAppDetail(appKey, env).then(res => {

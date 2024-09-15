@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 
 @Component({
   selector: 'app-skill',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './skill.component.sass'
 })
 export class SkillComponent {
-
+  constructor() {
+  }
 }

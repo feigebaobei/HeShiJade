@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, effect, ViewChild } from '@angular/core';
 import { PropsDirective } from '../props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 import { copy } from 'src/helper';
@@ -58,7 +58,8 @@ export class PropsBoxComponent {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    this.componentService.curComponent$.subscribe(p => {
+    effect(() => {
+      let p = this.componentService.curComponentS.get()
       this.curComp = p
       this.componentSelectedChange()
     })
@@ -229,5 +230,10 @@ export class PropsBoxComponent {
       propsObj[item.key] = item.value
     })
     this.listenerChange(p.key, propsObj)
+  }
+
+  identify(index: number, w: ConfigItem) {
+    // return w.id; // or use index if no id is set and you only modify at the end...
+    return w.key
   }
 }

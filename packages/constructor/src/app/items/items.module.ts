@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DevUIModule } from 'ng-devui'
+import {
+  FormModule,
+  TextInputModule,
+  SelectModule,
+  IconModule,
+  ButtonModule,
+  LayoutModule,
+  ToggleModule,
+} from 'ng-devui'
 import { FormsModule } from '@angular/forms';
 // 组件
 import { ItemsBoxComponent } from './items-box/items-box.component';
@@ -27,8 +35,15 @@ import { CompDirective } from './comp.directive'
   ],
   imports: [
     CommonModule,
-    DevUIModule,
     FormsModule,
+
+    FormModule,
+    TextInputModule,
+    SelectModule,
+    IconModule,
+    ButtonModule,
+    LayoutModule,
+    ToggleModule,
   ],
   providers: [],
   exports: [

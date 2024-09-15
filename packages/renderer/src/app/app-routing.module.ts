@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './not-found/not-found.component';
-// import { AppComponent } from './app.component';
-import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  // { path: ':appKey/:env/:pageKey', component: AppComponent, pathMatch: 'full' },
-  { path: ':appKey/:env/:pageKey', component: LayoutComponent, pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent }
+  { path: ':appKey/:env/:pageKey',
+    pathMatch: 'full',
+    loadComponent: () => import('./layout/layout.component').then(m => m.LayoutComponent),
+  },
+  { path: '**', loadComponent: () => import('./not-found/not-found.component').then(m => m.NotFoundComponent) }
 ];
 
 @NgModule({

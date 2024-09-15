@@ -1,13 +1,24 @@
 // 模块
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DevUIModule } from 'ng-devui';
+import { ButtonModule,
+  TabsModule,
+  LayoutModule,
+  DataTableModule,
+  SelectModule,
+  PaginationModule,
+  FormModule,
+  IconModule,
+  TextInputModule,
+  ToggleModule,
+  CheckBoxModule,
+  ModalModule,
+} from 'ng-devui';
 import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
 import { StackDirective } from './stack.directive';
 // 组件
-// import { StackComponent } from './stack/stack.component';
 import { StackComponent } from './stack/stack.component';
 import { CompBoxComponent } from './comp-box/comp-box.component';
 import { ButtonComponent } from './button/button.component';
@@ -41,7 +52,19 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   imports: [
     CommonModule,
-    DevUIModule,
+    ButtonModule,
+    TabsModule,
+    LayoutModule,
+    DataTableModule,
+    SelectModule,
+    PaginationModule,
+    FormModule,
+    IconModule,
+    TextInputModule,
+    ToggleModule,
+    CheckBoxModule,
+    ModalModule,
+
     FormsModule,
     GridstackModule,
   ],

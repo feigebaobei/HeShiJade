@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { reqToPromise } from 'src/helper';
-import { Subject, type Observable } from 'rxjs';
 import { createSsoClient } from 'src/helper/sso-saml-client';
+import { ShareSignal } from 'src/helper/shareSignal';
 // 配置项
 import { ssoUrl, serviceUrl, ssoClientConfig } from 'src/helper/config';
 // 类型
@@ -22,13 +21,13 @@ type a = A
 export class UserService {
   // 日后改为private
   user?: User
-  user$: Subject<User | undefined>
+  userS: ShareSignal<User | undefined>
   regularTime: N
   regularTimeId: N
   ssoClient: SsoClient
   constructor() {
     this.user = undefined
-    this.user$ = new Subject()
+    this.userS = new ShareSignal(undefined)
     let v = window.sessionStorage.getItem('lc-user')
     if (v) {
       this.user = JSON.parse(v || '{}')
@@ -47,7 +46,7 @@ export class UserService {
   }
   setUser(u?: User) {
     this.user = u
-    this.user$.next(this.user)
+    this.userS.set(this.user)
     let user: S
     if (u) {
       user = JSON.stringify(u)
@@ -58,7 +57,7 @@ export class UserService {
   }
   clearUser() {
     this.user = undefined
-    this.user$.next(this.user)
+    this.userS.set(this.user)
     window.sessionStorage.removeItem('lc-user')
   }
   logout() {

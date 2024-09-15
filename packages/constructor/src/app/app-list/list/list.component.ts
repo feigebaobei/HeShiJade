@@ -1,19 +1,24 @@
-// import { HttpClient } from '@angular/common/http';
+// utils
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogComponent } from './dialog/dialog.component';
-import { DialogService } from 'ng-devui/modal';
-import { AppService } from '../service/app.service';
-import { UserService } from '../service/user.service';
-import { AppConfigDialogComponent } from './app-config-dialog/app-config-dialog.component';
-import { PublishDialogComponent } from './publish-dialog/publish-dialog.component';
-import { PageService } from '../service/page.service';
-import { ComponentService } from '../service/component.service';
 import { initAppMeta } from 'src/helper';
+// module
+// service
+// import { DialogService } from 'ng-devui/modal';
+// import { ModalModule } from 'ng-devui/modal';
+import { AppService } from '../../service/app.service';
+import { UserService } from '../../service/user.service';
+import { PageService } from '../../service/page.service';
+import { ComponentService } from '../../service/component.service';
+// 组件
+import { DialogComponent } from '../dialog/dialog.component';
+import { AppConfigDialogComponent } from '../app-config-dialog/app-config-dialog.component';
+import { PublishDialogComponent } from '../publish-dialog/publish-dialog.component';
+// type
 import type { ResponseData, User } from 'src/types';
 import type { A, B, S, N, Email, } from 'src/types/base';
 import type { App } from 'src/types/app';
-
+import { DialogService } from 'ng-devui/modal';
 
 interface FormData {
   key: S
@@ -21,18 +26,16 @@ interface FormData {
   members: S
   theme: S
 }
-// interface App {
-//   key: S
-//   name: S
-//   ulid: S
-//   members: S[]
-//   // theme: S
-// }
 
 let clog = console.log
 
 @Component({
   selector: 'app-list',
+  // standalone: true,
+  // imports: [
+  //   DevUIModule,
+  //   CommonModule,
+  // ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })

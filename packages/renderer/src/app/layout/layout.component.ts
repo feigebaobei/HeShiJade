@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { popupsComponents } from 'src/helper/config'
+// import { popupsComponents } from 'src/helper/config'
 import { asyncFn } from 'src/helper';
+// module
+import { CommonModule } from '@angular/common';
 // 服务
 import { AppService } from '../service/app.service';
 import { EnvService } from '../service/env.service';
 import { ComponentService } from '../service/component.service';
+import { ComponentsModule } from '../components/components.module';
+// component
+import { PageListComponent } from '../page/page-list/page-list.component';
 // type
-import type { App } from 'src/types/app';
+// import type { App } from 'src/types/app';
 import type { Component as Comp } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 import type { B, N } from 'src/types/base';
@@ -21,6 +26,13 @@ interface SuperGridItem extends GridStackWidget {
 
 @Component({
   selector: 'app-layout',
+  standalone: true,
+  imports: [
+    PageListComponent,
+    ComponentsModule,
+    CommonModule,
+  ],
+  // declarations: [],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.sass']
 })
@@ -38,57 +50,13 @@ export class LayoutComponent implements OnInit {
     this.show = true
     this.componentList = []
     this.popupsComponentList = []
-    this.route.paramMap.subscribe((data: any) => {
-      // clog('paramMap data', data)
-      // clog('paramMap data', data.get('appKey'))
-      // clog('paramMap data', data.get('env'))
-      // clog('paramMap data', data.get('pageKey'))
-      if (data.get('appKey') && data.get('env')) {
-        this.appService.reqAppDetail(data.get('appKey'), data.get('env'))
-      }
-      if (data.get('env')) {
-        this.envService.setCur(data.get('env'))
-      }
-    })
-    this.componentService.componentList$.subscribe(componentList => {
-      new Promise((s, _j) => {
-        s(true)
-      }).then(() => {
-        this.show = false
-        this.componentList = []
-        // for(let i = 0; i < componentList.length; i++) {
-        //   if (popupsComponents.includes(componentList[i].type)) {
-        //     let j = i + 1
-        //     let h = componentList[i].gridLayout.h
-        //     while (j < componentList.length) {
-        //       componentList[j].gridLayout.h -= h
-        //       j++
-        //     }
-        //   }
-        // }
-        // componentList.filter(component => !popupsComponents.includes(component.type))
-        
-        // componentList.forEach(component => {
-        //   if (popupsComponents.includes(component.type)) {
-        //     this.popupsComponentList.push(component)
-        //   } else {
-        //     this.componentList.push({
-        //       x: component.gridLayout.x,
-        //       y: component.gridLayout.y,
-        //       w: component.gridLayout.w,
-        //       h: component.gridLayout.h,
-        //       id: component.ulid,
-        //       comp: component,
-        //     })
-        //   }
-        // })
-        
-        this.componentList = componentList
-        return true
-      }).then(() => {
-        asyncFn(() => {
-          this.show = true
-        })
+    effect(() => {
+      let componentList = this.componentService.componentListS.get()
+      this.show = false
+      this.componentList = []
+      this.componentList = componentList
+      asyncFn(() => {
+        this.show = true
       })
     })
     this.gridOptions = {
@@ -101,6 +69,11 @@ export class LayoutComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    let {appKey, env} = this.route.snapshot.params
+    // clog('9', o)
+    this.appService.reqAppDetail(appKey, env)
+    this.envService.setCur(env)
+    // this.pageService.setCur(pageKey)
   }
   identify(index: N, w: GridStackWidget) {
     return w.id

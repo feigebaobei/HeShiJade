@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, effect, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // type
@@ -39,22 +39,14 @@ export class CompStackComponent implements OnInit, OnDestroy {
       float: true,
       column: 24,
     }
-    // this.pageService.pageSubject$.subscribe(p => {
-    //   this.curPage = p
-    // })
+    effect(() => {
+      this.curComponent = this.componentService.curComponentS.get()
+    })
   }
   ngOnInit() {
-    this.curPage = this.pageService.getCurPage()
-    // clog('12345678 ngOnInit')
-    this.componentService.curComponent$.subscribe(p => {
-      // clog('curComponent$', p)
-      this.curComponent = p
-    })
     this.init()
   }
   ngOnDestroy() {
-    // clog('87654321 ngOnInit')
-    // this.componentService.curComponent$.unsubscribe()
   }
   init() {
     this._componentList = []
@@ -133,8 +125,10 @@ export class CompStackComponent implements OnInit, OnDestroy {
     // 通知父组件删除
     this.deleteComp.emit(ulid)
   }
+  // import { TrackByFunction } from '@angular/core';
+  //   trackById: TrackByFunction<DropDownItem> = (index: number, item: DropDownItem) => item.value;
   identify(index: number, w: GridStackWidget) {
-    // return w.id; // or use index if no id is set and you only modify at the end...
-    return index
+    return w.id; // or use index if no id is set and you only modify at the end...
+    // return index
   }
 }

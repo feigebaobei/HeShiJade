@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VersionsService } from './versions.service';
+import { ShareSignalService } from './share-signal.service';
 
-describe('VersionsService', () => {
-  let service: VersionsService;
+describe('ShareSignalService', () => {
+  let service: ShareSignalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(VersionsService);
+    service = TestBed.inject(ShareSignalService);
   });
 
   it('should be created', () => {

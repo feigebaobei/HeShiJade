@@ -10,7 +10,7 @@
     <span #ref>{{curComp?.ulid}}</span>
 </div>
 <ng-container
-*ngFor="let propItem of componentPropsList"
+*ngFor="let propItem of componentPropsList; trackBy: identify"
 >
 <app-props-item 
     *ngIf="!propItem.hideCalc"
@@ -18,7 +18,6 @@
     (itemChange)="itemChangeH($event)"
     class="props_item"
 ></app-props-item>
-
 </ng-container>
 
 <d-toast [value]="msg"></d-toast>

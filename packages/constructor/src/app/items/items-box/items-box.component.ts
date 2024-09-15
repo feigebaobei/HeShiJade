@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, effect, Input } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
 import addableAll from 'src/helper/addable'
@@ -28,7 +28,8 @@ export class ItemsBoxComponent {
     private pageService: PageService,
     private componentService: ComponentService) {
     this.groupList = []
-    this.componentService.curComponent$.subscribe(p => {
+    effect(() => {
+      let p = this.componentService.curComponentS.get()
       if (p) {
         this.curComponent = p
         this.groupList = []
