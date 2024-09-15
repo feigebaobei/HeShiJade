@@ -158,6 +158,9 @@ export class PageListComponent implements OnInit {
     let page = this.pageList[i]
     // 在本组件中删除该元素
     this.pageList.splice(i, 1)
+    // 清空舞台区
+    this.pageService.setCurPage(this.appService.getCurApp()!.ulid, '')
+    return
     // 在store中删除
     this.pageService.deletePageByUlid(page.ulid)
     this.componentService.deleteComponentByPageUlid(page.ulid)

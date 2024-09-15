@@ -121,6 +121,7 @@ export class SetupComponent implements OnInit {
     effect(() => {
       let p =this.pageService.pageS.get()
       this.curPage = p
+      // 取出当前页面的组件
       if (this.curPage) {
         this.componentService.getComponentList(this.curPage).then((componentList) => {
           this.show = false
@@ -138,9 +139,14 @@ export class SetupComponent implements OnInit {
             })
           })
           asyncFn(() => {
-            // this.compStack.init()
             this.show = true
           })
+        })
+      } else {
+        this.componentByPage = []
+        this.componentList = []
+        asyncFn(() => {
+          this.show = true
         })
       }
     })
@@ -163,11 +169,20 @@ export class SetupComponent implements OnInit {
     console.log(tab);
   }
   ngOnInit(): void {
-    this.opApp()
+    this.opApp().then(() => { // 取组件列表 setCurPage
+      return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
+        if (pl[0]) {
+          this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
+          return true
+        } else {
+          return Promise.reject('无页面')
+        }
+      })
+    })
   }
   opApp() {
     let appUlid = String(this.route.snapshot.queryParamMap.get('app'))
-    this.appService.getAppList().then(appList => {
+    return this.appService.getAppList().then(appList => {
       if (appList) {
         this.appService.setCurApp(appUlid)
         return true
@@ -182,17 +197,9 @@ export class SetupComponent implements OnInit {
       } else {
         return Promise.reject('该应用不存在')
       }
-    }).then(() => { // 取组件列表 setCurPage
-      return this.pageService.getPageList(this.curApp!.ulid).then(pl => {
-        if (pl[0]) {
-          this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
-          return true
-        } else {
-          return Promise.reject('无页面')
-        }
-      })
     }).catch((msg) => {
       clog(msg)
+      alert(msg)
     })
   }
   onDrop(e: DropEvent) {
