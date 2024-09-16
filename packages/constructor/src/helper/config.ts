@@ -11,7 +11,7 @@ let ssoUrl = () => {
             r = `${location.protocol}//${location.hostname}:5020` // host包括接口号
             break;
         default:
-            r = 'http://heshijade.com:5020' // host包括接口号
+            r = 'http://heshijade.com:5020' // host包括端口号
             // r = 'http://localhost:5020'
             break;
     }
