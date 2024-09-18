@@ -14,26 +14,32 @@ let Button: BehaviorConfigItem = {
     key: 'event',
     allowClear: true,
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  //   hide: function (itemGroup: BehaviorConfigItem) {
+  //     // this: Component
+  //     // itemGroup: 当前配置项组
+  //     clog('hide', !itemGroup.target.value)
+  //     return !itemGroup.target.value
+  //   },
+  //   hideListenerKey: 'target',
+  //   // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-    hide: function (itemGroup: BehaviorConfigItem) {
-      // this: Component
-      // itemGroup: 当前配置项组
-      clog('hide', !itemGroup.target.value)
-      return !itemGroup.target.value
-    },
-    hideListenerKey: 'target',
-    // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 let Modal: BehaviorConfigItem = {
   event: {
@@ -46,19 +52,25 @@ let Modal: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  //   hide: () => false
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-    hide: () => false
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 let Form: BehaviorConfigItem = {
   event: {
@@ -72,26 +84,32 @@ let Form: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  //   // hide: function (itemGroup: BehaviorConfigItem) {
+  //   //   // // this: Component
+  //   //   // // itemGroup: 当前配置项组
+  //   //   // clog('hide', !itemGroup.target.value)
+  //   //   // return !itemGroup.target.value
+  //   // },
+  //   // hideListenerKey: 'target',
+  //   // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-    // hide: function (itemGroup: BehaviorConfigItem) {
-    //   // // this: Component
-    //   // // itemGroup: 当前配置项组
-    //   // clog('hide', !itemGroup.target.value)
-    //   // return !itemGroup.target.value
-    // },
-    // hideListenerKey: 'target',
-    // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 let Table: BehaviorConfigItem = {
   event: {
@@ -117,18 +135,24 @@ let Table: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 let Select: BehaviorConfigItem = {
   event: {
@@ -142,18 +166,24 @@ let Select: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 
 let Checkbox: BehaviorConfigItem = {
@@ -167,18 +197,24 @@ let Checkbox: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 
 let Tabs: BehaviorConfigItem = {
@@ -193,18 +229,24 @@ let Tabs: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 
 let Pagination: BehaviorConfigItem = {
@@ -219,18 +261,24 @@ let Pagination: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  target: {
-    category: 'input',
-    value: '',
-    label: '目标',
-    key: 'target',
-  },
-  payload: {
+  // target: {
+  //   category: 'input',
+  //   value: '',
+  //   label: '目标',
+  //   key: 'target',
+  // },
+  // payload: {
+  //   category: 'textarea',
+  //   value: '',
+  //   label: '载荷',
+  //   key: 'payload',
+  // },
+  fnBody: {
     category: 'textarea',
     value: '',
-    label: '载荷',
-    key: 'payload',
-  },
+    label: '方法体',
+    key: 'fnBody',
+  }
 }
 export {
     Button,

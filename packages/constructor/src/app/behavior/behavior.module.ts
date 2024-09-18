@@ -9,6 +9,7 @@ import {
   // LayoutModule
   FormModule,
   SelectModule,
+  TextareaModule,
 } from 'ng-devui';
 
 
@@ -23,6 +24,7 @@ import {
     // DevUIModule,
     FormModule,
     SelectModule,
+    TextareaModule,
   ],
   exports: [
     BehaviorBoxComponent
