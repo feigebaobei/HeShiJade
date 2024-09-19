@@ -26,8 +26,9 @@ interface Component {
   }
   behavior: {
     event: S
-    target: S
-    payload: S
+    // target: S
+    // payload: S
+    fnBody: S
   }[]
   items: { // 搭建侧的类型比此宽松
     // category: S

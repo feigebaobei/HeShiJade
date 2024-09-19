@@ -8,7 +8,8 @@
 |删除不用的方法|done||
 |设置方法体时去抖|doen||
 |设置配置面板的右边距|done||
-|button定义事件|||
+|button定义事件|done||
+|提供若干api|doing||
 |modal消费事件|||
 |组件销毁时解绑事件|||
 |取消行为的显隐逻辑|||
@@ -320,4 +321,5 @@ export class HomeContainerComponent implements OnInit {
   }
 }
 
-1.2+34.6+243+0.3
+
+getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({visible: true})

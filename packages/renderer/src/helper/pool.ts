@@ -1,4 +1,4 @@
-// 搭建侧不会用到它。考虑把它删除。
+
 import { Queue } from "data-footstone"
 import type { ULID } from "src/types"
 import type { F, S } from "src/types/base"
@@ -8,19 +8,19 @@ class Pool {
     constructor() {
         this._ulidMap = new Map()
     }
-    get(ulid: ULID, event?: S) {
-        if (event) {
-            let m = this._ulidMap.get(ulid)
-            if (m) {
-                let q = m.get(event)
-                return q
-            } else {
-                return undefined
-            }
+    getQueue(ulid: ULID, event: S) {
+        let m = this._ulidMap.get(ulid)
+        if (m) {
+            let q = m.get(event)
+            return q
         } else {
-            let m = this._ulidMap.get(ulid)
-            return m
+            return undefined
         }
+        // if (event) {
+        // } else {
+        //     let m = this._ulidMap.get(ulid)
+        //     return m
+        // }
     }
     bind(ulid: ULID, event: S, fn: F) {
         if (!ulid || !event || !fn) {
@@ -46,7 +46,7 @@ class Pool {
 // let getComponentInstance = () => {}
 let pool = new Pool()
 let getComponentInstance = (ulid: ULID) => {
-    pool.get(ulid)
+    // pool.get(ulid)
 }
 export {
     Pool,
