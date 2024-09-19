@@ -69,6 +69,6 @@ export class BehaviorItemComponent implements OnInit {
   // }
   fnBodyTextareatChangeH(value: S) {
     this.componentService.setComponentsBehavior(this.index, 'fnBody', value)
-    // this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', value)
+    this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', value)
   }
 }

@@ -33,10 +33,15 @@
     <d-form-item>
         <d-form-label>{{itemGroup.fnBody.label}}</d-form-label>
         <d-form-control>
-            <input dTextInput name="fnBody"
+            <!-- <input dTextInput name="fnBody"
                 [(ngModel)]="itemGroup.fnBody.value"
                 (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
-            >
+            > -->
+            <textarea dTextarea
+              name="fnBody"
+              [(ngModel)]="itemGroup.fnBody.value"
+              (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
+            ></textarea>
         </d-form-control>
     </d-form-item>
 </form>

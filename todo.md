@@ -1,9 +1,11 @@
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
-|打通低代码能力|||
-|定义loop|done||
-|修改behavior数据结构|doing||
+|打通低代码能力|doing||
+|修改behavior数据结构|done||
+|调试修改方法体时保存|done||
+|方法体使用textarea|doing||
+|设置方法体时去抖|todo||
 |button定义事件|||
 |modal消费事件|||
 |组件销毁时解绑事件|||
@@ -13,7 +15,7 @@
 |web-site 事件与方法（再加上props/slots）|||
 |分支|f_behavior||
 |要上生产的内容|||
-||xxxxx||
+||定义pool||
 
 |官网增加api导航|||
 |官网增加助手函数子导航|||
