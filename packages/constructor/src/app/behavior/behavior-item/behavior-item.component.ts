@@ -56,17 +56,6 @@ export class BehaviorItemComponent implements OnInit {
     this.componentService.setComponentsBehavior(this.index, 'event', value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'event', value)
   }
-  // targetInputChangeH(value: S) {
-  //   this.componentService.setComponentsBehavior(this.index, 'target', value)
-  //   this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'target', value)
-  //   // this.behavior.target.value = value
-  //   this.itemGroup.target.value = value
-  //   this.listenerChange('target', this.itemGroup)
-  // }
-  // payloadInputChangeH(value: S) {
-  //   this.componentService.setComponentsBehavior(this.index, 'payload', value)
-  //   this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'payload', value)
-  // }
   fnBodyTextareatChangeH(value: S) {
     this.componentService.setComponentsBehavior(this.index, 'fnBody', value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', value)

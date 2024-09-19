@@ -4,7 +4,8 @@
 |打通低代码能力|doing||
 |修改behavior数据结构|done||
 |调试修改方法体时保存|done||
-|方法体使用textarea|doing||
+|方法体使用textarea|done||
+|删除不用的方法|done||
 |设置方法体时去抖|todo||
 |button定义事件|||
 |modal消费事件|||

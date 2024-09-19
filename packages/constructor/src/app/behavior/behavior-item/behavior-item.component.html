@@ -1,4 +1,4 @@
-<form dForm ngForm>
+<form dForm ngForm [labelSize]="'sm'">
     <d-form-item>
         <d-form-label>{{itemGroup.event.label}}</d-form-label>
         <d-form-control>
@@ -12,33 +12,12 @@
             ></d-select>
         </d-form-control>
     </d-form-item>
-    <!-- <d-form-item>
-        <d-form-label>{{itemGroup.target.label}}</d-form-label>
-        <d-form-control>
-            <input dTextInput name="target"
-                [(ngModel)]="itemGroup.target.value"
-                (ngModelChange)="targetInputChangeH(itemGroup.target.value)"
-            >
-        </d-form-control>
-    </d-form-item> -->
-    <!-- <d-form-item *ngIf="!itemGroup.payload.hideCalc">
-        <d-form-label>{{itemGroup.payload.label}}</d-form-label>
-        <d-form-control>
-            <input dTextInput name="payload"
-                [(ngModel)]="itemGroup.payload.value"
-                (ngModelChange)="payloadInputChangeH(itemGroup.payload.value)"
-            >
-        </d-form-control>
-    </d-form-item> -->
     <d-form-item>
         <d-form-label>{{itemGroup.fnBody.label}}</d-form-label>
         <d-form-control>
-            <!-- <input dTextInput name="fnBody"
-                [(ngModel)]="itemGroup.fnBody.value"
-                (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
-            > -->
             <textarea dTextarea
               name="fnBody"
+              [resize]="'vertical'"
               [(ngModel)]="itemGroup.fnBody.value"
               (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
             ></textarea>
