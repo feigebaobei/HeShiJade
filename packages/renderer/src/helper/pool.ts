@@ -1,15 +1,20 @@
 
 import { Queue } from "data-footstone"
 import type { ULID } from "src/types"
-import type { F, S } from "src/types/base"
+import type { A, F, S } from "src/types/base"
+
+let clog = console.log
+
 
 class Pool {
-    private _ulidMap: Map<ULID, Map<S, Queue<F>>>
+    private ulidEventMap: Map<ULID, Map<S, Queue<F>>>
+    private ulidComponentMap: Map<ULID, A>
     constructor() {
-        this._ulidMap = new Map()
+        this.ulidEventMap = new Map()
+        this.ulidComponentMap = new Map()
     }
     getQueue(ulid: ULID, event: S) {
-        let m = this._ulidMap.get(ulid)
+        let m = this.ulidEventMap.get(ulid)
         if (m) {
             let q = m.get(event)
             return q
@@ -18,16 +23,24 @@ class Pool {
         }
         // if (event) {
         // } else {
-        //     let m = this._ulidMap.get(ulid)
+        //     let m = this.ulidEventMap.get(ulid)
         //     return m
         // }
     }
-    bind(ulid: ULID, event: S, fn: F) {
+    getArray(ulid: ULID, event: S) {
+        let a = this.getQueue(ulid, event)
+        if (a) {
+            return a.toArray()
+        } else {
+            return []
+        }
+    }
+    bindEvent(ulid: ULID, event: S, fn: F) {
         if (!ulid || !event || !fn) {
             return
         }
-        if (this._ulidMap.has(ulid)) {
-            let q = this._ulidMap.get(ulid)!.get(event)
+        if (this.ulidEventMap.has(ulid)) {
+            let q = this.ulidEventMap.get(ulid)!.get(event)
             if (q) {
                 q.enqueue(fn)
             }
@@ -36,18 +49,26 @@ class Pool {
             q.enqueue(fn)
             let m = new Map()
             m.set(event, q)
-            this._ulidMap.set(ulid, m)
+            this.ulidEventMap.set(ulid, m)
         }
     }
+    bindComponentInstance(ulid: ULID, c: A) {
+        this.ulidComponentMap.set(ulid, c)
+    }
+    getComponentInstance(ulid: ULID) {
+        clog('this12345', this)
+        return this.ulidComponentMap.get(ulid)
+    }
     unbind(ulid: ULID) {
-        return this._ulidMap.delete(ulid)
+        return this.ulidEventMap.delete(ulid)
     }
 }
 // let getComponentInstance = () => {}
 let pool = new Pool()
-let getComponentInstance = (ulid: ULID) => {
-    // pool.get(ulid)
-}
+let getComponentInstance = pool.getComponentInstance
+// (ulid: ULID) => {
+//     // pool.get(ulid)
+// }
 export {
     Pool,
     pool,

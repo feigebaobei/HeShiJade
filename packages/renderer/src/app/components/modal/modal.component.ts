@@ -3,8 +3,9 @@ import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
 // import { PageService } from 'src/app/service/page.service';
 import { shareEvent } from 'src/helper';
+import { pool } from 'src/helper/pool';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
-import type { A } from 'src/types/base';
+import type { A, O } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
 
 let clog = console.log
@@ -90,6 +91,7 @@ export class ModalComponent implements OnInit {
       this.childrenFooter = curNode.children['footer']?.toArray() || []
     }
     // clog('12345', this.childrenHeader, this.childrenBody, this.childrenFooter)
+    pool.bindComponentInstance(this.data.ulid, this)
   }
   openDialog() {
     const results = this.modalService.open({
@@ -116,5 +118,13 @@ export class ModalComponent implements OnInit {
     });
     console.log(results.modalContentInstance);
   }
+  setProps(o: O) {
+    clog('setProps', o)
+    Object.entries(o).forEach(([k, v]) => {
+      this.data.props[k] = v
+      this.config[k] = v
+    })
+  }
+
 
 }
