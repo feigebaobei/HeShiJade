@@ -36,18 +36,9 @@ export class ButtonComponent implements OnInit, OnDestroy {
     })
   }
   ngOnInit() {
-    // // 注册组件实例
-    // pool.registerComponentInstance(this.data.ulid, this)
-    // // 注册事件
-    // this.data.behavior.forEach((b) => {
-    //   let f = new Function('getComponentInstance', b.fnBody)
-    //   pool.registerEvent(this.data.ulid, b.event, f)
-    // })
     pool.register(this.data.ulid, this, this.data.behavior)
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)
-    // pool.unRegisterComponentInstance(this.data.ulid)
-    // pool.unRegisterEvent(this.data.ulid)
   }
 }

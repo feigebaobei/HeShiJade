@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
-// import { PageService } from 'src/app/service/page.service';
 import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
@@ -116,18 +115,9 @@ export class ModalComponent implements OnInit, OnDestroy{
       this.childrenBody = curNode.children['body']?.toArray() || []
       this.childrenFooter = curNode.children['footer']?.toArray() || []
     }
-    // // 注册组件实例
-    // pool.registerComponentInstance(this.data.ulid, this)
-    // // 注册事件
-    // this.data.behavior.forEach((b) => {
-    //   let f = new Function('getComponentInstance', b.fnBody)
-    //   pool.registerEvent(this.data.ulid, b.event, f)
-    // })
     pool.register(this.data.ulid, this, this.data.behavior)
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)
-    // pool.unRegisterComponentInstance(this.data.ulid)
-    // pool.unRegisterEvent(this.data.ulid)
   }
 }

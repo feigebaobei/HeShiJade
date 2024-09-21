@@ -4,19 +4,21 @@
 |button定义事件|done||
 |优化pool的api|done||
 |提供若干api|done||
-|组件绑定事件|doing||
-|组件销毁时解绑事件|||
-|取消行为的显隐逻辑|||
-|web-site 事件的数据结构|||
+|组件绑定事件|done||
+|组件销毁时解绑事件|done||
+|web-site 事件的数据结构|doing||
 |web-site 事件的逻辑|done||
-|web-site 事件与方法（再加上props/slots）|||
+|web-site 事件与方法（再加上props/slots）|done||
+|点击model的关闭时应该关闭|||
 |分支|f_behavior||
 |要上生产的内容|||
 ||定义pool||
 ||打通低代码能力||
 ||官网增加api导航。说明button/modal的api(props/slots/method/event).||
 
+|取消行为配置项的显隐逻辑|||
 |官网增加助手函数子导航|||
+|支持配置多个事件|||
 |完成 shareEvent 的 todo |||
 |整理升级的要求|||
 |web-site扩展组件时增加井布局|todo||
