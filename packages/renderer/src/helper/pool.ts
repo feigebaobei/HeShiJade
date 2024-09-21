@@ -13,29 +13,7 @@ class Pool {
         this.ulidEventMap = new Map()
         this.ulidComponentMap = new Map()
     }
-    getQueue(ulid: ULID, event: S) {
-        let m = this.ulidEventMap.get(ulid)
-        if (m) {
-            let q = m.get(event)
-            return q
-        } else {
-            return undefined
-        }
-        // if (event) {
-        // } else {
-        //     let m = this.ulidEventMap.get(ulid)
-        //     return m
-        // }
-    }
-    getArray(ulid: ULID, event: S) {
-        let a = this.getQueue(ulid, event)
-        if (a) {
-            return a.toArray()
-        } else {
-            return []
-        }
-    }
-    bindEvent(ulid: ULID, event: S, fn: F) {
+    registerEvent(ulid: ULID, event: S, fn: F) {
         if (!ulid || !event || !fn) {
             return
         }
@@ -52,23 +30,43 @@ class Pool {
             this.ulidEventMap.set(ulid, m)
         }
     }
-    bindComponentInstance(ulid: ULID, c: A) {
+    getEventQueue(ulid: ULID, event: S) {
+        let m = this.ulidEventMap.get(ulid)
+        if (m) {
+            let q = m.get(event)
+            return q
+        } else {
+            return undefined
+        }
+        // if (event) {
+        // } else {
+        //     let m = this.ulidEventMap.get(ulid)
+        //     return m
+        // }
+    }
+    getEventArray(ulid: ULID, event: S) {
+        let a = this.getEventQueue(ulid, event)
+        if (a) {
+            return a.toArray()
+        } else {
+            return []
+        }
+    }
+    unRegisterEvent(ulid: ULID) {
+        return this.ulidEventMap.delete(ulid)
+    }
+    registerComponentInstance(ulid: ULID, c: A) {
         this.ulidComponentMap.set(ulid, c)
     }
     getComponentInstance(ulid: ULID) {
-        clog('this12345', this)
         return this.ulidComponentMap.get(ulid)
     }
-    unbind(ulid: ULID) {
-        return this.ulidEventMap.delete(ulid)
+    unRegisterComponentInstance(ulid: ULID) {
+        this.ulidComponentMap.delete(ulid)
     }
 }
-// let getComponentInstance = () => {}
 let pool = new Pool()
 let getComponentInstance = pool.getComponentInstance
-// (ulid: ULID) => {
-//     // pool.get(ulid)
-// }
 export {
     Pool,
     pool,

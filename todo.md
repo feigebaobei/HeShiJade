@@ -6,23 +6,24 @@
 |调试修改方法体时保存|done||
 |方法体使用textarea|done||
 |删除不用的方法|done||
-|设置方法体时去抖|doen||
+|设置方法体时去抖|done||
 |设置配置面板的右边距|done||
 |button定义事件|done||
-|优化pool的api|||
+|优化pool的api|done||
 |提供若干api|doing||
-|modal消费事件|||
+|modal消费事件|不使用此方法处理lc||
 |组件销毁时解绑事件|||
 |取消行为的显隐逻辑|||
 |web-site 事件的数据结构|||
 |web-site 事件的逻辑|done||
 |web-site 事件与方法（再加上props/slots）|||
-|官网增加api导航|||
-||增加button的props/slots/method/event||
-||增加modal的props/slots/method/event||
+|官网增加api导航|done||
+||增加button的props/slots/method/event|done|
+||增加modal的props/slots/method/event|done|
 |分支|f_behavior||
 |要上生产的内容|||
 ||定义pool||
+||官网增加api导航。说明button/modal的api(props/slots/method/event).||
 
 |官网增加助手函数子导航|||
 |完成 shareEvent 的 todo |||

@@ -30,7 +30,7 @@ export class ButtonComponent implements OnInit {
     // clog('button data', this.data)
     // this.data.behavior
     // pool.bind(data.ulid, )
-    // pool.bindComponentInstance(this.data.ulid,)
+    // pool.registerComponentInstance(this.data.ulid,)
   }
   buttonClickH() {
     // let eventArr = this.data.behavior.filter((item: A) => item.event === 'click')
@@ -38,7 +38,7 @@ export class ButtonComponent implements OnInit {
     //   shareEvent.emit(item.target, item.payload)
     // })
 
-    // let fQ = pool.getQueue(this.data.ulid, 'click')
+    // let fQ = pool.getEventQueue(this.data.ulid, 'click')
     // clog('fQ', fQ)
     // while (!fQ?.isEmpty()) {
     //   let f = fQ?.dequeue().bind(this)
@@ -47,7 +47,7 @@ export class ButtonComponent implements OnInit {
     //   f && f(pool.getComponentInstance.bind(pool))
     // }
 
-    let fnArr = pool.getArray(this.data.ulid, 'click')
+    let fnArr = pool.getEventArray(this.data.ulid, 'click')
     fnArr.forEach(f => {
       f.bind(this) // 方法体的this
       f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
@@ -64,13 +64,13 @@ export class ButtonComponent implements OnInit {
   // }
   ngOnInit() {
     // clog('button data', this.data)
-    pool.bindComponentInstance(this.data.ulid, this)
+    pool.registerComponentInstance(this.data.ulid, this)
     this.data.behavior.forEach((b) => {
       // let f = new Function('getComponentInstance', 'console.log(this);' + b.fnBody)
       // let f = new Function('getComponentInstance', 'console.log(this);' + "getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({visible: true})")
       let f = new Function('getComponentInstance', 'console.log(this);' + "getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({'width': '800px'});getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').openDialog();")
       // clog('f', f)
-      pool.bindEvent(this.data.ulid, b.event, f)
+      pool.registerEvent(this.data.ulid, b.event, f)
     })
   }
 }

@@ -91,7 +91,7 @@ export class ModalComponent implements OnInit {
       this.childrenFooter = curNode.children['footer']?.toArray() || []
     }
     // clog('12345', this.childrenHeader, this.childrenBody, this.childrenFooter)
-    pool.bindComponentInstance(this.data.ulid, this)
+    pool.registerComponentInstance(this.data.ulid, this)
   }
   openDialog() {
     const results = this.modalService.open({
