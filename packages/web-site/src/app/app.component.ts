@@ -42,4 +42,7 @@ export class AppComponent {
   skillClickH() {
     this.router.navigate(['/skill'])
   }
+  apiClickH() {
+    this.router.navigate(['/api'])
+  }
 }
