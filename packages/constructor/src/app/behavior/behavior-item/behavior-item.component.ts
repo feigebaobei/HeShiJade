@@ -2,6 +2,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { B, F, N, S, } from 'src/types/base';
+import { createDebounceFn } from 'src/helper/index';
+import { debounceTime } from 'src/helper/config';
 import type { BehaviorConfigItem } from 'src/types/config';
 
 let clog = console.log
@@ -16,18 +18,19 @@ export class BehaviorItemComponent implements OnInit {
   @Input() index!: N
   eventMap: Map<S, {f: F, targetKey: S}> // todo 抽象为
   itemGroup: newBehaviorConfigItem
+  fnBodyTextareatChangeH: F
   constructor(private componentService: ComponentService) {
     this.eventMap = new Map()
     this.itemGroup = {} as newBehaviorConfigItem
+    this.fnBodyTextareatChangeH = createDebounceFn((v: S) => {
+      this.componentService.setComponentsBehavior(this.index, 'fnBody', v)
+      this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', v)
+    }, debounceTime)
   }
   ngOnInit() {
     this.itemGroup = {
       event: this.behavior.event,
-      target: this.behavior.target,
-      payload: this.behavior.payload,
-    }
-    if (this.itemGroup.payload.hide) {
-      this.itemGroup.payload.hideCalc = this.itemGroup.payload.hide(this.behavior)
+      fnBody: this.behavior.fnBody,
     }
     Array.from(Object.values(this.behavior)).forEach(item => {
       if (item.hideListenerKey) {
@@ -55,15 +58,8 @@ export class BehaviorItemComponent implements OnInit {
     this.componentService.setComponentsBehavior(this.index, 'event', value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'event', value)
   }
-  targetInputChangeH(value: S) {
-    this.componentService.setComponentsBehavior(this.index, 'target', value)
-    this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'target', value)
-    // this.behavior.target.value = value
-    this.itemGroup.target.value = value
-    this.listenerChange('target', this.itemGroup)
-  }
-  payloadInputChangeH(value: S) {
-    this.componentService.setComponentsBehavior(this.index, 'payload', value)
-    this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'payload', value)
-  }
+  // fnBodyTextareatChangeH(value: S) {
+  //   this.componentService.setComponentsBehavior(this.index, 'fnBody', value)
+  //   this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', value)
+  // }
 }

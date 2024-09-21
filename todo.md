@@ -1,20 +1,24 @@
 解决上一次部署时的不足+升级技术栈
 ||完成日期||
 |-|-|-|
-|未选中页面时，舞台区应该无组件|done||
-||删除页面时，舞台区应该无组件|done|
-||切换应用时|done|
-|分支|f_update||
+|button定义事件|done||
+|优化pool的api|done||
+|提供若干api|done||
+|组件绑定事件|done||
+|组件销毁时解绑事件|done||
+|web-site 事件的数据结构|done||
+|web-site 事件的逻辑|done||
+|web-site 事件与方法（再加上props/slots）|done||
+|分支|f_behavior||
 |要上生产的内容|||
-||修正icon旋转角度默认值||
-||constructor 拆包，首页体积降到1.94mb -> 600+kb||
-||renderer 拆包，首页体积1.64mb -> 470kb||
-||web-site 拆包，首页体积280kb -> 254kb||
-||路由懒加载||
-||无页面时提示创建页面||
-||关键组件改为standalone components||
-||constructor/renderer/web-site升级angular到17.3.12||
+||定义pool||
+||打通低代码能力||
+||官网增加api导航。说明button/modal的api(props/slots/method/event).||
 
+|点击model的关闭时应该关闭|||
+|取消行为配置项的显隐逻辑|||
+|官网增加助手函数子导航|||
+|支持配置多个事件|||
 |完成 shareEvent 的 todo |||
 |整理升级的要求|||
 |web-site扩展组件时增加井布局|todo||
@@ -314,4 +318,5 @@ export class HomeContainerComponent implements OnInit {
   }
 }
 
-1.2+34.6+243+0.3
+
+getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({visible: true})

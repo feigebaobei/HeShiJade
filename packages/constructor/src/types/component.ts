@@ -28,8 +28,9 @@ interface GridLayoutDefault {
 }
 interface BehaviorMetaItem {
   event: S
-  target: S
-  payload: S
+  // target: S
+  // payload: S
+  fnBody: S
 }
 // button组件中需要指明文本
 interface ItemsMetaItemString {
@@ -56,7 +57,6 @@ interface SlotsMetaItem { // 待增强
 type BehaviorMeta = BehaviorMetaItem[]
 type ItemsMeta = ItemsMetaItem[]
 type SlotsMeta = {
-  // [k: S]: Component | {}
   [k: S]: ULID
 }// | {}
 interface ComponentMountEmpty {area: ''}
@@ -90,7 +90,8 @@ type ComponentDefaultConfig = Pick<Component, 'props' | 'behavior' | 'items' | '
 interface ComponentDefaultConfigAll {
   [k: S]: ComponentDefaultConfig
 }
-type BehaviorItemKey = 'event' | 'target' | 'payload' // keyof typeof BehaviorItem
+// type BehaviorItemKey = 'event' | 'target' | 'payload' // keyof typeof BehaviorItem
+type BehaviorItemKey = keyof BehaviorMetaItem
 
 interface PropsTransfer {
   componentUlid: ULID

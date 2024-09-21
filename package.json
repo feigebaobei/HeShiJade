@@ -12,6 +12,9 @@
     "dc": "cd packages/constructor && pnpm start",
     "dr": "cd packages/renderer && pnpm start",
     "dms": "cd packages/mock-server && pnpm dev",
-    "dw": "cd packages/web-site && pnpm dev"
+    "dw": "cd packages/web-site && pnpm dev",
+    "bc": "cd packages/constructor && pnpm build",
+    "br": "cd packages/renderer && pnpm build",
+    "bw": "cd packages/web-site && pnpm build"
   }
 }

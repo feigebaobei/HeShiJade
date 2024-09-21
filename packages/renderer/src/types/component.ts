@@ -26,8 +26,9 @@ interface Component {
   }
   behavior: {
     event: S
-    target: S
-    payload: S
+    // target: S
+    // payload: S
+    fnBody: S
   }[]
   items: { // 搭建侧的类型比此宽松
     // category: S
@@ -56,6 +57,13 @@ interface componentConfig {
   item: O
   slot: S
 }
+interface componentInstanceData {
+  props: Component['props'],
+  behavior: Component['behavior'],
+  items: Component['items'],
+  slots: Component['slots'],
+  ulid: Component['ulid'],
+}
 
 export type {
   PropsValue,
@@ -66,4 +74,5 @@ export type {
   ComponentMountEmpty,
   ComponentMountItems,
   ComponentMountSlots,
+  componentInstanceData,
 }

@@ -304,14 +304,6 @@ export class ComponentService {
       this.curComponentS.set(undefined)
     }
   }
-  // 设置当前组件的prop
-  // todo delete 2024.09.01+
-  // setCurComponentProp(key: S, value: PropsValue) {
-  // setCurComponentProp(key: S, value: A) {
-  //   if (this._curComponent) {
-  //     this._curComponent.props[key] = value
-  //   }
-  // }
   // 直接改变属性
   setComponentProp(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()

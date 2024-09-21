@@ -22,6 +22,5 @@ export class PropsSelectComponent {
   }
   // change() {
   // modelChangeH(v: S) {
-  //   // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
   // }
 }

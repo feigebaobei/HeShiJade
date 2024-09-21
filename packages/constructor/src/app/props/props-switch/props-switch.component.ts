@@ -21,7 +21,5 @@ export class PropsSwitchComponent {
     }, debounceTime)
   }
   // modelChangeH(v: S) {
-  //   // this.componentService.setCurComponentProp(this.data.propKey, this.data.value)
-  //   // this.componentService.setComponentProp(this.data.propKey, this.data.value)
   // }
 }

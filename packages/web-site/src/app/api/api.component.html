@@ -1,0 +1,278 @@
+<h1>api总纲</h1>
+<p>此api作用于低代码范围。零代码用配置就能完成，不需要写代码。和氏壁（此低代码平台）基于dev-ui组件库搞的。封装了常用的组件。对外暴露4种api（props/slots/method/event）。此平台的低代码能力在事件面板上体现。</p>
+<p>props: 组件的属性。</p>
+<p>slots: 组件的插槽。根据实际需求，或没有，或一个，或多个。</p>
+<p>method: 组件的方法。</p>
+<p>event: 组件本身的事件和生命周期事件。</p>
+<h1>button</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>类型</td>
+            <td>'button'/'submit'/'reset'</td>
+            <td>'button'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>bsStyle</td>
+            <td>风格</td>
+            <td>'primary'/'common'/'text'/'danger'</td>
+            <td>'primary'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>bsSize</td>
+            <td>大小</td>
+            <td>'lg'/'md'/'sm'/'xs'</td>
+            <td>'md'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>bordered</td>
+            <td>边框</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>icon</td>
+            <td>图标</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>shape</td>
+            <td>形状</td>
+            <td>'circle'/''</td>
+            <td>''</td>
+            <td>''对应矩形</td>
+        </tr>
+        <tr>
+            <td>showLoading</td>
+            <td>是否显示加载提示</td>
+            <td>true/false</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>宽度</td>
+            <td>-</td>
+            <td>''</td>
+            <td>需要输入带单位的数据。如：20px.</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>禁用</td>
+            <td>true/false</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>文本</td>
+            <td>-</td>
+            <td>'button'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>click</td>
+            <td>点击时</td>
+        </tr>
+    </tbody>
+</table>
+<h1>modal</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>宽度</td>
+            <td>-</td>
+            <td>'640px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>visible</td>
+            <td>是否默认显示</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td>该属性控制初始化时是否打开。不能通过设置该属性控制打开。若要控制打开，可以使用`openDialog()`。</td>
+        </tr>
+        <tr>
+            <td>showAnimation</td>
+            <td>是否使用动画</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>backdropCloseable</td>
+            <td>点击空白是否关闭</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>placement</td>
+            <td>位置</td>
+            <td>'center'/'top'/'bottom'/'unset'</td>
+            <td>'center'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>offsetX</td>
+            <td>横向偏移</td>
+            <td>-</td>
+            <td>'0px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>offsetY</td>
+            <td>纵向偏移</td>
+            <td>-</td>
+            <td>'0px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>bodyScrollable</td>
+            <td>外层是否可滚动</td>
+            <td>true/false</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>escapable</td>
+            <td>外层支持esc关闭</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>body</td>
+            <td>身体的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>openDialog: () => void</td>
+            <td>-</td>
+            <td>打开modal</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+        <tr>
+            <td>beforeHidden</td>
+            <td>关闭前</td>
+        </tr>
+    </tbody>
+</table>

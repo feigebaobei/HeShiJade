@@ -30,7 +30,6 @@ let clog = console.log
 export class BehaviorBoxComponent {
   componentBehaviorList: BehaviorConfigItem[]
   curComp?: Comp | null
-  // componentBehaviorMeta: BehaviorMeta
   componentBehaviorMeta: BehaviorConfigItem
   constructor(private componentService: ComponentService) {
     this.componentBehaviorMeta = {
@@ -41,13 +40,19 @@ export class BehaviorBoxComponent {
         label: '事件',
         key: '',
       },
-      target: {
-        category: 'input',
-        value: '',
-        label: '',
-        key: '',
-      },
-      payload: {
+      // target: {
+      //   category: 'input',
+      //   value: '',
+      //   label: '',
+      //   key: '',
+      // },
+      // payload: {
+      //   category: 'textarea',
+      //   value: '',
+      //   label: '',
+      //   key: '',
+      // },
+      fnBody: {
         category: 'textarea',
         value: '',
         label: '',
@@ -63,72 +68,90 @@ export class BehaviorBoxComponent {
       }
     })
   }
+  setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigItem) {
+    this.curComp!.behavior.forEach(item => {
+      let o = cloneDeep(compBehaviorMeta)
+      Object.entries(item).forEach(([k, v]) => {
+        if (o.hasOwnProperty(k)) {
+          o[k].value = v
+        }
+      })
+      this.componentBehaviorList.push(o)
+    })
+  }
   curComponentChange() {
     this.componentBehaviorList = []
     // clog('curComponentChange', this.curComp)
     switch (this.curComp?.type) {
       case 'Button':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(buttonBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(buttonBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(buttonBehaviorMeta)
         break;
       case 'Modal':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(modalBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(modalBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(modalBehaviorMeta)
         break;
       case 'Form':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(FormBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(FormBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(FormBehaviorMeta)
         break;
       case 'Table':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(TableBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(TableBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(TableBehaviorMeta)
         break;
       case 'Checkbox':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(CheckboxBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(CheckboxBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(CheckboxBehaviorMeta)
         break;
       case 'Tabs':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(TabsBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(TabsBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(TabsBehaviorMeta)
         break;
       case 'Pagination':
-        this.curComp.behavior.forEach(item => {
-          let o = cloneDeep(PaginationBehaviorMeta)
-          Object.entries(item).forEach(([k, v]) => {
-            o[k].value = v
-          })
-          this.componentBehaviorList.push(o)
-        })
+        // this.curComp.behavior.forEach(item => {
+        //   let o = cloneDeep(PaginationBehaviorMeta)
+        //   Object.entries(item).forEach(([k, v]) => {
+        //     o[k].value = v
+        //   })
+        //   this.componentBehaviorList.push(o)
+        // })
+        this.setComponentBehaviorListByType(PaginationBehaviorMeta)
         break;
       }
     // clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
