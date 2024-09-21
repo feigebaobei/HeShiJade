@@ -2,6 +2,7 @@
 import { Queue } from "data-footstone"
 import type { ULID } from "src/types"
 import type { A, F, S } from "src/types/base"
+import type { Component } from "src/types/component"
 
 let clog = console.log
 
@@ -63,6 +64,19 @@ class Pool {
     }
     unRegisterComponentInstance(ulid: ULID) {
         this.ulidComponentMap.delete(ulid)
+    }
+    register(ulid: ULID, componentInstance: A, behavior: Component['behavior'] ) {
+        // 注册组件实例
+        this.registerComponentInstance(ulid, componentInstance)
+        // 注册事件
+        behavior.forEach((b) => {
+          let f = new Function('getComponentInstance', b.fnBody)
+          pool.registerEvent(ulid, b.event, f)
+        })
+    }
+    unRegister(ulid: ULID) {
+        this.unRegisterComponentInstance(ulid)
+        this.unRegisterEvent(ulid)
     }
 }
 let pool = new Pool()

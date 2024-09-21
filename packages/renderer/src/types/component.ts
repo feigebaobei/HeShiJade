@@ -57,6 +57,13 @@ interface componentConfig {
   item: O
   slot: S
 }
+interface componentInstanceData {
+  props: Component['props'],
+  behavior: Component['behavior'],
+  items: Component['items'],
+  slots: Component['slots'],
+  ulid: Component['ulid'],
+}
 
 export type {
   PropsValue,
@@ -67,4 +74,5 @@ export type {
   ComponentMountEmpty,
   ComponentMountItems,
   ComponentMountSlots,
+  componentInstanceData,
 }
