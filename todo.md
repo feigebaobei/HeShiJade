@@ -1,21 +1,13 @@
-解决上一次部署时的不足+升级技术栈
-||完成日期||
+||||
 |-|-|-|
-|button定义事件|done||
-|优化pool的api|done||
-|提供若干api|done||
-|组件绑定事件|done||
-|组件销毁时解绑事件|done||
-|web-site 事件的数据结构|done||
-|web-site 事件的逻辑|done||
-|web-site 事件与方法（再加上props/slots）|done||
-|分支|f_behavior||
-|要上生产的内容|||
-||定义pool||
-||打通低代码能力||
-||官网增加api导航。说明button/modal的api(props/slots/method/event).||
-
 |点击model的关闭时应该关闭|||
+|停用shareEvent|||
+|支持配置多个事件|||
+|其他（8个）组件的事件、方法|||
+|其他（8个）组件的api|||
+|分支|f_lc||
+|要上生产的内容|||
+
 |取消行为配置项的显隐逻辑|||
 |官网增加助手函数子导航|||
 |支持配置多个事件|||

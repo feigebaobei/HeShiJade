@@ -84,26 +84,6 @@ let Form: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  //   // hide: function (itemGroup: BehaviorConfigItem) {
-  //   //   // // this: Component
-  //   //   // // itemGroup: 当前配置项组
-  //   //   // clog('hide', !itemGroup.target.value)
-  //   //   // return !itemGroup.target.value
-  //   // },
-  //   // hideListenerKey: 'target',
-  //   // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
