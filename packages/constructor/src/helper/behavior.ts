@@ -165,7 +165,6 @@ let Select: BehaviorConfigItem = {
     key: 'fnBody',
   }
 }
-
 let Checkbox: BehaviorConfigItem = {
   event: {
     category: 'select',
@@ -196,7 +195,6 @@ let Checkbox: BehaviorConfigItem = {
     key: 'fnBody',
   }
 }
-
 let Tabs: BehaviorConfigItem = {
   event: {
     category: 'select',
@@ -228,7 +226,6 @@ let Tabs: BehaviorConfigItem = {
     key: 'fnBody',
   }
 }
-
 let Pagination: BehaviorConfigItem = {
   event: {
     category: 'select',
