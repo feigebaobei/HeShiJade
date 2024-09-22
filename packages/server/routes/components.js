@@ -573,7 +573,53 @@ router.route('/behavior')
   res.send('put')
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
+  // res.send('delete')
+  let index = -1
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) && rules.required(req.query.index)) {
+      index = Number(req.query.index)
+      if (rules.isNumber(index) && index > -1) {
+        s(true)
+      } else {
+        j(100100)
+      }
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.componentTable).bulkWrite([
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $unset: {[`behavior.${req.query.index}`]: null},
+          }
+        }
+      },
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $pull: {behavior: null}
+          }
+        }
+      }
+    ]).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 
 router.route('/items')

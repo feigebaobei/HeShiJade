@@ -199,7 +199,6 @@ export class SetupComponent implements OnInit {
       }
     }).catch((msg) => {
       clog(msg)
-      alert(msg)
     })
   }
   onDrop(e: DropEvent) {
