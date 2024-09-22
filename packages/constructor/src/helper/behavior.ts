@@ -32,19 +32,6 @@ let Modal: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  //   hide: () => false
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
@@ -95,18 +82,6 @@ let Table: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
@@ -126,18 +101,6 @@ let Select: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
@@ -175,18 +138,6 @@ let Tabs: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
@@ -206,18 +157,6 @@ let Pagination: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
