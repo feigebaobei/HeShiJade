@@ -7,6 +7,7 @@
 |其他（8个）组件的api|doing||
 |分支|f_lc||
 |要上生产的内容|||
+|修正icon/select的props文案|||
 |form/xxx/xx/xxx/x/x/x/x/x组件的事件、方法|||
 |form/xxx/xx/xxx/x/x/x/x/x组件的api|||
 

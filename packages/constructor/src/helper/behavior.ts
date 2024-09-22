@@ -176,18 +176,6 @@ let Checkbox: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
   fnBody: {
     category: 'textarea',
     value: '',

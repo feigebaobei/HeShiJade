@@ -760,7 +760,7 @@ let Checkbox: PropsConfigItem = {
             { label: 'true', value: true },
         ],
         value: false,
-        label: '名称',
+        label: '是否禁用',
         key: 'disabled',
     },
     halfchecked: {
