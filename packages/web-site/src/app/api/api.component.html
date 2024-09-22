@@ -373,7 +373,7 @@
         </tr>
     </tbody>
 </table>
-<h1>componentName</h1>
+<h1>table</h1>
 <h2>props</h2>
 <table>
     <thead>
@@ -387,10 +387,143 @@
     </thead>
     <tbody>
         <tr>
-            <td>title</td>
-            <td>title</td>
+            <td>url</td>
+            <td>url</td>
             <td>-</td>
-            <td>'title'</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableWidth</td>
+            <td>表格宽度</td>
+            <td>-</td>
+            <td>'100%'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>maxWidth</td>
+            <td>最大宽度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableHeight</td>
+            <td>表格高度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>maxHeight</td>
+            <td>最大高度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>minHeight</td>
+            <td>最小高度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>大小</td>
+            <td>'mini'/'xs'/'sm'/'md'/'lg'</td>
+            <td>'sm'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>fixHeader</td>
+            <td>表头是否固定</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>colDraggable</td>
+            <td>列是否可拖动排序</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>virtualScroll</td>
+            <td>是否虚拟滚动</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>virtualItemSize</td>
+            <td>虚拟滚动时每一行的高度</td>
+            <td>-</td>
+            <td>'40px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>u</td>
+            <td>虚拟滚动时缓冲区最小高度</td>
+            <td>-</td>
+            <td>'80'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>checkable</td>
+            <td>是否可勾选行</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>resizeable</td>
+            <td>是否可以拖拽调整列宽</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>headerBg</td>
+            <td>表头是否显示背景色</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableLayout</td>
+            <td>表格布局</td>
+            <td>'fixed'/'auto'</td>
+            <td>'fixed'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>borderType</td>
+            <td>表格边框</td>
+            <td>''/'borderless'/'bordered'</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>striped</td>
+            <td>是否展示为斑马纹间隔</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>shadowType</td>
+            <td>阴影类型</td>
+            <td>'normal'/'embed'</td>
+            <td>'normal'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableOverflowType</td>
+            <td>滚动条类型</td>
+            <td>'auto'/'overlay'</td>
+            <td>'auto'</td>
             <td></td>
         </tr>
     </tbody>
@@ -406,8 +539,8 @@
     </thead>
     <tbody>
         <tr>
-            <td>header</td>
-            <td>头部的插槽</td>
+            <td>-</td>
+            <td>在items面板中设置</td>
             <td></td>
         </tr>
     </tbody>
@@ -431,7 +564,7 @@
         </tr>
     </tbody>
 </table>
-<h2>event</h2>
+<h2>event (未全支持)</h2>
 <table>
     <thead>
         <tr>
@@ -441,12 +574,67 @@
     </thead>
     <tbody>
         <tr>
-            <td>onClose</td>
-            <td>关闭后</td>
+            <td>rowCheckChange</td>
+            <td>改变行勾选</td>
+        </tr>
+        <tr>
+            <td>checkAllChange</td>
+            <td>改变全勾选</td>
+        </tr>
+        <tr>
+            <td>resize</td>
+            <td>改变列宽</td>
+        </tr>
+        <tr>
+            <td>childrenTableClose</td>
+            <td>关闭子列表</td>
+        </tr>
+        <tr>
+            <td>allChildrenTableClose</td>
+            <td>关闭全部子列表</td>
+        </tr>
+        <tr>
+            <td>cellClick</td>
+            <td>单击单元格</td>
+        </tr>
+        <tr>
+            <td>cellDBClick</td>
+            <td>双击单元格</td>
+        </tr>
+        <tr>
+            <td>rowClick</td>
+            <td>单击行</td>
+        </tr>
+        <tr>
+            <td>rowDBClick</td>
+            <td>双击行</td>
+        </tr>
+        <tr>
+            <td>detialToggle</td>
+            <td>改变扩展行</td>
+        </tr>
+        <tr>
+            <td>cellEditStart</td>
+            <td>开始编辑</td>
+        </tr>
+        <tr>
+            <td>cellEditEnd</td>
+            <td>结束编辑</td>
+        </tr>
+        <tr>
+            <td>tableScrollEvent</td>
+            <td>表格内部滚动</td>
+        </tr>
+        <tr>
+            <td>columnDragEnd</td>
+            <td>结束列拖拽</td>
+        </tr>
+        <tr>
+            <td>loadMore</td>
+            <td>完成延迟懒加载</td>
         </tr>
     </tbody>
 </table>
-
 <h1>componentName</h1>
 <h2>props</h2>
 <table>
