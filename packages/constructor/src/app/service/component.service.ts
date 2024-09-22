@@ -321,14 +321,14 @@ export class ComponentService {
       arr[index][key] = value
     }
   }
-  addBehivorOfCurComponent(obj: BehaviorMetaItem) {
+  addBehaviorOfCurComponent(obj: BehaviorMetaItem) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.behavior.push(obj)
     }
   }
-  reqAddBehivor(value: BehaviorMetaItem) {
-    return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {
+  reqAddBehavior(value: BehaviorMetaItem) {
+    return this.reqService.req(`${serviceUrl()}/components/behavior`, 'post', {
       ulid: this.curComponent()?.ulid,
       value,
     })

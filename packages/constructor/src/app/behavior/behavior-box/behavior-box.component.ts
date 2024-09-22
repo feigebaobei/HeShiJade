@@ -108,14 +108,14 @@ export class BehaviorBoxComponent {
         obj[item.key as unknown as 'event' | 'fnBody'] = cloneDeep(item)
       })
       this.componentBehaviorList.push(obj)
-      this.componentService.addBehivorOfCurComponent({
+      this.componentService.addBehaviorOfCurComponent({
         event: obj.event.value,
         fnBody: obj.fnBody.value,
       })
-      // this.componentService.reqAddBehivor({
-      //   event: obj.event.value,
-      //   fnBody: obj.fnBody.value,
-      // })
+      this.componentService.reqAddBehavior({
+        event: obj.event.value,
+        fnBody: obj.fnBody.value,
+      })
     }
   }
 }

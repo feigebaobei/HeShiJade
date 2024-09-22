@@ -533,6 +533,49 @@ router.route('/listByPage')
   res.send('delete')
 })
 
+router.route('/behavior')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) && rules.required(req.body.value)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.body.ulid}, {$push: {
+      // event: req.body.value.event,
+      // fnBody: req.body.value.fnBody,
+      behavior: req.body.value
+    }}).catch(error => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send('delete')
+})
+
 router.route('/items')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
