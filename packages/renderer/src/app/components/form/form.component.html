@@ -1,9 +1,9 @@
 <!-- todo 使用service中的数据渲染 -->
 <div style="padding-left: 16px">
   <form dForm ngForm
-    [layout]="props.layout"
-    [labelSize]="props.labelSize"
-    [labelAlign]="props.labelAlign"
+    [layout]="props['layout']"
+    [labelSize]="props['labelSize']"
+    [labelAlign]="props['labelAlign']"
   >
     <!-- todo 考虑使用动态组件。不喜欢使用div包裹。-->
     <!-- 不需要双向绑定表单项的值 -->
@@ -45,13 +45,12 @@
     </div>
     <d-form-operation>
         <d-button bsStyle="primary" class="mr-element-spacing" circled="true" style="margin-right: 4px"
-            *ngIf="data.props.isSubmit"
+            *ngIf="data.props['isSubmit']"
             (click)="submitClickH()"
-
             dFormSubmit
         >Submit</d-button>
         <d-button bsStyle="common" circled="true"
-            *ngIf="data.props.isCancel"
+            *ngIf="data.props['isCancel']"
         >Cancel</d-button>
     </d-form-operation>
   </form>
