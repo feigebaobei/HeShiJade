@@ -1,5 +1,5 @@
 // todo 改名为behavior-group
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { B, F, N, S, } from 'src/types/base';
 import { createDebounceFn } from 'src/helper/index';
@@ -19,6 +19,7 @@ export class BehaviorItemComponent implements OnInit {
   eventMap: Map<S, {f: F, targetKey: S}> // todo 抽象为
   itemGroup: newBehaviorConfigItem
   fnBodyTextareatChangeH: F
+  @Output() remove = new EventEmitter()
   constructor(private componentService: ComponentService) {
     this.eventMap = new Map()
     this.itemGroup = {} as newBehaviorConfigItem
@@ -57,5 +58,8 @@ export class BehaviorItemComponent implements OnInit {
   eventValueChange(value: S) {
     this.componentService.setComponentsBehavior(this.index, 'event', value)
     this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'event', value)
+  }
+  deleteButtonClickH() {
+    this.remove.emit()
   }
 }

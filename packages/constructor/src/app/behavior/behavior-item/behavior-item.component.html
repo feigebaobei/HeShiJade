@@ -1,26 +1,31 @@
-<form dForm ngForm [labelSize]="'sm'">
-    <d-form-item>
-        <d-form-label>{{itemGroup.event.label}}</d-form-label>
-        <d-form-control>
-            <d-select [options]="itemGroup.event.options"
-                name="event"
-                [filterKey]="'label'"
-                [valueKey]="'value'"
-                [allowClear]="!!itemGroup.event.allowClear"
-                [(ngModel)]="itemGroup.event.value"
-                (ngModelChange)="eventValueChange(itemGroup.event.value)"
-            ></d-select>
-        </d-form-control>
-    </d-form-item>
-    <d-form-item>
-        <d-form-label>{{itemGroup.fnBody.label}}</d-form-label>
-        <d-form-control>
-            <textarea dTextarea
-              name="fnBody"
-              [resize]="'vertical'"
-              [(ngModel)]="itemGroup.fnBody.value"
-              (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
-            ></textarea>
-        </d-form-control>
-    </d-form-item>
-</form>
+<div class="group-box">
+    <div class="toolbox">
+        <d-button bsSize="xs" icon="icon-delete" (click)="deleteButtonClickH()"></d-button>
+    </div>
+    <form dForm ngForm [labelSize]="'sm'">
+        <d-form-item>
+            <d-form-label>{{itemGroup.event.label}}</d-form-label>
+            <d-form-control>
+                <d-select [options]="itemGroup.event.options"
+                    name="event"
+                    [filterKey]="'label'"
+                    [valueKey]="'value'"
+                    [allowClear]="!!itemGroup.event.allowClear"
+                    [(ngModel)]="itemGroup.event.value"
+                    (ngModelChange)="eventValueChange(itemGroup.event.value)"
+                ></d-select>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label>{{itemGroup.fnBody.label}}</d-form-label>
+            <d-form-control>
+                <textarea dTextarea
+                  name="fnBody"
+                  [resize]="'vertical'"
+                  [(ngModel)]="itemGroup.fnBody.value"
+                  (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
+                ></textarea>
+            </d-form-control>
+        </d-form-item>
+    </form>
+</div>

@@ -2,7 +2,6 @@ import { Component, effect } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { cloneDeep } from 'src/helper/index'
 import addableAll from 'src/helper/addable'
-import type { Component as Comp } from 'src/types/component';
 import {
   Button as buttonBehaviorMeta,
   Modal as modalBehaviorMeta,
@@ -13,8 +12,10 @@ import {
   Pagination as PaginationBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
+import type { Component as Comp } from 'src/types/component';
 import type { BehaviorConfigItem } from 'src/types/config'
-import { B } from 'src/types/base';
+import type { B, N } from 'src/types/base';
+import { PageService } from 'src/app/service/page.service';
 // import type { Options, S,
 //   //  A, ULID, B, N, 
 //   // Options, 
@@ -35,7 +36,9 @@ export class BehaviorBoxComponent {
   curComp?: Comp | null
   componentBehaviorMeta: BehaviorConfigItem
   addable: B
-  constructor(private componentService: ComponentService) {
+  constructor(private componentService: ComponentService,
+    private pageService: PageService,
+  ) {
     this.addable = false
     this.componentBehaviorMeta = {
       event: {
@@ -117,5 +120,10 @@ export class BehaviorBoxComponent {
         fnBody: obj.fnBody.value,
       })
     }
+  }
+  removeH(i: N) {
+    this.componentBehaviorList.splice(i, 1)
+    this.componentService.removeBehaviorOfCurComponent(this.pageService.getCurPage()!.ulid, this.curComp!.ulid, i)
+    this.componentService.reqRemoveBehavior(this.curComp!.ulid, i)
   }
 }

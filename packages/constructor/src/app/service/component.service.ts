@@ -327,10 +327,23 @@ export class ComponentService {
       curComp.behavior.push(obj)
     }
   }
+  removeBehaviorOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
+    let tree = this._map.get(pageUlid)
+    if (tree) {
+      let component = tree.find(componentUlid)
+      component?.value.behavior.splice(index, 1)
+    }
+  }
   reqAddBehavior(value: BehaviorMetaItem) {
     return this.reqService.req(`${serviceUrl()}/components/behavior`, 'post', {
       ulid: this.curComponent()?.ulid,
       value,
+    })
+  }
+  reqRemoveBehavior(componentUlid: ULID, index: N) {
+    return this.reqService.req(`${serviceUrl()}/components/behavior`, 'delete', {
+      ulid: componentUlid,
+      index,
     })
   }
   // setItemsOfCurComponent(index: N, key: S, value: A) {
