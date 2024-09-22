@@ -1206,7 +1206,7 @@
         </tr>
     </tbody>
 </table>
-<h1>componentName</h1>
+<h1>pagination</h1>
 <h2>props</h2>
 <table>
     <thead>
@@ -1220,31 +1220,156 @@
     </thead>
     <tbody>
         <tr>
-            <td>title</td>
-            <td>title</td>
+            <td>pageSize</td>
+            <td>分页容量</td>
             <td>-</td>
-            <td>'title'</td>
+            <td>10</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>total</td>
+            <td>总条目数</td>
+            <td>-</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>e</td>
+            <td>分页容量的枚举值</td>
+            <td>-</td>
+            <td>5,10,20,50</td>
+            <td>以英文逗号分隔数字</td>
+        </tr>
+        <tr>
+            <td>pageSizeDirection</td>
+            <td>分页容量下拉框的展开方向</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>pageIndex</td>
+            <td>初始化页码</td>
+            <td>-</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>maxItems</td>
+            <td>分页最多显示按钮数</td>
+            <td>-</td>
+            <td>10</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>preLink</td>
+            <td>上一页按钮显示图标</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>nextLink</td>
+            <td>下一页按钮显示图标</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>大小</td>
+            <td>-</td>
+            <td>'sm'/''/'lg'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>canJumpPage</td>
+            <td>是否显示分页输入跳转</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>canChangePageSize</td>
+            <td>是否显示用于选择更改分页容量的下拉框</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>canViewTotal</td>
+            <td>是否显示总条目</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>totalItemText</td>
+            <td>总条目文本</td>
+            <td>-</td>
+            <td>'所有条目'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>goToText</td>
+            <td>跳至</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showJumpButton</td>
+            <td>是否显示跳转按钮</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showTruePageIndex</td>
+            <td>页码超出分页范围时候也显示当前页码的开关</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>lite</td>
+            <td>是否切换为极简模式</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showPageSelector</td>
+            <td>极简模式下是否显示页码下拉</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>haveConfigMenu</td>
+            <td>极简模式下是否显示配置</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>autoFixPageIndex</td>
+            <td>改变分页容量时是否自动修正页码</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>autoHide</td>
+            <td>是否自动隐藏</td>
+            <td>false/true</td>
+            <td>false</td>
             <td></td>
         </tr>
     </tbody>
 </table>
 <h2>slots</h2>
-<table>
-    <thead>
-        <tr>
-            <td>key</td>
-            <td>说明</td>
-            <td>备注</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>header</td>
-            <td>头部的插槽</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+-
 <h2>method</h2>
 <table>
     <thead>
@@ -1274,8 +1399,12 @@
     </thead>
     <tbody>
         <tr>
-            <td>onClose</td>
-            <td>关闭后</td>
+            <td>pageIndexChange</td>
+            <td>改变页码</td>
+        </tr>
+        <tr>
+            <td>pageSizeChange</td>
+            <td>改变分页容量</td>
         </tr>
     </tbody>
 </table>
