@@ -67,6 +67,7 @@ export class CompBoxComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
+          items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
         }
@@ -92,12 +93,18 @@ export class CompBoxComponent {
       case 'Input':
         this.componentRef.instance.data = {
           props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
       case 'Select':
         this.componentRef.instance.data = {
           props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
@@ -106,14 +113,16 @@ export class CompBoxComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
       case 'Icon':
         this.componentRef.instance.data = {
           props: this.data.props,
-          // behavior: this.data.behavior,
-          // items: this.data.items,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
@@ -121,7 +130,8 @@ export class CompBoxComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
-          // items: this.data.items,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
@@ -138,8 +148,8 @@ export class CompBoxComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
-          // items: this.data.items,
-          // slots: this.data.slots,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
         }
         break;
