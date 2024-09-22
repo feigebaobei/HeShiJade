@@ -1,9 +1,7 @@
-import type {N, B, A, S, ULID, O, SelectOptionsItem, ConfigItem, 
+import type {N, B, A, S, O, ConfigItem, 
     ConfigItemSelect,
-    ConfigItemInput,
     ConfigItemTextarea,
 } from './base'
-import type { Component } from './component'
 
 type PropsConfig = ConfigItem
 interface BehaviorConfigItem {

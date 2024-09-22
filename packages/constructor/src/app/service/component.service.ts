@@ -18,6 +18,7 @@ import type { Component, Category,
   ItemsMetaItem,
   ComponentMountItems,
   ComponentMountSlots,
+  BehaviorMetaItem,
  } from '../../types/component'
 import type { S, OA, ULID, A,
   N,
@@ -27,6 +28,7 @@ import type { S, OA, ULID, A,
 import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
+import { BehaviorConfigItem } from 'src/types/config';
 
 
 let clog = console.log
@@ -312,15 +314,24 @@ export class ComponentService {
     }
     clog('change after', curComp)
   }
-  setComponentsBehavior(
-    // type: UpdateType, 
-    index: N, key: BehaviorItemKey, value: S) {
+  setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()
     if(curComp) {
-      // let arr = curComp.behavior.groups
       let arr = curComp.behavior
       arr[index][key] = value
     }
+  }
+  addBehivorOfCurComponent(obj: BehaviorMetaItem) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      curComp.behavior.push(obj)
+    }
+  }
+  reqAddBehivor(value: BehaviorMetaItem) {
+    return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {
+      ulid: this.curComponent()?.ulid,
+      value,
+    })
   }
   // setItemsOfCurComponent(index: N, key: S, value: A) {
   // todo 可优化key的类型

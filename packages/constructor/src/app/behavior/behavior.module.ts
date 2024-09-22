@@ -10,6 +10,7 @@ import {
   FormModule,
   SelectModule,
   TextareaModule,
+  ButtonModule,
 } from 'ng-devui';
 
 
@@ -25,6 +26,7 @@ import {
     FormModule,
     SelectModule,
     TextareaModule,
+    ButtonModule,
   ],
   exports: [
     BehaviorBoxComponent

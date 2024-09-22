@@ -53,10 +53,8 @@ export class ItemsBoxComponent {
   addH() {
     if (this.curComponent) {
       let group = this.groupForConfig(this.curComponent.type)
-      // clog('group', group)
       this.groupList.push(group)
       let obj: ItemsMetaItem = {} as ItemsMetaItem
-      // group.forEach((item) => {
       groupTemplate[this.curComponent.type].forEach((item) => {
         let k: keyof ItemsMetaItem = item.key as unknown as keyof ItemsMetaItem
         obj[k] = item.value
@@ -76,7 +74,6 @@ export class ItemsBoxComponent {
   }
   groupForConfig(type: S): ConfigItem[] {
     let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
-    // clog('groupForConfig', r)
     return r
   }
 }

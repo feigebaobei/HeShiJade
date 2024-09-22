@@ -1,5 +1,5 @@
 import type { BehaviorConfigItem } from 'src/types/config'
-
+import type { S } from 'src/types/base'
 let clog = console.log
 
 // 指定组件的配置项
@@ -14,26 +14,6 @@ let Button: BehaviorConfigItem = {
     key: 'event',
     allowClear: true,
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  //   hide: function (itemGroup: BehaviorConfigItem) {
-  //     // this: Component
-  //     // itemGroup: 当前配置项组
-  //     clog('hide', !itemGroup.target.value)
-  //     return !itemGroup.target.value
-  //   },
-  //   hideListenerKey: 'target',
-  //   // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-  // },
   fnBody: {
     category: 'textarea',
     value: '',
@@ -256,3 +236,15 @@ export {
     Tabs,
     Pagination,
 }
+let all: {[k: S]: BehaviorConfigItem} = {
+    Button,
+    Modal,
+    Form,
+    Table,
+    Select,
+    // Icon, // 没有行为
+    Checkbox,
+    Tabs,
+    Pagination,
+}
+export default all
