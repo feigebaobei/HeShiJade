@@ -73,7 +73,7 @@ import { CompStackComponent } from './comp-stack/comp-stack.component';
   ],
   providers: [],
   exports: [
-    CompBoxComponent,
+    // CompBoxComponent,
     CompStackComponent,
   ],
 })
