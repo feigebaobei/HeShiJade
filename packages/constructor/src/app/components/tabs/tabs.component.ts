@@ -3,8 +3,6 @@ import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, createChildKey as cck, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
-// import { shareEvent } from 'src/helper';
-// import { shareEventName } from 'src/helper/config';
 import { createKvMap } from 'src/helper/kvMap';
 import { ulid } from 'ulid';
 // 数据
@@ -83,38 +81,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     this.componentList = []
     this.itemIndexSlotKeyMap = createKvMap()
     this.show = true
-    // this.listenAddItemCb = (payload) => {
-    //   let u = ulid()
-    //   this.itemIndexSlotKeyMap.set(String(payload.index), u)
-    //   // this.data.slots
-    //   clog('listenAddItemCb shareEventName', payload, this.itemIndexSlotKeyMap)
-    //   this.componentService.addSlots(u, '')
-    //   this.componentService.reqAddSlots(u, '')
-    //   clog('add items after', this.data)
-    // }
-    // this.listenRemoveItemCb = (payload) => {
-    //   let slotKey = this.itemIndexSlotKeyMap.get(String(payload.index))
-    //   // this.itemIndexSlotKeyMap.delete(String(payload.index))
-    //   this.deleteItemIndexSlotKeyMap({itemIndex: payload.index})
-    //   clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
-    //   let childrenUlid: ULID[] = []
-    //   // 删除slots
-    //   this.componentService.removeSlots(slotKey)
-    //   this.componentService.reqRemoveSlots(slotKey)
-    //   // 删除子组件
-    //   let compList = compatibleArray(this.compObj[this.createChildKey({slotKey})])
-    //   clog('compList', compList)
-    //   compList.forEach(comp => {
-    //     this.componentService.deleteByUlid(this.curPage.ulid, comp.ulid)
-    //     childrenUlid.push(comp.ulid)
-    //     childrenUlid.push(
-    //       ...this.componentService.getChildrenComponent(this.curPage.ulid, comp.ulid).map(component => component.ulid)
-    //     )
-    //   })
-    //   delete this.compObj[this.createChildKey({slotKey})]
-    //   clog('compObj', this.compObj)
-    //   this.componentService.reqDeleteComponent('', childrenUlid)
-    // }
   }
   ngOnInit() {
     this.compObj = {}
@@ -137,14 +103,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     this.listen()
     // 设置默认选中的tab对应的子组件列表
     this.selectTab()
-  }
-  ngOnDestroy(): void {
-    // shareEvent.off(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
-    // shareEvent.off(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
-  }
-  listen() {
-    // shareEvent.on(shareEventName.TABSADDITEM + this.data.ulid, this.listenAddItemCb)
-    // shareEvent.on(shareEventName.TABSREMOVEITEM + this.data.ulid, this.listenRemoveItemCb)
   }
   createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
     let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
@@ -285,5 +243,9 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         this.itemIndexSlotKeyMap.delete(String(i))
       }
     }
+  }
+  ngOnDestroy(): void {
+  }
+  listen() {
   }
 }

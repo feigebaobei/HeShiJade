@@ -3,8 +3,6 @@ import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
 import addableAll from 'src/helper/addable'
 import { cloneDeep, compatibleArray } from 'src/helper/index'
-// import { shareEvent } from 'src/helper';
-// import { shareEventName } from 'src/helper/config';
 // type
 import type { B, ConfigItem, N, S } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
@@ -61,7 +59,6 @@ export class ItemsBoxComponent {
       })
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
-      // shareEvent.emit(shareEventName.TABSADDITEM + this.curComponent.ulid, {index: this.groupList.length - 1})
     }
   }
   removeH(i: N) {
@@ -69,7 +66,6 @@ export class ItemsBoxComponent {
     this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
     if (this.curComponent) {
       this.componentService.reqRemoveItems(this.curComponent.ulid, i)
-      // shareEvent.emit(shareEventName.TABSREMOVEITEM + this.curComponent.ulid, {index: i})
     }
   }
   groupForConfig(type: S): ConfigItem[] {
