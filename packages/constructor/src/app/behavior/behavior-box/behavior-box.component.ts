@@ -13,7 +13,7 @@ import {
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
-import type { BehaviorConfigItem } from 'src/types/config'
+import type { BehaviorConfigGroup } from 'src/types/config'
 import type { B, N } from 'src/types/base';
 import { PageService } from 'src/app/service/page.service';
 // import type { Options, S,
@@ -32,9 +32,9 @@ let clog = console.log
   styleUrls: ['./behavior-box.component.sass']
 })
 export class BehaviorBoxComponent {
-  componentBehaviorList: BehaviorConfigItem[]
+  componentBehaviorList: BehaviorConfigGroup[]
   curComp?: Comp | null
-  componentBehaviorMeta: BehaviorConfigItem
+  componentBehaviorMeta: BehaviorConfigGroup
   addable: B
   constructor(private componentService: ComponentService,
     private pageService: PageService,
@@ -65,9 +65,9 @@ export class BehaviorBoxComponent {
       }
     })
   }
-  setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigItem) {
+  setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigGroup) {
     this.curComp!.behavior.forEach(item => {
-      let arr: BehaviorConfigItem = cloneDeep(compBehaviorMeta)
+      let arr: BehaviorConfigGroup = cloneDeep(compBehaviorMeta)
       Object.entries(item).forEach(([k, v]) => {
         let o = arr.find(item => item.key === k)
         if (o) {
@@ -109,7 +109,7 @@ export class BehaviorBoxComponent {
       }
   }
   addH() {
-    let group: BehaviorConfigItem = [] // as BehaviorConfigItem
+    let group: BehaviorConfigGroup = [] // as BehaviorConfigGroup
     if (this.curComp) {
       Object.values(behaviorTemplate[this.curComp.type]).forEach((item) => {
         // group[group.key as unknown as 'event' | 'fnBody'] = cloneDeep(group)

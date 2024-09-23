@@ -3,9 +3,9 @@
 |点击model的关闭时应该关闭|||
 |把事件触发放在pool里，如tabs|done||
 |修改事件的配置类型由Object改为Array|done||
-|init行为配置面板|doing||
-|删除behavior.ts中的注释|||
-|rename|||
+|init行为配置面板|done||
+|删除behavior.ts中的注释|done||
+|rename|done||
 |分支|f_lc||
 |要上生产的内容|||
 ||支持配置多个事件||

@@ -4,23 +4,23 @@ import type {N, B, A, S, O, ConfigItem,
 } from './base'
 
 type PropsConfig = ConfigItem
-// interface BehaviorConfigItem {
+// interface BehaviorConfigGroup {
     // event: ConfigItemSelect<S>
     // fnBody: ConfigItemTextarea
 //   }
 
 // rename
-type BehaviorConfigItem2 = ConfigItemSelect<S> | ConfigItemTextarea
-type BehaviorConfigItem = BehaviorConfigItem2[]
+type BehaviorConfigItem = ConfigItemSelect<S> | ConfigItemTextarea
+type BehaviorConfigGroup = BehaviorConfigItem[]
 // or
-// interface BehaviorConfigItem extends Array<ConfigItemSelect<S> | ConfigItemTextarea> {
+// interface BehaviorConfigGroup extends Array<ConfigItemSelect<S> | ConfigItemTextarea> {
 //     0: ConfigItemSelect<S>
 //     1: ConfigItemTextarea
 // }
   
 interface BehaviorConfig {
     addable: B
-    groups: BehaviorConfigItem[]
+    groups: BehaviorConfigGroup[]
 }
 interface ItemsConfig {
     addable: B
@@ -39,7 +39,7 @@ export type {
     PropsConfig,
     BehaviorConfig,
     // BehaviorConfigGroupsItem,
-    BehaviorConfigItem,
+    BehaviorConfigGroup,
     ItemsConfig,
     SlotsConfig,
     PropsConfigItem,

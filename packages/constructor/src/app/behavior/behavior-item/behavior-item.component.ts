@@ -6,17 +6,17 @@ import { B, F, N, S,
   ConfigItemTextarea, } from 'src/types/base';
 import { createDebounceFn } from 'src/helper/index';
 import { debounceTime } from 'src/helper/config';
-import type { BehaviorConfigItem } from 'src/types/config';
+import type { BehaviorConfigGroup } from 'src/types/config';
 
 let clog = console.log
-type newBehaviorConfigItem = Required<BehaviorConfigItem>
+type newBehaviorConfigItem = Required<BehaviorConfigGroup>
 @Component({
   selector: 'app-behavior-item',
   templateUrl: './behavior-item.component.html',
   styleUrls: ['./behavior-item.component.sass']
 })
 export class BehaviorItemComponent implements OnInit {
-  @Input() behavior!: BehaviorConfigItem
+  @Input() behavior!: BehaviorConfigGroup
   @Input() index!: N
   // eventMap: Map<S, {f: F, targetKey: S}> // todo 抽象为
   // itemGroup: newBehaviorConfigItem
@@ -45,7 +45,7 @@ export class BehaviorItemComponent implements OnInit {
     // this.behavior.forEach(item => {
     //   if (item.hideListenerKey) {
     //     this.eventMap.set(item.hideListenerKey, {
-    //       f: (behaviorObj: BehaviorConfigItem) => {
+    //       f: (behaviorObj: BehaviorConfigGroup) => {
     //         let f = item.hide
     //         if (f) {
     //           return f(behaviorObj)
@@ -58,10 +58,10 @@ export class BehaviorItemComponent implements OnInit {
     //   }
     // })
   }
-  // listenerChange(listenerKey: S, behaviorObj: BehaviorConfigItem) {
+  // listenerChange(listenerKey: S, behaviorObj: BehaviorConfigGroup) {
   //   let obj = this.eventMap.get(listenerKey)
   //   if (obj) {
-  //     this.itemGroup[(obj.targetKey as keyof BehaviorConfigItem)].hideCalc = obj.f(behaviorObj)
+  //     this.itemGroup[(obj.targetKey as keyof BehaviorConfigGroup)].hideCalc = obj.f(behaviorObj)
   //   }
   // }
   eventValueChange(value: S) {

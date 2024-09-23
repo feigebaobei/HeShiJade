@@ -28,7 +28,7 @@ import type { S, OA, ULID, A,
 import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
-import { BehaviorConfigItem } from 'src/types/config';
+import { BehaviorConfigGroup } from 'src/types/config';
 
 
 let clog = console.log
