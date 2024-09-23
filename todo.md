@@ -1,12 +1,12 @@
 ||||
 |-|-|-|
 |点击model的关闭时应该关闭|||
-|停用shareEvent|doing||
+|停用shareEvent|done||
 |支持删除事件|done||
 ||前端支持删除多个事件|done||
 ||后端支持删除多个事件|done||
 |删除behavior.ts是注释的代码|done||
-|把事件触发放在pool里，如tabs|||
+|把事件触发放在pool里，如tabs|doing||
 |修改事件配置的类型为Array|||
 |分支|f_lc||
 |要上生产的内容|||
