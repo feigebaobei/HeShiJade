@@ -67,13 +67,19 @@ export class BehaviorBoxComponent {
   }
   setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigItem) {
     this.curComp!.behavior.forEach(item => {
-      let o = cloneDeep(compBehaviorMeta)
+      let arr: BehaviorConfigItem = cloneDeep(compBehaviorMeta)
       Object.entries(item).forEach(([k, v]) => {
-        if (o.hasOwnProperty(k)) {
-          o[k].value = v
+        let o = arr.find(item => item.key === k)
+        if (o) {
+          o.value = v
         }
+        // if (arr.hasOwnProperty(k)) {
+        //   arr[k].value = v
+        // }
+        clog('k', k, v, o)
       })
-      this.componentBehaviorList.push(o)
+      this.componentBehaviorList.push(arr)
+      clog('this.componentBehaviorList', this.componentBehaviorList)
     })
   }
   curComponentChange() {

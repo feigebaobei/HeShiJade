@@ -18,14 +18,14 @@ type newBehaviorConfigItem = Required<BehaviorConfigItem>
 export class BehaviorItemComponent implements OnInit {
   @Input() behavior!: BehaviorConfigItem
   @Input() index!: N
-  eventMap: Map<S, {f: F, targetKey: S}> // todo 抽象为
+  // eventMap: Map<S, {f: F, targetKey: S}> // todo 抽象为
   // itemGroup: newBehaviorConfigItem
   fnBodyTextareatChangeH: F
   eventName: ConfigItemSelect<S>
   fnBodyTextarea: ConfigItemTextarea
   @Output() remove = new EventEmitter()
   constructor(private componentService: ComponentService) {
-    this.eventMap = new Map()
+    // this.eventMap = new Map()
     // this.itemGroup = {} as newBehaviorConfigItem
     this.fnBodyTextareatChangeH = createDebounceFn((v: S) => {
       this.componentService.setComponentsBehavior(this.index, 'fnBody', v)
@@ -42,21 +42,21 @@ export class BehaviorItemComponent implements OnInit {
     this.eventName = this.behavior[0] as ConfigItemSelect<S>
     this.fnBodyTextarea = this.behavior[1] as ConfigItemTextarea
     // Array.from(Object.values(this.behavior)).forEach(item => {
-    this.behavior.forEach(item => {
-      if (item.hideListenerKey) {
-        this.eventMap.set(item.hideListenerKey, {
-          f: (behaviorObj: BehaviorConfigItem) => {
-            let f = item.hide
-            if (f) {
-              return f(behaviorObj)
-            } else {
-              return true
-            }
-          },
-          targetKey: item.key
-        })
-      }
-    })
+    // this.behavior.forEach(item => {
+    //   if (item.hideListenerKey) {
+    //     this.eventMap.set(item.hideListenerKey, {
+    //       f: (behaviorObj: BehaviorConfigItem) => {
+    //         let f = item.hide
+    //         if (f) {
+    //           return f(behaviorObj)
+    //         } else {
+    //           return true
+    //         }
+    //       },
+    //       targetKey: item.key
+    //     })
+    //   }
+    // })
   }
   // listenerChange(listenerKey: S, behaviorObj: BehaviorConfigItem) {
   //   let obj = this.eventMap.get(listenerKey)
