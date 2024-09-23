@@ -4,26 +4,26 @@
     </div>
     <form dForm ngForm [labelSize]="'sm'">
         <d-form-item>
-            <d-form-label>{{itemGroup.event.label}}</d-form-label>
+            <d-form-label>{{eventName.label}}</d-form-label>
             <d-form-control>
-                <d-select [options]="itemGroup.event.options"
+                <d-select [options]="eventName.options"
                     name="event"
                     [filterKey]="'label'"
                     [valueKey]="'value'"
-                    [allowClear]="!!itemGroup.event.allowClear"
-                    [(ngModel)]="itemGroup.event.value"
-                    (ngModelChange)="eventValueChange(itemGroup.event.value)"
+                    [allowClear]="!!eventName.allowClear"
+                    [(ngModel)]="eventName.value"
+                    (ngModelChange)="eventValueChange(eventName.value)"
                 ></d-select>
             </d-form-control>
         </d-form-item>
         <d-form-item>
-            <d-form-label>{{itemGroup.fnBody.label}}</d-form-label>
+            <d-form-label>{{fnBodyTextarea.label}}</d-form-label>
             <d-form-control>
                 <textarea dTextarea
                   name="fnBody"
                   [resize]="'vertical'"
-                  [(ngModel)]="itemGroup.fnBody.value"
-                  (ngModelChange)="fnBodyTextareatChangeH(itemGroup.fnBody.value)"
+                  [(ngModel)]="fnBodyTextarea.value"
+                  (ngModelChange)="fnBodyTextareatChangeH(fnBodyTextarea.value)"
                 ></textarea>
             </d-form-control>
         </d-form-item>

@@ -38,8 +38,11 @@ let opProps = (pci: PropsConfigItem) => {
 let opBehavior = (p: BehaviorConfigItem) => {
     let arr: BehaviorMetaItem[] = []
     let o: BehaviorMetaItem = {} as BehaviorMetaItem
-    Object.entries(p).forEach((a) => {
-        o[a[0] as keyof BehaviorConfigItem] = a[1].value
+    // Object.entries(p).forEach((a) => {
+    //     o[a[0] as keyof BehaviorConfigItem] = a[1].value
+    // })
+    p.forEach(item => {
+        o[item.key] = item.value
     })
     arr.push(o)
     return arr

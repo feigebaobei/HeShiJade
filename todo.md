@@ -1,19 +1,15 @@
 ||||
 |-|-|-|
 |点击model的关闭时应该关闭|||
-|停用shareEvent|done||
-|支持删除事件|done||
-||前端支持删除多个事件|done||
-||后端支持删除多个事件|done||
-|删除behavior.ts是注释的代码|done||
-|把事件触发放在pool里，如tabs|doing||
-|修改事件配置的类型为Array|||
+|把事件触发放在pool里，如tabs|done||
+|修改事件的配置类型由Object改为Array|doing||
 |分支|f_lc||
 |要上生产的内容|||
 ||支持配置多个事件||
-|修正icon/select的props文案|||
-|form/table/input/select/icon/checkbox/tabs/pagination组件支持事件、方法。本次注重打通逻辑，api有且少。后续会增强。|||
-|官网增加form/table/input/select/icon/checkbox/tabs/pagination组件的api|||
+||停用shareEvent||
+||修正icon/select的props文案||
+||form/table/input/select/icon/checkbox/tabs/pagination组件支持事件、方法。本次注重打通逻辑，api有且少。后续会增强。||
+||官网增加form/table/input/select/icon/checkbox/tabs/pagination组件的api||
 
 |取消行为配置项的显隐逻辑|||
 |官网增加助手函数子导航|||
