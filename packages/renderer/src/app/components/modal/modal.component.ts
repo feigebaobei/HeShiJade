@@ -6,8 +6,12 @@ import { pool } from 'src/helper/pool';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
 import type { A, O } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component';
-
+import type { ModalComponent as MC } from 'ng-devui/modal';
 let clog = console.log
+interface M {
+  modalInstance: MC
+  modalContentInstance: any
+}
 
 @Component({
   selector: 'app-modal',
@@ -20,60 +24,67 @@ export class ModalComponent implements OnInit, OnDestroy{
   childrenHeader: Comp[]
   childrenBody: Comp[]
   childrenFooter: Comp[]
+  mc: M | null
   constructor(
     private modalService: ModalService,
     private componentService: ComponentService,
   ) {
     this.config = {
       // id: 'dialog-service',
-      title: 'title', // 使用传入的数据
+      // title: 'title', // 使用传入的数据
       width: '346px',
       // zIndex: 150,
-      showAnimation: true,
-      backdropCloseable: true,
-      placement: 'center',
-      offsetX: '0px',
-      offsetY: '0px',
-      bodyScrollable: true,
-      escapable: true,
-      dMoveable: true,
-      maxHeight: '600px',
       component: ModalCompComponent,
-      onClose: () => console.log('on dialog closed'),
       data: {
         // ulid: this.data.ulid,
         // props: this.data.props,
         // items: this.data.items,
         // slots: this.data.slots,
         // behavior: this.data.behavior,
+        onClose: (event: Event) => {
+          clog('close', event, this, this.mc)
+          this.mc?.modalInstance.hide()
+        }
       },
+      showAnimation: true,
+      backdropCloseable: true,
+      onClose: () => console.log('on dialog closed'),
+      placement: 'center',
+      offsetX: '0px',
+      offsetY: '0px',
+      bodyScrollable: true,
+      escapable: true,
+      // dMoveable: true,
+      // maxHeight: '600px',
     };
     this.childrenHeader = []
     this.childrenBody = []
     this.childrenFooter = []
+    this.mc = null
   }
   openDialog() {
-    const results = this.modalService.open({
+    // const results = this.modalService.open({
+    this.mc = this.modalService.open({
       ...this.config,
-      dialogtype: 'standard',
-      buttons: [
-        {
-          cssClass: 'primary',
-          text: 'Ok',
-          disabled: false,
-          handler: ($event: Event) => {
-            results.modalInstance.hide();
-          },
-        },
-        {
-          id: 'btn-cancel',
-          cssClass: 'common',
-          text: 'Cancel',
-          handler: ($event: Event) => {
-            results.modalInstance.hide();
-          },
-        },
-      ],
+      // dialogtype: 'standard',
+      // buttons: [
+      //   {
+      //     cssClass: 'primary',
+      //     text: 'Ok',
+      //     disabled: false,
+      //     handler: ($event: Event) => {
+      //       results.modalInstance.hide();
+      //     },
+      //   },
+      //   {
+      //     id: 'btn-cancel',
+      //     cssClass: 'common',
+      //     text: 'Cancel',
+      //     handler: ($event: Event) => {
+      //       results.modalInstance.hide();
+      //     },
+      //   },
+      // ],
     });
   }
   setProps(o: O) {
@@ -83,9 +94,14 @@ export class ModalComponent implements OnInit, OnDestroy{
     })
   }
   ngOnInit(): void {
-    this.config.title = this.data.props['title']
+    // this.config.title = this.data.props['title']
     this.config.width = this.data.props['width']
-    // this.config.zIndex = this.data.props.zIndex
+    this.config.data.ulid = this.data.ulid
+    this.config.data.props = this.data.props
+    this.config.data.items = this.data.items
+    this.config.data.slots = this.data.slots
+    this.config.data.behavior = this.data.behavior
+    // this.config.data.onClose = () => {}
     this.config.showAnimation = this.data.props['showAnimation']
     this.config.backdropCloseable = this.data.props['backdropCloseable']
     this.config.placement = this.data.props['placement']
@@ -93,12 +109,7 @@ export class ModalComponent implements OnInit, OnDestroy{
     this.config.offsetY = this.data.props['offsetY']
     this.config.bodyScrollable = this.data.props['bodyScrollable']
     this.config.escapable = this.data.props['escapable']
-    this.config.dMoveable = this.data.props['dMoveable']
-    this.config.data.ulid = this.data.ulid
-    this.config.data.props = this.data.props
-    this.config.data.items = this.data.items
-    this.config.data.slots = this.data.slots
-    this.config.data.behavior = this.data.behavior
+    // this.config.dMoveable = true //this.data.props['dMoveable']
     if (this.data.props['visible']) {
       this.openDialog()
     }

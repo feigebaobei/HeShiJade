@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, createChildKey } from 'src/helper/index'
 import { A, B } from 'src/types/base';
@@ -18,13 +18,21 @@ export class ModalCompComponent implements OnInit{
   componenntListBody: Comp[]
   componenntListFooter: Comp[]
   show: B
+  parent: HTMLElement
+  // @Output() close = new EventEmitter()
   constructor(
-    private componentService: ComponentService
+    private componentService: ComponentService,
+    private elr: ElementRef,
   ) {
     this.componenntListHeader = []
     this.componenntListBody = []
     this.componenntListFooter = []
     this.show = true
+    this.parent = this.elr.nativeElement.parentElement; // 关闭方法没用到它
+  }
+  iconClickH(event: Event) {
+    // this.close.emit()
+    this.data.onClose(event)
   }
   ngOnInit() {
     new Promise((s, _j) => {

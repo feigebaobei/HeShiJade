@@ -1,11 +1,14 @@
 ||||
 |-|-|-|
-|点击model的关闭时应该关闭|||
+|点击model的关闭时应该关闭|doing||
 |把事件触发放在pool里，如tabs|done||
 |修改事件的配置类型由Object改为Array|done||
 |init行为配置面板|done||
 |删除behavior.ts中的注释|done||
+|在web-site中更新behavior的数据类型|||
 |rename|done||
+|删除渲染侧的shareEvent|||
+|删除应用时有未删除user.firstApplicationUlid的bug|||
 |分支|f_lc||
 |要上生产的内容|||
 ||支持配置多个事件||
