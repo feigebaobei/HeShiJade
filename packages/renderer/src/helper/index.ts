@@ -2,7 +2,7 @@ import type { A, N, S, F } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 // import { DoublyChain } from 'data-footstone';
-import shareEvent from './share-event';
+// import shareEvent from './share-event';
 
 
 let reqToPromise = (fn: Observable<ResponseData>): Promise<ResponseData> => {
@@ -58,7 +58,7 @@ export {
   reqToPromise,
   // createCompKey,
   // arrToChain,
-  shareEvent,
+  // shareEvent,
   clog,
   cdir,
   createChildKey,

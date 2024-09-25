@@ -1,3 +1,4 @@
+// for delete 2024/12.01+
 import { A, S } from 'src/types/base';
 
 let clog = console.log

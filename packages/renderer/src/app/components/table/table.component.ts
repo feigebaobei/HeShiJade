@@ -3,7 +3,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { DataService } from 'src/app/service/data.service';
 import { cdir, clog } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
-import { shareEvent } from 'src/helper';
+// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 // type
 import type { A, S, ULID, O, D, ReqMethod, B, } from 'src/types/base';
@@ -84,9 +84,9 @@ export class TableComponent implements OnInit {
       })
       return true
     })
-    shareEvent.on(this.data.ulid, (payload) => {
-      this.basicDataSource = payload
-    })
+    // shareEvent.on(this.data.ulid, (payload) => {
+    //   this.basicDataSource = payload
+    // })
     pool.register(this.data.ulid, this, this.data.behavior)
   }
   ngOnDestroy() {

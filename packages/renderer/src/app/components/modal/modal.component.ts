@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
-import { shareEvent } from 'src/helper';
+// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
 import type { A, O } from 'src/types/base';
@@ -113,12 +113,12 @@ export class ModalComponent implements OnInit, OnDestroy{
     if (this.data.props['visible']) {
       this.openDialog()
     }
-    shareEvent.on(this.data.ulid, (payload) => {
-      let obj = JSON.parse(payload)
-      if (obj.visible) {
-        this.openDialog()
-      }
-    })
+    // shareEvent.on(this.data.ulid, (payload) => {
+    //   let obj = JSON.parse(payload)
+    //   if (obj.visible) {
+    //     this.openDialog()
+    //   }
+    // })
     let tree = this.componentService.getTreeByKey()
     if (tree) {
       let curNode = tree.find(this.data.ulid)!
