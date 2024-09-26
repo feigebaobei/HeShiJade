@@ -247,6 +247,6 @@ export class ListComponent implements OnInit {
     // 在service中删除应用
     this.appService.deleteApp(app.ulid)
     // 在userService中删除应用
-    this.userService.deleteApp(app.ulid, this.appList[0].ulid)
+    this.userService.deleteApp(app.ulid, this.appList[0]?.ulid || '')
   }
 }

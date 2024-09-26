@@ -4,6 +4,7 @@
 |在web-site中更新behavior的数据类型|done||
 |删除渲染侧的shareEvent|先注释了||
 |删除应用时有未删除user.firstApplicationUlid的bug|doing|创建2个应用，先删除第一个应用，就出错了。|
+||删除当前应用时应该清空后应用的prevUlid||
 |分支|f_lc||
 |要上生产的内容|||
 ||支持配置多个事件||
