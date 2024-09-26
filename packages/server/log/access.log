@@ -101,3 +101,12 @@
 {"level":30,"time":1727367614780,"pid":19172,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
 {"level":30,"time":1727367621463,"pid":19243,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
 {"level":30,"time":1727367680812,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1727367749888,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727367790982,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727367809939,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J8QJ963TKZJSG5EPYDJRQ4EN&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J8QJ963TKZJSG5EPYDJRQ4EN","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1727367810403,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J8QJ963TKZJSG5EPYDJRQ4EN&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1727367812695,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727367827138,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J8QG81RKM27MKJ9KYHJPH682&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J8QG81RKM27MKJ9KYHJPH682","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1727367827262,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J8QG81RKM27MKJ9KYHJPH682&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1727367829604,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727367848826,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J8QJ9DJN8VNH5JCYTJEERQAZ&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J8QJ9DJN8VNH5JCYTJEERQAZ","envs":["dev","test","pre","prod"]}}
