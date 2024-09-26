@@ -65,10 +65,6 @@ let ssoClientConfig = {
         logoutMethod: 'delete' as Method,
     },
 }
-let shareEventName = {
-    'TABSADDITEM': 'Tabs.addItem',
-    'TABSREMOVEITEM': 'Tabs.removeItem',
-}
 let debounceTime = 400
 
 export {
@@ -79,6 +75,5 @@ export {
     COMPONENTTOTALMAXOFPAGE,
     // ssoClientParams,
     ssoClientConfig,
-    shareEventName,
     debounceTime,
 }

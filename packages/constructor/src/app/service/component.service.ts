@@ -18,6 +18,7 @@ import type { Component, Category,
   ItemsMetaItem,
   ComponentMountItems,
   ComponentMountSlots,
+  BehaviorMetaItem,
  } from '../../types/component'
 import type { S, OA, ULID, A,
   N,
@@ -27,6 +28,7 @@ import type { S, OA, ULID, A,
 import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
+import { BehaviorConfigGroup } from 'src/types/config';
 
 
 let clog = console.log
@@ -312,17 +314,38 @@ export class ComponentService {
     }
     clog('change after', curComp)
   }
-  setComponentsBehavior(
-    // type: UpdateType, 
-    index: N, key: BehaviorItemKey, value: S) {
+  setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()
     if(curComp) {
-      // let arr = curComp.behavior.groups
       let arr = curComp.behavior
       arr[index][key] = value
     }
   }
-  // setItemsOfCurComponent(index: N, key: S, value: A) {
+  addBehaviorOfCurComponent(obj: BehaviorMetaItem) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      curComp.behavior.push(obj)
+    }
+  }
+  removeBehaviorOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
+    let tree = this._map.get(pageUlid)
+    if (tree) {
+      let component = tree.find(componentUlid)
+      component?.value.behavior.splice(index, 1)
+    }
+  }
+  reqAddBehavior(value: BehaviorMetaItem) {
+    return this.reqService.req(`${serviceUrl()}/components/behavior`, 'post', {
+      ulid: this.curComponent()?.ulid,
+      value,
+    })
+  }
+  reqRemoveBehavior(componentUlid: ULID, index: N) {
+    return this.reqService.req(`${serviceUrl()}/components/behavior`, 'delete', {
+      ulid: componentUlid,
+      index,
+    })
+  }
   // todo 可优化key的类型
   setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options', value: A) {
     let curComp = this.curComponent()

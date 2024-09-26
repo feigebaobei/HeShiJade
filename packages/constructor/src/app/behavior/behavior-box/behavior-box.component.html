@@ -1,7 +1,12 @@
-<!-- <p>behavior-box works! str</p> -->
-
 <app-behavior-item
     *ngFor="let item of componentBehaviorList; let i = index"
     [behavior]="item"
     [index]="i"
+    (remove)="removeH(i)"
 ></app-behavior-item>
+<d-button
+    bsStyle="common"
+    circled="true"
+    *ngIf="addable"
+    (click)="addH()"
+>增加一项</d-button>

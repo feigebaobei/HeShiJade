@@ -27,10 +27,9 @@ interface GridLayoutDefault {
   noResize: B
 }
 interface BehaviorMetaItem {
-  event: S
-  // target: S
-  // payload: S
-  fnBody: S
+  // event: S
+  // fnBody: S
+  [k: S]: S
 }
 // button组件中需要指明文本
 interface ItemsMetaItemString {

@@ -1,10 +1,10 @@
-import type { BehaviorConfigItem } from 'src/types/config'
-
+import type { BehaviorConfigGroup } from 'src/types/config'
+import type { S } from 'src/types/base'
 let clog = console.log
 
-// 指定组件的配置项
-let Button: BehaviorConfigItem = {
-  event: {
+
+let Button: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       {label: '单击', value: 'click'},
@@ -14,35 +14,15 @@ let Button: BehaviorConfigItem = {
     key: 'event',
     allowClear: true,
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  //   hide: function (itemGroup: BehaviorConfigItem) {
-  //     // this: Component
-  //     // itemGroup: 当前配置项组
-  //     clog('hide', !itemGroup.target.value)
-  //     return !itemGroup.target.value
-  //   },
-  //   hideListenerKey: 'target',
-  //   // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-let Modal: BehaviorConfigItem = {
-  event: {
+]
+let Modal: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       {label: '关闭后', value: 'onClose'},
@@ -52,28 +32,15 @@ let Modal: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  //   hide: () => false
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-let Form: BehaviorConfigItem = {
-  event: {
+]
+let Form: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       {label: '提交', value: 'submit'},
@@ -84,35 +51,15 @@ let Form: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  //   // hide: function (itemGroup: BehaviorConfigItem) {
-  //   //   // // this: Component
-  //   //   // // itemGroup: 当前配置项组
-  //   //   // clog('hide', !itemGroup.target.value)
-  //   //   // return !itemGroup.target.value
-  //   // },
-  //   // hideListenerKey: 'target',
-  //   // hideCalc: true, // 初始值. // 不应该设置初始值，需要在init时计算。
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-let Table: BehaviorConfigItem = {
-  event: {
+]
+let Table: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       {label: '改变行勾选', value: 'rowCheckChange'},
@@ -135,27 +82,15 @@ let Table: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-let Select: BehaviorConfigItem = {
-  event: {
+]
+let Select: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       {label: '改变行勾选', value: 'valueChange'},
@@ -166,28 +101,15 @@ let Select: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-
-let Checkbox: BehaviorConfigItem = {
-  event: {
+]
+let Checkbox: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       // {label: '改变前', value: 'beforeChange'},
@@ -197,28 +119,14 @@ let Checkbox: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-
-let Tabs: BehaviorConfigItem = {
-  event: {
+]
+let Tabs: BehaviorConfigGroup = [{
     category: 'select',
     options: [
       {label: '切换', value: 'activeTabChange'},
@@ -229,28 +137,15 @@ let Tabs: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
-
-let Pagination: BehaviorConfigItem = {
-  event: {
+]
+let Pagination: BehaviorConfigGroup = [
+  {
     category: 'select',
     options: [
       {label: '改变页码', value: 'pageIndexChange'},
@@ -261,25 +156,16 @@ let Pagination: BehaviorConfigItem = {
     label: '事件',
     key: 'event',
   },
-  // target: {
-  //   category: 'input',
-  //   value: '',
-  //   label: '目标',
-  //   key: 'target',
-  // },
-  // payload: {
-  //   category: 'textarea',
-  //   value: '',
-  //   label: '载荷',
-  //   key: 'payload',
-  // },
-  fnBody: {
+  {
     category: 'textarea',
     value: '',
     label: '方法体',
     key: 'fnBody',
   }
-}
+]
+
+
+
 export {
     Button,
     Modal,
@@ -291,3 +177,15 @@ export {
     Tabs,
     Pagination,
 }
+let all: {[k: S]: BehaviorConfigGroup} = {
+    Button,
+    Modal,
+    Form,
+    Table,
+    Select,
+    // Icon, // 没有行为
+    Checkbox,
+    Tabs,
+    Pagination,
+}
+export default all

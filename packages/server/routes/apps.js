@@ -188,6 +188,28 @@ router.route('/')
       }).catch(() => {
         return Promise.reject(200030)
       }))
+      let arr = []
+      if (app.nextUlid) {
+        arr.push({
+          updateOne: {
+            filter: {ulid: app.nextUlid},
+            update: {
+              $set: {prevUlid: app.prevUlid}
+            }
+          }
+        })
+      }
+      if (app.prevUlid) {
+        arr.push({
+          updateOne: {
+            filter: {ulid: app.prevUlid},
+            update: {
+              $set: {nextUlid: app.nextUlid}
+            }
+          }
+        })
+      }
+      pArr.push(lowcodeDb.collection(envObj.appTable).bulkWrite(arr))
       pArr.push(lowcodeDb.collection(envObj.pageTable).deleteMany({appUlid: req.query.appUlid}).then(() => {
         stepRecorder.add(`page_${env}`)
         return true

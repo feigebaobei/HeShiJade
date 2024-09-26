@@ -1,21 +1,26 @@
-import type {N, B, A, S, ULID, O, SelectOptionsItem, ConfigItem, 
+import type {N, B, A, S, O, ConfigItem, 
     ConfigItemSelect,
-    ConfigItemInput,
     ConfigItemTextarea,
 } from './base'
-import type { Component } from './component'
 
 type PropsConfig = ConfigItem
-interface BehaviorConfigItem {
-    event: ConfigItemSelect<S>
-    // target: ConfigItemInput
-    // payload: ConfigItemTextarea & ThisType<Component> // 思考为了hide方法的可以得到component对象，使用this还是使用参数。 2024.06.01+
-    fnBody: ConfigItemTextarea
-  }
+// interface BehaviorConfigGroup {
+    // event: ConfigItemSelect<S>
+    // fnBody: ConfigItemTextarea
+//   }
+
+// rename
+type BehaviorConfigItem = ConfigItemSelect<S> | ConfigItemTextarea
+type BehaviorConfigGroup = BehaviorConfigItem[]
+// or
+// interface BehaviorConfigGroup extends Array<ConfigItemSelect<S> | ConfigItemTextarea> {
+//     0: ConfigItemSelect<S>
+//     1: ConfigItemTextarea
+// }
   
 interface BehaviorConfig {
     addable: B
-    groups: BehaviorConfigItem[]
+    groups: BehaviorConfigGroup[]
 }
 interface ItemsConfig {
     addable: B
@@ -34,7 +39,7 @@ export type {
     PropsConfig,
     BehaviorConfig,
     // BehaviorConfigGroupsItem,
-    BehaviorConfigItem,
+    BehaviorConfigGroup,
     ItemsConfig,
     SlotsConfig,
     PropsConfigItem,

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy, } from '@angular/core';
-import { shareEvent } from 'src/helper';
+// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 // type
 import type { A, O, S } from 'src/types/base';

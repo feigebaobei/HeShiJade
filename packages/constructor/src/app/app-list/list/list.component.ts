@@ -231,22 +231,22 @@ export class ListComponent implements OnInit {
   }
   appDeleteClickH($event: Event, index: N) {
     $event.stopPropagation()
-    // 在本组件中删除
+    // 在本组件中删除应用项
     let app = this.appList[index]
-    // clog(app)
     this.appList.splice(index, 1)
     // 在服务器中删除
     this.appService.reqDeleteApp(app.ulid, ['dev', 'test', 'pre', 'prod'])
-    // 在service中删除
+    // 在service中删除组件
     this.pageService.getPageList(app.ulid, true).then((pageList) => { // 删除指定应用下的所有页面的组件
-      // clog(pageList)
       pageList.forEach((page) => {
         this.componentService.deleteComponentByPageUlid(page.ulid)
-        // this.componentService.getComponentList(page, true).then(r => clog(r))
       })
     })
+    // 在service中删除页面
     this.pageService.deletePageByAppUlid(app.ulid)
+    // 在service中删除应用
     this.appService.deleteApp(app.ulid)
-    this.userService.deleteApp(app.ulid)
+    // 在userService中删除应用
+    this.userService.deleteApp(app.ulid, this.appList[0]?.ulid || '')
   }
 }

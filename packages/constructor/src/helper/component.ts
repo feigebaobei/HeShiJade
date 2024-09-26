@@ -26,7 +26,7 @@ import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
     BehaviorMetaItem,
  } from 'src/types/component'
 // import type { S } from 'src/types/base'
-import type { PropsConfigItem, BehaviorConfigItem } from 'src/types/config'
+import type { PropsConfigItem, BehaviorConfigGroup } from 'src/types/config'
 
 let opProps = (pci: PropsConfigItem) => {
     let o: PropsMeta = {}
@@ -35,11 +35,14 @@ let opProps = (pci: PropsConfigItem) => {
     })
     return o
 }
-let opBehavior = (p: BehaviorConfigItem) => {
+let opBehavior = (p: BehaviorConfigGroup) => {
     let arr: BehaviorMetaItem[] = []
     let o: BehaviorMetaItem = {} as BehaviorMetaItem
-    Object.entries(p).forEach((a) => {
-        o[a[0] as keyof BehaviorConfigItem] = a[1].value
+    // Object.entries(p).forEach((a) => {
+    //     o[a[0] as keyof BehaviorConfigGroup] = a[1].value
+    // })
+    p.forEach(item => {
+        o[item.key] = item.value
     })
     arr.push(o)
     return arr

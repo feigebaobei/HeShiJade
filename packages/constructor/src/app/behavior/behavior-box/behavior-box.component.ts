@@ -1,7 +1,7 @@
 import { Component, effect } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { cloneDeep } from 'src/helper/index'
-import type { Component as Comp } from 'src/types/component';
+import addableAll from 'src/helper/addable'
 import {
   Button as buttonBehaviorMeta,
   Modal as modalBehaviorMeta,
@@ -11,7 +11,11 @@ import {
   Tabs as TabsBehaviorMeta,
   Pagination as PaginationBehaviorMeta,
 } from 'src/helper/behavior'
-import type { BehaviorConfigItem } from 'src/types/config'
+import behaviorTemplate from 'src/helper/behavior'
+import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
+import type { BehaviorConfigGroup } from 'src/types/config'
+import type { B, N } from 'src/types/base';
+import { PageService } from 'src/app/service/page.service';
 // import type { Options, S,
 //   //  A, ULID, B, N, 
 //   // Options, 
@@ -28,132 +32,109 @@ let clog = console.log
   styleUrls: ['./behavior-box.component.sass']
 })
 export class BehaviorBoxComponent {
-  componentBehaviorList: BehaviorConfigItem[]
+  componentBehaviorList: BehaviorConfigGroup[]
   curComp?: Comp | null
-  componentBehaviorMeta: BehaviorConfigItem
-  constructor(private componentService: ComponentService) {
-    this.componentBehaviorMeta = {
-      event: {
+  componentBehaviorMeta: BehaviorConfigGroup
+  addable: B
+  constructor(private componentService: ComponentService,
+    private pageService: PageService,
+  ) {
+    this.addable = false
+    this.componentBehaviorMeta = [
+      {
         category: 'select',
         options: [],
         value: '',
         label: '事件',
         key: '',
       },
-      // target: {
-      //   category: 'input',
-      //   value: '',
-      //   label: '',
-      //   key: '',
-      // },
-      // payload: {
-      //   category: 'textarea',
-      //   value: '',
-      //   label: '',
-      //   key: '',
-      // },
-      fnBody: {
+      {
         category: 'textarea',
         value: '',
         label: '',
         key: '',
-      },
-    }
+      }
+    ]
     this.componentBehaviorList = []
     effect(() => {
       let p = this.componentService.curComponentS.get()
       if (p) {
         this.curComp = p
         this.curComponentChange()
+        this.addable = addableAll[p.type].behavior
       }
     })
   }
-  setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigItem) {
+  setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigGroup) {
     this.curComp!.behavior.forEach(item => {
-      let o = cloneDeep(compBehaviorMeta)
+      let arr: BehaviorConfigGroup = cloneDeep(compBehaviorMeta)
       Object.entries(item).forEach(([k, v]) => {
-        if (o.hasOwnProperty(k)) {
-          o[k].value = v
+        let o = arr.find(item => item.key === k)
+        if (o) {
+          o.value = v
         }
+        // if (arr.hasOwnProperty(k)) {
+        //   arr[k].value = v
+        // }
+        clog('k', k, v, o)
       })
-      this.componentBehaviorList.push(o)
+      this.componentBehaviorList.push(arr)
+      clog('this.componentBehaviorList', this.componentBehaviorList)
     })
   }
   curComponentChange() {
     this.componentBehaviorList = []
-    // clog('curComponentChange', this.curComp)
     switch (this.curComp?.type) {
       case 'Button':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(buttonBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(buttonBehaviorMeta)
         break;
       case 'Modal':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(modalBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(modalBehaviorMeta)
         break;
       case 'Form':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(FormBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(FormBehaviorMeta)
         break;
       case 'Table':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(TableBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(TableBehaviorMeta)
         break;
       case 'Checkbox':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(CheckboxBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(CheckboxBehaviorMeta)
         break;
       case 'Tabs':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(TabsBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(TabsBehaviorMeta)
         break;
       case 'Pagination':
-        // this.curComp.behavior.forEach(item => {
-        //   let o = cloneDeep(PaginationBehaviorMeta)
-        //   Object.entries(item).forEach(([k, v]) => {
-        //     o[k].value = v
-        //   })
-        //   this.componentBehaviorList.push(o)
-        // })
         this.setComponentBehaviorListByType(PaginationBehaviorMeta)
         break;
       }
-    // clog('curComponentChange componentBehaviorList', this.componentBehaviorList)
+  }
+  addH() {
+    let group: BehaviorConfigGroup = [] // as BehaviorConfigGroup
+    if (this.curComp) {
+      Object.values(behaviorTemplate[this.curComp.type]).forEach((item) => {
+        // group[group.key as unknown as 'event' | 'fnBody'] = cloneDeep(group)
+        group.push(item)
+      })
+      this.componentBehaviorList.push(group)
+      // this.componentService.addBehaviorOfCurComponent({
+      //   event: obj.event.value,
+      //   fnBody: obj.fnBody.value,
+      // })
+      // this.componentService.reqAddBehavior({
+      //   event: obj.event.value,
+      //   fnBody: obj.fnBody.value,
+      // })
+      let o: BehaviorMetaItem = {}
+      group.forEach(item => {
+        o[item.key] = item.value
+      })
+      this.componentService.addBehaviorOfCurComponent(o)
+      this.componentService.reqAddBehavior(o)
+    }
+  }
+  removeH(i: N) {
+    this.componentBehaviorList.splice(i, 1)
+    this.componentService.removeBehaviorOfCurComponent(this.pageService.getCurPage()!.ulid, this.curComp!.ulid, i)
+    this.componentService.reqRemoveBehavior(this.curComp!.ulid, i)
   }
 }

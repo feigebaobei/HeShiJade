@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { asyncFn, createChildKey } from 'src/helper/index'
 import { ComponentService } from 'src/app/service/component.service';
+import { pool } from 'src/helper/pool';
 // type
-import type { Component as Comp } from 'src/types/component';
+import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
-import { B, S, N, A, } from 'src/types/base';
+import type { B, S, N, A, O } from 'src/types/base';
 
 let clog = console.log
 
@@ -23,8 +24,8 @@ interface TabsData {
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.sass'
 })
-export class TabsComponent implements OnInit {
-  @Input() data!: TabsData
+export class TabsComponent implements OnInit, OnDestroy {
+  @Input() data!: componentInstanceData
   activeTab: S
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
@@ -37,6 +38,37 @@ export class TabsComponent implements OnInit {
     this.show = true
     this.indexSlotKeyMap = new Map()
   }
+  activeTabChangeH(id: N | S) {
+    id = String(id)
+    clog('id', id)
+    let fnArr = pool.getEventArray(this.data.ulid, 'activeTabChange')
+    fnArr.forEach(f => {
+      f.bind(this) // 方法体的this
+      f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
+    })
+  }
+  addOrDeleteTabChangeH(o: A) {
+    // clog('o', o)
+    // let {id, operatioin} = o
+    let id: S = o.id
+    let operatioin: S = o.operatioin
+    switch (operatioin) {
+      case 'add': // 当前不支持
+        break;
+      case 'delete':
+        let fnArr = pool.getEventArray(this.data.ulid, 'deleteTabChange')
+        fnArr.forEach(f => {
+          f.bind(this) // 方法体的this
+          f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
+        })
+        break;
+    }
+  }
+  setProps(o: O) {
+    Object.entries(o).forEach(([k, v]) => {
+      this.data.props[k] = v
+    })
+  }
   ngOnInit() {
     new Promise((s, _j) => {
       s(true)
@@ -44,7 +76,6 @@ export class TabsComponent implements OnInit {
       this.show = false
       this.activeTab = this.data.props['activeTab']
       let tree = this.componentService.getTreeByKey()
-
       Object.entries(this.data.slots).forEach(([k, v], index) => {
         this.indexSlotKeyMap.set(index, k)
         let node = tree?.find(v)
@@ -58,22 +89,9 @@ export class TabsComponent implements OnInit {
         this.show = true
       })
     })
+    pool.register(this.data.ulid, this, this.data.behavior)
   }
-  activeTabChangeH(id: N | S) {
-    id = String(id)
-    clog('id', id)
-  }
-  addOrDeleteTabChangeH(o: A) {
-    // clog('o', o)
-    // let {id, operatioin} = o
-    let id: S = o.id
-    let operatioin: S = o.operatioin
-    switch (operatioin) {
-      case 'add': // 当前不支持
-        break;
-      case 'delete':
-
-        break;
-    }
+  ngOnDestroy() {
+    pool.unRegister(this.data.ulid)
   }
 }

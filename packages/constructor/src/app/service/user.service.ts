@@ -94,9 +94,13 @@ export class UserService {
   sendVerification(data: A) {
     return this.ssoClient.sendVerification(data)
   }
-  deleteApp(appUlid: ULID) {
+  deleteApp(appUlid: ULID, firstAppBack: ULID) {
     if (this.user?.firstApplicationUlid === appUlid) {
-      this.user.firstApplicationUlid = ''
+      if (firstAppBack) {
+        this.user.firstApplicationUlid = firstAppBack
+      } else {
+        this.user.firstApplicationUlid = ''
+      }
       this.setUser(this.user)
     }
   }

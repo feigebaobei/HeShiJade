@@ -602,7 +602,7 @@ let Select: PropsConfigItem = {
             { label: 'true', value: true },
         ],
         value: false,
-        label: '选项',
+        label: '是否禁用',
         key: 'disabled',
     },
     size: {
@@ -760,7 +760,7 @@ let Checkbox: PropsConfigItem = {
             { label: 'true', value: true },
         ],
         value: false,
-        label: '名称',
+        label: '是否禁用',
         key: 'disabled',
     },
     halfchecked: {

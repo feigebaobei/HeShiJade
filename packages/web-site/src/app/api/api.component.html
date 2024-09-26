@@ -276,3 +276,1653 @@
         </tr>
     </tbody>
 </table>
+<h1>form</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>layout</td>
+            <td>排版</td>
+            <td>'horizontal'/'vertical'</td>
+            <td>'horizontal'</td>
+            <td>水平、竖直</td>
+        </tr>
+        <tr>
+            <td>labelSize</td>
+            <td>label的宽度</td>
+            <td>-</td>
+            <td>'100px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>labelAlign</td>
+            <td>label的对齐方式</td>
+            <td>'start'/'center'/'end'</td>
+            <td>'start'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>isCancel</td>
+            <td>是否有取消按钮</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>isSubmit</td>
+            <td>是否有提交按钮</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>url</td>
+            <td>url</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>submit</td>
+            <td>提交</td>
+        </tr>
+        <tr>
+            <td>reset</td>
+            <td>重置</td>
+        </tr>
+    </tbody>
+</table>
+<h1>table</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>url</td>
+            <td>url</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableWidth</td>
+            <td>表格宽度</td>
+            <td>-</td>
+            <td>'100%'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>maxWidth</td>
+            <td>最大宽度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableHeight</td>
+            <td>表格高度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>maxHeight</td>
+            <td>最大高度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>minHeight</td>
+            <td>最小高度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>大小</td>
+            <td>'mini'/'xs'/'sm'/'md'/'lg'</td>
+            <td>'sm'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>fixHeader</td>
+            <td>表头是否固定</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>colDraggable</td>
+            <td>列是否可拖动排序</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>virtualScroll</td>
+            <td>是否虚拟滚动</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>virtualItemSize</td>
+            <td>虚拟滚动时每一行的高度</td>
+            <td>-</td>
+            <td>'40px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>u</td>
+            <td>虚拟滚动时缓冲区最小高度</td>
+            <td>-</td>
+            <td>'80'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>checkable</td>
+            <td>是否可勾选行</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>resizeable</td>
+            <td>是否可以拖拽调整列宽</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>headerBg</td>
+            <td>表头是否显示背景色</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableLayout</td>
+            <td>表格布局</td>
+            <td>'fixed'/'auto'</td>
+            <td>'fixed'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>borderType</td>
+            <td>表格边框</td>
+            <td>''/'borderless'/'bordered'</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>striped</td>
+            <td>是否展示为斑马纹间隔</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>shadowType</td>
+            <td>阴影类型</td>
+            <td>'normal'/'embed'</td>
+            <td>'normal'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tableOverflowType</td>
+            <td>滚动条类型</td>
+            <td>'auto'/'overlay'</td>
+            <td>'auto'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-</td>
+            <td>在items面板中设置</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event (未全支持)</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>rowCheckChange</td>
+            <td>改变行勾选</td>
+        </tr>
+        <tr>
+            <td>checkAllChange</td>
+            <td>改变全勾选</td>
+        </tr>
+        <tr>
+            <td>resize</td>
+            <td>改变列宽</td>
+        </tr>
+        <tr>
+            <td>childrenTableClose</td>
+            <td>关闭子列表</td>
+        </tr>
+        <tr>
+            <td>allChildrenTableClose</td>
+            <td>关闭全部子列表</td>
+        </tr>
+        <tr>
+            <td>cellClick</td>
+            <td>单击单元格</td>
+        </tr>
+        <tr>
+            <td>cellDBClick</td>
+            <td>双击单元格</td>
+        </tr>
+        <tr>
+            <td>rowClick</td>
+            <td>单击行</td>
+        </tr>
+        <tr>
+            <td>rowDBClick</td>
+            <td>双击行</td>
+        </tr>
+        <tr>
+            <td>detialToggle</td>
+            <td>改变扩展行</td>
+        </tr>
+        <tr>
+            <td>cellEditStart</td>
+            <td>开始编辑</td>
+        </tr>
+        <tr>
+            <td>cellEditEnd</td>
+            <td>结束编辑</td>
+        </tr>
+        <tr>
+            <td>tableScrollEvent</td>
+            <td>表格内部滚动</td>
+        </tr>
+        <tr>
+            <td>columnDragEnd</td>
+            <td>结束列拖拽</td>
+        </tr>
+        <tr>
+            <td>loadMore</td>
+            <td>完成延迟懒加载</td>
+        </tr>
+    </tbody>
+</table>
+<h1>input</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>value</td>
+            <td>值</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>是否显示错误状态</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>尺寸</td>
+            <td>'sm'/''/'lg'</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showGlowStyle</td>
+            <td>是否显示悬浮发光效果</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>styleType</td>
+            <td>风格</td>
+            <td>'default'/'gray'</td>
+            <td>'default'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>placeholder</td>
+            <td>占位符</td>
+            <td>-</td>
+            <td>'请输入'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+-
+<!-- <table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table> -->
+<h1>select</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>value</td>
+            <td>值</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>styleType</td>
+            <td>风格</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>options</td>
+            <td>选项</td>
+            <td>-</td>
+            <td>[]</td>
+            <td>该值类型的类型`{label: S, value: S}[]`。其中value当前只支持S类型。</td>
+        </tr>
+        <tr>
+            <td>isSearch</td>
+            <td>是否支持过滤搜索</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>optscrollHightons</td>
+            <td>选项</td>
+            <td>-</td>
+            <td>'300px'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>multiple</td>
+            <td>是否支持多选</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>isSelectAll</td>
+            <td>是否显示全选</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>readonly</td>
+            <td>是否可以输入</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>是否禁用</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>大小</td>
+            <td>'sm'/''/'lg'</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>placeholder</td>
+            <td>点位符</td>
+            <td>-</td>
+            <td>'请输入'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>searchPlaceholder</td>
+            <td>搜索功能的点位符</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>direction</td>
+            <td>下拉选框弹出方向</td>
+            <td>'auto'/'up'/'down'</td>
+            <td>'auto'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>overview</td>
+            <td>决定选择框样式显示</td>
+            <td>'border'/'underlined'</td>
+            <td>'borders'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>appendToBody</td>
+            <td>是否附加到body</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>allowClear</td>
+            <td>清空</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showAnimation</td>
+            <td>是否开启动画</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>复选框颜色</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showGlowStyle</td>
+            <td>是否显示悬浮发光效果</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+-
+<!-- <table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table> -->
+<h1>icon</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>icon</td>
+            <td>名称</td>
+            <td>-</td>
+            <td>'icon-add'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>operable</td>
+            <td>是否可操作</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>是否禁用</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>rotate</td>
+            <td>旋转角度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>颜色</td>
+            <td>-</td>
+            <td>'#333'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+-
+<h1>checkbox</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>label</td>
+            <td>label</td>
+            <td>-</td>
+            <td>'label'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>value</td>
+            <td>值</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>是否禁用</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>halfchecked</td>
+            <td>半选状态</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>复选框颜色</td>
+            <td>-</td>
+            <td>#5e7ce0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showAnimation</td>
+            <td>是否显示动画</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showGlowStyle</td>
+            <td>是否显示悬浮发光效果</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>change</td>
+            <td>改变后</td>
+        </tr>
+    </tbody>
+</table>
+<h1>tabs</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>activeTab</td>
+            <td>当前激活的选项卡Id</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>type</td>
+            <td>'tabs'/'pills'/'wrapped'/'slider'</td>
+            <td>'tabs'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>size</td>
+            <td>'xs'/'sm'/'md'/'lg'</td>
+            <td>'md'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>customWidth</td>
+            <td>选项卡的宽度</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>closeable</td>
+            <td>是否显示删除图标</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>scrollMode</td>
+            <td>是否启用大数据滚动显示</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>isHidden</td>
+            <td>选项卡内容隐藏时是否销毁</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-</td>
+            <td>在items面板中设置</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>activeTabChange</td>
+            <td>切换</td>
+        </tr>
+        <tr>
+            <td>deleteTabChange</td>
+            <td>删除</td>
+        </tr>
+    </tbody>
+</table>
+<h1>pagination</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>pageSize</td>
+            <td>分页容量</td>
+            <td>-</td>
+            <td>10</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>total</td>
+            <td>总条目数</td>
+            <td>-</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>e</td>
+            <td>分页容量的枚举值</td>
+            <td>-</td>
+            <td>5,10,20,50</td>
+            <td>以英文逗号分隔数字</td>
+        </tr>
+        <tr>
+            <td>pageSizeDirection</td>
+            <td>分页容量下拉框的展开方向</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>pageIndex</td>
+            <td>初始化页码</td>
+            <td>-</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>maxItems</td>
+            <td>分页最多显示按钮数</td>
+            <td>-</td>
+            <td>10</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>preLink</td>
+            <td>上一页按钮显示图标</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>nextLink</td>
+            <td>下一页按钮显示图标</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>大小</td>
+            <td>-</td>
+            <td>'sm'/''/'lg'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>canJumpPage</td>
+            <td>是否显示分页输入跳转</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>canChangePageSize</td>
+            <td>是否显示用于选择更改分页容量的下拉框</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>canViewTotal</td>
+            <td>是否显示总条目</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>totalItemText</td>
+            <td>总条目文本</td>
+            <td>-</td>
+            <td>'所有条目'</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>goToText</td>
+            <td>跳至</td>
+            <td>-</td>
+            <td>''</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showJumpButton</td>
+            <td>是否显示跳转按钮</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showTruePageIndex</td>
+            <td>页码超出分页范围时候也显示当前页码的开关</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>lite</td>
+            <td>是否切换为极简模式</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>showPageSelector</td>
+            <td>极简模式下是否显示页码下拉</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>haveConfigMenu</td>
+            <td>极简模式下是否显示配置</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>autoFixPageIndex</td>
+            <td>改变分页容量时是否自动修正页码</td>
+            <td>false/true</td>
+            <td>true</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>autoHide</td>
+            <td>是否自动隐藏</td>
+            <td>false/true</td>
+            <td>false</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+-
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>pageIndexChange</td>
+            <td>改变页码</td>
+        </tr>
+        <tr>
+            <td>pageSizeChange</td>
+            <td>改变分页容量</td>
+        </tr>
+    </tbody>
+</table>
+<!-- 
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>componentName</h1>
+<h2>props</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>可选值</td>
+            <td>默认值</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>title</td>
+            <td>-</td>
+            <td>'title'</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>slots</h2>
+<table>
+    <thead>
+        <tr>
+            <td>key</td>
+            <td>说明</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>头部的插槽</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>method</h2>
+<table>
+    <thead>
+        <tr>
+            <td>方法</td>
+            <td>参数说明</td>
+            <td>运行逻辑</td>
+            <td>备注</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>setProps: (o: Object) => void</td>
+            <td>由当前组件支持的props属性组成的对象</td>
+            <td>设置当前组件的props</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h2>event</h2>
+<table>
+    <thead>
+        <tr>
+            <td>事件名</td>
+            <td>触发时机</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>onClose</td>
+            <td>关闭后</td>
+        </tr>
+    </tbody>
+</table> -->
