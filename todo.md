@@ -1,13 +1,13 @@
 ||||
 |-|-|-|
 |点击model的关闭时应该关闭|done||
-|在web-site中更新behavior的数据类型|||
+|在web-site中更新behavior的数据类型|done||
 |删除渲染侧的shareEvent|先注释了||
-|删除应用时有未删除user.firstApplicationUlid的bug|||
+|删除应用时有未删除user.firstApplicationUlid的bug|doing|创建2个应用，先删除第一个应用，就出错了。|
 |分支|f_lc||
 |要上生产的内容|||
 ||支持配置多个事件||
-||停用shareEvent||
+||搭建侧、渲染侧停用shareEvent||
 ||修正icon/select的props文案||
 ||form/table/input/select/icon/checkbox/tabs/pagination组件支持事件、方法。本次注重打通逻辑，api有且少。后续会增强。||
 ||官网增加form/table/input/select/icon/checkbox/tabs/pagination组件的api||
@@ -38,7 +38,6 @@
 |组件之间传递数据|以table、pagination、form为例||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |是否需要把修改service与发请求分开|分开||
-|界定低代码与零代码的边界|（事件&配置项）|done|
 |丰富组件|||
 ||accordion||
 ||breadcrumb||
