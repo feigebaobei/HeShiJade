@@ -95,7 +95,6 @@ export class UserService {
     return this.ssoClient.sendVerification(data)
   }
   deleteApp(appUlid: ULID, firstAppBack: ULID) {
-    clog('deleteApp', appUlid, firstAppBack)
     if (this.user?.firstApplicationUlid === appUlid) {
       if (firstAppBack) {
         this.user.firstApplicationUlid = firstAppBack

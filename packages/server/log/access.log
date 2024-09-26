@@ -90,3 +90,14 @@
 {"level":30,"time":1727365486116,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J8QG2XEXK9A5SC6SJV0AW8PQ&envs=dev&envs=test&envs=pre&envs=prod"}
 {"level":30,"time":1727365500107,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1727365519218,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727365575968,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727365613094,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":50,"time":1727365632816,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{}}
+{"level":30,"time":1727365634517,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727365665467,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01J8QG7V9Z81ZYQBJVYAW48Z3F&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01J8QG7V9Z81ZYQBJVYAW48Z3F","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1727365665591,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01J8QG7V9Z81ZYQBJVYAW48Z3F&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1727365669041,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727365705369,"pid":18557,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1727367614780,"pid":19172,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1727367621463,"pid":19243,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1727367680812,"pid":19313,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
