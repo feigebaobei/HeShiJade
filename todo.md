@@ -1,36 +1,28 @@
 ||||
 |-|-|-|
-|点击model的关闭时应该关闭|done||
-|在web-site中更新behavior的数据类型|done||
-|删除渲染侧的shareEvent|先注释了||
-|删除应用时有未删除user.firstApplicationUlid的bug|done|创建2个应用，先删除第一个应用，就出错了。|
-||删除当前应用时应该清空后应用的prevUlid|done|
-|分支|f_lc||
-|要上生产的内容|||
-||支持配置多个事件||
-||搭建侧、渲染侧停用shareEvent||
-||修正icon/select的props文案||
-||form/table/input/select/icon/checkbox/tabs/pagination组件支持事件、方法。本次注重打通逻辑，api有且少。后续会增强。||
-||官网增加form/table/input/select/icon/checkbox/tabs/pagination组件的api||
-
+|设计插件的结构。考虑支持生命周期的方法、增强功能的方法。|||
+|在事件的回调方法体中使用插件的功能。|||
+|位移时请求一次接口|todo||
 |取消行为配置项的显隐逻辑|||
-|官网增加助手函数子导航|||
-|完成 shareEvent 的 todo |||
+|解决setup页面请求2次app/page接口的问题|todo||
+|web-site 后端接口的数据结构|||
+|web-site 插件的逻辑|||
+|分支|f_plugin||
+|要上生产的内容|||
+||||
+
+|官网增加助手函数子导航|待定||
 |整理升级的要求|||
 |web-site扩展组件时增加井布局|todo||
-|解决setup页面请求2次app/page接口的问题|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
-|modal组件的打开事件应该事件名+ulid|todo||
 |table组件在与items时的操作逻辑子组件|todo||
-|位移时请求一次接口|todo||
 |setup页面删除componentByPage或componentList|||
 |搭建页面的标题与按钮应该在同一行|todo||
 ||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
 |解决删除应用后视图中无应用的问题|todo||
-|items面板支持删除功能|done||
 |把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
 |有时无法选中页面|不好复现||
 ||可能需要增加一个layout配置面板|todo|
@@ -315,3 +307,42 @@ export class HomeContainerComponent implements OnInit {
 
 
 getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({visible: true})
+
+## 整理html的转码符
+{ 转义为 &#123;
+} 转义为 &#125;
+
+plugin表
+  profile
+    key
+    authorEmail
+    authorName
+  hooks
+    rootInstancePost
+    pageInstancePost
+    componentInstancePost
+  fnx
+  
+fn.toString()
+eval(str)
+
+存插件 
+取插件
+都是json。都不能使用fn.只能使用string。
+      client    server     client
+      fn->str
+                save
+                          str->fn
+
+插件的文档结构  已经确定
+上传文件
+上传文本
+
+
+getComponentInstance('01J90EYZ28TAH60BS34AV8Z499').openDialog();
+let clog = console.log;
+clog('plugins', plugins);
+plugins.key.fnx()
+要求严格自测插件代码。
+为插件方法绑定this.平台插件若干助手方法.
+

@@ -1,7 +1,7 @@
 
 import { Queue } from "data-footstone"
 import type { ULID } from "src/types"
-import type { A, F, S } from "src/types/base"
+import type { A, F, O, Oa, S } from "src/types/base"
 import type { Component } from "src/types/component"
 
 let clog = console.log
@@ -10,9 +10,11 @@ let clog = console.log
 class Pool {
     private ulidEventMap: Map<ULID, Map<S, Queue<F>>>
     private ulidComponentMap: Map<ULID, A>
+    private pluginMap: Map<S, Oa>
     constructor() {
         this.ulidEventMap = new Map()
         this.ulidComponentMap = new Map()
+        this.pluginMap = new Map()
     }
     registerEvent(ulid: ULID, event: S, fn: F) {
         if (!ulid || !event || !fn) {
@@ -70,13 +72,51 @@ class Pool {
         this.registerComponentInstance(ulid, componentInstance)
         // 注册事件
         behavior.forEach((b) => {
-          let f = new Function('getComponentInstance', b.fnBody)
+          // 可以使用入参
+          // 也可以使用方法体前缀
+          let f = new Function('getComponentInstance', 'plugins', b.fnBody)
           pool.registerEvent(ulid, b.event, f)
         })
     }
     unRegister(ulid: ULID) {
         this.unRegisterComponentInstance(ulid)
         this.unRegisterEvent(ulid)
+    }
+    registerPlugin(k: S, v: Oa) {
+        this.pluginMap.set(k, v)
+    }
+    getPlugin(k: S) {
+        return this.pluginMap.get(k)
+        // {
+        //     profile
+        //     hooks
+        //     fnx
+        // }
+    }
+    unRegisterPlugin(k: S) {
+        this.pluginMap.delete(k)
+    }
+    getPluginFn() {
+        let o: Oa = {}
+        Array.from(this.pluginMap.keys()).forEach((k) => {
+            o[k] = this.getPluginFnByKey(k)
+        })
+        return o
+    }
+    // 使用 plugins.$key.fnx
+    getPluginFnByKey(k: S) {
+        let o = this.getPlugin(k)
+        if (o) {
+            let t: Oa = {}
+            Object.entries(o).forEach(([k, v]) => {
+                if (!['profile', 'hooks'].includes(k)) {
+                    t[k] = v
+                }
+            })
+            return t
+        } else {
+            return undefined
+        }
     }
 }
 let pool = new Pool()
