@@ -5,6 +5,7 @@ const DB = {
         appTable: 'apps_dev',
         pageTable: 'pages_dev',
         componentTable: 'components_dev',
+        pluginTable: 'plugins',
     },
     test: {
         env: 'test',
@@ -12,6 +13,7 @@ const DB = {
         appTable: 'apps_test',
         pageTable: 'pages_test',
         componentTable: 'components_test',
+        pluginTable: 'plugins',
     },
     pre: {
         env: 'pre',
@@ -19,6 +21,7 @@ const DB = {
         appTable: 'apps_pre',
         pageTable: 'pages_pre',
         componentTable: 'components_pre',
+        pluginTable: 'plugins',
     },
     prod: {
         env: 'prod',
@@ -26,6 +29,7 @@ const DB = {
         appTable: 'apps_prod',
         pageTable: 'pages_prod',
         componentTable: 'components_prod',
+        pluginTable: 'plugins',
     },
 }
 
