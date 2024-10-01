@@ -2,12 +2,17 @@ var express = require('express');
 var cors = require('./cors')
 var router = express.Router();
 let bodyParser = require('body-parser');
-let {lowcodeDb} = require('../mongodb')
-let { rules, instance } = require('../helper/index')
+let multer = require('multer');
+let {fragmentDb} = require('../mongodb')
+let { rules, instance } = require('../helper/index');
+const { sizeObj, DB } = require('../helper/config');
 const { errorCode } = require('../helper/errorCode');
 let clog = console.log
 
 router.use(bodyParser.json())
+
+let upload = multer()
+
 
 router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
@@ -20,11 +25,42 @@ router.route('/')
     data: {}
   })
 })
-.post(cors.corsWithOptions, (req, res) => {
-  res.status(200).json({
-    code: 0,
-    message: "ok",
-    data: {},
+.post(cors.corsWithOptions, upload.single('pluginFile'), (req, res) => {
+  new Promise((s, j) => {
+    if (req.file.size > (sizeObj['1kb'] * 2)) {
+      j(100144)
+    } else {
+      s(true)
+    }
+  }).then(() => {
+    let pluginStr = req.file.buffer.toString()
+    let pluginObj = JSON.parse(pluginStr)
+    clog(pluginObj)
+    let t = {}
+    Array.from(Object.entries(pluginObj)).forEach(([k, v]) => {
+      if (!['profile', 'hooks'].includes(k)) {
+        t[k] = v
+      }
+    })
+    return fragmentDb.collection(DB.prod.pluginTable).insertOne({
+      profile: pluginObj.profile,
+      hooks: pluginObj.hooks,
+      ...t,
+    }).catch(() => {
+      return Promise.reject(200000)
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: "ok",
+      data: pluginObj,
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
   })
 })
 .put(cors.corsWithOptions, (req, res) => {
