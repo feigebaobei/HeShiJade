@@ -45,4 +45,7 @@ export class AppComponent {
   apiClickH() {
     this.router.navigate(['/api'])
   }
+  pluginClickH() {
+    this.router.navigate(['/plugins'])
+  }
 }
