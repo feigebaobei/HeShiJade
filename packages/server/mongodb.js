@@ -4,6 +4,7 @@ let clog = console.log
 let uri = 'mongodb+srv://feigebaobei:1qaz2wsx@feigebaobei.ojo8z3u.mongodb.net/?retryWrites=true&w=majority'
 let client = new MongoClient(uri)
 let lowcodeDb = client.db('lowcode')
+let fragmentDb = client.db('fragment')
 // let lowcodeDb = client.db('users')
 // let lowcodeDb = client.db('lowcode')
 // // 日后会删除以下三个数据库
@@ -14,4 +15,5 @@ let lowcodeDb = client.db('lowcode')
 
 module.exports = {
     lowcodeDb,
+    fragmentDb,
 }
