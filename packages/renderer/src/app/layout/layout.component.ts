@@ -85,9 +85,12 @@ export class LayoutComponent implements OnInit {
     // })
 
     // 方法无法传递
-    this.dataService.req(`${serviceUrl()}/plugins/${key}`,
-    'get',
-    {}).then((res) => {
+    this.dataService.req(
+      // `${serviceUrl()}/plugins/${key}`,
+      `${serviceUrl()}/plugins`,
+      'get',
+      {key: 'key'}
+    ).then((res) => {
       // clog('res', res)
       if (res.code === 0) {
         let pluginObj: Oa = {}
@@ -102,6 +105,8 @@ export class LayoutComponent implements OnInit {
                 t[k] = eval(v)
               })
               pluginObj['hooks'] = t
+              break;
+            case '_id':
               break;
             default:
               pluginObj[k] = eval(v as S)
