@@ -19,10 +19,30 @@ router.route('/')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  res.status(200).json({
-    code: 0,
-    message: '',
-    data: {}
+  new Promise((s, j) => {
+    if (req.query.key) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return fragmentDb.collection(DB.prod.pluginTable).findOne({'profile.key': req.query.key}).then((pluginObj) => {
+      return pluginObj
+    }).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((pluginObj) => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: pluginObj
+    })
+  }).catch(code => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
   })
 })
 .post(cors.corsWithOptions, upload.single('pluginFile'), (req, res) => {
