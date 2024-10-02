@@ -4,11 +4,11 @@
 |位移时请求一次接口|todo||
 |取消行为配置项的显隐逻辑|||
 |搭建侧选择插件|||
-|考虑支持生命周期的方法|doing||
+|考虑支持生命周期的方法|done||
 ||考虑支持生命周期的方法|done|
 |修改app的数据结构 pluginsKey|||
 |渲染侧请求插件插件|||
-|插件增加hooks.loadPost / profile.description|||
+|插件增加hooks.loadPost / profile.description|done||
 |解决setup页面请求2次app/page接口的问题|todo||
 |web-site 插件的规范文档|done||
 |分支|f_plugin||
