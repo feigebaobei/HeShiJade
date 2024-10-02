@@ -1,20 +1,19 @@
 ||||
 |-|-|-|
 |设计插件的结构。考虑支持生命周期的方法、增强功能的方法。|||
-|渲染侧消费插件|||
+|渲染侧消费插件|doing||
 ||在事件的回调方法体中使用插件的功能。|在button组件中打通。|
-|服务侧存插件|doing||
+|服务侧存插件|done||
 ||限制<2kb|done|
 ||写入数据库|done|
-||检查是否重复|to test|
+||检查是否重复|done|
 |服务侧取插件|done||
-|创建碎片平台|done||
 ||支持输入插件。后期改为多输入框。|先放弃此方式|
 ||先在官网中实现上传插件的功能。|done|
 |位移时请求一次接口|todo||
 |取消行为配置项的显隐逻辑|||
-|整理promise封装xhr的方法|||
-|整理html的转码符|||
+|整理promise封装xhr的方法|无法处理1-4的状态变化，和适宜封装。||
+|整理html的转码符|done||
 |解决setup页面请求2次app/page接口的问题|todo||
 |web-site 插件的逻辑|||
 ||存||
@@ -28,7 +27,11 @@
 |要上生产的内容|||
 ||web-site 后端接口的数据结构||
 ||server支持上传文件。安装了multer依赖。||
+||服务侧存插件||
+||服务侧取插件||
 
+
+|创建碎片平台|||
 |官网增加助手函数子导航|待定||
 |整理升级的要求|||
 |web-site扩展组件时增加井布局|todo||
@@ -243,22 +246,6 @@ Remove or relocate styles from global styles (styles.scss) to the components
 Use standalone components or the SCAM architecture (for Angular versions below 14.0.0) to take advantage of tree-shaking and remove unused components from your bundle.
 Remove all dead code from your application, including unused services, directives, pipes, modules, and so on. Additionally, remove unused dependencies and libraries from your bundle.
 
-# Can't bind to 'ngModel' since it isn't a known property of 'input'
-import { FormsModule } from '@angular/forms';
-@NgModule({
-  imports: [
-    [...]
-    FormsModule
-  ],
-  [...]
-})
-
-示例
-import { RadioModule } from 'ng-devui/radio';
-import { RateModule } from 'ng-devui/rate';
-import { ReadTipModule } from 'ng-devui/read-tip';
-import { SearchModule } from 'ng-devui/search';
-
 concatenate 连接、连接的
 content 目录
 Realize 了解，意识到
@@ -296,11 +283,6 @@ any 任意文件的大小
 6. 有找到清晰目标的能力
 7. 系统性思维
 
-main     1.74mb  1781.76
-polyfills 33.5kb
-runtime  1.13kb
-styles   176kb
-1.94mb
 
 # 动态引入组件
 export class HomeContainerComponent implements OnInit {
@@ -326,9 +308,6 @@ export class HomeContainerComponent implements OnInit {
 
 getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({visible: true})
 
-## 整理html的转码符
-{ 转义为 &#123;
-} 转义为 &#125;
 
 plugin表
   profile
