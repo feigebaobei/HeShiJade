@@ -14,6 +14,7 @@ router.use(bodyParser.json())
 let upload = multer()
 
 
+
 router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
@@ -46,24 +47,33 @@ router.route('/')
   })
 })
 .post(cors.corsWithOptions, upload.single('pluginFile'), (req, res) => {
+  // 校验参数
+  // 检查是否重复
+  // 存
   new Promise((s, j) => {
     if (req.file.size > (sizeObj['1kb'] * 2)) {
       j(100144)
     } else {
       s(true)
     }
-  }).then(() => {
-    return fragmentDb.collection(DB.prod.pluginTable).findOne({'profile.key': req.query.key}).then((pluginObj) => {
-      if (pluginObj) {
+  })
+  .then(() => {
+    try {
+      let pluginStr = req.file.buffer.toString()
+      let pluginObj = JSON.parse(pluginStr)
+      return pluginObj
+    } catch (error) {
+      return Promise.reject(100144)
+    }
+  }).then((pluginObj) => {
+    return fragmentDb.collection(DB.prod.pluginTable).findOne({'profile.key': pluginObj.profile.key}).then((_pluginObj) => {
+      if (_pluginObj) {
         return Promise.reject(100120)
       } else {
-        return true
+        return pluginObj
       }
     })
-  }).then(() => {
-    let pluginStr = req.file.buffer.toString()
-    let pluginObj = JSON.parse(pluginStr)
-    clog(pluginObj)
+  }).then((pluginObj) => {
     let t = {}
     Array.from(Object.entries(pluginObj)).forEach(([k, v]) => {
       if (!['profile', 'hooks'].includes(k)) {
@@ -81,7 +91,7 @@ router.route('/')
     res.status(200).json({
       code: 0,
       message: "ok",
-      data: pluginObj,
+      data: {},
     })
   }).catch((code) => {
     res.status(200).json({
