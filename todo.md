@@ -1,29 +1,24 @@
 ||||
 |-|-|-|
-|设计插件的结构。考虑支持生命周期的方法、增强功能的方法。|||
-|渲染侧消费插件|done||
-||在事件的回调方法体中使用插件的功能。|done|
-||支持输入插件。后期改为多输入框。|先放弃此方式|
-||先在官网中实现上传插件的功能。|done|
+|设计插件的结构。考虑支持生命周期的方法、增强功能的方法。|done||
 |位移时请求一次接口|todo||
 |取消行为配置项的显隐逻辑|||
 |搭建侧选择插件|||
+|考虑支持生命周期的方法|doing||
+||考虑支持生命周期的方法|done|
+|修改app的数据结构 pluginsKey|||
+|渲染侧请求插件插件|||
+|插件增加hooks.loadPost / profile.description|||
 |解决setup页面请求2次app/page接口的问题|todo||
-|web-site 插件的逻辑|done||
-||存|done|
-||取|done|
-||自定义|done|
-||getComonentInstance|done|
-||plugins|doen|
-||增强this|done|
-|web-site 插件的规范文档|||
+|web-site 插件的规范文档|done||
 |分支|f_plugin||
 |要上生产的内容|||
 ||web-site 后端接口的数据结构||
 ||server支持上传文件。安装了multer依赖。||
 ||服务侧存插件||
 ||服务侧取插件||
-
+||web-site 插件的逻辑|done|
+||渲染侧消费插件|done|
 
 |创建碎片平台|||
 |官网增加助手函数子导航|待定||
@@ -309,7 +304,7 @@ plugin表
     authorEmail
     authorName
   hooks
-    rootInstancePost
+    loadPost
     pageInstancePost
     componentInstancePost
   fnx

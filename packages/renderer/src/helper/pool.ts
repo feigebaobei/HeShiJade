@@ -118,6 +118,18 @@ class Pool {
             return undefined
         }
     }
+    runHooks(hookFn: S, pluginKey?: S) {
+        if (pluginKey) {
+            let pluginObj = this.getPluginFnByKey(pluginKey)
+            if (pluginObj) {
+                pluginObj['hooks'][hookFn] && pluginObj['hooks'][hookFn]()
+            }
+        } else {
+            Array.from(this.pluginMap.values()).forEach((pluginObj) => {
+                pluginObj['hooks'][hookFn] && pluginObj['hooks'][hookFn]()
+            })
+        }
+    }
 }
 let pool = new Pool()
 let getComponentInstance = pool.getComponentInstance

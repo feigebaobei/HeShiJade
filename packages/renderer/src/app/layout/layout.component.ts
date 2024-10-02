@@ -78,20 +78,11 @@ export class LayoutComponent implements OnInit {
     this.opPlugins('key')
   }
   opPlugins(key: S) {
-    // 无法找到此模块
-    // import(`${serviceUrl()}/plugins/${key}`).then((res) => {
-    // // import(`${serviceUrl()}/plugins`).then((res) => {
-    //   clog('res', res)
-    // })
-
-    // 方法无法传递
     this.dataService.req(
-      // `${serviceUrl()}/plugins/${key}`,
       `${serviceUrl()}/plugins`,
       'get',
       {key: 'key'}
     ).then((res) => {
-      // clog('res', res)
       if (res.code === 0) {
         let pluginObj: Oa = {}
         Array.from(Object.entries(res.data)).forEach(([k, v]) => {
@@ -113,7 +104,7 @@ export class LayoutComponent implements OnInit {
               break;
           }
         })
-        // clog('pluginObj', pluginObj)
+        pool.runHooks('loadPost', pluginObj['profile'].key)
         pool.registerPlugin(key, pluginObj)
       } else {
         clog(`插件 ${key} 请求失败。`)
