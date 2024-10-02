@@ -53,6 +53,14 @@ router.route('/')
       s(true)
     }
   }).then(() => {
+    return fragmentDb.collection(DB.prod.pluginTable).findOne({'profile.key': req.query.key}).then((pluginObj) => {
+      if (pluginObj) {
+        return Promise.reject(100120)
+      } else {
+        return true
+      }
+    })
+  }).then(() => {
     let pluginStr = req.file.buffer.toString()
     let pluginObj = JSON.parse(pluginStr)
     clog(pluginObj)
