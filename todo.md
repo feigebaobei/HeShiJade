@@ -1,27 +1,21 @@
 ||||
 |-|-|-|
 |设计插件的结构。考虑支持生命周期的方法、增强功能的方法。|||
-|渲染侧消费插件|doing||
-||在事件的回调方法体中使用插件的功能。|在button组件中打通。|
-|服务侧存插件|done||
-||限制<2kb|done|
-||写入数据库|done|
-||检查是否重复|done|
-|服务侧取插件|done||
+|渲染侧消费插件|done||
+||在事件的回调方法体中使用插件的功能。|done|
 ||支持输入插件。后期改为多输入框。|先放弃此方式|
 ||先在官网中实现上传插件的功能。|done|
 |位移时请求一次接口|todo||
 |取消行为配置项的显隐逻辑|||
-|整理promise封装xhr的方法|无法处理1-4的状态变化，和适宜封装。||
-|整理html的转码符|done||
+|搭建侧选择插件|||
 |解决setup页面请求2次app/page接口的问题|todo||
-|web-site 插件的逻辑|||
-||存||
-||取||
-||自定义||
-||getComonentInstance||
-||plugins||
-||增强this||
+|web-site 插件的逻辑|done||
+||存|done|
+||取|done|
+||自定义|done|
+||getComonentInstance|done|
+||plugins|doen|
+||增强this|done|
 |web-site 插件的规范文档|||
 |分支|f_plugin||
 |要上生产的内容|||
