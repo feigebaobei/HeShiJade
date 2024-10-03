@@ -143,6 +143,7 @@ let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', vers
     firstPageUlid: '',
     prevUlid: '',
     nextUlid: '',
+    pluginsKey: [],
   }
 }
 let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' | 'node' | 'component' = '') => {

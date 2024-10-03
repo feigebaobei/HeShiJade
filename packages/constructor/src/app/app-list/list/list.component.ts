@@ -91,9 +91,6 @@ export class ListComponent implements OnInit {
       backdropCloseable: true,
       onClose: () => console.log('on dialog closed'),
       data: {
-        // name: 'Tom',
-        // age: 10,
-        // address: 'Chengdu',
         key: 'one',
         name: 'one',
         members: '123@qq.com,kevin@163.com',
@@ -156,7 +153,6 @@ export class ListComponent implements OnInit {
   configBtClickH($event: Event, index: N) {
     $event.stopPropagation() // 阻止事件冒泡
     // $event.preventDefault() // 阻止默认事件
-    // clog('config', index, this.appList[index])
     let results = this.dialogService.open({
       id: 'app-config-dialog-service',
       width: '346px',

@@ -9,8 +9,9 @@
 |修改app的数据结构 pluginsKey|doing||
 ||web-site 修改app的数据结构 pluginsKey|done||
 ||服务侧设置、修改插件||
-||服务侧搜索插件||
-||搭建侧请求选择插件||
+||服务侧搜索插件|doing|
+||搭建侧请求选择插件|doing|
+||搭建侧创建应用时初始化项中增加插件||
 ||渲染侧请求插件插件|||
 |插件增加hooks.loadPost / profile.description|done||
 |解决setup页面请求2次app/page接口的问题|todo||
