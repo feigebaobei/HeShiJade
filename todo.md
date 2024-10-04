@@ -6,9 +6,10 @@
 |搭建侧选择插件|||
 |考虑支持生命周期的方法|done||
 ||考虑支持生命周期的方法|done|
-|修改app的数据结构 pluginsKey|doing||
+|修改app的数据结构 pluginsKey|todo||
 ||web-site 修改app的数据结构 pluginsKey|done||
 ||服务侧设置、修改插件||
+||查询服务侧在创建应用时是否正确使用pluginsKey||
 ||服务侧取插件应该是取插件key列表||
 ||服务侧搜索插件|doing|
 ||搭建侧请求选择插件|doing|

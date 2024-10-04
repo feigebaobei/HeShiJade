@@ -122,13 +122,25 @@ router.route('/key')
       j(100100)
     }
   }).then(() => {
-  let [key, pageSize, pageNumber] = [req.query.key, req.query.pageSize || 10, req.query.pageNumber || 0]
+    let [key, pageSize, pageNumber] = [req.query.key, req.query.pageSize || 10, req.query.pageNumber || 0]
     return fragmentDb.collection(DB.prod.pluginTable).find({
-      key: req.query.key,
-    }, {skip: pageSize * pageNumber}).limit(pageSize).catch(() => {
+      'profile.key': {
+        $regex: req.query.key,
+      }
+    }, {skip: pageSize * pageNumber}).limit(pageSize).toArray()
+    .catch(() => {
       return Promise.reject(200010)
     })
+  }).then((PluginList) => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: PluginList.map(item => {
+        return item.profile.key
+      }),
+    })
   }).catch((code) => {
+    clog('code', code)
     res.status(200).json({
       code,
       message: errorCode[code],
