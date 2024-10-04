@@ -1,9 +1,4 @@
-{"level":30,"time":1728051419229,"pid":60411,"hostname":"catdeMBP","name":"logname","msg":"启动服务"}
-{"level":30,"time":1728051426932,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728052946161,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728053082642,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728053141384,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728053909387,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728054011836,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728054039360,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728054143946,"pid":60411,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728082286185,"pid":62111,"hostname":"catdeMBP","name":"logname","msg":"启动服务"}
+{"level":50,"time":1728082367269,"pid":62111,"hostname":"catdeMBP","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:Ub1BIjOQDrdAZXf3pQY-e9vxS-4eNgjY.Wf7RT6fELM3CbEaEt9MK3z+SmeF7CdoOLIzVEowJI/8"}}
+{"level":30,"time":1728082371792,"pid":62111,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728082420321,"pid":62111,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}

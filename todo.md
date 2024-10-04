@@ -4,23 +4,16 @@
 |位移时请求一次接口|todo||
 |取消行为配置项的显隐逻辑|||
 |搭建侧选择插件|||
-|考虑支持生命周期的方法|done||
-||考虑支持生命周期的方法|done|
-|修改app的数据结构 pluginsKey|todo||
-||web-site 修改app的数据结构 pluginsKey|done||
+|修改app的数据结构 pluginsKey|doing||
 ||服务侧设置、修改插件||
-||查询服务侧在创建应用时是否正确使用pluginsKey|done|
 ||服务侧取插件应该是取插件key列表|done|
 ||服务侧设置插件点击确定|doing|
 ||服务侧搜索插件|doing|
-||搭建侧请求选择插件|done|
 ||搭建侧请求选择插件，再渲染出来|doing|
 ||搭建侧创建应用时初始化项中增加插件||
 ||搭建侧回显插件||
 ||渲染侧请求插件插件|||
-|插件增加hooks.loadPost / profile.description|done||
 |解决setup页面请求2次app/page接口的问题|todo||
-|web-site 插件的规范文档|done||
 |分支|f_plugin||
 |要上生产的内容|||
 ||web-site 后端接口的数据结构||
@@ -29,6 +22,7 @@
 ||服务侧取插件||
 ||web-site 插件的逻辑|done|
 ||渲染侧消费插件|done|
+||插件支持的生命周期方法：loadPost(加载完插件) / pageChange(改变页面时)，和自定义方法。插件以`*.json`格式上传。||
 
 |创建碎片平台|||
 |官网增加助手函数子导航|待定||
