@@ -114,7 +114,8 @@ export class ListComponent implements OnInit {
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
             this.userService.getUser().then(user => {
-              let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+              let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email, 
+                undefined, [])
               // 操作本组件的数据
               this.appList.push(appObj)
               // 操作service中的数据

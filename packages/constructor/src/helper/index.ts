@@ -130,7 +130,8 @@ let initPageMeta = (key: S = '', name: S = '',
     // lastComponentUlid: '',
   }
 }
-let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', version:N = VERSION): App => {
+let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', 
+  version:N = VERSION, pluginsKey: S[] = []): App => {
   return {
     key,
     name,
@@ -143,7 +144,7 @@ let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', vers
     firstPageUlid: '',
     prevUlid: '',
     nextUlid: '',
-    pluginsKey: [],
+    pluginsKey,
   }
 }
 let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' | 'node' | 'component' = '') => {
