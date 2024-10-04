@@ -108,4 +108,42 @@ router.route('/')
   res.send('delete')
 })
 
+router.route('/key')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  // 检查参数 key/pageSize/pageNumber
+  // 取
+  new Promise((s, j) => {
+    if (rules.required(req.query.key)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+  let [key, pageSize, pageNumber] = [req.query.key, req.query.pageSize || 10, req.query.pageNumber || 0]
+    return fragmentDb.collection(DB.prod.pluginTable).find({
+      key: req.query.key,
+    }, {skip: pageSize * pageNumber}).limit(pageSize).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.send('post')
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.send('delete')
+})
+
 module.exports = router;

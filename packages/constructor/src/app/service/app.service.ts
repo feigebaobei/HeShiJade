@@ -104,7 +104,6 @@ export class AppService {
       return res.data
     })
   }
-  // createApp(data: ReqCreateData) {
   createApp(appObj: App) {
     this.userService.getUser().then(user => {
       // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
@@ -128,6 +127,7 @@ export class AppService {
         firstPageUlid: appObj.firstPageUlid,
         prevUlid: appObj.prevUlid,
         nextUlid: appObj.nextUlid,
+        pluginsKey: appObj.pluginsKey,
       })
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
@@ -219,5 +219,9 @@ export class AppService {
         curApp.firstPageUlid = pageUlid
       }
     }
+  }
+  // 插件的请求暂时放在这里
+  reqPluginsKey(key: S) {
+    return this.reqService.req(`${serviceUrl()}/plugins`, 'get', {key: key})
   }
 }
