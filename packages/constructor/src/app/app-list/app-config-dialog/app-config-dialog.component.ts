@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { of } from 'rxjs';
-import { AppService } from 'src/app/service/app.service';
+import { HttpClient } from '@angular/common/http';
+import { serviceUrl } from 'src/helper/config';
+import { map} from 'rxjs/operators';
+import { compatibleArray } from 'src/helper';
 // type
 import type { App } from 'src/types/app';
-import type { A, S } from 'src/types/base';
+import type { A, N, S } from 'src/types/base';
 import type { SelectComponent } from 'ng-devui'
 // type EventEmitter = {instance: SelectComponent, event: ScrollEvent}
 type EventEmitter = {instance: SelectComponent, event: A}
@@ -43,7 +46,7 @@ export class AppConfigDialogComponent implements OnInit {
   arr: A[]
   f: A
   constructor(
-    private appService: AppService,
+    private http: HttpClient,
   ) {
     this.options = []
     this.value = null
@@ -54,11 +57,14 @@ export class AppConfigDialogComponent implements OnInit {
   }
   onSelectObject(term: S) {
     if (term) {
-      this.appService.reqPluginsKey(term).then((data) => {
-        clog('data', data)
-      })
-      return of([...arr, ...arr, ...arr].map((option, index) => ({id: index, option: option})))
+      return this.http.get(`${serviceUrl()}/plugins/key`, {params: {key: term}}).pipe(
+        map(res => {
+          return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
+        })
+      )
     } else {
+      // this.options = []
+      // return of(this.options)
       return of([])
     }
   }

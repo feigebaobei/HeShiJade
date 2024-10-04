@@ -222,6 +222,6 @@ export class AppService {
   }
   // 插件的请求暂时放在这里
   reqPluginsKey(key: S) {
-    return this.reqService.req(`${serviceUrl()}/plugins`, 'get', {key: key})
+    return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
   }
 }

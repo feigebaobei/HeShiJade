@@ -11,9 +11,9 @@ name="pluginsKey"
 [searchFn]="onSelectObject"
 ></d-select> -->
 
-<p>key: {{data.app.key}}</p>
+<!-- <p>key: {{data.app.key}}</p>
 <p>name: {{data.app.name}}</p>
-<p>version: {{data.app.version}}</p>
+<p>version: {{data.app.version}}</p> -->
 
 <form dForm ngForm>
     <d-form-item>
@@ -29,7 +29,7 @@ name="pluginsKey"
         <d-form-control>{{data.app.version}}</d-form-control>
     </d-form-item>
     <d-form-item>
-        <d-form-label>插件: {{value | json}}</d-form-label>
+        <d-form-label>插件: </d-form-label>
         <d-form-control>
             <d-select
                 [filterKey]="'label'" 
