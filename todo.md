@@ -9,13 +9,14 @@
 |修改app的数据结构 pluginsKey|todo||
 ||web-site 修改app的数据结构 pluginsKey|done||
 ||服务侧设置、修改插件||
-||查询服务侧在创建应用时是否正确使用pluginsKey||
+||查询服务侧在创建应用时是否正确使用pluginsKey|done|
 ||服务侧取插件应该是取插件key列表|done|
-||服务侧设置插件点击确定||
+||服务侧设置插件点击确定|doing|
 ||服务侧搜索插件|doing|
 ||搭建侧请求选择插件|done|
 ||搭建侧请求选择插件，再渲染出来|doing|
 ||搭建侧创建应用时初始化项中增加插件||
+||搭建侧回显插件||
 ||渲染侧请求插件插件|||
 |插件增加hooks.loadPost / profile.description|done||
 |解决setup页面请求2次app/page接口的问题|todo||
