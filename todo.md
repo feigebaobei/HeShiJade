@@ -352,3 +352,17 @@ authorName
 
 上传一个文件。
 
+
+
+  <div class="col-md-5">
+    <d-select
+      [enableLazyLoad]="true"
+      (loadMore)="loadMore($event)"
+      [loadingTemplateRef]="loadingTemplateRef"
+      [placeholder]="'Small Input'"
+      [options]="options1"
+    ></d-select>
+
+
+
+    
