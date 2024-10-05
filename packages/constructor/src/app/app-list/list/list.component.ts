@@ -154,6 +154,7 @@ export class ListComponent implements OnInit {
   configBtClickH($event: Event, index: N) {
     $event.stopPropagation() // 阻止事件冒泡
     // $event.preventDefault() // 阻止默认事件
+    let app = this.appList[index]
     let results = this.dialogService.open({
       id: 'app-config-dialog-service',
       width: '346px',
@@ -168,18 +169,22 @@ export class ListComponent implements OnInit {
       dialogtype: 'standard',
       showAnimate: true,
       buttons: [
-        // {
-        //   cssClass: 'primary',
-        //   text: 'Ok',
-        //   disabled: false,
-        //   handler: ($event: Event) => {
-        //     results.modalInstance.hide()
-        //   }
-        // },
+        {
+          cssClass: 'primary',
+          text: '确定',
+          disabled: false,
+          handler: ($event: Event) => {
+            // clog('app', app, results)
+            // results.modalContentInstance.value
+            this.appService.updatePluginKey(app.ulid, {pluginsKey: results.modalContentInstance.value || []}).then(() => {
+              results.modalInstance.hide()
+            })
+          }
+        },
         {
           id: 'app-config-dialog-btn-canncel',
           cssClass: 'common',
-          text: '关闭',
+          text: '取消',
           handler: ($event: Event) => {
             results.modalInstance.hide()
           }

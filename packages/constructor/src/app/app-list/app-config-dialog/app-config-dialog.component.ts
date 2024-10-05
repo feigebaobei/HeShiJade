@@ -42,14 +42,14 @@ export class AppConfigDialogComponent implements OnInit {
     app: App,
   }
   options: A[]
-  value: A
+  value: S[]
   arr: A[]
   f: A
   constructor(
     private http: HttpClient,
   ) {
     this.options = []
-    this.value = null
+    this.value = []
     this.arr = arr
     this.f = (term: S) => {
       return this.onSelectObject(term)
@@ -63,8 +63,6 @@ export class AppConfigDialogComponent implements OnInit {
         })
       )
     } else {
-      // this.options = []
-      // return of(this.options)
       return of([])
     }
   }

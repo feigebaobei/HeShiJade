@@ -22,3 +22,15 @@
 {"level":30,"time":1728089636958,"pid":64950,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1728089661512,"pid":65018,"hostname":"catdeMBP","name":"logname","msg":"启动服务"}
 {"level":30,"time":1728089663887,"pid":65146,"hostname":"catdeMBP","name":"logname","msg":"启动服务"}
+{"level":50,"time":1728089864967,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:H0IewbbM8njlwnmbtwLdKrxpfuwLVNSH.gL3d+STmNRzxoc50cl+Xv+PYOPCBgNkP66k4JtGcYjU"}}
+{"level":30,"time":1728089906805,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090084927,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090298105,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090363358,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090386818,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090406489,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090422745,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090432671,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090844576,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090883543,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728090916606,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
