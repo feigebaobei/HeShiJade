@@ -2,7 +2,7 @@ import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
 // import { ShareSignal } from './shareSignal';
 // type
-import type { A, F, N, S, OA, B } from 'src/types/base';
+import type { A, F, N, S, Oa, B } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component, GridLayout} from 'src/types/component';

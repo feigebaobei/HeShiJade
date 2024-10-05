@@ -7,7 +7,7 @@ type F = Function
 type O = object
 type D = Date
 // type At = '@'
-interface OA {
+interface Oa {
     [k: S]: A
 }
 type FT<T = A> = (...p: A[]) => T
@@ -112,7 +112,7 @@ type ConfigItemsCategoryType = ConfigItem['category']
 export type {
   S, N, A, B, ULID, 
   Email,
-  F, OA, O, D,
+  F, Oa, O, D,
   FT,
   ValueType,
   SelectOptionsItem,

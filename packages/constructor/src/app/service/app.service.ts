@@ -9,7 +9,8 @@ import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
    Email, S, ULID, N,
   A,
-  B, } from 'src/types/base';
+  B,
+  Oa, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 
 let clog = console.log
@@ -221,7 +222,13 @@ export class AppService {
     }
   }
   // 插件的请求暂时放在这里
-  reqPluginsKey(key: S) {
-    return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
+  // reqPluginsKey(key: S) {
+  //   return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
+  // }
+  updatePluginKey(ulid: ULID, updateObj: Oa) {
+    return this.reqService.req(`${serviceUrl()}/apps`, 'put', {
+      appUlid: ulid,
+      updateObj
+    })
   }
 }

@@ -2,7 +2,7 @@ import { req } from './axios'
 // type
 import type { Method, RequestData,
     ResponseData, } from './axios'
-import type { A, OA, F, N, S } from "src/types/base"
+import type { A, Oa, F, N, S } from "src/types/base"
 
 interface SsoClientParams {
     idp: {

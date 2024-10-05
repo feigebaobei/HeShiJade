@@ -1,6 +1,6 @@
 import axios from 'axios'
 // type
-import type { A, OA, N, S } from "src/types/base"
+import type { A, Oa, N, S } from "src/types/base"
 import type {
     AxiosInstance,
     AxiosRequestConfig,
@@ -14,8 +14,8 @@ interface RequestData {
     baseURL?: S
     url: S
     method: Method
-    params?: OA
-    data?: OA
+    params?: Oa
+    data?: Oa
 
 }
 interface ResponseData {

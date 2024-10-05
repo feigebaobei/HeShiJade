@@ -20,7 +20,7 @@ import type { Component, Category,
   ComponentMountSlots,
   BehaviorMetaItem,
  } from '../../types/component'
-import type { S, OA, ULID, A,
+import type { S, Oa, ULID, A,
   N,
   B,
   ConfigItem,
