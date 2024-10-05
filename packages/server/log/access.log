@@ -41,3 +41,5 @@
 {"level":30,"time":1728091075573,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1728091483764,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1728091502443,"pid":65146,"hostname":"catdeMBP","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1728091513774,"pid":65146,"hostname":"catdeMBP","name":"logname","code":200010,"originalUrl":"/apps"}
+{"level":30,"time":1728091532450,"pid":65146,"hostname":"catdeMBP","name":"logname","code":200010,"originalUrl":"/apps"}
