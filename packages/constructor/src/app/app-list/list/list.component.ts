@@ -174,8 +174,6 @@ export class ListComponent implements OnInit {
           text: '确定',
           disabled: false,
           handler: ($event: Event) => {
-            // clog('app', app, results)
-            // results.modalContentInstance.value
             this.appService.updatePluginKey(app.ulid, {pluginsKey: results.modalContentInstance.value || []}).then(() => {
               results.modalInstance.hide()
             })

@@ -71,5 +71,6 @@ export class AppConfigDialogComponent implements OnInit {
     $event.instance.loadFinish();
   }
   ngOnInit(): void {
+    this.value = this.data.app.pluginsKey
   }
 }
