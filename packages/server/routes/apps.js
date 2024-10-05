@@ -144,14 +144,16 @@ router.route('/')
   // req.body.key
   // req.body.value
   new Promise((s, j) => {
-    if (rules.required(req.body.appUlid) && rules.required(req.body.key) && rules.required(req.body.value)) {
+    if (rules.required(req.body.appUlid) && rules.required(req.body.updateObj)) {
       s(true)
     } else {
       j(100100)
     }
   }).then(() => {
-    lowcodeDb.collection(DB.dev.appTable).updateOne({ulid: req.body.ulid}, {
-      [`${req.body.key}`]: req.body.value
+    return lowcodeDb.collection(DB.dev.appTable).updateOne({ulid: req.body.appUlid}, {
+      $set: req.body.updateObj,
+    }).catch(() => {
+      return Promise.reject(200020)
     })
   }).then(() => {
     res.status(200).json({
@@ -159,7 +161,7 @@ router.route('/')
       message: '',
       data: {}
     })
-  }).catch(() => {
+  }).catch((code) => {
     res.status(200).json({
       code,
       message: errorCode[code],
