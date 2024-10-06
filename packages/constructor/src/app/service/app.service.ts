@@ -53,7 +53,6 @@ export class AppService {
     this._curApp = this._find(appUlid)
   }
   getAppList() {
-    // return this._appList
     let al = this.tree.root?.toArray()
     if (al?.length) {
       return Promise.resolve(al)
@@ -139,12 +138,12 @@ export class AppService {
   // 重铸
   // 获取应用列表+设置当前应用+返回应用列表
   // 可能用不上
-  recast(): Promise<App[]> {
-    return this.reqAppList().then(() => {
-      this.setCurApp(this.getCurApp()?.ulid)
-      return this._appList
-    })
-  }
+  // recast(): Promise<App[]> {
+  //   return this.reqAppList().then(() => {
+  //     this.setCurApp(this.getCurApp()?.ulid)
+  //     return this._appList
+  //   })
+  // }
   deletePageByUlid(ulid: ULID) {
     let app = this.getCurApp()
     if (app) {
