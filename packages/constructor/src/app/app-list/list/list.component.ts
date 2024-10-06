@@ -91,9 +91,6 @@ export class ListComponent implements OnInit {
       backdropCloseable: true,
       onClose: () => console.log('on dialog closed'),
       data: {
-        // name: 'Tom',
-        // age: 10,
-        // address: 'Chengdu',
         key: 'one',
         name: 'one',
         members: '123@qq.com,kevin@163.com',
@@ -117,7 +114,8 @@ export class ListComponent implements OnInit {
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
             this.userService.getUser().then(user => {
-              let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+              let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email, 
+                undefined, [])
               // 操作本组件的数据
               this.appList.push(appObj)
               // 操作service中的数据
@@ -156,7 +154,7 @@ export class ListComponent implements OnInit {
   configBtClickH($event: Event, index: N) {
     $event.stopPropagation() // 阻止事件冒泡
     // $event.preventDefault() // 阻止默认事件
-    // clog('config', index, this.appList[index])
+    let app = this.appList[index]
     let results = this.dialogService.open({
       id: 'app-config-dialog-service',
       width: '346px',
@@ -171,18 +169,20 @@ export class ListComponent implements OnInit {
       dialogtype: 'standard',
       showAnimate: true,
       buttons: [
-        // {
-        //   cssClass: 'primary',
-        //   text: 'Ok',
-        //   disabled: false,
-        //   handler: ($event: Event) => {
-        //     results.modalInstance.hide()
-        //   }
-        // },
+        {
+          cssClass: 'primary',
+          text: '确定',
+          disabled: false,
+          handler: ($event: Event) => {
+            this.appService.updatePluginKey(app.ulid, {pluginsKey: results.modalContentInstance.value || []}).then(() => {
+              results.modalInstance.hide()
+            })
+          }
+        },
         {
           id: 'app-config-dialog-btn-canncel',
           cssClass: 'common',
-          text: '关闭',
+          text: '取消',
           handler: ($event: Event) => {
             results.modalInstance.hide()
           }

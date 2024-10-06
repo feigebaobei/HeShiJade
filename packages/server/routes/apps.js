@@ -115,6 +115,7 @@ router.route('/')
               nextUlid: '', // 创建都是加在最后
               remarks: '',
               activated: true, // 预留字段
+              pluginsKey: req.body.pluginsKey, // 插件
             }
           }
         }
@@ -136,8 +137,37 @@ router.route('/')
     })
   })
 })
+// 修改应用
 .put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
+  // res.send('put')
+  // req.body.appUlid
+  // req.body.key
+  // req.body.value
+  new Promise((s, j) => {
+    if (rules.required(req.body.appUlid) && rules.required(req.body.updateObj)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.appTable).updateOne({ulid: req.body.appUlid}, {
+      $set: req.body.updateObj,
+    }).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {},
+    })
+  })
 })
 // 删除指定应用
 .delete(cors.corsWithOptions, (req, res) => { // 未做到原子性

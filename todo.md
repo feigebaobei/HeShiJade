@@ -1,41 +1,29 @@
 ||||
 |-|-|-|
-|点击model的关闭时应该关闭|done||
-|在web-site中更新behavior的数据类型|done||
-|删除渲染侧的shareEvent|先注释了||
-|删除应用时有未删除user.firstApplicationUlid的bug|done|创建2个应用，先删除第一个应用，就出错了。|
-||删除当前应用时应该清空后应用的prevUlid|done|
-|分支|f_lc||
+|组件之间传递数据|以table、pagination、form为例||
+|分支|f_demo||
 |要上生产的内容|||
-||支持配置多个事件||
-||搭建侧、渲染侧停用shareEvent||
-||修正icon/select的props文案||
-||form/table/input/select/icon/checkbox/tabs/pagination组件支持事件、方法。本次注重打通逻辑，api有且少。后续会增强。||
-||官网增加form/table/input/select/icon/checkbox/tabs/pagination组件的api||
+||||
 
-|取消行为配置项的显隐逻辑|||
-|官网增加助手函数子导航|||
-|完成 shareEvent 的 todo |||
+|// todo 改名为behavior-group|||
+|创建碎片平台|||
+|行为面板使用去抖|||
+|官网增加助手函数子导航|待定||
 |整理升级的要求|||
 |web-site扩展组件时增加井布局|todo||
-|解决setup页面请求2次app/page接口的问题|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
 |多种布局方式：井布局、列布局、行布局、块布局|todo||
-|modal组件的打开事件应该事件名+ulid|todo||
 |table组件在与items时的操作逻辑子组件|todo||
-|位移时请求一次接口|todo||
 |setup页面删除componentByPage或componentList|||
 |搭建页面的标题与按钮应该在同一行|todo||
 ||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
 |解决删除应用后视图中无应用的问题|todo||
-|items面板支持删除功能|done||
 |把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
 |有时无法选中页面|不好复现||
 ||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
-|组件之间传递数据|以table、pagination、form为例||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |是否需要把修改service与发请求分开|分开||
 |丰富组件|||
@@ -233,22 +221,6 @@ Remove or relocate styles from global styles (styles.scss) to the components
 Use standalone components or the SCAM architecture (for Angular versions below 14.0.0) to take advantage of tree-shaking and remove unused components from your bundle.
 Remove all dead code from your application, including unused services, directives, pipes, modules, and so on. Additionally, remove unused dependencies and libraries from your bundle.
 
-# Can't bind to 'ngModel' since it isn't a known property of 'input'
-import { FormsModule } from '@angular/forms';
-@NgModule({
-  imports: [
-    [...]
-    FormsModule
-  ],
-  [...]
-})
-
-示例
-import { RadioModule } from 'ng-devui/radio';
-import { RateModule } from 'ng-devui/rate';
-import { ReadTipModule } from 'ng-devui/read-tip';
-import { SearchModule } from 'ng-devui/search';
-
 concatenate 连接、连接的
 content 目录
 Realize 了解，意识到
@@ -286,11 +258,6 @@ any 任意文件的大小
 6. 有找到清晰目标的能力
 7. 系统性思维
 
-main     1.74mb  1781.76
-polyfills 33.5kb
-runtime  1.13kb
-styles   176kb
-1.94mb
 
 # 动态引入组件
 export class HomeContainerComponent implements OnInit {
@@ -315,3 +282,68 @@ export class HomeContainerComponent implements OnInit {
 
 
 getComponentInstance('01J85BMRDJ3NYS52FX3NDEKPDZ').setProps({visible: true})
+
+
+plugin表
+  profile
+    key
+    authorEmail
+    authorName
+  hooks
+    loadPost
+    pageInstancePost
+    componentInstancePost
+  fnx
+  
+fn.toString()
+eval(str)
+
+存插件 
+取插件
+都是json。都不能使用fn.只能使用string。
+      client    server     client
+      fn->str
+                save
+                          str->fn
+
+插件的文档结构  已经确定
+上传文件
+上传文本
+
+
+getComponentInstance('01J90EYZ28TAH60BS34AV8Z499').openDialog();
+let clog = console.log;
+clog('plugins', plugins);
+plugins.key.fnx()
+要求严格自测插件代码。
+为插件方法绑定this.平台插件若干助手方法.
+
+|-----------|
+|           |
+|           |
+|           |
+|           |
+|-----------|
+
+key
+authorEmail
+authorName
+选择生命周期方法
+自定义方法输入框
+
+上传一个文件。
+
+
+
+  <div class="col-md-5">
+    <d-select
+      [enableLazyLoad]="true"
+      (loadMore)="loadMore($event)"
+      [loadingTemplateRef]="loadingTemplateRef"
+      [placeholder]="'Small Input'"
+      [options]="options1"
+    ></d-select>
+
+
+
+    

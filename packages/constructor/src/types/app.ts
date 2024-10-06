@@ -13,6 +13,7 @@ interface App {
   firstPageUlid: ULID
   prevUlid: ULID
   nextUlid: ULID
+  pluginsKey: S[]
   // 无子应用
 }
 

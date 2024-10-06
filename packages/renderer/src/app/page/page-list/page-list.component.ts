@@ -6,6 +6,7 @@ import { Page } from 'src/types/page';
 import { CommonModule } from '@angular/common';
 import { S, ULID } from 'src/types/base';
 import { asyncFn } from 'src/helper';
+import { pool } from 'src/helper/pool';
 
 let clog = console.log
 
@@ -40,6 +41,7 @@ export class PageListComponent implements OnInit {
     })
     effect(() => {
       this.cur = this.pageService.curS.get()
+      pool.runHooks('pageChange')
     })
   }
   pageItemClickH(page: Page) {

@@ -50,7 +50,6 @@ export class CompStackComponent implements OnInit, OnDestroy {
   }
   init() {
     this._componentList = []
-    // this._componentList = 
     this.componentList.forEach(item => {
       this._componentList.push({
         x: item.gridLayout.x,
@@ -62,7 +61,6 @@ export class CompStackComponent implements OnInit, OnDestroy {
         noResize: item.gridLayout.noResize,
       })
     })
-    clog('this._componentList', this._componentList)
   }
   changeCBH($event: A) {
     // $event: {
@@ -86,7 +84,6 @@ export class CompStackComponent implements OnInit, OnDestroy {
       curNode.y = $event.nodes[0].y
       curNode.w = $event.nodes[0].w
       curNode.h = $event.nodes[0].h
-      clog(curNode)
       let gridLayout = {
         x: $event.nodes[0].x,
         y: $event.nodes[0].y,
@@ -99,7 +96,6 @@ export class CompStackComponent implements OnInit, OnDestroy {
         ulid: curNode.comp.ulid,
         ...gridLayout,
       })
-      // todo 参数改为kv对的object
       this.componentService.reqUpdateComponentProps('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
       this.componentService.reqUpdateComponentProps('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
       this.componentService.reqUpdateComponentProps('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
@@ -125,8 +121,6 @@ export class CompStackComponent implements OnInit, OnDestroy {
     // 通知父组件删除
     this.deleteComp.emit(ulid)
   }
-  // import { TrackByFunction } from '@angular/core';
-  //   trackById: TrackByFunction<DropDownItem> = (index: number, item: DropDownItem) => item.value;
   identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
     // return index

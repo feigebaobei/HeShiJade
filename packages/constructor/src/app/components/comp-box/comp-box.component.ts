@@ -15,7 +15,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 // type
-import type { A, S, OA, ULID } from 'src/types/base';
+import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
 // 数据
@@ -34,7 +34,7 @@ import type { Page } from 'src/types/page';
 
 let clog = console.log
 
-let compMap: OA = {
+let compMap: Oa = {
   Button: ButtonComponent,
   Form: FormComponent,
   Input: InputComponent,

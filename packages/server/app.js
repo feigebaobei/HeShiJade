@@ -16,6 +16,7 @@ var pagesRouter = require('./routes/pages');
 var componentsRouter = require('./routes/components');
 var devRouter = require('./routes/dev');
 var progressRouter = require('./routes/progress');
+var pluginsRouter = require('./routes/plugins');
 
 var app = express();
 
@@ -65,6 +66,7 @@ app.use('/pages', pagesRouter)
 app.use('/components', componentsRouter)
 app.use('/dev', devRouter)
 app.use('/progress', progressRouter)
+app.use('/plugins', pluginsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

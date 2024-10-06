@@ -6,7 +6,7 @@ type ULID = S
 type D = Date
 type F = Function
 type O = object
-interface Ao {
+interface Oa {
     [k: S]: A
 }
 type ValueType = 'string' | 'number' | 'switch'
@@ -24,7 +24,7 @@ interface Options<T, G> {
 type ReqMethod = "get" | "post" | "put" | "delete"
 export type {
     S, N, A, B, ULID, 
-    F, Ao, O, D,
+    F, Oa, O, D,
     ValueType,
     SelectOptionsItem,
     ENV,

@@ -2,7 +2,7 @@ import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
 // import { ShareSignal } from './shareSignal';
 // type
-import type { A, F, N, S, OA, B } from 'src/types/base';
+import type { A, F, N, S, Oa, B } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component, GridLayout} from 'src/types/component';
@@ -130,7 +130,8 @@ let initPageMeta = (key: S = '', name: S = '',
     // lastComponentUlid: '',
   }
 }
-let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', version:N = VERSION): App => {
+let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', 
+  version:N = VERSION, pluginsKey: S[] = []): App => {
   return {
     key,
     name,
@@ -143,6 +144,7 @@ let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', vers
     firstPageUlid: '',
     prevUlid: '',
     nextUlid: '',
+    pluginsKey,
   }
 }
 let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' | 'node' | 'component' = '') => {

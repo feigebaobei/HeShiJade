@@ -23,6 +23,7 @@
             firstPageUlid: ULID 第一个页面的ulid
             prevUlid: ULID      前一个应用的ulid
             nextUlid: ULID      后一个应用的ulid
+            pluginsKey: S[]     插件的key组成的数组 2024.10.03新增
 
         EnvKey = 'dev' | 'test' | 'pre' | 'prod'
 
@@ -181,5 +182,21 @@
         this._map
             key: pageUlid
             value: tree    结构同app
+    </pre>
+    <h1>插件</h1>
+    <pre>
+        &#123;
+            profile: &#123;
+                key: S
+                authorEmail: S
+                authorName: S
+                description: S
+            &#125;
+            hooks: &#123;
+                loadPost: S
+                pageChange: S
+            &#125;
+            [k: S]: S
+        &#125;
     </pre>
 </section>

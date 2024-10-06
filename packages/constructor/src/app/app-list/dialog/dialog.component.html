@@ -31,14 +31,6 @@
         <d-form-label>版本号</d-form-label>
         <d-form-control>
             {{initVersion}}
-            <!-- <d-select [options]="data.versionOptions" name="version" 
-            [filterKey]="'label'" 
-            [(ngModel)]="data.version"></d-select> -->
-
-            <!-- <input dTextInput autocomplete="off" name="version"
-                [(ngModel)]="0"
-                disabled="true"
-            /> -->
         </d-form-control>
     </d-form-item>
     <d-form-item>
@@ -51,18 +43,5 @@
             ></textarea>
         </d-form-control>
     </d-form-item>
-        <!-- 
-    <d-form-operation>
-        <d-button class="mr-element-spacing" 
-        [title]="'sti'" 
-        circled="true" 
-        style="margin-right: 8px" 
-        dFormSubmit
-        (click)="createBtClickH()"
-        >创建</d-button
-        >
-        <d-button bsStyle="common" circled="true" 
-        dFormReset>重置</d-button>
-    </d-form-operation> -->
 </form>
 <d-toast [value]="msg"></d-toast>

@@ -29,10 +29,9 @@ export class DialogComponent {
   // }
   createBtClickH() {
     this.newEvent.emit('str')
-    clog('createBtClickH')
-        this.msg = [
-          { severity: 'info', summary: 'Absolute', content: 'str', myInfo: 'Devui' },
-        ]
+    this.msg = [
+      { severity: 'info', summary: 'Absolute', content: 'str', myInfo: 'Devui' },
+    ]
   }
 
 }

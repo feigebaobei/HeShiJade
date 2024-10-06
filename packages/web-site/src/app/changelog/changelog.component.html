@@ -1,11 +1,22 @@
 <section class="content-box">
     <h1>2023.10.1x</h1>
     <ul>
-        <li>feat:打通插件能力。</li>
+        <li>demo:以table、pagination、form创建一个示例</li>
+    </ul>
+    <h1>2023.10.06</h1>
+    <ul>
+        <li>perf:搭建侧，请求接口去重。</li>
+        <li>perf:搭建侧，行为面板取消显隐逻辑</li>
+        <li>feat:web-site 修改App的数据结构</li>
+        <li>feat:web-site 说清插件的逻辑</li>
+        <li>feat:打通插件能力。在web-site上传插件，在搭建侧选择插件，在渲染侧使用插件。</li>
+        <li>feat:插件支持的生命周期方法：loadPost(加载完插件) / pageChange(改变页面时)，和自定义方法。插件以`*.json`格式上传。</li>
+        <li>feat:server支持接收上传的插件文件。</li>
     </ul>
     <h1>2023.09.28</h1>
     <ul>
         <li>fix:修正icon/select的props文案</li>
+        <li>fix:修正当有多个应用时删除第一个应用后刷新页面无法渲染其他应用的问题。</li>
         <li>feat:停用shareEvent</li>
         <li>feat:支持配置多个事件</li>
         <li>feat:8个组件（form/table/input/select/icon/checkbox/tabs/pagination）的事件、方法。本次注重打通逻辑，api有且少。后续会增强。</li>

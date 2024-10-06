@@ -16,13 +16,7 @@ import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
 import type { BehaviorConfigGroup } from 'src/types/config'
 import type { B, N } from 'src/types/base';
 import { PageService } from 'src/app/service/page.service';
-// import type { Options, S,
-//   //  A, ULID, B, N, 
-//   // Options, 
-//   B,
-//   N,
-//   } from "src/types/base"
-type keyType = 'event' | 'target' | 'payload'
+// type keyType = 'event' | 'target' | 'payload'
 
 let clog = console.log
 
@@ -73,13 +67,8 @@ export class BehaviorBoxComponent {
         if (o) {
           o.value = v
         }
-        // if (arr.hasOwnProperty(k)) {
-        //   arr[k].value = v
-        // }
-        clog('k', k, v, o)
       })
       this.componentBehaviorList.push(arr)
-      clog('this.componentBehaviorList', this.componentBehaviorList)
     })
   }
   curComponentChange() {
@@ -112,18 +101,9 @@ export class BehaviorBoxComponent {
     let group: BehaviorConfigGroup = [] // as BehaviorConfigGroup
     if (this.curComp) {
       Object.values(behaviorTemplate[this.curComp.type]).forEach((item) => {
-        // group[group.key as unknown as 'event' | 'fnBody'] = cloneDeep(group)
         group.push(item)
       })
       this.componentBehaviorList.push(group)
-      // this.componentService.addBehaviorOfCurComponent({
-      //   event: obj.event.value,
-      //   fnBody: obj.fnBody.value,
-      // })
-      // this.componentService.reqAddBehavior({
-      //   event: obj.event.value,
-      //   fnBody: obj.fnBody.value,
-      // })
       let o: BehaviorMetaItem = {}
       group.forEach(item => {
         o[item.key] = item.value

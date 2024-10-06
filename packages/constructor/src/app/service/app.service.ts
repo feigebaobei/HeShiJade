@@ -9,7 +9,8 @@ import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
    Email, S, ULID, N,
   A,
-  B, } from 'src/types/base';
+  B,
+  Oa, } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 
 let clog = console.log
@@ -52,7 +53,6 @@ export class AppService {
     this._curApp = this._find(appUlid)
   }
   getAppList() {
-    // return this._appList
     let al = this.tree.root?.toArray()
     if (al?.length) {
       return Promise.resolve(al)
@@ -104,7 +104,6 @@ export class AppService {
       return res.data
     })
   }
-  // createApp(data: ReqCreateData) {
   createApp(appObj: App) {
     this.userService.getUser().then(user => {
       // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
@@ -128,6 +127,7 @@ export class AppService {
         firstPageUlid: appObj.firstPageUlid,
         prevUlid: appObj.prevUlid,
         nextUlid: appObj.nextUlid,
+        pluginsKey: appObj.pluginsKey,
       })
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
@@ -138,12 +138,12 @@ export class AppService {
   // 重铸
   // 获取应用列表+设置当前应用+返回应用列表
   // 可能用不上
-  recast(): Promise<App[]> {
-    return this.reqAppList().then(() => {
-      this.setCurApp(this.getCurApp()?.ulid)
-      return this._appList
-    })
-  }
+  // recast(): Promise<App[]> {
+  //   return this.reqAppList().then(() => {
+  //     this.setCurApp(this.getCurApp()?.ulid)
+  //     return this._appList
+  //   })
+  // }
   deletePageByUlid(ulid: ULID) {
     let app = this.getCurApp()
     if (app) {
@@ -219,5 +219,15 @@ export class AppService {
         curApp.firstPageUlid = pageUlid
       }
     }
+  }
+  // 插件的请求暂时放在这里
+  // reqPluginsKey(key: S) {
+  //   return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
+  // }
+  updatePluginKey(ulid: ULID, updateObj: Oa) {
+    return this.reqService.req(`${serviceUrl()}/apps`, 'put', {
+      appUlid: ulid,
+      updateObj
+    })
   }
 }
