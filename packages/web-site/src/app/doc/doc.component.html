@@ -48,19 +48,19 @@
     </ul>
     <p>demo及说明</p>
     <pre>
-        {
-            "profile": {                        // 介绍插件
+        &#123;
+            "profile": &#123;                        // 介绍插件
                 "key": "abc",                   // 插件的key.要保证惟一
                 "authorEmail": "authorEmail",   // 作者的电子邮箱
                 "authorName": "authorName",     // 作者的名字
                 "description": "description"    // 插件的说明
-            },
-            "hooks": {                          // 插件中的生命周期方法。方法要写成字符串类型。
-                "loadPost": "() => {console.log('loadPost')}",
-                "pageChange": "() => {console.log('pageChange')}",
-            },
-            "customFn": "() => {}"              // 自定义方法
-        }
+            &#125;,
+            "hooks": &#123;                          // 插件中的生命周期方法。方法要写成字符串类型。
+                "loadPost": "() => &#123;console.log('loadPost')&#125;",
+                "pageChange": "() => &#123;console.log('pageChange')&#125;",
+            &#125;,
+            "customFn": "() => &#123;&#125;"              // 自定义方法
+        &#125;
     </pre>
     <ul>
         <li>方法要写成字符串格式。</li>
