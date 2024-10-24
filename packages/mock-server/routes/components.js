@@ -39,33 +39,90 @@ router.route('/table')
     data: [
       {
         id: 1,
-        name: 'name',
-        a: 'a',
-        d: 'd',
+        one: 'one1',
+        two: 'two1',
+        three: 'three1',
       },
       {
         id: 2,
-        name: 'name2',
-        a: 'a2',
-        d: 'd2',
+        one: 'one2',
+        two: 'two2',
+        three: 'three2',
       },
       {
-        id: 1,
-        name: 'name3',
-        a: 'a3',
-        d: 'd3',
+        id: 3,
+        one: 'one1',
+        two: 'two1',
+        three: 'three1',
       },
       {
-        id: 1,
-        name: 'name4',
-        a: 'a4',
-        d: 'd4',
+        id: 4,
+        one: 'one4',
+        two: 'two4',
+        three: 'three4',
       },
     ],
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  res.send(200)
+  // req.body
+  // {
+  //   name: '',
+  //   org: '',
+  //   page: 1,
+  //   pageSize: 10,
+  // }
+  let strArr = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+  let p = Math.floor(req.body.page / 3)
+  let data = []
+  for (let n of req.pageSize) {
+    data.push({
+      id: p * req.pageSize + n,
+      one: `one${p}-${n}`,
+      two: `two${p}-${n}`,
+      three: `three${p}-${n}`,
+      four: `four${p}-${n}`,
+    })
+  }
+  // switch (p) {
+  //   case 0:
+  //     break;
+  //   case 1:
+  //     break;
+  //   case 2:
+  //     break;
+  // }
+  res.status(200).json({
+    code: 0,
+    message: '',
+    // data: [
+    //   {
+    //     id: 1,
+    //     one: 'one1',
+    //     two: 'two1',
+    //     three: 'three1',
+    //   },
+    //   {
+    //     id: 2,
+    //     one: 'one2',
+    //     two: 'two2',
+    //     three: 'three2',
+    //   },
+    //   {
+    //     id: 3,
+    //     one: 'one1',
+    //     two: 'two1',
+    //     three: 'three1',
+    //   },
+    //   {
+    //     id: 4,
+    //     one: 'one4',
+    //     two: 'two4',
+    //     three: 'three4',
+    //   },
+    // ],
+    data,
+  })
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send(200)

@@ -19,7 +19,7 @@ export class FormComponent implements OnInit, OnDestroy {
   rules: A
   constructor(private dataService: DataService) {
     this.props = {} // this.data.props
-    this.items = {} //this.data.items
+    this.items = {} // this.data.items
     this.rules = {
       validators: [
         { required: true },
@@ -38,12 +38,15 @@ export class FormComponent implements OnInit, OnDestroy {
       data[item.key] = item.value
     })
     this.dataService.req(this.data.props['url'], 'post', data).then(res => {
+      clog('submit res', res)
       let fnArr = pool.getEventArray(this.data.ulid, 'submit')
       fnArr.forEach(f => {
         f.bind(this) // 方法体的this
-        f && f(pool.getComponentInstance.bind(pool),
+        f && f(
+          pool.getComponentInstance.bind(pool), // 绑定指定方法的this
           pool.getPluginFn(), // 插件
-        ) // 绑定指定方法的this
+          res
+        )
       })
       // let eventArr = this.data.behavior.filter((item: A) => item.event === 'submit')
       // eventArr.forEach((item: A) => {

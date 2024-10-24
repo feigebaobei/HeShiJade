@@ -1,6 +1,14 @@
 ||||
 |-|-|-|
 |组件之间传递数据|以table、pagination、form为例||
+||初始化3个组件|done|
+||查询||
+||重置||
+||显示数据||
+||分页||
+||翻页||
+||mock服务提供数据||
+||web-site增加第三参数的说明||
 |分支|f_demo||
 |要上生产的内容|||
 ||||
@@ -281,4 +289,15 @@ export class HomeContainerComponent implements OnInit {
 }
 
 
-    
+回调方法有三个参数
+getComonentInstance/plugins/thirdParams
+
+console.log('thirdParams', thirdParams)
+let i = getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+i.setDataSource(thirdParams.data)
+i.setProps({
+  striped: true
+})
+
+
+striped

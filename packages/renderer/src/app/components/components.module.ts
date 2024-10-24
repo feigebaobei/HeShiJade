@@ -13,6 +13,7 @@ import { ButtonModule,
   ToggleModule,
   CheckBoxModule,
   ModalModule,
+  // DataTableComponent,
 } from 'ng-devui';
 import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
@@ -49,6 +50,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     CheckboxComponent,
     TabsComponent,
     PaginationComponent,
+    // DataTableComponent,
   ],
   imports: [
     CommonModule,
