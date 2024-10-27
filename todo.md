@@ -2,13 +2,19 @@
 |-|-|-|
 |组件之间传递数据|以table、pagination、form为例||
 ||初始化3个组件|done|
-||查询||
+||查询|done|
 ||重置||
-||显示数据||
+||显示数据|done|
 ||分页||
 ||翻页||
-||mock服务提供数据||
+||mock服务提供数据|done|
+||回调事件中支持取得相关组件的数据，再请求后端，再把数据传入相关组件。|doing|
+|||插件中支持req|doing
+|||取出form的数据|todo
+|||取出page的数据|todo
+|||传入table|todo
 ||web-site增加第三参数的说明||
+||无选中组件时行为面板显示页面的生命周期事件||
 |分支|f_demo||
 |要上生产的内容|||
 ||||
@@ -301,3 +307,45 @@ i.setProps({
 
 
 striped
+
+三个参数
+utils/plugins/thirdParams
+utils: {
+  getComonentInstance,
+  req,
+}
+||utils|plugins||
+|-|-|-|-|
+||内置工具|外部引入的插件||
+|异步加载|不需要请求|需要请求||
+||总是存在|若不需要可以不设置，就不存在||
+|||||
+
+||utils|classes||
+|-|-|-|-|
+|工作范围|无明确作用域|非常通用||
+|形式|函数|类||
+|||不可循环使用||
+|||在当前angular项目中单例存在||
+
+let clog = console.log
+utils.req({
+  url: 'http://localhost:5030/components/table',
+  method: 'get',
+  data: {
+    page: 2,
+    pageSize: 10,
+  },
+}).then(res => {
+  clog('res', res)
+  let i = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+  i.setDataSource(res.data.data)
+}).catch()
+
+console.log('thirdParams', thirdParams)
+let i = getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+i.setDataSource(thirdParams.data)
+i.setProps({
+  striped: true
+})
+

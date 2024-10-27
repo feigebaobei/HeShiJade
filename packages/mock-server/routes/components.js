@@ -73,17 +73,19 @@ router.route('/table')
   //   pageSize: 10,
   // }
   let strArr = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
-  let p = Math.floor(req.body.page / 3)
+  let p = Math.floor((req.body.page || 1) / 3)
   let data = []
-  for (let n of req.pageSize) {
+  // for (let n of req.body.pageSize || 3) {
+  for (let n = 0; n < (req.body.pageSize || 3); n++) {
     data.push({
-      id: p * req.pageSize + n,
+      id: p * req.body.pageSize + n,
       one: `one${p}-${n}`,
       two: `two${p}-${n}`,
       three: `three${p}-${n}`,
       four: `four${p}-${n}`,
     })
   }
+  clog('data', data)
   // switch (p) {
   //   case 0:
   //     break;
