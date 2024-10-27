@@ -74,7 +74,8 @@ class Pool {
         behavior.forEach((b) => {
           // 可以使用入参
           // 也可以使用方法体前缀
-          let f = new Function('getComponentInstance', 'plugins', 'thirdParams', b.fnBody)
+        //   let f = new Function('getComponentInstance', 'plugins', 'thirdParams', b.fnBody)
+          let f = new Function('utils', 'plugins', 'thirdParams', b.fnBody)
           pool.registerEvent(ulid, b.event, f)
         })
     }
