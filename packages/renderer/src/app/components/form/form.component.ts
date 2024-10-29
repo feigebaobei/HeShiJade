@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 // import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
-import type { A, O } from 'src/types/base';
+import type { A, O, Oa, } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'
 import * as utils from 'src/helper/utils'
 
@@ -18,6 +18,7 @@ export class FormComponent implements OnInit, OnDestroy {
   props: A
   items: A
   rules: A
+  getData: () => Oa
   constructor(private dataService: DataService) {
     this.props = {} // this.data.props
     this.items = {} // this.data.items
@@ -26,6 +27,13 @@ export class FormComponent implements OnInit, OnDestroy {
         { required: true },
       ],
       message: 'Enter a'
+    }
+    this.getData = () => {
+      let r: Oa = {}
+      this.items.forEach((item: A) => {
+        r[item.key] = item.value
+      })
+      return r
     }
   }
   setProps(o: O) {
@@ -72,6 +80,9 @@ export class FormComponent implements OnInit, OnDestroy {
     //   // })
     // })
   }
+  // getData() {
+  //   return this.data
+  // }
   ngOnInit() {
     this.props = this.data.props
     this.items = this.data.items

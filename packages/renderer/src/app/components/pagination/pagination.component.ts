@@ -3,7 +3,7 @@ import { pool } from 'src/helper/pool';
 // type
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
-import type { N, S, O, } from 'src/types/base';
+import type { N, S, O, Oa, } from 'src/types/base';
 
 let clog = console.log
 
@@ -27,8 +27,12 @@ interface PaginationData {
 export class PaginationComponent implements OnInit {
   @Input() data!: PaginationData
   pageSizeOptions: N[]
+  getData: () => Oa
   constructor() {
     this.pageSizeOptions = []
+    this.getData = () => {
+      return this.data.props
+    }
   }
   pageIndexChangeH(n: N) {
     clog('pageIndexChangeH', n)

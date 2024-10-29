@@ -7,11 +7,11 @@
 ||显示数据|done|
 ||分页||
 ||翻页||
-||mock服务提供数据|done|
+||mock服务提供数据|todo|
 ||回调事件中支持取得相关组件的数据，再请求后端，再把数据传入相关组件。|doing|
-|||插件中支持req|doing
-|||取出form的数据|todo
-|||取出page的数据|todo
+|||插件中支持req|done
+|||取出form的数据|done
+|||取出page的数据|done
 |||传入table|todo
 ||web-site增加第三参数的说明||
 ||无选中组件时行为面板显示页面的生命周期事件||
@@ -328,7 +328,14 @@ utils: {
 |||不可循环使用||
 |||在当前angular项目中单例存在||
 
+
 let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+clog(form.getData())
+clog(table.getData())
+clog(page.getData())
 utils.req({
   url: 'http://localhost:5030/components/table',
   method: 'get',
@@ -341,11 +348,3 @@ utils.req({
   let i = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
   i.setDataSource(res.data.data)
 }).catch()
-
-console.log('thirdParams', thirdParams)
-let i = getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-i.setDataSource(thirdParams.data)
-i.setProps({
-  striped: true
-})
-

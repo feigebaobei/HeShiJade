@@ -38,6 +38,7 @@ export class TableComponent implements OnInit {
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
   showList: B[]
+  getData: () => A[]
   constructor(private dataService: DataService,
     private componentService: ComponentService
     ) {
@@ -46,6 +47,9 @@ export class TableComponent implements OnInit {
     this.createChildKey = createChildKey
     this.compObj = {}
     this.showList= []
+    this.getData = () => {
+      return this.basicDataSource
+    }
   }
   req() {
     this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {
