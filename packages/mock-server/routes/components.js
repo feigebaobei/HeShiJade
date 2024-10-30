@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 let bodyParser = require('body-parser')
 let cors = require('./cors')
+let staticData = require('../data/table')
 let clog = console.log
 
 /* GET users listing. */
@@ -32,97 +33,18 @@ router.route('/table')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  // res.send(200)
+  let data = staticData.arr.slice((req.query.page - 1) * req.query.pageSize, req.query.page * req.query.pageSize)
   res.status(200).json({
     code: 0,
     message: '',
-    data: [
-      {
-        id: 1,
-        one: 'one1',
-        two: 'two1',
-        three: 'three1',
-      },
-      {
-        id: 2,
-        one: 'one2',
-        two: 'two2',
-        three: 'three2',
-      },
-      {
-        id: 3,
-        one: 'one1',
-        two: 'two1',
-        three: 'three1',
-      },
-      {
-        id: 4,
-        one: 'one4',
-        two: 'two4',
-        three: 'three4',
-      },
-    ],
+    data,
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  // req.body
-  // {
-  //   name: '',
-  //   org: '',
-  //   page: 1,
-  //   pageSize: 10,
-  // }
-  let strArr = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
-  let p = Math.floor((req.body.page || 1) / 3)
-  let data = []
-  // for (let n of req.body.pageSize || 3) {
-  for (let n = 0; n < (req.body.pageSize || 3); n++) {
-    data.push({
-      id: p * req.body.pageSize + n,
-      one: `one${p}-${n}`,
-      two: `two${p}-${n}`,
-      three: `three${p}-${n}`,
-      four: `four${p}-${n}`,
-    })
-  }
-  clog('data', data)
-  // switch (p) {
-  //   case 0:
-  //     break;
-  //   case 1:
-  //     break;
-  //   case 2:
-  //     break;
-  // }
+  let data = staticData.arr.slice((req.query.page - 1) * req.query.pageSize, req.query.page * req.query.pageSize)
   res.status(200).json({
     code: 0,
     message: '',
-    // data: [
-    //   {
-    //     id: 1,
-    //     one: 'one1',
-    //     two: 'two1',
-    //     three: 'three1',
-    //   },
-    //   {
-    //     id: 2,
-    //     one: 'one2',
-    //     two: 'two2',
-    //     three: 'three2',
-    //   },
-    //   {
-    //     id: 3,
-    //     one: 'one1',
-    //     two: 'two1',
-    //     three: 'three1',
-    //   },
-    //   {
-    //     id: 4,
-    //     one: 'one4',
-    //     two: 'two4',
-    //     three: 'three4',
-    //   },
-    // ],
     data,
   })
 })

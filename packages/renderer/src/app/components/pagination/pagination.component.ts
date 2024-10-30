@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { pool } from 'src/helper/pool';
+import * as utils from 'src/helper/utils'
 // type
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
@@ -39,7 +40,9 @@ export class PaginationComponent implements OnInit {
     let fnArr = pool.getEventArray(this.data.ulid, 'pageIndexChange')
     fnArr.forEach(f => {
       f.bind(this) // 方法体的this
-      f && f(pool.getComponentInstance.bind(pool),
+      f && f(
+        // pool.getComponentInstance.bind(pool),
+        utils,
         pool.getPluginFn(), // 插件
       ) // 绑定指定方法的this
     })

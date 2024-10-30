@@ -3,16 +3,15 @@
 |组件之间传递数据|以table、pagination、form为例||
 ||初始化3个组件|done|
 ||查询|done|
-||重置||
 ||显示数据|done|
-||分页||
-||翻页||
-||mock服务提供数据|todo|
-||回调事件中支持取得相关组件的数据，再请求后端，再把数据传入相关组件。|doing|
+||分页|done|
+||翻页|done|
+||mock服务提供数据|done|
+||回调事件中支持取得相关组件的数据，再请求后端，再把数据传入相关组件。|done|
 |||插件中支持req|done
 |||取出form的数据|done
 |||取出page的数据|done
-|||传入table|todo
+|||传入table|done
 ||web-site增加第三参数的说明||
 ||无选中组件时行为面板显示页面的生命周期事件||
 |分支|f_demo||
@@ -333,18 +332,33 @@ let clog = console.log
 let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
 let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
 let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-clog(form.getData())
-clog(table.getData())
-clog(page.getData())
+let pageData = page.getData()
 utils.req({
   url: 'http://localhost:5030/components/table',
   method: 'get',
-  data: {
-    page: 2,
-    pageSize: 10,
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
   },
 }).then(res => {
   clog('res', res)
-  let i = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-  i.setDataSource(res.data.data)
+  table.setDataSource(res.data.data)
+}).catch()
+
+
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://localhost:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
 }).catch()
