@@ -14,6 +14,7 @@
 |||传入table|done
 ||web-site增加第三参数的说明|done|
 ||web-site增加三个组件的说明|doing|
+||web-site增加工具说明|todo|
 ||无选中组件时行为面板显示页面的生命周期事件||
 |整理所有组件的回调方法的参数|||
 |分支|f_demo||
@@ -366,18 +367,3 @@ utils.req({
 }).catch()
 
 
-
-            <tr>
-                <td>getData: () => Oa</td>
-                <td>-</td>
-                <td>返回组件当时的表单项数据组成的对象</td>
-                <td></td>
-            </tr>
-
-
-            <tr>
-                <td>getData: (o: Object) => void</td>
-                <td>由当前组件支持的props属性组成的对象</td>
-                <td>设置当前组件的props</td>
-                <td></td>
-            </tr>
