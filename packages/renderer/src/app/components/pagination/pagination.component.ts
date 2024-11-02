@@ -52,7 +52,7 @@ export class PaginationComponent implements OnInit {
     let fnArr = pool.getEventArray(this.data.ulid, 'pageSizeChange')
     fnArr.forEach(f => {
       f.bind(this) // 方法体的this
-      f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
+      f && f(utils, pool.getPluginFn()) // 绑定指定方法的this
     })
   }
   setProps(o: O) {
