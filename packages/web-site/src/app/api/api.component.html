@@ -6,7 +6,7 @@
     <p>method: 组件的方法。</p>
     <p>event: 组件本身的事件和生命周期事件。</p>
     <h1>事件的回调方法</h1>
-    <p>选中组件后在“behavior”面板选择事件，设置方法体。此回调方法的第一个参数是`getComponentInstance`，它用于根据组件的ulid取组件实例。第二个参数是plugins，它是当前应用的选中的插件集合。</p>
+    <p>选中组件后在“behavior”面板选择事件，设置方法体。平台已经为回调方法设置三个形式参数（utils：内置工具集合，plugins：当前应用的选中的插件集合，thirdParams：当前事件的相关入参）</p>
     <h1>下文中使用的数据类型</h1>
     <pre>
         type S = string
@@ -1962,4 +1962,15 @@
             </tr>
         </tbody>
     </table> -->
+    <h1>内置工具集合 utils</h1>
+    <h2>req</h2>
+    <pre>
+        utils.req: (params: AxiosRequestConfig) => Promise&lt;AxiosResponse&lt;any, any&gt;&gt;
+            axios的实例，用于请求数据。
+            
+        utils.getComponentInstance: (id: ULID) => Component // 返回的数据类型是angular的组件实例
+            根据组件的ulid取组件实例
+
+    </pre>
+
 </section>
