@@ -1,8 +1,2 @@
-{"level":30,"time":1728172879011,"pid":68765,"hostname":"bogon","name":"logname","msg":"启动服务"}
-{"level":30,"time":1728172906881,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728172926872,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728173018985,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728173036222,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728173083808,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728174053212,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
-{"level":30,"time":1728174089492,"pid":68765,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1730298512200,"pid":42105,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1730298602269,"pid":42105,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}

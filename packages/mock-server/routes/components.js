@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 let bodyParser = require('body-parser')
 let cors = require('./cors')
+let staticData = require('../data/table')
 let clog = console.log
 
 /* GET users listing. */
@@ -32,40 +33,20 @@ router.route('/table')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  // res.send(200)
+  let data = staticData.arr.slice((req.query.page - 1) * req.query.pageSize, req.query.page * req.query.pageSize)
   res.status(200).json({
     code: 0,
     message: '',
-    data: [
-      {
-        id: 1,
-        name: 'name',
-        a: 'a',
-        d: 'd',
-      },
-      {
-        id: 2,
-        name: 'name2',
-        a: 'a2',
-        d: 'd2',
-      },
-      {
-        id: 1,
-        name: 'name3',
-        a: 'a3',
-        d: 'd3',
-      },
-      {
-        id: 1,
-        name: 'name4',
-        a: 'a4',
-        d: 'd4',
-      },
-    ],
+    data,
   })
 })
 .post(cors.corsWithOptions, (req, res) => {
-  res.send(200)
+  let data = staticData.arr.slice((req.query.page - 1) * req.query.pageSize, req.query.page * req.query.pageSize)
+  res.status(200).json({
+    code: 0,
+    message: '',
+    data,
+  })
 })
 .put(cors.corsWithOptions, (req, res) => {
   res.send(200)

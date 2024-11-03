@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { pool } from 'src/helper/pool';
+import * as utils from 'src/helper/utils'
 // type
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
-import type { N, S, O, } from 'src/types/base';
+import type { N, S, O, Oa, } from 'src/types/base';
 
 let clog = console.log
 
@@ -27,15 +28,21 @@ interface PaginationData {
 export class PaginationComponent implements OnInit {
   @Input() data!: PaginationData
   pageSizeOptions: N[]
+  getData: () => Oa
   constructor() {
     this.pageSizeOptions = []
+    this.getData = () => {
+      return this.data.props
+    }
   }
   pageIndexChangeH(n: N) {
     clog('pageIndexChangeH', n)
     let fnArr = pool.getEventArray(this.data.ulid, 'pageIndexChange')
     fnArr.forEach(f => {
       f.bind(this) // 方法体的this
-      f && f(pool.getComponentInstance.bind(pool),
+      f && f(
+        // pool.getComponentInstance.bind(pool),
+        utils,
         pool.getPluginFn(), // 插件
       ) // 绑定指定方法的this
     })
@@ -45,7 +52,7 @@ export class PaginationComponent implements OnInit {
     let fnArr = pool.getEventArray(this.data.ulid, 'pageSizeChange')
     fnArr.forEach(f => {
       f.bind(this) // 方法体的this
-      f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
+      f && f(utils, pool.getPluginFn()) // 绑定指定方法的this
     })
   }
   setProps(o: O) {

@@ -1,10 +1,31 @@
 ||||
 |-|-|-|
 |组件之间传递数据|以table、pagination、form为例||
+||初始化3个组件|done|
+||查询|done|
+||显示数据|done|
+||分页|done|
+||翻页|done|
+||mock服务提供数据|done|
+||回调事件中支持取得相关组件的数据，再请求后端，再把数据传入相关组件。|done|
+|||插件中支持req|done
+|||取出form的数据|done
+|||取出page的数据|done
+|||传入table|done
+||web-site增加第三参数的说明|done|
+||web-site增加第三回调事件的入参的说明|done|
+||web-site增加三个组件的说明|done|
+||web-site增加工具说明|done|
+|整理所有组件的回调方法的参数|||
 |分支|f_demo||
 |要上生产的内容|||
+||form/table/pagination支持少数个事件。创建了一个查询页面。||
+||事件回调方法支持三个参数。第一个参数由getComponentInstance改为utils，第二个参数是plugins，第三个参数是该事件的入参。||
+||||
+||||
 ||||
 
+||无选中组件时行为面板显示页面的生命周期事件||
 |// todo 改名为behavior-group|||
 |创建碎片平台|||
 |行为面板使用去抖|||
@@ -281,4 +302,73 @@ export class HomeContainerComponent implements OnInit {
 }
 
 
-    
+回调方法有三个参数
+getComonentInstance/plugins/thirdParams
+
+console.log('thirdParams', thirdParams)
+let i = getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+i.setDataSource(thirdParams.data)
+i.setProps({
+  striped: true
+})
+
+
+striped
+
+三个参数
+utils/plugins/thirdParams
+utils: {
+  getComonentInstance,
+  req,
+}
+||utils|plugins||
+|-|-|-|-|
+||内置工具|外部引入的插件||
+|异步加载|不需要请求|需要请求||
+||总是存在|若不需要可以不设置，就不存在||
+|||||
+
+||utils|classes||
+|-|-|-|-|
+|工作范围|无明确作用域|非常通用||
+|形式|函数|类||
+|||不可循环使用||
+|||在当前angular项目中单例存在||
+
+
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://localhost:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
+}).catch()
+
+
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://localhost:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
+}).catch()
+
+

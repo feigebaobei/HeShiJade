@@ -6,7 +6,7 @@ import { createChildKey } from 'src/helper/index'
 // import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 // type
-import type { A, S, ULID, O, D, ReqMethod, B, } from 'src/types/base';
+import type { A, S, ULID, O, D, ReqMethod, B, Oa, } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems, componentInstanceData } from 'src/types/component';
 
 // interface basicDataSourceItem {
@@ -38,6 +38,7 @@ export class TableComponent implements OnInit {
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
   showList: B[]
+  getData: () => A[]
   constructor(private dataService: DataService,
     private componentService: ComponentService
     ) {
@@ -46,6 +47,9 @@ export class TableComponent implements OnInit {
     this.createChildKey = createChildKey
     this.compObj = {}
     this.showList= []
+    this.getData = () => {
+      return this.basicDataSource
+    }
   }
   req() {
     this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {
@@ -61,7 +65,7 @@ export class TableComponent implements OnInit {
       }
     })
   }
-  setProps(o: O) {
+  setProps(o: Oa) {
     Object.entries(o).forEach(([k, v]) => {
       this.data.props[k] = v
     })
@@ -91,6 +95,9 @@ export class TableComponent implements OnInit {
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)
+  }
+  setDataSource(v: A[]) {
+    this.basicDataSource = v
   }
   // ngOnInit() {
   //   this.req()
