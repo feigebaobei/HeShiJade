@@ -17,7 +17,7 @@
 ||web-site增加三个组件的说明|done|
 ||web-site增加工具说明|done|
 |整理所有组件的回调方法的参数|||
-|分支|f_demo||
+|分支|f_plugin||
 |要上生产的内容|||
 ||form/table/pagination支持少数个事件。创建了一个查询页面。||
 ||事件回调方法支持三个参数。第一个参数由getComponentInstance改为utils，第二个参数是plugins，第三个参数是该事件的入参。||
@@ -302,18 +302,6 @@ export class HomeContainerComponent implements OnInit {
 }
 
 
-回调方法有三个参数
-getComonentInstance/plugins/thirdParams
-
-console.log('thirdParams', thirdParams)
-let i = getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-i.setDataSource(thirdParams.data)
-i.setProps({
-  striped: true
-})
-
-
-striped
 
 三个参数
 utils/plugins/thirdParams
@@ -334,41 +322,4 @@ utils: {
 |形式|函数|类||
 |||不可循环使用||
 |||在当前angular项目中单例存在||
-
-
-let clog = console.log
-let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-let pageData = page.getData()
-utils.req({
-  url: 'http://localhost:5030/components/table',
-  method: 'get',
-  params: {
-    page: pageData.pageIndex,
-    pageSize: pageData.pageSize,
-  },
-}).then(res => {
-  clog('res', res)
-  table.setDataSource(res.data.data)
-}).catch()
-
-
-let clog = console.log
-let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-let pageData = page.getData()
-utils.req({
-  url: 'http://localhost:5030/components/table',
-  method: 'get',
-  params: {
-    page: pageData.pageIndex,
-    pageSize: pageData.pageSize,
-  },
-}).then(res => {
-  clog('res', res)
-  table.setDataSource(res.data.data)
-}).catch()
-
 
