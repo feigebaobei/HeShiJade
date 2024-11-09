@@ -1,21 +1,46 @@
-<!-- <p>stack works!</p> -->
-<!-- <div>
-    <ng-template appStack></ng-template>
-</div> -->
-<!-- placement start
-{{_componentList | json}}
-placement end -->
-<gridstack [options]="gridOptions"
+<!-- <gridstack [options]="gridOptions"
   (changeCB)="changeCBH($event)"
 >
   <gridstack-item
       *ngFor="let item of _componentList; trackBy: identify"
       [options]="item"
   >
-      <!-- <div class="toolbox">
-          <d-button bsSize="xs" icon="icon-delete" (click)="deleteComponentByUlidH(item.comp.ulid)"></d-button>
-      </div> -->
-      <!-- {{item | json}} -->
       <app-comp-box [data]="item.comp" ></app-comp-box>
   </gridstack-item>
-</gridstack>
+</gridstack> -->
+
+<!-- <div class="box">
+  <div class="inner"
+    *ngFor="let item of _componentList; trackBy: identify"
+    [style]="{gridColumnStart: item.x + 1, gridColumnEnd: item.x + 1 + item.w,}"
+    >
+    <app-comp-box [data]="item.comp"></app-comp-box>
+  </div>
+</div> -->
+
+@switch (k) {
+  @case ('a') {
+    k{{k}}
+    <gridstack [options]="gridOptions"
+      (changeCB)="changeCBH($event)"
+    >
+      <gridstack-item
+          *ngFor="let item of _componentList; trackBy: identify"
+          [options]="item"
+      >
+          <app-comp-box [data]="item.comp" ></app-comp-box>
+      </gridstack-item>
+    </gridstack>
+  }
+  @case ('b') {
+    k{{k}}
+    <div class="box">
+      <div class="inner"
+        *ngFor="let item of _componentList; trackBy: identify"
+        [style]="{gridColumnStart: item.x + 1, gridColumnEnd: item.x + 1 + item.w,}"
+        >
+        <app-comp-box [data]="item.comp"></app-comp-box>
+      </div>
+    </div>
+  }
+}
