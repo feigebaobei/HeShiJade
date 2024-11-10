@@ -18,9 +18,21 @@
   </div>
 </div> -->
 
-@switch (k) {
-  @case ('a') {
-    k{{k}}
+@switch (layout) {
+  @case (1) {
+    <div class="box">
+      <div class="inner"
+        *ngFor="let item of _componentList; trackBy: identify"
+        [style]="{gridColumnStart: item.x + 1, gridColumnEnd: item.x + 1 + item.w,}"
+        >
+        <app-comp-box [data]="item.comp"></app-comp-box>
+      </div>
+    </div>
+  }
+  @case (11) {
+    当前不支持该布局
+  }
+  @case (21) {
     <gridstack [options]="gridOptions"
       (changeCB)="changeCBH($event)"
     >
@@ -31,16 +43,5 @@
           <app-comp-box [data]="item.comp" ></app-comp-box>
       </gridstack-item>
     </gridstack>
-  }
-  @case ('b') {
-    k{{k}}
-    <div class="box">
-      <div class="inner"
-        *ngFor="let item of _componentList; trackBy: identify"
-        [style]="{gridColumnStart: item.x + 1, gridColumnEnd: item.x + 1 + item.w,}"
-        >
-        <app-comp-box [data]="item.comp"></app-comp-box>
-      </div>
-    </div>
   }
 }

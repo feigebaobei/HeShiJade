@@ -1,16 +1,21 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { compatibleArray } from 'src/helper';
+import { AppService } from 'src/app/service/app.service';
 // 指令
 import { StackDirective } from '../stack.directive';
 // 组件
 // type
-import type { A, S } from 'src/types/base';
+import type { A, Oa, S, N } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 
 let clog = console.log
 interface SuperGridItem extends GridStackWidget {
   comp: Comp
+  x: N
+  y: N
+  w: N
+  h: N
 }
 
 // data
@@ -24,9 +29,10 @@ export class StackComponent {
   @Input() componentList: Comp[] = []
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
-  @ViewChild(StackDirective, {static: true}) stack!: StackDirective;
   componentRef: A
-  constructor() {
+  layout: N
+  @ViewChild(StackDirective, {static: true}) stack!: StackDirective;
+  constructor(private appServer: AppService,) {
     // let componentRef
     this._componentList = []
     this.gridOptions = {
@@ -34,13 +40,14 @@ export class StackComponent {
       float: true,
       column: 24,
     }
+    this.layout = 0
   }
   ngOnInit() {
     this.init()
   }
   init() {
     this._componentList = []
-    clog('init', this.componentList)
+    // clog('init', this.componentList)
     // todo 解决这里为什么有时为undefined的问题
     compatibleArray(this.componentList).forEach(item => {
       this._componentList.push({
@@ -54,6 +61,7 @@ export class StackComponent {
         noResize: true,
       })
     })
+    this.layout = this.appServer.getCurApp()?.layout || 0
   }
   changeCBH($event: A) {
   }

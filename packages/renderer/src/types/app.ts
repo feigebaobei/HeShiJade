@@ -5,6 +5,8 @@ interface App {
   name: S
   ulid: ULID
   members: S[]
+  version: N
+  layout: N
   // child: S
   firstPageUlid: ULID
   prevUlid: ULID
