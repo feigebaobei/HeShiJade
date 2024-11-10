@@ -22,6 +22,7 @@ interface SelectOptionsItem {
 interface Options<T, G> {
     label: T,
     value: G,
+    disabled?: B
 }
 interface ConfigItemInput {
   category: 'input'

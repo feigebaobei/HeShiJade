@@ -1,4 +1,4 @@
-<form dForm>
+<form dForm ngForm>
     <d-form-item>
         <d-form-label>key</d-form-label>
         <d-form-control>
@@ -34,6 +34,39 @@
         </d-form-control>
     </d-form-item>
     <d-form-item>
+        <d-form-label>布局</d-form-label>
+        <d-form-control>
+            <d-select
+                [filterKey]="'label'" 
+                [valueKey]="'value'"
+                name="layout"
+                [(ngModel)]="layout"
+                [appendToBody]="true"
+                [options]="layoutOptions"
+                optionDisabledKey="disabled"
+                [placeholder]="'请选择布局方式'"
+                [scrollHight]="'220px'"
+            ></d-select>
+        </d-form-control>
+    </d-form-item>
+    <d-form-item>
+        <d-form-label>插件</d-form-label>
+        <d-form-control>
+            <d-select
+                [filterKey]="'label'" 
+                name="pluginsKey"
+                [(ngModel)]="value"
+                [multiple]="true"
+                [appendToBody]="true"
+                [placeholder]="'请输入关键字搜索插件'"
+                [allowClear]="true"
+                [isSearch]="true"
+                [searchFn]="f"
+                [scrollHight]="'220px'"
+            ></d-select>
+        </d-form-control>
+    </d-form-item>
+    <!-- <d-form-item>
         <d-form-label [hasHelp]="true" [helpTips]="'暂时不生效'">成员</d-form-label>
         <d-form-control>
             <textarea dTextarea
@@ -42,6 +75,6 @@
             placeholder="成员之间使用英文逗号分割"
             ></textarea>
         </d-form-control>
-    </d-form-item>
+    </d-form-item> -->
 </form>
 <d-toast [value]="msg"></d-toast>

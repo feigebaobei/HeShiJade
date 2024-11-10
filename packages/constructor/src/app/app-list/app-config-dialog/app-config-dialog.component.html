@@ -1,20 +1,3 @@
-<!-- 
-<d-select
-[filterKey]="'label'" 
-name="pluginsKey"
-[(ngModel)]="value"
-[multiple]="true"
-[appendToBody]="true"
-[placeholder]="'请输入关键字搜索插件'"
-[allowClear]="true"
-[isSearch]="true"
-[searchFn]="onSelectObject"
-></d-select> -->
-
-<!-- <p>key: {{data.app.key}}</p>
-<p>name: {{data.app.name}}</p>
-<p>version: {{data.app.version}}</p> -->
-
 <form dForm ngForm>
     <d-form-item>
         <d-form-label>key: </d-form-label>
@@ -27,6 +10,22 @@ name="pluginsKey"
     <d-form-item>
         <d-form-label>version: </d-form-label>
         <d-form-control>{{data.app.version}}</d-form-control>
+    </d-form-item>
+    <d-form-item>
+        <d-form-label>布局: </d-form-label>
+        <d-form-control>
+            <d-select
+                [filterKey]="'label'" 
+                [valueKey]="'value'"
+                name="layout"
+                [(ngModel)]="data.app.layout"
+                [appendToBody]="true"
+                [options]="layoutOptions"
+                optionDisabledKey="disabled"
+                [placeholder]="'请选择布局方式'"
+                [scrollHight]="'220px'"
+            ></d-select>
+        </d-form-control>
     </d-form-item>
     <d-form-item>
         <d-form-label>插件: </d-form-label>
@@ -43,18 +42,6 @@ name="pluginsKey"
                 [searchFn]="f"
                 [scrollHight]="'220px'"
             ></d-select>
-                <!-- [searchFn]="onSelectObject" -->
-            <!-- <d-select
-                [filterKey]="'label'"
-                [ngModel]="value"
-                [multiple]="true"
-                [appendToBody]="true"
-                [enableLazyLoad]="true"
-                [isSearch]="true"
-                (loadMore)="loadMore($event)"
-                [placeholder]="'请选择插件'"
-                [options]="arr"
-            ></d-select> -->
         </d-form-control>
     </d-form-item>
 </form>

@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { serviceUrl } from 'src/helper/config';
-import { map} from 'rxjs/operators';
+import { serviceUrl, layoutOptions } from 'src/helper/config';
+import { map } from 'rxjs/operators';
 import { compatibleArray } from 'src/helper';
 // type
 import type { App } from 'src/types/app';
-import type { A, N, S } from 'src/types/base';
+import type { A, N, S, Options } from 'src/types/base';
 import type { SelectComponent } from 'ng-devui'
 // type EventEmitter = {instance: SelectComponent, event: ScrollEvent}
 type EventEmitter = {instance: SelectComponent, event: A}
@@ -45,6 +45,7 @@ export class AppConfigDialogComponent implements OnInit {
   value: S[]
   arr: A[]
   f: A
+  layoutOptions: Options<S, N>[]
   constructor(
     private http: HttpClient,
   ) {
@@ -54,6 +55,7 @@ export class AppConfigDialogComponent implements OnInit {
     this.f = (term: S) => {
       return this.onSelectObject(term)
     }
+    this.layoutOptions = layoutOptions
   }
   onSelectObject(term: S) {
     if (term) {

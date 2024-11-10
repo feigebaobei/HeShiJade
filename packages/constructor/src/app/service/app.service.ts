@@ -116,12 +116,15 @@ export class AppService {
       // this.userService.appendApp(appObj.ulid)
       // this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
       this.tree.mountNext(appObj, appObj.prevUlid)
-      this._createApp({
+      clog('appObj', appObj)
+      // return
+      this.reqCreateApp({
         key: appObj.key,
         name: appObj.name,
         ulid: appObj.ulid,
         theme: appObj.theme,
         version: appObj.version,
+        layout: appObj.layout,
         owner: appObj.owner,
         collaborator: appObj.collaborator,
         firstPageUlid: appObj.firstPageUlid,
@@ -132,7 +135,7 @@ export class AppService {
     })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
-  private _createApp(data: App) {
+  private reqCreateApp(data: App) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'post', data)
   }
   // 重铸
@@ -224,7 +227,7 @@ export class AppService {
   // reqPluginsKey(key: S) {
   //   return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
   // }
-  updatePluginKey(ulid: ULID, updateObj: Oa) {
+  updateApp(ulid: ULID, updateObj: Oa) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'put', {
       appUlid: ulid,
       updateObj
