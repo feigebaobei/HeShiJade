@@ -1,5 +1,5 @@
 import type {N, B, A, S, ULID} from './base'
-
+import type { BehaviorMeta } from './component'
 interface Page {
   key: S
   name: S
@@ -10,6 +10,9 @@ interface Page {
   firstComponentUlid: ULID
   // lastComponentUlid: ULID
   appUlid: ULID
+  // props
+  behavior: BehaviorMeta
+  // items
 }
 
 export type {

@@ -239,7 +239,6 @@ export class SetupComponent implements OnInit {
     })
   }
   stageClickH($event: A) {
-    // if (Array.from($event.target.classList).includes('center')) {
     let classList = Array.from($event.target.classList)
     if (classList.includes('grid-stack') || classList.includes('center')) {
       if (this.curPage) {

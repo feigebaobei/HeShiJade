@@ -128,6 +128,7 @@ let initPageMeta = (key: S = '', name: S = '',
     childUlid: '',
     firstComponentUlid: '',
     // lastComponentUlid: '',
+    behavior: [],
   }
 }
 let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', 
