@@ -9,6 +9,7 @@ const { rules, resParamsError } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 // let md5 = require('md5');
 const { logger } = require('../helper/log')
+const { DB } = require('../helper/config')
 let clog = console.log
 
 router.use(bodyParser.json())
@@ -75,7 +76,6 @@ router.route('/')
       data: {}
     })
   })
-
 })
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
@@ -116,6 +116,7 @@ router.route('/')
             firstComponentUlid: '',
             lastComponentUlid: '',
             appUlid: req.body.appUlid,
+            behavior: [],
           }
         }
       }
@@ -311,8 +312,49 @@ router.route('/')
       data: {}
     })
   })
+})
 
-
+router.route('/behavior')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.post(cors.corsWithOptions, (req, res) => {
+  return new Promise((s, j) => {
+    if (req.body.ulid && req.body.behavior) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.pageTable).updateOne({
+      ulid: req.body.ulid,
+    }, {
+      $push: {
+        behavior: req.body.behavior
+      }
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
 })
 
 module.exports = router;
