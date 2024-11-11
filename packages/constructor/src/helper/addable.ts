@@ -56,6 +56,11 @@ let Pagination: CompConfigAddabel = {
     items: false,
     // slots: false,
 }
+let Page: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+    // slots: false,
+}
 
 
 let all: {[k: S]: CompConfigAddabel} = {
@@ -69,6 +74,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Checkbox,
     Tabs,
     Pagination,
+    Page,
 }
 
 export {

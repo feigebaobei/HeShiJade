@@ -72,7 +72,7 @@ export class AppService {
     // let curUser = this.userService.getUser()
     return this.userService.getUser().then(v => {
       let curUser = v
-      clog('curUser', curUser)
+      // clog('curUser', curUser)
       if (curUser) {
         let ulid = curUser.firstApplicationUlid
         let cur = appList.find(item => item.ulid === ulid)
@@ -80,7 +80,7 @@ export class AppService {
           this.tree.mountRoot(cur)
           while (cur) {
             let nextApp = appList.find(item => item.ulid === cur!.nextUlid)
-            clog('nextApp', nextApp)
+            // clog('nextApp', nextApp)
             if (nextApp) {
               this.tree.mountNext(nextApp, cur.ulid)
             }

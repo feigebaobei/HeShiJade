@@ -165,6 +165,27 @@ let Pagination: BehaviorConfigGroup = [
 ]
 
 
+let Page: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '页面开始加载', value: 'pageLoading'},
+      // {label: '添加', value: 'addTabChange'},
+      {label: '页面加载完', value: 'pageLoaded'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+
+
 
 export {
     Button,
@@ -176,6 +197,7 @@ export {
     Checkbox,
     Tabs,
     Pagination,
+    Page,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -187,5 +209,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Checkbox,
     Tabs,
     Pagination,
+    Page,
 }
 export default all
