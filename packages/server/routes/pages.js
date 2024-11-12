@@ -166,17 +166,43 @@ router.route('/')
   })
 })
 .put(cors.corsWithOptions, (req, res) => {
+  // meta     ulid,type,key,value
+  // behavior ulid,type,index,key,value
   new Promise((s, j) => {
-    if (rules.required(req.body.ulid) && rules.required(req.body.key) && rules.required(req.body.value)) {
-      s(true)
+    if (rules.required(req.body.ulid) && 
+      rules.required(req.body.type) && 
+      rules.required(req.body.key) && 
+      rules.required(req.body.value)) {
+      switch (req.body.type) {
+        case 'meta':
+          s(true)
+          break;
+        case 'behavior':
+          if (Math.sign(req.body.index) > 0) {
+            s(true)
+          } else {
+            j(100100)
+          }
+          break;
+      }
     } else {
       j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection('pages_dev').updateOne({
+    let updateObj = {}
+    switch(req.body.type) {
+      case 'meta':
+        updateObj[`${req.body.key}`] = req.body.value
+        break;
+      case 'behavior':
+        updateObj[`behavior.${req.body.index}.${req.body.key}`] = req.body.value
+        break;
+    }
+    return lowcodeDb.collection(DB.dev.pageTable).updateOne({
       ulid: req.body.ulid
     }, {
-      $set: {[req.body.key]: req.body.value}
+      $set: updateObj,
+      // $set: {[req.body.key]: req.body.value}
     })
   }).then(() => {
     res.status(200).json({
