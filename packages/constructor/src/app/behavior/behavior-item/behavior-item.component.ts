@@ -27,8 +27,16 @@ export class BehaviorItemComponent implements OnInit {
     private pageService: PageService,
   ) {
     this.fnBodyTextareatChangeH = createDebounceFn((v: S) => {
-      this.componentService.setComponentsBehavior(this.index, 'fnBody', v)
-      this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', v)
+
+      let c = this.componentService.curComponent()
+      let p = this.pageService.getCurPage()
+      if (c) {
+        this.componentService.setComponentsBehavior(this.index, 'fnBody', v)
+        this.componentService.reqUpdateComponentBehavior('behavior', this.index, 'fnBody', v)
+      } else if (p) {
+        this.pageService.setPageBehavior(this.index, 'fnBody', this.fnBodyTextarea.value)
+        this.pageService.reqUpdate(p.ulid, 'behavior', 'fnBody', this.fnBodyTextarea.value, this.index)
+      }
     }, debounceTime)
     this.eventName = {} as ConfigItemSelect<S>
     this.fnBodyTextarea = {} as ConfigItemTextarea

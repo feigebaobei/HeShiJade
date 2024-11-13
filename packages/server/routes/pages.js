@@ -178,7 +178,7 @@ router.route('/')
           s(true)
           break;
         case 'behavior':
-          if (Math.sign(req.body.index) > 0) {
+          if (Math.sign(req.body.index) > -1) {
             s(true)
           } else {
             j(100100)
