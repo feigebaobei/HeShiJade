@@ -6,9 +6,11 @@ import { ReqService } from './req.service';
 import { ShareSignal } from 'src/helper/shareSignal';
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
-import type { S, ULID, A } from 'src/types/base';
+import type { S, ULID, N, A, B } from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
-import type { Component } from 'src/types/component';
+import type { Component, BehaviorMeta, BehaviorMetaItem, BehaviorItemKey, PropsValue } from 'src/types/component';
+
+type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout'
 
 let clog = console.log
 
@@ -151,7 +153,32 @@ export class PageService {
   reqDeletePage(ulid: ULID) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'delete', {ulid}).then(() => true)
   }
-  update(ulid: ULID, key: keyof Page, value: S) {
+  // update(ulid: ULID, key: Pick<Page, 'key' | 'name' | 'ulid' | 'prevUlid'>, value: string): void
+  // update(ulid: ULID, key: 'behavior', value: BehaviorMeta): void {
+  // update(ulid: ULID, key: keyof Page, value: S & BehaviorMeta): void {
+  // update(ulid: ULID, key: 'key' | 'name' | 'ulid' | 'prevUlid', value: S): void
+  // update(ulid: ULID, key: 'behavior', value: BehaviorMeta): void {
+  //   // 更新tree中的数据
+  //   let app = this.appService.getCurApp()
+  //   let node = this._map.get(String(app?.ulid))?.find(ulid)
+  //   if (node) {
+  //     // node.value[key] = value
+  //     // if (['key', 'name', 'ulid', 'prevUlid'].includes(key)) {
+  //     //   node.value[key] = value
+  //     // } else {
+  //     //   node.value[key] = value
+  //     // }
+  //     switch (key) {
+  //       case 'behavior':
+  //         node.value[key] = value
+  //         break;
+  //       default:
+  //         node.value[key] = value
+  //         break;
+  //     }
+  //   }
+  // }
+  updateStr(ulid: ULID, key: Exclude<keyof Page, 'behavior'>, value: S) {
     // 更新tree中的数据
     let app = this.appService.getCurApp()
     let node = this._map.get(String(app?.ulid))?.find(ulid)
@@ -159,13 +186,72 @@ export class PageService {
       node.value[key] = value
     }
   }
-  reqUpdate(ulid: ULID, key: keyof Page, value: S) {
-    return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, key, value}) // .then(() => true)
+  updateBehavior(ulid: ULID, key: 'behavior', value: BehaviorMeta) {
+    // 更新tree中的数据
+    let app = this.appService.getCurApp()
+    let node = this._map.get(String(app?.ulid))?.find(ulid)
+    if (node) {
+      node.value[key] = value
+    }
+  }
+  reqUpdate(ulid: ULID, type: 'meta' , key: keyof Page, value: S): any 
+  reqUpdate(ulid: ULID, type:  'behavior', key: S, value: S, index: N,): any
+  reqUpdate(ulid: ULID, type:  'meta' | 'behavior', key: Page | S, value: S, index?: N,) {
+    switch (type) {
+      case 'meta':
+        return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, type, key, value})
+      case 'behavior':
+        return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, type, index, key, value})
+    }
   }
   deletePageByAppUlid(appUlid: ULID) {
     this._map.delete(appUlid)
   }
   createApp(appUlid: ULID) {
     this._map.set(appUlid, createTree<Page>())
+  }
+  // setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
+  //   let curComp: CompOrUn = this.curComponent()
+  //   if(curComp) {
+  //     let arr = curComp.behavior
+  //     arr[index][key] = value
+  //   }
+  // }
+  setPageBehavior(index: N, key: BehaviorItemKey, value: S) {
+    let curPage = this.getCurPage()
+    if (curPage) {
+      curPage.behavior[index][key] = value
+    }
+  }
+  // reqUpdatePageBehavior(type: UpdateType, index: N, key: S, value: PropsValue, ) {
+  //   return this.reqService.req(`${serviceUrl()}/pages`, 'put', {
+  //     ulid: this.getCurPage()?.ulid || '',
+  //     type,
+  //     index,
+  //     key,
+  //     value,
+  //   }).then(() => true)
+  // }
+  addBehaviorOfCurPage(obj: BehaviorMetaItem) {
+    let cp = this.getCurPage()
+    if (cp) {
+      if (cp.behavior) {
+        cp.behavior.push(obj)
+      } else {
+        cp.behavior = [obj]
+      }
+    }
+  }
+  removeBehaviorOfCurPage(index: N) {
+    let cp = this.getCurPage()
+    if (cp) {
+      cp.behavior.splice(index, 1)
+    }
+  }
+  reqAddBehavior(obj: BehaviorMetaItem) {
+    return this.reqService.req(`${serviceUrl()}/pages/behavior`, 'post', {
+      ulid: this.getCurPage()?.ulid || '',
+      behavior: obj,
+    })
   }
 }

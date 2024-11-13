@@ -52,24 +52,27 @@ export class BehaviorBoxComponent {
     ]
     this.componentBehaviorList = []
     effect(() => {
-      let p = this.componentService.curComponentS.get()
-      if (p) {
-        this.curComp = p
+      let comp = this.componentService.curComponentS.get()
+      let page = this.pageService.pageS.get()
+      if (comp) {
+        // clog('1')
+        this.curComp = comp
         this.curComponentChange()
-        this.addable = addableAll[p.type].behavior
-      } else {
+        this.addable = addableAll[comp.type].behavior
+      } else if (page) {
+        // clog('2')
         this.curComp = null
         this.curComponentChange()
         this.addable = addableAll['Page'].behavior
       }
     })
-    effect(() => {
-      let page = this.pageService.pageS.get()
-      if (page) {
-        this.curComponentChange()
-        this.addable = addableAll['Page'].behavior
-      }
-    })
+    // effect(() => {
+    //   let page = this.pageService.pageS.get()
+    //   if (page) {
+    //     this.curComponentChange()
+    //     this.addable = addableAll['Page'].behavior
+    //   }
+    // })
   }
   setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigGroup) {
     this.curComp!.behavior.forEach(item => {
