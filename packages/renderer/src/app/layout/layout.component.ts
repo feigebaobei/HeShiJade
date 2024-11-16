@@ -1,8 +1,9 @@
 import { Component, effect, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 // import { popupsComponents } from 'src/helper/config'
 import { asyncFn } from 'src/helper';
 import { serviceUrl } from 'src/helper/config';
+import { filter } from 'rxjs/operators'
 import { pool } from 'src/helper/pool';
 // module
 import { CommonModule } from '@angular/common';
@@ -46,36 +47,56 @@ export class LayoutComponent implements OnInit {
   componentList: Comp[]
   popupsComponentList: Comp[]
   gridOptions: GridStackOptions
+  account: N
   constructor(private route: ActivatedRoute,
     private appService: AppService,
     private envService: EnvService,
     private componentService: ComponentService,
     private dataService: DataService,
+    private router: Router
   ) {
     this.show = true
     this.componentList = []
     this.popupsComponentList = []
-    effect(() => {
-      let componentList = this.componentService.componentListS.get()
-      this.show = false
-      this.componentList = []
-      this.componentList = componentList
-      asyncFn(() => {
-        this.show = true
-      })
-    })
     this.gridOptions = {
       margin: 2,
       float: true,
       staticGrid: true,
       column: 24,
     }
+    this.account = 0
+    // clog('constructor')
+    effect(() => {
+      // clog('loading')
+      // if (!this.account) {
+      //   clog('loading')
+      // }
+      let componentList = this.componentService.componentListS.get()
+      this.show = false
+      this.componentList = []
+      this.componentList = componentList
+      asyncFn(() => {
+        this.show = true
+        // if (this.account) {
+        //   clog('loaded')
+        // } else {
+        //   this.account++
+        // }
+      })
+    })
   }
   ngOnInit(): void {
     let {appKey, env} = this.route.snapshot.params
     this.appService.reqAppDetail(appKey, env)
     this.envService.setCur(env)
     this.opPlugins('key')
+    // clog('oninit')
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    //   // filter(event => event instanceof NavigationStart)
+    // ).subscribe(event => {
+    //   clog('event', event)
+    // })
   }
   opPlugins(key: S) {
     this.dataService.req(
@@ -110,8 +131,6 @@ export class LayoutComponent implements OnInit {
         clog(`插件 ${key} 请求失败。`)
       }
     })
-
-
   }
   identify(index: N, w: GridStackWidget) {
     return w.id

@@ -8,12 +8,14 @@ import { EnvService } from './env.service';
 import { asyncFn, createChildKey } from 'src/helper/index'
 import { serviceUrl } from 'src/helper/config'
 import { ShareSignal } from 'src/helper/shareSignal';
+import * as utils from 'src/helper/utils'
 // type
 import type { ResponseData, ULID } from 'src/types';
 import type { Component,
   ComponentMountItems,
   ComponentMountSlots, } from 'src/types/component';
 import type { Tree } from 'src/helper/tree';
+import { pool } from 'src/helper/pool';
 
 let clog = console.log
 
@@ -39,23 +41,36 @@ export class ComponentService {
     effect(() => {
       let curPage = this.pageService.curS.get()
       if (curPage) {
+        pool.getEventArray(curPage.ulid, 'pageLoading').forEach(f => {
+          f.bind(this)
+          f && f(utils, pool.getPluginFn())
+        })
         asyncFn(() => {
           let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
+          let fnArr = pool.getEventArray(curPage.ulid, 'pageLoaded')
           if (arr.length) {
             this.setList(arr)
+            fnArr.forEach(f => {
+              f.bind(this)
+              f && f(utils, pool.getPluginFn())
+            })
           } else {
-            this.reqList(curPage.ulid, this.envService.getCur())
+            this.reqList(curPage.ulid, this.envService.getCur()).then(() => {
+              fnArr.forEach(f => {
+                f.bind(this)
+                f && f(utils, pool.getPluginFn())
+              })
+            })
           }
         })  
       }
     })
   }
   reqList(pageUlid: ULID, env: ENV) {
-    this._reqComponentByPage(pageUlid, env).then(componentList => {
+    return this._reqComponentByPage(pageUlid, env).then(componentList => {
       let page = this.pageService.getCur()
       let curComp = componentList.find(item => item.ulid === page?.firstComponentUlid)
       let tree = createTree<Component>()
-
       if (curComp) {
         tree.mountRoot(curComp)
         let q = new Queue<{
@@ -102,14 +117,6 @@ export class ComponentService {
         while (!q.isEmpty() && i < 100) {
           i++
           let cur = q.dequeue() // || curComp
-          // switch(cur.position) {
-          //   case 'next':
-          //     tree.mountNext(cur.component, cur.ulid)
-          //     break
-          //   case 'child':
-          //     tree.mountChild(cur.component, cur.ulid, cur.slot!)
-          //     break
-          // }
           switch(cur.mountMethod) {
             case 'next':
               tree.mountNext(cur.component, cur.component.prevUlid)
@@ -165,6 +172,7 @@ export class ComponentService {
         this._map.set(page?.ulid || '', tree)
         this.setList(tree.root?.toArray() || [])
       }
+      return true
     })
   }
   private _reqComponentByPage(pageUlid: ULID, env: ENV): Promise<Component[]> {

@@ -21,9 +21,14 @@ class Pool {
             return
         }
         if (this.ulidEventMap.has(ulid)) {
-            let q = this.ulidEventMap.get(ulid)!.get(event)
+            let m = this.ulidEventMap.get(ulid)!
+            let q = m?.get(event)
             if (q) {
                 q.enqueue(fn)
+            } else {
+                let q = new Queue<Function>()
+                q.enqueue(fn)
+                m.set(event, q)
             }
         } else {
             let q = new Queue()

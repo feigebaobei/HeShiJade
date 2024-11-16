@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { EnvService } from './env.service';
 import { createTree } from 'src/helper/tree';
 import { serviceUrl } from 'src/helper/config'
+import { pool } from 'src/helper/pool';
 // type
 import type { ResponseData, ULID } from 'src/types'
 import type { ENV } from 'src/types/base';
@@ -42,7 +43,11 @@ export class PageService {
     effect(() => {
       let p = this.appService.curAppS.get()
       if (p) {
-        this.reqList(p.ulid, this.envService.getCur())
+        this.reqList(p.ulid, this.envService.getCur()).then(() => {
+          this.getList().forEach(pageItem => {
+            pool.register(pageItem.ulid, pageItem, pageItem.behavior)
+          })
+        })
       }
     })
   }
@@ -79,6 +84,7 @@ export class PageService {
         this._map.set(app.ulid || '', tree)
         this.setList(tree.root?.toArray() || [])
       }
+      return true
     })
   }
   // 请求页面列表
