@@ -39,15 +39,11 @@ export class PageService {
     this._cur = undefined
     this.curS = new ShareSignal(undefined)
     this._map = new Map()
-    // 当应用改变时请求对应的页面数据
+    // 当应用改变时
     effect(() => {
       let p = this.appService.curAppS.get()
       if (p) {
-        this.reqList(p.ulid, this.envService.getCur()).then(() => {
-          this.getList().forEach(pageItem => {
-            pool.register(pageItem.ulid, pageItem, pageItem.behavior)
-          })
-        })
+        this.reqList(p.ulid, this.envService.getCur()) // 请求对应的页面数据
       }
     })
   }
@@ -64,6 +60,7 @@ export class PageService {
     }).then(pageList => {
       let app = this.appService.getCurApp()
       if (app) {
+        // 组成页面树
         let tree = createTree<Page>()
         let curUlid = app.firstPageUlid
         if (curUlid) {
@@ -80,9 +77,13 @@ export class PageService {
             }
           }
         }
-        // clog('tree', tree)
         this._map.set(app.ulid || '', tree)
+        // 缓存起来
         this.setList(tree.root?.toArray() || [])
+        // 绑定事件
+        this.getList().forEach(pageItem => {
+          pool.register(pageItem.ulid, pageItem, pageItem.behavior)
+        })
       }
       return true
     })

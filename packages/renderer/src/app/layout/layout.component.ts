@@ -5,6 +5,7 @@ import { asyncFn } from 'src/helper';
 import { serviceUrl } from 'src/helper/config';
 import { filter } from 'rxjs/operators'
 import { pool } from 'src/helper/pool';
+import * as utils from 'src/helper/utils'
 // module
 import { CommonModule } from '@angular/common';
 // 服务
@@ -13,6 +14,7 @@ import { EnvService } from '../service/env.service';
 import { ComponentService } from '../service/component.service';
 import { ComponentsModule } from '../components/components.module';
 import { DataService } from 'src/app/service/data.service';
+import { PageService } from '../service/page.service';
 // component
 import { PageListComponent } from '../page/page-list/page-list.component';
 // type
@@ -50,6 +52,7 @@ export class LayoutComponent implements OnInit {
   account: N
   constructor(private route: ActivatedRoute,
     private appService: AppService,
+    private pageService: PageService,
     private envService: EnvService,
     private componentService: ComponentService,
     private dataService: DataService,
@@ -87,6 +90,21 @@ export class LayoutComponent implements OnInit {
     // ).subscribe(event => {
     //   clog('event', event)
     // })
+  }
+  ngAfterViewInit(): void {
+    // 触发postRenderer事件
+    let ulid = this.pageService.getCur()?.ulid
+    if (ulid) {
+      let fnArr = pool.getEventArray(ulid, 'postRenderer')
+      fnArr.forEach(f => {
+        f.bind(this) // 方法体的this
+        f && f(
+          utils,
+          pool.getPluginFn(), // 插件
+          // res
+        )
+      })
+    }
   }
   opPlugins(key: S) {
     this.dataService.req(

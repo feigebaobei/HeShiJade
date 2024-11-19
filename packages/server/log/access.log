@@ -1,1 +1,2 @@
-{"level":30,"time":1731722657772,"pid":98576,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1732025169049,"pid":4171,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":50,"time":1732025246682,"pid":4171,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:LGCfxvzGhlLVhYDhGzzYZIv3mPstD68Z.Ob1XjZ8agzh2IzhNmmU5ssamnycPIDs7koqip83rxPs"}}
