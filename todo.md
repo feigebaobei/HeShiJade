@@ -11,9 +11,9 @@
 ||table||
 ||pagi||
 |seven应用的预览问题|todo||
-|website中增加事件池的设计文档|todo||
-||组件支持的事件|todo||
-||页面支持的事件|todo||
+|website中增加事件池的设计文档|done||
+||组件支持的事件|done||
+||页面支持的事件|done||
 可以移到page.service.ts
 |分支|f_page||
 |要上生产的内容|||

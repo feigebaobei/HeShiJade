@@ -21,6 +21,34 @@
             [k: S]: A
         &#125;
     </pre>
+    <h1>页面</h1>
+    <h2>event</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>事件名</td>
+                <td>触发时机</td>
+                <td>第三个参数</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>prePageLoad</td>
+                <td>页面加载前</td>
+                <td>undefined>
+            </tr>
+            <tr>
+                <td>postPageLoad</td>
+                <td>页面加载完</td>
+                <td>undefined>
+            </tr>
+            <tr>
+                <td>postPageRender</td>
+                <td>渲染完成后</td>
+                <td>undefined>
+            </tr>
+        </tbody>
+    </table>
     <h1>button</h1>
     <h2>props</h2>
     <table>
@@ -400,7 +428,12 @@
             <tr>
                 <td>reset</td>
                 <td>重置</td>
-                <td></td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentRender</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -685,6 +718,11 @@
                 <td>loadMore</td>
                 <td>完成延迟懒加载</td>
                 <td></td>
+            </tr>
+            <tr>
+                <td>postComponentRender</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -1472,6 +1510,11 @@
             <tr>
                 <td>pageSizeChange</td>
                 <td>改变分页容量</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentRender</td>
+                <td>渲染完成后</td>
                 <td>undefined</td>
             </tr>
         </tbody>
