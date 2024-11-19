@@ -46,47 +46,31 @@ export class FormComponent implements OnInit, OnDestroy {
     this.data.items.forEach((item: A) => {
       data[item.key] = item.value
     })
-
+    // 触发submit事件
     let fnArr = pool.getEventArray(this.data.ulid, 'submit')
     fnArr.forEach(f => {
       f.bind(this) // 方法体的this
       f && f(
-        // pool.getComponentInstance.bind(pool), // 绑定指定方法的this
         utils,
         pool.getPluginFn(), // 插件
         // res
       )
     })
-    // this.dataService.req(this.data.props['url'], 'post', data).then(res => {
-    //   clog('submit res', res)
-    //   // let fnArr = pool.getEventArray(this.data.ulid, 'submit')
-    //   // fnArr.forEach(f => {
-    //   //   f.bind(this) // 方法体的this
-    //   //   f && f(
-    //   //     // pool.getComponentInstance.bind(pool), // 绑定指定方法的this
-    //   //     utils,
-    //   //     pool.getPluginFn(), // 插件
-    //   //     res
-    //   //   )
-    //   // })
-
-    //   // let eventArr = this.data.behavior.filter((item: A) => item.event === 'submit')
-    //   // eventArr.forEach((item: A) => {
-    //   //   if (res.code === 0) {
-    //   //     // shareEvent.emit(item.target, res.data)
-    //   //   } else {
-    //   //     // todo 提示
-    //   //   }
-    //   // })
-    // })
   }
-  // getData() {
-  //   return this.data
-  // }
   ngOnInit() {
     this.props = this.data.props
     this.items = this.data.items
     pool.register(this.data.ulid, this, this.data.behavior)
+    // 触发postRenderer事件
+    let fnArr = pool.getEventArray(this.data.ulid, 'postRender')
+    fnArr.forEach(f => {
+      f.bind(this) // 方法体的this
+      f && f(
+        utils,
+        pool.getPluginFn(), // 插件
+        // res
+      )
+    })
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)

@@ -2,7 +2,7 @@
 |-|-|-|
 |无选中组件时行为面板显示页面的生命周期事件|doing||
 ||编辑事件|done|
-||在渲染侧使用事件|doing|
+||在渲染侧使用事件|done|
 ||测试components的put接口||
 ||测试pages的put接口||
 ||删除页面的事件||
@@ -12,12 +12,17 @@
 ||pagi||
 |seven应用的预览问题|todo||
 |website中增加事件池的设计文档|todo||
+||组件支持的事件|todo||
+||页面支持的事件|todo||
+可以移到page.service.ts
 |分支|f_page||
 |要上生产的内容|||
 ||支持川布局||
 ||||
 ||||
 
+|全部组件支持生命周期方法|||
+|全部组件修正调用事件的参数|||
 |// todo 改名为behavior-group|||
 |创建碎片平台|||
 |行为面板使用去抖|||
@@ -324,3 +329,19 @@ utils: {
 |-|-|-|-|
 |||非常通用||
 
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://heshijade.com:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
+}).catch()

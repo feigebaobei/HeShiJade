@@ -65,23 +65,13 @@ export class LayoutComponent implements OnInit {
       column: 24,
     }
     this.account = 0
-    // clog('constructor')
     effect(() => {
-      // clog('loading')
-      // if (!this.account) {
-      //   clog('loading')
-      // }
       let componentList = this.componentService.componentListS.get()
       this.show = false
       this.componentList = []
       this.componentList = componentList
       asyncFn(() => {
         this.show = true
-        // if (this.account) {
-        //   clog('loaded')
-        // } else {
-        //   this.account++
-        // }
       })
     })
   }

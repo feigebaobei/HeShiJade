@@ -46,6 +46,7 @@ export class ComponentService {
           f && f(utils, pool.getPluginFn())
         })
         asyncFn(() => {
+          // todo 可以移到page.service.ts
           let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
           let fnArr = pool.getEventArray(curPage.ulid, 'pageLoaded')
           if (arr.length) {
