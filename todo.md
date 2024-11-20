@@ -7,7 +7,7 @@
 ||测试pages的put接口||
 ||删除页面的事件||
 |3个组件的生命周期事件|todo||
-||form||
+||form|done|
 ||table||
 ||pagi||
 |seven应用的预览问题|todo||
@@ -345,3 +345,14 @@ utils.req({
   clog('res', res)
   table.setDataSource(res.data.data)
 }).catch()
+
+
+因为export导出的是变量
+因为export default导出的是变量
+
+export 1
+var a = 1
+// 这句相当于 export 1
+export a // 所以不合法
+
+我感觉export导出的是对象
