@@ -10,6 +10,8 @@
 ||form|done|
 ||table||
 ||pagi||
+|trigger方法放在utils里|||
+|页面渲染完的方法有问题。|||
 |seven应用的预览问题|todo||
 |website中增加事件池的设计文档|done||
 ||组件支持的事件|done||
@@ -356,3 +358,30 @@ var a = 1
 export a // 所以不合法
 
 我感觉export导出的是对象
+
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://heshijade.com:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
+}).catch()
+
+let modal = utils.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
+modal.openDialog()
+
+you must update your .npmrc
+save-workspace-protocol=true
+or
+pnpm publish.
+有人说是npm的bug
+

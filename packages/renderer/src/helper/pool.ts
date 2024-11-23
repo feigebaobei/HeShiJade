@@ -1,20 +1,26 @@
 
 import { Queue } from "data-footstone"
+import { utils } from "./utils"
 import type { ULID } from "src/types"
-import type { A, F, O, Oa, S } from "src/types/base"
+import type { A, F, O, Oa, S, B } from "src/types/base"
 import type { Component } from "src/types/component"
+import { PromiseControllable, } from "./utils"
 
 let clog = console.log
+type PageUlid = ULID
+type ComponentUlid = ULID
 
 
 class Pool {
     private ulidEventMap: Map<ULID, Map<S, Queue<F>>>
     private ulidComponentMap: Map<ULID, A>
     private pluginMap: Map<S, Oa>
+    private rendereredMap: Map<PageUlid, Map<ComponentUlid, PromiseControllable<B>>>
     constructor() {
         this.ulidEventMap = new Map()
         this.ulidComponentMap = new Map()
         this.pluginMap = new Map()
+        this.rendereredMap = new Map()
     }
     registerEvent(ulid: ULID, event: S, fn: F) {
         if (!ulid || !event || !fn) {
@@ -136,12 +142,44 @@ class Pool {
             })
         }
     }
-    // setProps(obj) {
-    //     this[key] = 
-    // }
+    // 记录页面内的组件是否渲染出视图。
+    // Map<pageUlid, Map<componentUlid: Promise<B>>>
+    // Map<componentUlid: Promise<B>>
+    trigger(ulid: ULID, eventName: S, thirdParams: A, self?: A) {
+        let fnArr = this.getEventArray(ulid, eventName)
+        // clog('arr', fnArr)
+        fnArr.forEach(f => {
+            f.bind(self)
+            // clog(f)
+            f(utils, pool.getPluginFn, thirdParams,) // 这行代码会使页面重定向到根目录
+        })
+    }
+    registerComponentRender(pageUlid: ULID, componentUlidList: ULID[]) {
+        let m = new Map<ComponentUlid, PromiseControllable<B>>()
+        // clog('componentUlidList', pageUlid, componentUlidList)
+        componentUlidList.forEach(componentUlid => {
+            // clog('componentUlid', componentUlid)
+            m.set(componentUlid, new PromiseControllable())
+        })
+        this.rendereredMap.set(pageUlid, m)
+        let pArr = Array.from(m.values()).map(pc => pc.promise)
+        clog('pArr', pArr)
+        Promise.all(pArr).then(() => {
+            clog('then', pArr)
+            this.trigger(pageUlid, 'postPageRenderer', undefined, undefined)
+            this.unRegisterComponentRender(pageUlid)
+        })
+    }
+    resolveComponentRender(pageUlid: ULID, componentUlid: ULID) {
+        let componentMap = this.rendereredMap.get(pageUlid)
+        componentMap?.get(componentUlid)?.resolve(true)
+    }
+    unRegisterComponentRender(pageUlid: ULID) {
+        this.rendereredMap.delete(pageUlid)
+    }
 }
 let pool = new Pool()
-let getComponentInstance = pool.getComponentInstance
+let getComponentInstance = '' // pool.getComponentInstance.bind(pool)
 export {
     Pool,
     pool,
