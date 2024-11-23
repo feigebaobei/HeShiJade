@@ -61,6 +61,7 @@ interface componentInstanceData {
   items: Component['items'],
   slots: Component['slots'],
   ulid: Component['ulid'],
+  pageUlid: Component['pageUlid'],
 }
 
 export type {
