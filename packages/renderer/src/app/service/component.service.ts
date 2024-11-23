@@ -8,7 +8,6 @@ import { EnvService } from './env.service';
 import { asyncFn, createChildKey } from 'src/helper/index'
 import { serviceUrl } from 'src/helper/config'
 import { ShareSignal } from 'src/helper/shareSignal';
-import * as utils from 'src/helper/utils'
 // type
 import type { ResponseData, ULID } from 'src/types';
 import type { Component,
@@ -16,6 +15,7 @@ import type { Component,
   ComponentMountSlots, } from 'src/types/component';
 import type { Tree } from 'src/helper/tree';
 import { pool } from 'src/helper/pool';
+// import { trigger } from 'src/helper/utils';
 
 let clog = console.log
 
@@ -41,26 +41,18 @@ export class ComponentService {
     effect(() => {
       let curPage = this.pageService.curS.get()
       if (curPage) {
-        pool.getEventArray(curPage.ulid, 'pageLoading').forEach(f => {
-          f.bind(this)
-          f && f(utils, pool.getPluginFn())
-        })
+        pool.trigger(curPage.ulid, 'prePageLoad', undefined, undefined)
         asyncFn(() => {
-          // todo 可以移到page.service.ts
           let arr: Component[] = this._map.get(curPage.ulid)?.root?.toArray() || []
-          let fnArr = pool.getEventArray(curPage.ulid, 'pageLoaded')
           if (arr.length) {
             this.setList(arr)
-            fnArr.forEach(f => {
-              f.bind(this)
-              f && f(utils, pool.getPluginFn())
-            })
+            pool.trigger(curPage.ulid, 'postPageLoad', undefined, this)
+            pool.registerComponentRender(curPage.ulid, arr.map(item => item.ulid))
           } else {
-            this.reqList(curPage.ulid, this.envService.getCur()).then(() => {
-              fnArr.forEach(f => {
-                f.bind(this)
-                f && f(utils, pool.getPluginFn())
-              })
+            this.reqList(curPage.ulid, this.envService.getCur())
+            .then(() => {
+              pool.trigger(curPage.ulid, 'postPageLoad', undefined, this)
+              pool.registerComponentRender(curPage.ulid, this.getList().map(item => item.ulid))
             })
           }
         })  

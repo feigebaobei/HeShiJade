@@ -6,6 +6,7 @@ import { EnvService } from './env.service';
 import { createTree } from 'src/helper/tree';
 import { serviceUrl } from 'src/helper/config'
 import { pool } from 'src/helper/pool';
+// import { trigger } from 'src/helper/utils'
 // type
 import type { ResponseData, ULID } from 'src/types'
 import type { ENV } from 'src/types/base';
@@ -110,6 +111,9 @@ export class PageService {
   setCur(pageUlid?: ULID) {
     this._cur = this.getPage(pageUlid)
     this.curS.set(this._cur)
+    // if (pageUlid) {
+    //   trigger(pageUlid, 'pageLoading', undefined, this)
+    // }
   }
   getCur() {
     return this._cur
