@@ -6,6 +6,7 @@ import { pool } from 'src/helper/pool';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
 import type { B, S, N, A, O } from 'src/types/base';
+// import { trigger } from 'src/helper/utils';
 
 let clog = console.log
 
@@ -39,15 +40,16 @@ export class TabsComponent implements OnInit, OnDestroy {
     this.indexSlotKeyMap = new Map()
   }
   activeTabChangeH(id: N | S) {
-    id = String(id)
-    clog('id', id)
-    let fnArr = pool.getEventArray(this.data.ulid, 'activeTabChange')
-    fnArr.forEach(f => {
-      f.bind(this) // 方法体的this
-      f && f(pool.getComponentInstance.bind(pool),
-        pool.getPluginFn(), // 插件
-      ) // 绑定指定方法的this
-    })
+    // id = String(id)
+    // clog('id', id)
+    // let fnArr = pool.getEventArray(this.data.ulid, 'activeTabChange')
+    // fnArr.forEach(f => {
+    //   f.bind(this) // 方法体的this
+    //   f && f(pool.getComponentInstance.bind(pool),
+    //     pool.getPluginFn(), // 插件
+    //   ) // 绑定指定方法的this
+    // })
+    // trigger(this.data.ulid, 'activeTabChange', undefined, this)
   }
   addOrDeleteTabChangeH(o: A) {
     // clog('o', o)
@@ -58,11 +60,12 @@ export class TabsComponent implements OnInit, OnDestroy {
       case 'add': // 当前不支持
         break;
       case 'delete':
-        let fnArr = pool.getEventArray(this.data.ulid, 'deleteTabChange')
-        fnArr.forEach(f => {
-          f.bind(this) // 方法体的this
-          f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
-        })
+        // let fnArr = pool.getEventArray(this.data.ulid, 'deleteTabChange')
+        // fnArr.forEach(f => {
+        //   f.bind(this) // 方法体的this
+        //   f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
+        // })
+        // trigger(this.data.ulid, 'deleteTabChange', undefined, this)
         break;
     }
   }
