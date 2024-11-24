@@ -229,7 +229,7 @@ router.route('/')
     if (rules.required(req.query.ulid)) {
       s(true)
     } else {
-      j()
+      j(100100)
     }
   }).then(() => {
     logger.info({method: 'delete', originalUrl: req.originalUrl, ulid: req.query.ulid})
@@ -380,7 +380,52 @@ router.route('/behavior')
   res.sendStatus(200)
 })
 .delete(cors.corsWithOptions, (req, res) => {
-  res.sendStatus(200)
+  let index
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) && rules.required(req.query.index)) {
+      index = Number(req.query.index)
+      if (rules.isNumber(index) && index > -1) {
+        s(true)
+      } else {
+        j(100100)
+      }
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.pageTable).bulkWrite([
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $unset: {[`behavior.${req.query.index}`]: null},
+          }
+        }
+      },
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $pull: {behavior: null}
+          }
+        }
+      }
+    ]).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 
 module.exports = router;

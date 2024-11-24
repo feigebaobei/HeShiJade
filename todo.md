@@ -5,11 +5,12 @@
 ||在渲染侧使用事件|done|
 ||测试components的put接口||
 ||测试pages的put接口||
-||删除页面的事件|doing|
+||删除页面的事件|done|
 |3个组件的生命周期事件|todo||
 ||form|done|
 ||table|done|
 ||pagi|done|
+|组件添加多个事件时应该可以独立编辑|todo||
 |trigger方法放在utils里|不这样做了||
 |页面渲染完的方法有问题。|无法复现||
 |seven应用的预览问题|无法复现||
