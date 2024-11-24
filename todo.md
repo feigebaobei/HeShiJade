@@ -14,10 +14,10 @@
 |页面渲染完的方法有问题。|||
 |seven应用的预览问题|todo||
 |website说明事件的参数|done||
-|website设计原理中增加页面生命周期|todo||
+|website设计原理中增加页面生命周期|done||
 |website中增加事件池的设计文档|done||
 ||组件支持的事件|done||
-||页面支持的事件|done||
+||页面支持的事件|todo||
 可以移到page.service.ts
 |分支|f_page||
 |要上生产的内容|||

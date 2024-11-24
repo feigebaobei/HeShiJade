@@ -214,7 +214,7 @@
     </pre>
     <h1>事件</h1>
     <p>实现低代码。支持当前路由内各组件之间通信、调用。</p>
-    <p>使用`getComponentInstance(ulid)`得到指定组件实例。请注意：有时对应的实例未完成初始化。</p>
+    <p>使用`utils.pool.getComponentInstance(ulid)`得到指定组件实例。请注意：有时对应的实例未完成初始化。</p>
     <p>搭建仙定义事件及方法体，无运行逻辑。渲染侧使用事件及方法，有运行逻辑。</p>
     <p>定义事件</p>
     <ol>
@@ -245,6 +245,15 @@
         |                   |                   |  9. 在触发事件时调用     |                   |
         |                   |                   |                       |                   |
     </pre>
+    <h1>生命周期</h1>
+    <p>在组件的特定生命周期方法时触发支持配置的特定生命周期方法。</p>
+    <p>页面的生命周期方法在面向过程的代码逻辑中触发。</p>
+    <p>页面postPageRender事件需要统计组件是否渲染完。</p>
+    <ul>
+        <li>1. 在请求到该页面的所有组件时以componentUlid为key，以PromiseControllable为value，建立map</li>
+        <li>2. 当组件的ngAfterViewInit事件时使promise状态为resolved.</li>
+        <li>3. 在所有promise为resolved时执行postPageRender事件的回调方法。</li>
+    </ul>
     <h1>插件</h1>
     <p>为增强低代码能力。</p>
     <p>为该平台接收自定义能力。</p>
