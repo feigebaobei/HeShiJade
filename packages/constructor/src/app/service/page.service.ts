@@ -254,4 +254,10 @@ export class PageService {
       behavior: obj,
     })
   }
+  reqRemoveBehavior(ulid: ULID = this.getCurPage()?.ulid || '', index: N) {
+    return this.reqService.req(`${serviceUrl()}/pages/behavior`, 'delete', {
+      ulid,
+      index,
+    })
+  }
 }

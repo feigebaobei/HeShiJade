@@ -160,7 +160,12 @@ export class BehaviorBoxComponent {
   }
   removeH(i: N) {
     this.componentBehaviorList.splice(i, 1)
-    this.componentService.removeBehaviorOfCurComponent(this.pageService.getCurPage()!.ulid, this.curComp!.ulid, i)
-    this.componentService.reqRemoveBehavior(this.curComp!.ulid, i)
+    if (this.curComp) {
+      this.componentService.removeBehaviorOfCurComponent(this.pageService.getCurPage()!.ulid, this.curComp!.ulid, i)
+      this.componentService.reqRemoveBehavior(this.curComp!.ulid, i)
+    } else {
+      this.pageService.removeBehaviorOfCurPage(i)
+      this.pageService.reqRemoveBehavior(this.pageService.getCurPage()!.ulid, i)
+    }
   }
 }
