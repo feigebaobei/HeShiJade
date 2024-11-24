@@ -13,6 +13,8 @@
 |trigger方法放在utils里|||
 |页面渲染完的方法有问题。|||
 |seven应用的预览问题|todo||
+|website说明事件的参数|done||
+|website设计原理中增加页面生命周期|todo||
 |website中增加事件池的设计文档|done||
 ||组件支持的事件|done||
 ||页面支持的事件|done||
@@ -50,7 +52,7 @@
 ||accordion||
 ||breadcrumb||
 ||cascader||
-||datapicker||
+||datepicker||
 ||inputNumber||
 ||radio||
 ||slider||

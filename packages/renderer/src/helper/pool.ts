@@ -1,6 +1,6 @@
 
 import { Queue } from "data-footstone"
-import { utils } from "./utils"
+import * as utils from "./utils"
 import type { ULID } from "src/types"
 import type { A, F, O, Oa, S, B } from "src/types/base"
 import type { Component } from "src/types/component"
@@ -179,9 +179,9 @@ class Pool {
     }
 }
 let pool = new Pool()
-let getComponentInstance = '' // pool.getComponentInstance.bind(pool)
+// let getComponentInstance = '' // pool.getComponentInstance.bind(pool)
 export {
     Pool,
     pool,
-    getComponentInstance,
+    // getComponentInstance,
 }

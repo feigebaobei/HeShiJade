@@ -30,14 +30,14 @@ class PromiseControllable<T = unknown> {
 //     })
 // }
 
-let utils = {
-    req,
-    // getComponentInstance,
-    // trigger,
-    PromiseControllable,
-}
+// let utils = {
+//     req,
+//     // getComponentInstance,
+//     // trigger,
+//     PromiseControllable,
+// }
 export {
-    utils,
+    // utils,
     req,
     // getComponentInstance,  //: pool.getComponentInstance,
     // trigger,
