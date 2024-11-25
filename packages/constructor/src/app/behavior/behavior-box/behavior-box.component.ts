@@ -136,7 +136,7 @@ export class BehaviorBoxComponent {
     let group: BehaviorConfigGroup = [] // as BehaviorConfigGroup
     if (this.curComp) {
       Object.values(behaviorTemplate[this.curComp.type]).forEach((item) => {
-        group.push(item)
+        group.push(cloneDeep(item))
       })
       this.componentBehaviorList.push(group)
       let o: BehaviorMetaItem = {}
@@ -147,7 +147,7 @@ export class BehaviorBoxComponent {
       this.componentService.reqAddBehavior(o)
     } else {
       Object.values(behaviorTemplate['Page']).forEach((item) => {
-        group.push(item)
+        group.push(cloneDeep(item))
       })
       this.componentBehaviorList.push(group)
       let o: BehaviorMetaItem = {}

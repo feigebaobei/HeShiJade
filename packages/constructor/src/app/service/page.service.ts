@@ -195,8 +195,8 @@ export class PageService {
     }
   }
   reqUpdate(ulid: ULID, type: 'meta' , key: keyof Page, value: S): any 
-  reqUpdate(ulid: ULID, type:  'behavior', key: S, value: S, index: N,): any
-  reqUpdate(ulid: ULID, type:  'meta' | 'behavior', key: Page | S, value: S, index?: N,) {
+  reqUpdate(ulid: ULID, type: 'behavior', key: S, value: S, index: N,): any
+  reqUpdate(ulid: ULID, type: 'meta' | 'behavior', key: Page | S, value: S, index?: N,) {
     switch (type) {
       case 'meta':
         return this.reqService.req(`${serviceUrl()}/pages`, 'put', {ulid, type, key, value})

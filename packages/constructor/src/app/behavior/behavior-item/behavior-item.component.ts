@@ -27,7 +27,6 @@ export class BehaviorItemComponent implements OnInit {
     private pageService: PageService,
   ) {
     this.fnBodyTextareatChangeH = createDebounceFn((v: S) => {
-
       let c = this.componentService.curComponent()
       let p = this.pageService.getCurPage()
       if (c) {
