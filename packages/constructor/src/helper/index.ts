@@ -20,7 +20,7 @@ interface Loop extends LoopPropotype {
 let clog = console.log
 // clog('clone', clone)
 
-const VERSION = 0 // 按照圆周率的数值
+const VERSION = 0
 
 let reqToPromise = <T>(fn: Observable<ResponseData>): Promise<T> => {
     return new Promise((s, j) => {
@@ -128,16 +128,18 @@ let initPageMeta = (key: S = '', name: S = '',
     childUlid: '',
     firstComponentUlid: '',
     // lastComponentUlid: '',
+    behavior: [],
   }
 }
 let initAppMeta = (key: S = '', name: S = '', theme: S = '', owner: S = '', 
-  version:N = VERSION, pluginsKey: S[] = []): App => {
+  version:N = VERSION, layout: N = 1, pluginsKey: S[] = []): App => {
   return {
     key,
     name,
     ulid: ulid(),
     theme,
     version,
+    layout,
     // owner: (this.userService.getUser()?.account as S),
     owner, // : (this.userService.getUser()?.profile.email as Email), // 考虑一下，email好还是id好。 // id好
     collaborator: [],

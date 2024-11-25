@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, } from '@angular/core';
 // import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
+// import { pool } from 'src/helper/utils';
 // type
 import type { A, O, S } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
@@ -24,13 +25,14 @@ export class ButtonComponent implements OnInit, OnDestroy {
   constructor() {
   }
   buttonClickH() {
-    let fnArr = pool.getEventArray(this.data.ulid, 'click')
-    fnArr.forEach(f => {
-      f.bind(this) // 方法体的this
-      f && f(pool.getComponentInstance.bind(pool),  // 绑定指定方法的this
-        pool.getPluginFn(), // 插件
-      )
-    })
+    // let fnArr = pool.getEventArray(this.data.ulid, 'click')
+    // fnArr.forEach(f => {
+    //   f.bind(this) // 方法体的this
+    //   f && f(pool.getComponentInstance.bind(pool),  // 绑定指定方法的this
+    //     pool.getPluginFn(), // 插件
+    //   )
+    // })
+    pool.trigger(this.data.ulid, 'click', undefined, this)
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -39,6 +41,9 @@ export class ButtonComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
+  }
+  ngAfterViewInit() {
+    pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)

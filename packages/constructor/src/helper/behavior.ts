@@ -45,7 +45,7 @@ let Form: BehaviorConfigGroup = [
     options: [
       {label: '提交', value: 'submit'},
       {label: '重置', value: 'reset'},
-      // {label: '取消', value: 'cancel'},
+      {label: '渲染完成后', value: 'postComponentRender'},
     ],
     value: 'submit',
     label: '事件',
@@ -77,6 +77,7 @@ let Table: BehaviorConfigGroup = [
       {label: '表格内部滚动', value: 'tableScrollEvent'},
       {label: '结束列拖拽', value: 'columnDragEnd'},
       {label: '完成延迟懒加载', value: 'loadMore'},
+      {label: '渲染完成后', value: 'postComponentRender'},
     ],
     value: '',
     label: '事件',
@@ -149,8 +150,29 @@ let Pagination: BehaviorConfigGroup = [
     category: 'select',
     options: [
       {label: '改变页码', value: 'pageIndexChange'},
-      // {label: '添加', value: 'addTabChange'},
       {label: '改变分页容量', value: 'pageSizeChange'},
+      {label: '渲染完成后', value: 'postComponentRender'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+
+
+let Page: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '页面加载前', value: 'prePageLoad'},
+      {label: '页面加载完', value: 'postPageLoad'},
+      {label: '渲染完成后', value: 'postPageRender'},
     ],
     value: '',
     label: '事件',
@@ -176,6 +198,7 @@ export {
     Checkbox,
     Tabs,
     Pagination,
+    Page,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -187,5 +210,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Checkbox,
     Tabs,
     Pagination,
+    Page,
 }
 export default all

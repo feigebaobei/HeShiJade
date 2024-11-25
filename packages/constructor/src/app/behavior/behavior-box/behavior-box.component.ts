@@ -1,6 +1,6 @@
 import { Component, effect } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-import { cloneDeep } from 'src/helper/index'
+import { cloneDeep, compatibleArray, } from 'src/helper/index'
 import addableAll from 'src/helper/addable'
 import {
   Button as buttonBehaviorMeta,
@@ -10,6 +10,7 @@ import {
   Checkbox as CheckboxBehaviorMeta,
   Tabs as TabsBehaviorMeta,
   Pagination as PaginationBehaviorMeta,
+  Page as PageBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
@@ -51,13 +52,27 @@ export class BehaviorBoxComponent {
     ]
     this.componentBehaviorList = []
     effect(() => {
-      let p = this.componentService.curComponentS.get()
-      if (p) {
-        this.curComp = p
+      let comp = this.componentService.curComponentS.get()
+      let page = this.pageService.pageS.get()
+      if (comp) {
+        // clog('1')
+        this.curComp = comp
         this.curComponentChange()
-        this.addable = addableAll[p.type].behavior
+        this.addable = addableAll[comp.type].behavior
+      } else if (page) {
+        // clog('2')
+        this.curComp = null
+        this.curComponentChange()
+        this.addable = addableAll['Page'].behavior
       }
     })
+    // effect(() => {
+    //   let page = this.pageService.pageS.get()
+    //   if (page) {
+    //     this.curComponentChange()
+    //     this.addable = addableAll['Page'].behavior
+    //   }
+    // })
   }
   setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigGroup) {
     this.curComp!.behavior.forEach(item => {
@@ -71,7 +86,24 @@ export class BehaviorBoxComponent {
       this.componentBehaviorList.push(arr)
     })
   }
+  setPageBehaviorListByType(compBehaviorMeta: BehaviorConfigGroup) {
+    let page = this.pageService.getCurPage()
+    if (page) {
+      compatibleArray(page.behavior).forEach((item: (typeof page.behavior)[number]) => {
+        let arr: BehaviorConfigGroup = cloneDeep(compBehaviorMeta)
+        Object.entries(item).forEach(([k, v]) => {
+          let o = arr.find(item => item.key === k)
+          if (o) {
+            o.value = v
+          }
+        })
+        this.componentBehaviorList.push(arr)
+      })
+    }
+  }
   curComponentChange() {
+    clog('this.curComp', this.curComp)
+    // return 
     this.componentBehaviorList = []
     switch (this.curComp?.type) {
       case 'Button':
@@ -95,13 +127,16 @@ export class BehaviorBoxComponent {
       case 'Pagination':
         this.setComponentBehaviorListByType(PaginationBehaviorMeta)
         break;
+      default:
+        this.setPageBehaviorListByType(PageBehaviorMeta)
+        break;
       }
   }
   addH() {
     let group: BehaviorConfigGroup = [] // as BehaviorConfigGroup
     if (this.curComp) {
       Object.values(behaviorTemplate[this.curComp.type]).forEach((item) => {
-        group.push(item)
+        group.push(cloneDeep(item))
       })
       this.componentBehaviorList.push(group)
       let o: BehaviorMetaItem = {}
@@ -110,11 +145,27 @@ export class BehaviorBoxComponent {
       })
       this.componentService.addBehaviorOfCurComponent(o)
       this.componentService.reqAddBehavior(o)
+    } else {
+      Object.values(behaviorTemplate['Page']).forEach((item) => {
+        group.push(cloneDeep(item))
+      })
+      this.componentBehaviorList.push(group)
+      let o: BehaviorMetaItem = {}
+      group.forEach(item => {
+        o[item.key] = item.value
+      })
+      this.pageService.addBehaviorOfCurPage(o)
+      this.pageService.reqAddBehavior(o)
     }
   }
   removeH(i: N) {
     this.componentBehaviorList.splice(i, 1)
-    this.componentService.removeBehaviorOfCurComponent(this.pageService.getCurPage()!.ulid, this.curComp!.ulid, i)
-    this.componentService.reqRemoveBehavior(this.curComp!.ulid, i)
+    if (this.curComp) {
+      this.componentService.removeBehaviorOfCurComponent(this.pageService.getCurPage()!.ulid, this.curComp!.ulid, i)
+      this.componentService.reqRemoveBehavior(this.curComp!.ulid, i)
+    } else {
+      this.pageService.removeBehaviorOfCurPage(i)
+      this.pageService.reqRemoveBehavior(this.pageService.getCurPage()!.ulid, i)
+    }
   }
 }

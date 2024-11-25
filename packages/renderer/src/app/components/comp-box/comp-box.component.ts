@@ -15,6 +15,7 @@ import { TabsComponent } from '../tabs/tabs.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 // type
 import type { A, S } from 'src/types/base';
+import type { Component as Comp, } from 'src/types/component';
 
 let clog = console.log
 
@@ -38,7 +39,8 @@ let compMap: {[k: S]: A} = {
   styleUrls: ['./comp-box.component.sass']
 })
 export class CompBoxComponent {
-  @Input() data: A
+  // @Input() data: A
+  @Input() data!: Comp
   @ViewChild(StackDirective, {static: true}) stack!: StackDirective;
   componentRef: A
   constructor() {
@@ -70,6 +72,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Form':
@@ -79,6 +82,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Modal':
@@ -88,6 +92,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Input':
@@ -97,6 +102,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Select':
@@ -106,6 +112,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Table':
@@ -115,6 +122,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Icon':
@@ -124,6 +132,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Checkbox':
@@ -133,6 +142,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Tabs':
@@ -142,6 +152,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
       case 'Pagination':
@@ -151,6 +162,7 @@ export class CompBoxComponent {
           items: this.data.items,
           slots: this.data.slots,
           ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
         }
         break;
     }

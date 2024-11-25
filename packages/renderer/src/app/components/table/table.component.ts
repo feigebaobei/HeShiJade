@@ -52,7 +52,7 @@ export class TableComponent implements OnInit {
     }
   }
   req() {
-    this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {
+    return this.dataService.req((this.data.props['url'] as S), ((this.data.props['method'] || 'get') as ReqMethod), {}).then(res => {
       if (res.code === 0) {
         this.basicDataSource = res.data
       } else {
@@ -63,6 +63,7 @@ export class TableComponent implements OnInit {
           message: '这个组件的接口返回的数据出错了。'
         })
       }
+      return true
     })
   }
   setProps(o: Oa) {
@@ -70,11 +71,23 @@ export class TableComponent implements OnInit {
       this.data.props[k] = v
     })
   }
+  setDataSource(v: A[]) {
+    this.basicDataSource = v
+  }
+  // dataTable组件的方法 start
+  // getCheckedRows
+  // setRowCheckStatus
+  // setTableCheckStatus
+  // getRowChildToggleStatus
+  // setTableChildrenToggleStatus
+  // cancelEditingStatus
+  // dataTable组件的方法 end
   ngOnInit(): void {
+    // pool.register(this.data.ulid, this, this.data.behavior)
     new Promise((s, _j) => {
       s(true)
     }).then(() => {
-      this.req()
+      // this.req()
       this.compObj = {}
       let tree = this.componentService.getTreeByKey()
       this.data.items.forEach((item, index) => {
@@ -88,26 +101,12 @@ export class TableComponent implements OnInit {
       })
       return true
     })
-    // shareEvent.on(this.data.ulid, (payload) => {
-    //   this.basicDataSource = payload
-    // })
-    pool.register(this.data.ulid, this, this.data.behavior)
+    // pool.trigger(this.data.ulid, 'postComponentRenderer', undefined, this)
+  }
+  ngAfterViewInit() {
+    pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)
   }
-  setDataSource(v: A[]) {
-    this.basicDataSource = v
-  }
-  // ngOnInit() {
-  //   this.req()
-  // }
-  // dataTable组件的方法 start
-  // getCheckedRows
-  // setRowCheckStatus
-  // setTableCheckStatus
-  // getRowChildToggleStatus
-  // setTableChildrenToggleStatus
-  // cancelEditingStatus
-  // dataTable组件的方法 end
 }

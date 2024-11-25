@@ -1,4 +1,4 @@
-import type {N, B, A, S, ULID} from './base'
+import type {N, B, A, S, ULID, Os,} from './base'
 
 interface Page {
   key: S
@@ -9,6 +9,10 @@ interface Page {
   childUlid?: ULID
   firstComponentUlid?: ULID
   appUlid: ULID
+  behavior: {
+    event: S
+    fnBody: S
+  }[]
 }
 
 export type {

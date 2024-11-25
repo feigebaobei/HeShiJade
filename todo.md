@@ -1,31 +1,17 @@
 ||||
 |-|-|-|
-|组件之间传递数据|以table、pagination、form为例||
-||初始化3个组件|done|
-||查询|done|
-||显示数据|done|
-||分页|done|
-||翻页|done|
-||mock服务提供数据|done|
-||回调事件中支持取得相关组件的数据，再请求后端，再把数据传入相关组件。|done|
-|||插件中支持req|done
-|||取出form的数据|done
-|||取出page的数据|done
-|||传入table|done
-||web-site增加第三参数的说明|done|
-||web-site增加第三回调事件的入参的说明|done|
-||web-site增加三个组件的说明|done|
-||web-site增加工具说明|done|
-|整理所有组件的回调方法的参数|||
-|分支|f_plugin||
+|分支|f_life||
+|把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
+|解决删除应用后视图中无应用的问题|todo||
+|生命周期时序图|||
+|7个组件生命周期事件|||
 |要上生产的内容|||
-||form/table/pagination支持少数个事件。创建了一个查询页面。||
-||事件回调方法支持三个参数。第一个参数由getComponentInstance改为utils，第二个参数是plugins，第三个参数是该事件的入参。||
-||||
 ||||
 ||||
 
-||无选中组件时行为面板显示页面的生命周期事件||
+|丰富配置面板的setter|||
+|全部组件支持生命周期方法|||
+|全部组件修正调用事件的参数|||
 |// todo 改名为behavior-group|||
 |创建碎片平台|||
 |行为面板使用去抖|||
@@ -40,33 +26,30 @@
 |搭建页面的标题与按钮应该在同一行|todo||
 ||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
-|解决删除应用后视图中无应用的问题|todo||
-|把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
 |有时无法选中页面|不好复现||
 ||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |是否需要把修改service与发请求分开|分开||
 |丰富组件|||
+||inputNumber||
+||radio||
+||card||
+||imagePreview||
 ||accordion||
 ||breadcrumb||
 ||cascader||
-||datapicker||
-||inputNumber||
-||radio||
+||datepicker||
 ||slider||
 ||textarea||
 ||toggle||
 ||drawer||
 ||avatar||
 ||badge||
-||card||
-||imagePreview||
 ||progress||
 ||rate||
 ||tag||
 |应用把非dev环境的版本回退到dev环境|||
-|生命周期|||
 |丰富配置面板的setter|||
 ||number||
 |“注销用户”功能|||
@@ -322,4 +305,67 @@ utils: {
 |形式|函数|类||
 |||不可循环使用||
 |||在当前angular项目中单例存在||
+
+||page生命周期方法|说明||
+|-|-|-|-|
+||preLoad|请求当前页面的组件前或从缓存中取出当前页面的组件前||
+||postLoad|请求当前页面的组件后或从缓存中取出当前页面的组件后||
+
+||component生命周期方法|说明||
+|-|-|-|-|
+|||非常通用||
+
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://heshijade.com:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
+}).catch()
+
+
+因为export导出的是变量
+因为export default导出的是变量
+
+export 1
+var a = 1
+// 这句相当于 export 1
+export a // 所以不合法
+
+我感觉export导出的是对象
+
+let clog = console.log
+let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
+let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
+let pageData = page.getData()
+utils.req({
+  url: 'http://heshijade.com:5030/components/table',
+  method: 'get',
+  params: {
+    page: pageData.pageIndex,
+    pageSize: pageData.pageSize,
+  },
+}).then(res => {
+  clog('res', res)
+  table.setDataSource(res.data.data)
+}).catch()
+
+let modal = utils.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
+modal.openDialog()
+
+you must update your .npmrc
+save-workspace-protocol=true
+or
+pnpm publish.
+有人说是npm的bug
 

@@ -9,6 +9,7 @@ const { rules, resParamsError } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 // let md5 = require('md5');
 const { logger } = require('../helper/log')
+const { DB } = require('../helper/config')
 let clog = console.log
 
 router.use(bodyParser.json())
@@ -75,7 +76,6 @@ router.route('/')
       data: {}
     })
   })
-
 })
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
@@ -116,6 +116,7 @@ router.route('/')
             firstComponentUlid: '',
             lastComponentUlid: '',
             appUlid: req.body.appUlid,
+            behavior: [],
           }
         }
       }
@@ -165,17 +166,43 @@ router.route('/')
   })
 })
 .put(cors.corsWithOptions, (req, res) => {
+  // meta     ulid,type,key,value
+  // behavior ulid,type,index,key,value
   new Promise((s, j) => {
-    if (rules.required(req.body.ulid) && rules.required(req.body.key) && rules.required(req.body.value)) {
-      s(true)
+    if (rules.required(req.body.ulid) && 
+      rules.required(req.body.type) && 
+      rules.required(req.body.key) && 
+      rules.required(req.body.value)) {
+      switch (req.body.type) {
+        case 'meta':
+          s(true)
+          break;
+        case 'behavior':
+          if (Math.sign(req.body.index) > -1) {
+            s(true)
+          } else {
+            j(100100)
+          }
+          break;
+      }
     } else {
       j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection('pages_dev').updateOne({
+    let updateObj = {}
+    switch(req.body.type) {
+      case 'meta':
+        updateObj[`${req.body.key}`] = req.body.value
+        break;
+      case 'behavior':
+        updateObj[`behavior.${req.body.index}.${req.body.key}`] = req.body.value
+        break;
+    }
+    return lowcodeDb.collection(DB.dev.pageTable).updateOne({
       ulid: req.body.ulid
     }, {
-      $set: {[req.body.key]: req.body.value}
+      $set: updateObj,
+      // $set: {[req.body.key]: req.body.value}
     })
   }).then(() => {
     res.status(200).json({
@@ -202,7 +229,7 @@ router.route('/')
     if (rules.required(req.query.ulid)) {
       s(true)
     } else {
-      j()
+      j(100100)
     }
   }).then(() => {
     logger.info({method: 'delete', originalUrl: req.originalUrl, ulid: req.query.ulid})
@@ -311,8 +338,94 @@ router.route('/')
       data: {}
     })
   })
+})
 
-
+router.route('/behavior')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.post(cors.corsWithOptions, (req, res) => {
+  return new Promise((s, j) => {
+    if (req.body.ulid && req.body.behavior) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.pageTable).updateOne({
+      ulid: req.body.ulid,
+    }, {
+      $push: {
+        behavior: req.body.behavior
+      }
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  let index
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) && rules.required(req.query.index)) {
+      index = Number(req.query.index)
+      if (rules.isNumber(index) && index > -1) {
+        s(true)
+      } else {
+        j(100100)
+      }
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.pageTable).bulkWrite([
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $unset: {[`behavior.${req.query.index}`]: null},
+          }
+        }
+      },
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $pull: {behavior: null}
+          }
+        }
+      }
+    ]).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    return res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    return res.status(200).json({
+      code,
+      message: errorCode[code],
+      data: {}
+    })
+  })
 })
 
 module.exports = router;

@@ -9,6 +9,9 @@ type O = object
 interface Oa {
     [k: S]: A
 }
+interface Os {
+    [k: S]: S
+}
 type ValueType = 'string' | 'number' | 'switch'
 interface SelectOptionsItem {
     label: S
@@ -24,7 +27,7 @@ interface Options<T, G> {
 type ReqMethod = "get" | "post" | "put" | "delete"
 export type {
     S, N, A, B, ULID, 
-    F, Oa, O, D,
+    F, Oa, Os, O, D,
     ValueType,
     SelectOptionsItem,
     ENV,

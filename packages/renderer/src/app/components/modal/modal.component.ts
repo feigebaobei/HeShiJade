@@ -66,25 +66,6 @@ export class ModalComponent implements OnInit, OnDestroy{
     // const results = this.modalService.open({
     this.mc = this.modalService.open({
       ...this.config,
-      // dialogtype: 'standard',
-      // buttons: [
-      //   {
-      //     cssClass: 'primary',
-      //     text: 'Ok',
-      //     disabled: false,
-      //     handler: ($event: Event) => {
-      //       results.modalInstance.hide();
-      //     },
-      //   },
-      //   {
-      //     id: 'btn-cancel',
-      //     cssClass: 'common',
-      //     text: 'Cancel',
-      //     handler: ($event: Event) => {
-      //       results.modalInstance.hide();
-      //     },
-      //   },
-      // ],
     });
   }
   setProps(o: O) {
@@ -127,6 +108,9 @@ export class ModalComponent implements OnInit, OnDestroy{
       this.childrenFooter = curNode.children['footer']?.toArray() || []
     }
     pool.register(this.data.ulid, this, this.data.behavior)
+  }
+  ngAfterViewInit() {
+    pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)

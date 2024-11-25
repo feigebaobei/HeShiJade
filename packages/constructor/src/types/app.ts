@@ -7,6 +7,7 @@ interface App {
   theme: S
   // members: S[]
   version: N
+  layout: N
   owner: S
   collaborator: S[]
   // child: S

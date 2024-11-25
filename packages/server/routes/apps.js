@@ -107,6 +107,7 @@ router.route('/')
               ulid: req.body.ulid,
               theme: req.body.theme,
               version: req.body.version || 0,
+              layout: req.body.layout || 1,
               owner: user.ulid,
               collaborator: req.body.collaborator, // ulid[]
               firstPageUlid: '',

@@ -66,7 +66,23 @@ let ssoClientConfig = {
     },
 }
 let debounceTime = 400
-
+let layoutOptions = [
+    {
+      label: '川布局',
+      value: 1,
+      disabled: false,
+    },
+    // {
+    //   label: '三布局',
+    //   value: 11,
+    //   disabled: true,
+    // },
+    {
+      label: '井布局',
+      value: 21,
+      disabled: false,
+    },
+  ]
 export {
     ssoUrl,
     serviceUrl,
@@ -76,4 +92,5 @@ export {
     // ssoClientParams,
     ssoClientConfig,
     debounceTime,
+    layoutOptions,
 }

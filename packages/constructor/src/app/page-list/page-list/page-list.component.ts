@@ -145,8 +145,8 @@ export class PageListComponent implements OnInit {
   okSpanClickH() {
     this.pageList[this.editIndex].name = this.pageNameEdit
     let ulid = this.pageList[this.editIndex].ulid
-    this.pageService.update(ulid, 'name', this.pageNameEdit)
-    this.pageService.reqUpdate(ulid, 'name', this.pageNameEdit)
+    this.pageService.updateStr(ulid, 'name', this.pageNameEdit)
+    this.pageService.reqUpdate(ulid, 'meta', 'name', this.pageNameEdit)
     this.editIndex = -1
   }
   iconEditClickH($event: Event, i: N) {

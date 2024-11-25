@@ -25,6 +25,8 @@ interface FormData {
   name: S
   members: S
   theme: S
+  layout: N
+  pluginsKey: S[]
 }
 
 let clog = console.log
@@ -111,11 +113,15 @@ export class ListComponent implements OnInit {
           disabled: false,
           handler: ($event: Event) => {
             let data: FormData = results.modalContentInstance.data
+            // let data: {app: App} = results.modalContentInstance.data
+            let layout: N = results.modalContentInstance.layout
+            let pluginsKey: S[] = results.modalContentInstance.value
             let members = data.members.split(',').map((item) => (item.trim())).filter((item) => !!item)
             members = [...new Set(members)]
+            // clog('data', data)
             this.userService.getUser().then(user => {
               let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email, 
-                undefined, [])
+                undefined, layout, pluginsKey)
               // 操作本组件的数据
               this.appList.push(appObj)
               // 操作service中的数据
@@ -174,7 +180,11 @@ export class ListComponent implements OnInit {
           text: '确定',
           disabled: false,
           handler: ($event: Event) => {
-            this.appService.updatePluginKey(app.ulid, {pluginsKey: results.modalContentInstance.value || []}).then(() => {
+            let data: {app: App} = results.modalContentInstance.data
+            this.appService.updateApp(app.ulid, {
+              pluginsKey: data.app.pluginsKey, // results.modalContentInstance.value || [],
+              layout: data.app.layout,
+            }).then(() => {
               results.modalInstance.hide()
             })
           }

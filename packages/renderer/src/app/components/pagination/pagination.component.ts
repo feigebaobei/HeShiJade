@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { pool } from 'src/helper/pool';
-import * as utils from 'src/helper/utils'
+// import { trigger } from 'src/helper/utils'
 // type
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
@@ -26,7 +26,8 @@ interface PaginationData {
   styleUrl: './pagination.component.sass'
 })
 export class PaginationComponent implements OnInit {
-  @Input() data!: PaginationData
+  // @Input() data!: PaginationData
+  @Input() data!: componentInstanceData
   pageSizeOptions: N[]
   getData: () => Oa
   constructor() {
@@ -36,24 +37,26 @@ export class PaginationComponent implements OnInit {
     }
   }
   pageIndexChangeH(n: N) {
-    clog('pageIndexChangeH', n)
-    let fnArr = pool.getEventArray(this.data.ulid, 'pageIndexChange')
-    fnArr.forEach(f => {
-      f.bind(this) // 方法体的this
-      f && f(
-        // pool.getComponentInstance.bind(pool),
-        utils,
-        pool.getPluginFn(), // 插件
-      ) // 绑定指定方法的this
-    })
+    // clog('pageIndexChangeH', n)
+    // let fnArr = pool.getEventArray(this.data.ulid, 'pageIndexChange')
+    // fnArr.forEach(f => {
+    //   f.bind(this) // 方法体的this
+    //   f && f(
+    //     // pool.getComponentInstance.bind(pool),
+    //     utils,
+    //     pool.getPluginFn(), // 插件
+    //   ) // 绑定指定方法的this
+    // })
+    pool.trigger(this.data.ulid, 'pageIndexChange', undefined, this)
   }
   pageSizeChangeH(n: N) {
-    clog('pageSizeChangeH', n)
-    let fnArr = pool.getEventArray(this.data.ulid, 'pageSizeChange')
-    fnArr.forEach(f => {
-      f.bind(this) // 方法体的this
-      f && f(utils, pool.getPluginFn()) // 绑定指定方法的this
-    })
+    // clog('pageSizeChangeH', n)
+    // let fnArr = pool.getEventArray(this.data.ulid, 'pageSizeChange')
+    // fnArr.forEach(f => {
+    //   f.bind(this) // 方法体的this
+    //   f && f(utils, pool.getPluginFn()) // 绑定指定方法的this
+    // })
+    pool.trigger(this.data.ulid, 'pageSizeChange', undefined, this)
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -63,6 +66,9 @@ export class PaginationComponent implements OnInit {
   ngOnInit() {
     this.pageSizeOptions = this.data.props['pageSizeOptions'].split(',').map((item: S) => Number(item))
     pool.register(this.data.ulid, this, this.data.behavior)
+  }
+  ngAfterViewInit() {
+    pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
     pool.unRegister(this.data.ulid)
