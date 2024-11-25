@@ -41,11 +41,11 @@
     <p>在组件的生命周期hooks、组件的事件上，支持搭建者写代码。</p>
     <p>页面和组件支持特定事件和生命周期事件。所有的事件方法都有三个参数，如下：</p>
     <pre>
-        // utils: { // 内置的工具集合
+        // utils: &#123; // 内置的工具集合
         //     req, // 请求方法
         //     pool, // 池子，里面有事件、组件、渲染记录等。
         //     PromiseControllable, // 可控制的promise的类
-        // }
+        // &#125;
         // plugins 用户指定的插件的集合
         // thirdParams 当前事件的入参。每个事件的入参不固定。详见各组件说明
         function (utils, plugins, thirdParams) &#123;...&#125;
