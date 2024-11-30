@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
-// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 import type { A, O, Oa, } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'

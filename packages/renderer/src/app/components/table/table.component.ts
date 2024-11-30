@@ -3,7 +3,6 @@ import { ComponentService } from 'src/app/service/component.service';
 import { DataService } from 'src/app/service/data.service';
 import { cdir, clog } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
-// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 // type
 import type { A, S, ULID, O, D, ReqMethod, B, Oa, } from 'src/types/base';
