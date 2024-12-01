@@ -76,6 +76,7 @@ let Form: BehaviorConfigGroup = [
     options: [
       {label: '提交', value: 'submit'},
       {label: '重置', value: 'reset'},
+      {label: '改变表单项的值', value: 'changeFormItemValue'},
       {label: '改变属性后', value: 'postComponentNgOnChanges'},
       {label: '初始化组件后', value: 'postComponentNgOnInit'},
       {label: '变更检测后', value: 'postComponentNgDoCheck'},
