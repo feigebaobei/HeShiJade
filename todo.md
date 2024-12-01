@@ -1,19 +1,15 @@
 ||||
 |-|-|-|
 |分支|f_life||
-|form组件支持表单项显隐逻辑|done||
-||增加updateVisible方法|done|
-||增加changeFormItemValue事件|done|
-|web-site 10个组件支持的生命周期方法|done||
-|web-site 增加updateVisible方法|done||
-|web-site 增加changeFormItemValue事件|done||
-|排版组件|||
-|优化formitem为switch时的配置项|||
+|优化formitem为switch时的配置项|doing||
+|删除配置项的show字段|todo||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
 ||docs:生命周期时序图||
 ||feat:10个组件支持全量生命周期事件||
+||feat:form支持控制表单项的显隐方法（updateVisible）、当表单项的值改变时触发的事件（changeFormItemValue）||
 
+|排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
 |丰富配置面板的setter|||
 |全部组件支持生命周期方法|||

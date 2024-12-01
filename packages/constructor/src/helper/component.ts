@@ -31,7 +31,12 @@ import type { PropsConfigItem, BehaviorConfigGroup } from 'src/types/config'
 let opProps = (pci: PropsConfigItem) => {
     let o: PropsMeta = {}
     Object.entries(pci).forEach(([k, v]) => {
-        o[k] = v.value
+        if ('value' in v) {
+            o[k] = v.value
+        }
+        if ('checked' in v) {
+            o[k] = v.checked
+        }
     })
     return o
 }

@@ -347,7 +347,7 @@ export class ComponentService {
     })
   }
   // todo 可优化key的类型
-  setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options', value: A) {
+  setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value

@@ -66,7 +66,7 @@ export class ItemComponent implements OnInit
     // this.hideListener(this.groupItem.key)
   }
   switchChangeH (v: B) {
-    this.switchChange.emit({key: this.groupItem.key, value: v})
+    this.switchChange.emit({key: this.groupItem.key, checked: v})
     // this.hideListener(this.groupItem.key)
   }
   optionsChangeH (v: Options<S, S>[]) {

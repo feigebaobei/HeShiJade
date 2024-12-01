@@ -10,17 +10,17 @@ import type { S, B } from 'src/types/base';
 })
 export class SwitchComponent implements OnInit {
   @Input() label: S = ''
-  @Input() value: B = false
+  @Input() checked: B = false
   @Output() changeValue = new EventEmitter()
-  _label: S = ''
-  _value: B = false
+  // _label: S = ''
+  // _value: B = false
   constructor() {
   }
   ngOnInit() {
-    this._label = this.label
-    this._value = this.value
+    // this._label = this.label
+    // this._value = this.checked
   }
   changeH() {
-    this.changeValue.emit(this._value)
+    this.changeValue.emit(this.checked)
   }
 }

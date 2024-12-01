@@ -43,6 +43,39 @@ let Form: ConfigItem[] = [
         key: 'value',
         value: '',
         // show: true,
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'category')
+            let r = false
+            if (o && 'value' in o) {
+                r = o.value === 'switch'
+            } else {
+                r = true
+            }
+            return r
+        },
+        hideListenerKey: 'category',
+    },
+    {
+        label: 'checked',
+        category: 'switch',
+        key: 'checked',
+        checked: false,
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        // show: true,
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'category')
+            let r = false
+            if (o && 'value' in o) {
+                r = o.value !== 'switch'
+            } else {
+                r = true
+            }
+            return r
+        },
+        hideListenerKey: 'category',
     },
     {
         label: '',
@@ -54,7 +87,7 @@ let Form: ConfigItem[] = [
             let o = p.find(item => item.key === 'category')
             // clog('o', o)
             let r = false
-            if (o) { // 存在且不为select，则隐藏
+            if (o && 'value' in o) { // 存在且不为select，则隐藏
                 r = o.value !== 'select'
             } else { // 不存在，则隐藏
                 r = true
@@ -72,7 +105,8 @@ let Form: ConfigItem[] = [
             {label: 'true', value: true},
         ],
         key: 'required',
-        value: false,
+        // value: false,
+        checked: false,
     },
     {
         label: '显示帮助',
@@ -82,7 +116,8 @@ let Form: ConfigItem[] = [
             {label: 'true', value: true},
         ],
         key: 'hasHelp',
-        value: false,
+        // value: false,
+        checked: false,
     },
     {
         label: '帮助文本',
@@ -92,7 +127,12 @@ let Form: ConfigItem[] = [
         hide: function (p: ConfigItem[]) { // 是否隐藏
             let o = p.find(item => item.key === 'hasHelp')
             // clog('hide', o)
-            return !o!.value
+            // return !o!.value
+            if (o && 'checked' in o) {
+                return !o.checked
+            } else {
+                return true
+            }
         },
         hideListenerKey: 'hasHelp',
     },
@@ -110,7 +150,8 @@ let Form: ConfigItem[] = [
             {label: 'true', value: true},
         ],
         key: 'visible',
-        value: true,
+        // value: true,
+        checked: false,
     },
 ]
 let FormItemCategory = [
@@ -181,7 +222,8 @@ let Table: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'filterable',
-        value: false,
+        // value: false,
+        checked: false,
     },
     {
         label: '过滤时是否多选',
@@ -191,10 +233,16 @@ let Table: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'filterMultiple',
-        value: false,
+        // value: false,
+        checked: false,
         hide: function (p: ConfigItem[]) { // 是否隐藏
             let o = p.find(item => item.key === 'filterable')
-            return !o!.value
+            // return !o!.value
+            if (o && 'checked' in o) {
+                return !o.checked
+            } else {
+                return true
+            }
         },
         hideListenerKey: 'filterable',
     },
@@ -206,7 +254,8 @@ let Table: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'closeFilterWhenScroll',
-        value: false,
+        // value: false,
+        checked: false,
     },
     {
         label: '是否可排序',
@@ -216,7 +265,8 @@ let Table: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'sortable',
-        value: false,
+        // value: false,
+        checked: false,
     },
     {
         label: '该列固定到左侧的距离',
@@ -264,7 +314,8 @@ let Tabs: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'disabled',
-        value: false,
+        // value: false,
+        checked: false,
     },
 ]
 let all: {[k: S]: ConfigItem[]} = {

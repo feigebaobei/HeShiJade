@@ -1,19 +1,8 @@
-<!-- 
-<d-form-item>
-    <d-form-label>{{_label}}</d-form-label>
-    <d-form-control>
-        <d-toggle
-          [checked]="true"
-          [(ngModel)]="_value"
-          (ngModelChange)="changeH()"
-        ></d-toggle>
-    </d-form-control>
-</d-form-item> -->
 <div class="switch_box">
-  <span>{{_label}}</span>
+  <span>{{label}}</span>
   <div class="toggle_box">
       <d-toggle
-      [(ngModel)]="_value"
+      [(ngModel)]="checked"
       (ngModelChange)="changeH()"
       class="toggle"
       ></d-toggle>

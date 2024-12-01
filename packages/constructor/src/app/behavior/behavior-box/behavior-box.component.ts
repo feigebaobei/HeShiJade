@@ -96,7 +96,7 @@ export class BehaviorBoxComponent {
     }
   }
   curComponentChange() {
-    clog('this.curComp', this.curComp)
+    // clog('this.curComp', this.curComp)
     // return 
     this.componentBehaviorList = []
     switch (this.curComp?.type) {

@@ -46,7 +46,9 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       // this.componentService.reqChangeItems(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
-      item.value = p.value
+      if ('value' in item) {
+        item.value = p.value
+      }
       this.listenerChange(p.key, this.itemList)
     }, debounceTime)
     this.selectChangeH = createDebounceFn((p: {
@@ -56,17 +58,21 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
-      item.value = p.value
+      if ('value' in item) {
+        item.value = p.value
+      }
       this.listenerChange(p.key, this.itemList)
     }, debounceTime)
     this.switchChangeH = createDebounceFn((p: {
-      key: 'value'
-      value: B
+      key: 'checked'
+      checked: B
     }, subIndex: N) => {
-      this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
-      this.reqChangeItems(this.index, p.key, p.value)
+      this.componentService.setItemsOfCurComponent(this.index, p.key, p.checked)
+      this.reqChangeItems(this.index, p.key, p.checked)
       let item = this.itemList[subIndex]
-      item.value = p.value
+      if ('checked' in item) {
+        item.checked = p.checked
+      }
       this.listenerChange(p.key, this.itemList)
     }, debounceTime)
     this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {

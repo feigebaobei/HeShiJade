@@ -30,6 +30,10 @@
             name="value"
             [ngModel]="ele.value"
           ></d-select>
+          <!-- <div *ngIf="ele.category === 'switch'">
+            ele.category: {{ele.category}}
+            ele.checked: {{ele.checked}}
+          </div> -->
           <d-toggle
             *ngIf="ele.category === 'switch'"
             [checked]="ele.checked"

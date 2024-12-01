@@ -47,6 +47,7 @@ type ItemsMetaItem = { // 这是为form开发的。
   label: S
   key: S
   value: A
+  checked: B
   options?: Options<S, S>[]
   child?: ULID // 这是为table而增强的。
 }
