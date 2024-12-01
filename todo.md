@@ -5,7 +5,7 @@
 ||增加updateVisible方法|done|
 ||增加changeFormItemValue事件|done|
 |web-site 10个组件支持的生命周期方法|done||
-|web-site 增加updateVisible方法|doing||
+|web-site 增加updateVisible方法|done||
 |web-site 增加changeFormItemValue事件|done||
 |排版组件|||
 |优化formitem为switch时的配置项|||
