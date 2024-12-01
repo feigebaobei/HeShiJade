@@ -73,6 +73,9 @@ export class ModalComponent implements OnInit, OnDestroy{
       this.config[k] = v
     })
   }
+  ngOnChanges() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+  }
   ngOnInit(): void {
     // this.config.title = this.data.props['title']
     this.config.width = this.data.props['width']
@@ -101,11 +104,17 @@ export class ModalComponent implements OnInit, OnDestroy{
       this.childrenFooter = curNode.children['footer']?.toArray() || []
     }
     pool.register(this.data.ulid, this, this.data.behavior)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+  }
+  ngDoCheck() {
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
   }
   ngAfterViewInit() {
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
     pool.unRegister(this.data.ulid)
   }
 }

@@ -7,12 +7,6 @@ import type { Component as Comp, componentInstanceData } from 'src/types/compone
 
 let clog = console.log
 
-// interface ButtonDataInterface {
-//   props: Comp['props']
-//   behavior: Comp['behavior']
-//   slots: Comp['slots']
-//   ulid: Comp['ulid']
-// }
 
 @Component({
   selector: 'app-button',
@@ -24,13 +18,6 @@ export class ButtonComponent implements OnInit, OnDestroy {
   constructor() {
   }
   buttonClickH() {
-    // let fnArr = pool.getEventArray(this.data.ulid, 'click')
-    // fnArr.forEach(f => {
-    //   f.bind(this) // 方法体的this
-    //   f && f(pool.getComponentInstance.bind(pool),  // 绑定指定方法的this
-    //     pool.getPluginFn(), // 插件
-    //   )
-    // })
     pool.trigger(this.data.ulid, 'click', undefined, this)
   }
   setProps(o: O) {
@@ -38,13 +25,22 @@ export class ButtonComponent implements OnInit, OnDestroy {
       this.data.props[k] = v
     })
   }
+  ngOnChanges() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+  }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+  }
+  ngDoCheck() {
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
   }
   ngAfterViewInit() {
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
     pool.unRegister(this.data.ulid)
   }
 }

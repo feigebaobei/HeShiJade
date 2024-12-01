@@ -45,31 +45,26 @@ export class FormComponent implements OnInit, OnDestroy {
     this.data.items.forEach((item: A) => {
       data[item.key] = item.value
     })
-    // 触发submit事件
-    // let fnArr = pool.getEventArray(this.data.ulid, 'submit')
-    // fnArr.forEach(f => {
-    //   f.bind(this) // 方法体的this
-    //   f && f(
-    //     utils,
-    //     pool.getPluginFn(), // 插件
-    //     // res
-    //   )
-    // })
     pool.trigger(this.data.ulid, 'submit', undefined, this)
+  }
+  ngOnChanges() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
   }
   ngOnInit() {
     this.props = this.data.props
     this.items = this.data.items
     pool.register(this.data.ulid, this, this.data.behavior)
-    // 触发postRenderer事件
-    // pool.trigger(this.data.ulid, 'postComponentRender', undefined, this)
-    // utils.
-    pool.trigger(this.data.ulid, 'postComponentRender', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+  }
+  ngDoCheck() {
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
   }
   ngAfterViewInit() {
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
     pool.unRegister(this.data.ulid)
   }
 }

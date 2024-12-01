@@ -74,7 +74,12 @@ export class TabsComponent implements OnInit, OnDestroy {
       this.data.props[k] = v
     })
   }
+  ngOnChanges() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+  }
   ngOnInit() {
+    pool.register(this.data.ulid, this, this.data.behavior)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
     new Promise((s, _j) => {
       s(true)
     }).then(() => {
@@ -94,9 +99,16 @@ export class TabsComponent implements OnInit, OnDestroy {
         this.show = true
       })
     })
-    pool.register(this.data.ulid, this, this.data.behavior)
+  }
+  ngDoCheck() {
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+  }
+  ngAfterViewInit() {
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
     pool.unRegister(this.data.ulid)
   }
 }
