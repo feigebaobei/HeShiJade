@@ -102,6 +102,16 @@ let Form: ConfigItem[] = [
         key: 'extraInfo',
         value: '',
     },
+    {
+        label: '渲染',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        key: 'visible',
+        value: true,
+    },
 ]
 let FormItemCategory = [
     { label: 'input', value: 'input', },
