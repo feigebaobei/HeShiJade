@@ -8,7 +8,7 @@
     <!-- todo 考虑使用动态组件。不喜欢使用div包裹。-->
     <!-- 不需要双向绑定表单项的值 -->
     <div *ngFor="let ele of items">
-      <d-form-item>
+      <d-form-item *ngIf="ele.visible">
         <d-form-label
           [required]="true"
           [hasHelp]="ele.hasHelp"
@@ -25,6 +25,7 @@
               autocomplete="off"
               [(ngModel)]="ele.value"
               [dValidateRules]="rules"
+              (ngModelChange)="inputNgModelChangeH($event, ele.key)"
             />
             <d-select
               *ngIf="ele.category === 'select'"
@@ -34,10 +35,13 @@
               [name]="ele.key"
               [(ngModel)]="ele.value"
               [dValidateRules]="rules"
+              [appendToBody]="true"
+              (ngModelChange)="selectNgModelChangeH($event, ele.key)"
               ></d-select>
             <d-toggle
               *ngIf="ele.category === 'switch'"
               [checked]="ele.checked"
+              (change)="toggleChangeH($event, ele.key)"
             ></d-toggle>
           </div>
         </d-form-control>

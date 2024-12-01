@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import { pool } from 'src/helper/pool';
-import type { A, O, Oa, } from 'src/types/base';
+import type { A, O, Oa, S, B, } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'
 // import {trigger} from 'src/helper/utils'
 
@@ -20,7 +20,7 @@ export class FormComponent implements OnInit, OnDestroy {
   getData: () => Oa
   constructor(private dataService: DataService) {
     this.props = {} // this.data.props
-    this.items = {} // this.data.items
+    this.items = [] // this.data.items
     this.rules = {
       validators: [
         { required: true },
@@ -39,6 +39,30 @@ export class FormComponent implements OnInit, OnDestroy {
     Object.entries(o).forEach(([k, v]) => {
       this.data.props[k] = v
     })
+  }
+  updateVisible(o: O) {
+    Object.entries(o).forEach(([k, v]) => {
+      this.items.forEach((item: A) => {
+        if (item.key === k) {
+          item.visible = v
+        }
+      })
+    })
+  }
+  inputNgModelChangeH(v: S, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+      key: k, value: v,
+    }, this)
+  }
+  selectNgModelChangeH(v: S, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+      key: k, value: v
+    }, this)
+  }
+  toggleChangeH(v: B, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+      key: k, value: v
+    }, this)
   }
   submitClickH() {
     let data: A = {}

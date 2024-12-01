@@ -1,12 +1,11 @@
 ||||
 |-|-|-|
 |分支|f_life||
-|7个组件生命周期事件|||
-|3个组件支持全量的生命周期事件|||
-||搭建侧|done|
-||渲染侧||
-|form组件支持表单项显隐逻辑|||
+|10个组件生命周期事件|done||
+|form组件支持表单项显隐逻辑|done||
+||增加updateVisible方法|todo|
 |排版组件|||
+|优化formitem为switch时的配置项|||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
 ||docs:生命周期时序图||
@@ -364,7 +363,7 @@ utils.req({
   table.setDataSource(res.data.data)
 }).catch()
 
-let modal = utils.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
+let modal = utils.pool.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
 modal.openDialog()
 
 you must update your .npmrc
@@ -373,3 +372,11 @@ or
 pnpm publish.
 有人说是npm的bug
 
+if (thirdParams.key === 'org') {
+  let form = utils.pool.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+  if (thirdParams.value === 'two') {
+    form.updateVisible({interest: false})
+  } else {
+    form.updateVisible({interest: true})
+  }
+}
