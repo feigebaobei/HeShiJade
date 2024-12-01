@@ -67,6 +67,17 @@ export class PropsBoxComponent {
   }
   ngOnInit() {
   }
+  opComponentPropsList(meta: PropsConfigItem) {
+    Object.values(meta).forEach(item => {
+      if ('value' in item) {
+        item.value = this.curComp?.props[item.key]
+      }
+      if ('checked' in item) {
+        item.checked = this.curComp?.props[item.key]
+      }
+      this.componentPropsList.push(item)
+    })
+  }
   componentSelectedChange() {
     // 先清空
     this.componentPropsList = []
@@ -76,28 +87,20 @@ export class PropsBoxComponent {
     // todo 优化为从配置文件中取出可配置项
     switch(this.curComp?.type) {
       case 'Button':
-        // Object.entries(this.curComp.props).forEach(([key, value]) => {
-        //   let o: ConfigItem = JSON.parse(JSON.stringify(buttonPropsMeta[key]))
-        //   o.key = key
-        //   o.value = value
-        //   this.componentPropsList.push(o)
+        // Object.values(buttonPropsMeta).forEach(item => {
+        //   if ('value' in item) {
+        //     item.value = this.curComp?.props[item.key]
+        //   }
+        //   this.componentPropsList.push(item)
         // })
-        Object.values(buttonPropsMeta).forEach(item => {
-          item.value = this.curComp?.props[item.key]
-          this.componentPropsList.push(item)
-        })
+        this.opComponentPropsList(buttonPropsMeta)
         break
       case 'Input':
-        // Object.entries(this.curComp.props).forEach(([key, value]) => {
-        //   let o: ConfigItem = JSON.parse(JSON.stringify(inputPropsMeta[key]))
-        //   o.key = key
-        //   o.value = value
-        //   this.componentPropsList.push(o)
+        // Object.values(inputPropsMeta).forEach(item => {
+        //   item.value = this.curComp?.props[item.key]
+        //   this.componentPropsList.push(item)
         // })
-        Object.values(inputPropsMeta).forEach(item => {
-          item.value = this.curComp?.props[item.key]
-          this.componentPropsList.push(item)
-        })
+        this.opComponentPropsList(inputPropsMeta)
         break
       case 'Select':
         // 读取数据结构
@@ -105,22 +108,18 @@ export class PropsBoxComponent {
         // 为数据结构赋值
         // push到数组中
         // 以props配置文件决定显示多少
-        Object.values(selectPropsMeta).forEach((item: ConfigItem) => {
-          item.value = this.curComp!.props[item.key] // value
-          this.componentPropsList.push(item)
-        })
+        // Object.values(selectPropsMeta).forEach((item: ConfigItem) => {
+        //   item.value = this.curComp!.props[item.key] // value
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(selectPropsMeta)
         break
       case 'Modal':
-        // Object.entries(this.curComp.props).forEach(([key, value]) => {
-        //   let o: ConfigItem = JSON.parse(JSON.stringify(modalPropsMeta[key]))
-        //   o.key = key
-        //   o.value = value
-        //   this.componentPropsList.push(o)
+        // Object.values(modalPropsMeta).forEach(item => {
+        //   item.value = this.curComp?.props[item.key]
+        //   this.componentPropsList.push(item)
         // })
-        Object.values(modalPropsMeta).forEach(item => {
-          item.value = this.curComp?.props[item.key]
-          this.componentPropsList.push(item)
-        })
+        this.opComponentPropsList(modalPropsMeta)
         break
       // case 'Table':
       //   break
@@ -131,44 +130,50 @@ export class PropsBoxComponent {
         //   o.value = value
         //   this.componentPropsList.push(o)
         // })
-        Object.values(formPropsMeta).forEach(item => {
-          item.value = this.curComp?.props[item.key]
-          this.componentPropsList.push(item)
-        })
+        // Object.values(formPropsMeta).forEach(item => {
+        //   item.value = this.curComp?.props[item.key]
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(formPropsMeta)
         break
       case 'Table':
         // todo把其他组件也改为从配置文件中取配置项。
         // todo配置文件改为数组
-        Object.values(tablePropsMeta).forEach((item: ConfigItem) => {
-          item.value = this.curComp!.props[item.key] // value
-          this.componentPropsList.push(item)
-        })
+        // Object.values(tablePropsMeta).forEach((item: ConfigItem) => {
+        //   item.value = this.curComp!.props[item.key] // value
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(tablePropsMeta)
         break;
       case 'Icon':
         // todo把其他组件也改为从配置文件中取配置项。
         // todo配置文件改为数组
-        Object.values(iconPropsMeta).forEach((item: ConfigItem) => {
-          item.value = this.curComp!.props[item.key] // value
-          this.componentPropsList.push(item)
-        })
+        // Object.values(iconPropsMeta).forEach((item: ConfigItem) => {
+        //   item.value = this.curComp!.props[item.key] // value
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(iconPropsMeta)
         break;
       case 'Checkbox':
-        Object.values(CheckPropsMeta).forEach((item: ConfigItem) => {
-          item.value = this.curComp!.props[item.key] // value
-          this.componentPropsList.push(item)
-        })
+        // Object.values(CheckPropsMeta).forEach((item: ConfigItem) => {
+        //   item.value = this.curComp!.props[item.key] // value
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(CheckPropsMeta)
         break;
       case 'Tabs':
-        Object.values(TabsPropsMeta).forEach((item: ConfigItem) => {
-          item.value = this.curComp!.props[item.key] // value
-          this.componentPropsList.push(item)
-        })
+        // Object.values(TabsPropsMeta).forEach((item: ConfigItem) => {
+        //   item.value = this.curComp!.props[item.key] // value
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(TabsPropsMeta)
         break;
       case 'Pagination':
-        Object.values(PaginationPropsMeta).forEach((item: ConfigItem) => {
-          item.value = this.curComp!.props[item.key] // value
-          this.componentPropsList.push(item)
-        })
+        // Object.values(PaginationPropsMeta).forEach((item: ConfigItem) => {
+        //   item.value = this.curComp!.props[item.key] // value
+        //   this.componentPropsList.push(item)
+        // })
+        this.opComponentPropsList(PaginationPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}
@@ -222,12 +227,25 @@ export class PropsBoxComponent {
   itemChangeH(p: A) {
     this.componentPropsList.forEach(item => {
       if (item.key === p.key) {
-        item.value = p.value
+        if ('value' in item) {
+          item.value = p.value
+        }
+        if ('cheched' in item) {
+          item.cheched = p.cheched
+        }
       }
     })
     let propsObj: Comp['props'] = {}
     this.componentPropsList.forEach(item => {
-      propsObj[item.key] = item.value
+      // propsObj[item.key] = item.value
+      switch (item.category) {
+        default:
+          propsObj[item.key] = item.value
+          break;
+        case 'switch':
+          propsObj[item.key] = item.checked
+          break;
+      }
     })
     this.listenerChange(p.key, propsObj)
   }
