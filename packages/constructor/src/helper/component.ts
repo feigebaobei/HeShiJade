@@ -3,9 +3,9 @@
 // props文件     定义结构
 // 这是所有组件的默认配置数据
 import { Button as ButtonProps,
+    Modal as ModalProps,
     Input as InputProps,
     Select as SelectProps,
-    Modal as ModalProps,
     Form as FormProps,
     Table as TableProps,
     Icon as IconProps,
@@ -147,8 +147,8 @@ let Pagination: ComponentDefaultConfig = {
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
-    Input,
     Modal,
+    Input,
     Select,
     Form,
     Table,
