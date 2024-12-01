@@ -33,6 +33,9 @@ const routes: Routes = [
   { path: 'api', 
     loadComponent: () => import('./api/api.component').then(m => m.ApiComponent)
   },
+  { path: 'life-circle', 
+    loadComponent: () => import('./life-circle/life-circle.component').then(m => m.LifeCircleComponent)
+  },
   { path: 'plugins', 
     loadComponent: () => import('./plugins/plugins.component').then(m => m.PluginsComponent)
   },
