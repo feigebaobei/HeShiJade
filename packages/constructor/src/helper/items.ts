@@ -21,7 +21,6 @@ let Form: ConfigItem[] = [
         ],
         key: 'category',
         value: 'input',
-        // show: true,
     },
     {
         label: 'key',      // 在配置面板中的显示的文本
@@ -35,14 +34,12 @@ let Form: ConfigItem[] = [
         category: 'input',
         key: 'label',
         value: '',
-        // show: true,
     },
     {
         label: 'value',
         category: 'input',
         key: 'value',
         value: '',
-        // show: true,
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             let r = false
@@ -64,7 +61,6 @@ let Form: ConfigItem[] = [
             {label: 'false', value: false},
             {label: 'true', value: true},
         ],
-        // show: true,
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             let r = false
@@ -95,7 +91,6 @@ let Form: ConfigItem[] = [
             return r
         },
         hideListenerKey: 'category',
-        // show: true,
     },
     {
         label: '必填',
@@ -169,7 +164,6 @@ let Table: ConfigItem[] = [
         ],
         key: 'category',
         value: 'fill',
-        // show: true,
     },
     {
         label: 'field',
@@ -183,7 +177,6 @@ let Table: ConfigItem[] = [
         category: 'input',
         key: 'header',
         value: '',
-        // show: true,
     },
     // {
     //     label: '列宽度是否可调整',
@@ -206,7 +199,6 @@ let Table: ConfigItem[] = [
         category: 'input',
         key: 'width',
         value: '150px',
-        // show: true,
     },
     {
         label: '最小宽度',

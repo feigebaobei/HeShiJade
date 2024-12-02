@@ -2,6 +2,9 @@
 |-|-|-|
 |分支|f_life||
 |优化formitem为switch时的配置项|doing||
+||切换category时value应该不显示|done|切换时未触发方法
+||切换category时cheched应该显示|done|
+||多次触发绑定监听事件|doing|
 |删除配置项的show字段|todo||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
