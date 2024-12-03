@@ -27,7 +27,6 @@ let Form: ConfigItem[] = [
         category: 'input', // 在配置面板中显示的种类
         key: 'key',        // 配置组中项的key
         value: '',      // 在配置面板中设置的值
-        // show: true,
     },
     {
         label: 'label',
@@ -170,7 +169,6 @@ let Table: ConfigItem[] = [
         category: 'input',
         key: 'field',
         value: '', // 配置项的默认值
-        // show: true,
     },
     {
         label: 'header',
@@ -277,7 +275,6 @@ let Table: ConfigItem[] = [
         category: 'input',
         key: 'childUlid',
         value: '',
-        // show: false,
         // hide: () => true,
         hideConfig: true,
     },

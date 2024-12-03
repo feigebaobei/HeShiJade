@@ -32,7 +32,6 @@ interface ConfigItemInput {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
-  // show: B
   hideConfig?: B
   placeholder?: S
 }
@@ -46,7 +45,6 @@ interface ConfigItemTextarea {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
-  // show: B
 }
 interface ConfigItemSelect<T> {
   category: 'select'
@@ -66,7 +64,6 @@ interface ConfigItemSelect<T> {
   hideListenerKey?: S
   hideCalc?: B
   allowClear?: B
-  // show: B
 }
 interface ConfigItemNumber {
   category: 'number'
@@ -78,7 +75,6 @@ interface ConfigItemNumber {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
-  // show: B
 }
 interface ConfigItemSwitch {
   category: 'switch'
@@ -90,7 +86,6 @@ interface ConfigItemSwitch {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
-  // show: B
 }
 interface ConfigItmeOption {
   category: 'options'
@@ -101,7 +96,6 @@ interface ConfigItmeOption {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
-  // show: B
 }
 // type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput

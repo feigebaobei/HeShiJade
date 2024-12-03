@@ -1,11 +1,13 @@
 ||||
 |-|-|-|
 |分支|f_life||
-|优化formitem为switch时的配置项|doing||
+|优化formitem为switch时的配置项|done||
 ||切换category时value应该不显示|done|切换时未触发方法
 ||切换category时cheched应该显示|done|
 ||多次触发绑定监听事件|done|不存在|
-|删除配置项的show字段|todo||
+|删除配置项的show字段|done||
+|渲染侧不显示表单项了|todo||
+|增加item，少了key|todo||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
 ||perf:支持多个配置项监听同一个配置项变化||
