@@ -82,7 +82,6 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.initCalc()
-    // clog('this.itemList', this.itemList)
   }
   ngOnDestroy() {
     // this.compHost.viewContainerRef.clear();

@@ -4,10 +4,11 @@
 |优化formitem为switch时的配置项|doing||
 ||切换category时value应该不显示|done|切换时未触发方法
 ||切换category时cheched应该显示|done|
-||多次触发绑定监听事件|doing|
+||多次触发绑定监听事件|done|不存在|
 |删除配置项的show字段|todo||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
+||perf:支持多个配置项监听同一个配置项变化||
 ||docs:生命周期时序图||
 ||feat:10个组件支持全量生命周期事件||
 ||feat:form支持控制表单项的显隐方法（updateVisible）、当表单项的值改变时触发的事件（changeFormItemValue）||
