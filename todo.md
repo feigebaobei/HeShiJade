@@ -7,8 +7,8 @@
 ||多次触发绑定监听事件|done|不存在|
 |删除配置项的show字段|done||
 |渲染侧不显示表单项了|todo||
-|增加item，少了key|doing||
-|web-site更新ItemsMetaItem|||
+|增加item，少了key|done||
+|web-site更新ItemsMetaItem|done||
 |items的字段不全|||
 |创建button时items的值应该初始化全|||
 |要上生产的内容|||
