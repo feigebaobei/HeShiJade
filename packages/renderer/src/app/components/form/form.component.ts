@@ -17,16 +17,25 @@ export class FormComponent implements OnInit, OnDestroy {
   props: A
   items: A
   rules: A
+  emptyRules: A
   getData: () => Oa
   constructor(private dataService: DataService) {
     this.props = {} // this.data.props
     this.items = [] // this.data.items
+    // this.rules = {}
     this.rules = {
       validators: [
-        { required: true },
+        {
+          required: true,
+          message: '请输入',
+        },
       ],
-      message: 'Enter a'
+      // message: 'Enter a'
     }
+    this.emptyRules = {
+      validators: [],
+    }
+    // todo 移到原型对象上
     this.getData = () => {
       let r: Oa = {}
       this.items.forEach((item: A) => {

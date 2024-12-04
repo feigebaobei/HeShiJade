@@ -10,7 +10,7 @@
     <div *ngFor="let ele of items">
       <d-form-item *ngIf="ele.visible">
         <d-form-label
-          [required]="true"
+          [required]="ele.required"
           [hasHelp]="ele.hasHelp"
           [helpTips]="ele.helpTips"
         >{{ele.label}}</d-form-label>
@@ -18,15 +18,16 @@
           [extraInfo]="ele.extraInfo"
         >
         <div>
+          <!-- {{(ele.required)}} -->
             <input
               *ngIf="ele.category === 'input'"
               dTextInput
               [name]="ele.key"
               autocomplete="off"
               [(ngModel)]="ele.value"
-              [dValidateRules]="rules"
+              [dValidateRules]="ele.required ? rules : emptyRules"
               (ngModelChange)="inputNgModelChangeH($event, ele.key)"
-            />
+              />
             <d-select
               *ngIf="ele.category === 'select'"
               [options]="ele.options" 
@@ -34,7 +35,8 @@
               [valueKey]="'value'"
               [name]="ele.key"
               [(ngModel)]="ele.value"
-              [dValidateRules]="rules"
+              [dValidateRules]="ele.required ? rules : emptyRules"
+              [allowClear]="true"
               [appendToBody]="true"
               (ngModelChange)="selectNgModelChangeH($event, ele.key)"
               ></d-select>

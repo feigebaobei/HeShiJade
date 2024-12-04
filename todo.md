@@ -1,23 +1,16 @@
 ||||
 |-|-|-|
 |分支|f_life||
-|优化formitem为switch时的配置项|done||
-||切换category时value应该不显示|done|切换时未触发方法
-||切换category时cheched应该显示|done|
-||多次触发绑定监听事件|done|不存在|
-|删除配置项的show字段|done||
-|渲染侧不显示表单项了|done||
-|增加item，少了key|done||
-|web-site更新ItemsMetaItem|done||
-|items的字段不全|done||
-|form的必填检验不对|||
+|form的必填检验不对|done||
 |创建button时items的值应该初始化全|||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
 ||perf:支持多个配置项监听同一个配置项变化||
+||perf:配置项的类型为switch时值使用checked:boolean处理||
 ||docs:生命周期时序图||
 ||feat:10个组件支持全量生命周期事件||
 ||feat:form支持控制表单项的显隐方法（updateVisible）、当表单项的值改变时触发的事件（changeFormItemValue）||
+||feat:web-site中更新ItemsMeta的类型||
 
 |排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
