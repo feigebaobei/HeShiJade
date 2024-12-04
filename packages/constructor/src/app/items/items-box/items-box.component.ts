@@ -76,10 +76,12 @@ export class ItemsBoxComponent {
           case 'options':
           case 'select':
           default:
-            obj.value = item.value
+            // obj.value = item.value
+            obj[k] = item.value
             break;
           case 'switch':
-            obj.checked = item.checked
+            obj[k] = item.checked
+            // obj.checked = item.checked
             break;
         }
       })

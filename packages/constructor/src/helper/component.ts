@@ -22,12 +22,20 @@ import {
     Tabs as TabsBehavior,
     Pagination as PaginationBehavior,
 } from 'src/helper/behavior'
+import ItemAll from 'src/helper/items'
+
 import type { ComponentDefaultConfig, ComponentDefaultConfigAll, PropsMeta,
     BehaviorMetaItem,
+    ConfigItem,
+    Component,
+    ComponentItemsValue,
  } from 'src/types/component'
-// import type { S } from 'src/types/base'
 import type { PropsConfigItem, BehaviorConfigGroup } from 'src/types/config'
 
+// let {
+//     Form: FromItems
+// } = ItemAll
+let FormItems = ItemAll['Form']
 let opProps = (pci: PropsConfigItem) => {
     let o: PropsMeta = {}
     Object.entries(pci).forEach(([k, v]) => {
@@ -51,6 +59,47 @@ let opBehavior = (p: BehaviorConfigGroup) => {
     })
     arr.push(o)
     return arr
+}
+let opItemsEle = (p: ConfigItem[]): ComponentItemsValue => {
+    let o: ComponentItemsValue = {}
+    p.forEach(item => {
+        if ('value' in item) {
+            o[item.key] = item.value
+        }
+        if ('checked' in item) {
+            o[item.key] = item.checked
+        }
+    })
+    return o
+}
+// 从配置文件中取出全量的组件的配置项。再与赋值。就可以当做组件的默认配置使用了。
+let opItemsOfForm = () => {
+    let defaultValueArr = [
+        {
+            category: 'input',
+            key: 'name',
+            label: '姓名',
+            value: '张三',
+        },
+        {
+            category: 'select',
+            options: [
+                {label: 'one', value: 'one'},
+                {label: 'two', value: 'two'},
+                {label: 'three', value: 'three'},
+            ],
+            key: 'org',
+            label: '组织',
+            value: 'one',
+        },
+    ]
+    let templateArr = [opItemsEle(FormItems), opItemsEle(FormItems),]
+    return defaultValueArr.map((item, index) => {
+        Object.entries(item).forEach(([k, v]) => {
+            templateArr[index][k] = v
+        })
+        return templateArr[index]
+    })
 }
 
 
@@ -92,25 +141,27 @@ let Select: ComponentDefaultConfig = {
 let Form: ComponentDefaultConfig = {
     props: opProps(FormProps),
     behavior: opBehavior(FormBehavior),
-    items: [
-        {
-            category: 'input',
-            key: 'name',
-            label: '姓名',
-            value: '张三',
-        },
-        {
-            category: 'select',
-            options: [
-                {label: 'one', value: 'one'},
-                {label: 'two', value: 'two'},
-                {label: 'three', value: 'three'},
-            ],
-            key: 'org',
-            label: '组织',
-            value: 'one',
-        },
-    ],
+    items: opItemsOfForm(), // [opItemsEle(FormItems), opItemsEle(FormItems),],
+    // items的字段不全 todo
+    // items: [
+    //     {
+    //         category: 'input',
+    //         key: 'name',
+    //         label: '姓名',
+    //         value: '张三',
+    //     },
+    //     {
+    //         category: 'select',
+    //         options: [
+    //             {label: 'one', value: 'one'},
+    //             {label: 'two', value: 'two'},
+    //             {label: 'three', value: 'three'},
+    //         ],
+    //         key: 'org',
+    //         label: '组织',
+    //         value: 'one',
+    //     },
+    // ],
     slots: {},
 }
 let Table: ComponentDefaultConfig = {
