@@ -6,10 +6,11 @@
 ||切换category时cheched应该显示|done|
 ||多次触发绑定监听事件|done|不存在|
 |删除配置项的show字段|done||
-|渲染侧不显示表单项了|todo||
+|渲染侧不显示表单项了|done||
 |增加item，少了key|done||
 |web-site更新ItemsMetaItem|done||
-|items的字段不全|||
+|items的字段不全|done||
+|form的必填检验不对|||
 |创建button时items的值应该初始化全|||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||

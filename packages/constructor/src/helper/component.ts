@@ -141,27 +141,7 @@ let Select: ComponentDefaultConfig = {
 let Form: ComponentDefaultConfig = {
     props: opProps(FormProps),
     behavior: opBehavior(FormBehavior),
-    items: opItemsOfForm(), // [opItemsEle(FormItems), opItemsEle(FormItems),],
-    // items的字段不全 todo
-    // items: [
-    //     {
-    //         category: 'input',
-    //         key: 'name',
-    //         label: '姓名',
-    //         value: '张三',
-    //     },
-    //     {
-    //         category: 'select',
-    //         options: [
-    //             {label: 'one', value: 'one'},
-    //             {label: 'two', value: 'two'},
-    //             {label: 'three', value: 'three'},
-    //         ],
-    //         key: 'org',
-    //         label: '组织',
-    //         value: 'one',
-    //     },
-    // ],
+    items: opItemsOfForm(),
     slots: {},
 }
 let Table: ComponentDefaultConfig = {

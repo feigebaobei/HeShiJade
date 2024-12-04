@@ -145,7 +145,7 @@ let Form: ConfigItem[] = [
         ],
         key: 'visible',
         // value: true,
-        checked: false,
+        checked: true,
     },
 ]
 let FormItemCategory = [
