@@ -83,9 +83,10 @@ let Form: BehaviorConfigGroup = [
       {label: '渲染完成后', value: 'postComponentNgAfterViewInit'},
       {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
     ],
-    value: 'submit',
+    value: '',
     label: '事件',
     key: 'event',
+    allowClear: true,
   },
   {
     category: 'textarea',

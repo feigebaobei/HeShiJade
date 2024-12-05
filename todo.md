@@ -3,8 +3,8 @@
 |分支|f_life||
 |创建button时items的值应该初始化全|button无items||
 |渲染侧的form的switch得不到值|done||
-|form的事件应该可以清空|todo||
-|form的事件无默认值|todo||
+|form的事件应该可以清空|doing||
+|form的事件无默认值|done||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
 ||perf:支持多个配置项监听同一个配置项变化||
