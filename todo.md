@@ -1,8 +1,10 @@
 ||||
 |-|-|-|
 |分支|f_life||
-|form的必填检验不对|done||
-|创建button时items的值应该初始化全|||
+|创建button时items的值应该初始化全|button无items||
+|渲染侧的form的switch得不到值|done||
+|form的事件应该可以清空|todo||
+|form的事件无默认值|todo||
 |要上生产的内容|||
 ||perf:删除不使用的shareEvent||
 ||perf:支持多个配置项监听同一个配置项变化||
@@ -11,6 +13,7 @@
 ||feat:10个组件支持全量生命周期事件||
 ||feat:form支持控制表单项的显隐方法（updateVisible）、当表单项的值改变时触发的事件（changeFormItemValue）||
 ||feat:web-site中更新ItemsMeta的类型||
+||fix:修正form的必填逻辑与必填标识||
 
 |排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||

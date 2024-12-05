@@ -39,7 +39,14 @@ export class FormComponent implements OnInit, OnDestroy {
     this.getData = () => {
       let r: Oa = {}
       this.items.forEach((item: A) => {
-        r[item.key] = item.value
+        switch (item.category) {
+          case 'switch':
+            r[item.key] = item.checked
+            break;
+          default:
+            r[item.key] = item.value
+            break;
+        }
       })
       return r
     }
@@ -70,7 +77,8 @@ export class FormComponent implements OnInit, OnDestroy {
   }
   toggleChangeH(v: B, k: S) {
     pool.trigger(this.data.ulid, 'changeFormItemValue', {
-      key: k, value: v
+      // key: k, value: v
+      key: k, checked: v
     }, this)
   }
   submitClickH() {

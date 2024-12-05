@@ -146,7 +146,6 @@ class Pool {
     // Map<componentUlid: Promise<B>>
     trigger(ulid: ULID, eventName: S, thirdParams: A, self?: A) {
         let fnArr = this.getEventArray(ulid, eventName)
-        // clog('arr', fnArr)
         fnArr.forEach(f => {
             f.bind(self)
             // clog(f)
