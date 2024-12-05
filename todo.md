@@ -1,14 +1,22 @@
 ||||
 |-|-|-|
 |分支|f_life||
-|把选中组件、选中页面、选中应用等根据subject触发事件的逻辑改为signal或shareEvent|||
-|解决删除应用后视图中无应用的问题|todo||
-|生命周期时序图|||
-|7个组件生命周期事件|||
+|创建button时items的值应该初始化全|button无items||
+|渲染侧的form的switch得不到值|done||
+|form的事件应该可以清空|无必要清空||
+|form的事件无默认值|done||
 |要上生产的内容|||
-||||
-||||
+||perf:删除不使用的shareEvent||
+||perf:支持多个配置项监听同一个配置项变化||
+||perf:配置项的类型为switch时值使用checked:boolean处理||
+||docs:生命周期时序图||
+||feat:10个组件支持全量生命周期事件||
+||feat:form支持控制表单项的显隐方法（updateVisible）、当表单项的值改变时触发的事件（changeFormItemValue）||
+||feat:web-site中更新ItemsMeta的类型||
+||fix:修正form的必填逻辑与必填标识||
 
+|排版组件|||
+|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
 |丰富配置面板的setter|||
 |全部组件支持生命周期方法|||
 |全部组件修正调用事件的参数|||
@@ -360,7 +368,7 @@ utils.req({
   table.setDataSource(res.data.data)
 }).catch()
 
-let modal = utils.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
+let modal = utils.pool.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
 modal.openDialog()
 
 you must update your .npmrc
@@ -369,3 +377,11 @@ or
 pnpm publish.
 有人说是npm的bug
 
+if (thirdParams.key === 'org') {
+  let form = utils.pool.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
+  if (thirdParams.value === 'two') {
+    form.updateVisible({interest: false})
+  } else {
+    form.updateVisible({interest: true})
+  }
+}

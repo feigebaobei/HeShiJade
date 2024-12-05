@@ -202,7 +202,6 @@ export class SetupComponent implements OnInit {
     })
   }
   onDrop(e: DropEvent) {
-  // onDrop(e: Event, targetArray: A) {
     // 请求后端保存组件时保存到本地。
     let curPage = this.pageService.getCurPage()
     let heightMax = 0

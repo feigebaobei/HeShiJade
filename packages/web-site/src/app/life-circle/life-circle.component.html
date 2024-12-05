@@ -1,0 +1,21 @@
+<section class="content-box">
+    <h1>页面的生命周期</h1>
+    <ul>
+        <li>渲染侧路由对应的根组件在ngOnInit时请求应用详情</li>
+        <li>设置当前应用</li>
+        <li>当前应用改变时请求页面列表数据</li>
+        <li>为每一个页面绑定事件</li>
+        <li>设置当前页面</li>
+        <li>当前页面改变时触发“<strong>页面加载前</strong>页面加载前”事件</li>
+        <li>请求当前页面的组件列表或从缓存中取出当前页面的组件列表后触发“<strong>页面加载完</strong>”事件</li>
+        <li>当前页面的一级组件渲染完时触发“<strong>渲染完成后</strong>”事件</li>
+    </ul>
+    <h1>组件的生命周期</h1>
+    <ul>
+        <li>当前组件在ngOnChanges时触发“<strong>改变属性后</strong>”事件</li>
+        <li>当前组件在ngOnInit时触发“<strong>初始化组件后</strong>”事件</li>
+        <li>当前组件在ngDoCheck时触发“<strong>变更检测后</strong>”事件</li>
+        <li>当前组件在ngAfterViewInit时触发“<strong>渲染完成后</strong>”事件</li>
+        <li>当前组件在ngOnDestroy时触发“<strong>销毁组件后</strong>”事件</li>
+    </ul>
+</section>

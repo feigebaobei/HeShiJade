@@ -168,7 +168,32 @@
             <tr>
                 <td>click</td>
                 <td>点击时</td>
-                <td></td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -324,6 +349,31 @@
                 <td>关闭前</td>
                 <td></td>
             </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
+            </tr>
         </tbody>
     </table>
     <h1>form</h1>
@@ -408,6 +458,12 @@
                 <td>设置当前组件的props</td>
                 <td></td>
             </tr>
+            <tr>
+                <td>updateVisible: (o: {[k: string]: boolean}) => void</td>
+                <td>k是表单项的key。其值是是否可见。</td>
+                <td>设置指定key对应的表单元素的显隐</td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
     <h2>event</h2>
@@ -431,8 +487,33 @@
                 <td>undefined</td>
             </tr>
             <tr>
-                <td>postComponentRender</td>
+                <td>changeFormItemValue</td>
+                <td>改变表单项的值</td>
+                <td>{key: string, // 改变的表单项的key value: string | boolean, // 改变后值}</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
                 <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
                 <td>undefined</td>
             </tr>
         </tbody>
@@ -724,6 +805,31 @@
                 <td>渲染完成后</td>
                 <td>undefined</td>
             </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
+            </tr>
         </tbody>
     </table>
     <h1>input</h1>
@@ -805,21 +911,42 @@
         </tbody>
     </table>
     <h2>event</h2>
-    -
-    <!-- <table>
+    <table>
         <thead>
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
-    </table> -->
+    </table>
     <h1>select</h1>
     <h2>props</h2>
     <table>
@@ -991,21 +1118,42 @@
         </tbody>
     </table>
     <h2>event</h2>
-    -
-    <!-- <table>
+    <table>
         <thead>
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
-    </table> -->
+    </table>
     <h1>icon</h1>
     <h2>props</h2>
     <table>
@@ -1078,7 +1226,43 @@
         </tbody>
     </table>
     <h2>event</h2>
-    -
+    
+    <table>
+        <thead>
+            <tr>
+                <td>事件名</td>
+                <td>触发时机</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
+            </tr>
+        </tbody>
+    </table>
     <h1>checkbox</h1>
     <h2>props</h2>
     <table>
@@ -1178,6 +1362,31 @@
                 <td>change</td>
                 <td>改变后</td>
                 <td></td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -1300,6 +1509,31 @@
                 <td>deleteTabChange</td>
                 <td>删除</td>
                 <td></td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -1515,6 +1749,31 @@
             <tr>
                 <td>postComponentRender</td>
                 <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
                 <td>undefined</td>
             </tr>
         </tbody>

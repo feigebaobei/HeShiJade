@@ -4,6 +4,8 @@ import { ComponentService } from 'src/app/service/component.service';import { de
 import { createDebounceFn } from 'src/helper/index'
 import { A, F, S } from 'src/types/base';
 
+let clog = console.log
+
 @Component({
   selector: 'app-props-switch',
   templateUrl: './props-switch.component.html',

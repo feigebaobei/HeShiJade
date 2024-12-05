@@ -46,7 +46,8 @@ type ItemsMetaItem = { // 这是为form开发的。
   category: S
   label: S
   key: S
-  value: A
+  value?: A
+  checked?: B
   options?: Options<S, S>[]
   child?: ULID // 这是为table而增强的。
 }
@@ -104,6 +105,7 @@ interface ChangeGridLayoutParams {
   w: GridLayout['w']
   h: GridLayout['h']
 }
+type ComponentItemsValue = Component['items'][number]
 
 export type {
   PropsValue,
@@ -127,4 +129,5 @@ export type {
   ComponentMountSlots,
   PropsTransfer,
   ChangeGridLayoutParams,
+  ComponentItemsValue,
 }

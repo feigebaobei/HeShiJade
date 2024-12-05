@@ -37,7 +37,7 @@ let Modal: CompConfigAddabel = {
     // slots: false,
 }
 let Icon: CompConfigAddabel = {
-    behavior: false,
+    behavior: true,
     items: false,
     // slots: false,
 }

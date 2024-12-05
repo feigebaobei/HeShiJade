@@ -56,6 +56,19 @@
                     ></app-item>
                 </div>
             </ng-template>
+            <!-- <ng-template [ngSwitchCase]="'toggle'">
+                <div *ngIf="!item.hideCalc">
+                    <app-item
+                        [groupItem]="item"
+                        [group]="itemList"
+                        (inputChange)="inputChangeH($event, i)"
+                        (selectChange)="selectChangeH($event, i)"
+                        (switchChange)="switchChangeH($event, i)"
+                        (optionsChange)="optionsChangeH($event, i)"
+                        class="app_item"
+                    ></app-item>
+                </div>
+            </ng-template> -->
             <ng-template [ngSwitchDefault]>
                 ngSwitchDefault
             </ng-template>

@@ -18,6 +18,7 @@ import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 import { OptionsComponent } from './options/options.component';
 import { ItemComponent } from './item/item.component';
+// import { ToggleComponent } from './toggle/toggle.component';
 // 指令
 import { CompDirective } from './comp.directive'
 
@@ -31,7 +32,8 @@ import { CompDirective } from './comp.directive'
     SelectComponent,
     SwitchComponent,
     OptionsComponent,
-    ItemComponent
+    ItemComponent,
+    // ToggleComponent,
   ],
   imports: [
     CommonModule,

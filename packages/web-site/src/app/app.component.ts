@@ -45,6 +45,9 @@ export class AppComponent {
   apiClickH() {
     this.router.navigate(['/api'])
   }
+  lifeCircleClickH() {
+    this.router.navigate(['/life-circle'])
+  }
   pluginClickH() {
     this.router.navigate(['/plugins'])
   }

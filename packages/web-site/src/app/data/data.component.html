@@ -39,10 +39,9 @@
             value: S                默认值
             label: S                文本
             key: S                  组件内运行时使用的key
-            hide?: FT&lt;B&gt;      xxx
+            hide?: FT&lt;B&gt;      是否隐藏。若后true，则隐藏。
             hideListenerKey?: S     当哪个key变动时重新计算显隐逻辑
             hideCalc?: B            xxx
-            // show: B
             hideConfig?: B          xxx
         
         type PropsValue = S | B | N    props的值类型
@@ -60,7 +59,8 @@
             category: S                             表单元素分类
             label: S                                label
             key: S                                  
-            value: A
+            value?: A
+            checked?: B
             options?: Options&lt;S, S&gt;[]         select/switch的选项
             child?: ULID                            items子组件的ulid
 

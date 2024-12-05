@@ -5,8 +5,11 @@ import addableAll from 'src/helper/addable'
 import {
   Button as buttonBehaviorMeta,
   Modal as modalBehaviorMeta,
+  Input as inputBehaviorMeta,
   Form as FormBehaviorMeta,
   Table as TableBehaviorMeta,
+  Select as SelectBehaviorMeta,
+  Icon as IconBehaviorMeta,
   Checkbox as CheckboxBehaviorMeta,
   Tabs as TabsBehaviorMeta,
   Pagination as PaginationBehaviorMeta,
@@ -55,24 +58,15 @@ export class BehaviorBoxComponent {
       let comp = this.componentService.curComponentS.get()
       let page = this.pageService.pageS.get()
       if (comp) {
-        // clog('1')
         this.curComp = comp
         this.curComponentChange()
         this.addable = addableAll[comp.type].behavior
       } else if (page) {
-        // clog('2')
         this.curComp = null
         this.curComponentChange()
         this.addable = addableAll['Page'].behavior
       }
     })
-    // effect(() => {
-    //   let page = this.pageService.pageS.get()
-    //   if (page) {
-    //     this.curComponentChange()
-    //     this.addable = addableAll['Page'].behavior
-    //   }
-    // })
   }
   setComponentBehaviorListByType(compBehaviorMeta: BehaviorConfigGroup) {
     this.curComp!.behavior.forEach(item => {
@@ -102,7 +96,7 @@ export class BehaviorBoxComponent {
     }
   }
   curComponentChange() {
-    clog('this.curComp', this.curComp)
+    // clog('this.curComp', this.curComp)
     // return 
     this.componentBehaviorList = []
     switch (this.curComp?.type) {
@@ -112,11 +106,20 @@ export class BehaviorBoxComponent {
       case 'Modal':
         this.setComponentBehaviorListByType(modalBehaviorMeta)
         break;
+      case 'Input':
+        this.setComponentBehaviorListByType(inputBehaviorMeta)
+        break;
+      case 'Select':
+        this.setComponentBehaviorListByType(SelectBehaviorMeta)
+        break;
       case 'Form':
         this.setComponentBehaviorListByType(FormBehaviorMeta)
         break;
       case 'Table':
         this.setComponentBehaviorListByType(TableBehaviorMeta)
+        break;
+      case 'Icon':
+        this.setComponentBehaviorListByType(IconBehaviorMeta)
         break;
       case 'Checkbox':
         this.setComponentBehaviorListByType(CheckboxBehaviorMeta)

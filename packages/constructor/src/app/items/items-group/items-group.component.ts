@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
-import { createDebounceFn } from 'src/helper/index'
+import { compatibleArray, createDebounceFn } from 'src/helper/index'
 import { debounceTime } from 'src/helper/config';
 // import { CompDirective } from '../comp.directive'
 // type
@@ -32,7 +32,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
   switchChangeH: F
   optionsChangeH: F
   itemList: newConfigItem[]
-  eventMap: Map<S, {f: F, targetKey: S}>
+  eventMap: Map<S, {f: F, targetKey: S, item: newConfigItem}[]>
   constructor(private componentService: ComponentService) {
     this.reqChangeItems = createDebounceFn(this.componentService.reqChangeItems, debounceTime, this.componentService)
     this.itemList = []
@@ -46,8 +46,10 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       // this.componentService.reqChangeItems(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
-      item.value = p.value
-      this.listenerChange(p.key, this.itemList)
+      if ('value' in item) {
+        item.value = p.value
+      }
+      this.listenerChange(item)
     }, debounceTime)
     this.selectChangeH = createDebounceFn((p: {
         key: 'category'
@@ -56,18 +58,22 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
-      item.value = p.value
-      this.listenerChange(p.key, this.itemList)
+      if ('value' in item) {
+        item.value = p.value
+      }
+      this.listenerChange(item)
     }, debounceTime)
     this.switchChangeH = createDebounceFn((p: {
-      key: 'value'
-      value: B
+      key: 'checked'
+      checked: B
     }, subIndex: N) => {
-      this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
-      this.reqChangeItems(this.index, p.key, p.value)
+      this.componentService.setItemsOfCurComponent(this.index, p.key, p.checked)
+      this.reqChangeItems(this.index, p.key, p.checked)
       let item = this.itemList[subIndex]
-      item.value = p.value
-      this.listenerChange(p.key, this.itemList)
+      if ('checked' in item) {
+        item.checked = p.checked
+      }
+      this.listenerChange(item)
     }, debounceTime)
     this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
@@ -76,7 +82,6 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.initCalc()
-    // clog('this.itemList', this.itemList)
   }
   ngOnDestroy() {
     // this.compHost.viewContainerRef.clear();
@@ -98,36 +103,34 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     })
     this.itemList.forEach(item => {
       if (item.hideListenerKey) {
-        this.eventMap.set(
-          `compId${item.hideListenerKey}`,
-          {
-            f: (obj: newConfigItem[]) => {
-              let f = item.hide
-              if (f) {
-                // f(this.itemList)
-                return f(obj)
-              } else {
-                return true
-              }
-            },
-            targetKey: item.key,
-          }
-        )
+        if (this.eventMap.has(item.hideListenerKey)) {
+          this.eventMap.get(item.hideListenerKey)!.push(this.createEventMapItem(item))
+        } else {
+          this.eventMap.set(item.hideListenerKey, [this.createEventMapItem(item)])
+        }
       }
     })
   }
-  listenerChange(listenerKey: S, group: newConfigItem[]) {
-    let obj = this.eventMap.get(`compId${listenerKey}`)
-    if (obj) {
-      let t = this.itemList.find(item => item.key === obj!.targetKey)
-      if (t) {
-        t.hideCalc = obj.f(group)
-      }
-      // clog('curItem', this.itemList)
+  listenerChange(item: newConfigItem) {
+    compatibleArray(this.eventMap.get(String(item.key))).forEach(ele => {
+      ele.item.hideCalc = ele.f(this.itemList)
+    })
+  }
+  createEventMapItem(item: newConfigItem) {
+    return {
+      f: (obj: newConfigItem[]) => {
+        let f = item.hide
+        if (f) {
+          return f(obj)
+        } else {
+          return true
+        }
+      },
+      targetKey: item.key,
+      item, // 引用
     }
   }
   deleteButtonClickH() {
-    // clog('deleteButtonClickH', n)
     this.remove.emit()
   }
 }

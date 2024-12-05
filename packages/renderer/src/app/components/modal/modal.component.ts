@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from 'ng-devui/modal';
 import { ComponentService } from 'src/app/service/component.service';
-// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
 import { ModalCompComponent } from './modal-comp/modal-comp.component';
 import type { A, O } from 'src/types/base';
@@ -74,6 +73,9 @@ export class ModalComponent implements OnInit, OnDestroy{
       this.config[k] = v
     })
   }
+  ngOnChanges() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+  }
   ngOnInit(): void {
     // this.config.title = this.data.props['title']
     this.config.width = this.data.props['width']
@@ -94,12 +96,6 @@ export class ModalComponent implements OnInit, OnDestroy{
     if (this.data.props['visible']) {
       this.openDialog()
     }
-    // shareEvent.on(this.data.ulid, (payload) => {
-    //   let obj = JSON.parse(payload)
-    //   if (obj.visible) {
-    //     this.openDialog()
-    //   }
-    // })
     let tree = this.componentService.getTreeByKey()
     if (tree) {
       let curNode = tree.find(this.data.ulid)!
@@ -108,11 +104,17 @@ export class ModalComponent implements OnInit, OnDestroy{
       this.childrenFooter = curNode.children['footer']?.toArray() || []
     }
     pool.register(this.data.ulid, this, this.data.behavior)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+  }
+  ngDoCheck() {
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
   }
   ngAfterViewInit() {
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
     pool.unRegister(this.data.ulid)
   }
 }

@@ -85,7 +85,6 @@ class Pool {
         behavior.forEach((b) => {
           // 可以使用入参
           // 也可以使用方法体前缀
-        //   let f = new Function('getComponentInstance', 'plugins', 'thirdParams', b.fnBody)
           let f = new Function('utils', 'plugins', 'thirdParams', b.fnBody)
           pool.registerEvent(ulid, b.event, f)
         })
@@ -147,11 +146,10 @@ class Pool {
     // Map<componentUlid: Promise<B>>
     trigger(ulid: ULID, eventName: S, thirdParams: A, self?: A) {
         let fnArr = this.getEventArray(ulid, eventName)
-        // clog('arr', fnArr)
         fnArr.forEach(f => {
             f.bind(self)
             // clog(f)
-            f(utils, pool.getPluginFn, thirdParams,) // 这行代码会使页面重定向到根目录
+            f(utils, pool.getPluginFn(), thirdParams,)
         })
     }
     registerComponentRender(pageUlid: ULID, componentUlidList: ULID[]) {
@@ -166,7 +164,7 @@ class Pool {
         clog('pArr', pArr)
         Promise.all(pArr).then(() => {
             clog('then', pArr)
-            this.trigger(pageUlid, 'postPageRenderer', undefined, undefined)
+            this.trigger(pageUlid, 'postPageRender', undefined, undefined)
             this.unRegisterComponentRender(pageUlid)
         })
     }

@@ -1,8 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
-// import { shareEvent } from 'src/helper';
 import { pool } from 'src/helper/pool';
-import type { A, O, Oa, } from 'src/types/base';
+import type { A, O, Oa, S, B, } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'
 // import {trigger} from 'src/helper/utils'
 
@@ -18,20 +17,36 @@ export class FormComponent implements OnInit, OnDestroy {
   props: A
   items: A
   rules: A
+  emptyRules: A
   getData: () => Oa
   constructor(private dataService: DataService) {
     this.props = {} // this.data.props
-    this.items = {} // this.data.items
+    this.items = [] // this.data.items
+    // this.rules = {}
     this.rules = {
       validators: [
-        { required: true },
+        {
+          required: true,
+          message: '请输入',
+        },
       ],
-      message: 'Enter a'
+      // message: 'Enter a'
     }
+    this.emptyRules = {
+      validators: [],
+    }
+    // todo 移到原型对象上
     this.getData = () => {
       let r: Oa = {}
       this.items.forEach((item: A) => {
-        r[item.key] = item.value
+        switch (item.category) {
+          case 'switch':
+            r[item.key] = item.checked
+            break;
+          default:
+            r[item.key] = item.value
+            break;
+        }
       })
       return r
     }
@@ -41,36 +56,56 @@ export class FormComponent implements OnInit, OnDestroy {
       this.data.props[k] = v
     })
   }
+  updateVisible(o: O) {
+    Object.entries(o).forEach(([k, v]) => {
+      this.items.forEach((item: A) => {
+        if (item.key === k) {
+          item.visible = v
+        }
+      })
+    })
+  }
+  inputNgModelChangeH(v: S, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+      key: k, value: v,
+    }, this)
+  }
+  selectNgModelChangeH(v: S, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+      key: k, value: v
+    }, this)
+  }
+  toggleChangeH(v: B, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+      // key: k, value: v
+      key: k, checked: v
+    }, this)
+  }
   submitClickH() {
     let data: A = {}
     this.data.items.forEach((item: A) => {
       data[item.key] = item.value
     })
-    // 触发submit事件
-    // let fnArr = pool.getEventArray(this.data.ulid, 'submit')
-    // fnArr.forEach(f => {
-    //   f.bind(this) // 方法体的this
-    //   f && f(
-    //     utils,
-    //     pool.getPluginFn(), // 插件
-    //     // res
-    //   )
-    // })
     pool.trigger(this.data.ulid, 'submit', undefined, this)
+  }
+  ngOnChanges() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
   }
   ngOnInit() {
     this.props = this.data.props
     this.items = this.data.items
     pool.register(this.data.ulid, this, this.data.behavior)
-    // 触发postRenderer事件
-    // pool.trigger(this.data.ulid, 'postComponentRender', undefined, this)
-    // utils.
-    pool.trigger(this.data.ulid, 'postComponentRender', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+  }
+  ngDoCheck() {
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
   }
   ngAfterViewInit() {
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
     pool.unRegister(this.data.ulid)
   }
 }

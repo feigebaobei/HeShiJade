@@ -36,7 +36,19 @@ export class ItemsBoxComponent {
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
-              gi.value = v
+              switch (gi.category) {
+                case 'input':
+                case 'number':
+                case 'textarea':
+                case 'options':
+                case 'select':
+                default:
+                  gi.value = v
+                  break;
+                case 'switch':
+                  gi.checked = v
+                  break;
+              }
             }
           })
           this.groupList.push(group)
@@ -52,10 +64,26 @@ export class ItemsBoxComponent {
     if (this.curComponent) {
       let group = this.groupForConfig(this.curComponent.type)
       this.groupList.push(group)
+      // todo 检查使用ItemsMetaItem的地方
       let obj: ItemsMetaItem = {} as ItemsMetaItem
       groupTemplate[this.curComponent.type].forEach((item) => {
         let k: keyof ItemsMetaItem = item.key as unknown as keyof ItemsMetaItem
-        obj[k] = item.value
+        // obj[k] = item.value
+        switch (item.category) {
+          case 'input':
+          case 'number':
+          case 'textarea':
+          case 'options':
+          case 'select':
+          default:
+            // obj.value = item.value
+            obj[k] = item.value
+            break;
+          case 'switch':
+            obj[k] = item.checked
+            // obj.checked = item.checked
+            break;
+        }
       })
       this.componentService.addItemsOfCurComponent(obj)
       this.componentService.reqAddItems(obj)
