@@ -86,7 +86,7 @@ let Form: BehaviorConfigGroup = [
     value: '',
     label: '事件',
     key: 'event',
-    allowClear: true,
+    // allowClear: true,
   },
   {
     category: 'textarea',
