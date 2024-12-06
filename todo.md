@@ -6,17 +6,18 @@
 |web-site扩展组件时增加井布局|todo||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
-|多种布局方式：井布局、列布局、行布局、块布局|todo||
-|搭建页面的标题与按钮应该在同一行|todo||
+|多种布局方式：井布局、列布局、行布局、块布局（一个组件占一整行）|todo||
+|搭建页面的标题与按钮应该在同一行|done||
+|搭建页面增加返回按钮|done||
 ||table组件在删除items时删除子组件|todo|
 |是否需要把修改service与发请求分开|分开||
 |丰富组件|||
 ||布局组件||
+||页面组件||
 |要上生产的内容|||
 
 |排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
-|丰富配置面板的setter|||
 |创建碎片平台|||
 |官网增加助手函数子导航|待定||
 |整理升级的要求|||
@@ -310,23 +311,6 @@ utils: {
 |-|-|-|-|
 |||非常通用||
 
-let clog = console.log
-let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-let pageData = page.getData()
-utils.req({
-  url: 'http://heshijade.com:5030/components/table',
-  method: 'get',
-  params: {
-    page: pageData.pageIndex,
-    pageSize: pageData.pageSize,
-  },
-}).then(res => {
-  clog('res', res)
-  table.setDataSource(res.data.data)
-}).catch()
-
 
 因为export导出的是变量
 因为export default导出的是变量
@@ -338,37 +322,8 @@ export a // 所以不合法
 
 我感觉export导出的是对象
 
-let clog = console.log
-let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-let pageData = page.getData()
-utils.req({
-  url: 'http://heshijade.com:5030/components/table',
-  method: 'get',
-  params: {
-    page: pageData.pageIndex,
-    pageSize: pageData.pageSize,
-  },
-}).then(res => {
-  clog('res', res)
-  table.setDataSource(res.data.data)
-}).catch()
-
-let modal = utils.pool.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
-modal.openDialog()
-
 you must update your .npmrc
 save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
-
-if (thirdParams.key === 'org') {
-  let form = utils.pool.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-  if (thirdParams.value === 'two') {
-    form.updateVisible({interest: false})
-  } else {
-    form.updateVisible({interest: true})
-  }
-}

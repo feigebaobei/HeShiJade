@@ -3,7 +3,6 @@ import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
-// import { ulid } from 'ulid';
 import { asyncFn, initComponentMeta } from 'src/helper'
 // module
 import { ItemsModule } from '../items/items.module';
@@ -11,7 +10,7 @@ import { BehaviorModule } from '../behavior/behavior.module';
 import { PropsModule } from '../props/props.module';
 import { ComponentsModule } from '../components/components.module';
 import { PageListModule } from '../page-list/page-list.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 // import { GridstackModule } from 'gridstack/dist/angular'
 // 组件
 // import { ComponentListComponent } from './component-list/component-list.component';
@@ -109,6 +108,7 @@ export class SetupComponent implements OnInit {
     private pageService: PageService,
     private componentService: ComponentService,
     private route: ActivatedRoute,
+    private location: Location
   ) {
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
@@ -164,6 +164,9 @@ export class SetupComponent implements OnInit {
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
+  }
+  gobackButtonClickH() {
+    this.location.back()
   }
   activeTabChange(tab: A) {
     console.log(tab);
