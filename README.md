@@ -13,6 +13,7 @@
 - express(node)
 - mongodb
 - pnpm
+- node@20
 
 ## 启动
 ```shell
