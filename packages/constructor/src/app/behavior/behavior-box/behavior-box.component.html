@@ -1,9 +1,9 @@
-<app-behavior-item
+<app-behavior-group
     *ngFor="let item of componentBehaviorList; let i = index"
     [behavior]="item"
     [index]="i"
     (remove)="removeH(i)"
-></app-behavior-item>
+></app-behavior-group>
 <d-button
     bsStyle="common"
     circled="true"

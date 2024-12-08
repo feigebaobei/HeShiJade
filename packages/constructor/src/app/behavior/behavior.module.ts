@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorBoxComponent } from './behavior-box/behavior-box.component';
-import { BehaviorItemComponent } from './behavior-item/behavior-item.component';
+import { BehaviorGroupComponent } from './behavior-group/behavior-group.component';
 import { FormsModule } from '@angular/forms';
 // devui
 import { 
@@ -17,7 +17,7 @@ import {
 @NgModule({
   declarations: [
     BehaviorBoxComponent,
-    BehaviorItemComponent
+    BehaviorGroupComponent
   ],
   imports: [
     CommonModule,

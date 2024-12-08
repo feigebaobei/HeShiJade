@@ -12,11 +12,11 @@ import type { BehaviorConfigGroup } from 'src/types/config';
 let clog = console.log
 // type newBehaviorConfigItem = Required<BehaviorConfigGroup>
 @Component({
-  selector: 'app-behavior-item',
-  templateUrl: './behavior-item.component.html',
-  styleUrls: ['./behavior-item.component.sass']
+  selector: 'app-behavior-group',
+  templateUrl: './behavior-group.component.html',
+  styleUrls: ['./behavior-group.component.sass']
 })
-export class BehaviorItemComponent implements OnInit {
+export class BehaviorGroupComponent implements OnInit {
   @Input() behavior!: BehaviorConfigGroup
   @Input() index!: N
   fnBodyTextareatChangeH: F
