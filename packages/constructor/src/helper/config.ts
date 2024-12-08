@@ -82,6 +82,11 @@ let layoutOptions = [
       value: 21,
       disabled: false,
     },
+    {
+      label: '块布局',
+      value: 31,
+      disabled: false,
+    },
   ]
 export {
     ssoUrl,
