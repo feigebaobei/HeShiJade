@@ -12,7 +12,7 @@
 - dev-ui
 - express(node)
 - mongodb
-- pnpm
+- pnpm@9.15.x
 - node@20
 
 ## 启动

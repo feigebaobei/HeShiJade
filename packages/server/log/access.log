@@ -1,6 +1,2 @@
-{"level":30,"time":1733586847238,"pid":28598,"hostname":"turbo-System-Product-Name","name":"logname","msg":"启动服务"}
-{"level":30,"time":1733586852096,"pid":28598,"hostname":"turbo-System-Product-Name","name":"logname","msg":"hi"}
-{"level":30,"time":1733586852096,"pid":28598,"hostname":"turbo-System-Product-Name","name":"logname","k":2,"b":true,"a":"str","name":"hi"}
-{"level":30,"time":1733586852096,"pid":28598,"hostname":"turbo-System-Product-Name","name":"logname","k":2,"b":true,"a":"str","name":"hi","msg":"other str"}
-{"level":50,"time":1733586852096,"pid":28598,"hostname":"turbo-System-Product-Name","name":"logname","msg":"error"}
-{"level":30,"time":1733586965825,"pid":28598,"hostname":"turbo-System-Product-Name","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1733618235586,"pid":65023,"hostname":"turbo-System-Product-Name","name":"logname","msg":"启动服务"}
+{"level":30,"time":1733618320310,"pid":65023,"hostname":"turbo-System-Product-Name","name":"logname","method":"get","originalUrl":"/apps","params":{}}
