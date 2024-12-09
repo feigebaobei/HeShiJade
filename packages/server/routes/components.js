@@ -702,6 +702,7 @@ router.route('/items')
   })
 })
 .delete(cors.corsWithOptions, (req, res) => {
+  // ulid, index
   let index = -1
   new Promise((s, j) => {
     if (rules.required(req.query.ulid) &&

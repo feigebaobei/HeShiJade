@@ -32,7 +32,7 @@ export class ItemsBoxComponent {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          let group = this.groupForConfig(p.type)
+          let group = this.groupForConfig(p!.type)
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
@@ -90,9 +90,25 @@ export class ItemsBoxComponent {
     }
   }
   removeH(i: N) {
-    this.groupList.splice(i, 1)
-    this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
-    if (this.curComponent) {
+    // 删除配置面板的item
+    let ele = this.groupList.splice(i, 1)
+    // clog(ele, this.pageService.getCurPage(), this.componentService.curComponent())
+    let curPage = this.pageService.getCurPage()
+    if (this.curComponent && curPage) {
+      let childUlid = this.curComponent.items[i]['childUlid']
+      if (childUlid) {
+        let nextComponent = this.componentService.getNextComponent(curPage.ulid, childUlid)
+        let childrenComponent = this.componentService.getChildrenComponent(curPage.ulid, childUlid)
+        // 删除store里的组件
+        nextComponent.forEach(comp => {
+          this.componentService.deleteByUlid(curPage!.ulid, comp.ulid)
+        })
+        // 删除远端的组件
+        this.componentService.reqDeleteComponent('', [...nextComponent, ...childrenComponent].map(item => item.ulid))
+      }
+      // 在本地删除组件的item
+      this.componentService.removeItemsOfCurComponent(curPage.ulid, this.curComponent.ulid, i)
+      // 在远端删除组件的item
       this.componentService.reqRemoveItems(this.curComponent.ulid, i)
     }
   }

@@ -272,6 +272,7 @@ export class ComponentService {
   reqCreateComponent(obj: Component) {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
+  // 删除指定组件及其子组件
   reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
     return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid, childrenUlid}).then(() => true)
   }
@@ -381,6 +382,7 @@ export class ComponentService {
   reqAddItems(obj: ItemsMetaItem) {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
+  // 删除当前组件的item
   removeItemsOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
     let tree = this._map.get(pageUlid)
     if (tree) {
@@ -443,6 +445,7 @@ export class ComponentService {
     return this._map.get(key)
   }
   // 删除组件
+  // 其子节点会被浏览器的垃圾回收机制回收。
   deleteByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteByUlid=>deleteComponentByUlid
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
@@ -450,12 +453,14 @@ export class ComponentService {
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
   }
+  // 得到后代组件
   getChildrenComponent(pageUlid: ULID, componentUlid: ULID) {
     let tree = this.getTree(pageUlid)
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
     return childrenComponent
   }
-  getNextComponent(pageUlid: ULID, componentUlid: ULID) {
+  // 得到后组件
+  getNextComponent(pageUlid: ULID, componentUlid: ULID): Component[] {
     let tree = this.getTree(pageUlid)
     return compatibleArray(tree?.find(componentUlid)?.toArray()) // .map(component => component.ulid)
   }
