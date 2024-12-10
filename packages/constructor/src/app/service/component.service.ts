@@ -446,7 +446,7 @@ export class ComponentService {
   }
   // 删除组件
   // 其子节点会被浏览器的垃圾回收机制回收。
-  deleteByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteByUlid=>deleteComponentByUlid
+  deleteComponentByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteComponentByUlid=>deleteComponentByUlid
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
 

@@ -2,20 +2,20 @@
 |-|-|-|
 |分支|f_layout||
 |列表页面应该优化样式|||
-|web-site扩展组件时增加井布局|已经增加了。本期还增加了块布局||
+|web-site扩展组件时增加井布局|已经增加了。本期还增加了块布局|done|
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|无法复现||
 |有时无法选中页面|不好复现||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|不明白题意||
 ||table组件在删除items时删除子组件|done|
 |测试tab的删除item功能|||
 |tab添加子组件有问题|||
-|是否需要把修改service与发请求分开|分开||
-deleteByUlid=>deleteComponentByUlid
+|是否需要把修改service与发请求分开|已经分开了||
+|deleteByUlid=>deleteComponentByUlid|done||
 |丰富组件|||
 ||弹性布局组件||
 ||网络布局组件||
 ||页面组件||
-|item的删除icon应该在内部|doing||
+|item的删除icon应该在内部|done||
 |删除脏数据|||
 |要上生产的内容|||
 ||搭建页面增加返回按钮||

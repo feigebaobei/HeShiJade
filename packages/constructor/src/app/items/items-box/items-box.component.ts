@@ -101,7 +101,7 @@ export class ItemsBoxComponent {
         let childrenComponent = this.componentService.getChildrenComponent(curPage.ulid, childUlid)
         // 删除store里的组件
         nextComponent.forEach(comp => {
-          this.componentService.deleteByUlid(curPage!.ulid, comp.ulid)
+          this.componentService.deleteComponentByUlid(curPage!.ulid, comp.ulid)
         })
         // 删除远端的组件
         this.componentService.reqDeleteComponent('', [...nextComponent, ...childrenComponent].map(item => item.ulid))

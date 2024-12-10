@@ -201,7 +201,7 @@ AfterViewInit
     let key = createChildKey('items', index, 'component')
     this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.curPage.ulid, ulid)
+    this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       this.compStack.init()

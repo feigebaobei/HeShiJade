@@ -128,7 +128,7 @@ export class ModalComponent implements OnInit{
   headerDeleteComponentByUlidH(ulid: ULID) {
     this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.page.ulid, ulid)
+    this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       this.compStackHeader.init()
@@ -137,7 +137,7 @@ export class ModalComponent implements OnInit{
   bodyDeleteComponentByUlidH(ulid: ULID) {
     this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.page.ulid, ulid)
+    this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       this.compStackBody.init()
