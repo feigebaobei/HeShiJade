@@ -1,22 +1,22 @@
 ||||
 |-|-|-|
 |分支|f_layout||
-|// todo 改名为behavior-group|done||
-|行为面板使用去抖|已经去抖了||
 |列表页面应该优化样式|||
 |web-site扩展组件时增加井布局|已经增加了。本期还增加了块布局||
 |fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|无法复现||
 |有时无法选中页面|不好复现||
 |fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|不明白题意||
-|列表页面增加返回按钮|再返回就是登录页面了。不适用使用返回按钮||
 ||table组件在删除items时删除子组件|done|
+|测试tab的删除item功能|||
+|tab添加子组件有问题|||
 |是否需要把修改service与发请求分开|分开||
 deleteByUlid=>deleteComponentByUlid
 |丰富组件|||
 ||弹性布局组件||
 ||网络布局组件||
 ||页面组件||
-|item的删除icon应该内部|||
+|item的删除icon应该在内部|doing||
+|删除脏数据|||
 |要上生产的内容|||
 ||搭建页面增加返回按钮||
 ||支持块布局||
@@ -31,6 +31,7 @@ deleteByUlid=>deleteComponentByUlid
 |table组件的打开事件应该事件名+ulid|todo||
 ||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
+||先写一个遇到脏数据报警的程序||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |丰富组件|||
 ||inputNumber||
@@ -109,16 +110,6 @@ just
 
 # devui
 api众多。其中好多不通用的。
-
-# 上生产过程
-1. 本地打包renderer
-2. 本地打包constructor
-3. 把当前的开发分支f_xxx推到远端。
-4. 在github上合并f_xxx到master
-5. 在服务端拉取master分支
-6. 重启后端服务mock-server
-7. 重启后端服务server
-8. 在服务端打包web-site.
 
 # 强制更新子组件
 // 父组件
