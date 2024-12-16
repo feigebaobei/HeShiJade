@@ -300,7 +300,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   }
   ca2(p: A) {
     // clog('ca2', p)
-
     this.compStack?.init()
     return compatibleArray(p)
   }
