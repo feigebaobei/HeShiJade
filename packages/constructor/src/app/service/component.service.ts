@@ -348,10 +348,52 @@ export class ComponentService {
     })
   }
   // todo 可优化key的类型
-  setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
+  // key 的类型应该是S
+  // setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
+  setItemsOfCurComponent(index: N, key: S, value: A) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
+      clog('server', curComp, key, value, index)
+      // 特殊处理tabs组件在改变items时更新slots内的key
+      // 若后期跨组件的情况多，则使用事件中枢处理。
+      switch (curComp.type) {
+        case 'Tabs':
+          if (key === 'id') {
+            let slotsKeyForDelete = Object.keys(curComp.slots).filter((slotsKey) => {
+              return slotsKey.split('_')[0] === String(index)
+            })
+            if (slotsKeyForDelete.length) {
+              // 增加新的
+              curComp.slots[`${index}_${value}`] = curComp.slots[slotsKeyForDelete[0]]
+              // 删除旧的
+              let slotsKeyUlid: {[k: S]: ULID} = {}
+              // 删除当前组件的
+              slotsKeyForDelete.forEach((slotsKey) => {
+                slotsKeyUlid[slotsKey] = curComp.slots[slotsKey]
+                delete curComp.slots[slotsKey]
+              })
+              // 处理脏数据
+              if (slotsKeyForDelete.slice(1).length) {
+                // 删除远端的
+                let pAll = slotsKeyForDelete.slice(1).map((slotKey) => {
+                  let childrenUlid = compatibleArray(this.getChildrenComponent(this.pageService.getCurPage()?.ulid || '', slotsKeyUlid[slotKey])).map(item => item.ulid)
+                  return this.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid)
+                })
+                Promise.all(pAll).then(() => {
+                  // 删除store中的
+                  slotsKeyForDelete.slice(1).forEach(ulid => {
+                    this.deleteComponentByUlid(this.pageService.getCurPage()?.ulid || '', ulid)
+                  })
+                })
+              }
+              
+            }
+          }
+          break;
+        default:
+          break;
+      }
     }
   }
   addItemsOfCurComponent(obj: ItemsMetaItem) {
@@ -446,7 +488,7 @@ export class ComponentService {
   }
   // 删除组件
   // 其子节点会被浏览器的垃圾回收机制回收。
-  deleteComponentByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteComponentByUlid=>deleteComponentByUlid
+  deleteComponentByUlid(pageUlid: ULID, componentUlid: ULID) {
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
 
@@ -462,7 +504,7 @@ export class ComponentService {
   // 得到后组件
   getNextComponent(pageUlid: ULID, componentUlid: ULID): Component[] {
     let tree = this.getTree(pageUlid)
-    return compatibleArray(tree?.find(componentUlid)?.toArray()) // .map(component => component.ulid)
+    return compatibleArray(tree?.find(componentUlid)?.toArray()!) // .map(component => component.ulid)
   }
   // getLastRow(pageUlid: ULID) {
   //   let tree = this.getTree(pageUlid)
