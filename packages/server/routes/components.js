@@ -303,6 +303,7 @@ router.route('/')
   })
 })
 // 删除组件
+// 后端不知道链式关系，需要前端传来子组件ulid.
 .delete(cors.corsWithOptions, (req, res) => {
   // 校验参数：必填+存在
   // 处理页面级数据
@@ -430,6 +431,7 @@ router.route('/')
       })
     })
   } else {
+    // 删除指定组件
     let childrenUlid = compatibleArray(req.query.childrenUlid)
     return lowcodeDb.collection(DB.dev.componentTable).deleteMany({ulid: {$in: childrenUlid}}).catch(() => {
       return Promise.reject(200020)
