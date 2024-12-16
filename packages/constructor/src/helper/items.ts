@@ -270,14 +270,14 @@ let Table: ConfigItem[] = [
         key: 'fixedRight',
         value: '',
     },
-    {
-        label: 'childUlid',
-        category: 'input',
-        key: 'childUlid',
-        value: '',
-        // hide: () => true,
-        hideConfig: true,
-    },
+    // {
+    //     label: 'childUlid',
+    //     category: 'input',
+    //     key: 'childUlid',
+    //     value: '',
+    //     // hide: () => true,
+    //     // hideConfig: true,
+    // },
 ]
 let Select: ConfigItem[] = [
     

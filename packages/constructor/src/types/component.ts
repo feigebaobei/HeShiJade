@@ -58,7 +58,7 @@ type BehaviorMeta = BehaviorMetaItem[]
 type ItemsMeta = ItemsMetaItem[]
 type SlotsMeta = {
   [k: S]: ULID
-}// | {}
+}
 interface ComponentMountEmpty {area: ''}
 interface ComponentMountItems {area: 'items', itemIndex: N}
 interface ComponentMountSlots {area: 'slots', slotKey: S}

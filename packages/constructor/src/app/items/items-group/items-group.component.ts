@@ -112,7 +112,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     })
   }
   listenerChange(item: newConfigItem) {
-    compatibleArray(this.eventMap.get(String(item.key))).forEach(ele => {
+    compatibleArray(this.eventMap.get(String(item.key))!).forEach(ele => {
       ele.item.hideCalc = ele.f(this.itemList)
     })
   }

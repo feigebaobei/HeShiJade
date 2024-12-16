@@ -113,7 +113,7 @@ export class ItemsBoxComponent {
     }
   }
   groupForConfig(type: S): ConfigItem[] {
-    let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
+    let r = cloneDeep(compatibleArray(groupTemplate[type])) // .filter(t => !t.hideConfig)) // 取出要显示的
     return r
   }
 }

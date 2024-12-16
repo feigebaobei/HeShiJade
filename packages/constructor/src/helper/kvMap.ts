@@ -64,6 +64,12 @@ let createKvMap = <T, G>(isDoubleDirection: B = true): KvMap<T, G> => {
         },
     })
 }
+let cretaItemIndexSlotKeyMap = <T, G>(isDoubleDirection: B = true) => {
+    
+    return Object.create(createKvMap<T, G>(isDoubleDirection), {
+
+    })
+}
 // class KvMap<T, G> {
 //     private _map: Map<T, G> | Map<G, T>
 //     public isDoubleDirection: B
