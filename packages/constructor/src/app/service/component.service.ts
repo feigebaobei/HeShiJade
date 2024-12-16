@@ -365,7 +365,8 @@ export class ComponentService {
             })
             if (slotsKeyForDelete.length) {
               // 增加新的
-              curComp.slots[`${index}_${value}`] = curComp.slots[slotsKeyForDelete[0]]
+              let newSlotKey = `${index}_${value}`
+              curComp.slots[newSlotKey] = curComp.slots[slotsKeyForDelete[0]]
               // 删除旧的
               let slotsKeyUlid: {[k: S]: ULID} = {}
               // 删除当前组件的
@@ -387,7 +388,8 @@ export class ComponentService {
                   })
                 })
               }
-              
+              // 请求个性slotKey
+              this.reqUpdateComponentSlotkey(curComp.ulid, newSlotKey, slotsKeyForDelete[0])
             }
           }
           break;
@@ -513,4 +515,9 @@ export class ComponentService {
 
   //   }
   // }
+  reqUpdateComponentSlotkey(ulid: ULID, newSlotKey: S, oldSlotKey: S) {
+    return this.reqService.req(`${serviceUrl()}/components/slots`, 'put', {
+      ulid, newSlotKey, oldSlotKey
+    })
+  }
 }

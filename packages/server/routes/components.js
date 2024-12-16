@@ -769,7 +769,53 @@ router.route('/slots')
   res.send('post')
 })
 .put(cors.corsWithOptions, (req, res) => {
-  res.send('put')
+  new Promise((s, j) => {
+    if (rules.required(req.body.ulid) &&
+      rules.required(req.body.oldSlotKey) && 
+      rules.required(req.body.newSlotKey)
+    ) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.componentTable).findOne({ulid: req.body.ulid}).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((component) => {
+    return lowcodeDb.collection(DB.dev.componentTable).bulkWrite([
+      {
+        updateOne: {
+          filter: {ulid: req.body.ulid},
+          update: {
+            $unset: {[`slots.${req.body.oldSlotKey}`]: null}
+          }
+        }
+      },
+      {
+        updateOne: {
+          filter: {ulid: req.body.ulid},
+          update: {
+            $set: {[`slots.${req.body.newSlotKey}`]: component.slots[req.body.oldSlotKey]}
+          }
+        }
+      }
+    ]).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: {},
+    })
+  }).catch((code) => {
+      res.status(200).json({
+        code,
+        message: errorCode[code],
+        data: {},
+      })
+  })
 })
 .delete(cors.corsWithOptions, (req, res) => {
   // ulid,slotKey
