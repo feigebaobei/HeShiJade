@@ -96,7 +96,12 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     let tree = this.componentService.getTree(this.curPage.ulid)
     if (tree) {
       let node = tree.find(this.data.ulid)
-      Object.entries(node?.value.slots || {}).forEach(([slotKey, valueUlid]) => {
+      Object.entries(node?.value.slots || {}).sort((a, b) => {
+        let d = Math.sign(Number(a[0].split('_')[0]) - Number(b[0].split('_')[0]))
+        return d
+      })
+      .forEach(([slotKey, valueUlid]) => {
+        // clog('slotKey', slotKey)
         let childNode = tree.find(valueUlid)
         // 把已经存在的子组件放在compArr中
         if (childNode) {
@@ -299,7 +304,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     return compatibleArray(p)
   }
   ca2(p: A) {
-    // clog('ca2', p)
     this.compStack?.init()
     return compatibleArray(p)
   }

@@ -18,7 +18,8 @@
 |item的删除icon应该在内部|done||
 |当更新tabs的items的id时应该当前组件的slots，其对应子组件的mount|||
 |删除脏数据|||
-|服务端：在修改items的id时更新slots的值|||
+|服务端：在修改items的id时更新slots的值|done||
+|修改无id的slots时插槽的顺序变了|检查init时||
 |要上生产的内容|||
 ||搭建页面增加返回按钮||
 ||支持块布局||
