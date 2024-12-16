@@ -61,54 +61,75 @@ interface TabsData {
 export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   @Input() data!: TabsData
   compObj: {[k: S]: Comp[]}
+  compArr: Comp[][]
   curPage: Page
-  // createChildKey: typeof createChildKey
   compatibleArray: typeof compatibleArray
   componentList: Comp[]
   itemIndexSlotKeyMap: KvMap<ULID, ULID>
   show: B
-  // listenAddItemCb: (p: A) => void
-  // listenRemoveItemCb: (p: A) => void
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
     this.compObj = {}
+    this.compArr = []
     this.curPage = this.pageService.getCurPage()!
-    // this.createChildKey = createChildKey
     this.compatibleArray = compatibleArray
     this.componentList = []
     this.itemIndexSlotKeyMap = createKvMap()
     this.show = true
+  }
+  createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
+    let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
+    return cck('slots', k, 'component')
+  }
+  createKey(p: {slotKey: ULID} | {index: N}) {
+    if ('slotKey' in p) {
+      return `slots_${p.slotKey}_component`
+    } else {
+      return `slots_${p.index}_component`
+    }
   }
   ngOnInit() {
     this.compObj = {}
     let tree = this.componentService.getTree(this.curPage.ulid)
     if (tree) {
       let node = tree.find(this.data.ulid)
-      Object.entries(node?.value.slots || {}).forEach(([slotKey, v]) => {
-        let key = this.createChildKey({slotKey})
-        let childNode = tree.find(v)
-        this.compObj[key] = compatibleArray(childNode?.toArray())
+      Object.entries(node?.value.slots || {}).forEach(([slotKey, valueUlid]) => {
+        let childNode = tree.find(valueUlid)
+        // 把已经存在的子组件放在compArr中
+        if (childNode) {
+          let compList = compatibleArray(childNode?.toArray())
+          if (compList.length) {
+            this.compArr.push(compList)
+          }
+        }
       })
     }
-    Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => { // 当无子元素时，不运行此回调。
-      this.itemIndexSlotKeyMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
-      // items的下标就是slots中的顺序
-    })
-    clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
-    // clog('init', this)
+    // Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => { // 当无子元素时，不运行此回调。
+    //   this.itemIndexSlotKeyMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
+    //   // items的下标就是slots中的顺序
+    // })
+    // clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
+    clog('compArr', this.compArr)
     // 开始监听
-    this.listen()
+    // this.listen()
     // 设置默认选中的tab对应的子组件列表
-    this.selectTab()
+    // this.selectTab()
+    new Promise((s, _j) => {
+      this.show = false
+      s(true)
+    }).then(() => {
+      asyncFn(() => {
+        this.show = true
+      })
+    })
   }
-  createChildKey(p: {slotKey?: ULID, itemIndex?: N}) {
-    let k = p.slotKey || this.itemIndexSlotKeyMap.get(String(p.itemIndex)) || ''
-    return cck('slots', k, 'component')
+  ngOnChanges(a: A) {
+    clog('prevUlid', a, this.data)
   }
-  selectTab() {
+  selectTab() { // 未被使用
     new Promise((s, _j) => {
       s(true)
     }).then(() => {
@@ -121,20 +142,21 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       } else {
         this.setComponentList('')
       }
-      return !!this.componentList.length
+      // return !!this.componentList.length
     }).then((b) => {
-      asyncFn(() => {
-        this.show = b
-      })
+      // asyncFn(() => {
+      //   this.show = b
+      // })
     })
   }
   ngAfterViewChecked() {
-    // clog('AfterViewChecked', this.componentList)
+    // clog('ngAfterViewChecked')
+  }
+  ngDoCheck() {
+    // clog('ngDoCheck', this.data)
   }
   // todo 可优化为根据item的index、slotsKey
   setComponentList(slotKey: ULID) {
-    // let k = this.data.props['activeTab']
-    // let key = createChildKey('slots', slotKey, 'component')
     let key = this.createChildKey({slotKey})
     this.componentList = compatibleArray(this.compObj[key])
   }
@@ -148,12 +170,24 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       let componentCategory = e.dragData.item.componentCategory
       let compGridLayout = gridLayoutDefault[componentCategory]
       // todo 可以优化到initComponentMeta内处理gridLayout
+      let slotKey = `${itemIndex}_${this.data.items[itemIndex]['id']}`
+      let prevUlid: ULID = ''
+      if (Array.isArray(this.compArr[itemIndex])) {
+        prevUlid = this.compArr[itemIndex][this.compArr[itemIndex].length - 1].ulid
+      } else {
+        prevUlid = ''
+      }
+      clog('prevUlid', prevUlid, slotKey, this.data.items)
       comp = initComponentMeta(
         componentCategory,
         this.curPage.appUlid, this.curPage.ulid,
-        this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
+        // this.compObj[key]?.length ? this.compObj[key][this.compObj[key].length - 1].ulid : '',
+        prevUlid, // prevUlid
         '', this.data.ulid,
-        {area: 'slots', slotKey: this.itemIndexSlotKeyMap.get(String(itemIndex))},
+        {area: 'slots', 
+          // slotKey: this.itemIndexSlotKeyMap.get(String(itemIndex))
+          slotKey,
+        },
         {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
       )
       // 操作compObj / slots
@@ -162,13 +196,21 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       } else {
         this.compObj[key] = [comp]
         // 操作slots
-        let slotKey = this.itemIndexSlotKeyMap.get(String(itemIndex))
+        // let slotKey = this.itemIndexSlotKeyMap.get(String(itemIndex))
+        // this.data.slots[slotKey] = comp.ulid
+        // this.data.slots[`${itemIndex}_${this.data.items[itemIndex]['id']}`] = comp.ulid
         this.data.slots[slotKey] = comp.ulid
       }
+      clog('comp', comp)
       this.componentService.mountComponent(this.curPage.ulid, comp)
+      if (Array.isArray(this.compArr[itemIndex])) {
+        this.compArr[itemIndex].push(comp)
+      } else {
+        this.compArr[itemIndex] = [comp]
+      }
       this.componentService.reqCreateComponent(comp)
-      this.setComponentList(this.itemIndexSlotKeyMap.get(String(itemIndex)))
       return true
+      this.setComponentList(this.itemIndexSlotKeyMap.get(String(itemIndex)))
     }).then(() => {
       asyncFn(() => {
         this.show = true
@@ -176,6 +218,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       })
     })
   }
+  // todo 用到了吗？
   deleteComponentByUlidH(ulid: ULID, index : N) {
     new Promise((s, j) => {
       this.show = false
@@ -187,6 +230,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
       this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
       this.componentService.reqDeleteComponent(ulid, childrenUlid)
+      this.compArr[index].splice(index, 1)
       return true
     }).then(() => {
       // asyncFn(() => {
@@ -247,5 +291,17 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   ngOnDestroy(): void {
   }
   listen() {
+  }
+  identify(index: number, w: Comp['items'][number]) {
+    return w['id']
+  }
+  ca(p: A) {
+    return compatibleArray(p)
+  }
+  ca2(p: A) {
+    // clog('ca2', p)
+
+    this.compStack?.init()
+    return compatibleArray(p)
   }
 }
