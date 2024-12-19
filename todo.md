@@ -2,27 +2,27 @@
 |-|-|-|
 |分支|f_layout||
 |列表页面应该优化样式|||
-|web-site扩展组件时增加井布局|已经增加了。本期还增加了块布局|done|
-|fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|无法复现||
-|有时无法选中页面|不好复现||
-|fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|不明白题意||
-||table组件在删除items时删除子组件|done|
-|测试tab的删除item功能|||
-|tab添加子组件有问题|||
-|是否需要把修改service与发请求分开|已经分开了||
+|测试tab的删除item功能|待测试||
+|测试table的删除item功能|||
+|修正所有的reqDeleteComponent调用|||
+|服务端：删除组件，需要支持控制是否删除子组件|todo||
+|tab添加子组件有问题|done||
 |deleteByUlid=>deleteComponentByUlid|done||
 |丰富组件|||
 ||弹性布局组件||
 ||网络布局组件||
 ||页面组件||
-|item的删除icon应该在内部|done||
 |当更新tabs的items的id时应该当前组件的slots，其对应子组件的mount|||
 |删除脏数据|||
+|table的子元素应该在slots中处理。items中不再处理childUlid了|todo||
 |服务端：在修改items的id时更新slots的值|done||
-|修改无id的slots时插槽的顺序变了|检查init时||
+|修改无id的slots时插槽的顺序变了|检查init时|done|
 |要上生产的内容|||
 ||搭建页面增加返回按钮||
 ||支持块布局||
+||table组件在删除items时删除子组件||
+||解决在tabs组件的items中创建组件时未处理组件链式关系的问题。||
+||优化item的删除icon应该在内部||
 
 |排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||

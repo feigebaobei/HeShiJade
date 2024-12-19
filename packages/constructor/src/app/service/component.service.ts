@@ -273,8 +273,12 @@ export class ComponentService {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
   // 删除指定组件及其子组件
-  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
-    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid, childrenUlid}).then(() => true)
+  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[], includeCurComponent: B = false) {
+    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {
+      ulid,
+      childrenUlid,
+      includeCurComponent, 
+    }).then(() => true)
   }
   // for dev
   // 只在本地保存，不改变远端数据

@@ -4,7 +4,7 @@ import groupTemplate from 'src/helper/items'
 import addableAll from 'src/helper/addable'
 import { cloneDeep, compatibleArray } from 'src/helper/index'
 // type
-import type { B, ConfigItem, N, S } from 'src/types/base';
+import type { B, ConfigItem, N, S, ULID } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
  } from 'src/types/component';
 import { PageService } from 'src/app/service/page.service';
@@ -94,19 +94,45 @@ export class ItemsBoxComponent {
     let ele = this.groupList.splice(i, 1)
     // clog(ele, this.pageService.getCurPage(), this.componentService.curComponent())
     let curPage = this.pageService.getCurPage()
+    // todo 待测试
     if (this.curComponent && curPage) {
-      let childUlid = this.curComponent.items[i]['childUlid']
-      if (childUlid) {
-        let nextComponent = this.componentService.getNextComponent(curPage.ulid, childUlid)
-        let childrenComponent = this.componentService.getChildrenComponent(curPage.ulid, childUlid)
-        // 删除store里的组件
-        nextComponent.forEach(comp => {
-          this.componentService.deleteComponentByUlid(curPage!.ulid, comp.ulid)
-        })
-        // 删除远端的组件
-        this.componentService.reqDeleteComponent('', [...nextComponent, ...childrenComponent].map(item => item.ulid))
+      // 删除当前组件的相关子组件
+      let slotKey = ''
+      switch (this.curComponent.type) {
+        case 'Tabs':
+          slotKey = `${i}_${this.curComponent.items[i]['id']}`
+          break;
+        case 'Table':
+          slotKey = `${i}_${this.curComponent.items[i]['field']}`
+          break;
       }
+      clog('slotKey', slotKey)
+      // debugger
+      if (this.curComponent.slots[slotKey]) {
+        let childrenUlid: Set<ULID> = new Set()
+        this.componentService.getNextComponent(curPage.ulid, this.curComponent.slots[slotKey]).forEach(item => {
+          childrenUlid.add(item.ulid)
+          this.componentService.deleteComponentByUlid(curPage.ulid, item.ulid)
+          this.componentService.getChildrenComponent(curPage.ulid, item.ulid).forEach(subItem => {
+            childrenUlid.add(subItem.ulid)
+          })
+        })
+        this.componentService.reqDeleteComponent(this.curComponent.ulid, [...childrenUlid])
+      }
+      // let childUlid = this.curComponent.items[i]['childUlid']
+      // if (childUlid) {
+      //   let nextComponent = this.componentService.getNextComponent(curPage.ulid, childUlid)
+      //   let childrenComponent = this.componentService.getChildrenComponent(curPage.ulid, childUlid)
+      //   // 删除store里的组件
+      //   nextComponent.forEach(comp => {
+      //     this.componentService.deleteComponentByUlid(curPage!.ulid, comp.ulid)
+      //   })
+      //   // 删除远端的组件
+      //   this.componentService.reqDeleteComponent('', [...nextComponent, ...childrenComponent].map(item => item.ulid))
+      // }
       // 在本地删除组件的item
+      delete this.curComponent.slots[slotKey]
+      // 在store中的item
       this.componentService.removeItemsOfCurComponent(curPage.ulid, this.curComponent.ulid, i)
       // 在远端删除组件的item
       this.componentService.reqRemoveItems(this.curComponent.ulid, i)
