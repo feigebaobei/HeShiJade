@@ -5,6 +5,7 @@ import { asyncFn, createChildKey as cck, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
 import { createKvMap } from 'src/helper/kvMap';
 import { ulid } from 'ulid';
+import shareEvent from 'src/helper/share-event';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -119,7 +120,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     // clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
     clog('compArr', this.compArr)
     // 开始监听
-    // this.listen()
+    this.listen()
     // 设置默认选中的tab对应的子组件列表
     // this.selectTab()
     new Promise((s, _j) => {
@@ -296,6 +297,11 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   ngOnDestroy(): void {
   }
   listen() {
+    shareEvent.on(`Tabs_${this.data.ulid}_items_remove`, (index: N) => {
+      this.compArr.splice(index, 1)
+      clog('cb', index, this.compArr)
+    })
+    clog('shareEvent')
   }
   identify(index: number, w: Comp['items'][number]) {
     return w['id']

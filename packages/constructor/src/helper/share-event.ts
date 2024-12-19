@@ -1,4 +1,3 @@
-// 2024.12.01+ 删除
 // type
 import type { A, S, } from 'src/types/base';
 
@@ -28,7 +27,7 @@ export class ShareEventService {
       }
     }
   }
-  emit(eventName: S, payload: A) {
+  emit(eventName: S, payload?: A) {
     let set = this.getCb(eventName)
     if (set) {
       let arr = [...set]

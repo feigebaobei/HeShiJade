@@ -3,11 +3,13 @@
 |分支|f_layout||
 |列表页面应该优化样式|||
 |测试tab的删除item功能|待测试||
+|在删除了tab的有组件items后再创建相同Id的item不应该有原来的组件|done||
 |测试table的删除item功能|||
 |修正所有的reqDeleteComponent调用|||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
 |tab添加子组件有问题|done||
 |deleteByUlid=>deleteComponentByUlid|done||
+|把下面的逻辑移入tab组件内|||
 |丰富组件|||
 ||弹性布局组件||
 ||网络布局组件||
@@ -325,3 +327,7 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+事件中枢很好用，但是不方便理清逻辑。应少用。
+事件名应该有规范。
+  组件类型_组件的ulid_组件内的字段_动作

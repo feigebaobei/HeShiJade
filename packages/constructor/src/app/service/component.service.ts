@@ -5,6 +5,8 @@ import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, createChildKey } from 'src/helper/index'
+// import shareEvent from ''
+import shareEvent from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -361,6 +363,7 @@ export class ComponentService {
       clog('server', curComp, key, value, index)
       // 特殊处理tabs组件在改变items时更新slots内的key
       // 若后期跨组件的情况多，则使用事件中枢处理。
+      // todo 把下面的逻辑移入tab组件内
       switch (curComp.type) {
         case 'Tabs':
           if (key === 'id') {
@@ -431,11 +434,13 @@ export class ComponentService {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
   // 删除当前组件的item
+  // todo rename removeItems
   removeItemsOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
     let tree = this._map.get(pageUlid)
-    if (tree) {
-      let component = tree.find(componentUlid)
-      component?.value.items.splice(index, 1)
+    let node = tree?.find(componentUlid)
+    if (node) {
+      node.value.items.splice(index, 1)
+      shareEvent.emit(`${node.value.type}_${node.value.ulid}_items_remove`, index)
     }
   }
   // 更新组件
