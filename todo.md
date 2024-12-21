@@ -2,8 +2,10 @@
 |-|-|-|
 |分支|f_layout||
 |列表页面应该优化样式|||
-|测试tab的删除item功能|待测试||
-|在删除了tab的有组件items后再创建相同Id的item不应该有原来的组件|done||
+|测试tab的删除item功能|doing||
+|在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
+|测试所有删除组件的地方。使用includeCurComponent属性控制是否删除当前组件|||
+|tab内非最后一个子组件无法选中|todo||
 |测试table的删除item功能|||
 |修正所有的reqDeleteComponent调用|||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
