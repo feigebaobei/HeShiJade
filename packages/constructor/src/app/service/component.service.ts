@@ -5,8 +5,7 @@ import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, createChildKey } from 'src/helper/index'
-// import shareEvent from ''
-import shareEvent from 'src/helper/share-event';
+import {shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -360,49 +359,50 @@ export class ComponentService {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
-      clog('server', curComp, key, value, index)
+      // clog('server', curComp, key, value, index)
+      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'update'), {key, value, index})
       // 特殊处理tabs组件在改变items时更新slots内的key
       // 若后期跨组件的情况多，则使用事件中枢处理。
       // todo 把下面的逻辑移入tab组件内
-      switch (curComp.type) {
-        case 'Tabs':
-          if (key === 'id') {
-            let slotsKeyForDelete = Object.keys(curComp.slots).filter((slotsKey) => {
-              return slotsKey.split('_')[0] === String(index)
-            })
-            if (slotsKeyForDelete.length) {
-              // 增加新的
-              let newSlotKey = `${index}_${value}`
-              curComp.slots[newSlotKey] = curComp.slots[slotsKeyForDelete[0]]
-              // 删除旧的
-              let slotsKeyUlid: {[k: S]: ULID} = {}
-              // 删除当前组件的
-              slotsKeyForDelete.forEach((slotsKey) => {
-                slotsKeyUlid[slotsKey] = curComp.slots[slotsKey]
-                delete curComp.slots[slotsKey]
-              })
-              // 处理脏数据
-              if (slotsKeyForDelete.slice(1).length) {
-                // 删除远端的
-                let pAll = slotsKeyForDelete.slice(1).map((slotKey) => {
-                  let childrenUlid = compatibleArray(this.getChildrenComponent(this.pageService.getCurPage()?.ulid || '', slotsKeyUlid[slotKey])).map(item => item.ulid)
-                  return this.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid)
-                })
-                Promise.all(pAll).then(() => {
-                  // 删除store中的
-                  slotsKeyForDelete.slice(1).forEach(ulid => {
-                    this.deleteComponentByUlid(this.pageService.getCurPage()?.ulid || '', ulid)
-                  })
-                })
-              }
-              // 请求个性slotKey
-              this.reqUpdateComponentSlotkey(curComp.ulid, newSlotKey, slotsKeyForDelete[0])
-            }
-          }
-          break;
-        default:
-          break;
-      }
+      // switch (curComp.type) {
+      //   case 'Tabs':
+      //     if (key === 'id') {
+      //       let slotsKeyForDelete = Object.keys(curComp.slots).filter((slotsKey) => {
+      //         return slotsKey.split('_')[0] === String(index)
+      //       })
+      //       if (slotsKeyForDelete.length) {
+      //         // 增加新的
+      //         let newSlotKey = `${index}_${value}`
+      //         curComp.slots[newSlotKey] = curComp.slots[slotsKeyForDelete[0]]
+      //         // 删除旧的
+      //         let slotsKeyUlid: {[k: S]: ULID} = {}
+      //         // 删除当前组件的
+      //         slotsKeyForDelete.forEach((slotsKey) => {
+      //           slotsKeyUlid[slotsKey] = curComp.slots[slotsKey]
+      //           delete curComp.slots[slotsKey]
+      //         })
+      //         // 处理脏数据
+      //         if (slotsKeyForDelete.slice(1).length) {
+      //           // 删除远端的
+      //           let pAll = slotsKeyForDelete.slice(1).map((slotKey) => {
+      //             let childrenUlid = compatibleArray(this.getChildrenComponent(this.pageService.getCurPage()?.ulid || '', slotsKeyUlid[slotKey])).map(item => item.ulid)
+      //             return this.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid)
+      //           })
+      //           Promise.all(pAll).then(() => {
+      //             // 删除store中的
+      //             slotsKeyForDelete.slice(1).forEach(ulid => {
+      //               this.deleteComponentByUlid(this.pageService.getCurPage()?.ulid || '', ulid)
+      //             })
+      //           })
+      //         }
+      //         // 请求个性slotKey
+      //         this.reqUpdateComponentSlotkey(curComp.ulid, newSlotKey, slotsKeyForDelete[0])
+      //       }
+      //     }
+      //     break;
+      //   default:
+      //     break;
+      // }
     }
   }
   addItemsOfCurComponent(obj: ItemsMetaItem) {

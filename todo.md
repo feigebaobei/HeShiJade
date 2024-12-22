@@ -2,10 +2,13 @@
 |-|-|-|
 |分支|f_layout||
 |列表页面应该优化样式|||
-|测试tab的删除item功能|doing||
+|测试tab的删除item功能|done||
 |在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
-|测试所有删除组件的地方。使用includeCurComponent属性控制是否删除当前组件|||
+|测试所有删除组件的地方。使用includeCurComponent属性控制是否删除当前组件|done||
+|server内处理tabs组件的删除Items的逻辑 =》 使用事件中枢处理在tabs内处理|done||
+|删除tabs的items时分别调用接口处理删除子组件、删除slots、删除items|||
 |tab内非最后一个子组件无法选中|todo||
+|web-site增加事件中枢的逻辑|todo||
 |测试table的删除item功能|||
 |修正所有的reqDeleteComponent调用|||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
@@ -333,3 +336,5 @@ pnpm publish.
 事件中枢很好用，但是不方便理清逻辑。应少用。
 事件名应该有规范。
   组件类型_组件的ulid_组件内的字段_动作
+统一在service中调用
+先用别的，后来才使用事件中枢。

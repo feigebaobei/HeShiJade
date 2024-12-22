@@ -106,8 +106,8 @@ export class ItemsBoxComponent {
           slotKey = `${i}_${this.curComponent.items[i]['field']}`
           break;
       }
-      clog('slotKey', slotKey)
-      // debugger
+      clog('slotkey', slotKey)
+      debugger
       if (this.curComponent.slots[slotKey]) {
         let childrenUlid: Set<ULID> = new Set()
         this.componentService.getNextComponent(curPage.ulid, this.curComponent.slots[slotKey]).forEach(item => {
@@ -117,19 +117,9 @@ export class ItemsBoxComponent {
             childrenUlid.add(subItem.ulid)
           })
         })
+        clog('childrenUlid', childrenUlid)
         this.componentService.reqDeleteComponent(this.curComponent.ulid, [...childrenUlid])
       }
-      // let childUlid = this.curComponent.items[i]['childUlid']
-      // if (childUlid) {
-      //   let nextComponent = this.componentService.getNextComponent(curPage.ulid, childUlid)
-      //   let childrenComponent = this.componentService.getChildrenComponent(curPage.ulid, childUlid)
-      //   // 删除store里的组件
-      //   nextComponent.forEach(comp => {
-      //     this.componentService.deleteComponentByUlid(curPage!.ulid, comp.ulid)
-      //   })
-      //   // 删除远端的组件
-      //   this.componentService.reqDeleteComponent('', [...nextComponent, ...childrenComponent].map(item => item.ulid))
-      // }
       // 在本地删除组件的item
       delete this.curComponent.slots[slotKey]
       // 在store中的item
