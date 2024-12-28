@@ -359,56 +359,14 @@ export class ComponentService {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
-      // clog('server', curComp, key, value, index)
       shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'update'), {key, value, index})
-      // 特殊处理tabs组件在改变items时更新slots内的key
-      // 若后期跨组件的情况多，则使用事件中枢处理。
-      // todo 把下面的逻辑移入tab组件内
-      // switch (curComp.type) {
-      //   case 'Tabs':
-      //     if (key === 'id') {
-      //       let slotsKeyForDelete = Object.keys(curComp.slots).filter((slotsKey) => {
-      //         return slotsKey.split('_')[0] === String(index)
-      //       })
-      //       if (slotsKeyForDelete.length) {
-      //         // 增加新的
-      //         let newSlotKey = `${index}_${value}`
-      //         curComp.slots[newSlotKey] = curComp.slots[slotsKeyForDelete[0]]
-      //         // 删除旧的
-      //         let slotsKeyUlid: {[k: S]: ULID} = {}
-      //         // 删除当前组件的
-      //         slotsKeyForDelete.forEach((slotsKey) => {
-      //           slotsKeyUlid[slotsKey] = curComp.slots[slotsKey]
-      //           delete curComp.slots[slotsKey]
-      //         })
-      //         // 处理脏数据
-      //         if (slotsKeyForDelete.slice(1).length) {
-      //           // 删除远端的
-      //           let pAll = slotsKeyForDelete.slice(1).map((slotKey) => {
-      //             let childrenUlid = compatibleArray(this.getChildrenComponent(this.pageService.getCurPage()?.ulid || '', slotsKeyUlid[slotKey])).map(item => item.ulid)
-      //             return this.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid)
-      //           })
-      //           Promise.all(pAll).then(() => {
-      //             // 删除store中的
-      //             slotsKeyForDelete.slice(1).forEach(ulid => {
-      //               this.deleteComponentByUlid(this.pageService.getCurPage()?.ulid || '', ulid)
-      //             })
-      //           })
-      //         }
-      //         // 请求个性slotKey
-      //         this.reqUpdateComponentSlotkey(curComp.ulid, newSlotKey, slotsKeyForDelete[0])
-      //       }
-      //     }
-      //     break;
-      //   default:
-      //     break;
-      // }
     }
   }
   addItemsOfCurComponent(obj: ItemsMetaItem) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items.push(obj)
+      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'add'), obj)
     }
   }
   addSlots(key: S, value: S) {
@@ -437,10 +395,10 @@ export class ComponentService {
   // todo rename removeItems
   removeItemsOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
     let tree = this._map.get(pageUlid)
-    let node = tree?.find(componentUlid)
-    if (node) {
-      node.value.items.splice(index, 1)
-      shareEvent.emit(`${node.value.type}_${node.value.ulid}_items_remove`, index)
+    let component = tree?.find(componentUlid)?.value
+    if (component) {
+      component.items.splice(index, 1)
+      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, index)
     }
   }
   // 更新组件
@@ -513,6 +471,7 @@ export class ComponentService {
     return childrenComponent
   }
   // 得到后组件
+  // todo rename getNextAllComponent
   getNextComponent(pageUlid: ULID, componentUlid: ULID): Component[] {
     let tree = this.getTree(pageUlid)
     return compatibleArray(tree?.find(componentUlid)?.toArray()!) // .map(component => component.ulid)

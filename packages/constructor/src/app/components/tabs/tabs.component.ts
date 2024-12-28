@@ -107,9 +107,10 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         // 把已经存在的子组件放在compArr中
         if (childNode) {
           let compList = compatibleArray(childNode?.toArray())
-          if (compList.length) {
-            this.compArr.push(compList)
-          }
+          // if (compList.length) {
+          //   this.compArr.push(compList)
+          // }
+          this.compArr.push(compList)
         }
       })
     }
@@ -297,10 +298,36 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   ngOnDestroy(): void {
   }
   listen() {
-    // todo 应该由一个方法生成事件名
-    shareEvent.on(`Tabs_${this.data.ulid}_items_remove`, (index: N) => {
-      this.compArr.splice(index, 1)
+    shareEvent.on(creatEventName('Tabs', this.data.ulid, 'items', 'add'), () => {
+      this.compArr.push([])
     })
+    shareEvent.on(
+      creatEventName('Tabs', this.data.ulid, 'items', 'remove'),
+      (index: N) => {
+        let childComponentArr = this.compArr.splice(index, 1)[0]
+        // 删除当前组件的相关子组件
+        let childrenUlid: ULID[] = []
+        childComponentArr.forEach(item => {
+          childrenUlid.push(item.ulid)
+          this.componentService.deleteComponentByUlid(this.curPage.ulid, item.ulid)
+          this.componentService.getChildrenComponent(this.curPage.ulid, item.ulid).forEach(subItem => {
+            childrenUlid.push(subItem.ulid)
+          })
+        })
+        this.componentService.reqDeleteComponent(this.data.ulid, [...childrenUlid])
+        // 在本地删除组件的item
+        let slotKey = `${index}_${this.data.items[index]['id']}`
+        delete this.data.slots[slotKey]
+        // 调整slots的key
+        Object.entries(this.data.slots).forEach(([key, ulidValue]) => {
+          let [indexStr, idStr] = key.split('_')
+          if (Number(indexStr) >= index) {
+            this.data.slots[`${Number(indexStr) - 1}_${idStr}`] = ulidValue
+            delete this.data.slots[key]
+          }
+        })
+      }
+    )
     shareEvent.on(creatEventName('Tabs', this.data.ulid, 'items', 'update'), (options) => {
       if (options.key === 'id') {
         let slotsKeyForDelete = Object.keys(this.data.slots).filter((slotsKey) => {
@@ -336,6 +363,13 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         }
       }
     })
+    shareEvent.on(
+      creatEventName('Tabs', this.data.ulid, 'items', 'reorder'),
+      (index: N) => {
+        // this.compArr.splice(index, 1)
+        clog('reorder', index)
+      }
+    )
   }
   identify(index: number, w: Comp['items'][number]) {
     return w['id']

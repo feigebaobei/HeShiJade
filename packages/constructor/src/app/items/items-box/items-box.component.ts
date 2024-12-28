@@ -90,38 +90,41 @@ export class ItemsBoxComponent {
     }
   }
   removeH(i: N) {
+    // 在这里处理公共的逻辑。各组件的逻辑在其内部自己处理。
     // 删除配置面板的item
     let ele = this.groupList.splice(i, 1)
     // clog(ele, this.pageService.getCurPage(), this.componentService.curComponent())
     let curPage = this.pageService.getCurPage()
     // todo 待测试
     if (this.curComponent && curPage) {
+      // let slotKey = ''
+      // switch (this.curComponent.type) {
+      //   case 'Tabs':
+      //     slotKey = `${i}_${this.curComponent.items[i]['id']}`
+      //     break;
+      //   case 'Table':
+      //     slotKey = `${i}_${this.curComponent.items[i]['field']}`
+      //     break;
+      // }
+      // clog('slotkey', slotKey)
+      // debugger
       // 删除当前组件的相关子组件
-      let slotKey = ''
-      switch (this.curComponent.type) {
-        case 'Tabs':
-          slotKey = `${i}_${this.curComponent.items[i]['id']}`
-          break;
-        case 'Table':
-          slotKey = `${i}_${this.curComponent.items[i]['field']}`
-          break;
-      }
-      clog('slotkey', slotKey)
-      debugger
-      if (this.curComponent.slots[slotKey]) {
-        let childrenUlid: Set<ULID> = new Set()
-        this.componentService.getNextComponent(curPage.ulid, this.curComponent.slots[slotKey]).forEach(item => {
-          childrenUlid.add(item.ulid)
-          this.componentService.deleteComponentByUlid(curPage.ulid, item.ulid)
-          this.componentService.getChildrenComponent(curPage.ulid, item.ulid).forEach(subItem => {
-            childrenUlid.add(subItem.ulid)
-          })
-        })
-        clog('childrenUlid', childrenUlid)
-        this.componentService.reqDeleteComponent(this.curComponent.ulid, [...childrenUlid])
-      }
-      // 在本地删除组件的item
-      delete this.curComponent.slots[slotKey]
+      // if (this.curComponent.slots[slotKey]) {
+      //   let childrenUlid: Set<ULID> = new Set()
+      //   this.componentService.getNextComponent(curPage.ulid, this.curComponent.slots[slotKey]).forEach(item => {
+      //     childrenUlid.add(item.ulid)
+      //     this.componentService.deleteComponentByUlid(curPage.ulid, item.ulid)
+      //     this.componentService.getChildrenComponent(curPage.ulid, item.ulid).forEach(subItem => {
+      //       childrenUlid.add(subItem.ulid)
+      //     })
+      //   })
+      //   clog('childrenUlid', childrenUlid)
+      //   this.componentService.reqDeleteComponent(this.curComponent.ulid, [...childrenUlid])
+      // }
+
+
+      // // 在本地删除组件的item
+      // delete this.curComponent.slots[slotKey]
       // 在store中的item
       this.componentService.removeItemsOfCurComponent(curPage.ulid, this.curComponent.ulid, i)
       // 在远端删除组件的item
