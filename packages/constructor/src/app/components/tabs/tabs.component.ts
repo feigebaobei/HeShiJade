@@ -179,7 +179,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       // todo 可以优化到initComponentMeta内处理gridLayout
       let slotKey = `${itemIndex}_${this.data.items[itemIndex]['id']}`
       let prevUlid: ULID = ''
-      if (Array.isArray(this.compArr[itemIndex])) {
+      if (this.compArr[itemIndex].length) {
         prevUlid = this.compArr[itemIndex][this.compArr[itemIndex].length - 1].ulid
       } else {
         prevUlid = ''
