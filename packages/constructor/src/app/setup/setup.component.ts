@@ -163,7 +163,7 @@ export class SetupComponent implements OnInit {
     this.show = true
   }
   viewBtClickH() {
-    window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
+    window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.curPage?.key}`, '_blank')
   }
   gobackButtonClickH() {
     this.location.back()
@@ -206,7 +206,10 @@ export class SetupComponent implements OnInit {
   }
   onDrop(e: DropEvent) {
     // 请求后端保存组件时保存到本地。
-    let curPage = this.pageService.getCurPage()
+    let curPage = this.curPage
+    if (!curPage) {
+      this.msg = [{ severity: 'error', summary: '', content: '当前未选中页面，无法创建组件。请先选中页面。' }];
+    }
     let heightMax = 0
     this.componentByPage.forEach(item => {
       let n = (item.y || 0) + (item.h || 0)
@@ -304,7 +307,7 @@ export class SetupComponent implements OnInit {
   }
   gridStackItemClickH($event: MouseEvent, item: SuperGridItem) {
     $event.stopPropagation()
-    let curPage = this.pageService.getCurPage()
+    let curPage = this.curPage
     if (curPage) {
       if (this.curComponent) {
         if (item.id !== this.curComponent.ulid) {
