@@ -6,6 +6,7 @@ import { asyncFn, createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
 import { compatibleArray } from 'src/helper/index'
+import {shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -81,7 +82,7 @@ AfterViewInit
   createChildKey: typeof createChildKey
   curPage: Page
   componentList: Comp[]
-  showList: B[]
+  showList: B[] // 是否显示指定列的组件
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
   @ViewChild('compStack') compStack!: CompStackComponent
@@ -149,10 +150,49 @@ AfterViewInit
         let node = tree?.find(item['childUlid'])
         if (node) {
           this.compObj[createChildKey('items', index, 'component')] = node.toArray()
+        } else {
+          this.compObj[createChildKey('items', index, 'component')] = []
         }
+      } else {
+        this.compObj[createChildKey('items', index, 'component')] = []
       }
       this.showList.push(true)
     })
+    // clog('init this.showLit', this.showList)
+    this.listen()
+  }
+  listen() {
+    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'add'), (_obj) => {
+      this.showList.push(true)
+      this.compObj[createChildKey('items', this.data.items.length, 'component')] = []
+    })
+    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'remove'), (index) => {
+      this.showList.splice(index, 1)
+      let key = createChildKey('items', index, 'component')
+      let childComponentArr = this.compObj[key]
+      let childrenUlid: ULID[] = []
+      childComponentArr.forEach(comp => {
+        childrenUlid.push(comp.ulid)
+        this.componentService.deleteComponentByUlid(this.curPage.ulid, comp.ulid)
+        this.componentService.getChildrenComponent(this.curPage.ulid, comp.ulid).forEach(subItem => {
+          childrenUlid.push(subItem.ulid)
+        })
+      })
+      this.componentService.reqDeleteComponent(this.data.ulid, childrenUlid)
+      delete this.compObj[key]
+      // 调整
+      Object.entries(this.compObj).forEach(([key, compList]) => {
+        let [_prev, i, _post] = key.split('_')
+        if (Number(i) > index) {
+          this.compObj[createChildKey('items', Number(i) - 1, 'component')] = compList
+          delete this.compObj[createChildKey('items', Number(i), 'component')]
+        }
+      })
+    })
+    // shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'update'), () => {
+    // })
+    // shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'reorder'), () => {
+    // })
   }
   dropH(e: DropEvent, field: S, itemIndex: N) {
     // 在本组件内添加新组件
@@ -184,6 +224,7 @@ AfterViewInit
         )
         this.compObj[key] = [comp]
       }
+      clog(comp)
       // 在service中添加新组件
       this.componentService.mountComponent(this.curPage.ulid, comp)
       // 在服务端保存新组件

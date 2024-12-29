@@ -190,6 +190,7 @@ export class ComponentService {
     // 2 后组件
     // 3 items组件
     // 4 slots组件
+    // 当前不支持在中间创建组件
     let n: N = 0
     if (comp.parentUlid) {
       switch (comp.mount.area) {
@@ -248,7 +249,7 @@ export class ComponentService {
             createChildKey('items', (comp.mount as ComponentMountItems).itemIndex, 'node')
             )
           // createChildKey
-          node = tree.find(comp.parentUlid)
+          node = tree.find(comp.parentUlid) // 父节点
           if (node) {
             node.value.items[(comp.mount as ComponentMountItems).itemIndex]['childUlid'] = comp.ulid
           }
@@ -263,7 +264,7 @@ export class ComponentService {
           }
           break;
       }
-      clog('tree', tree)
+      // clog('tree', tree)
       return b
     } else {
       return false
@@ -362,7 +363,7 @@ export class ComponentService {
       shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'update'), {key, value, index})
     }
   }
-  addItemsOfCurComponent(obj: ItemsMetaItem) {
+  addItems(obj: ItemsMetaItem) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items.push(obj)
@@ -392,13 +393,12 @@ export class ComponentService {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
   // 删除当前组件的item
-  // todo rename removeItems
-  removeItemsOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
+  removeItems(pageUlid: ULID, componentUlid: ULID, index: N) {
     let tree = this._map.get(pageUlid)
     let component = tree?.find(componentUlid)?.value
     if (component) {
       component.items.splice(index, 1)
-      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, index)
+      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, index) // 触发事件
     }
   }
   // 更新组件

@@ -321,7 +321,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         // 调整slots的key
         Object.entries(this.data.slots).forEach(([key, ulidValue]) => {
           let [indexStr, idStr] = key.split('_')
-          if (Number(indexStr) >= index) {
+          if (Number(indexStr) > index) {
             this.data.slots[`${Number(indexStr) - 1}_${idStr}`] = ulidValue
             delete this.data.slots[key]
           }

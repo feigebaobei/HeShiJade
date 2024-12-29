@@ -1,6 +1,7 @@
 ||||
 |-|-|-|
 |分支|f_layout||
+|删除舞台区的组件时有问题|||
 |列表页面应该优化样式|||
 |测试tab的删除item功能|done||
 |在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
@@ -9,7 +10,8 @@
 |删除tabs的items时分别调用接口处理删除子组件、删除slots、删除items|||
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
-|测试table的删除item功能|||
+|测试table的删除item功能|doing||
+|// todo 检查使用ItemsMetaItem的地方|||
 |修正所有的reqDeleteComponent调用|||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
 |tab添加子组件有问题|done||
@@ -24,6 +26,7 @@
 |table的子元素应该在slots中处理。items中不再处理childUlid了|todo||
 |服务端：在修改items的id时更新slots的值|done||
 |修改无id的slots时插槽的顺序变了|检查init时|done|
+||item的icon应该在上面||
 |要上生产的内容|||
 ||搭建页面增加返回按钮||
 ||支持块布局||
@@ -336,6 +339,6 @@ pnpm publish.
 事件中枢很好用，但是不方便理清逻辑。应少用。
 事件名应该有规范。
   组件类型_组件的ulid_组件内的字段_动作
-统一在service中调用
+统一在service中调用。作为事件的总阀门处理。
 先用别的，后来才使用事件中枢。
 兼顾语义性与惟一性
