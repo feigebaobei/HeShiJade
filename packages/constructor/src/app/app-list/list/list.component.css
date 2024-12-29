@@ -1,13 +1,24 @@
 .app_section {
-    display: flex;
+    display: grid;
+    row-gap: 12px;
+    column-gap: 16px;
+    grid-template-columns: repeat(4, minmax(280px, 320px));
+    padding: 0 16px;
 }
 .app_box {
-    border: 1px solid #333;
+    border: 1px solid #b1b0b2;
     flex-basis: 360px;
     flex-grow: 0;
     flex-shrink: 1;
-    margin: 8px 16px;
     cursor: pointer;
+    padding: 8px;
+}
+.paragraph {
+    margin: 4px;
+}
+.paragraph-button-box {
+    display: flex;
+    column-gap: 8px;
 }
 .header {
     background: #9ef7c3;

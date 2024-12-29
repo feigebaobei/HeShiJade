@@ -2,7 +2,7 @@
 |-|-|-|
 |分支|f_layout||
 |删除舞台区的组件时有问题|||
-|列表页面应该优化样式|doing||
+|列表页面应该优化样式|done||
 |测试tab的删除item功能|done||
 |在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
 |测试所有删除组件的地方。使用includeCurComponent属性控制是否删除当前组件|done||
@@ -27,6 +27,7 @@
 |服务端：在修改items的id时更新slots的值|done||
 |修改无id的slots时插槽的顺序变了|检查init时|done|
 ||item的icon应该在上面|done|
+|刷新应用列表时显示提示|done||
 |要上生产的内容|||
 ||搭建页面增加返回按钮||
 ||支持块布局||

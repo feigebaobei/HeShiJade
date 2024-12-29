@@ -19,19 +19,19 @@
     <!-- 列表 -->
     <section class="app_section">
         <div *ngFor="let app of appList; let index = index" class="app_box" (click)="appItemClickH(app.ulid)">
-            <p>
+            <p class="paragraph">
                 <span>key:</span>
                 <span>{{app.key}}</span>
             </p>
-            <p>
+            <p class="paragraph">
                 <span>name:</span>
                 <span>{{app.name}}</span>
             </p>
-            <p>
+            <p class="paragraph">
                 <span>theme:</span>
                 <span>{{app.theme}}</span>
             </p>
-            <p>
+            <p class="paragraph-button-box">
                 <d-button (click)="configBtClickH($event, index)">配置</d-button>
                 <d-button (click)="gotoPublishBtClickH($event, index)">版本&发布</d-button>
                 <d-button (click)="appDeleteClickH($event, index)">删除</d-button>
