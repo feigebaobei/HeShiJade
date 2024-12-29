@@ -1,15 +1,20 @@
 <!-- header -->
-<header>
-    <!-- {{user | json}} -->
-    <span>用户账号：{{user?.profile?.email}}</span>
-    <d-button (click)="logoutBtClickH()">logout</d-button>
-    <d-button (click)="homeBtClickH()">home</d-button>
+<header class="header">
+    <div class="logo-box">
+        <span class="logo"></span>
+        <span class="">HeShiJade</span>
+    </div>
+    <div class="right">
+        <span>用户账号：{{user?.profile?.email}}</span>
+        <d-button (click)="logoutBtClickH()">logout</d-button>
+        <d-button (click)="homeBtClickH()">home</d-button>
+    </div>
 </header>
 <!-- main -->
 <main>
-    <div>
+    <div class="button-box">
         <d-button (click)="openModalBtClickH()">创建新应用</d-button>
-        <d-button (click)="sqlBtClickH()">查询应用列表</d-button>
+        <d-button (click)="sqlBtClickH()">刷新应用列表</d-button>
     </div>
     <!-- 列表 -->
     <section class="app_section">

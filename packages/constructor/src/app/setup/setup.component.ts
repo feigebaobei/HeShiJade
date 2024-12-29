@@ -209,6 +209,7 @@ export class SetupComponent implements OnInit {
     let curPage = this.curPage
     if (!curPage) {
       this.msg = [{ severity: 'error', summary: '', content: '当前未选中页面，无法创建组件。请先选中页面。' }];
+      return
     }
     let heightMax = 0
     this.componentByPage.forEach(item => {

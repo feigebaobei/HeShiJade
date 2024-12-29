@@ -6,7 +6,7 @@ import { asyncFn, createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
 import { compatibleArray } from 'src/helper/index'
-import {shareEvent, creatEventName} from 'src/helper/share-event';
+import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
 import {
   Button as gridLayoutButtonDefault,

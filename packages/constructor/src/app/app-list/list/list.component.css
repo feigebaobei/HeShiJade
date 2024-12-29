@@ -9,3 +9,38 @@
     margin: 8px 16px;
     cursor: pointer;
 }
+.header {
+    background: #9ef7c3;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content-box {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.logo-box {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+}
+.logo {
+    border-radius: 50px;
+    border: 18px solid #fdfdfd;
+    box-sizing: border-box;
+    width: 56px;
+    height: 56px;
+    display: inline-block;
+    margin-right: 18px;
+}
+.right {
+    display: flex;
+    column-gap: 8px;
+}
+.button-box {
+    display: flex;
+    column-gap: 8px;
+    padding: 8px 16px;
+    
+}

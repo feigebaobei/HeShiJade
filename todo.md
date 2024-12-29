@@ -2,7 +2,7 @@
 |-|-|-|
 |分支|f_layout||
 |删除舞台区的组件时有问题|||
-|列表页面应该优化样式|||
+|列表页面应该优化样式|doing||
 |测试tab的删除item功能|done||
 |在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
 |测试所有删除组件的地方。使用includeCurComponent属性控制是否删除当前组件|done||
@@ -10,7 +10,7 @@
 |删除tabs的items时分别调用接口处理删除子组件、删除slots、删除items|||
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
-|测试table的删除item功能|doing||
+|测试table的删除item功能|done||
 |// todo 检查使用ItemsMetaItem的地方|||
 |修正所有的reqDeleteComponent调用|||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
@@ -26,7 +26,7 @@
 |table的子元素应该在slots中处理。items中不再处理childUlid了|todo||
 |服务端：在修改items的id时更新slots的值|done||
 |修改无id的slots时插槽的顺序变了|检查init时|done|
-||item的icon应该在上面||
+||item的icon应该在上面|done|
 |要上生产的内容|||
 ||搭建页面增加返回按钮||
 ||支持块布局||
