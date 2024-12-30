@@ -258,7 +258,7 @@ export class SetupComponent implements OnInit {
     this.componentList = this.componentList.filter(item => item.ulid !== ulid)
     let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteComponentByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
-    this.componentService.reqDeleteComponent(ulid, compUlid)
+    this.componentService.reqDeleteComponent(ulid, compUlid, true)
     // 这里不用使用comStack.init()
   }
   identify(index: number, w: GridStackWidget) {

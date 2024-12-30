@@ -1,27 +1,27 @@
 ||||
 |-|-|-|
 |分支|f_layout||
-|删除舞台区的组件时有问题|||
+|删除舞台区的组件时有问题|doing||
 |列表页面应该优化样式|done||
 |测试tab的删除item功能|done||
 |在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
 |测试所有删除组件的地方。使用includeCurComponent属性控制是否删除当前组件|done||
 |server内处理tabs组件的删除Items的逻辑 =》 使用事件中枢处理在tabs内处理|done||
-|删除tabs的items时分别调用接口处理删除子组件、删除slots、删除items|||
+|删除tabs的items时分别调用接口处理删除子组件、删除slots、删除items|done||
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
 |测试table的删除item功能|done||
 |// todo 检查使用ItemsMetaItem的地方|||
-|修正所有的reqDeleteComponent调用|||
+|修正所有的reqDeleteComponent调用|doing||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
 |tab添加子组件有问题|done||
 |deleteByUlid=>deleteComponentByUlid|done||
-|把下面的逻辑移入tab组件内|||
+|把下面的逻辑移入tab组件内|done||
 |丰富组件|||
 ||弹性布局组件||
 ||网络布局组件||
 ||页面组件||
-|当更新tabs的items的id时应该当前组件的slots，其对应子组件的mount|||
+|当更新tabs的items的id时应该当前组件的slots，其对应子组件的mount|done||
 |删除脏数据|||
 |table的子元素应该在slots中处理。items中不再处理childUlid了|todo||
 |服务端：在修改items的id时更新slots的值|done||
