@@ -260,6 +260,7 @@ export class ComponentService {
             )
           node = tree.find(comp.parentUlid)
           if (node) {
+            // todo 这里的Ulid好像不需要
             node.value.slots[`slots_${(comp.mount as ComponentMountSlots).slotKey}Ulid`] = comp.ulid
           }
           break;
@@ -355,6 +356,7 @@ export class ComponentService {
   }
   // todo 可优化key的类型
   // key 的类型应该是S
+  // todo rename setItems
   // setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
   setItemsOfCurComponent(index: N, key: S, value: A) {
     let curComp = this.curComponent()

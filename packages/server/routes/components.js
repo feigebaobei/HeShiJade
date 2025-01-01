@@ -282,7 +282,7 @@ router.route('/')
     let updateObj = {
       [k]: req.body.value
     }
-    clog('updateObj', updateObj)
+    // clog('updateObj', updateObj)
     return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: 
       updateObj
     }).catch(() => {

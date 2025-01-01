@@ -60,8 +60,8 @@ interface basicDataSourceItem {
 interface TableData {
   props: Comp['props']
   items: Comp['items']
+  slots: Comp['slots']
   ulid: ULID
-  mount: ComponentMountItems
 }
 
 
@@ -72,13 +72,10 @@ interface TableData {
 })
 export class TableComponent implements OnInit, 
 AfterViewInit
-// AfterContentInit
  {
-  // @Input() data: A
   @Input() data!: TableData
   basicDataSource: basicDataSourceItem[]
-  // dataTableOptions: {columns: A[]}
-  compObj: {[k: S]: Comp[]}
+  compArr: Comp[][]
   createChildKey: typeof createChildKey
   curPage: Page
   componentList: Comp[]
@@ -130,46 +127,42 @@ AfterViewInit
         dob: new Date(1991, 3, 1),
       },
     ]
-    this.compObj = {
-      // <field>: Comp[]
-    }
+    this.compArr = []
     this.createChildKey = createChildKey
     this.curPage = this.pageService.getCurPage()!
     this.componentList = []
     this.showList = []
   }
-  compCompList(index: N) {
-    return compatibleArray(this.compObj[createChildKey('items', index, 'component')])
-    // this.componentList = compatibleArray(this.compObj[createChildKey('items', index, 'component')])
-  }
   ngOnInit(): void {
-    this.compObj = {}
     let tree = this.componentService.getTree(this.curPage.ulid)
+    // todo 删除所有使用childUlid的地方
     this.data.items.forEach((item, index) => {
-      if (item['category'] === 'slots') {
-        let node = tree?.find(item['childUlid'])
-        if (node) {
-          this.compObj[createChildKey('items', index, 'component')] = node.toArray()
-        } else {
-          this.compObj[createChildKey('items', index, 'component')] = []
-        }
+      let slotsKey =this.data.slots[`${index}_${item['field']}`]
+      if (slotsKey) {
+        this.compArr.push(tree?.find(slotsKey)?.toArray() || [])
       } else {
-        this.compObj[createChildKey('items', index, 'component')] = []
+        this.compArr.push([])
       }
       this.showList.push(true)
     })
-    // clog('init this.showLit', this.showList)
     this.listen()
+    new Promise((s, _j) => {
+      this.showList = this.showList.fill(false)
+      s(true)
+    }).then(() => {
+      asyncFn(() => {
+        this.showList = this.showList.fill(true)
+      })
+    })
   }
   listen() {
     shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'add'), (_obj) => {
       this.showList.push(true)
-      this.compObj[createChildKey('items', this.data.items.length, 'component')] = []
+      this.compArr.push([])
     })
     shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'remove'), (index) => {
       this.showList.splice(index, 1)
-      let key = createChildKey('items', index, 'component')
-      let childComponentArr = this.compObj[key]
+      let childComponentArr = this.compArr[index]
       let childrenUlid: ULID[] = []
       childComponentArr.forEach(comp => {
         childrenUlid.push(comp.ulid)
@@ -179,18 +172,23 @@ AfterViewInit
         })
       })
       this.componentService.reqDeleteComponent(this.data.ulid, childrenUlid)
-      delete this.compObj[key]
-      // 调整
-      Object.entries(this.compObj).forEach(([key, compList]) => {
-        let [_prev, i, _post] = key.split('_')
-        if (Number(i) > index) {
-          this.compObj[createChildKey('items', Number(i) - 1, 'component')] = compList
-          delete this.compObj[createChildKey('items', Number(i), 'component')]
-        }
-      })
+      this.compArr.splice(index, 1)
     })
-    // shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'update'), () => {
-    // })
+    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+      // {key, value, index}
+      if (key === 'field') {
+        let slotsKeyForDelete = Object.keys(this.data.slots).find((slotsKey) => {
+          return slotsKey.split('_')[0] === String(index)
+        })
+        if (slotsKeyForDelete) {
+          // 更新、删除当前组件的slotKey
+          this.data.slots[`${index}_${value}`] = this.data.slots[slotsKeyForDelete]
+          delete this.data.slots[slotsKeyForDelete]
+          // 请求更新slotKey
+          this.componentService.reqUpdateComponentSlotkey(this.data.ulid, `${index}_${value}`, slotsKeyForDelete)
+        }
+      }
+    })
     // shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'reorder'), () => {
     // })
   }
@@ -205,34 +203,37 @@ AfterViewInit
       let key = createChildKey('items', itemIndex, 'component')
       let componentCategory = e.dragData.item.componentCategory
       let compGridLayout = gridLayoutDefault[componentCategory]
-      if (this.compObj[key]?.length) {
+      if (this.compArr[itemIndex]?.length) {
         comp = initComponentMeta(
           componentCategory,
           this.curPage.appUlid, this.curPage.ulid,
-          this.compObj[key][this.compObj[key].length - 1].ulid, '', this.data.ulid,
-          {area: 'items', itemIndex},
+          this.compArr[itemIndex][this.compArr.length - 1].ulid, '', this.data.ulid,
+          // {area: 'items', itemIndex},
+          {area: 'slots', slotKey: `${itemIndex}_`}, // 这里的slotKey应该与配置项的field的默认值相同
           {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
           )
-        this.compObj[key].push(comp)
+        // this.compObj[key].push(comp)
+        this.compArr[itemIndex].push(comp)
       } else {
         comp = initComponentMeta(
           componentCategory,
           this.curPage.appUlid, this.curPage.ulid,
           '', '', this.data.ulid,
-          {area: 'items', itemIndex},
+          // {area: 'items', itemIndex},
+          {area: 'slots', slotKey: `${itemIndex}_`},
           {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
         )
-        this.compObj[key] = [comp]
+        this.compArr.push([comp])
       }
-      clog(comp)
       // 在service中添加新组件
       this.componentService.mountComponent(this.curPage.ulid, comp)
+      // 更新当前组件的slots
+      this.componentService.reqAddSlots(`${itemIndex}_`, comp.ulid)
       // 在服务端保存新组件
       this.componentService.reqCreateComponent(comp)
       return
     }).then(() => {
       asyncFn(() => {
-        // this.compStack.init()
         this.showList[itemIndex] = true
       })
     })
@@ -240,7 +241,10 @@ AfterViewInit
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     let key = createChildKey('items', index, 'component')
-    this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+    this.compArr[index] = this.compArr[index].filter(item => item.ulid !== ulid)
+    if (this.data.slots[`${index}_${this.data.items[index]['field']}`] === ulid) {
+      this.data.slots[`${index}_${this.data.items[index]['field']}`] = ''
+    }
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)

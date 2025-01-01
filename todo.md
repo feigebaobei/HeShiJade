@@ -1,7 +1,7 @@
 ||||
 |-|-|-|
 |分支|f_layout||
-|删除舞台区的组件时有问题|doing||
+|删除舞台区的组件时有问题|done||
 |列表页面应该优化样式|done||
 |测试tab的删除item功能|done||
 |在删除了tab的items后再创建相同Id的item不应该有原来的组件|done||
@@ -11,9 +11,12 @@
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
 |测试table的删除item功能|done||
-|// todo 检查使用ItemsMetaItem的地方|||
-|修正所有的reqDeleteComponent调用|doing||
+|// todo 检查使用ItemsMetaItem的地方|done||
+||table的子组件挂载到slots字段|doing|
+|修正所有的reqDeleteComponent调用|done||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
+|tabs不再处理脏数据|||
+|// todo 这里的Ulid好像不需要|||
 |tab添加子组件有问题|done||
 |deleteByUlid=>deleteComponentByUlid|done||
 |把下面的逻辑移入tab组件内|done||
@@ -22,7 +25,7 @@
 ||网络布局组件||
 ||页面组件||
 |当更新tabs的items的id时应该当前组件的slots，其对应子组件的mount|done||
-|删除脏数据|||
+|服务端支持删除脏数据|||
 |table的子元素应该在slots中处理。items中不再处理childUlid了|todo||
 |服务端：在修改items的id时更新slots的值|done||
 |修改无id的slots时插槽的顺序变了|检查init时|done|
@@ -34,7 +37,11 @@
 ||table组件在删除items时删除子组件||
 ||解决在tabs组件的items中创建组件时未处理组件链式关系的问题。||
 ||优化item的删除icon应该在内部||
+||perf:使用事件中枢处理items面板与组件的联动逻辑||
+||perf:items中不再支持childUlid,改为slots中处理子组件的ulid.||
+||perf:items不挂载子组件的ulid。子组件的ulid都在slots中。||
 
+|不应该使用默认的选中组件，因有可能用户不选中组件直接为指定组件操作|||
 |排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
 |创建碎片平台|||
