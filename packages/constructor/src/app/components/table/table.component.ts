@@ -200,7 +200,7 @@ AfterViewInit
     }).then(() => {
       this.showList[itemIndex] = false
       let comp: Comp
-      let key = createChildKey('items', itemIndex, 'component')
+      // let key = createChildKey('items', itemIndex, 'component')
       let componentCategory = e.dragData.item.componentCategory
       let compGridLayout = gridLayoutDefault[componentCategory]
       if (this.compArr[itemIndex]?.length) {
@@ -240,6 +240,7 @@ AfterViewInit
     // this.cdRef.detectChanges()
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
+    this.showList[index] = false
     let key = createChildKey('items', index, 'component')
     this.compArr[index] = this.compArr[index].filter(item => item.ulid !== ulid)
     if (this.data.slots[`${index}_${this.data.items[index]['field']}`] === ulid) {
@@ -249,7 +250,8 @@ AfterViewInit
     this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
-      this.compStack.init()
+      // this.compStack.init()
+      this.showList[index] = true
     })
   }
   ngAfterViewInit() {
