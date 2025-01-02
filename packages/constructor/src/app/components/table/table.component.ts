@@ -203,28 +203,15 @@ AfterViewInit
       // let key = createChildKey('items', itemIndex, 'component')
       let componentCategory = e.dragData.item.componentCategory
       let compGridLayout = gridLayoutDefault[componentCategory]
-      if (this.compArr[itemIndex]?.length) {
-        comp = initComponentMeta(
-          componentCategory,
-          this.curPage.appUlid, this.curPage.ulid,
-          this.compArr[itemIndex][this.compArr.length - 1].ulid, '', this.data.ulid,
-          // {area: 'items', itemIndex},
-          {area: 'slots', slotKey: `${itemIndex}_`}, // 这里的slotKey应该与配置项的field的默认值相同
-          {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
-          )
-        // this.compObj[key].push(comp)
-        this.compArr[itemIndex].push(comp)
-      } else {
-        comp = initComponentMeta(
-          componentCategory,
-          this.curPage.appUlid, this.curPage.ulid,
-          '', '', this.data.ulid,
-          // {area: 'items', itemIndex},
-          {area: 'slots', slotKey: `${itemIndex}_`},
-          {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
+      comp = initComponentMeta(
+        componentCategory,
+        this.curPage.appUlid, this.curPage.ulid,
+        this.compArr[itemIndex][this.compArr.length - 1].ulid, '', this.data.ulid,
+        // {area: 'items', itemIndex},
+        {area: 'slots', slotKey: `${itemIndex}_`}, // 这里的slotKey应该与配置项的field的默认值相同
+        {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
         )
-        this.compArr.push([comp])
-      }
+      this.compArr[itemIndex].push(comp)
       // 在service中添加新组件
       this.componentService.mountComponent(this.curPage.ulid, comp)
       // 更新当前组件的slots
@@ -241,14 +228,14 @@ AfterViewInit
   }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     this.showList[index] = false
-    let key = createChildKey('items', index, 'component')
+    // let key = createChildKey('items', index, 'component')
     this.compArr[index] = this.compArr[index].filter(item => item.ulid !== ulid)
     if (this.data.slots[`${index}_${this.data.items[index]['field']}`] === ulid) {
       this.data.slots[`${index}_${this.data.items[index]['field']}`] = ''
     }
-    let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
+    // let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid, childrenUlid)
+    this.componentService.reqDeleteComponent(ulid, [ulid])
     asyncFn(() => {
       // this.compStack.init()
       this.showList[index] = true

@@ -12,10 +12,13 @@
 |web-site增加事件中枢的逻辑|todo||
 |测试table的删除item功能|done||
 |// todo 检查使用ItemsMetaItem的地方|done||
-||table的子组件挂载到slots字段|doing|
+||table的子组件挂载到slots字段|done|
 |修正所有的reqDeleteComponent调用|done||
 |服务端：删除组件，需要支持控制是否删除子组件|todo||
+|修改table的field字段，检查是否正常修改items、slots、视图|||
 |tabs不再处理脏数据|||
+|table创建子组件后未更新视图|done||
+|删除table的子组件有问题|||
 |// todo 这里的Ulid好像不需要|||
 |tab添加子组件有问题|done||
 |deleteByUlid=>deleteComponentByUlid|done||
