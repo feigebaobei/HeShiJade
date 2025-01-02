@@ -203,19 +203,21 @@ AfterViewInit
       // let key = createChildKey('items', itemIndex, 'component')
       let componentCategory = e.dragData.item.componentCategory
       let compGridLayout = gridLayoutDefault[componentCategory]
+      let slotsKey = `${itemIndex}_${this.data.items[itemIndex]['field']}`
       comp = initComponentMeta(
         componentCategory,
         this.curPage.appUlid, this.curPage.ulid,
-        this.compArr[itemIndex][this.compArr.length - 1].ulid, '', this.data.ulid,
-        // {area: 'items', itemIndex},
-        {area: 'slots', slotKey: `${itemIndex}_`}, // 这里的slotKey应该与配置项的field的默认值相同
+        this.compArr[itemIndex][this.compArr[itemIndex].length - 1]?.ulid, '', this.data.ulid,
+        {area: 'slots', slotKey: slotsKey}, // 这里的slotKey应该与配置项的field的默认值相同
         {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
         )
       this.compArr[itemIndex].push(comp)
       // 在service中添加新组件
       this.componentService.mountComponent(this.curPage.ulid, comp)
       // 更新当前组件的slots
-      this.componentService.reqAddSlots(`${itemIndex}_`, comp.ulid)
+      if (!this.data.slots[slotsKey]) {
+        this.componentService.reqAddSlots(slotsKey, comp.ulid)
+      }
       // 在服务端保存新组件
       this.componentService.reqCreateComponent(comp)
       return
