@@ -602,3 +602,14 @@
 {"level":30,"time":1736055070625,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1736055228615,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1736055585108,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736055789614,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056000920,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056005589,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056006855,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/pages?ulid=01JGTF3JN4FWPYWBJNSY8530AN","ulid":"01JGTF3JN4FWPYWBJNSY8530AN"}
+{"level":30,"time":1736056038387,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056075991,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056082163,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01JG9BTP2S02CPB8X3MFZ2467J&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01JG9BTP2S02CPB8X3MFZ2467J","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1736056082322,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01JG9BTP2S02CPB8X3MFZ2467J&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1736056099158,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056247327,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736056251729,"pid":27499,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}

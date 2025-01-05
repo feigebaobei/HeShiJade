@@ -42,7 +42,7 @@ interface ItemsMetaItemCategory {
   label: S
   value: S
 }
-type ItemsMetaItem = { // 这是为form开发的。
+type ItemsMetaItem = {
   category: S
   label: S
   key: S

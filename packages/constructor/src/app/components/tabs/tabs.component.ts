@@ -330,36 +330,16 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     )
     shareEvent.on(creatEventName('Tabs', this.data.ulid, 'items', 'update'), (options) => {
       if (options.key === 'id') {
-        let slotsKeyForDelete = Object.keys(this.data.slots).filter((slotsKey) => {
+        let slotsKeyForDelete = Object.keys(this.data.slots).find((slotsKey) => {
           return slotsKey.split('_')[0] === String(options.index)
         })
-        if (slotsKeyForDelete.length) {
+        if (slotsKeyForDelete) {
           // 在slots中增加新的
           let newSlotKey = `${options.index}_${options.value}`
-          this.data.slots[newSlotKey] = this.data.slots[slotsKeyForDelete[0]]
-          // 删除旧的slots
-          let slotsKeyUlid: {[k: S]: ULID} = {}
-          // 删除当前组件的
-          slotsKeyForDelete.forEach((slotsKey) => {
-            slotsKeyUlid[slotsKey] = this.data.slots[slotsKey]
-            delete this.data.slots[slotsKey]
-          })
-          // 处理脏数据
-          if (slotsKeyForDelete.slice(1).length) {
-            // 删除远端的
-            let pAll = slotsKeyForDelete.slice(1).map((slotKey) => {
-              let childrenUlid = compatibleArray(this.componentService.getChildrenComponent(this.pageService.getCurPage()?.ulid || '', slotsKeyUlid[slotKey])).map(item => item.ulid)
-              return this.componentService.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid)
-            })
-            Promise.all(pAll).then(() => {
-              // 删除store中的组件
-              slotsKeyForDelete.slice(1).forEach(ulid => {
-                this.componentService.deleteComponentByUlid(this.pageService.getCurPage()?.ulid || '', ulid)
-              })
-            })
-          }
+          this.data.slots[newSlotKey] = this.data.slots[slotsKeyForDelete]
+          delete this.data.slots[slotsKeyForDelete]
           // 请求更新slotKey
-          this.componentService.reqUpdateComponentSlotkey(this.data.ulid, newSlotKey, slotsKeyForDelete[0])
+          this.componentService.reqUpdateComponentSlotkey(this.data.ulid, newSlotKey, slotsKeyForDelete)
         }
       }
     })
