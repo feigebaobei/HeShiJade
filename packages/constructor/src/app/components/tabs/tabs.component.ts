@@ -215,7 +215,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       s(true)
     }).then(() => {
       let key = this.createChildKey({itemIndex: index})
-      this.compObj[key] = this.compObj[key].filter(item => item.ulid !== ulid)
+      this.compArr[index] = this.compArr[index].filter(item => item.ulid !== ulid)
       this.componentList = compatibleArray(this.compObj[key])
       let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
       this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
