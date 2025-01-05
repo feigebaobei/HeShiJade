@@ -323,6 +323,8 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
           delete this.data.slots[slotsKeyForDelete]
           // 请求更新slotKey
           this.componentService.reqUpdateComponentSlotkey(this.data.ulid, newSlotKey, slotsKeyForDelete)
+          // 请求更新子组件的mount
+          this.componentService.reqUpdateComponentProps('mount', 'slotKey', newSlotKey, this.data.slots[newSlotKey])
         }
       }
     })

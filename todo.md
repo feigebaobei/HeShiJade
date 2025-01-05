@@ -9,6 +9,8 @@
 |修改table的field字段，检查是否正常修改items、slots、视图|||
 |tabs不再处理脏数据|done||
 |tabs不能正常运行了|done||
+|tabs修改id|done||
+||服务端：支持修改子组件的数据|不应该开发此接口，应用在component的put方式中增加功能。|
 |检查所有调用 reqDeleteComponent 的地方|done||
 |在table中创建多个子组件后，分别删除子组件，是否正确运行。数据正确。|done||
 ||当删除中间的子组件时， |done|
