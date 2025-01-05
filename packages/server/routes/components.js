@@ -240,6 +240,7 @@ router.route('/')
     // behavior    ulid,type,index,key,value,
     // gridLayout  ulid,type,key,value,
     // slots       ulid,type,key,value,
+    // mount       ulid,type,key,value,
     if (rules.required(req.body.ulid) && rules.required(req.body.type)) {
       switch (req.body.type) {
         case 'props':
@@ -270,6 +271,13 @@ router.route('/')
             j(100100)
           }
           break;
+        case 'mount':
+          if (rules.required(req.body.key) && rules.required(req.body.value)) {
+            s(true)
+          } else {
+            j(100100)
+          }
+          break;
       }
     } else {
       j(100100)
@@ -289,12 +297,15 @@ router.route('/')
       case 'slots':
         k = `slots.${req.body.key}`
         break
+      case 'mount':
+        k = `mount.${req.body.key}`
+        break;
     }
     let updateObj = {
       [k]: req.body.value
     }
     // clog('updateObj', updateObj)
-    return lowcodeDb.collection('components_dev').updateOne({ulid: req.body.ulid}, {$set: 
+    return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.body.ulid}, {$set: 
       updateObj
     }).catch(() => {
       return Promise.reject(200020)
