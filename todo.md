@@ -3,7 +3,8 @@
 |分支|f_layout||
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
-|// todo 检查使用ItemsMetaItem的地方|done|再检查一遍|
+|// todo 检查使用ItemsMetaItem的地方|done|再检查一遍done|
+|refactor: item中不再执行child.改为在slots中指定key处理子组件的ulid.|done||
 |refactor:服务端：删除组件，需要支持控制是否删除子组件|done||
 |修改table的field字段，检查是否正常修改items、slots、视图|||
 |tabs不再处理脏数据|||

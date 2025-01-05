@@ -49,7 +49,6 @@ type ItemsMetaItem = { // 这是为form开发的。
   value?: A
   checked?: B
   options?: Options<S, S>[]
-  child?: ULID // 这是为table而增强的。
 }
 interface SlotsMetaItem { // 待增强
   [k: S]: A
