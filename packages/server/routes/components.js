@@ -336,7 +336,7 @@ router.route('/')
   // 检查必填项
   let {ulid, childrenUlid} = req.query
   new Promise((s, j) => {
-    if (rules.required(ulid)) {
+    if (rules.unEmpty(ulid)) {
       if (childrenUlid) {
         if (Array.isArray(childrenUlid)) {} else {
           childrenUlid = [childrenUlid]
@@ -345,6 +345,11 @@ router.route('/')
         childrenUlid = []
       }
       s(true)
+    } else if (rules.required(childrenUlid)) {
+      if (Array.isArray(childrenUlid)) {} else {
+        childrenUlid = [childrenUlid]
+      }
+      s(false)
     } else {
       j(100100)
     }
