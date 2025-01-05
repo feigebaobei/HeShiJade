@@ -796,16 +796,32 @@ router.route('/slots')
 .delete(cors.corsWithOptions, (req, res) => {
   // ulid,slotKey
   new Promise((s, j) => {
-    if (rules.required(req.query.ulid) && rules.required(req.query.slotKey)) {
+    if (rules.unEmpty(req.query.ulid) && rules.unEmpty(req.query.slotKey)) {
       s(true)
     } else {
       j(100100)
     }
   }).then(() => {
-    return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.query.ulid}, {
-      $unset: {
-        [`slots.${req.query.slotKey}`]: null
+    return lowcodeDb.collection(DB.dev.componentTable).findOne({ulid: req.query.ulid}).catch(() => {
+      return Promise.reject(200010)
+    })
+  }).then((curComponent) => {
+    let [slotkeyIndexStr, slotKeyItemId] = req.query.slotKey.split('_')
+    let slotkeyIndex = Number(slotkeyIndexStr)
+    let deleteObj = {}
+    let updateObj = {}
+    Object.entries(curComponent.slots).forEach(([slotsKey, ulid]) => {
+      let [indexStr, itemId] = slotsKey.split('_')
+      if (Number(indexStr) >= slotkeyIndex) {
+        deleteObj[`slots.${indexStr}_${itemId}`] = null
       }
+      if (Number(indexStr) > slotkeyIndex) {
+        updateObj[`slots.${Number(indexStr) - 1}_${itemId}`] = ulid
+      }
+    })
+    return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.query.ulid}, {
+      $unset: deleteObj,
+      $set: updateObj,
     }).catch(() => {
       return Promise.reject(200020)
     })
