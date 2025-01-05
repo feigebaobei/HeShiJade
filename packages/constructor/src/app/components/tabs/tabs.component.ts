@@ -349,7 +349,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
             // 删除远端的
             let pAll = slotsKeyForDelete.slice(1).map((slotKey) => {
               let childrenUlid = compatibleArray(this.componentService.getChildrenComponent(this.pageService.getCurPage()?.ulid || '', slotsKeyUlid[slotKey])).map(item => item.ulid)
-              return this.componentService.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid, true)
+              return this.componentService.reqDeleteComponent(slotsKeyUlid[slotKey], childrenUlid)
             })
             Promise.all(pAll).then(() => {
               // 删除store中的组件

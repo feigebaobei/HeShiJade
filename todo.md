@@ -4,9 +4,10 @@
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
 |// todo 检查使用ItemsMetaItem的地方|done||
-|服务端：删除组件，需要支持控制是否删除子组件|todo||
+|refactor:服务端：删除组件，需要支持控制是否删除子组件|done||
 |修改table的field字段，检查是否正常修改items、slots、视图|||
 |tabs不再处理脏数据|||
+|检查所有调用 reqDeleteComponent 的地方|done||
 |在table中创建多个子组件后，分别删除子组件，是否正确运行。数据正确。|done||
 ||当删除中间的子组件时， ||
 |有时无法选中页面|||

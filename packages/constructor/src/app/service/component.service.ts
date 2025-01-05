@@ -276,18 +276,13 @@ export class ComponentService {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
   // 删除指定组件及其子组件
-  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[], includeCurComponent: B = false) {
+  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[] = []) {
     return this.reqService.req(`${serviceUrl()}/components`, 'delete', {
-      ulid,
-      childrenUlid,
-      includeCurComponent, 
-    }).then(() => true)
+      ulid, childrenUlid,
+    })
   }
-  // for dev
-  // 只在本地保存，不改变远端数据
   postCompListByPageForLocal(obj: Component){
-    // return 
-    new Promise((s, j) => {
+    return new Promise((s, j) => {
       let has = this._map.has(obj['pageUlid'])
       if (has) {
       } else {
@@ -466,7 +461,7 @@ export class ComponentService {
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
   }
-  // 得到后代组件
+  // 得到后代组件，不含当前组件
   getChildrenComponent(pageUlid: ULID, componentUlid: ULID) {
     let tree = this.getTree(pageUlid)
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
