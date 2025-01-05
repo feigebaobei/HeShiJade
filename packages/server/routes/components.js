@@ -323,9 +323,16 @@ router.route('/')
   // 处理页面级数据
   // 处理组件级数据
   // 检查必填项
-  let {ulid, childrenUlid = []} = req.query
+  let {ulid, childrenUlid} = req.query
   new Promise((s, j) => {
     if (rules.required(ulid)) {
+      if (childrenUlid) {
+        if (Array.isArray(childrenUlid)) {} else {
+          childrenUlid = [childrenUlid]
+        }
+      } else {
+        childrenUlid = []
+      }
       s(true)
     } else {
       j(100100)
