@@ -107,12 +107,12 @@ let Button: ComponentDefaultConfig = {
     props: opProps(ButtonProps),
     behavior: opBehavior(ButtonBehavior),
     items: [
-        {
-            category: 'input',
-            label: '文本',
-            value: 'button star',
-            key: '',
-        }
+        // {
+        //     category: 'input',
+        //     label: '文本',
+        //     value: 'button star',
+        //     key: '',
+        // }
     ],
     slots: {}, // 子组件
 }
