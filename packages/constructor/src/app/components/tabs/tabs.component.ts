@@ -65,7 +65,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
   compArr: Comp[][]
   curPage: Page
   compatibleArray: typeof compatibleArray
-  componentList: Comp[]
+  componentList: Comp[] // todo 检查这个字段是做什么的
   itemIndexSlotKeyMap: KvMap<ULID, ULID>
   show: B
   @ViewChild('compStack') compStack!: CompStackComponent
@@ -93,33 +93,16 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     }
   }
   ngOnInit() {
-    this.compObj = {}
     let tree = this.componentService.getTree(this.curPage.ulid)
-    if (tree) {
-      let node = tree.find(this.data.ulid)
-      Object.entries(node?.value.slots || {}).sort((a, b) => {
-        let d = Math.sign(Number(a[0].split('_')[0]) - Number(b[0].split('_')[0]))
-        return d
-      })
-      .forEach(([slotKey, valueUlid]) => {
-        // clog('slotKey', slotKey)
-        let childNode = tree.find(valueUlid)
-        // 把已经存在的子组件放在compArr中
-        if (childNode) {
-          let compList = compatibleArray(childNode?.toArray())
-          // if (compList.length) {
-          //   this.compArr.push(compList)
-          // }
-          this.compArr.push(compList)
-        }
-      })
-    }
-    // Array.from(Object.entries(this.data.slots)).forEach(([k, _v], index) => { // 当无子元素时，不运行此回调。
-    //   this.itemIndexSlotKeyMap.set(String(index), k) // 记录items的下标与slotsKey的对应关系。
-    //   // items的下标就是slots中的顺序
-    // })
-    // clog('this.itemIndexSlotKeyMap', this.itemIndexSlotKeyMap)
-    clog('compArr', this.compArr)
+    this.data.items.forEach((item, index) => {
+      let slotsKey = this.data.slots[`${index}_${item['id']}`]
+      if (slotsKey) {
+        this.compArr.push(tree?.find(slotsKey)?.toArray() || [])
+      } else {
+        this.compArr.push([])
+      }
+    })
+    // clog('compArr', this.compArr)
     // 开始监听
     this.listen()
     // 设置默认选中的tab对应的子组件列表
@@ -184,7 +167,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       } else {
         prevUlid = ''
       }
-      clog('prevUlid', prevUlid, slotKey, this.data.items)
+      // clog('prevUlid', prevUlid, slotKey, this.data.items)
       comp = initComponentMeta(
         componentCategory,
         this.curPage.appUlid, this.curPage.ulid,
@@ -208,7 +191,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         // this.data.slots[`${itemIndex}_${this.data.items[itemIndex]['id']}`] = comp.ulid
         this.data.slots[slotKey] = comp.ulid
       }
-      clog('comp', comp)
+      // clog('comp', comp)
       this.componentService.mountComponent(this.curPage.ulid, comp)
       if (Array.isArray(this.compArr[itemIndex])) {
         this.compArr[itemIndex].push(comp)
