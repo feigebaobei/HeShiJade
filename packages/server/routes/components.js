@@ -366,7 +366,6 @@ router.route('/')
             arr.push(lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: curComponent.nextUlid}, {$set: {prevUlid: curComponent.prevUlid}}))
           }
         } else {
-          clog('curComponent.parentUlid', curComponent.parentUlid)
           if (curComponent.parentUlid) {
             if (curComponent.nextUlid) {
               arr.push(lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: curComponent.parentUlid}, {
@@ -382,7 +381,6 @@ router.route('/')
               }))
             }
           } else {
-            clog('arr.length', arr.length)
             arr.push(lowcodeDb.collection(DB.dev.pageTable).updateOne({ulid: curComponent.pageUlid}, {
               $set: {
                 firstComponentUlid: curComponent.nextUlid
@@ -808,22 +806,19 @@ router.route('/slots')
   }).then((curComponent) => {
     let [slotkeyIndexStr, slotKeyItemId] = req.query.slotKey.split('_')
     let slotkeyIndex = Number(slotkeyIndexStr)
-    let deleteObj = {}
-    let updateObj = {}
-    Object.entries(curComponent.slots).forEach(([slotsKey, ulid]) => {
-      let [indexStr, itemId] = slotsKey.split('_')
-      if (Number(indexStr) >= slotkeyIndex) {
-        deleteObj[`slots.${indexStr}_${itemId}`] = null
-      }
-      if (Number(indexStr) > slotkeyIndex) {
-        updateObj[`slots.${Number(indexStr) - 1}_${itemId}`] = ulid
+    let slots = curComponent.slots
+    Object.entries(slots).forEach(([k, ulid]) => {
+      let [indexStr, idOrField] = k.split('_')
+      let indexNum = Number(indexStr)
+      if (indexNum >= slotkeyIndex) {
+        delete slots[`${indexNum}_${idOrField}`]
+        if (indexNum > slotkeyIndex) {
+          slots[`${indexNum - 1}_${idOrField}`] = ulid
+        }
       }
     })
     return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.query.ulid}, {
-      $unset: deleteObj,
-      $set: updateObj,
-    }).catch(() => {
-      return Promise.reject(200020)
+      $set: {slots}
     })
   }).then(() => {
     return res.status(200).json({

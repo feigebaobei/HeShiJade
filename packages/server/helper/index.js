@@ -26,7 +26,9 @@ let rules = {
     // todo 修改使用它的地方
     required: (params) => {
         return params !== undefined && params !== null
-        // return this.exist(params) && params !== ''
+    },
+    unEmpty: (params) => {
+        return rules.required(params) && params !== ''
     },
     email: (str) => {
         // 1234@qq.com

@@ -3,7 +3,6 @@
 |分支|f_layout||
 |tab内非最后一个子组件无法选中|todo||
 |web-site增加事件中枢的逻辑|todo||
-|// todo 检查使用ItemsMetaItem的地方|done|再检查一遍done|
 |refactor: item中不再执行child.改为在slots中指定key处理子组件的ulid.|done||
 |refactor:服务端：删除组件，需要支持控制是否删除子组件|done||
 |修改table的field字段，检查是否正常修改items、slots、视图|||
@@ -12,6 +11,7 @@
 |tabs修改id|done||
 ||服务端：支持修改子组件的数据|不应该开发此接口，应用在component的put方式中增加功能。|
 |检查所有调用 reqDeleteComponent 的地方|done + doing||
+|测试删除items时的逻辑|doing||
 |在table中创建多个子组件后，分别删除子组件，是否正确运行。数据正确。|done||
 ||当删除中间的子组件时， |done|
 |有时无法选中页面|||
