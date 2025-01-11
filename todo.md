@@ -12,6 +12,9 @@
 ||服务端：支持修改子组件的数据|不应该开发此接口，应用在component的put方式中增加功能。|
 |检查所有调用 reqDeleteComponent 的地方|done + doing||
 |测试删除items时的逻辑|doing||
+|改为一个接口|||
+|xx页面无组件。未选中组件。|||
+|// todo rename reqUpdateComponent|||
 |在table中创建多个子组件后，分别删除子组件，是否正确运行。数据正确。|done||
 ||当删除中间的子组件时， |done|
 |有时无法选中页面|||

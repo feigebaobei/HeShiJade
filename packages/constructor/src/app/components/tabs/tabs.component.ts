@@ -286,29 +286,40 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     })
     shareEvent.on(
       creatEventName('Tabs', this.data.ulid, 'items', 'remove'),
-      (index: N) => {
-        let childComponentArr = this.compArr.splice(index, 1)[0]
+      (options) => {
+        let childComponentArr = this.compArr.splice(options.index, 1)[0]
         // 删除当前组件的相关子组件
         let childrenUlid: ULID[] = []
         childComponentArr.forEach(item => {
           childrenUlid.push(item.ulid)
           this.componentService.deleteComponentByUlid(this.curPage.ulid, item.ulid)
+          // this.componentService.reqUpdateComponentProps('mount', 'slotKey', `${options.index}_${options.item['id']}`, item.ulid)
           this.componentService.getChildrenComponent(this.curPage.ulid, item.ulid).forEach(subItem => {
             childrenUlid.push(subItem.ulid)
           })
         })
-        this.componentService.reqDeleteComponent(this.data.ulid, [...childrenUlid])
+        this.componentService.reqDeleteComponent('', [...childrenUlid])
         // 在本地删除组件的item
-        let slotKey = `${index}_${this.data.items[index]['id']}`
-        delete this.data.slots[slotKey]
+        let slotKey = `${options.index}_${options.item['id']}`
         // 调整slots的key
         Object.entries(this.data.slots).forEach(([key, ulidValue]) => {
           let [indexStr, idStr] = key.split('_')
-          if (Number(indexStr) > index) {
-            this.data.slots[`${Number(indexStr) - 1}_${idStr}`] = ulidValue
+          if (Number(indexStr) >= options.index) {
             delete this.data.slots[key]
+            if (Number(indexStr) > options.index) {
+              this.data.slots[`${Number(indexStr) - 1}_${idStr}`] = ulidValue
+            }
           }
         })
+        // 请求远端删除slots
+        this.componentService.reqRemoveSlots(slotKey)
+        // 修改所有后代组件的mount字段
+        // todo 改为一个接口
+        for (let i = options.index; i < this.compArr.length; i++) {
+          this.compArr[i].forEach((comp) => {
+            this.componentService.reqUpdateComponentProps('mount', 'slotKey', `${options.index}_${options.item['id']}`, comp.ulid)
+          })
+        }
       }
     )
     shareEvent.on(creatEventName('Tabs', this.data.ulid, 'items', 'update'), (options) => {

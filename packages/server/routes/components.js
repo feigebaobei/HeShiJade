@@ -180,7 +180,7 @@ router.route('/')
             break;
           case 'slots': // 已测试
             if (parentComponent.slots[req.body.mount.slotKey]) {
-              // 当父组件的slots[slotkey]中存在子组件信息时，无操作。
+              // 当父组件的slots[slotKey]中存在子组件信息时，无操作。
             } else {
               componentUpdateArr.unshift({
                 updateOne: {
@@ -304,7 +304,6 @@ router.route('/')
     let updateObj = {
       [k]: req.body.value
     }
-    // clog('updateObj', updateObj)
     return lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: req.body.ulid}, {$set: 
       updateObj
     }).catch(() => {

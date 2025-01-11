@@ -276,7 +276,7 @@ export class ComponentService {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
   // 删除指定组件及其子组件
-  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[] = []) {
+  reqDeleteComponent(ulid?: ULID, childrenUlid: ULID[] = []) {
     return this.reqService.req(`${serviceUrl()}/components`, 'delete', {
       ulid, childrenUlid,
     })
@@ -394,8 +394,8 @@ export class ComponentService {
     let tree = this._map.get(pageUlid)
     let component = tree?.find(componentUlid)?.value
     if (component) {
-      component.items.splice(index, 1)
-      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, index) // 触发事件
+      let [item] = component.items.splice(index, 1)
+      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, {item, index}) // 触发事件
     }
   }
   // 更新组件
@@ -439,6 +439,7 @@ export class ComponentService {
       return Promise.reject('无选中组件')
     }
   }
+  // 服务端会处理slots内的所有字段及其值
   reqRemoveSlots(slotKey: S) {
     let curComp = this.curComponent()
     if (curComp) {
