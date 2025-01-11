@@ -137,7 +137,7 @@ AfterViewInit
     let tree = this.componentService.getTree(this.curPage.ulid)
     // todo 删除所有使用childUlid的地方
     this.data.items.forEach((item, index) => {
-      let slotsKey =this.data.slots[`${index}_${item['field']}`]
+      let slotsKey = this.data.slots[`${index}_${item['field']}`]
       if (slotsKey) {
         this.compArr.push(tree?.find(slotsKey)?.toArray() || [])
       } else {
@@ -160,9 +160,11 @@ AfterViewInit
       this.showList.push(true)
       this.compArr.push([])
     })
-    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'remove'), (index) => {
+    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'remove'), ({index, item}) => {
+      // 处理当前组件内的是否显示
       this.showList.splice(index, 1)
       let childComponentArr = this.compArr[index]
+      // 删除service中的后代组件
       let childrenUlid: ULID[] = []
       childComponentArr.forEach(comp => {
         childrenUlid.push(comp.ulid)
@@ -171,8 +173,23 @@ AfterViewInit
           childrenUlid.push(subItem.ulid)
         })
       })
-      this.componentService.reqDeleteComponent(this.data.ulid, childrenUlid)
+      // 删除远端的后代组件
+      this.componentService.reqDeleteComponent('', childrenUlid)
+      // 处理当前组件内的子组件
       this.compArr.splice(index, 1)
+      // 整理当前组件内的slots
+      Object.entries(this.data.slots).forEach(([k, v], subIndex) => {
+        let [indexStr, field] = k.split('_')
+        let indexNum = Number(indexStr)
+        if (indexNum >= index) {
+          delete this.data.slots[`${subIndex}_${item.field}`]
+          if (indexNum > index) {
+            this.data.slots[`${indexNum - 1}_${field}`] = v
+          }
+        }
+      })
+      // 删除远端的slots
+      this.componentService.reqRemoveSlots(`${index}_${item.field}`)
     })
     shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
       // {key, value, index}
@@ -203,7 +220,7 @@ AfterViewInit
       // let key = createChildKey('items', itemIndex, 'component')
       let componentCategory = e.dragData.item.componentCategory
       let compGridLayout = gridLayoutDefault[componentCategory]
-      let slotsKey = `${itemIndex}_${this.data.items[itemIndex]['field']}`
+      let slotsKey = this.getSlotsKey(itemIndex)
       comp = initComponentMeta(
         componentCategory,
         this.curPage.appUlid, this.curPage.ulid,
@@ -216,6 +233,7 @@ AfterViewInit
       this.componentService.mountComponent(this.curPage.ulid, comp)
       // 更新当前组件的slots
       if (!this.data.slots[slotsKey]) {
+        this.data.slots[slotsKey] = comp.ulid
         this.componentService.reqAddSlots(slotsKey, comp.ulid)
       }
       // 在服务端保存新组件
@@ -228,16 +246,19 @@ AfterViewInit
     })
     // this.cdRef.detectChanges()
   }
+  getSlotsKey(itemIndex: N) {
+    return `${itemIndex}_${this.data.items[itemIndex]['field']}`
+  }
   deleteComponentByUlidH(ulid: ULID, index: N) {
     this.showList[index] = false
-    // let key = createChildKey('items', index, 'component')
+    let compForDelete = this.compArr[index].find(comp => comp.ulid === ulid)!
     this.compArr[index] = this.compArr[index].filter(item => item.ulid !== ulid)
-    if (this.data.slots[`${index}_${this.data.items[index]['field']}`] === ulid) {
-      this.data.slots[`${index}_${this.data.items[index]['field']}`] = ''
+    if (this.data.slots[this.getSlotsKey(index)] === ulid) {
+      this.data.slots[this.getSlotsKey(index)] = ''
     }
-    // let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(comp => comp.ulid)
     this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid, [ulid])
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       // this.compStack.init()
       this.showList[index] = true
