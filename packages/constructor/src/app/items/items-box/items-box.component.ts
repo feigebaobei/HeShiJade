@@ -90,6 +90,7 @@ export class ItemsBoxComponent {
     // 在这里处理公共的逻辑。各组件的逻辑在其内部自己处理。
     // 删除配置面板的item
     let curPage = this.pageService.getCurPage()
+    this.groupList.splice(i, 1)
     if (this.curComponent && curPage) {
       // 在store中的item
       this.componentService.removeItems(curPage.ulid, this.curComponent.ulid, i)

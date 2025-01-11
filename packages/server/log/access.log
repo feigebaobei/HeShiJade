@@ -865,3 +865,6 @@
 {"level":30,"time":1736522966934,"pid":47823,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1736523013891,"pid":47823,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1736523331609,"pid":48031,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1736598361146,"pid":49950,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1736598386756,"pid":49950,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1736598398521,"pid":49950,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
