@@ -1,7 +1,7 @@
 ||||
 |-|-|-|
 |分支|f_layout||
-|tab内非最后一个子组件无法选中|todo||
+|tab内非最后一个子组件无法选中|done||
 |web-site增加事件中枢的逻辑|todo||
 |refactor: item中不再执行child.改为在slots中指定key处理子组件的ulid.|done||
 |refactor:服务端：删除组件，需要支持控制是否删除子组件|done||
@@ -10,8 +10,8 @@
 |tabs不能正常运行了|done||
 |tabs修改id|done||
 ||服务端：支持修改子组件的数据|不应该开发此接口，应用在component的put方式中增加功能。|
-|检查所有调用 reqDeleteComponent 的地方|done + doing||
-|测试删除items时的逻辑|doing||
+|检查所有调用 reqDeleteComponent 的地方|done + done||
+|测试删除items时的逻辑|done||
 |改为一个接口|||
 |xx页面无组件。未选中组件。|||
 |// todo rename reqUpdateComponent|||
