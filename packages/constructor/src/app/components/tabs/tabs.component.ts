@@ -293,7 +293,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         childComponentArr.forEach(item => {
           childrenUlid.push(item.ulid)
           this.componentService.deleteComponentByUlid(this.curPage.ulid, item.ulid)
-          // this.componentService.reqUpdateComponentProps('mount', 'slotKey', `${options.index}_${options.item['id']}`, item.ulid)
           this.componentService.getChildrenComponent(this.curPage.ulid, item.ulid).forEach(subItem => {
             childrenUlid.push(subItem.ulid)
           })
@@ -317,7 +316,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         // todo 改为一个接口
         for (let i = options.index; i < this.compArr.length; i++) {
           this.compArr[i].forEach((comp) => {
-            this.componentService.reqUpdateComponentProps('mount', 'slotKey', `${options.index}_${options.item['id']}`, comp.ulid)
+            this.componentService.reqUpdateComponent('mount', 'slotKey', `${options.index}_${options.item['id']}`, comp.ulid)
           })
         }
       }
@@ -335,7 +334,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
           // 请求更新slotKey
           this.componentService.reqUpdateComponentSlotkey(this.data.ulid, newSlotKey, slotsKeyForDelete)
           // 请求更新子组件的mount
-          this.componentService.reqUpdateComponentProps('mount', 'slotKey', newSlotKey, this.data.slots[newSlotKey])
+          this.componentService.reqUpdateComponent('mount', 'slotKey', newSlotKey, this.data.slots[newSlotKey])
         }
       }
     })

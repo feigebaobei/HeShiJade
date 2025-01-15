@@ -412,7 +412,7 @@ export class ComponentService {
   }
   // 更新组件
   // todo rename reqUpdateComponent
-  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
+  reqUpdateComponent(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
       ulid: componentUlid,
       type,

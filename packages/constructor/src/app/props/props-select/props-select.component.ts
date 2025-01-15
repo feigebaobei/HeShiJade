@@ -16,7 +16,7 @@ export class PropsSelectComponent {
   constructor(private componentService: ComponentService) {
     this.modelChangeH = createDebounceFn((v: S) => {
       this.componentService.setComponentProp(this.data.key, this.data.value)
-      this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
+      this.componentService.reqUpdateComponent('props', this.data.key, this.data.value)
       this.change.emit(v)
     }, debounceTime)
   }
