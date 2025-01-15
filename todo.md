@@ -1,41 +1,36 @@
 ||||
 |-|-|-|
-|分支|f_life||
-|可能多了123|||
+|分支|f_layout||
 |要上生产的内容|||
-||perf:删除不使用的shareEvent||
-||perf:支持多个配置项监听同一个配置项变化||
-||perf:配置项的类型为switch时值使用checked:boolean处理||
-||docs:生命周期时序图||
-||feat:10个组件支持全量生命周期事件||
-||feat:form支持控制表单项的显隐方法（updateVisible）、当表单项的值改变时触发的事件（changeFormItemValue）||
-||feat:web-site中更新ItemsMeta的类型||
-||fix:修正form的必填逻辑与必填标识||
+|web-site增加事件中枢的逻辑|done||
+|table的子元素应该在slots中处理。items中不再处理childUlid了|done||
+||||
+||||
+||||
 
+|服务端定期删除脏数据|||
+|修改所有子组件的mount字段时改为一个接口|||
+|xx页面无组件。未选中组件。|||
+|有时无法选中页面|||
+|// todo 这里的Ulid好像不需要|||
+|改变table组件的子元素时同列应该更新|||
+|丰富组件|||
+||弹性布局组件||
+||网络布局组件||
+||页面组件||
+|不应该使用默认的选中组件，因有可能用户不选中组件直接为指定组件操作。如为table组件添加子组件|||
 |排版组件|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
-|丰富配置面板的setter|||
-|全部组件支持生命周期方法|||
-|全部组件修正调用事件的参数|||
-|// todo 改名为behavior-group|||
 |创建碎片平台|||
-|行为面板使用去抖|||
 |官网增加助手函数子导航|待定||
 |整理升级的要求|||
-|web-site扩展组件时增加井布局|todo||
-|fix  删除最后一个页面后，再创建一个页面，则无法选中这个页面|todo||
-|fix  select组件在搭建侧与grid结合使用时出现的区域不够，使用了滚动条|todo||
-|多种布局方式：井布局、列布局、行布局、块布局|todo||
 |table组件在与items时的操作逻辑子组件|todo||
 |setup页面删除componentByPage或componentList|||
-|搭建页面的标题与按钮应该在同一行|todo||
-||table组件在删除items时删除子组件|todo|
 |table组件的打开事件应该事件名+ulid|todo||
-|有时无法选中页面|不好复现||
 ||可能需要增加一个layout配置面板|todo|
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
+||先写一个遇到脏数据报警的程序||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
-|是否需要把修改service与发请求分开|分开||
 |丰富组件|||
 ||inputNumber||
 ||radio||
@@ -56,7 +51,6 @@
 ||tag||
 |应用把非dev环境的版本回退到dev环境|||
 |丰富配置面板的setter|||
-||number||
 |“注销用户”功能|||
 |核验idp提供的token|||
 |验证saml数据是否有效|||
@@ -114,16 +108,6 @@ just
 
 # devui
 api众多。其中好多不通用的。
-
-# 上生产过程
-1. 本地打包renderer
-2. 本地打包constructor
-3. 把当前的开发分支f_xxx推到远端。
-4. 在github上合并f_xxx到master
-5. 在服务端拉取master分支
-6. 重启后端服务mock-server
-7. 重启后端服务server
-8. 在服务端打包web-site.
 
 # 强制更新子组件
 // 父组件
@@ -320,23 +304,6 @@ utils: {
 |-|-|-|-|
 |||非常通用||
 
-let clog = console.log
-let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-let pageData = page.getData()
-utils.req({
-  url: 'http://heshijade.com:5030/components/table',
-  method: 'get',
-  params: {
-    page: pageData.pageIndex,
-    pageSize: pageData.pageSize,
-  },
-}).then(res => {
-  clog('res', res)
-  table.setDataSource(res.data.data)
-}).catch()
-
 
 因为export导出的是变量
 因为export default导出的是变量
@@ -348,37 +315,15 @@ export a // 所以不合法
 
 我感觉export导出的是对象
 
-let clog = console.log
-let form = utils.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-let table = utils.getComponentInstance('01J9GM4H7SBG1EG92ARXEPMQG7')
-let page = utils.getComponentInstance('01J9GM4P5MVDRX7QKV0DQ5Q7KN')
-let pageData = page.getData()
-utils.req({
-  url: 'http://heshijade.com:5030/components/table',
-  method: 'get',
-  params: {
-    page: pageData.pageIndex,
-    pageSize: pageData.pageSize,
-  },
-}).then(res => {
-  clog('res', res)
-  table.setDataSource(res.data.data)
-}).catch()
-
-let modal = utils.pool.getComponentInstance('01JD8JAD9WS1RDB1RESD0D7D9X')
-modal.openDialog()
-
 you must update your .npmrc
 save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
 
-if (thirdParams.key === 'org') {
-  let form = utils.pool.getComponentInstance('01J9GM48PD8S3SVBYPQ5ZXE21N')
-  if (thirdParams.value === 'two') {
-    form.updateVisible({interest: false})
-  } else {
-    form.updateVisible({interest: true})
-  }
-}
+事件中枢很好用，但是不方便理清逻辑。应少用。
+事件名应该有规范。
+  组件类型_组件的ulid_组件内的字段_动作
+统一在service中调用。作为事件的总阀门处理。
+先用别的，后来才使用事件中枢。
+兼顾语义性与惟一性

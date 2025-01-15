@@ -4,7 +4,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { asyncFn, initComponentMeta } from 'src/helper'
 import { createChildKey } from 'src/helper/index'
-
+// import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
 import {
   Button as gridLayoutButtonDefault,
@@ -79,6 +79,17 @@ export class ModalComponent implements OnInit{
       let footerNode = node?.children[createChildKey('slots', 'footer', 'node')]
       this.childrenFooter = footerNode?.toArray() || []
     }
+    this.listen()
+  }
+  listen() {
+    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'add'), () => {
+    // })
+    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'remove'), () => {
+    // })
+    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'update'), () => {
+    // })
+    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'reorder'), () => {
+    // })
   }
   dropHeaderH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
@@ -128,7 +139,7 @@ export class ModalComponent implements OnInit{
   headerDeleteComponentByUlidH(ulid: ULID) {
     this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.page.ulid, ulid)
+    this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       this.compStackHeader.init()
@@ -137,7 +148,7 @@ export class ModalComponent implements OnInit{
   bodyDeleteComponentByUlidH(ulid: ULID) {
     this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.page.ulid, ulid)
+    this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       this.compStackBody.init()

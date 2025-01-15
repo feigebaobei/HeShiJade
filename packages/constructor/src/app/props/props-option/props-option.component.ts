@@ -22,7 +22,7 @@ export class PropsOptionComponent {
     this.optionsList = []
     this.modelChangeH = createDebounceFn((v: S) => {
       this.componentService.setComponentProp(this.data.key, this.data.value as unknown as PropsValue)
-      this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value as unknown as PropsValue)
+      this.componentService.reqUpdateComponent('props', this.data.key, this.data.value as unknown as PropsValue)
       this.change.emit(v)
     }, debounceTime)
   }
@@ -32,19 +32,19 @@ export class PropsOptionComponent {
   // todo 去抖
   labelChangeH(v: S, index: N) {
     this.componentService.setComponentProp(this.data.key, this.optionsList as unknown as PropsValue)
-    this.componentService.reqUpdateComponentProps('props', this.data.key, this.optionsList as unknown as PropsValue)
+    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
     this.change.emit(this.optionsList)
   }
   valueChangeH(index: N) {
     this.componentService.setComponentProp(this.data.key, this.optionsList as unknown as PropsValue)
-    this.componentService.reqUpdateComponentProps('props', this.data.key, this.optionsList as unknown as PropsValue)
+    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
     this.change.emit(this.optionsList)
   }
   addH() {
     let o = JSON.parse(JSON.stringify(this.data.template))
     this.optionsList.push(o)
     this.componentService.setComponentProp(this.data.key, this.optionsList as unknown as PropsValue)
-    this.componentService.reqUpdateComponentProps('props', this.data.key, this.optionsList as unknown as PropsValue)
+    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
     this.change.emit(this.optionsList)
   }
 }

@@ -7,7 +7,6 @@ interface App {
   members: S[]
   version: N
   layout: N
-  // child: S
   firstPageUlid: ULID
   prevUlid: ULID
   nextUlid: ULID

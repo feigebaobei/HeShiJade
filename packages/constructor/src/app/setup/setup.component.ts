@@ -3,7 +3,6 @@ import { AppService } from '../service/app.service';
 import { ComponentService } from '../service/component.service';
 import { PageService } from '../service/page.service';
 import { ActivatedRoute } from '@angular/router';
-// import { ulid } from 'ulid';
 import { asyncFn, initComponentMeta } from 'src/helper'
 // module
 import { ItemsModule } from '../items/items.module';
@@ -11,7 +10,7 @@ import { BehaviorModule } from '../behavior/behavior.module';
 import { PropsModule } from '../props/props.module';
 import { ComponentsModule } from '../components/components.module';
 import { PageListModule } from '../page-list/page-list.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 // import { GridstackModule } from 'gridstack/dist/angular'
 // 组件
 // import { ComponentListComponent } from './component-list/component-list.component';
@@ -109,6 +108,7 @@ export class SetupComponent implements OnInit {
     private pageService: PageService,
     private componentService: ComponentService,
     private route: ActivatedRoute,
+    private location: Location
   ) {
     this.leftTabActive = 'page'
     this.rightTabActive = 'props'
@@ -163,7 +163,10 @@ export class SetupComponent implements OnInit {
     this.show = true
   }
   viewBtClickH() {
-    window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.pageService.getCurPage()?.key}`, '_blank')
+    window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.curPage?.key}`, '_blank')
+  }
+  gobackButtonClickH() {
+    this.location.back()
   }
   activeTabChange(tab: A) {
     console.log(tab);
@@ -203,7 +206,11 @@ export class SetupComponent implements OnInit {
   }
   onDrop(e: DropEvent) {
     // 请求后端保存组件时保存到本地。
-    let curPage = this.pageService.getCurPage()
+    let curPage = this.curPage
+    if (!curPage) {
+      this.msg = [{ severity: 'error', summary: '', content: '当前未选中页面，无法创建组件。请先选中页面。' }];
+      return
+    }
     let heightMax = 0
     this.componentByPage.forEach(item => {
       let n = (item.y || 0) + (item.h || 0)
@@ -249,9 +256,9 @@ export class SetupComponent implements OnInit {
   deleteComponentByUlidH(ulid: ULID) {
     this.componentByPage = this.componentByPage.filter(item => item.id !== ulid)
     this.componentList = this.componentList.filter(item => item.ulid !== ulid)
-    let compUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
-    this.componentService.reqDeleteComponent(ulid, compUlid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.curPage!.ulid, ulid).map(componentItem => componentItem.ulid)
+    this.componentService.deleteComponentByUlid(this.curPage!.ulid, ulid) // todo rename deleteNodeByUlid
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
     // 这里不用使用comStack.init()
   }
   identify(index: number, w: GridStackWidget) {
@@ -286,10 +293,10 @@ export class SetupComponent implements OnInit {
         h: $event.nodes[0].h,
       })
       // todo 参数改为kv对的object
-      this.componentService.reqUpdateComponentProps('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
-      this.componentService.reqUpdateComponentProps('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
-      this.componentService.reqUpdateComponentProps('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
-      this.componentService.reqUpdateComponentProps('gridLayout', 'h', $event.nodes[0].h, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'h', $event.nodes[0].h, curNode.comp.ulid)
     }
   }
   resizeH($event: A) {
@@ -301,7 +308,7 @@ export class SetupComponent implements OnInit {
   }
   gridStackItemClickH($event: MouseEvent, item: SuperGridItem) {
     $event.stopPropagation()
-    let curPage = this.pageService.getCurPage()
+    let curPage = this.curPage
     if (curPage) {
       if (this.curComponent) {
         if (item.id !== this.curComponent.ulid) {

@@ -72,6 +72,7 @@ let nodePropotype: NodePropotype<Component> = Object.create({}, {
             return !Object.values(this.children).length
         }
     },
+    // 当前及其后的元素组成的数组
     toArray: {
         value: function () {
             let arr: Component[] = []
@@ -83,6 +84,7 @@ let nodePropotype: NodePropotype<Component> = Object.create({}, {
             return arr
         }
     },
+    // 当前元素的后代元素组成的数组。广度优化。
     allChildren: {
         value: function () {
             let arr: Component[] = []

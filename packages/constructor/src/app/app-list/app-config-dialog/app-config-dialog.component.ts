@@ -68,10 +68,11 @@ export class AppConfigDialogComponent implements OnInit {
       return of([])
     }
   }
-  loadMore($event: EventEmitter) {
-    arr = [...arr, ...arr]
-    $event.instance.loadFinish();
-  }
+  // 没发现使用它的地方
+  // loadMore($event: EventEmitter) {
+  //   arr = [...arr, ...arr]
+  //   $event.instance.loadFinish();
+  // }
   ngOnInit(): void {
     this.value = this.data.app.pluginsKey
   }

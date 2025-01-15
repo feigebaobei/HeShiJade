@@ -43,8 +43,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
         value: S
       }, subIndex: N) => {
       this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
-      // this.componentService.reqChangeItems(this.index, p.key, p.value)
-      this.reqChangeItems(this.index, p.key, p.value)
+      this.componentService.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
       if ('value' in item) {
         item.value = p.value
@@ -112,7 +111,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     })
   }
   listenerChange(item: newConfigItem) {
-    compatibleArray(this.eventMap.get(String(item.key))).forEach(ele => {
+    compatibleArray(this.eventMap.get(String(item.key))!).forEach(ele => {
       ele.item.hideCalc = ele.f(this.itemList)
     })
   }

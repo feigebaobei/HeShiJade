@@ -12,7 +12,8 @@
 - dev-ui
 - express(node)
 - mongodb
-- pnpm
+- pnpm@9.15.x
+- node@20
 
 ## 启动
 ```shell
@@ -71,3 +72,13 @@ npm run dr # 启动渲染侧
 |-- packages.json
 |-- .npmrc
 ```
+
+## 上生产过程
+1. 本地打包renderer
+2. 本地打包constructor
+3. 提交代码，再把当前的开发分支f_xxx推到远端。
+4. 在github上合并f_xxx到master
+5. 在服务端拉取master分支
+6. 重启后端服务mock-server
+7. 重启后端服务server
+8. 在服务端打包web-site.

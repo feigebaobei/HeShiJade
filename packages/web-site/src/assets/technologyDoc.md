@@ -152,7 +152,7 @@ table支持操作列
 5. 当改变配置项时更新舞台区的组件渲染效果。
 6. 分别操作table组件的items、service中的tree型数据、服务端的数据。
 7. 在渲染侧使用死数据渲染出table的操作列。
-8. 在渲染侧增强tree支持items[x].child<ulid>。
+<!-- 8. 在渲染侧增强tree支持items[x].child<ulid>。 -->
 9. 由死数据改为活数据。
 
 #### 编辑应用

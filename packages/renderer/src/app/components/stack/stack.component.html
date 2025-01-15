@@ -44,4 +44,9 @@
       </gridstack-item>
     </gridstack>
   }
+  @case (31) {
+      <div class="block" *ngFor="let item of _componentList; trackBy: identify">
+        <app-comp-box [data]="item.comp" ></app-comp-box>
+      </div>
+  }
 }

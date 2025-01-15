@@ -10,7 +10,6 @@ interface App {
   layout: N
   owner: S
   collaborator: S[]
-  // child: S
   firstPageUlid: ULID
   prevUlid: ULID
   nextUlid: ULID

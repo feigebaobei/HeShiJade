@@ -7,9 +7,10 @@
     "dev": "yarn nm",
     "start": "node ./bin/server",
     "s": "node ./bin/start",
-    "nm": "npm run s && nodemon ./bin/server"
+    "nm": "nodemon ./bin/server"
   },
   "dependencies": {
+    "axios": "^1.7.9",
     "body-parser": "^1.20.2",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "~1.4.4",

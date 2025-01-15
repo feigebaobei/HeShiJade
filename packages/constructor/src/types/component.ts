@@ -42,14 +42,13 @@ interface ItemsMetaItemCategory {
   label: S
   value: S
 }
-type ItemsMetaItem = { // 这是为form开发的。
+type ItemsMetaItem = {
   category: S
   label: S
   key: S
   value?: A
   checked?: B
   options?: Options<S, S>[]
-  child?: ULID // 这是为table而增强的。
 }
 interface SlotsMetaItem { // 待增强
   [k: S]: A
@@ -58,7 +57,7 @@ type BehaviorMeta = BehaviorMetaItem[]
 type ItemsMeta = ItemsMetaItem[]
 type SlotsMeta = {
   [k: S]: ULID
-}// | {}
+}
 interface ComponentMountEmpty {area: ''}
 interface ComponentMountItems {area: 'items', itemIndex: N}
 interface ComponentMountSlots {area: 'slots', slotKey: S}

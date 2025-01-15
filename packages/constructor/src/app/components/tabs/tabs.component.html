@@ -10,7 +10,7 @@
     (activeTabChange)="activeTabChangeH()"
 >
     <d-tab
-        *ngFor="let ele of data.items; let i = index;"
+        *ngFor="let ele of data.items; let i = index; trackBy: identify"
         [id]="ele['id']"
         [title]="ele['title']"
         [disabled]="ele['disabled']"
@@ -19,10 +19,11 @@
             class="dropArea"
             (dropEvent)="dropH($event, i)"
         >
-            <span *ngIf="!componentList.length">此区域可接收子组件</span>
+            <span *ngIf="!((compArr[i]).length)">此区域可接收子组件</span>
+            <!-- [componentList]="componentList" -->
             <app-comp-stack
                 *ngIf="show"
-                [componentList]="componentList"
+                [componentList]="compArr[i]"
                 #compStack
                 (deleteComp)="deleteComponentByUlidH($event, i)"
                 (change)="compStackChangeH($event)"

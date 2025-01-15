@@ -155,6 +155,8 @@ export class ListComponent implements OnInit {
   reqAppList() {
     this.appService.reqAppList().then(appList => {
       this.appService.opAppList(appList)
+      this.init()
+      this.msg = [{ severity: 'success', summary: '', content: '已经更新应用列表' }]
     })
   }
   configBtClickH($event: Event, index: N) {

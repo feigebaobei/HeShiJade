@@ -32,7 +32,7 @@ export class PropsInputComponent implements OnInit, OnChanges {
           key: this.data.key,
           value: this.data.value,
       })
-      this.componentService.reqUpdateComponentProps('props', this.data.key, this.data.value)
+      this.componentService.reqUpdateComponent('props', this.data.key, this.data.value)
       // clog('modelChangeH', v)
       this.change.emit(v)
     }, debounceTime)

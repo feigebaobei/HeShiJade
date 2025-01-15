@@ -5,6 +5,7 @@ import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, createChildKey } from 'src/helper/index'
+import {shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -35,7 +36,7 @@ let clog = console.log
 
 type CompOrUn = Component | undefined
 type ComponentOrUn = Component | undefined
-type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout'
+type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout' | 'mount'
 
 @Injectable({
   providedIn: 'root'
@@ -187,26 +188,35 @@ export class ComponentService {
     // 0 根组件
     // 1 前组件
     // 2 后组件
-    // 3 items组件
+    // 3 items组件 不使用此情况了
     // 4 slots组件
+    // 当前不支持在中间创建组件
     let n: N = 0
-    if (comp.parentUlid) {
-      switch (comp.mount.area) {
-        case 'slots':
-          n = 4
-          break;
-        case 'items':
-          n = 3
-          break;
-      }
-    } else {
-      if (!comp.prevUlid && !comp.nextUlid) {
-        n = 0
-      } else if (!comp.prevUlid && comp.nextUlid) {
-        n = 1
-      } else if (comp.prevUlid && !comp.nextUlid) {
-        n = 2
-      }
+    // todo delete 2025.02.01+
+    // if (comp.parentUlid) {
+    //   switch (comp.mount.area) {
+    //     case 'slots':
+    //       n = 4
+    //       break;
+    //     // case 'items':
+    //     //   n = 3
+    //     //   break;
+    //   }
+    // } else {
+    //   if (!comp.prevUlid && !comp.nextUlid) {
+    //     n = 0
+    //   } else if (!comp.prevUlid && comp.nextUlid) {
+    //     n = 1
+    //   } else if (comp.prevUlid && !comp.nextUlid) {
+    //     n = 2
+    //   }
+    // }
+    if (!comp.prevUlid && !comp.nextUlid) {
+      n = 0
+    } else if (!comp.prevUlid && comp.nextUlid) {
+      n = 1
+    } else if (comp.prevUlid && !comp.nextUlid) {
+      n = 2
     }
     return n
   }
@@ -241,28 +251,34 @@ export class ComponentService {
             node.value.prevUlid = comp.ulid
           }
           break;
-        case 3: // items
-          // b = !!tree.mountChild(comp, comp.parentUlid, `items_${(comp.mount as ComponentMountItems).itemIndex}Ulid`)
-          b = !!tree.mountChild(comp, comp.parentUlid, 
-            createChildKey('items', (comp.mount as ComponentMountItems).itemIndex, 'node')
-            )
-          // createChildKey
-          node = tree.find(comp.parentUlid)
-          if (node) {
-            node.value.items[(comp.mount as ComponentMountItems).itemIndex]['childUlid'] = comp.ulid
-          }
-          break;
+          // todo 删除 处理挂载到item的逻辑
+        // case 3: // items
+        //   // b = !!tree.mountChild(comp, comp.parentUlid, `items_${(comp.mount as ComponentMountItems).itemIndex}Ulid`)
+        //   b = !!tree.mountChild(comp, comp.parentUlid, 
+        //     createChildKey('items', (comp.mount as ComponentMountItems).itemIndex, 'node')
+        //     )
+        //   // createChildKey
+        //   node = tree.find(comp.parentUlid) // 父节点
+        //   if (node) {
+        //     node.value.items[(comp.mount as ComponentMountItems).itemIndex]['childUlid'] = comp.ulid
+        //   }
+        //   break;
+        // todo 若确定不会出现4，则删除此分支
         case 4: // slots
-          b = !!tree.mountChild(comp, comp.parentUlid, 
+          let curNode = tree.mountChild(comp, comp.parentUlid, 
             createChildKey('slots', (comp.mount as ComponentMountSlots).slotKey, 'node')
             )
-          node = tree.find(comp.parentUlid)
-          if (node) {
-            node.value.slots[`slots_${(comp.mount as ComponentMountSlots).slotKey}Ulid`] = comp.ulid
-          }
+          clog('curNode', curNode, tree)
+          // clog('curNode', curNode,)
+          b = !!curNode
+          // node = tree.find(comp.parentUlid)
+          // if (node) {
+          //   // todo 这里的Ulid好像不需要
+          //   node.value.slots[`slots_${(comp.mount as ComponentMountSlots).slotKey}Ulid`] = comp.ulid
+          // }
           break;
       }
-      clog('tree', tree)
+      // clog('tree', tree)
       return b
     } else {
       return false
@@ -272,14 +288,14 @@ export class ComponentService {
   reqCreateComponent(obj: Component) {
     return this.reqService.req(`${serviceUrl()}/components`, 'post', obj).then(() => true)
   }
-  reqDeleteComponent(ulid: ULID, childrenUlid: ULID[]) {
-    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {ulid, childrenUlid}).then(() => true)
+  // 删除指定组件及其子组件
+  reqDeleteComponent(ulid?: ULID, childrenUlid: ULID[] = []) {
+    return this.reqService.req(`${serviceUrl()}/components`, 'delete', {
+      ulid, childrenUlid,
+    })
   }
-  // for dev
-  // 只在本地保存，不改变远端数据
   postCompListByPageForLocal(obj: Component){
-    // return 
-    new Promise((s, j) => {
+    return new Promise((s, j) => {
       let has = this._map.has(obj['pageUlid'])
       if (has) {
       } else {
@@ -347,16 +363,21 @@ export class ComponentService {
     })
   }
   // todo 可优化key的类型
-  setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
+  // key 的类型应该是S
+  // todo rename setItems
+  // setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
+  setItemsOfCurComponent(index: N, key: S, value: A) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
+      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'update'), {key, value, index})
     }
   }
-  addItemsOfCurComponent(obj: ItemsMetaItem) {
+  addItems(obj: ItemsMetaItem) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items.push(obj)
+      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'add'), obj)
     }
   }
   addSlots(key: S, value: S) {
@@ -381,15 +402,17 @@ export class ComponentService {
   reqAddItems(obj: ItemsMetaItem) {
     return this.reqService.req(`${serviceUrl()}/components/items`, 'post', {ulid: this.curComponent()?.ulid, value: obj})
   }
-  removeItemsOfCurComponent(pageUlid: ULID, componentUlid: ULID, index: N) {
+  // 删除当前组件的item
+  removeItems(pageUlid: ULID, componentUlid: ULID, index: N) {
     let tree = this._map.get(pageUlid)
-    if (tree) {
-      let component = tree.find(componentUlid)
-      component?.value.items.splice(index, 1)
+    let component = tree?.find(componentUlid)?.value
+    if (component) {
+      let [item] = component.items.splice(index, 1)
+      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, {item, index}) // 触发事件
     }
   }
   // 更新组件
-  reqUpdateComponentProps(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
+  reqUpdateComponent(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
       ulid: componentUlid,
       type,
@@ -428,6 +451,7 @@ export class ComponentService {
       return Promise.reject('无选中组件')
     }
   }
+  // 服务端会处理slots内的所有字段及其值
   reqRemoveSlots(slotKey: S) {
     let curComp = this.curComponent()
     if (curComp) {
@@ -443,27 +467,29 @@ export class ComponentService {
     return this._map.get(key)
   }
   // 删除组件
-  deleteByUlid(pageUlid: ULID, componentUlid: ULID) { // todo deleteByUlid=>deleteComponentByUlid
+  // 其子节点会被浏览器的垃圾回收机制回收。
+  deleteComponentByUlid(pageUlid: ULID, componentUlid: ULID) {
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
 
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
   }
+  // 得到后代组件，不含当前组件
   getChildrenComponent(pageUlid: ULID, componentUlid: ULID) {
     let tree = this.getTree(pageUlid)
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []
     return childrenComponent
   }
-  getNextComponent(pageUlid: ULID, componentUlid: ULID) {
+  // 得到后组件
+  // todo rename getNextAllComponent
+  getNextComponent(pageUlid: ULID, componentUlid: ULID): Component[] {
     let tree = this.getTree(pageUlid)
-    return compatibleArray(tree?.find(componentUlid)?.toArray()) // .map(component => component.ulid)
+    return compatibleArray(tree?.find(componentUlid)?.toArray()!) // .map(component => component.ulid)
   }
-  // getLastRow(pageUlid: ULID) {
-  //   let tree = this.getTree(pageUlid)
-  //   if (tree) {
-  //     let lastNode = tree!.lastNode()
-
-  //   }
-  // }
+  reqUpdateComponentSlotkey(ulid: ULID, newSlotKey: S, oldSlotKey: S) {
+    return this.reqService.req(`${serviceUrl()}/components/slots`, 'put', {
+      ulid, newSlotKey, oldSlotKey
+    })
+  }
 }

@@ -96,10 +96,10 @@ export class CompStackComponent implements OnInit, OnDestroy {
         ulid: curNode.comp.ulid,
         ...gridLayout,
       })
-      this.componentService.reqUpdateComponentProps('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
-      this.componentService.reqUpdateComponentProps('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
-      this.componentService.reqUpdateComponentProps('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
-      this.componentService.reqUpdateComponentProps('gridLayout', 'h', $event.nodes[0].h, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'w', $event.nodes[0].w, curNode.comp.ulid)
+      this.componentService.reqUpdateComponent('gridLayout', 'h', $event.nodes[0].h, curNode.comp.ulid)
     }
   }
   gridStackItemClickH($event: MouseEvent, item: SuperGridItem) {

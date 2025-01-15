@@ -4,7 +4,7 @@ import groupTemplate from 'src/helper/items'
 import addableAll from 'src/helper/addable'
 import { cloneDeep, compatibleArray } from 'src/helper/index'
 // type
-import type { B, ConfigItem, N, S } from 'src/types/base';
+import type { B, ConfigItem, N, S, ULID } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
  } from 'src/types/component';
 import { PageService } from 'src/app/service/page.service';
@@ -32,7 +32,7 @@ export class ItemsBoxComponent {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          let group = this.groupForConfig(p.type)
+          let group = this.groupForConfig(p!.type)
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
@@ -68,7 +68,6 @@ export class ItemsBoxComponent {
       let obj: ItemsMetaItem = {} as ItemsMetaItem
       groupTemplate[this.curComponent.type].forEach((item) => {
         let k: keyof ItemsMetaItem = item.key as unknown as keyof ItemsMetaItem
-        // obj[k] = item.value
         switch (item.category) {
           case 'input':
           case 'number':
@@ -76,28 +75,31 @@ export class ItemsBoxComponent {
           case 'options':
           case 'select':
           default:
-            // obj.value = item.value
             obj[k] = item.value
             break;
           case 'switch':
             obj[k] = item.checked
-            // obj.checked = item.checked
             break;
         }
       })
-      this.componentService.addItemsOfCurComponent(obj)
+      this.componentService.addItems(obj)
       this.componentService.reqAddItems(obj)
     }
   }
   removeH(i: N) {
+    // 在这里处理公共的逻辑。各组件的逻辑在其内部自己处理。
+    // 删除配置面板的item
+    let curPage = this.pageService.getCurPage()
     this.groupList.splice(i, 1)
-    this.componentService.removeItemsOfCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid, i)
-    if (this.curComponent) {
+    if (this.curComponent && curPage) {
+      // 在store中的item
+      this.componentService.removeItems(curPage.ulid, this.curComponent.ulid, i)
+      // 在远端删除组件的item
       this.componentService.reqRemoveItems(this.curComponent.ulid, i)
     }
   }
   groupForConfig(type: S): ConfigItem[] {
-    let r = cloneDeep(compatibleArray(groupTemplate[type]).filter(t => !t.hideConfig)) // 取出要显示的
+    let r = cloneDeep(compatibleArray(groupTemplate[type])) // .filter(t => !t.hideConfig)) // 取出要显示的
     return r
   }
 }

@@ -19,7 +19,6 @@
             version: N          版本号
             owner: S            拥有者
             collaborator: S[]   协作者
-            // child: S
             firstPageUlid: ULID 第一个页面的ulid
             prevUlid: ULID      前一个应用的ulid
             nextUlid: ULID      后一个应用的ulid
@@ -42,12 +41,12 @@
             hide?: FT&lt;B&gt;      是否隐藏。若后true，则隐藏。
             hideListenerKey?: S     当哪个key变动时重新计算显隐逻辑
             hideCalc?: B            xxx
-            hideConfig?: B          xxx
+            // hideConfig?: B       没发现它的用处
         
         type PropsValue = S | B | N    props的值类型
 
         BehaviorMetaItem           行为
-            <!-- target: S              作用的目标     2024.09.21 删除
+            <!-- 
             payload: S             传递的数据 -->
             <!-- event: S               事件 -->
             <!-- fnBody                 方法体             2024.09.21 增加 -->
@@ -62,7 +61,6 @@
             value?: A
             checked?: B
             options?: Options&lt;S, S&gt;[]         select/switch的选项
-            child?: ULID                            items子组件的ulid
 
         Options&lt;T, G&gt;       选项
             label: T,
