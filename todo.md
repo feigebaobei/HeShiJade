@@ -1,18 +1,14 @@
 ||||
 |-|-|-|
 |分支|f_layout||
-|web-site增加事件中枢的逻辑|todo||
-|改为一个接口|||
-|xx页面无组件。未选中组件。|||
-|// todo rename reqUpdateComponent|done||
-|有时无法选中页面|||
-|// todo 这里的Ulid好像不需要|||
-|改变table组件的子元素时同列应该更新|||
-|table的子元素应该在slots中处理。items中不再处理childUlid了|todo||
+|web-site增加事件中枢的逻辑|done||
+|table的子元素应该在slots中处理。items中不再处理childUlid了|done||
 |要上生产的内容|||
 ||feat:搭建页面增加返回按钮||
 ||feat:支持块布局||
 ||feat:table组件在删除items时删除子组件||
+||feat:刷新应用列表时显示提示||
+||feat:事件中枢在service中统一触发。注册事件在面板中。回调在组件中。||
 ||fix:解决在tabs组件的items中创建组件时未处理组件链式关系的问题。||
 ||refactor:item中不再执行child.改为在slots中指定key处理子组件的ulid.||
 ||refactor:服务端：删除组件，需要支持控制是否删除子组件||
@@ -24,14 +20,17 @@
 ||perf:items不挂载子组件的ulid。子组件的ulid都在slots中。||
 ||perf:列表页面应该优化样式||
 ||perf:明确前端控制删除子组件列表。后端不负责组件关系。后端使用前端给的数据执行删除。||
-||feat:事件中枢在service中统一触发。注册事件在面板中。回调在组件中。||
 ||perf:table的子组件挂载到slots字段||
-||feat:刷新应用列表时显示提示||
 ||||
 ||||
 ||||
 
 |服务端定期删除脏数据|||
+|修改所有子组件的mount字段时改为一个接口|||
+|xx页面无组件。未选中组件。|||
+|有时无法选中页面|||
+|// todo 这里的Ulid好像不需要|||
+|改变table组件的子元素时同列应该更新|||
 |丰富组件|||
 ||弹性布局组件||
 ||网络布局组件||

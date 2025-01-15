@@ -192,6 +192,7 @@ export class ComponentService {
     // 4 slots组件
     // 当前不支持在中间创建组件
     let n: N = 0
+    // todo delete 2025.02.01+
     // if (comp.parentUlid) {
     //   switch (comp.mount.area) {
     //     case 'slots':
@@ -411,7 +412,6 @@ export class ComponentService {
     }
   }
   // 更新组件
-  // todo rename reqUpdateComponent
   reqUpdateComponent(type: UpdateType, key: S, value: PropsValue, componentUlid: ULID = this.curComponent()?.ulid || '',) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
       ulid: componentUlid,
@@ -487,13 +487,6 @@ export class ComponentService {
     let tree = this.getTree(pageUlid)
     return compatibleArray(tree?.find(componentUlid)?.toArray()!) // .map(component => component.ulid)
   }
-  // getLastRow(pageUlid: ULID) {
-  //   let tree = this.getTree(pageUlid)
-  //   if (tree) {
-  //     let lastNode = tree!.lastNode()
-
-  //   }
-  // }
   reqUpdateComponentSlotkey(ulid: ULID, newSlotKey: S, oldSlotKey: S) {
     return this.reqService.req(`${serviceUrl()}/components/slots`, 'put', {
       ulid, newSlotKey, oldSlotKey

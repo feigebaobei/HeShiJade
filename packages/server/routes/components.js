@@ -2,25 +2,14 @@ var express = require('express');
 var cors = require('./cors')
 var router = express.Router();
 let bodyParser = require('body-parser');
-let {appsDb, componentsDb, lowcodeDb} = require('../mongodb');
+let { componentsDb, lowcodeDb } = require('../mongodb');
 const { rules, compatibleArray } = require('../helper');
-let clog = console.log
 const { errorCode } = require('../helper/errorCode');
 const { DB } = require('../helper/config');
 const { logger } = require('../helper/log')
+let clog = console.log
 
 router.use(bodyParser.json())
-
-
-
-
-// let updateChainRelation = (chainRelation) => {
-//   lowcodeDb.collection(DB.dev.componentTable).updateMany({ulid: })
-// }
-
-
-
-
 
 router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
