@@ -1,7 +1,27 @@
 <section class="content-box">
-    <h1>2023.12.1x</h1>
+    <h1>2024.02.0x</h1>
     <ul>
-        <li>布局组件</li>
+        <li>布局组件(弹性布局组件/网络布局组件/页面组件)</li>
+    </ul>
+    <h1>2024.01.15</h1>
+    <ul>
+        <li>feat:搭建页面增加返回按钮</li>
+        <li>feat:支持块布局</li>
+        <li>feat:table组件在删除items时删除子组件</li>
+        <li>feat:刷新应用列表时显示提示</li>
+        <li>feat:事件中枢在service中统一触发。注册事件在面板中。回调在组件中。</li>
+        <li>fix:解决在tabs组件的items中创建组件时未处理组件链式关系的问题。</li>
+        <li>refactor:item中不再执行child.改为在slots中指定key处理子组件的ulid.</li>
+        <li>refactor:服务端：删除组件，需要支持控制是否删除子组件</li>
+        <li>perf:修改组件的配置的接口统一到components的put方式中</li>
+        <li>perf:init的button不应该有items</li>
+        <li>perf:优化item的删除icon应该在内部</li>
+        <li>perf:使用事件中枢处理items面板与组件的联动逻辑</li>
+        <li>perf:items中不再支持childUlid,改为slots中处理子组件的ulid.</li>
+        <li>perf:items不挂载子组件的ulid。子组件的ulid都在slots中。</li>
+        <li>perf:列表页面应该优化样式</li>
+        <li>perf:明确前端控制删除子组件列表。后端不负责组件关系。后端使用前端给的数据执行删除。</li>
+        <li>perf:table的子组件挂载到slots字段</li>
     </ul>
     <h1>2023.12.05</h1>
     <ul>
