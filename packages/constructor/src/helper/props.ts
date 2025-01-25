@@ -1073,6 +1073,44 @@ let Pagination: PropsConfigItem = {
         key: 'autoHide',
     },
 }
+let Flex: PropsConfigItem = {
+    // width: {
+    //     category: 'input',
+    //     value: '100%',
+    //     label: '宽度',
+    //     key: 'width',
+    // },
+    // height: {
+    //     category: 'input',
+    //     value: '200px',
+    //     label: '高度',
+    //     key: 'height',
+    // },
+    rowGap: {
+        category: 'input',
+        value: '0px',
+        label: '行间隔',
+        key: 'rowGap',
+    },
+    columnGap: {
+        category: 'input',
+        value: '0px',
+        label: '列间隔',
+        key: 'columnGap',
+    },
+    padding: {
+        category: 'input',
+        value: '0px',
+        label: 'padding',
+        key: 'padding',
+    },
+    margin: {
+        category: 'input',
+        value: '0px',
+        label: 'margin',
+        key: 'margin',
+    },
+}
 export {
     Button,
     Modal,
@@ -1084,4 +1122,5 @@ export {
     Checkbox,
     Tabs,
     Pagination,
+    Flex,
 }

@@ -61,6 +61,11 @@ let Page: CompConfigAddabel = {
     items: false,
     // slots: false,
 }
+let Flex: CompConfigAddabel = {
+    behavior: false,
+    items: false,
+    // slots: false,
+}
 
 
 let all: {[k: S]: CompConfigAddabel} = {
@@ -75,6 +80,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Tabs,
     Pagination,
     Page,
+    Flex,
 }
 
 export {

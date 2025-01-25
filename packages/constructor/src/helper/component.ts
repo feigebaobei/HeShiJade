@@ -12,6 +12,7 @@ import { Button as ButtonProps,
     Checkbox as CheckboxProps,
     Tabs as TabsProps,
     Pagination as PaginationProps,
+    Flex as FlexProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -180,6 +181,12 @@ let Pagination: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Flex: ComponentDefaultConfig = {
+    props: opProps(FlexProps),
+    behavior: [],
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -192,4 +199,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Checkbox,
     Tabs,
     Pagination,
+    Flex,
 }

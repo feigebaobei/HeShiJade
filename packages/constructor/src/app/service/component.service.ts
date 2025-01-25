@@ -475,7 +475,7 @@ export class ComponentService {
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
   }
-  // 得到后代组件，不含当前组件
+  // 得到当前组件的后代组件，不含当前组件
   getChildrenComponent(pageUlid: ULID, componentUlid: ULID) {
     let tree = this.getTree(pageUlid)
     let childrenComponent = tree?.find(componentUlid)?.allChildren() || []

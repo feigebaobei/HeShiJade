@@ -18,12 +18,12 @@ import {
   Checkbox as gridLayoutCheckboxDefault,
   Tabs as gridLayoutTabsDefault,
   Pagination as gridLayoutPaginationDefault,
+  Flex as gridLayoutFlexDefault,
 } from 'src/helper/gridLayout'
 
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
-import type { ULID } from 'src/types';
-import type { A, B, N, S } from 'src/types/base';
+import type { A, B, N, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
 import type { GridLayoutDefault } from "src/types/component"
@@ -43,6 +43,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Checkbox: gridLayoutCheckboxDefault,
   Tabs: gridLayoutTabsDefault,
   Pagination: gridLayoutPaginationDefault,
+  Flex: gridLayoutFlexDefault,
 }
 interface TabsData {
   props: Comp['props']
@@ -208,7 +209,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       })
     })
   }
-  // todo 用到了吗？
   deleteComponentByUlidH(ulid: ULID, index : N) {
     new Promise((s, j) => {
       this.show = false

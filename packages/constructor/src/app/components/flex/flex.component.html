@@ -1,0 +1,13 @@
+<div dDroppable
+    class="dropArea"
+    (dropEvent)="dropH($event)"
+>
+    <span *ngIf="!(compArr.length)">此区域可接收子组件</span>
+    <app-comp-stack
+        *ngIf="show"
+        [componentList]="compArr"
+        #compStack
+        (deleteComp)="deleteComponentByUlidH($event)"
+        (change)="compStackChangeH($event)"
+    ></app-comp-stack>
+</div>

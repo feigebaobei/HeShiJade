@@ -35,6 +35,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CompStackComponent } from './comp-stack/comp-stack.component';
+import { FlexComponent } from './flex/flex.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CompStackComponent } from './comp-stack/comp-stack.component';
     TabsComponent,
     PaginationComponent,
     CompStackComponent,
+    FlexComponent,
   ],
   imports: [
     CommonModule,

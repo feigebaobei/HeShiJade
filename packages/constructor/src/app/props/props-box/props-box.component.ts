@@ -25,6 +25,7 @@ import {
   Checkbox as CheckPropsMeta,
   Tabs as TabsPropsMeta,
   Pagination as PaginationPropsMeta,
+  Flex as FlexPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -155,25 +156,16 @@ export class PropsBoxComponent {
         this.opComponentPropsList(iconPropsMeta)
         break;
       case 'Checkbox':
-        // Object.values(CheckPropsMeta).forEach((item: ConfigItem) => {
-        //   item.value = this.curComp!.props[item.key] // value
-        //   this.componentPropsList.push(item)
-        // })
         this.opComponentPropsList(CheckPropsMeta)
         break;
       case 'Tabs':
-        // Object.values(TabsPropsMeta).forEach((item: ConfigItem) => {
-        //   item.value = this.curComp!.props[item.key] // value
-        //   this.componentPropsList.push(item)
-        // })
         this.opComponentPropsList(TabsPropsMeta)
         break;
       case 'Pagination':
-        // Object.values(PaginationPropsMeta).forEach((item: ConfigItem) => {
-        //   item.value = this.curComp!.props[item.key] // value
-        //   this.componentPropsList.push(item)
-        // })
         this.opComponentPropsList(PaginationPropsMeta)
+        break;
+      case 'Flex':
+        this.opComponentPropsList(FlexPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}
@@ -237,7 +229,6 @@ export class PropsBoxComponent {
     })
     let propsObj: Comp['props'] = {}
     this.componentPropsList.forEach(item => {
-      // propsObj[item.key] = item.value
       switch (item.category) {
         default:
           propsObj[item.key] = item.value
