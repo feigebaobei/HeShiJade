@@ -88,14 +88,12 @@ export class FlexComponent implements OnInit {
   
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
-    this.data.items.forEach((item, index) => {
-      let slotsKey = this.data.slots[`0_${this.data.ulid}`]
-      if (slotsKey) {
-        this.compArr = tree?.find(slotsKey)?.toArray() || []
-      } else {
-        this.compArr = []
-      }
-    })
+    let ulid = this.data.slots[`0_${this.data.ulid}`]
+    if (ulid) {
+      this.compArr = tree?.find(ulid)?.toArray() || []
+    } else {
+      this.compArr = []
+    }
     this.listen()
     asyncFn(() => {
       this.show = false
