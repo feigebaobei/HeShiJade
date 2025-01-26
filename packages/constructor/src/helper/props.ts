@@ -1148,6 +1148,116 @@ let Flex: PropsConfigItem = {
         key: 'margin',
     },
 }
+let Grid: PropsConfigItem = {
+    gridTemplateColumns: {
+        category: 'input',
+        value: 'auto',
+        label: '每列列宽',
+        key: 'gridTemplateColumns',
+    },
+    gridTemplateRows: {
+        category: 'input',
+        value: 'auto',
+        label: '每列行高',
+        key: 'gridTemplateRows',
+    },
+    rowGap: {
+        category: 'input',
+        value: '0px',
+        label: '行间距',
+        key: 'rowGap',
+    },
+    columnGap: {
+        category: 'input',
+        value: '0px',
+        label: '列间距',
+        key: 'columnGap',
+    },
+    gridTemplateAreas: {
+        category: 'input',
+        value: '',
+        label: '定义区域',
+        key: 'gridTemplateAreas',
+    },
+    gridAutoFlow: {
+        category: 'select',
+        options: [
+            { label: '先行后列', value: 'row', },
+            { label: '先列后行', value: 'column', },
+            { label: '先行后列,尽量填满空格', value: 'row dense', },
+            { label: '先列后行,尽量填满空格', value: 'column dense', },
+        ],
+        value: '0px',
+        label: '子元素顺序',
+        key: 'gridAutoFlow',
+    },
+    justifyItems: {
+        category: 'select',
+        options: [
+            { label: '对齐单元格的起始边缘', value: 'start', },
+            { label: '对齐单元格的结束边缘', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸（占满）', value: 'stretch', },
+        ],
+        value: 'stretch',
+        label: '元素的水平位置',
+        key: 'justifyItems',
+    },
+    alignItems: {
+        category: 'select',
+        options: [
+            { label: '开始', value: 'start', },
+            { label: '末尾', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+        ],
+        value: 'stretch',
+        label: '元素的竖直位置',
+        key: 'alignItems',
+    },
+    justifyContent: {
+        category: 'select',
+        options: [
+            { label: '开始', value: 'start', },
+            { label: '末尾', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+            { label: '不加边界相等间距', value: 'space-around', },
+            { label: '两端对齐', value: 'space-between', },
+            { label: '加边界相等间距', value: 'space-evently', },
+        ],
+        value: 'start',
+        label: '网格的对齐位置',
+        key: 'justifyContent',
+    },
+    alignContent: {
+        category: 'select',
+        options: [
+            { label: '开始', value: 'start', },
+            { label: '末尾', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+            { label: '不加边界相等间距', value: 'space-around', },
+            { label: '两端对齐', value: 'space-between', },
+            { label: '加边界相等间距', value: 'space-evently', },
+        ],
+        value: 'start',
+        label: '网格的竖直位置',
+        key: 'alignContent',
+    },
+    padding: {
+        category: 'input',
+        value: '0px',
+        label: 'padding',
+        key: 'padding',
+    },
+    margin: {
+        category: 'input',
+        value: '0px',
+        label: 'margin',
+        key: 'margin',
+    },
+}
 export {
     Button,
     Modal,
@@ -1160,4 +1270,5 @@ export {
     Tabs,
     Pagination,
     Flex,
+    Grid,
 }

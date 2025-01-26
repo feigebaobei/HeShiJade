@@ -67,6 +67,11 @@ let Flex: CompConfigAddabel = {
     // slots: false,
 }
 
+let Grid: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+
 
 let all: {[k: S]: CompConfigAddabel} = {
     Button,
@@ -81,6 +86,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Pagination,
     Page,
     Flex,
+    Grid,
 }
 
 export {

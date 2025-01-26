@@ -14,6 +14,7 @@ import {
   Tabs as TabsBehaviorMeta,
   Pagination as PaginationBehaviorMeta,
   Flex as FlexBehaviorMeta,
+  Grid as GridBehaviorMeta,
   Page as PageBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
@@ -131,6 +132,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Flex':
         this.setComponentBehaviorListByType(FlexBehaviorMeta)
+        break;
+      case 'Grid':
+        this.setComponentBehaviorListByType(GridBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

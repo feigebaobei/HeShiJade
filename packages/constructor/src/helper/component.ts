@@ -13,6 +13,7 @@ import { Button as ButtonProps,
     Tabs as TabsProps,
     Pagination as PaginationProps,
     Flex as FlexProps,
+    Grid as GridProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -22,6 +23,8 @@ import {
     Checkbox as CheckboxBehavior,
     Tabs as TabsBehavior,
     Pagination as PaginationBehavior,
+    Flex as FlexBehavior,
+    Grid as GridBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -183,7 +186,13 @@ let Pagination: ComponentDefaultConfig = {
 }
 let Flex: ComponentDefaultConfig = {
     props: opProps(FlexProps),
-    behavior: [],
+    behavior: opBehavior(FlexBehavior),
+    items: [],
+    slots: {},
+}
+let Grid: ComponentDefaultConfig = {
+    props: opProps(GridProps),
+    behavior: opBehavior(GridBehavior),
     items: [],
     slots: {},
 }
@@ -200,4 +209,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Tabs,
     Pagination,
     Flex,
+    Grid,
 }
