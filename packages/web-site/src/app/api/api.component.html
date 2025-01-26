@@ -1778,8 +1778,7 @@
             </tr>
         </tbody>
     </table>
-    <!-- 
-    <h1>componentName</h1>
+    <h1>flex</h1>
     <h2>props</h2>
     <table>
         <thead>
@@ -1793,11 +1792,60 @@
         </thead>
         <tbody>
             <tr>
-                <td>title</td>
-                <td>title</td>
+                <td>justifyContent</td>
+                <td>主轴的对齐方式</td>
+                <td>向开头对齐,向末尾对齐,居中,两端对齐,相等间距</td>
+                <td>向开头对齐</td>
                 <td>-</td>
-                <td>'title'</td>
-                <td></td>
+            </tr>
+            <tr>
+                <td>alignItems</td>
+                <td>垂直主轴的对齐方式</td>
+                <td>向开头对齐,向末尾对齐,向末尾对齐,两端对齐,轴线占满交叉轴</td>
+                <td>垂直主轴的对齐方式</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>flexDirection</td>
+                <td>主轴的方向</td>
+                <td>行,反向行,列,反向列</td>
+                <td>行</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>flexWrap</td>
+                <td>换行</td>
+                <td>不折行,折行正序,折行倒序</td>
+                <td>不折行</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>rowGap</td>
+                <td>行间隔</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>columnGap</td>
+                <td>列间隔</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>padding</td>
+                <td>padding</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>margin</td>
+                <td>margin</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td>-</td>
             </tr>
         </tbody>
     </table>
@@ -1812,9 +1860,9 @@
         </thead>
         <tbody>
             <tr>
-                <td>header</td>
-                <td>头部的插槽</td>
-                <td></td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
             </tr>
         </tbody>
     </table>
@@ -1843,16 +1891,39 @@
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td>第三个参数</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
     
+    <!-- 
     <h1>componentName</h1>
     <h2>props</h2>
     <table>

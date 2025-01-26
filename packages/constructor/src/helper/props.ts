@@ -1074,18 +1074,6 @@ let Pagination: PropsConfigItem = {
     },
 }
 let Flex: PropsConfigItem = {
-    // width: {
-    //     category: 'input',
-    //     value: '100%',
-    //     label: '宽度',
-    //     key: 'width',
-    // },
-    // height: {
-    //     category: 'input',
-    //     value: '200px',
-    //     label: '高度',
-    //     key: 'height',
-    // },
     justifyContent: {
         category: 'select',
         options: [
