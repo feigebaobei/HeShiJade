@@ -11,6 +11,7 @@ import { IconComponent } from '../icon/icon.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { FlexComponent } from '../flex/flex.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -45,6 +46,7 @@ let compMap: Oa = {
   Checkbox: CheckboxComponent,
   Tabs: TabsComponent,
   Pagination: PaginationComponent,
+  Flex: FlexComponent,
 }
 
 @Component({
@@ -167,6 +169,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Pagination':
         this.componentRef.instance.data = {
           props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break
+      case 'Flex':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
           items: this.comp.items,
           ulid: this.comp.ulid,
         }

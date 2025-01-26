@@ -29,6 +29,7 @@ import {
   Checkbox as gridLayoutCheckboxDefault,
   Tabs as gridLayoutTabsDefault,
   Pagination as gridLayoutPaginationDefault,
+  Flex as gridLayoutFlexDefault,
 } from 'src/helper/gridLayout'
 // 类型
 import type { A, S, N, B, ULID, } from 'src/types/base';
@@ -63,6 +64,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
   Checkbox: gridLayoutCheckboxDefault,
   Tabs: gridLayoutTabsDefault,
   Pagination: gridLayoutPaginationDefault,
+  Flex: gridLayoutFlexDefault,
 }
 
 @Component({

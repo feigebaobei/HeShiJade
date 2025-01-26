@@ -10,14 +10,6 @@ import type { B, S, N, A, O } from 'src/types/base';
 
 let clog = console.log
 
-interface TabsData {
-  props: Comp['props']
-  behavior: Comp['behavior']
-  items: Comp['items']
-  slots: Comp['slots']
-  ulid: ULID
-}
-
 @Component({
   selector: 'app-tabs',
   // standalone: true,

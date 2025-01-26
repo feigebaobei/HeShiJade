@@ -33,6 +33,7 @@ import { IconComponent } from './icon/icon.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { FlexComponent } from './flex/flex.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     TabsComponent,
     PaginationComponent,
     // DataTableComponent,
+    FlexComponent,
   ],
   imports: [
     CommonModule,

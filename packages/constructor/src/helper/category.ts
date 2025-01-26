@@ -56,6 +56,11 @@ let categoryList = [
         componentCategory: 'Pagination',
         ulid: '01J50ZGTCKEC10HWAJBZND487B'
     },
+    {
+        name: 'flex',
+        componentCategory: 'Flex',
+        ulid: '01J50ZGTCKEC10HWAJBZND487C'
+    },
   ]
 export {
     categoryList

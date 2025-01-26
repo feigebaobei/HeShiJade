@@ -96,8 +96,6 @@ export class BehaviorBoxComponent {
     }
   }
   curComponentChange() {
-    // clog('this.curComp', this.curComp)
-    // return 
     this.componentBehaviorList = []
     switch (this.curComp?.type) {
       case 'Button':
@@ -157,6 +155,7 @@ export class BehaviorBoxComponent {
       group.forEach(item => {
         o[item.key] = item.value
       })
+      // todo 测试添加组件
       this.pageService.addBehaviorOfCurPage(o)
       this.pageService.reqAddBehavior(o)
     }

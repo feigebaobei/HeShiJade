@@ -290,7 +290,7 @@ let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
       s(p)
     }, timing)
   }).then((p: A) => {
-    fn(...p)
+    return Promise.resolve(fn(...p))
   })
 }
 

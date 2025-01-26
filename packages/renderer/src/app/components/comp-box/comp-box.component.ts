@@ -13,6 +13,7 @@ import { IconComponent } from 'src/app/components/icon/icon.component';
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { FlexComponent } from '../flex/flex.component';
 // type
 import type { A, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -31,6 +32,7 @@ let compMap: {[k: S]: A} = {
   Checkbox: CheckboxComponent,
   Tabs: TabsComponent,
   Pagination: PaginationComponent,
+  Flex: FlexComponent,
 }
 
 @Component({
@@ -165,6 +167,15 @@ export class CompBoxComponent {
           pageUlid: this.data.pageUlid,
         }
         break;
+      case 'Flex':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
     }
   }
 }

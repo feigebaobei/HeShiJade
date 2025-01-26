@@ -1,4 +1,5 @@
 import type { GridLayoutDefault } from "src/types/component"
+import type { S } from "src/types/base"
 
 let Button: GridLayoutDefault = {
     // x: 0,
@@ -70,6 +71,24 @@ let Pagination: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Flex: GridLayoutDefault = {
+    w: 24,
+    h: 4,
+    noResize: false,
+}
+let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
+    Button,
+    Modal,
+    Form,
+    Table,
+    Input,
+    Select,
+    Icon,
+    Checkbox,
+    Tabs,
+    Pagination,
+    Flex,
+}
 export {
     Button,
     Modal,
@@ -81,4 +100,7 @@ export {
     Checkbox,
     Tabs,
     Pagination,
+    Flex,
+
+    gridLayoutDefault,
 }

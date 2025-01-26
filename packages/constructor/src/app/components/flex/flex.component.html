@@ -1,0 +1,23 @@
+<div dDroppable
+    class="dropArea"
+    (dropEvent)="dropH($event)"
+    [style]="{'margin': data.props['margin'],}"
+>
+    <span *ngIf="!(compArr.length)">此区域可接收子组件</span>
+    <div class="flex"
+        [style]="{
+            'justify-content': data.props['justifyContent'],
+            'align-items': data.props['alignItems'],
+            'flex-direction': data.props['flexDirection'],
+            'flex-wrap': data.props['flexWrap'],
+            'row-gap': data.props['rowGap'],
+            'column-gap': data.props['columnGap'],
+            'padding': data.props['padding'],
+        }"
+    >        
+        <app-comp-box 
+            *ngFor="let item of compArr"
+            [comp]="item"
+        ></app-comp-box>
+    </div>
+</div>

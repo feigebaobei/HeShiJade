@@ -1073,6 +1073,93 @@ let Pagination: PropsConfigItem = {
         key: 'autoHide',
     },
 }
+let Flex: PropsConfigItem = {
+    // width: {
+    //     category: 'input',
+    //     value: '100%',
+    //     label: '宽度',
+    //     key: 'width',
+    // },
+    // height: {
+    //     category: 'input',
+    //     value: '200px',
+    //     label: '高度',
+    //     key: 'height',
+    // },
+    justifyContent: {
+        category: 'select',
+        options: [
+            { label: '向开头对齐', value: 'flex-start' },
+            { label: '向末尾对齐', value: 'flex-end' },
+            { label: '居中', value: 'center' },
+            { label: '两端对齐', value: 'space-between' },
+            { label: '相等间距', value: 'space-around' },
+        ],
+        value: 'flex-start',
+        label: '主轴的对齐方式',
+        key: 'justifyContent',
+    },
+    alignItems: {
+        category: 'select',
+        options: [
+            { label: '向开头对齐', value: 'flex-start' },
+            { label: '向末尾对齐', value: 'flex-end' },
+            { label: '向末尾对齐', value: 'center' },
+            { label: '两端对齐', value: 'space-between' },
+            { label: '轴线占满交叉轴', value: 'stretch' },
+        ],
+        value: 'stretch',
+        label: '垂直主轴的对齐方式',
+        key: 'alignItems',
+    },
+    flexDirection: {
+        category: 'select',
+        options: [
+            { label: '行', value: 'row' },
+            { label: '反向行', value: 'row-reverse' },
+            { label: '列', value: 'column' },
+            { label: '反向列', value: 'column-reverse' },
+        ],
+        value: 'row',
+        label: '主轴的方向',
+        key: 'flexDirection',
+    },
+    flexWrap: {
+        category: 'select',
+        options: [
+            { label: '不折行', value: 'nowrap' },
+            { label: '折行正序', value: 'wrap' },
+            { label: '折行倒序', value: 'wrap-reverse' },
+        ],
+        value: 'nowrap',
+        label: '换行',
+        key: 'flexWrap',
+    },
+    rowGap: {
+        category: 'input',
+        value: '0px',
+        label: '行间隔',
+        key: 'rowGap',
+    },
+    columnGap: {
+        category: 'input',
+        value: '0px',
+        label: '列间隔',
+        key: 'columnGap',
+    },
+    padding: {
+        category: 'input',
+        value: '0px',
+        label: 'padding',
+        key: 'padding',
+    },
+    margin: {
+        category: 'input',
+        value: '0px',
+        label: 'margin',
+        key: 'margin',
+    },
+}
 export {
     Button,
     Modal,
@@ -1084,4 +1171,5 @@ export {
     Checkbox,
     Tabs,
     Pagination,
+    Flex,
 }
