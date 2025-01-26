@@ -6,6 +6,7 @@
 |测试flex组件的使用功能|done||
 ||内部实现flex布局|done|
 ||flex组件支持行为面板|done|
+||flex组件的子组件支持删除组件||
 |渲染侧实现flex组件|done||
 |整理tabs组件|||
 |丰富组件|||

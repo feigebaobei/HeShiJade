@@ -1,1 +1,29 @@
-<p>grid works!</p>
+<!-- <p>grid works!</p> -->
+<div dDroppable
+    class="dropArea"
+    (dropEvent)="dropH($event)"
+    [style]="{'margin': data.props['margin'],}"
+>
+    <span *ngIf="!(compArr.length)">此区域可接收子组件</span>
+    <div class="grid"
+        [style]="{
+            'grid-template-columns': data.props['gridTemplateColumns'],
+            'grid-template-rows': data.props['gridTemplateRows'],
+            'row-gap': data.props['rowGap'],
+            'column-gap': data.props['columnGap'],
+            'grid-template-areas': data.props['gridTemplateAreas'],
+            'grid-auto-flow': data.props['gridAutoFlow'],
+            'justify-items': data.props['justifyItems'],
+            'align-items': data.props['alignItems'],
+            'justify-content': data.props['justifyContent'],
+            'align-content': data.props['alignContent'],
+            'padding': data.props['padding'],
+            'margin': data.props['margin'],
+        }"
+    >
+        <app-comp-box 
+            *ngFor="let item of compArr"
+            [comp]="item"
+        ></app-comp-box>
+    </div>
+</div>

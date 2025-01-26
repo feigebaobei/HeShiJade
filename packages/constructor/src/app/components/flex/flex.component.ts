@@ -32,7 +32,7 @@ export class FlexComponent implements OnInit, OnChanges {
   curPage: Page
   compArr: Comp[]
   show: B
-  @ViewChild('compStack') compStack!: CompStackComponent
+  // @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
