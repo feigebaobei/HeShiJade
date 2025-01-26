@@ -331,7 +331,7 @@ export class ComponentService {
     if (curComp) {
       curComp.props[key] = value
     }
-    clog('change after', curComp)
+    // clog('change after', curComp)
   }
   setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()

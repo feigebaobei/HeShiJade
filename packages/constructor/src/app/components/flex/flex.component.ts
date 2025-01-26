@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { asyncFn, compatibleArray, initComponentMeta } from 'src/helper';
@@ -6,10 +6,12 @@ import { asyncFn, compatibleArray, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
-import type { A, B, N, S, ULID } from 'src/types/base';
+import type { A, B, N, O, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 import type { DropEvent } from 'ng-devui';
+
+let clog = console.log
 
 interface FlexData {
   props: Comp['props']
@@ -25,8 +27,15 @@ interface FlexData {
   templateUrl: './flex.component.html',
   styleUrl: './flex.component.sass'
 })
-export class FlexComponent implements OnInit {
+export class FlexComponent implements OnInit, OnChanges {
   @Input() data!: FlexData
+  // _data: FlexData
+  // @Input() set data(value: FlexData) {
+  //   this.data = value
+  // }
+  // get data(): FlexData {
+  //   return this.data
+  // }
   curPage: Page
   compArr: Comp[]
   show: B
@@ -35,6 +44,7 @@ export class FlexComponent implements OnInit {
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    // this.data = this.data
     this.curPage = this.pageService.getCurPage()!
     this.compArr = []
     this.show = true
@@ -100,6 +110,14 @@ export class FlexComponent implements OnInit {
     }).then(() => {
       this.show = true
     })
+    // setInterval(() => {
+    //   clog('读取data', this.data)
+    // }, 2000)
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    clog('changes', changes)
+  }
+  // ngDoCheck() {
+  //   clog('123456y')
+  // }
 }
