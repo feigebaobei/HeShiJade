@@ -29,13 +29,6 @@ interface FlexData {
 })
 export class FlexComponent implements OnInit, OnChanges {
   @Input() data!: FlexData
-  // _data: FlexData
-  // @Input() set data(value: FlexData) {
-  //   this.data = value
-  // }
-  // get data(): FlexData {
-  //   return this.data
-  // }
   curPage: Page
   compArr: Comp[]
   show: B
@@ -44,7 +37,6 @@ export class FlexComponent implements OnInit, OnChanges {
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
-    // this.data = this.data
     this.curPage = this.pageService.getCurPage()!
     this.compArr = []
     this.show = true

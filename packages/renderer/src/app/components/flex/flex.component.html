@@ -1,0 +1,11 @@
+<div
+    *ngIf="show"
+    class="box"
+    [style]="styleObj"
+>
+    <app-comp-box
+        *ngFor="let item of compArr"
+        [data]="item"
+    >
+    </app-comp-box>
+</div>

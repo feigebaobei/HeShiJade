@@ -42,11 +42,10 @@ let createChildKey = (prefix: 'items' | 'slots', key: S | N, type: '' | 'ulid' |
 let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
   return new Promise((s, j) => {
     setTimeout(() => {
-      // fn(...p)
       s(p)
     }, timing)
   }).then((p: A) => {
-    fn(...p)
+    return Promise.resolve(fn(...p))
   })
 }
 // 兼容的数组，常用于处理脏数据。
