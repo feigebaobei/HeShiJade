@@ -62,7 +62,7 @@ let Page: CompConfigAddabel = {
     // slots: false,
 }
 let Flex: CompConfigAddabel = {
-    behavior: false,
+    behavior: true,
     items: false,
     // slots: false,
 }

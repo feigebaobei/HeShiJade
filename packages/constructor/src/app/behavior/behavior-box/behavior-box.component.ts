@@ -13,6 +13,7 @@ import {
   Checkbox as CheckboxBehaviorMeta,
   Tabs as TabsBehaviorMeta,
   Pagination as PaginationBehaviorMeta,
+  Flex as FlexBehaviorMeta,
   Page as PageBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
@@ -127,6 +128,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Pagination':
         this.setComponentBehaviorListByType(PaginationBehaviorMeta)
+        break;
+      case 'Flex':
+        this.setComponentBehaviorListByType(FlexBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)
