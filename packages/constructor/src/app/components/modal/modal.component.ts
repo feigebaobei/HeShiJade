@@ -18,30 +18,30 @@ import {
   Tabs as gridLayoutTabsDefault,
   Pagination as gridLayoutPaginationDefault,
 } from 'src/helper/gridLayout'
-
+import { gridLayoutDefault } from 'src/helper/gridLayout';
 // type
 import type { A, ULID, S, N, } from 'src/types/base';
 import type {Component as Comp, 
   ComponentMountItems,
   ComponentMountSlots,} from 'src/types/component'
 import type { Page } from 'src/types/page';
-import type { GridLayoutDefault } from "src/types/component"
+// import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 
 let clog = console.log
 
-let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
-  Button: gridLayoutButtonDefault,
-  Modal: gridLayoutModalDefault,
-  Form: gridLayoutFormDefault,
-  Table: gridLayoutTableDefault,
-  Input: gridLayoutInputDefault,
-  Select: gridLayoutSelectDefault,
-  Icon: gridLayoutIconDefault,
-  Checkbox: gridLayoutCheckboxDefault,
-  Tabs: gridLayoutTabsDefault,
-  Pagination: gridLayoutPaginationDefault,
-}
+// let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
+//   Button: gridLayoutButtonDefault,
+//   Modal: gridLayoutModalDefault,
+//   Form: gridLayoutFormDefault,
+//   Table: gridLayoutTableDefault,
+//   Input: gridLayoutInputDefault,
+//   Select: gridLayoutSelectDefault,
+//   Icon: gridLayoutIconDefault,
+//   Checkbox: gridLayoutCheckboxDefault,
+//   Tabs: gridLayoutTabsDefault,
+//   Pagination: gridLayoutPaginationDefault,
+// }
 
 @Component({
   selector: 'app-modal',

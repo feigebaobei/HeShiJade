@@ -20,6 +20,7 @@ import {
   Tabs as gridLayoutTabsDefault,
   Pagination as gridLayoutPaginationDefault,
 } from 'src/helper/gridLayout'
+import { gridLayoutDefault } from 'src/helper/gridLayout';
 
 // type
 import type { N, S, D, B, ULID } from 'src/types/base';
@@ -29,21 +30,21 @@ import type { DropEvent } from 'ng-devui';
 import type { Page } from 'src/types/page';
 // import { ulid } from 'ulid';
 import type { DataTableComponent } from 'ng-devui/data-table';
-import type { GridLayoutDefault } from "src/types/component"
+// import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
 
-let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
-  Button: gridLayoutButtonDefault,
-  Modal: gridLayoutModalDefault,
-  Form: gridLayoutFormDefault,
-  Table: gridLayoutTableDefault,
-  Input: gridLayoutInputDefault,
-  Select: gridLayoutSelectDefault,
-  Icon: gridLayoutIconDefault,
-  Checkbox: gridLayoutCheckboxDefault,
-  Tabs: gridLayoutTabsDefault,
-  Pagination: gridLayoutPaginationDefault,
-}
+// let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
+//   Button: gridLayoutButtonDefault,
+//   Modal: gridLayoutModalDefault,
+//   Form: gridLayoutFormDefault,
+//   Table: gridLayoutTableDefault,
+//   Input: gridLayoutInputDefault,
+//   Select: gridLayoutSelectDefault,
+//   Icon: gridLayoutIconDefault,
+//   Checkbox: gridLayoutCheckboxDefault,
+//   Tabs: gridLayoutTabsDefault,
+//   Pagination: gridLayoutPaginationDefault,
+// }
 
 
 let clog = console.log

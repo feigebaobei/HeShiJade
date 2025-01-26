@@ -20,31 +20,32 @@ import {
   Pagination as gridLayoutPaginationDefault,
   Flex as gridLayoutFlexDefault,
 } from 'src/helper/gridLayout'
+import { gridLayoutDefault } from 'src/helper/gridLayout';
 
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
-import type { GridLayoutDefault } from "src/types/component"
+// import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 import type { KvMap } from 'src/helper/kvMap';
 
 let clog = console.log
 
-let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
-  Button: gridLayoutButtonDefault,
-  Modal: gridLayoutModalDefault,
-  Form: gridLayoutFormDefault,
-  Table: gridLayoutTableDefault,
-  Input: gridLayoutInputDefault,
-  Select: gridLayoutSelectDefault,
-  Icon: gridLayoutIconDefault,
-  Checkbox: gridLayoutCheckboxDefault,
-  Tabs: gridLayoutTabsDefault,
-  Pagination: gridLayoutPaginationDefault,
-  Flex: gridLayoutFlexDefault,
-}
+// let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
+//   Button: gridLayoutButtonDefault,
+//   Modal: gridLayoutModalDefault,
+//   Form: gridLayoutFormDefault,
+//   Table: gridLayoutTableDefault,
+//   Input: gridLayoutInputDefault,
+//   Select: gridLayoutSelectDefault,
+//   Icon: gridLayoutIconDefault,
+//   Checkbox: gridLayoutCheckboxDefault,
+//   Tabs: gridLayoutTabsDefault,
+//   Pagination: gridLayoutPaginationDefault,
+//   Flex: gridLayoutFlexDefault,
+// }
 interface TabsData {
   props: Comp['props']
   slots: Comp['slots']

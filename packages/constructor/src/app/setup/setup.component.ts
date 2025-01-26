@@ -31,7 +31,8 @@ import {
   Pagination as gridLayoutPaginationDefault,
   Flex as gridLayoutFlexDefault,
 } from 'src/helper/gridLayout'
-// 类型
+import { gridLayoutDefault } from 'src/helper/gridLayout';
+// type
 import type { A, S, N, B, ULID, } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { Category, Component as Comp,
@@ -40,7 +41,7 @@ import type { Category, Component as Comp,
 import type { DropEvent } from 'ng-devui';
 import type { App } from 'src/types/app';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
-import type { GridLayoutDefault } from "src/types/component"
+// import type { GridLayoutDefault } from "src/types/component"
 // import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/angular';
 import type { CompStackComponent } from '../components/comp-stack/comp-stack.component';
 
@@ -53,19 +54,19 @@ interface SuperGridItem extends GridStackWidget {
   comp: Comp
 }
 
-let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
-  Button: gridLayoutButtonDefault,
-  Modal: gridLayoutModalDefault,
-  Form: gridLayoutFormDefault,
-  Table: gridLayoutTableDefault,
-  Input: gridLayoutInputDefault,
-  Select: gridLayoutSelectDefault,
-  Icon: gridLayoutIconDefault,
-  Checkbox: gridLayoutCheckboxDefault,
-  Tabs: gridLayoutTabsDefault,
-  Pagination: gridLayoutPaginationDefault,
-  Flex: gridLayoutFlexDefault,
-}
+// let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
+//   Button: gridLayoutButtonDefault,
+//   Modal: gridLayoutModalDefault,
+//   Form: gridLayoutFormDefault,
+//   Table: gridLayoutTableDefault,
+//   Input: gridLayoutInputDefault,
+//   Select: gridLayoutSelectDefault,
+//   Icon: gridLayoutIconDefault,
+//   Checkbox: gridLayoutCheckboxDefault,
+//   Tabs: gridLayoutTabsDefault,
+//   Pagination: gridLayoutPaginationDefault,
+//   Flex: gridLayoutFlexDefault,
+// }
 
 @Component({
   selector: 'app-setup',
