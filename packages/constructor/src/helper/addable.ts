@@ -69,7 +69,7 @@ let Flex: CompConfigAddabel = {
 
 let Grid: CompConfigAddabel = {
     behavior: true,
-    items: false,
+    items: true,
 }
 
 

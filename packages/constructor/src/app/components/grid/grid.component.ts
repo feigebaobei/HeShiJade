@@ -66,6 +66,12 @@ export class GridComponent {
       this.show = true
     })
   }
+  deleteCompH(ulid: ULID) {
+    this.compArr = this.compArr.filter(item => item.ulid !== ulid)
+    this.componentService.deleteComponentByUlid(this.pageService.getCurPage()!.ulid, ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.pageService.getCurPage()!.ulid, ulid).map(item => item.ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
+  }
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
     let ulid = this.data.slots[`0_${this.data.ulid}`]

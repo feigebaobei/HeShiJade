@@ -4,7 +4,7 @@
     (dropEvent)="dropH($event)"
     [style]="{'margin': data.props['margin'],}"
 >
-    <span *ngIf="!(compArr.length)">此区域可接收子组件</span>
+    <span *ngIf="!(compArr.length)">请先创建items</span>
     <div class="grid"
         [style]="{
             'grid-template-columns': data.props['gridTemplateColumns'],
@@ -21,9 +21,10 @@
             'margin': data.props['margin'],
         }"
     >
-        <app-comp-box 
+        <app-comp-packet
             *ngFor="let item of compArr"
-            [comp]="item"
-        ></app-comp-box>
+            [data]="item"
+            (deleteComp)="deleteCompH($event)"
+        ></app-comp-packet>
     </div>
 </div>

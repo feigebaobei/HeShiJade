@@ -1,4 +1,4 @@
-import { Component, effect, Input, } from '@angular/core';
+import { Component, effect, Input, Output, EventEmitter, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // type
@@ -17,6 +17,7 @@ export class CompPacketComponent {
   @Input() data!: Comp
   curComponent: Comp | undefined
   curPage: Page | undefined
+  @Output() deleteComp = new EventEmitter<ULID>()
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -43,7 +44,10 @@ export class CompPacketComponent {
       }
     }
   }
-  deleteClickH(ulid: ULID) {}
+  deleteClickH(ulid: ULID) {
+    // 通知父组件删除
+    this.deleteComp.emit(ulid)
+  }
   ngOnInit() {
     this.init()
   }

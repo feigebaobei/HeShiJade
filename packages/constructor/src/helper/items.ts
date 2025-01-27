@@ -299,6 +299,56 @@ let Tabs: ConfigItem[] = [
         checked: false,
     },
 ]
+let Grid: ConfigItem[] = [
+    {
+        label: '左边框所在的垂直网格线',
+        category: 'input',
+        key: 'gridColumnStart',
+        value: '',
+    },
+    {
+        label: '上边框所在的垂直网格线',
+        category: 'input',
+        key: 'gridRowStart',
+        value: '',
+    },
+    {
+        label: '右边框所在的垂直网格线',
+        category: 'input',
+        key: 'gridRowEnd',
+        value: '',
+    },
+    {
+        label: '区域',
+        category: 'input',
+        key: 'gridArea',
+        value: '',
+    },
+    {
+        label: '当前元素的水平位置',
+        category: 'select',
+        options: [
+            {label: '开头', value: 'start',},
+            {label: '末尾', value: 'end',},
+            {label: '居中', value: 'center',},
+            {label: '拉伸', value: 'stretch',},
+        ],
+        key: 'justifySelf',
+        value: 'start',
+    },
+    {
+        label: '当前元素的竖直位置',
+        category: 'select',
+        options: [
+            {label: '开头', value: 'start',},
+            {label: '末尾', value: 'end',},
+            {label: '居中', value: 'center',},
+            {label: '拉伸', value: 'stretch',},
+        ],
+        key: 'alignSelf',
+        value: 'start',
+    },
+]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
     Button,
@@ -311,6 +361,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Checkbox, // 没有子元素
     Tabs,
     // Pagination, // 没有子元素
+    Grid,
 }
 
 export default all
