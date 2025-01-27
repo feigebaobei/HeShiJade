@@ -37,7 +37,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { CompStackComponent } from './comp-stack/comp-stack.component';
 import { FlexComponent } from './flex/flex.component';
 import { GridComponent } from './grid/grid.component';
-
+import { CompPacketComponent } from './comp-packet/comp-packet.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -56,6 +56,7 @@ import { GridComponent } from './grid/grid.component';
     CompStackComponent,
     FlexComponent,
     GridComponent,
+    CompPacketComponent,
   ],
   imports: [
     CommonModule,
