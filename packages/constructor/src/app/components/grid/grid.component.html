@@ -1,30 +1,41 @@
 <!-- <p>grid works!</p> -->
-<div dDroppable
-    class="dropArea"
-    (dropEvent)="dropH($event)"
-    [style]="{'margin': data.props['margin'],}"
+<!-- [style]="{'margin': data.props['margin'],}" -->
+<!-- {{arrComp | json}} -->
+<div
+    class="grid-box"
+    [style]="{
+        'grid-template-columns': data.props['gridTemplateColumns'],
+        'grid-template-rows': data.props['gridTemplateRows'],
+        'row-gap': data.props['rowGap'],
+        'column-gap': data.props['columnGap'],
+        'grid-template-areas': data.props['gridTemplateAreas'],
+        'grid-auto-flow': data.props['gridAutoFlow'],
+        'justify-items': data.props['justifyItems'],
+        'align-items': data.props['alignItems'],
+        'justify-content': data.props['justifyContent'],
+        'align-content': data.props['alignContent'],
+        'padding': data.props['padding'],
+        'margin': data.props['margin'],
+    }"
 >
-    <span *ngIf="!(compArr.length)">请先创建items</span>
-    <div class="grid"
-        [style]="{
-            'grid-template-columns': data.props['gridTemplateColumns'],
-            'grid-template-rows': data.props['gridTemplateRows'],
-            'row-gap': data.props['rowGap'],
-            'column-gap': data.props['columnGap'],
-            'grid-template-areas': data.props['gridTemplateAreas'],
-            'grid-auto-flow': data.props['gridAutoFlow'],
-            'justify-items': data.props['justifyItems'],
-            'align-items': data.props['alignItems'],
-            'justify-content': data.props['justifyContent'],
-            'align-content': data.props['alignContent'],
-            'padding': data.props['padding'],
-            'margin': data.props['margin'],
-        }"
+    <span *ngIf="!(arrComp.length)">请先创建items</span>
+    <div
+        *ngFor="let ele of arrComp; let i = index;"
     >
-        <app-comp-packet
-            *ngFor="let item of compArr"
-            [data]="item"
-            (deleteComp)="deleteCompH($event)"
-        ></app-comp-packet>
+        <div *ngIf="ele; else templateElse"
+            class="comp-box"
+        >
+            <app-comp-packet
+                [data]="ele"
+                (deleteComp)="deleteCompH($event, i)"
+            ></app-comp-packet>
+        </div>
+        <ng-template #templateElse>
+            <div
+                dDroppable
+                class="dropArea"
+                (dropEvent)="dropH($event, i)"
+                >请创建组件</div>
+        </ng-template>
     </div>
 </div>

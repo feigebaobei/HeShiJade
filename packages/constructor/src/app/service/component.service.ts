@@ -36,7 +36,7 @@ let clog = console.log
 
 type CompOrUn = Component | undefined
 type ComponentOrUn = Component | undefined
-type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout' | 'mount'
+type UpdateType = 'props' | 'behavior' | 'slots' | 'plugin' | 'gridLayout' | 'mount'
 
 @Injectable({
   providedIn: 'root'
@@ -411,7 +411,7 @@ export class ComponentService {
     let component = tree?.find(componentUlid)?.value
     if (component) {
       let [item] = component.items.splice(index, 1)
-      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, {item, index}) // 触发事件
+      shareEvent.emit(creatEventName(component.type, component.ulid, 'items', 'remove'), {item, index}) // 触发事件
     }
   }
   // 更新组件
@@ -474,7 +474,6 @@ export class ComponentService {
   deleteComponentByUlid(pageUlid: ULID, componentUlid: ULID) {
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
-
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
   }
