@@ -19,10 +19,11 @@
     <div
         *ngFor="let ele of compArr; let i = index;"
         class="item-box"
+        [style]="ele.styleObj"
     >
-        <div *ngIf="ele; else templateElse">
+        <div *ngIf="ele.comp; else templateElse">
             <app-comp-packet
-                [data]="ele"
+                [data]="ele.comp"
                 (deleteComp)="deleteCompH($event, i)"
             ></app-comp-packet>
         </div>
