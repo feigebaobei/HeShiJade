@@ -76,8 +76,6 @@ export class GridComponent {
       this.data.slots[slotKey] = comp.ulid
       this.componentService.mountComponent(this.curPage.ulid, comp)
       this.componentService.reqCreateComponent(comp)
-      // todo 测试
-      
       this.componentService.reqUpdateComponent('slots', slotKey, comp.ulid, this.data.ulid)
     }).then(() => {
       this.show = true

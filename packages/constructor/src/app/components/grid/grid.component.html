@@ -18,10 +18,9 @@
     <span *ngIf="!(compArr.length)">请先创建items</span>
     <div
         *ngFor="let ele of compArr; let i = index;"
+        class="item-box"
     >
-        <div *ngIf="ele; else templateElse"
-            class="comp-box"
-        >
+        <div *ngIf="ele; else templateElse">
             <app-comp-packet
                 [data]="ele"
                 (deleteComp)="deleteCompH($event, i)"
@@ -32,7 +31,7 @@
                 dDroppable
                 class="dropArea"
                 (dropEvent)="dropH($event, i)"
-                >请创建组件</div>
+            >请创建组件</div>
         </ng-template>
     </div>
 </div>
