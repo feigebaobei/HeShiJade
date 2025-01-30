@@ -27,41 +27,28 @@ interface GridData {
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.sass'
 })
-// todo 整理compArr cArr arrComp compObj show
 export class GridComponent {
   @Input() data!: GridData
   curPage: Page
-  compArr: Comp[]
-  cArr: Comp[][]
-  arrComp: (Comp | undefined)[]
-  compObj: {[k: S]: Comp[]}
+  compArr: (Comp | undefined)[] // 使用它
   show: B
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
     this.curPage = this.pageService.getCurPage()!
-    this.compArr = []
-    this.compObj = {}
     this.show = false
-    this.cArr = []
-    this.arrComp = []
+    this.compArr = []
   }
   listen() {
     shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'add'), (obj) => {
-      // let key = `${this.data.items.length - 1}_`
-      // if (this.data.items.length) {
-      //   key
-      // }
       let key = this.createSlotsKey(this.data.items.length - 1)
       this.data.slots[key] = ''
-      // this.compObj[key] = []
-      this.arrComp.push(undefined)
+      this.compArr.push(undefined)
       this.componentService.reqUpdateComponent('slots', key, '', this.data.ulid)
     })
     shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'remove'), ({item, index}) => {
-      this.arrComp[index] = undefined
-      // this.data.slots[`${index}_`] = ''
+      this.compArr[index] = undefined
       this.componentService.removeSlots(`${index}_`)
       this.componentService.reqRemoveSlots(`${index}_`)
     })
@@ -72,48 +59,6 @@ export class GridComponent {
     return `${index}_items`
   }
   dropH(e: DropEvent, index: N) {
-    // this.show = false
-    // let prevUlid: ULID
-    // if (this.compArr.length) {
-    //   prevUlid = this.compArr[this.compArr.length - 1].ulid
-    // } else {
-    //   prevUlid = ''
-    // }
-    // let slotKey = `${this.compArr.length}_${this.data.ulid}`
-    // let compGridLayout = gridLayoutDefault[e.dragData.item.componentCategory]
-    // let comp: Comp = initComponentMeta(
-    //   e.dragData.item.componentCategory,
-    //   this.curPage.appUlid, this.curPage.ulid,
-    //   prevUlid,
-    //   '', this.data.ulid,
-    //   { area: 'slots', slotKey },
-    //   {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
-    // )
-    // this.compArr.push(comp)
-    // this.data.slots[slotKey] = comp.ulid
-    // this.componentService.mountComponent(this.curPage.ulid, comp)
-    // this.componentService.reqCreateComponent(comp)
-
-    // asyncFn(() => {
-    //   this.show = false
-    //   let prevUlid: ULID
-    //   if (this.cArr[index].length) {
-    //     prevUlid = this.cArr[index][this.cArr[index].length - 1].ulid
-    //   } else {
-    //     prevUlid = ''
-    //   }
-    //   let slotKey = `${this.cArr[index].length}_items}`
-    //   let compGridLayout = gridLayoutDefault[e.dragData.item.componentCategory]
-    //   let comp: Comp = initComponentMeta(
-    //   e.dragData.item.componentCategory,
-    //   this.curPage.appUlid, this.curPage.ulid,
-    //   prevUlid,
-    //   '', this.data.ulid,
-    //   { area: 'slots', slotKey },
-    //   {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
-    // )
-    // this.compArr.push(comp)
-    
     asyncFn(() => {
       this.show = false
       let prevUlid: ULID = ''
@@ -127,7 +72,7 @@ export class GridComponent {
         { area: 'slots', slotKey }, 
         {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
       )
-      this.arrComp[index] = comp
+      this.compArr[index] = comp
       this.data.slots[slotKey] = comp.ulid
       this.componentService.mountComponent(this.curPage.ulid, comp)
       this.componentService.reqCreateComponent(comp)
@@ -139,8 +84,7 @@ export class GridComponent {
     })
   }
   deleteCompH(ulid: ULID, index: N) {
-    // this.compArr = this.compArr.filter(item => item.ulid !== ulid)
-    this.arrComp = this.arrComp.map(item => {
+    this.compArr = this.compArr.map(item => {
       if (item?.ulid === ulid) {
         return undefined
       } else {
@@ -155,28 +99,9 @@ export class GridComponent {
   }
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
-    // let ulid = this.data.slots[`0_${this.data.ulid}`]
-    // if (ulid) {
-    //   this.compArr = tree?.find(ulid)?.toArray() || []
-    // } else {
-    //   this.compArr = []
-    // }
-    // Array.from(Object.entries(this.data.slots)).forEach(([k, v]) => {
-    //   // this.compObj[k] = tree?.find(v)?.toArray() || []
-    //   // this.cArr.push(this.compObj[k])
-    //   this.cArr.push()
-    // })
-    // clog('arr', this.cArr)
-
-    // Array.from(Object.entries(this.data.slots)).forEach(([_key, ulid]) => {
-    //   clog('key', _key, ulid)
-    //   let t = tree?.find(ulid)?.value
-    //   this.arrComp.push(t)
-    // })
     this.data.items.forEach((item, index) => {
-      this.arrComp.push(tree?.find(this.data.slots[this.createSlotsKey(index)])?.value)
+      this.compArr.push(tree?.find(this.data.slots[this.createSlotsKey(index)])?.value)
     })
-    clog('aaaa', this.arrComp)
     this.listen()
     asyncFn(() => {
       this.show = false

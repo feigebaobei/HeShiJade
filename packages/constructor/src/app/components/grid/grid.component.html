@@ -1,6 +1,3 @@
-<!-- <p>grid works!</p> -->
-<!-- [style]="{'margin': data.props['margin'],}" -->
-<!-- {{arrComp | json}} -->
 <div
     class="grid-box"
     [style]="{
@@ -18,9 +15,9 @@
         'margin': data.props['margin'],
     }"
 >
-    <span *ngIf="!(arrComp.length)">请先创建items</span>
+    <span *ngIf="!(compArr.length)">请先创建items</span>
     <div
-        *ngFor="let ele of arrComp; let i = index;"
+        *ngFor="let ele of compArr; let i = index;"
     >
         <div *ngIf="ele; else templateElse"
             class="comp-box"
