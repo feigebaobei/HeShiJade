@@ -35,7 +35,6 @@ export class GridComponent implements OnInit, OnDestroy {
     return `${index}_items`
   }
   ngOnInit(): void {
-    clog(this.data)
     pool.register(this.data.ulid, this, this.data.behavior)
     pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
     asyncFn(() => {

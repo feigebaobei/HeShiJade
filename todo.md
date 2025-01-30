@@ -6,6 +6,7 @@
 |测试flex组件的使用功能|done||
 ||flex组件的子组件支持删除组件||
 |整理tabs组件|||
+|// todo rename setItems|||
 |整理占位文案|||
 |优化登录页面|||
 |整理component.service.ts|||

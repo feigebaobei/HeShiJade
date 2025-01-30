@@ -69,6 +69,17 @@ export class GridComponent {
       this.componentService.removeSlots(`${index}_`)
       this.componentService.reqRemoveSlots(`${index}_`)
     })
+    shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+      let item = this.data.items[index]
+      this.compArr[index].styleObj = {
+        'grid-column-start': item['gridColumnStart'],
+        'grid-row-start': item['gridRowStart'],
+        'grid-row-end': item['gridRowEnd'],
+        'grid-area': item['gridArea'],
+        'justify-self': item['justifySelf'],
+        'align-self': item['alignSelf'],
+      }
+    })
     // shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'reorder'), (obj) => {
     // })
   }
