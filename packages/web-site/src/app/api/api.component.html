@@ -1922,6 +1922,179 @@
             </tr>
         </tbody>
     </table>
+    <h1>grid</h1>
+    <h2>props</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>key</td>
+                <td>说明</td>
+                <td>可选值</td>
+                <td>默认值</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>gridTemplateColumns</td>
+                <td>每列列宽</td>
+                <td>-</td>
+                <td>'auto'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>gridTemplateRows</td>
+                <td>每列行高</td>
+                <td>-</td>
+                <td>'auto'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>rowGap</td>
+                <td>行间距</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>columnGap</td>
+                <td>列间距</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>gridTemplateAreas</td>
+                <td>定义区域</td>
+                <td>-</td>
+                <td>''</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>gridAutoFlow</td>
+                <td>子元素顺序</td>
+                <td>先行后列/先列后行/先行后列,尽量填满空格 /先列后行,尽量填满空格</td>
+                <td>先行后列</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>justifyItems</td>
+                <td>元素的水平位置</td>
+                <td>对齐单元格的起始边缘/对齐单元格的结束边缘/居中/拉伸</td>
+                <td>拉伸</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>alignItems</td>
+                <td>元素的竖直位置</td>
+                <td>开始/末尾/居中/拉伸</td>
+                <td>拉伸</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>justifyContent</td>
+                <td>网格的对齐位置</td>
+                <td>开始/末尾/居中/拉伸/不加边界相等间距/两端对齐/加边界相等间距</td>
+                <td>开始</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>alignContent</td>
+                <td>网格的竖直位置</td>
+                <td>开始/末尾/居中/拉伸/不加边界相等间距/两端对齐/加边界相等间距</td>
+                <td>开始</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>padding</td>
+                <td>padding</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>margin</td>
+                <td>margin</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>slots</h2>
+    <p>每一个items对应一个slots。</p>
+    <table>
+        <thead>
+            <tr>
+                <td>key</td>
+                <td>说明</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>`$&#123;itemsIndex&#125;_items`</td>
+                <td>-</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>method</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>方法</td>
+                <td>参数说明</td>
+                <td>运行逻辑</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setProps: (o: Object) => void</td>
+                <td>由当前组件支持的props属性组成的对象</td>
+                <td>设置当前组件的props</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>event</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>事件名</td>
+                <td>触发时机</td>
+                <td>第三个参数</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
+            </tr>
+        </tbody>
+    </table>
     
     <!-- 
     <h1>componentName</h1>
@@ -1988,12 +2161,34 @@
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td>第三个参数</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -2062,12 +2257,34 @@
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td>第三个参数</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -2136,12 +2353,34 @@
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td>第三个参数</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -2210,12 +2449,34 @@
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td>第三个参数</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table>
@@ -2284,86 +2545,34 @@
             <tr>
                 <td>事件名</td>
                 <td>触发时机</td>
+                <td>第三个参数</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
             </tr>
-        </tbody>
-    </table>
-    
-    <h1>componentName</h1>
-    <h2>props</h2>
-    <table>
-        <thead>
             <tr>
-                <td>key</td>
-                <td>说明</td>
-                <td>可选值</td>
-                <td>默认值</td>
-                <td>备注</td>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
             </tr>
-        </thead>
-        <tbody>
             <tr>
-                <td>title</td>
-                <td>title</td>
-                <td>-</td>
-                <td>'title'</td>
-                <td></td>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
             </tr>
-        </tbody>
-    </table>
-    <h2>slots</h2>
-    <table>
-        <thead>
             <tr>
-                <td>key</td>
-                <td>说明</td>
-                <td>备注</td>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染完成后</td>
+                <td>undefined</td>
             </tr>
-        </thead>
-        <tbody>
             <tr>
-                <td>header</td>
-                <td>头部的插槽</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <h2>method</h2>
-    <table>
-        <thead>
-            <tr>
-                <td>方法</td>
-                <td>参数说明</td>
-                <td>运行逻辑</td>
-                <td>备注</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>setProps: (o: Object) => void</td>
-                <td>由当前组件支持的props属性组成的对象</td>
-                <td>设置当前组件的props</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <h2>event</h2>
-    <table>
-        <thead>
-            <tr>
-                <td>事件名</td>
-                <td>触发时机</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>onClose</td>
-                <td>关闭后</td>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
             </tr>
         </tbody>
     </table> -->
