@@ -62,12 +62,18 @@ export class GridComponent {
     })
     shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'remove'), ({item, index}) => {
       // this.compArr[index] = undefined
-      this.compArr[index] = {
-        comp: undefined,
-        styleObj: {}
+      // this.compArr[index] = {
+      //   comp: undefined,
+      //   styleObj: {}
+      // }
+      let [{comp}] = this.compArr.splice(index, 1)
+      this.componentService.removeSlots(this.createSlotsKey(index))
+      this.componentService.reqRemoveSlots(this.createSlotsKey(index))
+      if (comp) {
+        let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, comp.ulid).map(item => item.ulid)
+        this.componentService.deleteComponentByUlid(this.curPage.ulid, comp.ulid)
+        this.componentService.reqDeleteComponent(comp.ulid, childrenUlid)
       }
-      this.componentService.removeSlots(`${index}_`)
-      this.componentService.reqRemoveSlots(`${index}_`)
     })
     shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
       let item = this.data.items[index]
@@ -137,16 +143,26 @@ export class GridComponent {
     this.data.items.forEach((item, index) => {
       let compT = tree?.find(this.data.slots[this.createSlotsKey(index)])?.value
       if (compT) {
-        this.compArr.push({comp: compT, styleObj: {
-          'grid-column-start': item['gridColumnStart'],
-          'grid-row-start': item['gridRowStart'],
-          'grid-row-end': item['gridRowEnd'],
-          'grid-area': item['gridArea'],
-          'justify-self': item['justifySelf'],
-          'align-self': item['alignSelf'],
-        }})
+        this.compArr.push({comp: compT,
+          styleObj: {
+            // 'grid-column-start': item['gridColumnStart'],
+            // 'grid-row-start': item['gridRowStart'],
+            // 'grid-row-end': item['gridRowEnd'],
+            // 'grid-area': item['gridArea'],
+            // 'justify-self': item['justifySelf'],
+            // 'align-self': item['alignSelf'],
+          }
+        })
       } else {
         this.compArr.push({comp: undefined, styleObj: {}})
+      }
+      this.compArr[index].styleObj = {
+        'grid-column-start': item['gridColumnStart'],
+        'grid-row-start': item['gridRowStart'],
+        'grid-row-end': item['gridRowEnd'],
+        'grid-area': item['gridArea'],
+        'justify-self': item['justifySelf'],
+        'align-self': item['alignSelf'],
       }
     })
     this.listen()

@@ -299,6 +299,38 @@ let Tabs: ConfigItem[] = [
         checked: false,
     },
 ]
+let Flex: ConfigItem[] = [
+    {
+        label: '项目的排列顺序,越小越靠前',
+        category: 'number',
+        key: 'order',
+        value: 0,
+    },
+    {
+        label: '项目的放大比例',
+        category: 'number',
+        key: 'flexGrow',
+        value: 0,
+    },
+    {
+        label: '项目的缩小比例',
+        category: 'number',
+        key: 'flexShrink',
+        value: 1,
+    },
+    {
+        label: '项目本来的大小',
+        category: 'input',
+        key: 'flexBasis',
+        value: 'auto',
+    },
+    {
+        label: '当前项目的对齐方式',
+        category: 'input',
+        key: 'alignSelf',
+        value: 'auto',
+    },
+]
 let Grid: ConfigItem[] = [
     {
         label: '左边框所在的垂直网格线',
@@ -361,6 +393,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Checkbox, // 没有子元素
     Tabs,
     // Pagination, // 没有子元素
+    Flex,
     Grid,
 }
 
