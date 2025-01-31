@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { initAppMeta } from 'src/helper';
 // module
 // service
-// import { DialogService } from 'ng-devui/modal';
-// import { ModalModule } from 'ng-devui/modal';
 import { AppService } from '../../service/app.service';
 import { UserService } from '../../service/user.service';
 import { PageService } from '../../service/page.service';
 import { ComponentService } from '../../service/component.service';
+import { text } from 'src/helper/config';
+import { DialogService } from 'ng-devui/modal';
 // 组件
 import { DialogComponent } from '../dialog/dialog.component';
 import { AppConfigDialogComponent } from '../app-config-dialog/app-config-dialog.component';
@@ -18,7 +18,7 @@ import { PublishDialogComponent } from '../publish-dialog/publish-dialog.compone
 import type { ResponseData, User } from 'src/types';
 import type { A, B, S, N, Email, } from 'src/types/base';
 import type { App } from 'src/types/app';
-import { DialogService } from 'ng-devui/modal';
+import type { Text } from 'src/types/config';
 
 interface FormData {
   key: S
@@ -45,6 +45,7 @@ export class ListComponent implements OnInit {
   appList: App[]
   user?: User
   msg: {}[]
+  text: Text
   constructor(
     private router: Router, 
     // private http: HttpClient, 
@@ -59,6 +60,7 @@ export class ListComponent implements OnInit {
     })
     this.msg = []
     this.appList = []
+    this.text = text
   }
   ngOnInit(): void {
     this.init()

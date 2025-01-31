@@ -10,14 +10,15 @@
     <span #ref>{{curComp?.ulid}}</span>
 </div>
 <ng-container
-*ngFor="let propItem of componentPropsList; trackBy: identify"
+    *ngFor="let propItem of componentPropsList; trackBy: identify"
 >
-<app-props-item 
-    *ngIf="!propItem.hideCalc"
-    [propItem]="propItem"
-    (itemChange)="itemChangeH($event)"
-    class="props_item"
-></app-props-item>
+    <app-props-item 
+        *ngIf="!propItem.hideCalc"
+        [propItem]="propItem"
+        (itemChange)="itemChangeH($event)"
+        class="props_item"
+    ></app-props-item>
 </ng-container>
+<p *ngIf="!componentPropsList.length">{{text['noCurComp']}}</p>
 
 <d-toast [value]="msg"></d-toast>

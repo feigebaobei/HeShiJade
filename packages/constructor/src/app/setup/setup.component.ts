@@ -18,20 +18,21 @@ import { ComponentListModule } from '../component-list/component-list.module';
 // devui
 import { ToastModule, TabsModule, ButtonModule, DragDropModule, } from 'ng-devui';
 // 数据
-import {
-  Button as gridLayoutButtonDefault,
-  Modal as gridLayoutModalDefault,
-  Form as gridLayoutFormDefault,
-  Table as gridLayoutTableDefault,
-  Input as gridLayoutInputDefault,
-  Select as gridLayoutSelectDefault,
-  Icon as gridLayoutIconDefault,
-  Checkbox as gridLayoutCheckboxDefault,
-  Tabs as gridLayoutTabsDefault,
-  Pagination as gridLayoutPaginationDefault,
-  Flex as gridLayoutFlexDefault,
-} from 'src/helper/gridLayout'
+// import {
+//   Button as gridLayoutButtonDefault,
+//   Modal as gridLayoutModalDefault,
+//   Form as gridLayoutFormDefault,
+//   Table as gridLayoutTableDefault,
+//   Input as gridLayoutInputDefault,
+//   Select as gridLayoutSelectDefault,
+//   Icon as gridLayoutIconDefault,
+//   Checkbox as gridLayoutCheckboxDefault,
+//   Tabs as gridLayoutTabsDefault,
+//   Pagination as gridLayoutPaginationDefault,
+//   Flex as gridLayoutFlexDefault,
+// } from 'src/helper/gridLayout'
 import { gridLayoutDefault } from 'src/helper/gridLayout';
+import { text } from 'src/helper/config';
 // type
 import type { A, S, N, B, ULID, } from 'src/types/base';
 import type { Page } from 'src/types/page';
@@ -44,6 +45,7 @@ import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 // import type { GridLayoutDefault } from "src/types/component"
 // import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/angular';
 import type { CompStackComponent } from '../components/comp-stack/comp-stack.component';
+import type { Text } from 'src/types/config';
 
 // let componentDefaultConfigAll = all
 
@@ -105,6 +107,7 @@ export class SetupComponent implements OnInit {
   gridOptions: GridStackOptions // todo 删除gridStack相关的代码
   componentList: Comp[]
   show: B
+  text: Text
   @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private appService: AppService,
@@ -121,6 +124,15 @@ export class SetupComponent implements OnInit {
     this.msg = []
     this.pageData = []
     this.componentList = []
+    this.text = text
+    this.gridOptions = {
+      margin: 2,
+      // padding: 8,
+      float: true,
+      column: 24,
+    }
+    this.curComponent = undefined
+    this.show = true
     effect(() => {
       let p =this.pageService.pageS.get()
       this.curPage = p
@@ -153,17 +165,9 @@ export class SetupComponent implements OnInit {
         })
       }
     })
-    this.gridOptions = {
-      margin: 2,
-      // padding: 8,
-      float: true,
-      column: 24,
-    }
-    this.curComponent = undefined
     effect(() => {
       this.curComponent = this.componentService.curComponentS.get()
     })
-    this.show = true
   }
   viewBtClickH() {
     window.open(`${location.protocol}//${location.hostname}:${4210}/${this.appService.getCurApp()?.key}/dev/${this.curPage?.key}`, '_blank')

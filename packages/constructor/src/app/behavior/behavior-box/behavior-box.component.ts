@@ -18,10 +18,11 @@ import {
   Page as PageBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
-import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
-import type { BehaviorConfigGroup } from 'src/types/config'
-import type { B, N } from 'src/types/base';
 import { PageService } from 'src/app/service/page.service';
+import { text } from 'src/helper/config';
+import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
+import type { BehaviorConfigGroup, Text } from 'src/types/config'
+import type { B, N } from 'src/types/base';
 // type keyType = 'event' | 'target' | 'payload'
 
 let clog = console.log
@@ -36,6 +37,7 @@ export class BehaviorBoxComponent {
   curComp?: Comp | null
   componentBehaviorMeta: BehaviorConfigGroup
   addable: B
+  text: Text
   constructor(private componentService: ComponentService,
     private pageService: PageService,
   ) {
@@ -56,6 +58,7 @@ export class BehaviorBoxComponent {
       }
     ]
     this.componentBehaviorList = []
+    this.text = text
     effect(() => {
       let comp = this.componentService.curComponentS.get()
       let page = this.pageService.pageS.get()

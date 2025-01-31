@@ -6,11 +6,11 @@
 |fixed: 有时无法选中页面|||
 |测试flex组件的使用功能|done||
 ||flex组件的子组件支持删除组件|done|
-||渲染侧支持flex组件的子组件|doing|
+||渲染侧支持flex组件的子组件|done|
 |整理tabs组件|||
 |// todo rename setItems|done||
 |// todo 这里的Ulid好像不需要|||
-|整理占位文案|||
+|整理占位文案|done||
 ||xx页面无组件。未选中组件。||
 |优化登录页面|||
 |整理component.service.ts|||

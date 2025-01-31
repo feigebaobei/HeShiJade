@@ -1,6 +1,7 @@
 import { A, S } from "src/types/base"
 // import type { SsoClientParams } from "./sso-saml-client"
 import type { Method, } from './axios'
+import type { Text } from "src/types/config"
 
 // 日后使用环境变量判断
 let ssoUrl = () => {
@@ -87,7 +88,15 @@ let layoutOptions = [
       value: 31,
       disabled: false,
     },
-  ]
+]
+let text: Text = {
+    noComp: '无组件',
+    noPage: '无页面',
+    noCurPage: '未选中页面',
+    noCurComp: '未选中组件',
+    noApp: '无应用',
+}
+
 export {
     ssoUrl,
     serviceUrl,
@@ -98,4 +107,5 @@ export {
     ssoClientConfig,
     debounceTime,
     layoutOptions,
+    text,
 }

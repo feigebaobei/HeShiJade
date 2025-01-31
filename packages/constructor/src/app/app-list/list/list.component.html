@@ -17,7 +17,7 @@
         <d-button (click)="sqlBtClickH()">刷新应用列表</d-button>
     </div>
     <!-- 列表 -->
-    <section class="app_section">
+    <section class="app_section" *ngIf="appList.length; else noApp">
         <div *ngFor="let app of appList; let index = index" class="app_box" (click)="appItemClickH(app.ulid)">
             <p class="paragraph">
                 <span>key:</span>
@@ -38,5 +38,10 @@
             </p>
         </div>
     </section>
+    <ng-template #noApp>
+        <section class="app_section">
+            <p>{{text['noApp']}}</p>
+        </section>
+    </ng-template>
 </main>
 <d-toast [value]="msg"></d-toast>

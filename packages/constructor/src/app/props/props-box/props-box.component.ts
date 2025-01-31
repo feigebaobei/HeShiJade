@@ -2,9 +2,10 @@ import { Component, effect, ViewChild } from '@angular/core';
 import { PropsDirective } from '../props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 import { copy } from 'src/helper';
+import { text } from 'src/helper/config';
 // type
 import type {Component as Comp, } from 'src/types/component'
-import type { PropsConfigItem } from 'src/types/config'
+import type { PropsConfigItem, Text } from 'src/types/config'
 // import type {
 //   ComponentPropsMetaRaw as CPMR,
 //   ComponentPropsMetaItemRaw as CPMIR,
@@ -56,16 +57,18 @@ export class PropsBoxComponent {
   componentPropsList: ConfigItem[]
   msg: {}[]
   propsMap: Map<S, {f: F, targetKey: S}>
+  text: Text
   constructor(private componentService: ComponentService) {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
+    this.propsMap = new Map()
+    this.text = text
     effect(() => {
       let p = this.componentService.curComponentS.get()
       this.curComp = p
       this.componentSelectedChange()
     })
-    this.propsMap = new Map()
   }
   ngOnInit() {
   }

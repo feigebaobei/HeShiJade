@@ -11,11 +11,12 @@ import { PageService } from 'src/app/service/page.service';
 import { ulid } from 'ulid'
 import { initPageMeta } from 'src/helper/index'
 import { ActivatedRoute } from '@angular/router';
-// import type { Page } from 'src/types';
+import { ComponentService } from 'src/app/service/component.service';
+import { text } from 'src/helper/config';
+// type
 import type { Page } from 'src/types/page';
 import type { A, B, N, S, ULID } from 'src/types/base'
-import { ComponentService } from 'src/app/service/component.service';
-// import type { ResponseData } from 'src/types';
+import type { Text } from 'src/types/config';
 
 let clog = console.log
 
@@ -36,6 +37,7 @@ export class PageListComponent implements OnInit {
   hoveredIndex: N
   editIndex: N
   pageNameEdit: S // 编辑状态的页面名称
+  text: Text
   constructor(
     private dialogService: DialogService,
     private appService: AppService,
@@ -45,13 +47,14 @@ export class PageListComponent implements OnInit {
   ) {
     this.pageList = []
     this.curPage = null
-    effect(() => {
-      this.curPage = this.pageService.pageS.get()
-    })
+    this.text = text
     this.msg = []
     this.hoveredIndex = -1
     this.editIndex = -1
     this.pageNameEdit = ''
+    effect(() => {
+      this.curPage = this.pageService.pageS.get()
+    })
   }
   ngOnInit(): void {
     this.init()
