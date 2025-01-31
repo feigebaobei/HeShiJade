@@ -42,7 +42,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
         key: 'label' | 'key' | 'value'
         value: S
       }, subIndex: N) => {
-      this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+      this.componentService.setItems(this.index, p.key, p.value)
       this.componentService.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
       if ('value' in item) {
@@ -54,7 +54,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
         key: 'category'
         value: S
       }, subIndex: N) => {
-      this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+      this.componentService.setItems(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
       if ('value' in item) {
@@ -66,7 +66,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       key: 'checked'
       checked: B
     }, subIndex: N) => {
-      this.componentService.setItemsOfCurComponent(this.index, p.key, p.checked)
+      this.componentService.setItems(this.index, p.key, p.checked)
       this.reqChangeItems(this.index, p.key, p.checked)
       let item = this.itemList[subIndex]
       if ('checked' in item) {
@@ -75,7 +75,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       this.listenerChange(item)
     }, debounceTime)
     this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
-      this.componentService.setItemsOfCurComponent(this.index, p.key, p.value)
+      this.componentService.setItems(this.index, p.key, p.value)
       this.reqChangeItems(this.index, p.key, p.value)
     }, debounceTime)
   }
