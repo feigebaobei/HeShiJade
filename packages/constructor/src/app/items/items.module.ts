@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   FormModule,
   TextInputModule,
+  InputNumberModule,
   SelectModule,
   IconModule,
   ButtonModule,
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ItemsBoxComponent } from './items-box/items-box.component';
 import { ItemsGroupComponent } from './items-group/items-group.component';
 import { InputComponent } from './input/input.component';
+import { NumberComponent } from './number/number.component';
 import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 import { OptionsComponent } from './options/options.component';
@@ -29,6 +31,7 @@ import { CompDirective } from './comp.directive'
     ItemsBoxComponent,
     ItemsGroupComponent,
     InputComponent,
+    NumberComponent,
     SelectComponent,
     SwitchComponent,
     OptionsComponent,
@@ -41,6 +44,7 @@ import { CompDirective } from './comp.directive'
 
     FormModule,
     TextInputModule,
+    InputNumberModule,
     SelectModule,
     IconModule,
     ButtonModule,

@@ -28,6 +28,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
   reqChangeItems: F
   // inputChangeDebounce: F
   inputChangeH: F
+  numberChange: F
   selectChangeH: F
   switchChangeH: F
   optionsChangeH: F
@@ -50,12 +51,25 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       }
       this.listenerChange(item)
     }, debounceTime)
+    this.numberChange = createDebounceFn((p: {
+      key: 'label' | 'key' | 'value'
+      value: N
+    }, subIndex: N) => {
+      this.componentService.setItems(this.index, p.key, p.value)
+      this.componentService.reqChangeItems(this.index, p.key, p.value)
+      let item = this.itemList[subIndex]
+      if ('value' in item) {
+        item.value = p.value
+      }
+      this.listenerChange(item)
+    }, debounceTime)
     this.selectChangeH = createDebounceFn((p: {
         key: 'category'
         value: S
       }, subIndex: N) => {
       this.componentService.setItems(this.index, p.key, p.value)
-      this.reqChangeItems(this.index, p.key, p.value)
+      // this.reqChangeItems(this.index, p.key, p.value)
+      this.componentService.reqChangeItems(this.index, p.key, p.value)
       let item = this.itemList[subIndex]
       if ('value' in item) {
         item.value = p.value
@@ -67,7 +81,8 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       checked: B
     }, subIndex: N) => {
       this.componentService.setItems(this.index, p.key, p.checked)
-      this.reqChangeItems(this.index, p.key, p.checked)
+      // this.reqChangeItems(this.index, p.key, p.checked)
+      this.componentService.reqChangeItems(this.index, p.key, p.checked)
       let item = this.itemList[subIndex]
       if ('checked' in item) {
         item.checked = p.checked
@@ -76,7 +91,8 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     }, debounceTime)
     this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
       this.componentService.setItems(this.index, p.key, p.value)
-      this.reqChangeItems(this.index, p.key, p.value)
+      // this.reqChangeItems(this.index, p.key, p.value)
+      this.componentService.reqChangeItems(this.index, p.key, p.value)
     }, debounceTime)
   }
   ngOnInit() {

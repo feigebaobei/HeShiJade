@@ -3,6 +3,11 @@
     [value]="groupItem.value"
     (changeValue)="inputChangeH($event)"
 ></app-input>
+<app-number *ngIf="groupItem.category === 'number'"
+    [label]="groupItem.label"
+    [value]="groupItem.value"
+    (changeValue)="numberChangeH($event)"
+></app-number>
 <app-select *ngIf="groupItem.category === 'select'"
     [label]="groupItem.label"
     [value]="groupItem.value"
