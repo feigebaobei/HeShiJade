@@ -5,7 +5,8 @@
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
 |测试flex组件的使用功能|done||
-||flex组件的子组件支持删除组件|doing|
+||flex组件的子组件支持删除组件|done|
+||渲染侧支持flex组件的子组件|doing|
 |整理tabs组件|||
 |// todo rename setItems|done||
 |// todo 这里的Ulid好像不需要|||

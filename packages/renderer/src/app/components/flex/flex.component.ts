@@ -3,7 +3,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn } from 'src/helper';
 import { pool } from 'src/helper/utils';
 // type
-import type { B, O } from 'src/types/base';
+import type { B, O, N } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 
 let clog = console.log
@@ -17,21 +17,27 @@ let clog = console.log
 })
 export class FlexComponent implements OnInit, OnDestroy {
   @Input() data!: componentInstanceData
-  compArr: Comp[]
-  show: B
+  compArr: {
+    comp: Comp | undefined
+    styleObj: O
+  }[]
+  // show: B
   styleObj: O
   constructor(
     private componentService: ComponentService
   ) {
     this.compArr = []
-    this.show = false
+    // this.show = false
     this.styleObj = {}
+  }
+  createSlotsKey(index: N) {
+    return `${index}_items`
   }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
     pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
     asyncFn(() => {
-      this.show = false
+      // this.show = false
       this.styleObj = {
         'justify-content': this.data.props['justifyContent'],
         'align-items': this.data.props['alignItems'],
@@ -43,9 +49,30 @@ export class FlexComponent implements OnInit, OnDestroy {
         'margin': this.data.props['margin'],
       }
       let tree = this.componentService.getTreeByKey()
-      this.compArr = tree?.find(this.data.slots[`0_${this.data.ulid}`])?.toArray() || []
+      // this.compArr = tree?.find(this.data.slots[`0_${this.data.ulid}`])?.toArray() || []
+      this.data.items.forEach((item, index: N) => {
+        let compT = tree?.find(this.data.slots[this.createSlotsKey(index)])?.value
+        if (compT) {
+          this.compArr.push({
+            comp: compT,
+            styleObj: {
+              'order': item['order'],
+              'flex-grow': item['flexGrow'],
+              'flex-shrink': item['flexShrink'],
+              'flex-basis': item['flexBasis'],
+              'align-self': item['alignSelf'],
+            }
+          })
+        } else {
+          this.compArr.push({
+            comp: undefined,
+            styleObj: {}
+          })
+        }
+      })
+      clog(this.compArr)
     }).then(() => {
-      this.show = true
+      // this.show = true
     })
   }
   ngOnChanges() {
