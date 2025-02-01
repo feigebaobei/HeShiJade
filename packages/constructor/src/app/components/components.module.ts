@@ -38,6 +38,7 @@ import { CompStackComponent } from './comp-stack/comp-stack.component';
 import { FlexComponent } from './flex/flex.component';
 import { GridComponent } from './grid/grid.component';
 import { CompPacketComponent } from './comp-packet/comp-packet.component';
+import { LayoutComponent } from './layout/layout.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -57,6 +58,7 @@ import { CompPacketComponent } from './comp-packet/comp-packet.component';
     FlexComponent,
     GridComponent,
     CompPacketComponent,
+    LayoutComponent,
   ],
   imports: [
     CommonModule,

@@ -307,6 +307,27 @@ let Grid: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let Layout: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染完成后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -324,6 +345,7 @@ export {
     Page,
     Flex,
     Grid,
+    Layout,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -339,5 +361,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Page,
     Flex,
     Grid,
+    Layout,
 }
 export default all

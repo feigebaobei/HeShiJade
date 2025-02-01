@@ -13,6 +13,7 @@ import { TabsComponent } from '../tabs/tabs.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { FlexComponent } from '../flex/flex.component';
 import { GridComponent } from '../grid/grid.component';
+import { LayoutComponent } from '../layout/layout.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -49,6 +50,7 @@ let compMap: Oa = {
   Pagination: PaginationComponent,
   Flex: FlexComponent,
   Grid: GridComponent,
+  Layout: LayoutComponent,
 }
 
 @Component({
@@ -184,6 +186,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'Grid':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Layout':
         this.componentRef.instance.data = {
           props: this.comp.props,
           slots: this.comp.slots,

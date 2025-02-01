@@ -1258,6 +1258,58 @@ let Grid: PropsConfigItem = {
         key: 'margin',
     },
 }
+let Layout: PropsConfigItem = {
+    header: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: false,
+        label: '渲染上区',
+        key: 'header',
+    },
+    left: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: false,
+        label: '渲染左区',
+        key: 'left',
+    },
+    main: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: false,
+        label: '渲染中区',
+        key: 'main',
+    },
+    right: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: false,
+        label: '渲染右区',
+        key: 'right',
+    },
+    footer: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: false,
+        label: '渲染下区',
+        key: 'footer',
+    },
+}
 export {
     Button,
     Modal,
@@ -1271,4 +1323,5 @@ export {
     Pagination,
     Flex,
     Grid,
+    Layout,
 }

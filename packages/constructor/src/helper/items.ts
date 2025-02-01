@@ -381,6 +381,22 @@ let Grid: ConfigItem[] = [
         value: 'start',
     },
 ]
+let Layout: ConfigItem[] = [
+    // {
+    //     label: '元素',
+    //     category: 'select',
+    //     options: [
+    //         {label: '上区', value: 'header',},
+    //         {label: '左区', value: 'left',},
+    //         {label: '主区', value: 'main',},
+    //         {label: '右区', value: 'right',},
+    //         {label: '下区', value: 'footer',},
+    //     ],
+    //     key: 'alignSelf',
+    //     value: 'start',
+    // },
+
+]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
     Button,
@@ -395,6 +411,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Pagination, // 没有子元素
     Flex,
     Grid,
+    Layout,
 }
 
 export default all

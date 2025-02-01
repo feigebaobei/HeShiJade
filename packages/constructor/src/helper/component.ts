@@ -14,6 +14,7 @@ import { Button as ButtonProps,
     Pagination as PaginationProps,
     Flex as FlexProps,
     Grid as GridProps,
+    Layout as LayoutProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -25,6 +26,7 @@ import {
     Pagination as PaginationBehavior,
     Flex as FlexBehavior,
     Grid as GridBehavior,
+    Layout as LayoutBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -196,6 +198,12 @@ let Grid: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Layout: ComponentDefaultConfig = {
+    props: opProps(LayoutProps),
+    behavior: opBehavior(LayoutBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -210,4 +218,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Pagination,
     Flex,
     Grid,
+    Layout,
 }
