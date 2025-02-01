@@ -2,14 +2,16 @@ import { Component, Input, } from '@angular/core';
 import shareEvent, { creatEventName } from 'src/helper/share-event';
 import { asyncFn, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
+import { text } from 'src/helper/config';
+import { PageService } from 'src/app/service/page.service';
+import { ComponentService } from 'src/app/service/component.service';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, O, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 import type { DropEvent } from 'ng-devui';
-import { PageService } from 'src/app/service/page.service';
-import { ComponentService } from 'src/app/service/component.service';
+import type { Text } from 'src/types/config';
 
 let clog = console.log
 
@@ -44,6 +46,7 @@ export class LayoutComponent {
   footerAreaCompArr: Comp[]
   showObj: ShowObj
   curPage: Page
+  text: Text
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -61,6 +64,7 @@ export class LayoutComponent {
       right: true,
       footer: true,
     }
+    this.text = text
   }
   listen() {
     shareEvent.on(creatEventName('Layout', this.data.ulid, 'props', 'update'), (obj) => {

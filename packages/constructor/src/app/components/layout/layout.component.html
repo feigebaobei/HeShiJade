@@ -9,6 +9,7 @@
             (deleteComp)="deleteComponentByUlidH($event, 'header')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
+        <span *ngIf="!headerAreaCompArr.length">{{text['toCreateComp']}}</span>
     </header>
     <header class="header" *ngIf="!showObj.header"></header>
     <aside class="left dropArea"
@@ -21,6 +22,7 @@
             (deleteComp)="deleteComponentByUlidH($event, 'left')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
+        <span *ngIf="!leftAreaCompArr.length">{{text['toCreateComp']}}</span>
     </aside>
     <aside class="left" *ngIf="!showObj.left"></aside>
     <main class="main dropArea"
@@ -33,6 +35,7 @@
             (deleteComp)="deleteComponentByUlidH($event, 'main')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
+        <span *ngIf="!mainAreaCompArr.length">{{text['toCreateComp']}}</span>
     </main>
     <main class="main" *ngIf="!showObj.main"></main>
     <aside class="right dropArea"
@@ -45,6 +48,7 @@
             (deleteComp)="deleteComponentByUlidH($event, 'right')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
+        <span *ngIf="!rightAreaCompArr.length">{{text['toCreateComp']}}</span>
     </aside>
     <aside class="right" *ngIf="!showObj.right"></aside>
     <footer class="footer dropArea"
@@ -57,6 +61,7 @@
             (deleteComp)="deleteComponentByUlidH($event, 'footer')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
+        <span *ngIf="!footerAreaCompArr.length">{{text['toCreateComp']}}</span>
     </footer>
     <footer class="footer" *ngIf="!showObj.footer"></footer>
 </section>
