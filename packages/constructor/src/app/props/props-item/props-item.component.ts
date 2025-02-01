@@ -76,7 +76,6 @@ export class PropsItemComponent implements OnInit, AfterContentInit {
         componentRef.instance.data = this.propItem
         // 绑定事件
         componentRef.instance.change.subscribe((v: A) => {
-          clog('subscribe', v)
           this.itemChange.emit({key: this.propItem.key, value: v})
         })
         break;

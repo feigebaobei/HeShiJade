@@ -5,7 +5,7 @@ import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, createChildKey } from 'src/helper/index'
-import {shareEvent, creatEventName} from 'src/helper/share-event';
+import { shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -326,12 +326,20 @@ export class ComponentService {
     }
   }
   // 直接改变属性
+  // todo 与setProps整合
   setComponentProp(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
     }
     // clog('change after', curComp)
+  }
+  setProps(key: S, value: A) {
+    let curComp: CompOrUn = this.curComponent()
+    if (curComp) {
+      // curComp.props[key] = value
+      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
+    }
   }
   setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()

@@ -1,57 +1,62 @@
 <section class="content">
     <header class="header dropArea"
-    dDroppable
-    (dropEvent)="dropH($event, 'header')"
+        dDroppable
+        (dropEvent)="dropH($event, 'header')"
+        *ngIf="showObj.header"
     >
         <app-comp-stack
-            *ngIf="showObj.header"
             [componentList]="headerAreaCompArr"
             (deleteComp)="deleteComponentByUlidH($event, 'header')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
     </header>
+    <header class="header" *ngIf="!showObj.header"></header>
     <aside class="left dropArea"
-    dDroppable
-    (dropEvent)="dropH($event, 'left')"
+        dDroppable
+        (dropEvent)="dropH($event, 'left')"
+        *ngIf="showObj.left"
     >
         <app-comp-stack
-            *ngIf="showObj.left"
             [componentList]="leftAreaCompArr"
             (deleteComp)="deleteComponentByUlidH($event, 'left')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
     </aside>
+    <aside class="left" *ngIf="!showObj.left"></aside>
     <main class="main dropArea"
-    dDroppable
-    (dropEvent)="dropH($event, 'main')"
+        dDroppable
+        (dropEvent)="dropH($event, 'main')"
+        *ngIf="showObj.main"
     >
         <app-comp-stack
-            *ngIf="showObj.main"
             [componentList]="mainAreaCompArr"
             (deleteComp)="deleteComponentByUlidH($event, 'main')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
     </main>
+    <main class="main" *ngIf="!showObj.main"></main>
     <aside class="right dropArea"
-    dDroppable
-    (dropEvent)="dropH($event, 'right')"
+        dDroppable
+        (dropEvent)="dropH($event, 'right')"
+        *ngIf="showObj.right"
     >
         <app-comp-stack
-            *ngIf="showObj.right"
             [componentList]="rightAreaCompArr"
             (deleteComp)="deleteComponentByUlidH($event, 'right')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
     </aside>
+    <aside class="right" *ngIf="!showObj.right"></aside>
     <footer class="footer dropArea"
-    dDroppable
-    (dropEvent)="dropH($event, 'footer')"
+        dDroppable
+        (dropEvent)="dropH($event, 'footer')"
+        *ngIf="showObj.footer"
     >
         <app-comp-stack
-            *ngIf="showObj.footer"
             [componentList]="footerAreaCompArr"
             (deleteComp)="deleteComponentByUlidH($event, 'footer')"
             (change)="compStackChangeH($event)"
         ></app-comp-stack>
     </footer>
+    <footer class="footer" *ngIf="!showObj.footer"></footer>
 </section>

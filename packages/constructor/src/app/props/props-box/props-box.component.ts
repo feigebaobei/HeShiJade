@@ -232,9 +232,11 @@ export class PropsBoxComponent {
       if (item.key === p.key) {
         if ('value' in item) {
           item.value = p.value
+          this.componentService.setProps(item.key, item.value)
         }
-        if ('cheched' in item) {
-          item.cheched = p.cheched
+        if ('checked' in item) {
+          item.checked = p.checked
+          this.componentService.setProps(item.key, item.checked)
         }
       }
     })

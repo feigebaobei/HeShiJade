@@ -19,6 +19,14 @@ interface LayoutData {
   items: Comp['items']
   ulid: ULID
 }
+interface ShowObj {
+  header: B
+  left: B
+  main: B
+  right: B
+  footer: B
+}
+type K = keyof ShowObj
 
 @Component({
   selector: 'app-layout',
@@ -34,13 +42,7 @@ export class LayoutComponent {
   mainAreaCompArr: Comp[]
   rightAreaCompArr: Comp[]
   footerAreaCompArr: Comp[]
-  showObj: {
-    header: B
-    left: B
-    main: B
-    right: B
-    footer: B
-  }
+  showObj: ShowObj
   curPage: Page
   constructor(
     private pageService: PageService,
@@ -61,7 +63,12 @@ export class LayoutComponent {
     }
   }
   listen() {
-    shareEvent.on(creatEventName('Layout', this.data.ulid, 'props', 'update'), ({key, value}) => {
+    shareEvent.on(creatEventName('Layout', this.data.ulid, 'props', 'update'), (obj) => {
+      clog('aaaaaaa', obj.key, obj.value)
+      // obj.key
+      asyncFn(() => {
+        this.showObj[obj.key as K] = obj.value
+      })
     })
   }
   
@@ -202,7 +209,9 @@ export class LayoutComponent {
         break;
     }
   }
-  compStackChangeH(p: ChangeGridLayoutParams) {}
+  compStackChangeH(p: ChangeGridLayoutParams) {
+    // clog('compStackChangeH', p)
+  }
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
     Object.entries(this.data.slots).forEach(([key, value]) => {
