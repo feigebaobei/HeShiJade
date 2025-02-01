@@ -95,6 +95,7 @@ let text: Text = {
     noCurPage: '未选中页面',
     noCurComp: '未选中组件',
     noApp: '无应用',
+    toCreateComp: '请创建组件',
 }
 
 export {
