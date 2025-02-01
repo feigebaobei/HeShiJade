@@ -75,7 +75,6 @@ export class GridComponent implements OnInit, OnDestroy {
           })
         }
       })
-
     }).then(() => {
       this.show = true
     })

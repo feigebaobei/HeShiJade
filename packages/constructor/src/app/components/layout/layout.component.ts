@@ -64,8 +64,6 @@ export class LayoutComponent {
   }
   listen() {
     shareEvent.on(creatEventName('Layout', this.data.ulid, 'props', 'update'), (obj) => {
-      clog('aaaaaaa', obj.key, obj.value)
-      // obj.key
       asyncFn(() => {
         this.showObj[obj.key as K] = obj.value
       })

@@ -15,6 +15,7 @@ import { TabsComponent } from '../tabs/tabs.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { FlexComponent } from '../flex/flex.component';
 import { GridComponent } from '../grid/grid.component';
+import { LayoutComponent } from '../layout/layout.component';
 // type
 import type { A, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -35,6 +36,7 @@ let compMap: {[k: S]: A} = {
   Pagination: PaginationComponent,
   Flex: FlexComponent,
   Grid: GridComponent,
+  Layout: LayoutComponent,
 }
 
 @Component({
@@ -180,6 +182,16 @@ export class CompBoxComponent {
         }
         break;
       case 'Grid':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Layout':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,

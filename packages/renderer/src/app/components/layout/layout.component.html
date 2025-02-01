@@ -1,0 +1,37 @@
+<section class="content" [style]="styleObj">
+    <header class="header" *ngIf="showObj['header']">
+        <app-stack
+            [componentList]="headerAreaCompArr"
+        ></app-stack>
+    </header>
+    <header class="header" *ngIf="!showObj['header']">
+    </header>
+    <aside class="left" *ngIf="showObj['left']">
+        <app-stack
+            [componentList]="leftAreaCompArr"
+        ></app-stack>
+    </aside>
+    <aside class="left" *ngIf="!showObj['left']">
+    </aside>
+    <main class="main" *ngIf="showObj['main']">
+        <app-stack
+            [componentList]="mainAreaCompArr"
+        ></app-stack>
+    </main>
+    <main class="main" *ngIf="!showObj['main']">
+    </main>
+    <aside class="right" *ngIf="showObj['right']">
+        <app-stack
+            [componentList]="rightAreaCompArr"
+        ></app-stack>
+    </aside>
+    <aside class="right" *ngIf="!showObj['right']">
+    </aside>
+    <footer class="footer" *ngIf="showObj['footer']">
+        <app-stack
+            [componentList]="footerAreaCompArr"
+        ></app-stack>
+    </footer>
+    <footer class="footer" *ngIf="!showObj['footer']">
+    </footer>
+</section>

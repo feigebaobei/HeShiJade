@@ -35,6 +35,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FlexComponent } from './flex/flex.component';
 import { GridComponent } from './grid/grid.component';
+import { LayoutComponent } from './layout/layout.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { GridComponent } from './grid/grid.component';
     FlexComponent,
     GridComponent,
     // CompPacketComponent,
+    LayoutComponent,
   ],
   imports: [
     CommonModule,
