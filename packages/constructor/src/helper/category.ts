@@ -71,6 +71,11 @@ let categoryList = [
         componentCategory: 'Layout',
         ulid: '01J50ZGTCKEC10HWAJBZND487E'
     },
+    {
+        name: 'pageList',
+        componentCategory: 'PageList',
+        ulid: '01J50ZGTCKEC10HWAJBZND487F'
+    },
   ]
 export {
     categoryList

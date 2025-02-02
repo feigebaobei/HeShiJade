@@ -86,6 +86,11 @@ let Layout: GridLayoutDefault = {
     h: 16,
     noResize: false,
 }
+let PageList: GridLayoutDefault = {
+    w: 24,
+    h: 30,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -100,6 +105,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Flex,
     Grid,
     Layout,
+    PageList,
 }
 export {
     Button,
@@ -115,6 +121,7 @@ export {
     Flex,
     Grid,
     Layout,
+    PageList,
     
     gridLayoutDefault,
 }

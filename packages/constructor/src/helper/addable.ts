@@ -61,6 +61,10 @@ let Layout: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let PageList: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -79,6 +83,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Flex,
     Grid,
     Layout,
+    PageList,
 }
 
 export {

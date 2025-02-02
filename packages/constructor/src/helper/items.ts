@@ -397,6 +397,49 @@ let Layout: ConfigItem[] = [
     // },
 
 ]
+let PageList: ConfigItem[] = [
+    // {
+    //     parentKey: '',
+    //     key: '',
+    //     label: '',
+    //     isRenderer: true,
+    //     isDisable: false,
+    // }
+    {
+        label: '父key',
+        category: 'input',
+        key: 'parentKey',
+        value: '',
+    },
+    {
+        label: 'key',
+        category: 'input',
+        key: 'key',
+        value: '',
+    },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: '渲染',
+        category: 'input',
+        key: 'isRenderer',
+        value: '',
+    },
+    {
+        label: '禁用',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'isDisabled',
+        checked: false,
+    },
+]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
     Button,
@@ -412,6 +455,7 @@ let all: {[k: S]: ConfigItem[]} = {
     Flex,
     Grid,
     Layout,
+    PageList,
 }
 
 export default all

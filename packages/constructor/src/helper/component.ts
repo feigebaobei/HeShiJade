@@ -15,6 +15,7 @@ import { Button as ButtonProps,
     Flex as FlexProps,
     Grid as GridProps,
     Layout as LayoutProps,
+    PageList as PageListProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -27,6 +28,7 @@ import {
     Flex as FlexBehavior,
     Grid as GridBehavior,
     Layout as LayoutBehavior,
+    PageList as PageListBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -204,6 +206,12 @@ let Layout: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let PageList: ComponentDefaultConfig = {
+    props: opProps(PageListProps),
+    behavior: opBehavior(PageListBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -219,4 +227,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Flex,
     Grid,
     Layout,
+    PageList,
 }

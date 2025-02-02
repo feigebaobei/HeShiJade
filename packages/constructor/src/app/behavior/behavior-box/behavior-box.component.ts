@@ -17,6 +17,7 @@ import {
   Grid as GridBehaviorMeta,
   Page as PageBehaviorMeta,
   Layout as LayoutBehaviorMeta,
+  PageList as PageListBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -142,6 +143,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Layout':
         this.setComponentBehaviorListByType(LayoutBehaviorMeta)
+        break;
+      case 'PageList':
+        this.setComponentBehaviorListByType(PageListBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

@@ -29,6 +29,7 @@ import {
   Flex as FlexPropsMeta,
   Grid as GridPropsMeta,
   Layout as LayoutPropsMeta,
+  PageList as PageListPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -177,6 +178,9 @@ export class PropsBoxComponent {
         break;
       case 'Layout':
         this.opComponentPropsList(LayoutPropsMeta)
+        break;
+      case 'PageList':
+        this.opComponentPropsList(PageListPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}

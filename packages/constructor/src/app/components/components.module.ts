@@ -39,6 +39,7 @@ import { FlexComponent } from './flex/flex.component';
 import { GridComponent } from './grid/grid.component';
 import { CompPacketComponent } from './comp-packet/comp-packet.component';
 import { LayoutComponent } from './layout/layout.component';
+import { PageListComponent } from './page-list/page-list.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -59,6 +60,7 @@ import { LayoutComponent } from './layout/layout.component';
     GridComponent,
     CompPacketComponent,
     LayoutComponent,
+    PageListComponent,
   ],
   imports: [
     CommonModule,

@@ -1346,6 +1346,8 @@ let Layout: PropsConfigItem = {
         key: 'footerHeight',
     },
 }
+let PageList: PropsConfigItem = {
+}
 export {
     Button,
     Modal,
@@ -1360,4 +1362,5 @@ export {
     Flex,
     Grid,
     Layout,
+    PageList,
 }
