@@ -19,6 +19,6 @@
         class="props_item"
     ></app-props-item>
 </ng-container>
-<p *ngIf="!componentPropsList.length">{{text['noCurComp']}}</p>
+<p *ngIf="!curComp">{{text['noCurComp']}}</p>
 
 <d-toast [value]="msg"></d-toast>

@@ -4,7 +4,7 @@
     [index]="i"
     (remove)="removeH(i)"
 ></app-items-group>
-<p *ngIf="!groupList.length">{{text['noCurComp']}}</p>
+<p *ngIf="!curComponent">{{text['noCurComp']}}</p>
 <d-button
     bsStyle="common"
     circled="true"
