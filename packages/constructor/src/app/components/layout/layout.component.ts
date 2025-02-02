@@ -47,6 +47,7 @@ export class LayoutComponent {
   showObj: ShowObj
   curPage: Page
   text: Text
+  styleObj: O
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -65,6 +66,7 @@ export class LayoutComponent {
       footer: true,
     }
     this.text = text
+    this.styleObj = {}
   }
   listen() {
     shareEvent.on(creatEventName('Layout', this.data.ulid, 'props', 'update'), (obj) => {
@@ -73,8 +75,27 @@ export class LayoutComponent {
       })
     })
   }
-  
   deleteComponentByUlidH(ulid: ULID, area: S) {
+    switch (area) {
+      case 'header':
+        this.headerAreaCompArr = this.headerAreaCompArr.filter(item => item.ulid !== ulid)
+        break;
+      case 'left':
+        this.leftAreaCompArr = this.leftAreaCompArr.filter(item => item.ulid !== ulid)
+        break;
+      case 'main':
+        this.mainAreaCompArr = this.mainAreaCompArr.filter(item => item.ulid !== ulid)
+        break;
+      case 'right':
+        this.rightAreaCompArr = this.rightAreaCompArr.filter(item => item.ulid !== ulid)
+        break;
+      case 'footer':
+        this.footerAreaCompArr = this.footerAreaCompArr.filter(item => item.ulid !== ulid)
+        break;
+    }
+    this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(item => item.ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
   
   dropH(e: DropEvent, area: S) {
@@ -235,6 +256,11 @@ export class LayoutComponent {
           break;
       }
     })
+    this.styleObj = {
+      // 'grid-template-rows': `${this.data.props['headerHeight']} auto ${this.data.props['footerHeight']}`,
+      'grid-template-rows': `${this.data.props['headerHeight']} calc(100% - 66px) ${this.data.props['footerHeight']}`,
+      'grid-template-columns': `${this.data.props['leftWidth']} ${this.data.props['mainWidth']} ${this.data.props['rightWidth']}`,
+    }
     this.listen()
   }
   // ngOnChanges() {

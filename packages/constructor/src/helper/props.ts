@@ -1269,6 +1269,12 @@ let Layout: PropsConfigItem = {
         label: '渲染上区',
         key: 'header',
     },
+    headerHeight: {
+        category: 'input',
+        value: '120px',
+        label: '上区高度',
+        key: 'headerHeight',
+    },
     left: {
         category: 'switch',
         options: [
@@ -1278,6 +1284,12 @@ let Layout: PropsConfigItem = {
         checked: true,
         label: '渲染左区',
         key: 'left',
+    },
+    leftWidth: {
+        category: 'input',
+        value: '200px',
+        label: '左区宽度',
+        key: 'leftWidth',
     },
     main: {
         category: 'switch',
@@ -1289,6 +1301,18 @@ let Layout: PropsConfigItem = {
         label: '渲染中区',
         key: 'main',
     },
+    mainWidth: {
+        category: 'input',
+        value: 'auto',
+        label: '中区宽度',
+        key: 'mainWidth',
+    },
+    mainHeight: {
+        category: 'input',
+        value: 'auto',
+        label: '中区高度',
+        key: 'mainHeight',
+    },
     right: {
         category: 'switch',
         options: [
@@ -1299,6 +1323,12 @@ let Layout: PropsConfigItem = {
         label: '渲染右区',
         key: 'right',
     },
+    rightWidth: {
+        category: 'input',
+        value: '240px',
+        label: '右区宽度',
+        key: 'rightWidth',
+    },
     footer: {
         category: 'switch',
         options: [
@@ -1308,6 +1338,12 @@ let Layout: PropsConfigItem = {
         checked: true,
         label: '渲染下区',
         key: 'footer',
+    },
+    footerHeight: {
+        category: 'input',
+        value: '120px',
+        label: '下区高度',
+        key: 'footerHeight',
     },
 }
 export {

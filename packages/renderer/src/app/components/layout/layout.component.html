@@ -13,7 +13,7 @@
     </aside>
     <aside class="left" *ngIf="!showObj['left']">
     </aside>
-    <main class="main" *ngIf="showObj['main']">
+    <main class="main" [style]="mainStyleObj" *ngIf="showObj['main']">
         <app-stack
             [componentList]="mainAreaCompArr"
         ></app-stack>

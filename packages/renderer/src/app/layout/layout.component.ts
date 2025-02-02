@@ -73,7 +73,6 @@ export class LayoutComponent implements OnInit {
       this.show = false
       this.componentList = []
       this.componentList = componentList
-      clog('componentList', componentList)
       asyncFn(() => {
         this.show = true
       })
