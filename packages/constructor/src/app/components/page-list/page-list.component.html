@@ -1,1 +1,44 @@
-<p>page-list works!</p>
+
+<div dMenu>
+    <!-- <div dMenuItem>
+     <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+     <span class="devui-menu-item-name">menu item 1</span>
+    </div>
+    <div dSubMenu title="sub menu" icon="icon-more-func">
+       <div dMenuItem>
+         <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+         <span class="devui-menu-item-name">sub menu item 1</span>
+       </div>
+       <div dMenuItem>
+         <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+         <span class="devui-menu-item-name">sub menu item 2</span>
+       </div>
+     </div>
+     <div dMenuItem>
+       <d-icon class="devui-menu-item-icon" icon="icon-op-list" />
+       <span class="devui-menu-item-name">menu item 3</span>
+     </div> -->
+    <ng-container *ngFor="let item of menu">
+        <div
+            *ngIf="item.children?.length"
+            dSubMenu
+            [title]="item.name"
+            [icon]="item.icon"
+            [disabled]="item.isDisabled"
+            [open]="item.isOpen"
+            (openChange)="openChangeH($event, item.key)"
+        >
+            <app-page-sub-list
+                [list]="item.children!"
+                [active]="active"
+            >
+            </app-page-sub-list>
+        </div>
+         <app-page-list-item
+            *ngIf="!item.children?.length"
+            [item]="item"
+            [active]="active"
+         >
+         </app-page-list-item>
+    </ng-container>
+</div>
