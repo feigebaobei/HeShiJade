@@ -83,7 +83,7 @@ export class PageListComponent {
   }
   itemClickH(key: S) {
     this.active = key
-    pool.trigger(this.data.ulid, 'itemClick', undefined, this)
+    pool.trigger(this.data.ulid, 'itemClick', key, this)
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -91,10 +91,12 @@ export class PageListComponent {
     })
   }
   openChangeH(isOpen: B, key: S) {
-    clog('openChangeH', isOpen, key)
+    // clog('openChangeH', isOpen, key)
+    pool.trigger(this.data.ulid, 'openChange', {isOpen, key}, this)
   }
   openChangeInnerH(obj: {isOpen: B, key: S}) {
-    clog('openChangeInnerH', obj)
+    // clog('openChangeInnerH', obj)
+    pool.trigger(this.data.ulid, 'openChange', {isOpen: obj.isOpen, key: obj.key}, this)
   }
   ngOnInit() {
     this.opMenu()

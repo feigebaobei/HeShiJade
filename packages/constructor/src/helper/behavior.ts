@@ -332,6 +332,8 @@ let PageList: BehaviorConfigGroup = [
   {
     category: 'select',
     options: [
+      {label: '点击项目', value: 'itemClick'},
+      {label: '改变展开状态', value: 'openChange'},
       {label: '改变属性后', value: 'postComponentNgOnChanges'},
       {label: '初始化组件后', value: 'postComponentNgOnInit'},
       {label: '变更检测后', value: 'postComponentNgDoCheck'},
