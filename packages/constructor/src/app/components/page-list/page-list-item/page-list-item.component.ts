@@ -4,7 +4,6 @@ import type { A, B, S, MenuItem } from 'src/types/base';
 
 let clog = console.log
 
-
 @Component({
   selector: 'app-page-list-item',
   // standalone: true,
@@ -17,9 +16,9 @@ export class PageListItemComponent {
   @Input() active: S = ''
   @Output() itemClick = new EventEmitter()
   constructor() {}
-  itemClickH(p: A) {
-    clog('itemClickH', p)
-    this.itemClick.emit(p)
+  itemClickH(key: S) {
+    // clog('itemClickH item', key)
+    this.itemClick.emit(key)
   }
 
 }

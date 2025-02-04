@@ -24,7 +24,8 @@ export class PageListComponent {
       {
         key: 'one',
         name: 'one',
-        icon: 'icon-op-list',
+        // icon: 'icon-op-list',
+        icon: '',
         isOpen: false,
         isDisabled: false,
         isRenderer: true,
@@ -33,7 +34,8 @@ export class PageListComponent {
       {
         key: 'two',
         name: 'two',
-        icon: 'icon-op-list',
+        // icon: 'icon-op-list',
+        icon: '',
         isOpen: false,
         isDisabled: false,
         isRenderer: true,
@@ -171,11 +173,12 @@ export class PageListComponent {
       },
     ]
   }
-  itemClickH(p: A) {
-    clog('itemClickH', p)
+  itemClickH(key: S) {
+    clog('itemClickH', key)
+    this.active = key
   }
-  openChangeH(a: A, b: A) {
-    clog('openChangeH', a, b)
+  openChangeH(isOpen: B, key: S) {
+    clog('openChangeH', isOpen, key)
   }
   openChangeInnerH(obj: {isOpen: B, key: S}) {
     clog('openChangeInnerH', obj)

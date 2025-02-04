@@ -1,8 +1,9 @@
 <div dMenuItem
-    (itemClick)="itemClickH($event)"
+    (itemClick)="itemClickH(item.key)"
     [disabled]="item.isDisabled"
     [active]="item.key === active"
->
+    class="customActive"
+    >
     <d-icon
         *ngIf="item.icon"
         class="devui-menu-item-icon" icon="icon-op-list" />

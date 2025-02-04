@@ -14,6 +14,7 @@
         <app-page-sub-list
             [list]="item.children!"
             [active]="active"
+            (itemClick)="itemClickInnerH($event)"
             (openChange)="openChangeInnerH($event)"
         >
         </app-page-sub-list>
