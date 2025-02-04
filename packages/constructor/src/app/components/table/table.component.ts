@@ -8,18 +8,6 @@ import { PageService } from 'src/app/service/page.service';
 import { compatibleArray } from 'src/helper/index'
 import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
-import {
-  Button as gridLayoutButtonDefault,
-  Modal as gridLayoutModalDefault,
-  Form as gridLayoutFormDefault,
-  Table as gridLayoutTableDefault,
-  Input as gridLayoutInputDefault,
-  Select as gridLayoutSelectDefault,
-  Icon as gridLayoutIconDefault,
-  Checkbox as gridLayoutCheckboxDefault,
-  Tabs as gridLayoutTabsDefault,
-  Pagination as gridLayoutPaginationDefault,
-} from 'src/helper/gridLayout'
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 
 // type

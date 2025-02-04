@@ -1,5 +1,6 @@
 import { Component, Input, TemplateRef, ViewChild, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
+import shareEvent, { creatEventName } from 'src/helper/share-event';
 // type
 import type { A, B, S, MenuItem, ULID, Oa, } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
@@ -219,8 +220,7 @@ export class PageListComponent {
       return
     }
   }
-  ngOnInit() {
-    let arr: MenuItem[] = [];
+  opMenu() {
     if (!this.data.items.length) {
       return
     }
@@ -239,9 +239,19 @@ export class PageListComponent {
         i++
       }
     }
-    clog(washMenuItemList)
     this.menu = washMenuItemList
-
+  }
+  listen() {
+    shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'add'), () => {
+      this.opMenu()
+    })
+    shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'update'), () => {
+      this.opMenu()
+    })
+  }
+  ngOnInit() {
+    this.opMenu()
+    this.listen()
   }
   ngOnChanges() {}
 }
