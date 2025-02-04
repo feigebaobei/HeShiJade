@@ -1,3 +1,5 @@
+import type { MenuItemType } from "ng-devui/menu"
+
 type S = string
 type N = number
 type A = any
@@ -25,6 +27,14 @@ interface Options<T, G> {
     value: G,
 }
 type ReqMethod = "get" | "post" | "put" | "delete"
+interface MenuItem extends MenuItemType {
+  icon: S
+  isOpen: B
+  isDisabled: B
+  isRenderer: B
+  parentKey: S
+  children: MenuItem[]
+}
 export type {
     S, N, A, B, ULID, 
     F, Oa, Os, O, D,
@@ -33,4 +43,5 @@ export type {
     ENV,
     Options,
     ReqMethod,
+    MenuItem,
 }

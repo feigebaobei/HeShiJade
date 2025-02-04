@@ -3,7 +3,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn } from 'src/helper';
 import { pool } from 'src/helper/utils';
 // type
-import type { B, O, N } from 'src/types/base';
+import type { B, O, N, Oa, } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 
 let clog = console.log
@@ -23,12 +23,21 @@ export class FlexComponent implements OnInit, OnDestroy {
   }[]
   // show: B
   styleObj: O
+  getData: () => Oa
   constructor(
     private componentService: ComponentService
   ) {
     this.compArr = []
     // this.show = false
     this.styleObj = {}
+    this.getData = () => {
+      return this.data.props
+    }
+  }
+  setProps(o: O) {
+    Object.entries(o).forEach(([k, v]) => {
+      this.data.props[k] = v
+    })
   }
   createSlotsKey(index: N) {
     return `${index}_items`

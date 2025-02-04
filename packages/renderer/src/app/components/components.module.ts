@@ -15,6 +15,7 @@ import { ButtonModule,
   ModalModule,
   // DataTableComponent,
 } from 'ng-devui';
+import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
@@ -80,6 +81,7 @@ import { PageListItemComponent } from './page-list/page-list-item/page-list-item
     ToggleModule,
     CheckBoxModule,
     ModalModule,
+    MenuModule,
 
     FormsModule,
     GridstackModule,

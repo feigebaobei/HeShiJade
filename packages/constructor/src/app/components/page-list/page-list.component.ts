@@ -184,16 +184,6 @@ export class PageListComponent {
     //   },
     // ]
   }
-  itemClickH(key: S) {
-    clog('itemClickH', key)
-    this.active = key
-  }
-  openChangeH(isOpen: B, key: S) {
-    clog('openChangeH', isOpen, key)
-  }
-  openChangeInnerH(obj: {isOpen: B, key: S}) {
-    clog('openChangeInnerH', obj)
-  }
   washMenuItem(obj: Oa) {
     return {
       key: obj['key'],
@@ -248,6 +238,15 @@ export class PageListComponent {
     shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'update'), () => {
       this.opMenu()
     })
+  }
+  itemClickH(key: S) {
+    this.active = key
+  }
+  openChangeH(isOpen: B, key: S) {
+    clog('openChangeH', isOpen, key)
+  }
+  openChangeInnerH(obj: {isOpen: B, key: S}) {
+    clog('openChangeInnerH', obj)
   }
   ngOnInit() {
     this.opMenu()

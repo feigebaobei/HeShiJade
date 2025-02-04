@@ -2022,3 +2022,9 @@
 {"level":30,"time":1738675378403,"pid":67116,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1738675424318,"pid":67116,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1738675687789,"pid":67116,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738677261212,"pid":67116,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738677269858,"pid":67116,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738677367505,"pid":67116,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738678236392,"pid":74647,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":50,"time":1738678365189,"pid":74647,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"","originalUrl":"/apps","session":{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"}},"cookies":{"user":"s:HEsFjHlEiyAK4Qf9GJtQhPAmjHk_vIdc.mp9LVDL1ks+a639d0Sm1l002NVJG+ugQVXkquq1OFXo"}}
+{"level":30,"time":1738679574837,"pid":74647,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}

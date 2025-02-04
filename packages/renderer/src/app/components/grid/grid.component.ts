@@ -4,7 +4,7 @@ import { asyncFn, clog } from 'src/helper';
 
 import { pool } from 'src/helper/utils';
 // type
-import type { B, O, N } from 'src/types/base';
+import type { B, O, N, Oa, } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 
 @Component({
@@ -23,16 +23,25 @@ export class GridComponent implements OnInit, OnDestroy {
   // (Comp | undefined)[]
   show: B
   styleObj: O
+  getData: () => Oa
   constructor(
     private componentService: ComponentService
   ) {
     this.compArr = []
     this.show = false
     this.styleObj = {}
+    this.getData = () => {
+      return this.data.props
+    }
   }
 
   createSlotsKey(index: N) {
     return `${index}_items`
+  }
+  setProps(o: O) {
+    Object.entries(o).forEach(([k, v]) => {
+      this.data.props[k] = v
+    })
   }
   ngOnInit(): void {
     pool.register(this.data.ulid, this, this.data.behavior)

@@ -1,1 +1,11 @@
-<p>page-list-item works!</p>
+<div dMenuItem
+    (itemClick)="itemClickH(item.key)"
+    [disabled]="item.isDisabled"
+    [active]="item.key === active"
+    class="customActive"
+    >
+    <d-icon
+        *ngIf="item.icon"
+        class="devui-menu-item-icon" [icon]="item.icon" />
+    <span class="devui-menu-item-name">{{item.name}}</span>
+</div>

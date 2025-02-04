@@ -109,14 +109,12 @@ type ConfigItem<T = S> = ConfigItemInput
 type ConfigItemsCategoryType = ConfigItem['category']
 
 interface MenuItem extends MenuItemType {
-  // key
-  // name
   icon: S
   isOpen: B
   isDisabled: B
   isRenderer: B
   parentKey: S
-  children: MenuItem[] // | undefined
+  children: MenuItem[]
 }
 
 export type {
