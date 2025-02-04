@@ -395,16 +395,8 @@ let Layout: ConfigItem[] = [
     //     key: 'alignSelf',
     //     value: 'start',
     // },
-
 ]
 let PageList: ConfigItem[] = [
-    // {
-    //     parentKey: '',
-    //     key: '',
-    //     label: '',
-    //     isRenderer: true,
-    //     isDisable: false,
-    // }
     {
         label: '父key',
         category: 'input',
