@@ -2,10 +2,27 @@
 <ng-container
     *ngFor="let item of list"
 >
+    <div
+        *ngIf="item.children?.length"
+        dSubMenu
+        [title]="item.name"
+        [icon]="item.icon"
+        [disabled]="item.isDisabled"
+        [open]="item.isOpen"
+        (openChange)="openChangeH($event, item.key)"
+    >
+        <app-page-sub-list
+            [list]="item.children!"
+            [active]="active"
+            (openChange)="openChangeInnerH($event)"
+        >
+        </app-page-sub-list>
+    </div>
     <app-page-list-item
+        *ngIf="!item.children?.length"
         [item]="item"
         [active]="active"
+        (itemClick)="itemClickH($event)"
     >
     </app-page-list-item>
 </ng-container> 
-

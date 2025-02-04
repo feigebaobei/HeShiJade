@@ -54,6 +54,108 @@ export class PageListComponent {
             isOpen: false,
             isDisabled: false,
             isRenderer: true,
+            children: [
+              {
+                key: 'two-two-one',
+                name: 'two-two-one',
+                icon: 'icon-op-list',
+                isOpen: false,
+                isDisabled: false,
+                isRenderer: true,
+                children: [],
+              },
+              {
+                key: 'two-two-two',
+                name: 'two-two-two',
+                icon: 'icon-op-list',
+                isOpen: false,
+                isDisabled: false,
+                isRenderer: true,
+                children: [],
+              },
+              {
+                key: 'two-two-three',
+                name: 'two-two-three',
+                icon: 'icon-op-list',
+                isOpen: false,
+                isDisabled: false,
+                isRenderer: true,
+                children: [
+                  {
+                    key: 'two-two-three-1',
+                    name: 'two-two-three-1',
+                    icon: 'icon-op-list',
+                    isOpen: false,
+                    isDisabled: false,
+                    isRenderer: true,
+                    children: [],
+                  },
+                  {
+                    key: 'two-two-three-2',
+                    name: 'two-two-three-2',
+                    icon: 'icon-op-list',
+                    isOpen: false,
+                    isDisabled: false,
+                    isRenderer: true,
+                    children: [],
+                  },
+                  {
+                    key: 'two-two-three-3',
+                    name: 'two-two-three-4',
+                    icon: 'icon-op-list',
+                    isOpen: false,
+                    isDisabled: false,
+                    isRenderer: true,
+                    children: [
+                      {
+                        key: 'two-two-three-3-1',
+                        name: 'two-two-three-4-1',
+                        icon: 'icon-op-list',
+                        isOpen: false,
+                        isDisabled: false,
+                        isRenderer: true,
+                        children: [],
+                      },
+                      {
+                        key: 'two-two-three-3-2',
+                        name: 'two-two-three-4-2',
+                        icon: 'icon-op-list',
+                        isOpen: false,
+                        isDisabled: false,
+                        isRenderer: true,
+                        children: [],
+                      },
+                      {
+                        key: 'two-two-three-3-3',
+                        name: 'two-two-three-4-3',
+                        icon: 'icon-op-list',
+                        isOpen: false,
+                        isDisabled: false,
+                        isRenderer: true,
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                key: 'two-two-four',
+                name: 'two-two-four',
+                icon: 'icon-op-list',
+                isOpen: false,
+                isDisabled: false,
+                isRenderer: true,
+                children: [],
+              },
+            ],
+          },
+          {
+            key: 'two-three',
+            name: 'two-three',
+            icon: 'icon-op-list',
+            isOpen: false,
+            isDisabled: false,
+            isRenderer: true,
             children: [],
           },
         ],
@@ -74,6 +176,9 @@ export class PageListComponent {
   }
   openChangeH(a: A, b: A) {
     clog('openChangeH', a, b)
+  }
+  openChangeInnerH(obj: {isOpen: B, key: S}) {
+    clog('openChangeInnerH', obj)
   }
   ngOnInit() {}
   ngOnChanges() {}

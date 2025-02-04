@@ -31,8 +31,14 @@
             <app-page-sub-list
                 [list]="item.children!"
                 [active]="active"
-            >
+                (itemClick)="itemClickH($event)"
+                (openChange)="openChangeInnerH($event)"
+                >
             </app-page-sub-list>
+            <!-- <app-page-list
+              [menu]="item.children"
+              [active]="active"
+            ></app-page-list> -->
         </div>
          <app-page-list-item
             *ngIf="!item.children?.length"

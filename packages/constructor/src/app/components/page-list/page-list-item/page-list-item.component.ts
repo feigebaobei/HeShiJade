@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 // type
 import type { A, B, S, MenuItem } from 'src/types/base';
 
@@ -15,9 +15,11 @@ let clog = console.log
 export class PageListItemComponent {
   @Input() item!: MenuItem
   @Input() active: S = ''
+  @Output() itemClick = new EventEmitter()
   constructor() {}
   itemClickH(p: A) {
     clog('itemClickH', p)
+    this.itemClick.emit(p)
   }
 
 }

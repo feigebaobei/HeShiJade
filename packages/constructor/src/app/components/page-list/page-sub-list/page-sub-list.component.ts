@@ -1,6 +1,8 @@
-import { Component, Input, } from '@angular/core';
+import { Component, EventEmitter, Input, Output, } from '@angular/core';
 // type
 import type { A, B, S, MenuItem } from 'src/types/base';
+
+let clog = console.log
 
 @Component({
   selector: 'app-page-sub-list',
@@ -12,6 +14,18 @@ import type { A, B, S, MenuItem } from 'src/types/base';
 export class PageSubListComponent {
   @Input() list: MenuItem[] = []
   @Input() active: S = ''
+  @Output() openChange = new EventEmitter()
   constructor() {}
-
+  openChangeH(isOpen: B, key: S) {
+    clog('openChangeH inner', isOpen, key)
+    this.openChange.emit({isOpen, key})
+  }
+  openChangeInnerH(obj: {isOpen: B, key: S}) {
+    clog('openChangeH inner', obj)
+    this.openChange.emit(obj)
+  }
+  
+  itemClickH(p: A) {
+    clog('itemClickH inner ', p)
+  }
 }
