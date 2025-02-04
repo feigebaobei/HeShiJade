@@ -115,7 +115,8 @@ interface MenuItem extends MenuItemType {
   isOpen: B
   isDisabled: B
   isRenderer: B
-  children: MenuItem[] | undefined
+  parentKey: S
+  children: MenuItem[] // | undefined
 }
 
 export type {

@@ -6,6 +6,6 @@
     >
     <d-icon
         *ngIf="item.icon"
-        class="devui-menu-item-icon" icon="icon-op-list" />
+        class="devui-menu-item-icon" [icon]="item.icon" />
     <span class="devui-menu-item-name">{{item.name}}</span>
 </div>

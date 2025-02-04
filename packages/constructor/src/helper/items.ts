@@ -420,14 +420,34 @@ let PageList: ConfigItem[] = [
     {
         label: 'label',
         category: 'input',
-        key: 'label',
+        key: 'name',
         value: '',
     },
     {
-        label: '渲染',
+        label: 'icon',
         category: 'input',
-        key: 'isRenderer',
+        key: 'icon',
         value: '',
+    },
+    {
+        label: '是否打开',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'isOpen',
+        checked: false,
+    },
+    {
+        label: '渲染',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'isRenderer',
+        checked: true,
     },
     {
         label: '禁用',
