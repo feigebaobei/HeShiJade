@@ -1345,6 +1345,26 @@ let Layout: PropsConfigItem = {
         label: '下区高度',
         key: 'footerHeight',
     },
+    borderInner: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: true,
+        label: '内边框',
+        key: 'borderInner',
+    },
+    borderOut: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        checked: true,
+        label: '外边框',
+        key: 'borderOut',
+    },
 }
 let PageList: PropsConfigItem = {
 }

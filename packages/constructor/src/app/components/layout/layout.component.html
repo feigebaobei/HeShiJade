@@ -1,5 +1,5 @@
 <section class="content" [style]="styleObj">
-    <header class="header dropArea"
+    <header [class]="{header: true, dropArea: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
         dDroppable
         (dropEvent)="dropH($event, 'header')"
         *ngIf="showObj.header"
@@ -12,7 +12,7 @@
         <span *ngIf="!headerAreaCompArr.length">{{text['toCreateComp']}}</span>
     </header>
     <header class="header" *ngIf="!showObj.header"></header>
-    <aside class="left dropArea"
+    <aside [class]="{left: true, dropArea: true, 'border-out': data.props['borderOut']}"
         dDroppable
         (dropEvent)="dropH($event, 'left')"
         *ngIf="showObj.left"
@@ -25,7 +25,7 @@
         <span *ngIf="!leftAreaCompArr.length">{{text['toCreateComp']}}</span>
     </aside>
     <aside class="left" *ngIf="!showObj.left"></aside>
-    <main class="main dropArea"
+    <main [class]="{main: true, dropArea: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
         dDroppable
         (dropEvent)="dropH($event, 'main')"
         *ngIf="showObj.main"
@@ -38,7 +38,7 @@
         <span *ngIf="!mainAreaCompArr.length">{{text['toCreateComp']}}</span>
     </main>
     <main class="main" *ngIf="!showObj.main"></main>
-    <aside class="right dropArea"
+    <aside [class]="{right: true, dropArea: true, 'border-out': data.props['borderOut']}"
         dDroppable
         (dropEvent)="dropH($event, 'right')"
         *ngIf="showObj.right"
@@ -51,7 +51,7 @@
         <span *ngIf="!rightAreaCompArr.length">{{text['toCreateComp']}}</span>
     </aside>
     <aside class="right" *ngIf="!showObj.right"></aside>
-    <footer class="footer dropArea"
+    <footer [class]="{footer: true, dropArea: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
         dDroppable
         (dropEvent)="dropH($event, 'footer')"
         *ngIf="showObj.footer"

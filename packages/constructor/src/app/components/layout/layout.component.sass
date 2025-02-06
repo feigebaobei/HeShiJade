@@ -1,6 +1,6 @@
 .dropArea
     background: #969798
-    border: 1px solid #333
+    // border: 1px solid #333
     padding-top: 18px
     padding-bottom: 48px
     
@@ -9,12 +9,31 @@
     grid-template-areas: 'header header header' 'left main right' 'footer footer footer'
     .header
         grid-area: header
+        &.border-inner
+            border-bottom: 1px solid #333
+        &.border-out
+            border-top: 1px solid #333
+            border-right: 1px solid #333
+            border-left: 1px solid #333
     .left
         grid-area: left
+        &.border-out
+            border-left: 1px solid #333
     .main
         grid-area: main
+        &.border-inner
+            border-left: 1px solid #333
+            border-right: 1px solid #333
     .right
         grid-area: right
+        &.border-out
+            border-right: 1px solid #333
     .footer
         grid-area: footer
+        &.border-inner
+            border-top: 1px solid #333
+        &.border-out
+            border-right: 1px solid #333
+            border-bottom: 1px solid #333
+            border-left: 1px solid #333
 
