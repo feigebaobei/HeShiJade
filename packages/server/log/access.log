@@ -2035,3 +2035,7 @@
 {"level":30,"time":1738680166391,"pid":74647,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1738680785106,"pid":74647,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1738680917052,"pid":74647,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738846135009,"pid":81589,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1738846528150,"pid":81589,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738846757195,"pid":81589,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1738849874440,"pid":81589,"hostname":"catdeMacBook-Pro.local","name":"logname","componentUpdateArr":[{"updateOne":{"filter":{"ulid":"01JKDRES276Z1XAZYSN741JGST"},"update":{"$set":{"slots.left":"01JKDREWB9YNA92A81N7E9G1TA"}}}},{"insertOne":{"document":{"ulid":"01JKDREWB9YNA92A81N7E9G1TA","type":"PageList","prevUlid":"","nextUlid":"","parentUlid":"01JKDRES276Z1XAZYSN741JGST","mount":{"area":"slots","slotKey":"left"},"props":{},"behavior":[{"event":"","fnBody":""}],"items":[],"slots":{},"appUlid":"01JG9BVCSP0V3ZNW02W7GQVT88","gridLayout":{"x":0,"y":0,"w":24,"h":30,"noResize":false},"pageUlid":"01JKDNR99FV6K5Y48EFM8XRBPY"}}}]}

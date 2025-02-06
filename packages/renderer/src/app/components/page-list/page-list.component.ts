@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PageService } from 'src/app/service/page.service';
 import { pool } from 'src/helper/utils';
 // type
 import type { MenuItem, ULID, S, Oa, O, B, } from 'src/types/base';
@@ -27,7 +28,9 @@ export class PageListComponent {
   menu: MenuItem[]
   active: S
   getData: () => Oa
-  constructor() {
+  constructor(
+    private pageService: PageService
+  ) {
     this.active = ''
     this.menu = []
     this.getData = () => {
@@ -83,6 +86,7 @@ export class PageListComponent {
   }
   itemClickH(key: S) {
     this.active = key
+    this.pageService.setCurByKey(key)
     pool.trigger(this.data.ulid, 'itemClick', key, this)
   }
   setProps(o: O) {
