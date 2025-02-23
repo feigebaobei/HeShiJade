@@ -9,9 +9,8 @@
 |整理component.service.ts|||
 |整理出接口文档|||
 |丰富组件|||
-||layout组件支持内边框配置|todo|
-||layout组件支持外边框配置|todo|
-||渲染侧删除页面布局组件|done|
+||layout组件支持内边框配置|doing|
+||layout组件支持外边框配置|doing|
 |改变table组件的子元素时同列应该更新|||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||

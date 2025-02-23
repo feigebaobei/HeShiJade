@@ -1,33 +1,34 @@
 <section class="content" [style]="styleObj">
-    <header class="header" *ngIf="showObj['header']">
+    <header [class]="{header: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
+        *ngIf="showObj['header']">
         <app-stack
             [componentList]="headerAreaCompArr"
         ></app-stack>
     </header>
     <header class="header" *ngIf="!showObj['header']">
     </header>
-    <aside class="left" *ngIf="showObj['left']">
+    <aside [class]="{left: true, 'border-out': data.props['borderOut']}" *ngIf="showObj['left']">
         <app-stack
             [componentList]="leftAreaCompArr"
         ></app-stack>
     </aside>
     <aside class="left" *ngIf="!showObj['left']">
     </aside>
-    <main class="main" [style]="mainStyleObj" *ngIf="showObj['main']">
+    <main [class]="{main: true, 'border-inner': data.props['borderInner']}" [style]="mainStyleObj" *ngIf="showObj['main']">
         <app-stack
             [componentList]="mainAreaCompArr"
         ></app-stack>
     </main>
     <main class="main" *ngIf="!showObj['main']">
     </main>
-    <aside class="right" *ngIf="showObj['right']">
+    <aside [class]="{right: true, 'border-out': data.props['borderOut']}" *ngIf="showObj['right']">
         <app-stack
             [componentList]="rightAreaCompArr"
         ></app-stack>
     </aside>
     <aside class="right" *ngIf="!showObj['right']">
     </aside>
-    <footer class="footer" *ngIf="showObj['footer']">
+    <footer [class]="{footer: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}" *ngIf="showObj['footer']">
         <app-stack
             [componentList]="footerAreaCompArr"
         ></app-stack>

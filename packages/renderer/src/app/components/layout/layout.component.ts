@@ -54,6 +54,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.mainStyleObj = {
       // height: this.data.props['mainHeight']
     }
+    clog('this.styleObj', this.styleObj)
     asyncFn(() => {
       Object.entries(this.data.slots).forEach(([area, ulid]) => {
         switch (area) {
