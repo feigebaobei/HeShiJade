@@ -161,9 +161,9 @@ class Pool {
         })
         this.rendereredMap.set(pageUlid, m)
         let pArr = Array.from(m.values()).map(pc => pc.promise)
-        clog('pArr', pArr)
+        // clog('pArr', pArr)
         Promise.all(pArr).then(() => {
-            clog('then', pArr)
+            // clog('then', pArr)
             this.trigger(pageUlid, 'postPageRender', undefined, undefined)
             this.unRegisterComponentRender(pageUlid)
         })

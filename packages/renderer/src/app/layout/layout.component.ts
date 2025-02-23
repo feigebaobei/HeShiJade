@@ -21,7 +21,7 @@ import { PageListComponent } from '../page/page-list/page-list.component';
 // import type { App } from 'src/types/app';
 import type { Component as Comp } from 'src/types/component';
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
-import type { B, N, O, Oa, S } from 'src/types/base';
+import type { B, N, O, Oa, S, ULID } from 'src/types/base';
 
 
 let clog = console.log
@@ -73,11 +73,30 @@ export class LayoutComponent implements OnInit {
       this.show = false
       this.componentList = []
       this.componentList = componentList
-      clog('componentList', componentList)
       asyncFn(() => {
         this.show = true
       })
     })
+    effect(() => {
+      let pageList = this.pageService.listS.get()
+      // this.pageList = pageList
+      let {pageKey} = this.route.snapshot.params
+      let page = pageList.find(item => item.key === pageKey)
+      if (page) {
+        asyncFn(() => { // effect内可以使用宏任务去设置signal
+          // clog('setCur qwert')
+          this.setCur(page.ulid)
+        })
+      }
+    })
+    effect(() => {
+      this.pageService.curS.get()
+      // clog('effect')
+      pool.runHooks('pageChange')
+    })
+  }
+  setCur(ulid: ULID) {
+    this.pageService.setCur(ulid)
   }
   ngOnInit(): void {
     let {appKey, env} = this.route.snapshot.params

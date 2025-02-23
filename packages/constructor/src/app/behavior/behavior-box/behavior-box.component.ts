@@ -13,13 +13,18 @@ import {
   Checkbox as CheckboxBehaviorMeta,
   Tabs as TabsBehaviorMeta,
   Pagination as PaginationBehaviorMeta,
+  Flex as FlexBehaviorMeta,
+  Grid as GridBehaviorMeta,
   Page as PageBehaviorMeta,
+  Layout as LayoutBehaviorMeta,
+  PageList as PageListBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
-import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
-import type { BehaviorConfigGroup } from 'src/types/config'
-import type { B, N } from 'src/types/base';
 import { PageService } from 'src/app/service/page.service';
+import { text } from 'src/helper/config';
+import type { Component as Comp, BehaviorMetaItem } from 'src/types/component';
+import type { BehaviorConfigGroup, Text } from 'src/types/config'
+import type { B, N } from 'src/types/base';
 // type keyType = 'event' | 'target' | 'payload'
 
 let clog = console.log
@@ -34,6 +39,7 @@ export class BehaviorBoxComponent {
   curComp?: Comp | null
   componentBehaviorMeta: BehaviorConfigGroup
   addable: B
+  text: Text
   constructor(private componentService: ComponentService,
     private pageService: PageService,
   ) {
@@ -54,6 +60,7 @@ export class BehaviorBoxComponent {
       }
     ]
     this.componentBehaviorList = []
+    this.text = text
     effect(() => {
       let comp = this.componentService.curComponentS.get()
       let page = this.pageService.pageS.get()
@@ -127,6 +134,18 @@ export class BehaviorBoxComponent {
         break;
       case 'Pagination':
         this.setComponentBehaviorListByType(PaginationBehaviorMeta)
+        break;
+      case 'Flex':
+        this.setComponentBehaviorListByType(FlexBehaviorMeta)
+        break;
+      case 'Grid':
+        this.setComponentBehaviorListByType(GridBehaviorMeta)
+        break;
+      case 'Layout':
+        this.setComponentBehaviorListByType(LayoutBehaviorMeta)
+        break;
+      case 'PageList':
+        this.setComponentBehaviorListByType(PageListBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

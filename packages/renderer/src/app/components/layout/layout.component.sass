@@ -1,0 +1,38 @@
+.content
+    display: grid
+    grid-template-areas: 'header header header' 'left main right' 'footer footer footer'
+    .header
+        grid-area: header
+        overflow: auto
+        &.border-inner
+            border-bottom: 1px solid #c2c4ce
+        &.border-out
+            border-top: 1px solid #c2c4ce
+            border-right: 1px solid #c2c4ce
+            border-left: 1px solid #c2c4ce
+    .left
+        grid-area: left
+        overflow: auto
+        &.border-out
+            border-left: 1px solid #c2c4ce
+    .main
+        grid-area: main
+        overflow: auto
+        &.border-inner
+            border-left: 1px solid #c2c4ce
+            border-right: 1px solid #c2c4ce
+    .right
+        grid-area: right
+        overflow: auto
+        &.border-out
+            border-right: 1px solid #c2c4ce
+    .footer
+        grid-area: footer
+        overflow: auto
+        &.border-inner
+            border-top: 1px solid #c2c4ce
+        &.border-out
+            border-right: 1px solid #c2c4ce
+            border-bottom: 1px solid #c2c4ce
+            border-left: 1px solid #c2c4ce
+

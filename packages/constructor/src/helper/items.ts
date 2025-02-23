@@ -55,7 +55,8 @@ let Form: ConfigItem[] = [
         label: 'checked',
         category: 'switch',
         key: 'checked',
-        checked: false,
+        // checked: false,
+        value: false,
         options: [
             {label: 'false', value: false},
             {label: 'true', value: true},
@@ -100,7 +101,8 @@ let Form: ConfigItem[] = [
         ],
         key: 'required',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '显示帮助',
@@ -111,7 +113,8 @@ let Form: ConfigItem[] = [
         ],
         key: 'hasHelp',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '帮助文本',
@@ -145,7 +148,8 @@ let Form: ConfigItem[] = [
         ],
         key: 'visible',
         // value: true,
-        checked: true,
+        // checked: true,
+        value: true,
     },
 ]
 let FormItemCategory = [
@@ -213,7 +217,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'filterable',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '过滤时是否多选',
@@ -224,7 +229,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'filterMultiple',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
         hide: function (p: ConfigItem[]) { // 是否隐藏
             let o = p.find(item => item.key === 'filterable')
             // return !o!.value
@@ -245,7 +251,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'closeFilterWhenScroll',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '是否可排序',
@@ -256,7 +263,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'sortable',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '该列固定到左侧的距离',
@@ -296,7 +304,164 @@ let Tabs: ConfigItem[] = [
         ],
         key: 'disabled',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
+    },
+]
+let Flex: ConfigItem[] = [
+    {
+        label: '项目的排列顺序,越小越靠前',
+        category: 'number',
+        key: 'order',
+        value: 0,
+    },
+    {
+        label: '项目的放大比例',
+        category: 'number',
+        key: 'flexGrow',
+        value: 0,
+    },
+    {
+        label: '项目的缩小比例',
+        category: 'number',
+        key: 'flexShrink',
+        value: 1,
+    },
+    {
+        label: '项目本来的大小',
+        category: 'input',
+        key: 'flexBasis',
+        value: 'auto',
+    },
+    {
+        label: '当前项目的对齐方式',
+        category: 'input',
+        key: 'alignSelf',
+        value: 'auto',
+    },
+]
+let Grid: ConfigItem[] = [
+    {
+        label: '左边框所在的垂直网格线',
+        category: 'input',
+        key: 'gridColumnStart',
+        value: '',
+    },
+    {
+        label: '上边框所在的垂直网格线',
+        category: 'input',
+        key: 'gridRowStart',
+        value: '',
+    },
+    {
+        label: '右边框所在的垂直网格线',
+        category: 'input',
+        key: 'gridRowEnd',
+        value: '',
+    },
+    {
+        label: '区域',
+        category: 'input',
+        key: 'gridArea',
+        value: '',
+    },
+    {
+        label: '当前元素的水平位置',
+        category: 'select',
+        options: [
+            {label: '开头', value: 'start',},
+            {label: '末尾', value: 'end',},
+            {label: '居中', value: 'center',},
+            {label: '拉伸', value: 'stretch',},
+        ],
+        key: 'justifySelf',
+        value: 'start',
+    },
+    {
+        label: '当前元素的竖直位置',
+        category: 'select',
+        options: [
+            {label: '开头', value: 'start',},
+            {label: '末尾', value: 'end',},
+            {label: '居中', value: 'center',},
+            {label: '拉伸', value: 'stretch',},
+        ],
+        key: 'alignSelf',
+        value: 'start',
+    },
+]
+let Layout: ConfigItem[] = [
+    // {
+    //     label: '元素',
+    //     category: 'select',
+    //     options: [
+    //         {label: '上区', value: 'header',},
+    //         {label: '左区', value: 'left',},
+    //         {label: '主区', value: 'main',},
+    //         {label: '右区', value: 'right',},
+    //         {label: '下区', value: 'footer',},
+    //     ],
+    //     key: 'alignSelf',
+    //     value: 'start',
+    // },
+]
+let PageList: ConfigItem[] = [
+    {
+        label: '父key',
+        category: 'input',
+        key: 'parentKey',
+        value: '',
+    },
+    {
+        label: 'key',
+        category: 'input',
+        key: 'key',
+        value: '',
+    },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'name',
+        value: '',
+    },
+    {
+        label: 'icon',
+        category: 'input',
+        key: 'icon',
+        value: '',
+    },
+    {
+        label: '是否打开',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'isOpen',
+        // checked: false,
+        value: false,
+    },
+    {
+        label: '渲染',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'isRenderer',
+        // checked: true,
+        value: true,
+    },
+    {
+        label: '禁用',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'isDisabled',
+        // checked: false,
+        value: false,
     },
 ]
 let all: {[k: S]: ConfigItem[]} = {
@@ -311,6 +476,10 @@ let all: {[k: S]: ConfigItem[]} = {
     // Checkbox, // 没有子元素
     Tabs,
     // Pagination, // 没有子元素
+    Flex,
+    Grid,
+    Layout,
+    PageList,
 }
 
 export default all

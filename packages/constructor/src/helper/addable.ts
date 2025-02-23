@@ -6,66 +6,66 @@ type CompConfigAddabel = {
     // slots: SlotsConfig['addable']
 }
 let Button: CompConfigAddabel = {
-    // props,
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Form: CompConfigAddabel = {
     behavior: true,
     items: true,
-    // slots: false,
 }
 let Table: CompConfigAddabel = {
     behavior: true,
     items: true,
-    // slots: false,
 }
 let Input: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Select: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Modal: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Icon: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Checkbox: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Tabs: CompConfigAddabel = {
     behavior: true,
     items: true,
-    // slots: false,
 }
 let Pagination: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Page: CompConfigAddabel = {
     behavior: true,
     items: false,
-    // slots: false,
 }
 let Flex: CompConfigAddabel = {
-    behavior: false,
-    items: false,
-    // slots: false,
+    behavior: true,
+    items: true,
 }
+let Grid: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
+let Layout: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let PageList: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
+
 
 
 let all: {[k: S]: CompConfigAddabel} = {
@@ -81,6 +81,9 @@ let all: {[k: S]: CompConfigAddabel} = {
     Pagination,
     Page,
     Flex,
+    Grid,
+    Layout,
+    PageList,
 }
 
 export {

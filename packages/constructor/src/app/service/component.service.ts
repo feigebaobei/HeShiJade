@@ -5,7 +5,7 @@ import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, createChildKey } from 'src/helper/index'
-import {shareEvent, creatEventName} from 'src/helper/share-event';
+import { shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
 // import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
@@ -36,7 +36,7 @@ let clog = console.log
 
 type CompOrUn = Component | undefined
 type ComponentOrUn = Component | undefined
-type UpdateType = 'props' | 'behavior' | 'slot' | 'plugin' | 'gridLayout' | 'mount'
+type UpdateType = 'props' | 'behavior' | 'slots' | 'plugin' | 'gridLayout' | 'mount'
 
 @Injectable({
   providedIn: 'root'
@@ -326,12 +326,20 @@ export class ComponentService {
     }
   }
   // 直接改变属性
+  // todo 与setProps整合
   setComponentProp(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
     }
     // clog('change after', curComp)
+  }
+  setProps(key: S, value: A) {
+    let curComp: CompOrUn = this.curComponent()
+    if (curComp) {
+      // curComp.props[key] = value
+      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
+    }
   }
   setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()
@@ -367,9 +375,8 @@ export class ComponentService {
   }
   // todo 可优化key的类型
   // key 的类型应该是S
-  // todo rename setItems
-  // setItemsOfCurComponent(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
-  setItemsOfCurComponent(index: N, key: S, value: A) {
+  // setItems(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
+  setItems(index: N, key: S, value: A) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
@@ -411,7 +418,7 @@ export class ComponentService {
     let component = tree?.find(componentUlid)?.value
     if (component) {
       let [item] = component.items.splice(index, 1)
-      shareEvent.emit(`${component.type}_${component.ulid}_items_remove`, {item, index}) // 触发事件
+      shareEvent.emit(creatEventName(component.type, component.ulid, 'items', 'remove'), {item, index}) // 触发事件
     }
   }
   // 更新组件
@@ -474,7 +481,6 @@ export class ComponentService {
   deleteComponentByUlid(pageUlid: ULID, componentUlid: ULID) {
     return this._map.get(pageUlid)?.unmount(componentUlid)
   }
-
   deleteComponentByPageUlid(pageUlid: ULID) {
     this._map.delete(pageUlid)
   }

@@ -12,6 +12,9 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { FlexComponent } from '../flex/flex.component';
+import { GridComponent } from '../grid/grid.component';
+import { LayoutComponent } from '../layout/layout.component';
+import { PageListComponent } from '../page-list/page-list.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -47,6 +50,9 @@ let compMap: Oa = {
   Tabs: TabsComponent,
   Pagination: PaginationComponent,
   Flex: FlexComponent,
+  Grid: GridComponent,
+  Layout: LayoutComponent,
+  PageList: PageListComponent,
 }
 
 @Component({
@@ -174,6 +180,30 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break
       case 'Flex':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Grid':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Layout':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'PageList':
         this.componentRef.instance.data = {
           props: this.comp.props,
           slots: this.comp.slots,

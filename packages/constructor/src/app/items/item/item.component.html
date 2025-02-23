@@ -3,15 +3,21 @@
     [value]="groupItem.value"
     (changeValue)="inputChangeH($event)"
 ></app-input>
+<app-number *ngIf="groupItem.category === 'number'"
+    [label]="groupItem.label"
+    [value]="groupItem.value"
+    (changeValue)="numberChangeH($event)"
+></app-number>
 <app-select *ngIf="groupItem.category === 'select'"
     [label]="groupItem.label"
     [value]="groupItem.value"
     [options]="groupItem.options"
     (changeValue)="selectChangeH($event)"
 ></app-select>
+<!-- [checked]="groupItem.checked" -->
 <app-switch *ngIf="groupItem.category === 'switch'"
     [label]="groupItem.label"
-    [checked]="groupItem.checked"
+    [checked]="groupItem.value"
     (changeValue)="switchChangeH($event)"
 ></app-switch>
 <app-options *ngIf="groupItem.category === 'options'"

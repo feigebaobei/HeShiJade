@@ -8,8 +8,8 @@ import { serviceUrl } from 'src/helper/config'
 import { pool } from 'src/helper/pool';
 // import { trigger } from 'src/helper/utils'
 // type
-import type { ResponseData, ULID } from 'src/types'
-import type { ENV } from 'src/types/base';
+import type { ResponseData, ULID, } from 'src/types'
+import type { ENV, S} from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 import { ShareSignal } from 'src/helper/shareSignal';
 
@@ -114,6 +114,12 @@ export class PageService {
     // if (pageUlid) {
     //   trigger(pageUlid, 'pageLoading', undefined, this)
     // }
+  }
+  setCurByKey(key: S) {
+    let p = this.getList().find(item => item.key === key)
+    if (p) {
+      this.setCur(p.ulid)
+    }
   }
   getCur() {
     return this._cur

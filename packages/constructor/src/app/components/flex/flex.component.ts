@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, } from '
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { asyncFn, compatibleArray, initComponentMeta } from 'src/helper';
-// import shareEvent from 'src/helper/share-event';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
+import shareEvent, { creatEventName } from 'src/helper/share-event';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, O, S, ULID } from 'src/types/base';
@@ -30,9 +30,13 @@ interface FlexData {
 export class FlexComponent implements OnInit, OnChanges {
   @Input() data!: FlexData
   curPage: Page
-  compArr: Comp[]
+  // compArr: Comp[]
+  compArr: {
+    comp: Comp | undefined
+    styleObj: O
+  }[]
   show: B
-  @ViewChild('compStack') compStack!: CompStackComponent
+  // @ViewChild('compStack') compStack!: CompStackComponent
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -42,34 +46,52 @@ export class FlexComponent implements OnInit, OnChanges {
     this.show = true
   }
   listen() {
-    // shareEvent.on()
+    shareEvent.on(creatEventName('Flex', this.data.ulid, 'items', 'add'), (obj) => {
+      let key = this.createSlotsKey(this.data.items.length - 1)
+      this.data.slots[key] = ''
+      this.compArr.push({
+        comp: undefined,
+        styleObj: {
+          'order': this.data.items[this.data.items.length - 1]['order'],
+          'flex-grow': this.data.items[this.data.items.length - 1]['flexGrow'],
+          'flex-shrink': this.data.items[this.data.items.length - 1]['flexShrink'],
+          'flex-basis': this.data.items[this.data.items.length - 1]['flexBasis'],
+          'align-self': this.data.items[this.data.items.length - 1]['alignSelf'],
+        }
+      })
+      this.componentService.reqUpdateComponent('slots', key, '', this.data.ulid)
+    })
+    shareEvent.on(creatEventName('Flex', this.data.ulid, 'items', 'remove'), ({index}) => {
+      let [{comp}] = this.compArr.splice(index, 1)
+      this.componentService.removeSlots(this.createSlotsKey(index))
+      this.componentService.reqRemoveSlots(this.createSlotsKey(index))
+      if (comp) {
+        let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, comp.ulid).map(item => item.ulid)
+        this.componentService.deleteComponentByUlid(this.curPage.ulid, comp.ulid)
+        this.componentService.reqDeleteComponent(comp.ulid, childrenUlid)
+      }
+    })
+    shareEvent.on(creatEventName('Flex', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+      let item = this.data.items[index]
+      this.compArr[index].styleObj = {
+        'order': item['order'],
+        'flex-grow': item['flexGrow'],
+        'flex-shrink': item['flexShrink'],
+        'flex-basis': item['flexBasis'],
+        'align-self': item['alignSelf'],
+      }
+    })
   }
   deleteComponentByUlidH(ulid: ULID) {
-    this.compArr = this.compArr.filter(item => item.ulid !== ulid)
+    this.compArr = this.compArr.filter(item => item.comp?.ulid !== ulid)
     this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(item => item.ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
-  compStackChangeH(p: ChangeGridLayoutParams) {
-    let component = this.compArr.find(comp => {
-      return comp.ulid === p.ulid
-    })
-    if (component) {
-      component.gridLayout.x = p.x
-      component.gridLayout.y = p.y
-      component.gridLayout.w = p.w
-      component.gridLayout.h = p.h
-    }
-  }
-  dropH(e: DropEvent) {
+  dropH(e: DropEvent, index: N) {
     this.show = false
-    let prevUlid: ULID
-    if (this.compArr.length) {
-      prevUlid = this.compArr[this.compArr.length - 1].ulid
-    } else {
-      prevUlid = ''
-    }
-    let slotKey = `0_${this.data.ulid}`
+    let prevUlid: ULID = ''
+    let slotKey = this.createSlotsKey(index)
     let compGridLayout = gridLayoutDefault[e.dragData.item.componentCategory]
     let comp: Comp = initComponentMeta(
       e.dragData.item.componentCategory,
@@ -79,32 +101,71 @@ export class FlexComponent implements OnInit, OnChanges {
       {area: 'slots', slotKey},
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
-    this.compArr.push(comp)
+    this.compArr[index] = {
+      comp,
+      styleObj: {
+        'order': this.data.items[index]['order'],
+        'flex-grow': this.data.items[index]['flexGrow'],
+        'flex-shrink': this.data.items[index]['flexShrink'],
+        'flex-basis': this.data.items[index]['flexBasis'],
+        'align-self': this.data.items[index]['alignSelf'],
+      }
+    }
     this.data.slots[slotKey] = comp.ulid
     this.componentService.mountComponent(this.curPage.ulid, comp)
     this.componentService.reqCreateComponent(comp)
+    this.componentService.reqUpdateComponent('slots', slotKey, comp.ulid, this.data.ulid)
     asyncFn(() => {
       this.show = true
     })
   }
+  deleteCompH(ulid: ULID, index: N) {
+    this.compArr = this.compArr.map(item => {
+      if (item.comp?.ulid === ulid) {
+        return {comp: undefined, styleObj: {}}
+      } else {
+        return item
+      }
+    })
+    this.componentService.deleteComponentByUlid(this.pageService.getCurPage()!.ulid, ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.pageService.getCurPage()!.ulid, ulid).map(item => item.ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid).then(() => {
+      this.componentService.reqUpdateComponent('slots', this.createSlotsKey(index), '', this.data.ulid)
+    })
+  }
   
+  createSlotsKey(index: N) {
+    return `${index}_items`
+  }
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
-    let ulid = this.data.slots[`0_${this.data.ulid}`]
-    if (ulid) {
-      this.compArr = tree?.find(ulid)?.toArray() || []
-    } else {
-      this.compArr = []
-    }
+    this.data.items.forEach((item, index) => {
+      let compT = tree?.find(this.data.slots[this.createSlotsKey(index)])?.value
+      if (compT) {
+        this.compArr.push({
+          comp: compT,
+          styleObj: {},
+        })
+      } else {
+        this.compArr.push({
+          comp: undefined,
+          styleObj: {},
+        })
+      }
+      this.compArr[index].styleObj = {
+          'order': item['order'],
+          'flex-grow': item['flexGrow'],
+          'flex-shrink': item['flexShrink'],
+          'flex-basis': item['flexBasis'],
+          'align-self': item['alignSelf'],
+        }
+    })
     this.listen()
     asyncFn(() => {
       this.show = false
     }).then(() => {
       this.show = true
     })
-    // setInterval(() => {
-    //   clog('读取data', this.data)
-    // }, 2000)
   }
   ngOnChanges(changes: SimpleChanges): void {
     clog('changes', changes)

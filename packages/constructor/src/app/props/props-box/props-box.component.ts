@@ -2,9 +2,10 @@ import { Component, effect, ViewChild } from '@angular/core';
 import { PropsDirective } from '../props.directive';
 import { ComponentService } from 'src/app/service/component.service';
 import { copy } from 'src/helper';
+import { text } from 'src/helper/config';
 // type
 import type {Component as Comp, } from 'src/types/component'
-import type { PropsConfigItem } from 'src/types/config'
+import type { PropsConfigItem, Text } from 'src/types/config'
 // import type {
 //   ComponentPropsMetaRaw as CPMR,
 //   ComponentPropsMetaItemRaw as CPMIR,
@@ -26,6 +27,9 @@ import {
   Tabs as TabsPropsMeta,
   Pagination as PaginationPropsMeta,
   Flex as FlexPropsMeta,
+  Grid as GridPropsMeta,
+  Layout as LayoutPropsMeta,
+  PageList as PageListPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -55,16 +59,18 @@ export class PropsBoxComponent {
   componentPropsList: ConfigItem[]
   msg: {}[]
   propsMap: Map<S, {f: F, targetKey: S}>
+  text: Text
   constructor(private componentService: ComponentService) {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
+    this.propsMap = new Map()
+    this.text = text
     effect(() => {
       let p = this.componentService.curComponentS.get()
       this.curComp = p
       this.componentSelectedChange()
     })
-    this.propsMap = new Map()
   }
   ngOnInit() {
   }
@@ -73,9 +79,9 @@ export class PropsBoxComponent {
       if ('value' in item) {
         item.value = this.curComp?.props[item.key]
       }
-      if ('checked' in item) {
-        item.checked = this.curComp?.props[item.key]
-      }
+      // if ('checked' in item) {
+      //   item.checked = this.curComp?.props[item.key]
+      // }
       this.componentPropsList.push(item)
     })
   }
@@ -167,6 +173,15 @@ export class PropsBoxComponent {
       case 'Flex':
         this.opComponentPropsList(FlexPropsMeta)
         break;
+      case 'Grid':
+        this.opComponentPropsList(GridPropsMeta)
+        break;
+      case 'Layout':
+        this.opComponentPropsList(LayoutPropsMeta)
+        break;
+      case 'PageList':
+        this.opComponentPropsList(PageListPropsMeta)
+        break;
       default:
         this.componentPropsMeta = {}
         break
@@ -221,10 +236,12 @@ export class PropsBoxComponent {
       if (item.key === p.key) {
         if ('value' in item) {
           item.value = p.value
+          this.componentService.setProps(item.key, item.value)
         }
-        if ('cheched' in item) {
-          item.cheched = p.cheched
-        }
+        // if ('checked' in item) {
+        //   item.checked = p.checked
+        //   this.componentService.setProps(item.key, item.checked)
+        // }
       }
     })
     let propsObj: Comp['props'] = {}
@@ -233,9 +250,9 @@ export class PropsBoxComponent {
         default:
           propsObj[item.key] = item.value
           break;
-        case 'switch':
-          propsObj[item.key] = item.checked
-          break;
+        // case 'switch':
+        //   propsObj[item.key] = item.checked
+        //   break;
       }
     })
     this.listenerChange(p.key, propsObj)

@@ -20,7 +20,6 @@
             (dropEvent)="dropH($event, i)"
         >
             <span *ngIf="!((compArr[i]).length)">此区域可接收子组件</span>
-            <!-- [componentList]="componentList" -->
             <app-comp-stack
                 *ngIf="show"
                 [componentList]="compArr[i]"

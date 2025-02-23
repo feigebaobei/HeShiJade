@@ -1,0 +1,12 @@
+<div class="grid-box"
+    [style]="styleObj"
+>
+    <div *ngFor="let item of compArr">
+        <div *ngIf="item.comp; else temlateElse" [style]="item.styleObj">
+            <app-comp-box [data]="item.comp"></app-comp-box>
+        </div>
+        <ng-template #temlateElse>
+            <!-- string -->
+        </ng-template>
+    </div>
+</div>

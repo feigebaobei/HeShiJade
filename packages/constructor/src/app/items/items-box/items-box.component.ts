@@ -3,11 +3,13 @@ import { ComponentService } from 'src/app/service/component.service';
 import groupTemplate from 'src/helper/items'
 import addableAll from 'src/helper/addable'
 import { cloneDeep, compatibleArray } from 'src/helper/index'
+import { PageService } from 'src/app/service/page.service';
+import { text } from 'src/helper/config';
 // type
 import type { B, ConfigItem, N, S, ULID } from 'src/types/base';
 import type { Component as Comp, ItemsMeta, ItemsMetaItem
  } from 'src/types/component';
-import { PageService } from 'src/app/service/page.service';
+import { Text } from 'src/types/config';
 
 let clog = console.log
 
@@ -22,10 +24,12 @@ export class ItemsBoxComponent {
   addable: B = false
   groupList: ConfigItem[][] = []
   curComponent: Comp | null = null
+  text: Text
   constructor(
     private pageService: PageService,
     private componentService: ComponentService) {
     this.groupList = []
+    this.text = text
     effect(() => {
       let p = this.componentService.curComponentS.get()
       if (p) {
@@ -42,12 +46,13 @@ export class ItemsBoxComponent {
                 case 'textarea':
                 case 'options':
                 case 'select':
+                case 'switch':
                 default:
                   gi.value = v
                   break;
-                case 'switch':
-                  gi.checked = v
-                  break;
+                // case 'switch':
+                //   gi.checked = v
+                //   break;
               }
             }
           })
@@ -74,12 +79,13 @@ export class ItemsBoxComponent {
           case 'textarea':
           case 'options':
           case 'select':
+          case 'switch':
           default:
             obj[k] = item.value
             break;
-          case 'switch':
-            obj[k] = item.checked
-            break;
+          // case 'switch':
+          //   obj[k] = item.checked
+          //   break;
         }
       })
       this.componentService.addItems(obj)

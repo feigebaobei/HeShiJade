@@ -17,6 +17,16 @@
                     ></app-item>
                 </div>
             </ng-template>
+            <ng-template [ngSwitchCase]="'number'">
+                <div *ngIf="!item.hideCalc">
+                    <app-item
+                        [groupItem]="item"
+                        [group]="itemList"
+                        (numberChange)="numberChange($event, i)"
+                        class="app_item"
+                    ></app-item>
+                </div>
+            </ng-template>
             <ng-template [ngSwitchCase]="'select'">
                 <div *ngIf="!item.hideCalc">
                     <app-item

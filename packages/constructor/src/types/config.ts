@@ -34,6 +34,9 @@ interface SlotsConfig {
 interface PropsConfigItem {
     [k: S]: ConfigItem
 }
+interface Text {
+    [k: S]: S
+}
 
 export type {
     PropsConfig,
@@ -43,4 +46,5 @@ export type {
     ItemsConfig,
     SlotsConfig,
     PropsConfigItem,
+    Text,
 }

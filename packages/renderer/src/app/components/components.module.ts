@@ -15,6 +15,7 @@ import { ButtonModule,
   ModalModule,
   // DataTableComponent,
 } from 'ng-devui';
+import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
 // 指令
@@ -34,6 +35,12 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FlexComponent } from './flex/flex.component';
+import { GridComponent } from './grid/grid.component';
+import { LayoutComponent } from './layout/layout.component';
+import { PageListComponent } from './page-list/page-list.component';
+import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.component';
+import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
+// import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +60,12 @@ import { FlexComponent } from './flex/flex.component';
     PaginationComponent,
     // DataTableComponent,
     FlexComponent,
+    GridComponent,
+    // CompPacketComponent,
+    LayoutComponent,
+    PageListComponent,
+    PageSubListComponent,
+    PageListItemComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +81,7 @@ import { FlexComponent } from './flex/flex.component';
     ToggleModule,
     CheckBoxModule,
     ModalModule,
+    MenuModule,
 
     FormsModule,
     GridstackModule,

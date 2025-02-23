@@ -1,3 +1,5 @@
+import type { MenuItemType } from 'ng-devui/menu'
+
 type S = string
 type N = number
 type A = any
@@ -79,8 +81,8 @@ interface ConfigItemNumber {
 interface ConfigItemSwitch {
   category: 'switch'
   options: SelectOptionsItem[]
-  // value: B
-  checked: B
+  value: B
+  // checked: B
   label: S
   key: S
   hide?: FT<B>
@@ -105,6 +107,16 @@ type ConfigItem<T = S> = ConfigItemInput
   | ConfigItemSwitch
   | ConfigItmeOption
 type ConfigItemsCategoryType = ConfigItem['category']
+
+interface MenuItem extends MenuItemType {
+  icon: S
+  isOpen: B
+  isDisabled: B
+  isRenderer: B
+  parentKey: S
+  children: MenuItem[]
+}
+
 export type {
   S, N, A, B, ULID, 
   Email,
@@ -122,4 +134,5 @@ export type {
   ConfigItmeOption,
   ConfigItemKeys,
   ConfigItemsCategoryType,
+  MenuItem,
 }

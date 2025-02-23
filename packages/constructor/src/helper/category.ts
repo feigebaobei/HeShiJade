@@ -61,6 +61,21 @@ let categoryList = [
         componentCategory: 'Flex',
         ulid: '01J50ZGTCKEC10HWAJBZND487C'
     },
+    {
+        name: 'grid',
+        componentCategory: 'Grid',
+        ulid: '01J50ZGTCKEC10HWAJBZND487D'
+    },
+    {
+        name: 'layout',
+        componentCategory: 'Layout',
+        ulid: '01J50ZGTCKEC10HWAJBZND487E'
+    },
+    {
+        name: 'pageList',
+        componentCategory: 'PageList',
+        ulid: '01J50ZGTCKEC10HWAJBZND487F'
+    },
   ]
 export {
     categoryList

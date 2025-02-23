@@ -1,0 +1,67 @@
+<section class="content" [style]="styleObj">
+    <header [class]="{header: true, dropArea: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
+        dDroppable
+        (dropEvent)="dropH($event, 'header')"
+        *ngIf="showObj.header"
+    >
+        <app-comp-stack
+            [componentList]="headerAreaCompArr"
+            (deleteComp)="deleteComponentByUlidH($event, 'header')"
+            (change)="compStackChangeH($event)"
+        ></app-comp-stack>
+        <span *ngIf="!headerAreaCompArr.length">{{text['toCreateComp']}}</span>
+    </header>
+    <header class="header" *ngIf="!showObj.header"></header>
+    <aside [class]="{left: true, dropArea: true, 'border-out': data.props['borderOut']}"
+        dDroppable
+        (dropEvent)="dropH($event, 'left')"
+        *ngIf="showObj.left"
+    >
+        <app-comp-stack
+            [componentList]="leftAreaCompArr"
+            (deleteComp)="deleteComponentByUlidH($event, 'left')"
+            (change)="compStackChangeH($event)"
+        ></app-comp-stack>
+        <span *ngIf="!leftAreaCompArr.length">{{text['toCreateComp']}}</span>
+    </aside>
+    <aside class="left" *ngIf="!showObj.left"></aside>
+    <main [class]="{main: true, dropArea: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
+        dDroppable
+        (dropEvent)="dropH($event, 'main')"
+        *ngIf="showObj.main"
+    >
+        <app-comp-stack
+            [componentList]="mainAreaCompArr"
+            (deleteComp)="deleteComponentByUlidH($event, 'main')"
+            (change)="compStackChangeH($event)"
+        ></app-comp-stack>
+        <span *ngIf="!mainAreaCompArr.length">{{text['toCreateComp']}}</span>
+    </main>
+    <main class="main" *ngIf="!showObj.main"></main>
+    <aside [class]="{right: true, dropArea: true, 'border-out': data.props['borderOut']}"
+        dDroppable
+        (dropEvent)="dropH($event, 'right')"
+        *ngIf="showObj.right"
+    >
+        <app-comp-stack
+            [componentList]="rightAreaCompArr"
+            (deleteComp)="deleteComponentByUlidH($event, 'right')"
+            (change)="compStackChangeH($event)"
+        ></app-comp-stack>
+        <span *ngIf="!rightAreaCompArr.length">{{text['toCreateComp']}}</span>
+    </aside>
+    <aside class="right" *ngIf="!showObj.right"></aside>
+    <footer [class]="{footer: true, dropArea: true, 'border-inner': data.props['borderInner'], 'border-out': data.props['borderOut']}"
+        dDroppable
+        (dropEvent)="dropH($event, 'footer')"
+        *ngIf="showObj.footer"
+    >
+        <app-comp-stack
+            [componentList]="footerAreaCompArr"
+            (deleteComp)="deleteComponentByUlidH($event, 'footer')"
+            (change)="compStackChangeH($event)"
+        ></app-comp-stack>
+        <span *ngIf="!footerAreaCompArr.length">{{text['toCreateComp']}}</span>
+    </footer>
+    <footer class="footer" *ngIf="!showObj.footer"></footer>
+</section>

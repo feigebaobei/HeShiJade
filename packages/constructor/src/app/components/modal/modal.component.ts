@@ -6,42 +6,27 @@ import { asyncFn, initComponentMeta } from 'src/helper'
 import { createChildKey } from 'src/helper/index'
 // import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
-import {
-  Button as gridLayoutButtonDefault,
-  Modal as gridLayoutModalDefault,
-  Form as gridLayoutFormDefault,
-  Table as gridLayoutTableDefault,
-  Input as gridLayoutInputDefault,
-  Select as gridLayoutSelectDefault,
-  Icon as gridLayoutIconDefault,
-  Checkbox as gridLayoutCheckboxDefault,
-  Tabs as gridLayoutTabsDefault,
-  Pagination as gridLayoutPaginationDefault,
-} from 'src/helper/gridLayout'
-
+// import {
+//   Button as gridLayoutButtonDefault,
+//   Modal as gridLayoutModalDefault,
+//   Form as gridLayoutFormDefault,
+//   Table as gridLayoutTableDefault,
+//   Input as gridLayoutInputDefault,
+//   Select as gridLayoutSelectDefault,
+//   Icon as gridLayoutIconDefault,
+//   Checkbox as gridLayoutCheckboxDefault,
+//   Tabs as gridLayoutTabsDefault,
+//   Pagination as gridLayoutPaginationDefault,
+// } from 'src/helper/gridLayout'
+import { gridLayoutDefault } from 'src/helper/gridLayout';
 // type
 import type { A, ULID, S, N, } from 'src/types/base';
-import type {Component as Comp, 
-  ComponentMountItems,
-  ComponentMountSlots,} from 'src/types/component'
+import type {Component as Comp, } from 'src/types/component'
 import type { Page } from 'src/types/page';
-import type { GridLayoutDefault } from "src/types/component"
+// import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 
 let clog = console.log
-
-let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
-  Button: gridLayoutButtonDefault,
-  Modal: gridLayoutModalDefault,
-  Form: gridLayoutFormDefault,
-  Table: gridLayoutTableDefault,
-  Input: gridLayoutInputDefault,
-  Select: gridLayoutSelectDefault,
-  Icon: gridLayoutIconDefault,
-  Checkbox: gridLayoutCheckboxDefault,
-  Tabs: gridLayoutTabsDefault,
-  Pagination: gridLayoutPaginationDefault,
-}
 
 @Component({
   selector: 'app-modal',

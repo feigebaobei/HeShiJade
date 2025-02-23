@@ -1,5 +1,5 @@
 <section class="box">
-    <section class="right">
+    <section class="left-box">
         <section class="login_box">
             <header class="header" [ngClass]="{left: status, right: !status}">
               <d-button *ngIf="status; else loginBt" icon="icon-arrow-right" bsStyle="primary" (click)="setStatus(0)"> 注册 </d-button>
@@ -115,12 +115,12 @@
               </section>
             </ng-template>
             <!-- for dev -->
-            <d-button bsStyle="common" circled="true" 
-            (click)="gotoLinkButtonClickH()">goto list</d-button>
+            <!-- <d-button bsStyle="common" circled="true" 
+            (click)="gotoLinkButtonClickH()">goto list</d-button> -->
         </section>
         <d-toast [value]="msg"></d-toast>
     </section>
-    <section class="left">
+    <section class="right">
         <p class="welcome">{{'welcome' | uppercase}}</p>
         <p class="welcome">{{'to' | uppercase }}</p>
         <p class="welcome">{{'HeShiJade' | uppercase}}</p>

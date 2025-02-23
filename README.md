@@ -43,8 +43,8 @@ npm run dr # 启动渲染侧
 <!-- 主要文件和目录 -->
 <root>
 |-- packages
-    |-- components
-    |-- constructor
+    |-- components      组件库（未开发）
+    |-- constructor     搭建侧
         |-- src
             |-- app
                 |-- service
@@ -65,10 +65,10 @@ npm run dr # 启动渲染侧
         |-- angular.json
         |-- package.json
         |-- tsconfig.json
-    |-- mock-server
-    |-- renderer
-    |-- serverc
-    |-- web-site
+    |-- mock-server    模拟服务端
+    |-- renderer       渲染侧
+    |-- serverc        服务端
+    |-- web-site       官网
 |-- packages.json
 |-- .npmrc
 ```
@@ -82,3 +82,11 @@ npm run dr # 启动渲染侧
 6. 重启后端服务mock-server
 7. 重启后端服务server
 8. 在服务端打包web-site.
+
+## 端口
+搭建侧      4200
+模拟服务端   5030
+渲染侧      4210
+服务端      5000
+官网        4220
+

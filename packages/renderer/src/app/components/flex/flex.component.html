@@ -1,11 +1,8 @@
-<div
-    *ngIf="show"
-    class="box"
-    [style]="styleObj"
->
-    <app-comp-box
-        *ngFor="let item of compArr"
-        [data]="item"
-    >
-    </app-comp-box>
+<div class="flex-box" [style]="styleObj">
+    <div *ngFor="let item of compArr" [style]="item.styleObj">
+        <div *ngIf="item.comp; else templateElse">
+            <app-comp-box [data]="item.comp"></app-comp-box>
+        </div>
+        <ng-template #templateElse></ng-template>
+    </div>
 </div>

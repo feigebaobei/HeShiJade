@@ -1,0 +1,38 @@
+<div
+    class="grid-box"
+    [style]="{
+        'grid-template-columns': data.props['gridTemplateColumns'],
+        'grid-template-rows': data.props['gridTemplateRows'],
+        'row-gap': data.props['rowGap'],
+        'column-gap': data.props['columnGap'],
+        'grid-template-areas': data.props['gridTemplateAreas'],
+        'grid-auto-flow': data.props['gridAutoFlow'],
+        'justify-items': data.props['justifyItems'],
+        'align-items': data.props['alignItems'],
+        'justify-content': data.props['justifyContent'],
+        'align-content': data.props['alignContent'],
+        'padding': data.props['padding'],
+        'margin': data.props['margin'],
+    }"
+>
+    <span *ngIf="!(compArr.length)">请先创建items</span>
+    <div
+        *ngFor="let ele of compArr; let i = index;"
+        class="item-box"
+        [style]="ele.styleObj"
+    >
+        <div *ngIf="ele.comp; else templateElse">
+            <app-comp-packet
+                [data]="ele.comp"
+                (deleteComp)="deleteCompH($event, i)"
+            ></app-comp-packet>
+        </div>
+        <ng-template #templateElse>
+            <div
+                dDroppable
+                class="dropArea"
+                (dropEvent)="dropH($event, i)"
+            >{{text['toCreateComp']}}</div>
+        </ng-template>
+    </div>
+</div>
