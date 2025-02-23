@@ -9,10 +9,11 @@
 |整理component.service.ts|||
 |整理出接口文档|||
 |丰富组件|||
-||layout组件支持内边框配置|doing|
-||layout组件支持外边框配置|doing|
+||layout组件支持内边框配置|done|
+||layout组件支持外边框配置|done|
 |改变table组件的子元素时同列应该更新|||
-|swtich使用value|doing||
+|swtich使用value|done||
+渲染侧的样式|doing||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
 |不应该使用默认的选中组件，因有可能用户不选中组件直接为指定组件操作。如为table组件添加子组件|||

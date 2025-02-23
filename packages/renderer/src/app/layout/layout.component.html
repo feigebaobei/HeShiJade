@@ -1,6 +1,6 @@
-<section class="box">
-    <!-- <header>header</header> -->
-    <!-- <section>
+<!-- <section class="box">
+    <header>header</header>
+    <section>
         <aside>
             <app-page-list></app-page-list>
         </aside>
@@ -10,16 +10,24 @@
                 [componentList]="componentList"
             ></app-stack>
         </main>
-    </section> -->
+    </section>
     <section>
-        <!-- <aside>
+        <aside>
             <app-page-list></app-page-list>
-        </aside> -->
+        </aside>
         <app-stack 
             *ngIf="show"
             [componentList]="componentList"
         ></app-stack>
     </section>
-</section>
+</section> -->
+
 
 <!-- <router-outlet></router-outlet> -->
+
+<section class="box2">
+    <app-stack 
+        *ngIf="show"
+        [componentList]="componentList"
+    ></app-stack>
+</section>
