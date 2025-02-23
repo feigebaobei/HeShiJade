@@ -14,9 +14,10 @@
     [options]="groupItem.options"
     (changeValue)="selectChangeH($event)"
 ></app-select>
+<!-- [checked]="groupItem.checked" -->
 <app-switch *ngIf="groupItem.category === 'switch'"
     [label]="groupItem.label"
-    [checked]="groupItem.checked"
+    [checked]="groupItem.value"
     (changeValue)="switchChangeH($event)"
 ></app-switch>
 <app-options *ngIf="groupItem.category === 'options'"

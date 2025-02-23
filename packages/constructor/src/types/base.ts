@@ -81,8 +81,8 @@ interface ConfigItemNumber {
 interface ConfigItemSwitch {
   category: 'switch'
   options: SelectOptionsItem[]
-  // value: B
-  checked: B
+  value: B
+  // checked: B
   label: S
   key: S
   hide?: FT<B>

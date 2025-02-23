@@ -55,7 +55,8 @@ let Form: ConfigItem[] = [
         label: 'checked',
         category: 'switch',
         key: 'checked',
-        checked: false,
+        // checked: false,
+        value: false,
         options: [
             {label: 'false', value: false},
             {label: 'true', value: true},
@@ -100,7 +101,8 @@ let Form: ConfigItem[] = [
         ],
         key: 'required',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '显示帮助',
@@ -111,7 +113,8 @@ let Form: ConfigItem[] = [
         ],
         key: 'hasHelp',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '帮助文本',
@@ -145,7 +148,8 @@ let Form: ConfigItem[] = [
         ],
         key: 'visible',
         // value: true,
-        checked: true,
+        // checked: true,
+        value: true,
     },
 ]
 let FormItemCategory = [
@@ -213,7 +217,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'filterable',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '过滤时是否多选',
@@ -224,7 +229,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'filterMultiple',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
         hide: function (p: ConfigItem[]) { // 是否隐藏
             let o = p.find(item => item.key === 'filterable')
             // return !o!.value
@@ -245,7 +251,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'closeFilterWhenScroll',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '是否可排序',
@@ -256,7 +263,8 @@ let Table: ConfigItem[] = [
         ],
         key: 'sortable',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '该列固定到左侧的距离',
@@ -296,7 +304,8 @@ let Tabs: ConfigItem[] = [
         ],
         key: 'disabled',
         // value: false,
-        checked: false,
+        // checked: false,
+        value: false,
     },
 ]
 let Flex: ConfigItem[] = [
@@ -429,7 +438,8 @@ let PageList: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'isOpen',
-        checked: false,
+        // checked: false,
+        value: false,
     },
     {
         label: '渲染',
@@ -439,7 +449,8 @@ let PageList: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'isRenderer',
-        checked: true,
+        // checked: true,
+        value: true,
     },
     {
         label: '禁用',
@@ -449,7 +460,8 @@ let PageList: ConfigItem[] = [
             {label: 'true', value: true,},
         ],
         key: 'isDisabled',
-        checked: false,
+        // checked: false,
+        value: false,
     },
 ]
 let all: {[k: S]: ConfigItem[]} = {

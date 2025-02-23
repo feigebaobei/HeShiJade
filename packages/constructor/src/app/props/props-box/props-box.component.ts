@@ -79,9 +79,9 @@ export class PropsBoxComponent {
       if ('value' in item) {
         item.value = this.curComp?.props[item.key]
       }
-      if ('checked' in item) {
-        item.checked = this.curComp?.props[item.key]
-      }
+      // if ('checked' in item) {
+      //   item.checked = this.curComp?.props[item.key]
+      // }
       this.componentPropsList.push(item)
     })
   }
@@ -238,10 +238,10 @@ export class PropsBoxComponent {
           item.value = p.value
           this.componentService.setProps(item.key, item.value)
         }
-        if ('checked' in item) {
-          item.checked = p.checked
-          this.componentService.setProps(item.key, item.checked)
-        }
+        // if ('checked' in item) {
+        //   item.checked = p.checked
+        //   this.componentService.setProps(item.key, item.checked)
+        // }
       }
     })
     let propsObj: Comp['props'] = {}
@@ -250,9 +250,9 @@ export class PropsBoxComponent {
         default:
           propsObj[item.key] = item.value
           break;
-        case 'switch':
-          propsObj[item.key] = item.checked
-          break;
+        // case 'switch':
+        //   propsObj[item.key] = item.checked
+        //   break;
       }
     })
     this.listenerChange(p.key, propsObj)

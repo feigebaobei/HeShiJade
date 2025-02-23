@@ -46,12 +46,13 @@ export class ItemsBoxComponent {
                 case 'textarea':
                 case 'options':
                 case 'select':
+                case 'switch':
                 default:
                   gi.value = v
                   break;
-                case 'switch':
-                  gi.checked = v
-                  break;
+                // case 'switch':
+                //   gi.checked = v
+                //   break;
               }
             }
           })
@@ -78,12 +79,13 @@ export class ItemsBoxComponent {
           case 'textarea':
           case 'options':
           case 'select':
+          case 'switch':
           default:
             obj[k] = item.value
             break;
-          case 'switch':
-            obj[k] = item.checked
-            break;
+          // case 'switch':
+          //   obj[k] = item.checked
+          //   break;
         }
       })
       this.componentService.addItems(obj)
