@@ -44,6 +44,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { PageListComponent } from './page-list/page-list.component';
 import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.component';
 import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
+import { ShowHideComponent } from './show-hide/show-hide.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -67,6 +68,7 @@ import { PageListItemComponent } from './page-list/page-list-item/page-list-item
     PageListComponent,
     PageSubListComponent,
     PageListItemComponent,
+    ShowHideComponent,
   ],
   imports: [
     CommonModule,

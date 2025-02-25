@@ -464,6 +464,9 @@ let PageList: ConfigItem[] = [
         value: false,
     },
 ]
+let ShowHide: ConfigItem[] = [
+
+]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
     Button,
@@ -472,14 +475,15 @@ let all: {[k: S]: ConfigItem[]} = {
     // FormItemCategory,
     Table,
     Select,
-    // Icon, // 没有子元素
-    // Checkbox, // 没有子元素
+    // Icon, // 没有特定子元素
+    // Checkbox, // 没有特定子元素
     Tabs,
-    // Pagination, // 没有子元素
+    // Pagination, // 没有特定子元素
     Flex,
     Grid,
     Layout,
     PageList,
+    // ShowHide, // 没有特定子元素
 }
 
 export default all

@@ -65,6 +65,10 @@ let PageList: CompConfigAddabel = {
     behavior: true,
     items: true,
 }
+let ShowHide: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -84,6 +88,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Grid,
     Layout,
     PageList,
+    ShowHide,
 }
 
 export {
