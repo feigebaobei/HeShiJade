@@ -1380,12 +1380,12 @@ let ShowHide: PropsConfigItem = {
         key: 'switch',
     },
     initValue: {
-        category: 'switch',
+        category: 'select',
         options: [
-            {label: 'true', value: true},
-            {label: 'false', value: false},
+            {label: '显示', value: 'true'},
+            {label: '不显示', value: 'false'},
         ],
-        value: true,
+        value: 'true',
         label: '初始值',
         key: 'initValue',
     },
