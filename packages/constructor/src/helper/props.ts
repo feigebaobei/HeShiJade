@@ -1369,25 +1369,35 @@ let Layout: PropsConfigItem = {
 let PageList: PropsConfigItem = {
 }
 let ShowHide: PropsConfigItem = {
-    switch: {
-        category: 'select',
+    // switch: {
+    //     category: 'select',
+    //     options: [
+    //         {label: 'ngIf', value: 'ngIf'},
+    //         {label: 'ngShow', value: 'ngShow'},
+    //     ],
+    //     value: 'ngIf',
+    //     label: '切换方式',
+    //     key: 'switch',
+    // },
+    // initValue: {
+    //     category: 'select',
+    //     options: [
+    //         {label: '显示', value: 'true'},
+    //         {label: '不显示', value: 'false'},
+    //     ],
+    //     value: 'true',
+    //     label: '初始值',
+    //     key: 'initValue',
+    // },
+    show: {
+        category: 'switch',
         options: [
-            {label: 'ngIf', value: 'ngIf'},
-            {label: 'ngShow', value: 'ngShow'},
+            {label: '显示', value: true},
+            {label: '不显示', value: false},
         ],
-        value: 'ngIf',
-        label: '切换方式',
-        key: 'switch',
-    },
-    initValue: {
-        category: 'select',
-        options: [
-            {label: '显示', value: 'true'},
-            {label: '不显示', value: 'false'},
-        ],
-        value: 'true',
-        label: '初始值',
-        key: 'initValue',
+        value: true,
+        label: '是否显示',
+        key: 'show',
     },
 }
 export {

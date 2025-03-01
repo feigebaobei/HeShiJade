@@ -1,1 +1,6 @@
-<p>show-hide works!</p>
+<div *ngIf="data.props['show']">
+    <app-stack 
+        *ngIf="childComp"
+        [componentList]="[childComp]"
+    ></app-stack>
+</div>
