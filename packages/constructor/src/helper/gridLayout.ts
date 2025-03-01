@@ -93,7 +93,7 @@ let PageList: GridLayoutDefault = {
 }
 let ShowHide: GridLayoutDefault = {
     w: 24,
-    h: 10,
+    h: 4,
     noResize: false,
 }
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {

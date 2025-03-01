@@ -15,6 +15,7 @@ import {
   FormModule,
   CheckBoxModule,
   // MenuModule,
+  ToastModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -88,6 +89,7 @@ import { ShowHideComponent } from './show-hide/show-hide.component';
     FormModule,
     CheckBoxModule,
     MenuModule,
+    ToastModule,
   ],
   providers: [],
   exports: [
