@@ -82,7 +82,10 @@ export class ShowHideComponent {
       this.show = false
       return true
     }).then(() => {
-      // 
+      this.childComp = null
+      let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
+      this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
+      this.componentService.reqDeleteComponent(ulid, childrenUlid)
       return true
     }).then(() => {
       this.show = true
