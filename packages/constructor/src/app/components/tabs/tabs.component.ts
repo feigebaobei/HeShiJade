@@ -4,22 +4,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, createChildKey as cck, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
 import { createKvMap } from 'src/helper/kvMap';
-import { ulid } from 'ulid';
 import {shareEvent, creatEventName} from 'src/helper/share-event';
-// 数据
-import {
-  Button as gridLayoutButtonDefault,
-  Modal as gridLayoutModalDefault,
-  Form as gridLayoutFormDefault,
-  Table as gridLayoutTableDefault,
-  Input as gridLayoutInputDefault,
-  Select as gridLayoutSelectDefault,
-  Icon as gridLayoutIconDefault,
-  Checkbox as gridLayoutCheckboxDefault,
-  Tabs as gridLayoutTabsDefault,
-  Pagination as gridLayoutPaginationDefault,
-  Flex as gridLayoutFlexDefault,
-} from 'src/helper/gridLayout'
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 
 // type
@@ -194,7 +179,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         this.data.slots[slotKey] = comp.ulid
       }
       // clog('comp', comp)
-      this.componentService.mountComponent(this.curPage.ulid, comp)
+      this.componentService.mountComponent(comp)
       if (Array.isArray(this.compArr[itemIndex])) {
         this.compArr[itemIndex].push(comp)
       } else {
@@ -202,7 +187,6 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
       }
       this.componentService.reqCreateComponent(comp)
       return true
-      this.setComponentList(this.itemIndexSlotKeyMap.get(String(itemIndex)))
     }).then(() => {
       asyncFn(() => {
         this.show = true

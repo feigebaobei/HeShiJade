@@ -16,6 +16,7 @@ import { Button as ButtonProps,
     Grid as GridProps,
     Layout as LayoutProps,
     PageList as PageListProps,
+    ShowHide as ShowHideProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -29,6 +30,7 @@ import {
     Grid as GridBehavior,
     Layout as LayoutBehavior,
     PageList as PageListBehavior,
+    ShowHide as ShowHideBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -213,6 +215,13 @@ let PageList: ComponentDefaultConfig = {
     slots: {},
 }
 
+let ShowHide: ComponentDefaultConfig = {
+    props: opProps(ShowHideProps),
+    behavior: opBehavior(ShowHideBehavior),
+    items: [],
+    slots: {},
+}
+
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
     Modal,
@@ -228,4 +237,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Grid,
     Layout,
     PageList,
+    ShowHide,
 }

@@ -195,25 +195,6 @@ export class ComponentService {
     // 4 slots组件
     // 当前不支持在中间创建组件
     let n: N = 0
-    // todo delete 2025.02.01+
-    // if (comp.parentUlid) {
-    //   switch (comp.mount.area) {
-    //     case 'slots':
-    //       n = 4
-    //       break;
-    //     // case 'items':
-    //     //   n = 3
-    //     //   break;
-    //   }
-    // } else {
-    //   if (!comp.prevUlid && !comp.nextUlid) {
-    //     n = 0
-    //   } else if (!comp.prevUlid && comp.nextUlid) {
-    //     n = 1
-    //   } else if (comp.prevUlid && !comp.nextUlid) {
-    //     n = 2
-    //   }
-    // }
     if (!comp.prevUlid && !comp.nextUlid) {
       n = 0
     } else if (!comp.prevUlid && comp.nextUlid) {
@@ -223,7 +204,8 @@ export class ComponentService {
     }
     return n
   }
-  mountComponent(pageUlid: ULID, comp: Component,): B {
+  mountComponent(comp: Component,): B {
+    let pageUlid = comp.pageUlid
     let tree = this._map.get(pageUlid)
     if (tree) {
       let b: B = false // 是否挂载成功
@@ -254,31 +236,12 @@ export class ComponentService {
             node.value.prevUlid = comp.ulid
           }
           break;
-          // todo 删除 处理挂载到item的逻辑
-        // case 3: // items
-        //   // b = !!tree.mountChild(comp, comp.parentUlid, `items_${(comp.mount as ComponentMountItems).itemIndex}Ulid`)
-        //   b = !!tree.mountChild(comp, comp.parentUlid, 
-        //     createChildKey('items', (comp.mount as ComponentMountItems).itemIndex, 'node')
-        //     )
-        //   // createChildKey
-        //   node = tree.find(comp.parentUlid) // 父节点
-        //   if (node) {
-        //     node.value.items[(comp.mount as ComponentMountItems).itemIndex]['childUlid'] = comp.ulid
-        //   }
-        //   break;
-        // todo 若确定不会出现4，则删除此分支
         case 4: // slots
           let curNode = tree.mountChild(comp, comp.parentUlid, 
             createChildKey('slots', (comp.mount as ComponentMountSlots).slotKey, 'node')
             )
-          clog('curNode', curNode, tree)
-          // clog('curNode', curNode,)
+          // clog('curNode', curNode, tree)
           b = !!curNode
-          // node = tree.find(comp.parentUlid)
-          // if (node) {
-          //   // todo 这里的Ulid好像不需要
-          //   node.value.slots[`slots_${(comp.mount as ComponentMountSlots).slotKey}Ulid`] = comp.ulid
-          // }
           break;
       }
       // clog('tree', tree)
@@ -310,9 +273,6 @@ export class ComponentService {
   private _find(pageUlid: ULID, compUlid: ULID): CompOrUn {
     return this._map.get(pageUlid)?.find(compUlid)?.value
   }
-  // private _findCategory(categoryUlid: ULID) {
-  //   return this.categoryList.find(item => item.ulid === categoryUlid)
-  // }
   curComponent() {
     return this._curComponent
   }

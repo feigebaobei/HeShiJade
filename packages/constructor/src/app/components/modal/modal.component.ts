@@ -90,7 +90,7 @@ export class ModalComponent implements OnInit{
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenHeader.push(component)
-    this.componentService.mountComponent(this.page.ulid, component)
+    this.componentService.mountComponent(component)
     // 请求保存组件的接口
     this.componentService.reqCreateComponent(component).then(() => {
       clog('成功在远端保存组件')
@@ -113,7 +113,7 @@ export class ModalComponent implements OnInit{
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenBody.push(component)
-    this.componentService.mountComponent(this.page.ulid, component)
+    this.componentService.mountComponent(component)
     this.componentService.reqCreateComponent(component).then(() => {
       clog('成功在远端保存组件')
     }).catch((error) => {

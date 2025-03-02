@@ -76,6 +76,11 @@ let categoryList = [
         componentCategory: 'PageList',
         ulid: '01J50ZGTCKEC10HWAJBZND487F'
     },
+    {
+        name: 'showHide',
+        componentCategory: 'ShowHide',
+        ulid: '01J50ZGTCKEC10HWAJBZND487G'
+    },
   ]
 export {
     categoryList

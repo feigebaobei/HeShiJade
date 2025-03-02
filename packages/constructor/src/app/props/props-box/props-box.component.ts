@@ -30,6 +30,7 @@ import {
   Grid as GridPropsMeta,
   Layout as LayoutPropsMeta,
   PageList as PageListPropsMeta,
+  ShowHide as ShowHidePropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -181,6 +182,9 @@ export class PropsBoxComponent {
         break;
       case 'PageList':
         this.opComponentPropsList(PageListPropsMeta)
+        break;
+      case 'ShowHide':
+        this.opComponentPropsList(ShowHidePropsMeta)
         break;
       default:
         this.componentPropsMeta = {}

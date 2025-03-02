@@ -219,7 +219,7 @@ AfterViewInit
         )
       this.compArr[itemIndex].push(comp)
       // 在service中添加新组件
-      this.componentService.mountComponent(this.curPage.ulid, comp)
+      this.componentService.mountComponent(comp)
       // 更新当前组件的slots
       if (!this.data.slots[slotsKey]) {
         this.data.slots[slotsKey] = comp.ulid

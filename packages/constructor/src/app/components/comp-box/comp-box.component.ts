@@ -15,6 +15,7 @@ import { FlexComponent } from '../flex/flex.component';
 import { GridComponent } from '../grid/grid.component';
 import { LayoutComponent } from '../layout/layout.component';
 import { PageListComponent } from '../page-list/page-list.component';
+import { ShowHideComponent } from '../show-hide/show-hide.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -53,6 +54,7 @@ let compMap: Oa = {
   Grid: GridComponent,
   Layout: LayoutComponent,
   PageList: PageListComponent,
+  ShowHide: ShowHideComponent,
 }
 
 @Component({
@@ -211,6 +213,13 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
           ulid: this.comp.ulid,
         }
         break
+      case 'ShowHide':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
+          ulid: this.comp.ulid,
+        }
+        break;
     }
   }
   ngAfterViewInit() {

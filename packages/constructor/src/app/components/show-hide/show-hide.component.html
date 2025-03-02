@@ -1,0 +1,15 @@
+<div dDroppable
+[class]="{dropArea: true}"
+(dropEvent)="dropH($event)"
+>
+    <span *ngIf="!childComp">此区域可接收一个组件</span>
+    <div *ngIf="childComp">
+        <app-comp-stack [componentList]="[(childComp)]" (deleteComp)="deleteComponentByUlidH($event)"></app-comp-stack>
+    </div>
+</div>
+
+<d-toast [value]="msgs"></d-toast>
+
+<!-- 
+<div *ngShow="shouldShow">This element is toggled with style changes.</div>
+<div *ngIf="isVisible">This element is conditionally added to the DOM.</div> -->

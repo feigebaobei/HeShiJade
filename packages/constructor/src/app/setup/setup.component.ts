@@ -241,7 +241,7 @@ export class SetupComponent implements OnInit {
       }
     this.componentByPage.push(gridObj)
     this.componentList.push(compObj)
-    this.componentService.mountComponent(curPage!.ulid, compObj)
+    this.componentService.mountComponent(compObj)
     this.componentService.reqCreateComponent(compObj).then(() => {
       clog('成功在远端保存组件')
     }).catch(error => {
