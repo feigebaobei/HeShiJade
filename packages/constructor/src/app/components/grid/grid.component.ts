@@ -120,7 +120,7 @@ export class GridComponent {
         }
       }
       this.data.slots[slotKey] = comp.ulid
-      this.componentService.mountComponent(this.curPage.ulid, comp)
+      this.componentService.mountComponent(comp)
       this.componentService.reqCreateComponent(comp)
       this.componentService.reqUpdateComponent('slots', slotKey, comp.ulid, this.data.ulid)
     }).then(() => {

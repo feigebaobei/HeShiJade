@@ -70,7 +70,7 @@ export class ShowHideComponent {
         { x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize },
       )
       this.childComp = component
-      this.componentService.mountComponent(this.curPage.ulid, component)
+      this.componentService.mountComponent(component)
       this.componentService.reqCreateComponent(component)
       return true
     }).then(() => {

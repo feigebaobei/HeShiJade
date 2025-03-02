@@ -223,7 +223,8 @@ export class ComponentService {
     }
     return n
   }
-  mountComponent(pageUlid: ULID, comp: Component,): B {
+  mountComponent(comp: Component,): B {
+    let pageUlid = comp.pageUlid
     let tree = this._map.get(pageUlid)
     if (tree) {
       let b: B = false // 是否挂载成功

@@ -123,7 +123,7 @@ export class LayoutComponent {
           this.headerAreaCompArr = [comp]
           this.data.slots[slotKey] = comp.ulid
         }
-        this.componentService.mountComponent(this.curPage.ulid, comp)
+        this.componentService.mountComponent(comp)
         this.componentService.reqCreateComponent(comp)
         this.showObj.header = false
         asyncFn(() => {
@@ -148,7 +148,7 @@ export class LayoutComponent {
           this.leftAreaCompArr = [comp]
           this.data.slots[slotKey] = comp.ulid
         }
-        this.componentService.mountComponent(this.curPage.ulid, comp)
+        this.componentService.mountComponent(comp)
         this.componentService.reqCreateComponent(comp)
         this.showObj.left = false
         asyncFn(() => {
@@ -173,7 +173,7 @@ export class LayoutComponent {
           this.mainAreaCompArr = [comp]
           this.data.slots[slotKey] = comp.ulid
         }
-        this.componentService.mountComponent(this.curPage.ulid, comp)
+        this.componentService.mountComponent(comp)
         this.componentService.reqCreateComponent(comp)
         this.showObj.main = false
         asyncFn(() => {
@@ -198,7 +198,7 @@ export class LayoutComponent {
           this.rightAreaCompArr = [comp]
           this.data.slots[slotKey] = comp.ulid
         }
-        this.componentService.mountComponent(this.curPage.ulid, comp)
+        this.componentService.mountComponent(comp)
         this.componentService.reqCreateComponent(comp)
         this.showObj.right = false
         asyncFn(() => {
@@ -223,7 +223,7 @@ export class LayoutComponent {
           this.footerAreaCompArr = [comp]
           this.data.slots[slotKey] = comp.ulid
         }
-        this.componentService.mountComponent(this.curPage.ulid, comp)
+        this.componentService.mountComponent(comp)
         this.componentService.reqCreateComponent(comp)
         this.showObj.footer = false
         asyncFn(() => {

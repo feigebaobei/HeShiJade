@@ -179,7 +179,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
         this.data.slots[slotKey] = comp.ulid
       }
       // clog('comp', comp)
-      this.componentService.mountComponent(this.curPage.ulid, comp)
+      this.componentService.mountComponent(comp)
       if (Array.isArray(this.compArr[itemIndex])) {
         this.compArr[itemIndex].push(comp)
       } else {
