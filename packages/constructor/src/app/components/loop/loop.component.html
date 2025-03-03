@@ -1,1 +1,12 @@
-<p>loop works!</p>
+<!-- <p>loop works!</p> -->
+<div dDroppable
+    class="dropArea"
+    (dropEvent)="dropH($event)"
+>
+    <span *ngIf="!childComp">此区域可接收一个组件</span>
+    <app-comp-stack
+        *ngIf="childComp"
+        [componentList]="[childComp]"
+        (deleteComp)="deleteComponentByUlidH($event)"
+    ></app-comp-stack>
+</div>
