@@ -1,5 +1,6 @@
 import { Component, Input, } from '@angular/core';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
+import { createChildKey } from 'src/helper/index'
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, S, ULID, O, } from 'src/types/base';
@@ -37,7 +38,7 @@ export class LoopComponent {
   }
   dropH(e: DropEvent) {
     if (this.childComp) {
-      this.msgs = [{ severity: 'error', summary: '提示', content: '显隐组件最多有一个子组件。' }]
+      this.msgs = [{ severity: 'error', summary: '提示', content: '循环组件最多有一种子组件。' }]
       return
     }
     let componentCategory = e.dragData.item.componentCategory
@@ -55,6 +56,12 @@ export class LoopComponent {
   }
   deleteComponentByUlidH(ulid: ULID) {}
   ngOnInit() {
-
+    let tree = this.componentService.getTree(this.curPage.ulid)
+    let node = tree?.find(this.data.ulid)
+    let bodyNode = node?.children[createChildKey('slots', 'body', 'node')]
+    let arr = bodyNode?.toArray()
+    if (arr?.length) {
+      this.childComp = arr[0]
+    }
   }
 }
