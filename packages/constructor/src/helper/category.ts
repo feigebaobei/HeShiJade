@@ -81,6 +81,11 @@ let categoryList = [
         componentCategory: 'ShowHide',
         ulid: '01J50ZGTCKEC10HWAJBZND487G'
     },
+    {
+        name: 'loop',
+        componentCategory: 'Loop',
+        ulid: '01J50ZGTCKEC10HWAJBZND487H'
+    },
   ]
 export {
     categoryList

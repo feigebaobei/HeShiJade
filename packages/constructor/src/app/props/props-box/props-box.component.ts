@@ -31,6 +31,7 @@ import {
   Layout as LayoutPropsMeta,
   PageList as PageListPropsMeta,
   ShowHide as ShowHidePropsMeta,
+  Loop as LoopPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -185,6 +186,9 @@ export class PropsBoxComponent {
         break;
       case 'ShowHide':
         this.opComponentPropsList(ShowHidePropsMeta)
+        break;
+      case 'Loop':
+        this.opComponentPropsList(LoopPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}

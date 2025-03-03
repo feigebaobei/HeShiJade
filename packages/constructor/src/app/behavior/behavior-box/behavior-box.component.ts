@@ -19,6 +19,7 @@ import {
   Layout as LayoutBehaviorMeta,
   PageList as PageListBehaviorMeta,
   ShowHide as ShowHideBehaviorMeta,
+  Loop as LoopBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -150,6 +151,9 @@ export class BehaviorBoxComponent {
         break;
       case 'ShowHide':
         this.setComponentBehaviorListByType(ShowHideBehaviorMeta)
+        break;
+      case 'Loop':
+        this.setComponentBehaviorListByType(LoopBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

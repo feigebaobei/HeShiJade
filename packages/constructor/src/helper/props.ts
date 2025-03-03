@@ -1369,26 +1369,6 @@ let Layout: PropsConfigItem = {
 let PageList: PropsConfigItem = {
 }
 let ShowHide: PropsConfigItem = {
-    // switch: {
-    //     category: 'select',
-    //     options: [
-    //         {label: 'ngIf', value: 'ngIf'},
-    //         {label: 'ngShow', value: 'ngShow'},
-    //     ],
-    //     value: 'ngIf',
-    //     label: '切换方式',
-    //     key: 'switch',
-    // },
-    // initValue: {
-    //     category: 'select',
-    //     options: [
-    //         {label: '显示', value: 'true'},
-    //         {label: '不显示', value: 'false'},
-    //     ],
-    //     value: 'true',
-    //     label: '初始值',
-    //     key: 'initValue',
-    // },
     show: {
         category: 'switch',
         options: [
@@ -1398,6 +1378,18 @@ let ShowHide: PropsConfigItem = {
         value: true,
         label: '是否显示',
         key: 'show',
+    },
+}
+let Loop: PropsConfigItem = {
+    layout: {
+        category: 'select',
+        options: [
+            {label: 'flex', value: 'flex'},
+            {label: 'grid', value: 'grid'},
+        ],
+        value: 'flex',
+        label: '布局方式',
+        key: 'layout',
     },
 }
 export {
@@ -1416,4 +1408,5 @@ export {
     Layout,
     PageList,
     ShowHide,
+    Loop,
 }

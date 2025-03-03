@@ -464,9 +464,8 @@ let PageList: ConfigItem[] = [
         value: false,
     },
 ]
-let ShowHide: ConfigItem[] = [
+// let ShowHide: ConfigItem[] = []
 
-]
 let all: {[k: S]: ConfigItem[]} = {
     Input,
     Button,
@@ -484,6 +483,7 @@ let all: {[k: S]: ConfigItem[]} = {
     Layout,
     PageList,
     // ShowHide, // 没有特定子元素
+    // Loop, // 没有特定子元素
 }
 
 export default all
