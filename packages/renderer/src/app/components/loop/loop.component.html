@@ -1,1 +1,3 @@
-<p>loop works!</p>
+<div *ngFor="let item of objArr(); let i = index">
+    <app-stack [componentList]="[item]" [loopIndex]="i"></app-stack>
+</div>
