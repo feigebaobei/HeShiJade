@@ -139,20 +139,22 @@ export class PropsBoxComponent {
         this.componentPropsMeta = {}
         break
     }
-    this.componentPropsList = this.componentPropsList.map(item => {
-      let f = item.hide
-      if (f) {
-        return {
-          ...item,
-          hideCalc: f(this.componentPropsList)
-        }
-      } else {
-        return {
-          ...item,
-          hideCalc: false
-        }
-      }
-    })
+    // this.componentPropsList
+    //  = this.componentPropsList.map(item => {
+    //   // let f = item.hide
+    //   // if (f) {
+    //   //   return {
+    //   //     ...item,
+    //   //     hideCalc: f(this.componentPropsList)
+    //   //   }
+    //   // } else {
+    //   //   return {
+    //   //     ...item,
+    //   //     hideCalc: false
+    //   //   }
+    //   // }
+
+    // })
     this.componentPropsList.forEach(item => {
       if (item.hideListenerKey) {
         if (this.propsMap.has(item.hideListenerKey)) {

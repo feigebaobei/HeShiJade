@@ -1,6 +1,7 @@
 // import type { ConfigItem } from 'src/types/props'
 import type { B, ConfigItem } from 'src/types/base'
 import type { PropsConfigItem } from 'src/types/config'
+import type { Component } from 'src/types/component'
 // interface PropsConfigItem {
 //     [k: S]: ConfigItem
 // }
@@ -374,10 +375,10 @@ let Table: PropsConfigItem = {
         value: '40px',
         label: '虚拟滚动时每一行的高度',
         key: 'virtualItemSize',
-        hide: function (p: ConfigItem[]) {
-            let o = p.find(item => item.key === 'virtualScroll')
+        hide: function (p: Component['props']) {
+            // let o = p.find(item => item.key === 'virtualScroll')
             // clog('o', o)
-            return o!.value as B
+            return p['virtualScroll']
             // if (o && 'checked' in o) {
             //     return !o.checked
             // } else {
@@ -391,15 +392,16 @@ let Table: PropsConfigItem = {
         value: '80',
         label: '虚拟滚动时缓冲区最小高度',
         key: 'virtualMinBufferPx',
-        hide: function (p: ConfigItem[]) {
-            let o = p.find(item => item.key === 'virtualScroll')
-            // clog('o', o)
-            // return o!.value as B
-            if (o && 'checked' in o) {
-                return !o.checked
-            } else {
-                return true
-            }
+        hide: function (p: Component['props']) {
+            // let o = p.find(item => item.key === 'virtualScroll')
+            // // clog('o', o)
+            // // return o!.value as B
+            // if (o && 'checked' in o) {
+            //     return !o.checked
+            // } else {
+            //     return true
+            // }
+            return p['virtualScroll']
         },
         hideListenerKey: 'virtualScroll',
         placeholder: '如：80',
@@ -1396,6 +1398,202 @@ let Loop: PropsConfigItem = {
         value: 3,
         label: 'mock数量',
         key: 'mockCount',
+    },
+    justifyContentFlex: {
+        category: 'select',
+        options: [
+            { label: '向开头对齐', value: 'flex-start' },
+            { label: '向末尾对齐', value: 'flex-end' },
+            { label: '居中', value: 'center' },
+            { label: '两端对齐', value: 'space-between' },
+            { label: '相等间距', value: 'space-around' },
+        ],
+        value: 'flex-start',
+        label: '主轴的对齐方式',
+        key: 'justifyContent',
+        hide: function (p: Component['props']) {
+            clog('hide', p)
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    alignItemsFlex: {
+        category: 'select',
+        options: [
+            { label: '向开头对齐', value: 'flex-start' },
+            { label: '向末尾对齐', value: 'flex-end' },
+            { label: '向末尾对齐', value: 'center' },
+            { label: '两端对齐', value: 'space-between' },
+            { label: '拉伸', value: 'stretch' },
+        ],
+        value: 'stretch',
+        label: '垂直主轴的对齐方式',
+        key: 'alignItems',
+        hide: function (p: Component['props']) {
+            clog('hide', p)
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    flexDirection: {
+        category: 'select',
+        options: [
+            { label: '行', value: 'row' },
+            { label: '反向行', value: 'row-reverse' },
+            { label: '列', value: 'column' },
+            { label: '反向列', value: 'column-reverse' },
+        ],
+        value: 'row',
+        label: '主轴的方向',
+        key: 'flexDirection',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    flexWrap: {
+        category: 'select',
+        options: [
+            { label: '不折行', value: 'nowrap' },
+            { label: '折行正序', value: 'wrap' },
+            { label: '折行倒序', value: 'wrap-reverse' },
+        ],
+        value: 'nowrap',
+        label: '换行',
+        key: 'flexWrap',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    rowGap: {
+        category: 'input',
+        value: '0px',
+        label: '行间隔',
+        key: 'rowGap',
+    },
+    columnGap: {
+        category: 'input',
+        value: '0px',
+        label: '列间隔',
+        key: 'columnGap',
+    },
+    gridTemplateColumns: {
+        category: 'input',
+        value: 'auto',
+        label: '每列列宽',
+        key: 'gridTemplateColumns',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
+    },
+    gridTemplateRows: {
+        category: 'input',
+        value: 'auto',
+        label: '每列行高',
+        key: 'gridTemplateRows',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
+    },
+    gridAutoFlow: {
+        category: 'select',
+        options: [
+            { label: '先行后列', value: 'row', },
+            { label: '先列后行', value: 'column', },
+            { label: '先行后列,尽量填满空格', value: 'row dense', },
+            { label: '先列后行,尽量填满空格', value: 'column dense', },
+        ],
+        value: 'row',
+        label: '子元素顺序',
+        key: 'gridAutoFlow',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'grid'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
+    },
+    justifyItems: {
+        category: 'select',
+        options: [
+            { label: '对齐单元格的起始边缘', value: 'start', },
+            { label: '对齐单元格的结束边缘', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+        ],
+        value: 'stretch',
+        label: '元素的水平位置',
+        key: 'justifyItems',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'grid'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
+    },
+    alignItemsGrid: {
+        category: 'select',
+        options: [
+            { label: '开始', value: 'start', },
+            { label: '末尾', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+        ],
+        value: 'stretch',
+        label: '元素的竖直位置',
+        key: 'alignItems',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'grid'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
+    },
+    justifyContentGrid: {
+        category: 'select',
+        options: [
+            { label: '开始', value: 'start', },
+            { label: '末尾', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+            { label: '不加边界相等间距', value: 'space-around', },
+            { label: '两端对齐', value: 'space-between', },
+            { label: '加边界相等间距', value: 'space-evently', },
+        ],
+        value: 'start',
+        label: '网格的对齐位置',
+        key: 'justifyContent',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'grid'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
+    },
+    alignContent: {
+        category: 'select',
+        options: [
+            { label: '开始', value: 'start', },
+            { label: '末尾', value: 'end', },
+            { label: '居中', value: 'center', },
+            { label: '拉伸', value: 'stretch', },
+            { label: '不加边界相等间距', value: 'space-around', },
+            { label: '两端对齐', value: 'space-between', },
+            { label: '加边界相等间距', value: 'space-evently', },
+        ],
+        value: 'start',
+        label: '网格的竖直位置',
+        key: 'alignContent',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'grid'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: true,
     },
 }
 export {
