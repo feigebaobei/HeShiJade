@@ -130,7 +130,8 @@ let Button: ComponentDefaultConfig = {
 }
 let Input: ComponentDefaultConfig = {
     props: opProps(InputProps),
-    behavior: [],
+    // behavior: [],
+    behavior: opBehavior(ButtonBehavior),
     items: [],
     slots: {},
 }

@@ -53,6 +53,8 @@ let Input: BehaviorConfigGroup = [
   {
     category: 'select',
     options: [
+      {label: '输入后', value: 'input'},
+      {label: '改变后', value: 'change'},
       {label: '改变属性后', value: 'postComponentNgOnChanges'},
       {label: '初始化组件后', value: 'postComponentNgOnInit'},
       {label: '变更检测后', value: 'postComponentNgDoCheck'},
