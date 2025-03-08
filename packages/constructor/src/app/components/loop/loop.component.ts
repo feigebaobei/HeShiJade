@@ -54,7 +54,12 @@ export class LoopComponent {
     this.componentService.mountComponent(this.childComp)
     this.componentService.reqCreateComponent(this.childComp)
   }
-  deleteComponentByUlidH(ulid: ULID) {}
+  deleteComponentByUlidH(ulid: ULID) {
+    this.childComp = null
+    let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
+    this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
+  }
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
     let node = tree?.find(this.data.ulid)

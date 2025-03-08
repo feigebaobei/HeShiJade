@@ -1,13 +1,28 @@
-<!-- <p>loop works!</p> -->
+<div *ngIf="childComp" [class]="['wqert', data.props['layout']]">
+    <div
+    class="flex-item"
+    *ngFor="let item of [1,2,3]"
+    >
+        <app-comp-stack
+            [componentList]="[childComp]"
+            (deleteComp)="deleteComponentByUlidH($event)"
+        ></app-comp-stack>
+    </div>
+</div>
 <div dDroppable
     class="dropArea"
     (dropEvent)="dropH($event)"
 >
     <span *ngIf="!childComp">此区域可接收一个组件</span>
-    <app-comp-stack
+    <!-- <app-comp-stack
         *ngIf="childComp"
         [componentList]="[childComp]"
         (deleteComp)="deleteComponentByUlidH($event)"
     ></app-comp-stack>
+    <app-comp-stack
+        *ngIf="childComp"
+        [componentList]="[childComp]"
+        (deleteComp)="deleteComponentByUlidH($event)"
+    ></app-comp-stack> -->
 </div>
 <d-toast [value]="msgs"></d-toast>
