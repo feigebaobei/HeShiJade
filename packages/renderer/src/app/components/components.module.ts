@@ -41,6 +41,7 @@ import { PageListComponent } from './page-list/page-list.component';
 import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.component';
 import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
 import { ShowHideComponent } from './show-hide/show-hide.component';
+import { LoopComponent } from './loop/loop.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -68,6 +69,7 @@ import { ShowHideComponent } from './show-hide/show-hide.component';
     PageSubListComponent,
     PageListItemComponent,
     ShowHideComponent,
+    LoopComponent,
   ],
   imports: [
     CommonModule,
