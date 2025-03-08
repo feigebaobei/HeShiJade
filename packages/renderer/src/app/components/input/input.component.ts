@@ -3,6 +3,8 @@ import { pool } from 'src/helper/pool';
 import type { A, O } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'
 
+let clog = console.log
+
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
@@ -15,6 +17,14 @@ export class InputComponent implements OnInit, OnDestroy {
     Object.entries(o).forEach(([k, v]) => {
       this.data.props[k] = v
     })
+  }
+  inputH(p: A) {
+    // clog('inputH', p.target.value)
+    pool.trigger(this.data.ulid, 'input', p, this)
+  }
+  changeH(p: A) {
+    // clog('changeH', p.target.value)
+    pool.trigger(this.data.ulid, 'change', p, this)
   }
   ngOnChanges() {
     pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
