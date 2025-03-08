@@ -1391,6 +1391,12 @@ let Loop: PropsConfigItem = {
         label: '布局方式',
         key: 'layout',
     },
+    mockCount: {
+        category: 'number',
+        value: 3,
+        label: 'mock数量',
+        key: 'mockCount',
+    },
 }
 export {
     Button,

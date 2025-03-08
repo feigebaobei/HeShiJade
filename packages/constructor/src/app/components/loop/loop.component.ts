@@ -28,6 +28,7 @@ export class LoopComponent {
   childComp: Comp | null
   curPage: Page
   msgs: O[]
+  mockArr: N[]
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -35,6 +36,7 @@ export class LoopComponent {
     this.childComp = null
     this.curPage = this.pageService.getCurPage()!
     this.msgs = []
+    this.mockArr = []
   }
   dropH(e: DropEvent) {
     if (this.childComp) {
@@ -68,5 +70,6 @@ export class LoopComponent {
     if (arr?.length) {
       this.childComp = arr[0]
     }
+    this.mockArr = new Array(this.data.props['mockCount'] || 1).fill(1)
   }
 }

@@ -1,7 +1,7 @@
 <div *ngIf="childComp" [class]="['wqert', data.props['layout']]">
     <div
     class="flex-item"
-    *ngFor="let item of [1,2,3]"
+    *ngFor="let item of mockArr"
     >
         <app-comp-stack
             [componentList]="[childComp]"

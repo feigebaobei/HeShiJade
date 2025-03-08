@@ -2268,3 +2268,15 @@
 {"level":30,"time":1741103238205,"pid":45577,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1741103331496,"pid":45577,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1741394248294,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","msg":"启动服务"}
+{"level":30,"time":1741397411246,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397501038,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397511679,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397709556,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397731288,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397735314,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397750637,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397768799,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397798432,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397827700,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1741397834597,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","componentUpdateArr":[{"updateOne":{"filter":{"ulid":"01JNE8J5CZZHNT94YB8ESHRX79"},"update":{"$set":{"slots.body":"01JNSPCER0V2Z4J34F3TH0QNN6"}}}},{"insertOne":{"document":{"ulid":"01JNSPCER0V2Z4J34F3TH0QNN6","type":"Input","prevUlid":"","nextUlid":"","parentUlid":"01JNE8J5CZZHNT94YB8ESHRX79","mount":{"area":"slots","slotKey":"body"},"props":{"value":"","error":false,"size":"","showGlowStyle":true,"styleType":"default","placeholder":"请输入"},"behavior":[],"items":[],"slots":{},"appUlid":"01JG9BVCSP0V3ZNW02W7GQVT88","gridLayout":{"x":0,"y":0,"w":4,"h":2,"noResize":false},"pageUlid":"01JNE8HZF6JZCE9YNKC42Z164Q"}}}]}
+{"level":30,"time":1741397837593,"pid":50549,"hostname":"catdeMacBook-Pro.local","name":"logname","method":"get","originalUrl":"/apps","params":{}}
