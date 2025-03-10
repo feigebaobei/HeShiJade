@@ -59,12 +59,14 @@ export class PropsBoxComponent {
   msg: {}[]
   propsMap: Map<S, relationTargetKey>
   text: Text
+  propsObj: Comp['props']
   constructor(private componentService: ComponentService) {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
     this.propsMap = new Map()
     this.text = text
+    this.propsObj = {}
     effect(() => {
       let p = this.componentService.curComponentS.get()
       this.curComp = p
@@ -73,10 +75,24 @@ export class PropsBoxComponent {
   }
   ngOnInit() {
   }
+  initPropsObj() {
+    this.componentPropsList.forEach(item => {
+      this.propsObj[item.key] = item.value
+    })
+  }
   opComponentPropsList(meta: PropsConfigItem) {
     Object.values(meta).forEach(item => {
       item.value = this.curComp?.props[item.key]
       this.componentPropsList.push(item)
+    })
+    this.initPropsObj()
+    // clog('this.propsObj', JSON.stringify(this.propsObj))
+    this.componentPropsList.forEach(item => {
+      if (item.hideListenerKey) {
+        if (item.hide) {
+          item.hideCalc = item.hide(this.propsObj)
+        }
+      }
     })
   }
   componentSelectedChange() {
@@ -172,13 +188,13 @@ export class PropsBoxComponent {
       this.msg = [{ severity: 'success', summary: '', content: '已经复制' }];
     })
   }
-  listenerChange(listenerKey: S, propsObj: Comp['props']) {
+  listenerChange(listenerKey: S) {
     let q = this.propsMap.get(listenerKey)
     if (q) {
       q.toArray().forEach(item => {
         let b: B
         if (item.hide) {
-          b = item.hide(propsObj)
+          b = item.hide(this.propsObj)
           item.hideCalc = b
         } else {
           item.hideCalc = false
@@ -193,15 +209,8 @@ export class PropsBoxComponent {
         this.componentService.setProps(item.key, item.value)
       }
     })
-    let propsObj: Comp['props'] = {}
-    this.componentPropsList.forEach(item => {
-      switch (item.category) {
-        default:
-          propsObj[item.key] = item.value
-          break;
-      }
-    })
-    this.listenerChange(p.key, propsObj)
+    this.initPropsObj()
+    this.listenerChange(p.key)
   }
 
   identify(index: number, w: ConfigItem) {
