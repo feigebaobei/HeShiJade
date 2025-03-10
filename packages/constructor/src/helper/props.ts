@@ -1094,7 +1094,7 @@ let Flex: PropsConfigItem = {
         options: [
             { label: '向开头对齐', value: 'flex-start' },
             { label: '向末尾对齐', value: 'flex-end' },
-            { label: '向末尾对齐', value: 'center' },
+            { label: '居中', value: 'center' },
             { label: '两端对齐', value: 'space-between' },
             { label: '拉伸', value: 'stretch' },
         ],
@@ -1410,7 +1410,7 @@ let Loop: PropsConfigItem = {
         ],
         value: 'flex-start',
         label: '主轴的对齐方式',
-        key: 'justifyContent',
+        key: 'justifyContentFlex',
         hide: function (p: Component['props']) {
             clog('hide', p)
             return p['layout'] !== 'flex'
@@ -1423,13 +1423,13 @@ let Loop: PropsConfigItem = {
         options: [
             { label: '向开头对齐', value: 'flex-start' },
             { label: '向末尾对齐', value: 'flex-end' },
-            { label: '向末尾对齐', value: 'center' },
+            { label: '居中', value: 'center' },
             { label: '两端对齐', value: 'space-between' },
             { label: '拉伸', value: 'stretch' },
         ],
         value: 'stretch',
         label: '垂直主轴的对齐方式',
-        key: 'alignItems',
+        key: 'alignItemsFlex',
         hide: function (p: Component['props']) {
             clog('hide', p)
             return p['layout'] !== 'flex'
@@ -1482,13 +1482,46 @@ let Loop: PropsConfigItem = {
         label: '列间隔',
         key: 'columnGap',
     },
+    flexGrow: {
+        category: 'number',
+        value: 0,
+        label: '项目的放大比例',
+        key: 'flexGrow',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    flexShrink: {
+        category: 'number',
+        value: 1,
+        label: '项目的缩小比例',
+        key: 'flexShrink',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    flexBasis: {
+        category: 'input',
+        value: 'auto',
+        label: '项目本来的大小',
+        key: 'flexBasis',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
     gridTemplateColumns: {
         category: 'input',
         value: 'auto',
         label: '每列列宽',
         key: 'gridTemplateColumns',
         hide: function (p: Component['props']) {
-            return p['layout'] !== 'flex'
+            return p['layout'] !== 'grid'
         },
         hideListenerKey: 'layout',
         hideCalc: true,
@@ -1499,7 +1532,7 @@ let Loop: PropsConfigItem = {
         label: '每列行高',
         key: 'gridTemplateRows',
         hide: function (p: Component['props']) {
-            return p['layout'] !== 'flex'
+            return p['layout'] !== 'grid'
         },
         hideListenerKey: 'layout',
         hideCalc: true,
@@ -1521,7 +1554,7 @@ let Loop: PropsConfigItem = {
         hideListenerKey: 'layout',
         hideCalc: true,
     },
-    justifyItems: {
+    justifyItemsGrid: {
         category: 'select',
         options: [
             { label: '对齐单元格的起始边缘', value: 'start', },
@@ -1531,7 +1564,7 @@ let Loop: PropsConfigItem = {
         ],
         value: 'stretch',
         label: '元素的水平位置',
-        key: 'justifyItems',
+        key: 'justifyItemsGrid',
         hide: function (p: Component['props']) {
             return p['layout'] !== 'grid'
         },
@@ -1548,7 +1581,7 @@ let Loop: PropsConfigItem = {
         ],
         value: 'stretch',
         label: '元素的竖直位置',
-        key: 'alignItems',
+        key: 'alignItemsGrid',
         hide: function (p: Component['props']) {
             return p['layout'] !== 'grid'
         },
@@ -1568,14 +1601,14 @@ let Loop: PropsConfigItem = {
         ],
         value: 'start',
         label: '网格的对齐位置',
-        key: 'justifyContent',
+        key: 'justifyContentGrid',
         hide: function (p: Component['props']) {
             return p['layout'] !== 'grid'
         },
         hideListenerKey: 'layout',
         hideCalc: true,
     },
-    alignContent: {
+    alignContentGrid: {
         category: 'select',
         options: [
             { label: '开始', value: 'start', },
@@ -1588,7 +1621,7 @@ let Loop: PropsConfigItem = {
         ],
         value: 'start',
         label: '网格的竖直位置',
-        key: 'alignContent',
+        key: 'alignContentGrid',
         hide: function (p: Component['props']) {
             return p['layout'] !== 'grid'
         },

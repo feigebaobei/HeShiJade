@@ -1,20 +1,26 @@
-<div *ngIf="childComp" [class]="['wqert', data.props['layout']]">
-    <div
-    class="flex-item"
-    *ngFor="let item of mockArr"
-    >
-        <app-comp-stack
-            [componentList]="[childComp]"
-            (deleteComp)="deleteComponentByUlidH($event)"
-        ></app-comp-stack>
-    </div>
-</div>
-<div dDroppable
+<div
+    dDroppable
     class="dropArea"
     (dropEvent)="dropH($event)"
 >
     <span *ngIf="!childComp">此区域可接收一个组件</span>
-    <!-- <app-comp-stack
+    <div
+        *ngIf="childComp" [class]="['wqert', data.props['layout']]"
+        [style]="styleObj"
+    >
+        <div
+        class="flex-item"
+        *ngFor="let item of mockArr"
+        [style]="itemStyleObj"
+        >
+            <!-- <app-comp-box [comp]="childComp"></app-comp-box> -->
+            <app-comp-stack
+                [componentList]="[childComp]"
+                (deleteComp)="deleteComponentByUlidH($event)"
+            ></app-comp-stack>
+        </div>
+    </div>
+<!-- <app-comp-stack
         *ngIf="childComp"
         [componentList]="[childComp]"
         (deleteComp)="deleteComponentByUlidH($event)"

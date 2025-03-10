@@ -29,6 +29,8 @@ export class LoopComponent {
   curPage: Page
   msgs: O[]
   mockArr: N[]
+  styleObj: O
+  itemStyleObj: O
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -37,6 +39,8 @@ export class LoopComponent {
     this.curPage = this.pageService.getCurPage()!
     this.msgs = []
     this.mockArr = []
+    this.styleObj = {}
+    this.itemStyleObj = {}
   }
   dropH(e: DropEvent) {
     if (this.childComp) {
@@ -71,5 +75,38 @@ export class LoopComponent {
       this.childComp = arr[0]
     }
     this.mockArr = new Array(this.data.props['mockCount'] || 1).fill(1)
+    switch (this.data.props['layout']) {
+      case 'flex':
+        this.styleObj = {
+          'justify-content': this.data.props['justifyContentFlex'],
+          'align-items': this.data.props['alignItemsFlex'],
+          'flex-direction': this.data.props['flexDirection'],
+          'flex-wrap': this.data.props['flexWrap'],
+          'row-gap': this.data.props['rowGap'],
+          'column-gap': this.data.props['columnGap'],
+          // height: '200px',
+        }
+        this.itemStyleObj = {
+          'flex-grow': this.data.props['flexGrow'],
+          'flex-shrink': this.data.props['flexShrink'],
+          'flex-basis': this.data.props['flexBasis'],
+        }
+        break;
+      case 'grid':
+        this.styleObj = {
+          'grid-templat-columns': this.data.props['gridTemplateColumns'],
+          'grid-gemplate-rows': this.data.props['gridTemplateRows'],
+          'grid-auto-flow': this.data.props['gridAutoFlow'],
+          'justify-items': this.data.props['justifyItemsGrid'],
+          'align-items': this.data.props['alignItemsGrid'],
+          'align-content': this.data.props['alignContentGrid'],
+        }
+        this.itemStyleObj = {}
+        break;
+      default:
+        this.styleObj = {}
+        this.itemStyleObj = {}
+        break;
+    }
   }
 }
