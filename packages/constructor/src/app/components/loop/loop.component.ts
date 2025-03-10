@@ -94,14 +94,17 @@ export class LoopComponent {
         break;
       case 'grid':
         this.styleObj = {
-          'grid-templat-columns': this.data.props['gridTemplateColumns'],
-          'grid-gemplate-rows': this.data.props['gridTemplateRows'],
+          'grid-template-columns': this.data.props['gridTemplateColumns'],
+          'grid-template-rows': this.data.props['gridTemplateRows'],
           'grid-auto-flow': this.data.props['gridAutoFlow'],
+          // 'justify-items': this.data.props['justifyItemsGrid'],
           'justify-items': this.data.props['justifyItemsGrid'],
           'align-items': this.data.props['alignItemsGrid'],
           'align-content': this.data.props['alignContentGrid'],
         }
-        this.itemStyleObj = {}
+        this.itemStyleObj = {
+          // width: '250px'
+        }
         break;
       default:
         this.styleObj = {}

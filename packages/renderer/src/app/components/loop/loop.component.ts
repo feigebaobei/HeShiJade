@@ -21,9 +21,50 @@ export class LoopComponent {
   compArr: componentInstanceData[]
   loopValue: componentInstanceData['props'][]
   childComp: Comp | undefined
+  styleObj: O
+  itemStyleObj: O
   constructor(private componentService: ComponentService) {
     // for dev
     this.loopValue = [
+      {
+        error: false,
+        placeholder: '请输入',
+        showGlowStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+      },
+      {
+        error: false,
+        placeholder: '请输入',
+        showGlowStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+      },
+      {
+        error: false,
+        placeholder: '请输入',
+        showGlowStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+      },{
+        error: false,
+        placeholder: '请输入',
+        showGlowStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+      },
+      {
+        error: false,
+        placeholder: '请输入',
+        showGlowStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+      },
       {
         error: false,
         placeholder: '请输入',
@@ -51,6 +92,8 @@ export class LoopComponent {
     ];
     this.compArr = []
     this.childComp = undefined
+    this.styleObj = {}
+    this.itemStyleObj = {}
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -98,6 +141,40 @@ export class LoopComponent {
       // }
     }
     clog('objArr', this.objArr())
+    switch (this.data.props['layout']) {
+      case 'flex':
+        this.styleObj = {
+          'justify-content': this.data.props['justifyContentFlex'],
+          'align-items': this.data.props['alignItemsFlex'],
+          'flex-direction': this.data.props['flexDirection'],
+          'flex-wrap': this.data.props['flexWrap'],
+          'row-gap': this.data.props['rowGap'],
+          'column-gap': this.data.props['columnGap'],
+          height: '200px',
+        }
+        this.itemStyleObj = {
+          'flex-grow': this.data.props['flexGrow'],
+          'flex-shrink': this.data.props['flexShrink'],
+          'flex-basis': this.data.props['flexBasis'],
+        }
+        break;
+      case 'grid':
+        this.styleObj = {
+          'grid-template-columns': this.data.props['gridTemplateColumns'],
+          'grid-template-rows': this.data.props['gridTemplateRows'],
+          'grid-auto-flow': this.data.props['gridAutoFlow'],
+          'justify-items': this.data.props['justifyItemsGrid'],
+          'align-items': this.data.props['alignItemsGrid'],
+          'align-content': this.data.props['alignContentGrid'],
+        }
+        this.itemStyleObj = {}
+        break;
+      default:
+        this.styleObj = {}
+        this.itemStyleObj = {}
+        break;
+    }
+
   }
   ngDoCheck() {
     pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
