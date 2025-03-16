@@ -50,6 +50,16 @@ let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
 }
 // 兼容的数组，常用于处理脏数据。
 let compatibleArray = (a: A) => Array.isArray(a) ? Array.from(a) : []
+let getLoopEventParams = (loopIndex: N, thirdParams: A) => {
+  if (loopIndex > -1) {
+    return {
+      value: thirdParams,
+      loopIndex
+    }
+  } else {
+    return thirdParams
+  }
+}
 
 export {
   reqToPromise,
@@ -60,4 +70,5 @@ export {
   createChildKey,
   asyncFn,
   compatibleArray,
+  getLoopEventParams,
 }

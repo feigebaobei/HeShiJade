@@ -27,6 +27,7 @@ interface SuperGridItem extends GridStackWidget {
 })
 export class StackComponent {
   @Input() componentList: Comp[] = []
+  @Input() loopIndex: N = -1
   _componentList: SuperGridItem[]
   gridOptions: GridStackOptions
   componentRef: A
