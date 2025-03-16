@@ -25,77 +25,14 @@ export class LoopComponent {
   childComp: Comp | undefined
   styleObj: O
   itemStyleObj: O
+  dataArr: Comp[]
   constructor(private componentService: ComponentService) {
-    // for dev
-    this.loopValue = [
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },{
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-      {
-        error: false,
-        placeholder: '请输入',
-        showGlowStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-      },
-    ];
+    this.loopValue = [];
     this.compArr = []
     this.childComp = undefined
     this.styleObj = {}
     this.itemStyleObj = {}
+    this.dataArr = []
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -104,22 +41,39 @@ export class LoopComponent {
   }
   setLoopValue(a: componentInstanceData['props'][]) {
     this.loopValue = a
+    clog('setLoopValue', this.loopValue)
+    // this.objArr. = 
+    this.setDataArr()
   }
   setLoopValueByIndex(v: componentInstanceData['props'], index: N) {
     this.loopValue[index] = v
+    this.setDataArr()
   }
-  objArr = computed(() => {
+  setDataArr() {
     if (this.childComp) {
-      return this.loopValue.map(item => {
+      this.dataArr = this.loopValue.map(item => {
         return {
           ...this.childComp,
           props: item,
         } as Comp
       })
     } else {
-      return []
+      this.dataArr = []
     }
-  })
+  }
+  // objArr = computed(() => {
+  //   clog('computed', !!this.childComp, this.loopValue)
+  //   if (this.childComp) {
+  //     return this.loopValue.map(item => {
+  //       return {
+  //         ...this.childComp,
+  //         props: item,
+  //       } as Comp
+  //     })
+  //   } else {
+  //     return []
+  //   }
+  // })
   ngOnChanges() {
     pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }

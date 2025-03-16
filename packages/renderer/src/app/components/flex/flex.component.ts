@@ -81,7 +81,7 @@ export class FlexComponent implements OnInit, OnDestroy {
           })
         }
       })
-      clog(this.compArr)
+      // clog(this.compArr)
     }).then(() => {
       // this.show = true
     })

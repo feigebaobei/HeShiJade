@@ -5,7 +5,7 @@
 ||支持flex布局|done|
 ||支持grid布局|done|
 |渲染侧循环组件|done||
-|所有现有组件支持循环体的事件|doing||
+|所有现有组件支持循环体的事件|done||
 ||button|done|
 ||modal|done|
 ||form|done|
@@ -22,13 +22,8 @@
 ||pagelist|done|
 ||showHide|done|
 ||loop|done|
-
-import { getLoopEventParams } from 'src/helper';
-@Input() loopIndex: N = -1
-getLoopEventParams(this.loopIndex, undefined)
-
-
-|官网侧循环组件|||
+|官网侧循环组件|done||
+|渲染端使用真实数据|done||
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
 |整理tabs组件|||
@@ -333,3 +328,48 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+let clog = console.log
+clog('utils', utils, utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79'))
+utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79').setLoopValue([
+    {
+        error: false,
+        placeholder: 'hi',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+    },
+    {
+        error: false,
+        placeholder: 'hieee',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: 'dd',
+    }
+])
+
+
+
+
+let clog = console.log
+clog('utils', utils, utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79'))
+utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79').setLoopValue([
+    {
+        error: false,
+        placeholder: 'hi',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+    },
+    {
+        error: false,
+        placeholder: 'hieee',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: 'dd',
+    }
+])
