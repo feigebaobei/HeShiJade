@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { PageService } from 'src/app/service/page.service';
 import { pool } from 'src/helper/utils';
+import { getLoopEventParams } from 'src/helper';
 // type
-import type { MenuItem, ULID, S, Oa, O, B, } from 'src/types/base';
+import type { MenuItem, ULID, S, Oa, O, N, B, } from 'src/types/base';
 // import { Component } from 'src/types/component';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 
@@ -25,6 +26,7 @@ interface PageListData {
 })
 export class PageListComponent {
   @Input() data!: PageListData
+  @Input() loopIndex: N = -1
   menu: MenuItem[]
   active: S
   getData: () => Oa
@@ -87,7 +89,7 @@ export class PageListComponent {
   itemClickH(key: S) {
     this.active = key
     this.pageService.setCurByKey(key)
-    pool.trigger(this.data.ulid, 'itemClick', key, this)
+    pool.trigger(this.data.ulid, 'itemClick', getLoopEventParams(this.loopIndex, key), this)
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -96,29 +98,29 @@ export class PageListComponent {
   }
   openChangeH(isOpen: B, key: S) {
     // clog('openChangeH', isOpen, key)
-    pool.trigger(this.data.ulid, 'openChange', {isOpen, key}, this)
+    pool.trigger(this.data.ulid, 'openChange', getLoopEventParams(this.loopIndex, {isOpen, key}), this)
   }
   openChangeInnerH(obj: {isOpen: B, key: S}) {
     // clog('openChangeInnerH', obj)
-    pool.trigger(this.data.ulid, 'openChange', {isOpen: obj.isOpen, key: obj.key}, this)
+    pool.trigger(this.data.ulid, 'openChange', getLoopEventParams(this.loopIndex, {isOpen: obj.isOpen, key: obj.key}), this)
   }
   ngOnInit() {
     this.opMenu()
     pool.register(this.data.ulid, this, this.data.behavior)
-    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnChanges() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngDoCheck() {
-    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngAfterViewInit() {
-    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
     pool.unRegister(this.data.ulid)
   }
 

@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import { pool } from 'src/helper/pool';
-import type { A, O, Oa, S, B, } from 'src/types/base';
+import { getLoopEventParams } from 'src/helper';
+import type { A, O, Oa, S, B, N, } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'
-// import {trigger} from 'src/helper/utils'
 
 let clog = console.log
 
@@ -14,6 +14,7 @@ let clog = console.log
 })
 export class FormComponent implements OnInit, OnDestroy {
   @Input() data!: componentInstanceData
+  @Input() loopIndex: N = -1
   props: A
   items: A
   rules: A
@@ -66,46 +67,47 @@ export class FormComponent implements OnInit, OnDestroy {
     })
   }
   inputNgModelChangeH(v: S, k: S) {
-    pool.trigger(this.data.ulid, 'changeFormItemValue', {
-      key: k, value: v,
-    }, this)
+    pool.trigger(this.data.ulid, 'changeFormItemValue', 
+      getLoopEventParams(this.loopIndex, {
+        key: k, value: v,
+      }), this)
   }
   selectNgModelChangeH(v: S, k: S) {
-    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', getLoopEventParams(this.loopIndex, {
       key: k, value: v
-    }, this)
+    }), this)
   }
   toggleChangeH(v: B, k: S) {
-    pool.trigger(this.data.ulid, 'changeFormItemValue', {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', getLoopEventParams(this.loopIndex, {
       // key: k, value: v
       key: k, checked: v
-    }, this)
+    }), this)
   }
   submitClickH() {
     let data: A = {}
     this.data.items.forEach((item: A) => {
       data[item.key] = item.value
     })
-    pool.trigger(this.data.ulid, 'submit', undefined, this)
+    pool.trigger(this.data.ulid, 'submit', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnChanges() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnInit() {
     this.props = this.data.props
     this.items = this.data.items
     pool.register(this.data.ulid, this, this.data.behavior)
-    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngDoCheck() {
-    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngAfterViewInit() {
-    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
     pool.unRegister(this.data.ulid)
   }
 }

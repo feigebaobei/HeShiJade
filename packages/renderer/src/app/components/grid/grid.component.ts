@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, clog } from 'src/helper';
+import { getLoopEventParams } from 'src/helper';
 
 import { pool } from 'src/helper/utils';
 // type
@@ -16,6 +17,7 @@ import type { Component as Comp, componentInstanceData } from 'src/types/compone
 })
 export class GridComponent implements OnInit, OnDestroy {
   @Input() data!: componentInstanceData
+  @Input() loopIndex: N = -1
   compArr: {
     comp: Comp | undefined,
     styleObj: O
@@ -45,7 +47,7 @@ export class GridComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     pool.register(this.data.ulid, this, this.data.behavior)
-    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
     asyncFn(() => {
       this.show = false
       this.styleObj = {
@@ -89,17 +91,17 @@ export class GridComponent implements OnInit, OnDestroy {
     })
   }
   ngOnChanges() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngDoCheck() {
-    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngAfterViewInit() {
-    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy(): void {
-    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
     pool.unRegister(this.data.ulid)
   }
 

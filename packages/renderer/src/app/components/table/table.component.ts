@@ -3,9 +3,10 @@ import { ComponentService } from 'src/app/service/component.service';
 import { DataService } from 'src/app/service/data.service';
 import { cdir, clog } from 'src/helper';
 import { createChildKey } from 'src/helper/index'
+import { getLoopEventParams } from 'src/helper';
 import { pool } from 'src/helper/pool';
 // type
-import type { A, S, ULID, O, D, ReqMethod, B, Oa, } from 'src/types/base';
+import type { A, S, ULID, O, D, ReqMethod, B, Oa, N, } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems, componentInstanceData } from 'src/types/component';
 
 // interface basicDataSourceItem {
@@ -33,6 +34,7 @@ import type { Component as Comp, ComponentMountItems, componentInstanceData } fr
 })
 export class TableComponent implements OnInit {
   @Input() data!: componentInstanceData
+  @Input() loopIndex: N = -1
   basicDataSource: A[]
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
@@ -82,11 +84,11 @@ export class TableComponent implements OnInit {
   // cancelEditingStatus
   // dataTable组件的方法 end
   ngOnChanges() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnInit(): void {
     pool.register(this.data.ulid, this, this.data.behavior)
-    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
     new Promise((s, _j) => {
       s(true)
     }).then(() => {
@@ -104,17 +106,17 @@ export class TableComponent implements OnInit {
       })
       return true
     })
-    // pool.trigger(this.data.ulid, 'postComponentRenderer', undefined, this)
+    // pool.trigger(this.data.ulid, 'postComponentRenderer', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngDoCheck() {
-    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngAfterViewInit() {
-    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
     pool.unRegister(this.data.ulid)
   }
 }

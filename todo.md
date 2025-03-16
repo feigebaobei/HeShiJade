@@ -6,6 +6,28 @@
 ||支持grid布局|done|
 |渲染侧循环组件|done||
 |所有现有组件支持循环体的事件|doing||
+||button|done|
+||modal|done|
+||form|done|
+||table|done|
+||input|done|
+||select|done|
+||icon|done|
+||checkbox|done|
+||tabs|done|
+||pagination|done|
+||flex|done|
+||grid|done|
+||layout|done|
+||pagelist|done|
+||showHide|done|
+||loop|done|
+
+import { getLoopEventParams } from 'src/helper';
+@Input() loopIndex: N = -1
+getLoopEventParams(this.loopIndex, undefined)
+
+
 |官网侧循环组件|||
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
