@@ -13,22 +13,11 @@
         *ngFor="let item of mockArr"
         [style]="itemStyleObj"
         >
-            <!-- <app-comp-box [comp]="childComp"></app-comp-box> -->
             <app-comp-stack
                 [componentList]="[childComp]"
                 (deleteComp)="deleteComponentByUlidH($event)"
             ></app-comp-stack>
         </div>
     </div>
-<!-- <app-comp-stack
-        *ngIf="childComp"
-        [componentList]="[childComp]"
-        (deleteComp)="deleteComponentByUlidH($event)"
-    ></app-comp-stack>
-    <app-comp-stack
-        *ngIf="childComp"
-        [componentList]="[childComp]"
-        (deleteComp)="deleteComponentByUlidH($event)"
-    ></app-comp-stack> -->
 </div>
 <d-toast [value]="msgs"></d-toast>

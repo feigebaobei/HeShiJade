@@ -297,7 +297,7 @@ export class ComponentService {
   setProps(key: S, value: A) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
-      // curComp.props[key] = value
+      curComp.props[key] = value
       shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
     }
   }

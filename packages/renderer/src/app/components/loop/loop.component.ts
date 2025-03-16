@@ -140,7 +140,7 @@ export class LoopComponent {
       //   // })
       // }
     }
-    clog('objArr', this.objArr())
+    // clog('objArr', this.objArr())
     switch (this.data.props['layout']) {
       case 'flex':
         this.styleObj = {
@@ -150,7 +150,7 @@ export class LoopComponent {
           'flex-wrap': this.data.props['flexWrap'],
           'row-gap': this.data.props['rowGap'],
           'column-gap': this.data.props['columnGap'],
-          height: '200px',
+          // height: '200px',
         }
         this.itemStyleObj = {
           'flex-grow': this.data.props['flexGrow'],

@@ -1,14 +1,17 @@
 import { Component, Input, } from '@angular/core';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 import { createChildKey } from 'src/helper/index'
-// type
-import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
-import type { A, B, N, S, ULID, O, } from 'src/types/base';
-import type { DropEvent } from 'ng-devui';
+import shareEvent, { creatEventName } from 'src/helper/share-event';
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { Page } from 'src/types/page';
+// type
+import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
+import type { A, B, N, S, ULID, O, } from 'src/types/base';
+import type { DropEvent } from 'ng-devui';
+
+let clog = console.log
 
 interface LoopData {
   props: Comp['props']
@@ -42,6 +45,11 @@ export class LoopComponent {
     this.styleObj = {}
     this.itemStyleObj = {}
   }
+  listen() {
+    shareEvent.on(creatEventName('Loop', this.data.ulid, 'props', 'update'), (obj) => {
+      this.setStyle()
+    })
+  }
   dropH(e: DropEvent) {
     if (this.childComp) {
       this.msgs = [{ severity: 'error', summary: '提示', content: '循环组件最多有一种子组件。' }]
@@ -66,15 +74,7 @@ export class LoopComponent {
     this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
   }
-  ngOnInit() {
-    let tree = this.componentService.getTree(this.curPage.ulid)
-    let node = tree?.find(this.data.ulid)
-    let bodyNode = node?.children[createChildKey('slots', 'body', 'node')]
-    let arr = bodyNode?.toArray()
-    if (arr?.length) {
-      this.childComp = arr[0]
-    }
-    this.mockArr = new Array(this.data.props['mockCount'] || 1).fill(1)
+  setStyle() {
     switch (this.data.props['layout']) {
       case 'flex':
         this.styleObj = {
@@ -97,7 +97,6 @@ export class LoopComponent {
           'grid-template-columns': this.data.props['gridTemplateColumns'],
           'grid-template-rows': this.data.props['gridTemplateRows'],
           'grid-auto-flow': this.data.props['gridAutoFlow'],
-          // 'justify-items': this.data.props['justifyItemsGrid'],
           'justify-items': this.data.props['justifyItemsGrid'],
           'align-items': this.data.props['alignItemsGrid'],
           'align-content': this.data.props['alignContentGrid'],
@@ -111,5 +110,17 @@ export class LoopComponent {
         this.itemStyleObj = {}
         break;
     }
+  }
+  ngOnInit() {
+    let tree = this.componentService.getTree(this.curPage.ulid)
+    let node = tree?.find(this.data.ulid)
+    let bodyNode = node?.children[createChildKey('slots', 'body', 'node')]
+    let arr = bodyNode?.toArray()
+    if (arr?.length) {
+      this.childComp = arr[0]
+    }
+    this.mockArr = new Array(this.data.props['mockCount'] || 0).fill(1)
+    this.setStyle()
+    this.listen()
   }
 }
