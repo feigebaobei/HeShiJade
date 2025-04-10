@@ -6,22 +6,6 @@
 ||支持grid布局|done|
 |渲染侧循环组件|done||
 |所有现有组件支持循环体的事件|done||
-||button|done|
-||modal|done|
-||form|done|
-||table|done|
-||input|done|
-||select|done|
-||icon|done|
-||checkbox|done|
-||tabs|done|
-||pagination|done|
-||flex|done|
-||grid|done|
-||layout|done|
-||pagelist|done|
-||showHide|done|
-||loop|done|
 |官网侧循环组件|done||
 |渲染端使用真实数据|done||
 |fixed: 无法选中组件的问题|||
@@ -34,7 +18,8 @@
 |改变table组件的子元素时同列应该更新|||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
-||||
+|feat:循环组件|||
+|feat:官网说明循环组件中的组件的事件的回调就的参数（所有组件都有变化）|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
