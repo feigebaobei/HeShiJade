@@ -1,3 +1,4 @@
+<!-- {{loopIndex}} -->
 <input dTextInput
     [ngModel]="data.props['value']"
     [placeholder]="data.props['placeholder']"
@@ -5,4 +6,6 @@
     [size]="data.props['size']"
     [showGlowStyle]="data.props['showGlowStyle']"
     [styleType]="data.props['styleType']"
+    (change)="changeH($event)"
+    (input)="inputH($event)"
 />

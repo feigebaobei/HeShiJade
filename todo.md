@@ -1,24 +1,19 @@
 ||||
 |-|-|-|
-|分支|f_if||
-||if组件，支持if、show.||
-|mountComponent可以不需要第一个参数|done||
-|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
-|修改所有子组件的mount字段时改为一个接口|不明白需求||
+|分支|f_for||
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
-|整理tabs组件|||
 |// todo 这里的Ulid好像不需要|||
-|整理component.service.ts|||
 |整理出接口文档|||
 |丰富组件|||
 |改变table组件的子元素时同列应该更新|||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
-|feat: 官方文档中增加显隐逻辑、循环逻辑。|||
-||||
+|feat:循环组件|||
+|feat:官网说明循环组件中的组件的事件的回调就的参数（所有组件都有变化）|||
 ||||
 
+|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
 |服务端定期删除脏数据|||
 |增加style面板|||
 |排版组件|||
@@ -309,3 +304,48 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+let clog = console.log
+clog('utils', utils, utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79'))
+utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79').setLoopValue([
+    {
+        error: false,
+        placeholder: 'hi',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+    },
+    {
+        error: false,
+        placeholder: 'hieee',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: 'dd',
+    }
+])
+
+
+
+
+let clog = console.log
+clog('utils', utils, utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79'))
+utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79').setLoopValue([
+    {
+        error: false,
+        placeholder: 'hi',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: '',
+    },
+    {
+        error: false,
+        placeholder: 'hieee',
+        showGlwoStyle: true,
+        size: '',
+        styleType: 'default',
+        value: 'dd',
+    }
+])

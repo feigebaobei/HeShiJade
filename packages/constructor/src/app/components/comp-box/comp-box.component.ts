@@ -16,6 +16,7 @@ import { GridComponent } from '../grid/grid.component';
 import { LayoutComponent } from '../layout/layout.component';
 import { PageListComponent } from '../page-list/page-list.component';
 import { ShowHideComponent } from '../show-hide/show-hide.component';
+import { LoopComponent } from '../loop/loop.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -55,6 +56,7 @@ let compMap: Oa = {
   Layout: LayoutComponent,
   PageList: PageListComponent,
   ShowHide: ShowHideComponent,
+  Loop: LoopComponent,
 }
 
 @Component({
@@ -102,6 +104,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
+    clog('sss', this.comp.type)
     this.componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
     switch (this.comp.type) {
       case 'Button':
@@ -214,6 +217,13 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break
       case 'ShowHide':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Loop':
         this.componentRef.instance.data = {
           props: this.comp.props,
           slots: this.comp.slots,

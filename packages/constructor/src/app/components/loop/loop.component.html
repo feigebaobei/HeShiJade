@@ -1,0 +1,23 @@
+<div
+    dDroppable
+    class="dropArea"
+    (dropEvent)="dropH($event)"
+>
+    <span *ngIf="!childComp">此区域可接收一个组件</span>
+    <div
+        *ngIf="childComp" [class]="['wqert', data.props['layout']]"
+        [style]="styleObj"
+    >
+        <div
+        class="flex-item"
+        *ngFor="let item of mockArr"
+        [style]="itemStyleObj"
+        >
+            <app-comp-stack
+                [componentList]="[childComp]"
+                (deleteComp)="deleteComponentByUlidH($event)"
+            ></app-comp-stack>
+        </div>
+    </div>
+</div>
+<d-toast [value]="msgs"></d-toast>

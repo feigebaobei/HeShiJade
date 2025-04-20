@@ -921,6 +921,16 @@
         </thead>
         <tbody>
             <tr>
+                <td>input</td>
+                <td>输入后</td>
+                <td>value 当前值</td>
+            </tr>
+            <tr>
+                <td>change</td>
+                <td>改变后</td>
+                <td>value 当前值</td>
+            </tr>
+            <tr>
                 <td>postComponentNgOnChanges</td>
                 <td>改变属性后</td>
                 <td>undefined</td>
@@ -2409,9 +2419,7 @@
             </tr>
         </tbody>
     </table>
-    
-    <!-- 
-    <h1>componentName</h1>
+    <h1>loop</h1>
     <h2>props</h2>
     <table>
         <thead>
@@ -2425,11 +2433,123 @@
         </thead>
         <tbody>
             <tr>
-                <td>title</td>
-                <td>title</td>
-                <td>-</td>
-                <td>'title'</td>
+                <td>layout</td>
+                <td>布局方式</td>
+                <td>'flex' / 'grid'</td>
+                <td>'flex'</td>
                 <td></td>
+            </tr>
+            <tr>
+                <td>mockCount</td>
+                <td>mock数量</td>
+                <td>-</td>
+                <td>3</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>justifyContentFlex</td>
+                <td>主轴的对齐方式</td>
+                <td>向开头对齐 / 向末尾对齐 / 居中 / 两端对齐 / 相等间距</td>
+                <td>向开头对齐</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>flexDirection</td>
+                <td>主轴的方向</td>
+                <td>行 / 反向行 / 列 / 反向列</td>
+                <td>行</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>flexWrap</td>
+                <td>换行</td>
+                <td>不折行 / 折行正序 / 折行倒序</td>
+                <td>不折行</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>rowGap</td>
+                <td>行间隔</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>columnGap</td>
+                <td>列间隔</td>
+                <td>-</td>
+                <td>'0px'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>flexGrow</td>
+                <td>项目的放大比例</td>
+                <td>-</td>
+                <td>0</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>flexShrink</td>
+                <td>项目的缩小比例</td>
+                <td>-</td>
+                <td>1</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>项目本来的大小</td>
+                <td>mock数量</td>
+                <td>-</td>
+                <td>'auto'</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>gridTemplateColumns</td>
+                <td>每列列宽</td>
+                <td>-</td>
+                <td>'auto'</td>
+                <td>布局方式为grid时生效</td>
+            </tr>
+            <tr>
+                <td>gridTemplateRows</td>
+                <td>每列行高</td>
+                <td>-</td>
+                <td>'auto'</td>
+                <td>布局方式为grid时生效</td>
+            </tr>
+            <tr>
+                <td>gridAutoFlow</td>
+                <td>子元素顺序</td>
+                <td>先行后列 / 先列后行 / 先行后列,尽量填满空格 / 先列后行,尽量填满空格</td>
+                <td>先行后列</td>
+                <td>布局方式为grid时生效</td>
+            </tr>
+            <tr>
+                <td>justifyItemsGrid</td>
+                <td>元素的水平位置</td>
+                <td>对齐单元格的起始边缘 / 对齐单元格的结束边缘 / 居中 / 拉伸</td>
+                <td>拉伸</td>
+                <td>布局方式为grid时生效</td>
+            </tr>
+            <tr>
+                <td>alignItemsGrid</td>
+                <td>元素的竖直位置</td>
+                <td>开始 / 末尾 / 居中 / 拉伸</td>
+                <td>拉伸</td>
+                <td>布局方式为grid时生效</td>
+            </tr>
+            <tr>
+                <td>justifyContentGrid</td>
+                <td>网格的对齐位置</td>
+                <td>开始 / 末尾 / 居中 / 拉伸 / 不加边界相等间距 / 两端对齐 / 加边界相等间距</td>
+                <td>开始</td>
+                <td>布局方式为grid时生效</td>
+            </tr>
+            <tr>
+                <td>alignContentGrid</td>
+                <td>网格的竖直位置</td>
+                <td>开始 / 末尾 / 居中 / 拉伸 / 不加边界相等间距 / 两端对齐 / 加边界相等间距</td>
+                <td>开始</td>
+                <td>布局方式为grid时生效</td>
             </tr>
         </tbody>
     </table>
@@ -2444,9 +2564,9 @@
         </thead>
         <tbody>
             <tr>
-                <td>header</td>
-                <td>头部的插槽</td>
-                <td></td>
+                <td>body</td>
+                <td>插槽</td>
+                <td>插槽内只能有一种组件。</td>
             </tr>
         </tbody>
     </table>
@@ -2465,6 +2585,18 @@
                 <td>setProps: (o: Object) => void</td>
                 <td>由当前组件支持的props属性组成的对象</td>
                 <td>设置当前组件的props</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setLoopValue: (o: {[k: S]: A}[]) => void</td>
+                <td>各组件的props对象组成的数组</td>
+                <td>设置用于循环的组件的props的对象</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setLoopValueByIndex: (o: {[k: S]: A}[], index: N) => void</td>
+                <td>o: 组件的props对象. index: 指定组件的下标。</td>
+                <td>设置指定下标的循环的组件的props对象</td>
                 <td></td>
             </tr>
         </tbody>
@@ -2507,6 +2639,7 @@
         </tbody>
     </table>
     
+    <!-- 
     <h1>componentName</h1>
     <h2>props</h2>
     <table>
@@ -2704,7 +2837,7 @@
         utils.req: (params: AxiosRequestConfig) => Promise&lt;AxiosResponse&lt;any, any&gt;&gt;
             axios的实例，用于请求数据。
             
-        utils.getComponentInstance: (id: ULID) => Component // 返回的数据类型是angular的组件实例
+        utils.pool.getComponentInstance: (id: ULID) => Component // 返回的数据类型是angular的组件实例
             根据组件的ulid取组件实例
 
     </pre>

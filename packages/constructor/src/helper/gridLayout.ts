@@ -96,6 +96,11 @@ let ShowHide: GridLayoutDefault = {
     h: 4,
     noResize: false,
 }
+let Loop: GridLayoutDefault = {
+    w: 24,
+    h: 4,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -112,6 +117,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Layout,
     PageList,
     ShowHide,
+    Loop,
 }
 export {
     Button,
@@ -129,6 +135,7 @@ export {
     Layout,
     PageList,
     ShowHide,
+    Loop,
     
     gridLayoutDefault,
 }

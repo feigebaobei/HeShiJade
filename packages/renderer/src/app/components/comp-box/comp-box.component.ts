@@ -18,8 +18,9 @@ import { GridComponent } from '../grid/grid.component';
 import { LayoutComponent } from '../layout/layout.component';
 import { PageListComponent } from '../page-list/page-list.component';
 import { ShowHideComponent } from '../show-hide/show-hide.component';
+import { LoopComponent } from '../loop/loop.component';
 // type
-import type { A, S } from 'src/types/base';
+import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
 
 let clog = console.log
@@ -41,6 +42,7 @@ let compMap: {[k: S]: A} = {
   Layout: LayoutComponent,
   PageList: PageListComponent,
   ShowHide: ShowHideComponent,
+  Loop: LoopComponent,
 }
 
 @Component({
@@ -51,6 +53,7 @@ let compMap: {[k: S]: A} = {
 export class CompBoxComponent {
   // @Input() data: A
   @Input() data!: Comp
+  @Input() loopIndex: N = -1
   @ViewChild(StackDirective, {static: true}) stack!: StackDirective;
   componentRef: A
   constructor() {
@@ -114,6 +117,7 @@ export class CompBoxComponent {
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }
+        this.componentRef.instance.loopIndex = this.loopIndex
         break;
       case 'Select':
         this.componentRef.instance.data = {
@@ -216,6 +220,16 @@ export class CompBoxComponent {
         }
         break;
       case 'ShowHide':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          // items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Loop':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,

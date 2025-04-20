@@ -18,6 +18,7 @@
   </div>
 </div> -->
 
+<!-- layout{{layout}} -->
 @switch (layout) {
   @case (1) {
     <div class="box">
@@ -25,7 +26,8 @@
         *ngFor="let item of _componentList; trackBy: identify"
         [style]="{gridColumnStart: item.x + 1, gridColumnEnd: item.x + 1 + item.w,}"
         >
-        <app-comp-box [data]="item.comp"></app-comp-box>
+        <!-- {{loopIndex}} -->
+        <app-comp-box [data]="item.comp" [loopIndex]="loopIndex"></app-comp-box>
       </div>
     </div>
   }
@@ -40,13 +42,13 @@
           *ngFor="let item of _componentList; trackBy: identify"
           [options]="item"
       >
-          <app-comp-box [data]="item.comp" ></app-comp-box>
+          <app-comp-box [data]="item.comp" [loopIndex]="loopIndex"></app-comp-box>
       </gridstack-item>
     </gridstack>
   }
   @case (31) {
       <div class="block" *ngFor="let item of _componentList; trackBy: identify">
-        <app-comp-box [data]="item.comp" ></app-comp-box>
+        <app-comp-box [data]="item.comp" [loopIndex]="loopIndex"></app-comp-box>
       </div>
   }
 }

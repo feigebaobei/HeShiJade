@@ -40,10 +40,10 @@ export class ModalCompComponent implements OnInit{
     }).then(() => {
       this.show = false
       let tree = this.componentService.getTreeByKey()
-      clog('data', this.data)
+      // clog('data', this.data)
       if (tree) {
         let node = tree.find(this.data.ulid)
-        clog('node', node)
+        // clog('node', node)
         let headerKey = createChildKey('slots', 'header', 'node')
         let bodyKey = createChildKey('slots', 'body', 'node')
         let footerKey = createChildKey('slots', 'footer', 'node')

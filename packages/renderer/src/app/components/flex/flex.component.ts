@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn } from 'src/helper';
 import { pool } from 'src/helper/utils';
+import { getLoopEventParams } from 'src/helper';
 // type
 import type { B, O, N, Oa, } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
@@ -17,6 +18,7 @@ let clog = console.log
 })
 export class FlexComponent implements OnInit, OnDestroy {
   @Input() data!: componentInstanceData
+  @Input() loopIndex: N = -1
   compArr: {
     comp: Comp | undefined
     styleObj: O
@@ -44,7 +46,7 @@ export class FlexComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
-    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
     asyncFn(() => {
       // this.show = false
       this.styleObj = {
@@ -79,23 +81,23 @@ export class FlexComponent implements OnInit, OnDestroy {
           })
         }
       })
-      clog(this.compArr)
+      // clog(this.compArr)
     }).then(() => {
       // this.show = true
     })
   }
   ngOnChanges() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngDoCheck() {
-    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngAfterViewInit() {
-    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy(): void {
-    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
     pool.unRegister(this.data.ulid)
   }
 }

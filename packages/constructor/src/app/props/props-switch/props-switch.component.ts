@@ -17,7 +17,7 @@ export class PropsSwitchComponent {
   modelChangeH: F
   constructor(private componentService: ComponentService) {
     this.modelChangeH = createDebounceFn((v: S) => {
-      this.componentService.setComponentProp(this.data.key, this.data.value)
+      this.componentService.setProps(this.data.key, this.data.value)
       // debugger
       this.componentService.reqUpdateComponent('props', this.data.key, this.data.value)
       // this.componentService.reqUpdateComponent('props', this.data.key, this.data.cheched)

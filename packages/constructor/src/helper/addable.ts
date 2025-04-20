@@ -69,6 +69,10 @@ let ShowHide: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Loop: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -89,6 +93,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Layout,
     PageList,
     ShowHide,
+    Loop,
 }
 
 export {

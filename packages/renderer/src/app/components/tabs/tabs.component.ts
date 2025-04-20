@@ -2,11 +2,11 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { asyncFn, createChildKey } from 'src/helper/index'
 import { ComponentService } from 'src/app/service/component.service';
 import { pool } from 'src/helper/pool';
+import { getLoopEventParams } from 'src/helper';
 // type
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
 import type { B, S, N, A, O } from 'src/types/base';
-// import { trigger } from 'src/helper/utils';
 
 let clog = console.log
 
@@ -19,6 +19,7 @@ let clog = console.log
 })
 export class TabsComponent implements OnInit, OnDestroy {
   @Input() data!: componentInstanceData
+  @Input() loopIndex: N = -1
   activeTab: S
   createChildKey: typeof createChildKey
   compObj: {[k: S]: Comp[]}
@@ -41,7 +42,7 @@ export class TabsComponent implements OnInit, OnDestroy {
     //     pool.getPluginFn(), // 插件
     //   ) // 绑定指定方法的this
     // })
-    // trigger(this.data.ulid, 'activeTabChange', undefined, this)
+    // trigger(this.data.ulid, 'activeTabChange', getLoopEventParams(this.loopIndex, undefined), this)
   }
   addOrDeleteTabChangeH(o: A) {
     // clog('o', o)
@@ -57,7 +58,7 @@ export class TabsComponent implements OnInit, OnDestroy {
         //   f.bind(this) // 方法体的this
         //   f && f(pool.getComponentInstance.bind(pool)) // 绑定指定方法的this
         // })
-        // trigger(this.data.ulid, 'deleteTabChange', undefined, this)
+        // trigger(this.data.ulid, 'deleteTabChange', getLoopEventParams(this.loopIndex, undefined), this)
         break;
     }
   }
@@ -67,11 +68,11 @@ export class TabsComponent implements OnInit, OnDestroy {
     })
   }
   ngOnChanges() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
-    pool.trigger(this.data.ulid, 'postComponentNgOnInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
     new Promise((s, _j) => {
       s(true)
     }).then(() => {
@@ -93,14 +94,14 @@ export class TabsComponent implements OnInit, OnDestroy {
     })
   }
   ngDoCheck() {
-    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngAfterViewInit() {
-    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
     pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
   }
   ngOnDestroy() {
-    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', undefined, this)
+    pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
     pool.unRegister(this.data.ulid)
   }
 }

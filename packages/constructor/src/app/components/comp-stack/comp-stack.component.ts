@@ -90,7 +90,7 @@ export class CompStackComponent implements OnInit, OnDestroy {
         w: $event.nodes[0].w,
         h: $event.nodes[0].h,
       }
-      this.componentService.setComponentProp('gridLayout', gridLayout)
+      this.componentService.setProps('gridLayout', gridLayout, false)
       // 通知父组件
       this.change.emit({
         ulid: curNode.comp.ulid,
