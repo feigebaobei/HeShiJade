@@ -4,7 +4,6 @@
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
 |// todo 这里的Ulid好像不需要|||
-|整理component.service.ts|done||
 |整理出接口文档|||
 |丰富组件|||
 |改变table组件的子元素时同列应该更新|||
