@@ -10,7 +10,7 @@
 |渲染端使用真实数据|done||
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
-|整理tabs组件|||
+|整理tabs组件|done||
 |// todo 这里的Ulid好像不需要|||
 |整理component.service.ts|||
 |整理出接口文档|||
