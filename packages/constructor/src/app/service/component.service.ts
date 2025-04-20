@@ -248,7 +248,6 @@ export class ComponentService {
     if (curComp) {
       curComp.props[key] = value
       if (isEmit) {
-        clog('setProps', key, value, isEmit)
         shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
       }
     }
@@ -399,8 +398,7 @@ export class ComponentService {
     return childrenComponent
   }
   // 得到后组件
-  // todo rename getNextAllComponent
-  getNextComponent(pageUlid: ULID, componentUlid: ULID): Component[] {
+  getNextAllComponent(pageUlid: ULID, componentUlid: ULID): Component[] {
     let tree = this.getTree(pageUlid)
     return compatibleArray(tree?.find(componentUlid)?.toArray()!) // .map(component => component.ulid)
   }
