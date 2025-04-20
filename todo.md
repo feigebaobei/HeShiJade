@@ -1,18 +1,10 @@
 ||||
 |-|-|-|
 |分支|f_for||
-|搭建侧循环组件|done||
-||支持flex布局|done|
-||支持grid布局|done|
-|渲染侧循环组件|done||
-|所有现有组件支持循环体的事件|done||
-|官网侧循环组件|done||
-|渲染端使用真实数据|done||
 |fixed: 无法选中组件的问题|||
 |fixed: 有时无法选中页面|||
-|整理tabs组件|done||
 |// todo 这里的Ulid好像不需要|||
-|整理component.service.ts|||
+|整理component.service.ts|doing||
 |整理出接口文档|||
 |丰富组件|||
 |改变table组件的子元素时同列应该更新|||

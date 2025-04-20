@@ -1,5 +1,4 @@
-import { Injectable, signal } from '@angular/core';
-// import { DoublyChain } from 'data-footstone'
+import { Injectable } from '@angular/core';
 import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
 import { AppService } from './app.service';
@@ -8,7 +7,6 @@ import { compatibleArray, createChildKey } from 'src/helper/index'
 import { shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
-// import { COMPONENTTOTALMAXOFPAGE } from 'src/helper/config'
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
 import { ShareSignal } from 'src/helper/shareSignal';
@@ -17,19 +15,17 @@ import type { Component, Category,
   PropsValue, 
   BehaviorItemKey,
   ItemsMetaItem,
-  ComponentMountItems,
   ComponentMountSlots,
   BehaviorMetaItem,
  } from '../../types/component'
-import type { S, Oa, ULID, A,
+import type { S,
+  ULID, A,
   N,
   B,
-  ConfigItem,
 } from 'src/types/base';
 import type { PropsTransfer } from 'src/types/component'
 import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
-import { BehaviorConfigGroup } from 'src/types/config';
 
 
 let clog = console.log
@@ -48,9 +44,6 @@ export class ComponentService {
   _curCompUlid: S
   _curComponent: CompOrUn
   private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
-  // ulid是pageUlid
-  // private propsS = signal({})
-  // readonly propsSReadonly = this.propsS.asReadonly()
   propsS: ShareSignal<PropsTransfer | undefined>
 
   constructor(
@@ -66,15 +59,6 @@ export class ComponentService {
     this._map = new Map()
     this.propsS = new ShareSignal<PropsTransfer | undefined>(undefined)
   }
-  // setPropsS(v: A) {
-  //   this.propsS.set(v)
-  // }
-  // getPropsS() {
-  //   return this.propsS
-  // }
-  // updatePropsS(v: A) {
-  //   return this.propsS.update(() => v)
-  // }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
       s(this.categoryList)
@@ -126,28 +110,12 @@ export class ComponentService {
             })
           }
         })
-        // 应该删除这里 start
-        // curComp.items.forEach((item) => {
-        //   let t = componentList.find(ele => ele.ulid === item['childUlid'])
-        //   if (t) {
-        //     q.enqueue({
-        //       component: t,
-        //       mountMethod: 'items',
-        //     })
-        //   }
-        // })
-        // 应该删除这里 end
         while (!q.isEmpty()) {
           let cur = q.dequeue()
           switch (cur.mountMethod) {
             case 'next':
               tree.mountNext(cur.component, cur.component.prevUlid)
               break;
-            // case 'items':
-            //   tree.mountChild(cur.component, cur.component.parentUlid, 
-            //     createChildKey('items', (cur.component.mount as ComponentMountItems).itemIndex, 'node')
-            //     )
-            //   break;
             case 'slots':
               tree.mountChild(cur.component, cur.component.parentUlid, 
                 createChildKey('slots', (cur.component.mount as ComponentMountSlots).slotKey, 'node')
@@ -170,15 +138,6 @@ export class ComponentService {
               })
             }
           })
-          // cur.component.items.forEach((item) => {
-          //   let t = componentList.find(subItem => subItem.ulid === item['childUlid'])
-          //   if (t) {
-          //     q.enqueue({
-          //       component: t,
-          //       mountMethod: 'items',
-          //     })
-          //   }
-          // })
         }
       }
     }
@@ -240,11 +199,9 @@ export class ComponentService {
           let curNode = tree.mountChild(comp, comp.parentUlid, 
             createChildKey('slots', (comp.mount as ComponentMountSlots).slotKey, 'node')
             )
-          // clog('curNode', curNode, tree)
           b = !!curNode
           break;
       }
-      // clog('tree', tree)
       return b
     } else {
       return false
@@ -285,20 +242,15 @@ export class ComponentService {
       this.curComponentS.set(undefined)
     }
   }
-  // 直接改变属性
-  // todo 与setProps整合
-  setComponentProp(key: S, value: A) {
+  // 改变属性
+  setProps(key: S, value: A, isEmit: B = true) {
     let curComp: CompOrUn = this.curComponent()
     if (curComp) {
       curComp.props[key] = value
-    }
-    // clog('change after', curComp)
-  }
-  setProps(key: S, value: A) {
-    let curComp: CompOrUn = this.curComponent()
-    if (curComp) {
-      curComp.props[key] = value
-      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
+      if (isEmit) {
+        clog('setProps', key, value, isEmit)
+        shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
+      }
     }
   }
   setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
@@ -333,9 +285,6 @@ export class ComponentService {
       index,
     })
   }
-  // todo 可优化key的类型
-  // key 的类型应该是S
-  // setItems(index: N, key: 'category' | 'label' | 'key' | 'value' | 'options' | 'checked', value: A) {
   setItems(index: N, key: S, value: A) {
     let curComp = this.curComponent()
     if (curComp) {
@@ -411,7 +360,6 @@ export class ComponentService {
       let ulid = curComp.ulid
       let type = 'slots'
       return this.reqService.req(`${serviceUrl()}/components`, 'put', {
-        // slots: this.curComponent()?.slots
         ulid,
         type,
         key,

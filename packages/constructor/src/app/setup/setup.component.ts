@@ -293,12 +293,12 @@ export class SetupComponent implements OnInit {
       curNode.y = $event.nodes[0].y
       curNode.w = $event.nodes[0].w
       curNode.h = $event.nodes[0].h
-      this.componentService.setComponentProp('gridLayout', {
+      this.componentService.setProps('gridLayout', {
         x: $event.nodes[0].x,
         y: $event.nodes[0].y,
         w: $event.nodes[0].w,
         h: $event.nodes[0].h,
-      })
+      }, false)
       // todo 参数改为kv对的object
       this.componentService.reqUpdateComponent('gridLayout', 'x', $event.nodes[0].x, curNode.comp.ulid)
       this.componentService.reqUpdateComponent('gridLayout', 'y', $event.nodes[0].y, curNode.comp.ulid)

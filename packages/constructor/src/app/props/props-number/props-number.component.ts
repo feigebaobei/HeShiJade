@@ -22,7 +22,7 @@ export class PropsNumberComponent implements OnInit {
   constructor(private componentService: ComponentService) {
     this.value = 0
     this.ngModelChangeH = createDebounceFn((v: N) => {
-      this.componentService.setComponentProp(this.data.key, this.data.value)
+      this.componentService.setProps(this.data.key, this.data.value)
       this.componentService.propsS.set({
         componentUlid: this.componentService.curComponent()!.ulid,
         key: this.data.key,
