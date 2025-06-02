@@ -4,7 +4,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "dev": "yarn nm",
+    "dev": "npm run nm",
     "start": "node ./bin/server",
     "s": "node ./bin/start",
     "nm": "nodemon ./bin/server"

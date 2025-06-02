@@ -11,7 +11,7 @@ import { shareEvent, creatEventName } from 'src/helper/share-event';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 
 // type
-import type { N, S, D, B, ULID } from 'src/types/base';
+import type { N, S, D, B, ULID, A } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
 // import type { Tree, Node } from 'src/helper/tree';
@@ -67,7 +67,7 @@ AfterViewInit
   compArr: Comp[][]
   createChildKey: typeof createChildKey
   curPage: Page
-  componentList: Comp[]
+  // componentList: Comp[] // 未被使用到。todo delete 2025.07.01+
   showList: B[] // 是否显示指定列的组件
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
@@ -119,7 +119,7 @@ AfterViewInit
     this.compArr = []
     this.createChildKey = createChildKey
     this.curPage = this.pageService.getCurPage()!
-    this.componentList = []
+    // this.componentList = []
     this.showList = []
   }
   ngOnInit(): void {
@@ -250,6 +250,20 @@ AfterViewInit
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       // this.compStack.init()
+      this.showList[index] = true
+    })
+  }
+  changeH(obj: A, index: N) {
+    this.showList[index] = false
+    this.compArr[index].forEach(comp => {
+      comp.gridLayout.x = obj.x
+      comp.gridLayout.y = obj.y
+      comp.gridLayout.w = obj.w
+      comp.gridLayout.h = obj.h
+    })
+    asyncFn(() => {
+      this.showList[index] = false
+    }).then(() => {
       this.showList[index] = true
     })
   }
