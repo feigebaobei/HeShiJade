@@ -360,8 +360,8 @@ router.route('/versions')
   // 校验参数
   // 取出数据
   new Promise((s, j) => {
-    clog('rules.required(req.query.appUlid)', rules.required(req.query.appUlid))
-    clog('rules.isArray(req.query.envs)', rules.isArray(req.query.envs))
+    // clog('rules.required(req.query.appUlid)', rules.required(req.query.appUlid))
+    // clog('rules.isArray(req.query.envs)', rules.isArray(req.query.envs))
     if (rules.required(req.query.appUlid) && rules.isArray(req.query.envs)) {
       s(true)
     } else {

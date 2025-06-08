@@ -167,7 +167,7 @@ router.route('/')
 })
 .put(cors.corsWithOptions, (req, res) => {
   // meta     ulid,type,key,value
-  // behavior ulid,type,index,key,value
+  // behavior ulid,type,key,value,index
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && 
       rules.required(req.body.type) && 
