@@ -419,32 +419,33 @@ router.route('/listByPage')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
-  let {user} = req.session
-  clog('user', user)
-  if (rules.required(req.query.pageUlid)) {
-    let result = componentsDb.collection('components').find({
-      pageUlid: req.query.pageUlid
-    })
-    result.toArray().then(r => {
-      res.status(200).json({
-        code: 0,
-        message: '',
-        data: r,
-      })
-    }).catch(error => {
-      res.status(200).json({
-        code: 200200,
-        message: '数据库出错',
-        data: error,
-      })
-    })
-  } else {
-    res.status(200).json({
-      code: 100100,
-      message: '请求参数错误',
-      data: {},
-    })
-  }
+  res.sendStatus(200)
+  // let {user} = req.session
+  // clog('user', user)
+  // if (rules.required(req.query.pageUlid)) {
+  //   let result = componentsDb.collection('components').find({
+  //     pageUlid: req.query.pageUlid
+  //   })
+  //   result.toArray().then(r => {
+  //     res.status(200).json({
+  //       code: 0,
+  //       message: '',
+  //       data: r,
+  //     })
+  //   }).catch(error => {
+  //     res.status(200).json({
+  //       code: 200200,
+  //       message: '数据库出错',
+  //       data: error,
+  //     })
+  //   })
+  // } else {
+  //   res.status(200).json({
+  //     code: 100100,
+  //     message: '请求参数错误',
+  //     data: {},
+  //   })
+  // }
 })
 .post(cors.corsWithOptions, (req, res) => {
   // res.send('post')

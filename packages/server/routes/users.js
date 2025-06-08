@@ -202,80 +202,80 @@ router.route('/logout')
   })
 })
 
-// 更新token
-// todo delete
-router.route('/refreshToken')
-.options(cors.corsWithOptions, (req, res) => {
-  res.sendStatus(200)
-})
-.get(cors.corsWithOptions, (req, res) => {
-  res.send('get')
-})
-.post(cors.corsWithOptions, (req, res) => {
-  res.send('post')
-})
-.put(cors.corsWithOptions, (req, res) => {
-  // 校验参数
-  // 是否已登录
-  // at/rt是否有效
-  // 向sso请求新token
-  // 更新session中的数据
-  // 返回数据
-  new Promise((s, j) => {
-    // clog('req\n\n\n\n', req.body)
-    if (rules.required(req.body.accessToken) && rules.required(req.body.refreshToken)) {
-      s(true)
-    } else {
-      j(100100)
-    }
-  }).then(() => {
-    if (req.session.isAuth) {
-      return true
-    } else {
-      return Promise.reject(100130)
-    }
-  })
-  .then(() => {
-    return instance({
-      url: '/users/refreshToken',
-      method: 'put',
-      data: {
-        accessToken: req.body.accessToken,
-        refreshToken: req.body.refreshToken,
-      }
-    }).then((response) => {
-      if (response.code === 0) {
-        req.session.user.accessToken = response.data.accessToken
-        req.session.user.refreshToken = response.data.refreshToken
-        return {
-          accessToken: response.data.accessToken,
-          refreshToken: response.data.refreshToken,
-        }
-      } else {
-        // clog('response', response)
-        return Promise.reject(100200)
-      }
-    })
-  }).then((instData) => {
-    res.status(200).json({
-      code: 0,
-      message: '',
-      data: {
-        accessToken: instData.accessToken,
-        refreshToken: instData.refreshToken,
-      }
-    })
-  }).catch((code) => {
-    res.status(200).json({
-      code,
-      message: errorCode[code],
-      data: {},
-    })
-  })
-})
-.delete(cors.corsWithOptions, (req, res) => {
-  res.send('delete')
-})
+// // 更新token
+// // todo delete 2025.07.01+
+// router.route('/refreshToken')
+// .options(cors.corsWithOptions, (req, res) => {
+//   res.sendStatus(200)
+// })
+// .get(cors.corsWithOptions, (req, res) => {
+//   res.send('get')
+// })
+// .post(cors.corsWithOptions, (req, res) => {
+//   res.send('post')
+// })
+// .put(cors.corsWithOptions, (req, res) => {
+//   // 校验参数
+//   // 是否已登录
+//   // at/rt是否有效
+//   // 向sso请求新token
+//   // 更新session中的数据
+//   // 返回数据
+//   new Promise((s, j) => {
+//     // clog('req\n\n\n\n', req.body)
+//     if (rules.required(req.body.accessToken) && rules.required(req.body.refreshToken)) {
+//       s(true)
+//     } else {
+//       j(100100)
+//     }
+//   }).then(() => {
+//     if (req.session.isAuth) {
+//       return true
+//     } else {
+//       return Promise.reject(100130)
+//     }
+//   })
+//   .then(() => {
+//     return instance({
+//       url: '/users/refreshToken',
+//       method: 'put',
+//       data: {
+//         accessToken: req.body.accessToken,
+//         refreshToken: req.body.refreshToken,
+//       }
+//     }).then((response) => {
+//       if (response.code === 0) {
+//         req.session.user.accessToken = response.data.accessToken
+//         req.session.user.refreshToken = response.data.refreshToken
+//         return {
+//           accessToken: response.data.accessToken,
+//           refreshToken: response.data.refreshToken,
+//         }
+//       } else {
+//         // clog('response', response)
+//         return Promise.reject(100200)
+//       }
+//     })
+//   }).then((instData) => {
+//     res.status(200).json({
+//       code: 0,
+//       message: '',
+//       data: {
+//         accessToken: instData.accessToken,
+//         refreshToken: instData.refreshToken,
+//       }
+//     })
+//   }).catch((code) => {
+//     res.status(200).json({
+//       code,
+//       message: errorCode[code],
+//       data: {},
+//     })
+//   })
+// })
+// .delete(cors.corsWithOptions, (req, res) => {
+//   res.send('delete')
+// })
 
 router.route('/saml')
 .options(cors.corsWithOptions, (req, res) => {

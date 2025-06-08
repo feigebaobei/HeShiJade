@@ -224,9 +224,9 @@ export class AppService {
     }
   }
   // 插件的请求暂时放在这里
-  // reqPluginsKey(key: S) {
-  //   return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
-  // }
+  reqPluginsKey(key: S) {
+    return this.reqService.req(`${serviceUrl()}/plugins/key`, 'get', {key: key})
+  }
   updateApp(ulid: ULID, updateObj: Oa) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'put', {
       appUlid: ulid,

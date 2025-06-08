@@ -19,6 +19,7 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
+// 取出key对应的插件内容
 .get(cors.corsWithOptions, (req, res) => {
   new Promise((s, j) => {
     if (req.query.key) {
@@ -112,6 +113,7 @@ router.route('/key')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
+// 取出相似插件的key组成的数组
 .get(cors.corsWithOptions, (req, res) => {
   // 检查参数 key/pageSize/pageNumber
   // 取
@@ -140,7 +142,6 @@ router.route('/key')
       }),
     })
   }).catch((code) => {
-    clog('code', code)
     res.status(200).json({
       code,
       message: errorCode[code],

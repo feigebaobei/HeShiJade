@@ -1,17 +1,18 @@
 ||||
 |-|-|-|
-|分支|f_for||
-|fixed: 无法选中组件的问题|||
-|fixed: 有时无法选中页面|||
-|// todo 这里的Ulid好像不需要|||
-|整理出接口文档|||
-|创建页面时，页面名称未生效。|done||
+|分支|f_comp||
+|fixed: 无法选中组件的问题|观察中||
+|fixed: 有时无法选中页面|观察中||
 |丰富组件|||
-|改变table组件的子元素时同列应该更新|||
+||inputNumber||
+||radio||
+||card||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
 |feat:循环组件|||
 |feat:官网说明循环组件中的组件的事件的回调就的参数（所有组件都有变化）|||
+|feat:改变table组件的子元素时同列应该更新|||
+|chore:整理出接口文档|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
@@ -305,48 +306,3 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
-
-let clog = console.log
-clog('utils', utils, utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79'))
-utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79').setLoopValue([
-    {
-        error: false,
-        placeholder: 'hi',
-        showGlwoStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-    },
-    {
-        error: false,
-        placeholder: 'hieee',
-        showGlwoStyle: true,
-        size: '',
-        styleType: 'default',
-        value: 'dd',
-    }
-])
-
-
-
-
-let clog = console.log
-clog('utils', utils, utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79'))
-utils.pool.getComponentInstance('01JNE8J5CZZHNT94YB8ESHRX79').setLoopValue([
-    {
-        error: false,
-        placeholder: 'hi',
-        showGlwoStyle: true,
-        size: '',
-        styleType: 'default',
-        value: '',
-    },
-    {
-        error: false,
-        placeholder: 'hieee',
-        showGlwoStyle: true,
-        size: '',
-        styleType: 'default',
-        value: 'dd',
-    }
-])
