@@ -54,7 +54,6 @@
 |/components|'post'||{ulid,type,props,behavior,items,slots,mount,appUlid,pageUlid,gridLayout}||创建组件|
 |/components|'put'||{ulid,type,}||更新组件|
 |/components|'delete'|{ulid,childrenUlid}|||删除组件及其子组件|
-|/components/listByPage|'get'|{pageUlid}|||返回指定页面的组件组成的数组|
 |/components|'post'||{prev,ulid,type,props,behavior,item,slot,appUlid,pageUlid}||创建组件|
 |/components/behavior|'post'||{ulid,value}||组件增加行为|
 |/components/behavior|'delete'||{ulid,index}||删除指定组件的指定下标的行为|
@@ -77,7 +76,7 @@
 ## pluginsRotuer
 |path|method|params|data|返回值|说明|
 |-|-|-|-|-|-|
-|/plugins|'get'|{key?}|||返回插件|
+|/plugins|'get'|{key?}|||返回插件的内容|
 |/plugins|'post'|{pluginFile}|||增加插件|
-|/plugins/key|'get'|{key,pageSize?pageNumber?}|||查询插件|
+|/plugins/key|'get'|{key,pageSize?pageNumber?}|||查询相似key的插件key组成的数组|
 |||||||
