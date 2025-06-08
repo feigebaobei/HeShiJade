@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { serviceUrl, layoutOptions } from 'src/helper/config';
 import { map } from 'rxjs/operators';
 import { compatibleArray } from 'src/helper';
+// 服务
+import { AppService } from 'src/app/service/app.service';
 // type
 import type { App } from 'src/types/app';
 import type { A, N, S, Options } from 'src/types/base';
@@ -47,7 +49,8 @@ export class AppConfigDialogComponent implements OnInit {
   f: A
   layoutOptions: Options<S, N>[]
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
+    private appService: AppService,
   ) {
     this.options = []
     this.value = []
@@ -59,11 +62,14 @@ export class AppConfigDialogComponent implements OnInit {
   }
   onSelectObject(term: S) {
     if (term) {
-      return this.http.get(`${serviceUrl()}/plugins/key`, {params: {key: term}}).pipe(
-        map(res => {
-          return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
-        })
-      )
+      // return this.http.get(`${serviceUrl()}/plugins/key`, {params: {key: term}}).pipe(
+      //   map(res => {
+      //     return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
+      //   })
+      // )
+      return this.appService.reqPluginsKey(term).then(res => {
+        return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
+      })
     } else {
       return of([])
     }

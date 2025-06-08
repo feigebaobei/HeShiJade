@@ -5,14 +5,9 @@
 |fixed: 有时无法选中页面|观察中||
 |// todo 这里的Ulid好像不需要|未找到||
 |发布应用时不应该设置新版本号|不需要变动||
-|把修改页面的行为的逻辑从pages接口的put方法中改到pages/behavior接口的put方法中|doing||
-||修改pages/behavior中的put方法|done|
-||删除pages中的put方法的相关behavior的逻辑||
-||在调用接口中分别调用||
-||||
-||||
-|/components/listByPage get 好像未使用，若未使用，则删除它。它与components get逻辑相同。|||
-|/plugins get /plugins/key get 应该删除一个保留一个|||
+|把修改页面的行为的逻辑从pages接口的put方法中改到pages/behavior接口的put方法中|没必要||
+|/components/listByPage get 好像未使用，若未使用，则删除它。它与components get逻辑相同。|done||
+|/plugins get /plugins/key get 应该删除一个保留一个|2个接口功能不同，不应该合并。||
 |丰富组件|||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||

@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { serviceUrl, layoutOptions } from 'src/helper/config';
 import { map } from 'rxjs/operators';
 import { compatibleArray } from 'src/helper';
+// 服务
+import { AppService } from 'src/app/service/app.service';
 import { of } from 'rxjs';
 // import type { ResponseData } from 'src/types';
 import type { A, N, S, Options, } from 'src/types/base';
@@ -24,7 +26,10 @@ export class DialogComponent {
   f: A
   layout: N
   @Output() newEvent = new EventEmitter()
-  constructor(private http: HttpClient) {
+  constructor(
+    // private http: HttpClient,
+    private appService: AppService,
+  ) {
     this.msg = []
     this.initVersion = VERSION
     this.layoutOptions = layoutOptions
@@ -36,11 +41,14 @@ export class DialogComponent {
   }
   onSelectObject(term: S) {
     if (term) {
-      return this.http.get(`${serviceUrl()}/plugins/key`, {params: {key: term}}).pipe(
-        map(res => {
-          return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
-        })
-      )
+      // return this.http.get(`${serviceUrl()}/plugins/key`, {params: {key: term}}).pipe(
+      //   map(res => {
+      //     return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
+      //   })
+      // )
+      return this.appService.reqPluginsKey(term).then(res => {
+        return compatibleArray((res as A).data).map((option, index) => ({id: index, option}))
+      })
     } else {
       return of([])
     }
