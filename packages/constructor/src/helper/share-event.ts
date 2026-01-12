@@ -17,6 +17,7 @@ class ShareEventService {
     } else {
       this._map.set(eventName, new Set([cb]))
     }
+    return () => this.off(eventName, cb)
   }
   off(eventName: S, cb?: Cb) {
     let set = this.getCb(eventName)
@@ -24,6 +25,7 @@ class ShareEventService {
       if (cb) {
         set.delete(cb)
       } else {
+        set.clear()
         this._map.delete(eventName)
       }
     }
@@ -31,10 +33,7 @@ class ShareEventService {
   emit(eventName: S, payload?: A) {
     let set = this.getCb(eventName)
     if (set) {
-      let arr = [...set]
-      arr.forEach(cb => {
-          cb(payload)
-        })
+      set.forEach(cb => cb(payload))
     }
   }
   private getCb(eventName: S) {

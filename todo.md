@@ -3,6 +3,8 @@
 |分支|f_comp||
 |fixed: 无法选中组件的问题|观察中||
 |fixed: 有时无法选中页面|观察中||
+|fixed: 新增加的页面，不添加组件，再进入引应用后应该存在此页面|doing||
+|fixed: layout组件的left/right区的组件在选中是高度不应用为0|todo||
 |丰富组件|||
 ||inputNumber||
 ||radio||

@@ -25,7 +25,7 @@ interface PageData {
   name: S
 }
 @Component({
-  selector: 'app-page-list',
+  selector: 'app-side-page-list',
   templateUrl: './page-list.component.html',
   styleUrls: ['./page-list.component.sass']
 })

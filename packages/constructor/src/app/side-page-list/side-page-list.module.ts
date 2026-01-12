@@ -35,4 +35,4 @@ import { PageDialogComponent } from './page-list/dialog/page-dialog.component';
     PageListComponent
   ],
 })
-export class PageListModule { }
+export class SidePageListModule { }

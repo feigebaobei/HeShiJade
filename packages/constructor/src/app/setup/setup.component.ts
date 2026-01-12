@@ -9,7 +9,7 @@ import { ItemsModule } from '../items/items.module';
 import { BehaviorModule } from '../behavior/behavior.module';
 import { PropsModule } from '../props/props.module';
 import { ComponentsModule } from '../components/components.module';
-import { PageListModule } from '../page-list/page-list.module';
+import { SidePageListModule } from '../side-page-list/side-page-list.module';
 import { CommonModule, Location } from '@angular/common';
 // import { GridstackModule } from 'gridstack/dist/angular'
 // 组件
@@ -85,7 +85,7 @@ interface SuperGridItem extends GridStackWidget {
     BehaviorModule,
     PropsModule,
     ComponentsModule,
-    PageListModule,
+    SidePageListModule,
     // ComponentListComponent,
     ComponentListModule,
     CommonModule,
