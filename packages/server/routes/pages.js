@@ -77,6 +77,7 @@ router.route('/')
     })
   })
 })
+// 经过检查。创建页面的接口运行正确。
 .post(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 取出对应应用判断是否有权限。owner collaborator
@@ -103,7 +104,7 @@ router.route('/')
       return Promise.reject(400000)
     }
   }).then((curApp) => {
-    let arr = [
+    let opPageArr = [
       {
         insertOne: {
           document: {
@@ -122,8 +123,9 @@ router.route('/')
       }
     ]
     let updateObj = {}
+    // 更新应用的最后一个页面的ulid。
     if (curApp.lastPageUlid) {
-      arr.unshift({
+      opPageArr.unshift({
         updateOne: {
           filter: {ulid: curApp.lastPageUlid},
           update: {
@@ -144,7 +146,7 @@ router.route('/')
         }
       }
     }
-    let pPage = lowcodeDb.collection('pages_dev').bulkWrite(arr)
+    let pPage = lowcodeDb.collection('pages_dev').bulkWrite(opPageArr)
     let pApp = lowcodeDb.collection('apps_dev').updateOne({
       ulid: curApp.ulid
     }, updateObj)
@@ -247,9 +249,12 @@ router.route('/')
       return Promise.reject(200010)
     })
   }).then(() => {
+    // 处理应用的数据
     let pApp
+    // 当删除第一个页面时
     if (page.ulid === app.firstPageUlid) {
       let setObj
+      // 当只有一个页面时。
       if (app.firstPageUlid === app.lastPageUlid) { // 删除最后一个页面，应该清空app中的页面数据。
         setObj = {
           firstPageUlid: '',
@@ -266,9 +271,16 @@ router.route('/')
       pApp = lowcodeDb.collection('apps_dev').updateOne({
         ulid: app.ulid
       }, appUpdateObj)
+    } else if (page.ulid === app.lastPageUlid) {
+      // 当删除最后一个页面时
+      pApp = lowcodeDb.collection('apps_dev').updateOne({
+        ulid: app.ulid
+      }, { $set: { lastPageUlid: page.prevUlid } })
     } else {
+      // 当删除中间的页面时
       pApp = Promise.resolve(true)
     }
+    // 处理页面的数据
     let pageUpdateArr = []
     // 删除当前的。
     // 修改前一个
@@ -316,7 +328,9 @@ router.route('/')
         },
       })
     }
+    // 删除最后一个页面时，应用的lastPageUlid未修正。
     let pPage = lowcodeDb.collection('pages_dev').bulkWrite(pageUpdateArr)
+    // 处理组件的数据
     let pComponent = lowcodeDb.collection('components_dev').deleteMany({pageUlid: page.ulid}).then(() => {
       return true
     }).catch((error) => {
