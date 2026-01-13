@@ -103,10 +103,10 @@ export class PageListComponent implements OnInit {
               '',
               app!.ulid,
             )
-            this.pageList.push(page)
-            this.pageService.add(app!.ulid, page)
-            this.pageService.reqPostPage(data, app!.ulid, page.ulid)
-            this.appService.addPage(page.ulid)
+            this.pageList.push(page) // 当前组件内增加数据
+            this.pageService.add(app!.ulid, page) // 前端缓存的页面中增加数据
+            this.pageService.reqPostPage(data, app!.ulid, page.ulid) // 数据库中增加数据
+            this.appService.addPage(page.ulid) // 前端缓存的应用中增加数据
             results.modalInstance.hide();
           }
         },

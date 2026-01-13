@@ -59,6 +59,8 @@ export class PageService {
         }
         this._map.set(app.ulid, tree)
       }
+    } else {
+      this._map.set(app.ulid, tree)
     }
   }
   reqPageList(appUlid: ULID) {
@@ -103,6 +105,7 @@ export class PageService {
   // 重铸
   recast() {
   }
+  // 在本地添加page数据
   // 若在断网、弱网环境下应该缓存请求到ls中，在强网时再依次请求。
   add(appUlid: ULID, page: Page) {
     let pageTree = this._map.get(appUlid)
@@ -113,6 +116,7 @@ export class PageService {
     }
     // clog('add', pageTree, pageTree?.root?.toArray(), page, appUlid)
   }
+  // 创建新页面
   reqPostPage(data: AddData, appUlid: ULID, pageUlid: ULID) {
     return new Promise((s, j) => {
       let u: ULID = pageUlid
