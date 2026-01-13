@@ -7,6 +7,9 @@
 .content
     display: grid
     grid-template-areas: 'header header header' 'left main right' 'footer footer footer'
+    // 这里有使用与配置文件相同的值作为默认值
+    grid-template-rows: 120px 300px 120px
+    grid-template-columns: 120px auto 120px
     .header
         grid-area: header
         &.border-inner
