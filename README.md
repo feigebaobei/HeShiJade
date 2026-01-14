@@ -79,8 +79,8 @@ npm run dr # 启动渲染侧
 3. 提交代码，再把当前的开发分支f_xxx推到远端。
 4. 在github上合并f_xxx到master
 5. 在服务端拉取master分支
-6. 重启后端服务mock-server
-7. 重启后端服务server
+6. 在服务端重启后端服务mock-server
+7. 在服务端重启后端服务server
 8. 在服务端打包web-site.
 
 ## 端口
