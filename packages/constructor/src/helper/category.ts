@@ -86,6 +86,11 @@ let categoryList = [
         componentCategory: 'Loop',
         ulid: '01J50ZGTCKEC10HWAJBZND487H'
     },
+    {
+        name: 'inputNumber',
+        componentCategory: 'InputNumber',
+        ulid: '01J50ZGTCKEC10HWAJBZND487I'
+    },
   ]
 export {
     categoryList

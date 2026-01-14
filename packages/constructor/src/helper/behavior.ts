@@ -397,6 +397,24 @@ let Loop: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let InputNumber: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '键盘输入时', value: 'whileValueChanging'},
+      // {label: '值改变时', value: 'afterValueChanged'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -418,6 +436,7 @@ export {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -437,5 +456,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
 }
 export default all

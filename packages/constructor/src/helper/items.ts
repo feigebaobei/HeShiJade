@@ -484,6 +484,7 @@ let all: {[k: S]: ConfigItem[]} = {
     PageList,
     // ShowHide, // 没有特定子元素
     // Loop, // 没有特定子元素
+    // InputNumber, // 没有特定子元素
 }
 
 export default all

@@ -27,6 +27,7 @@ import {
   PageList as PageListPropsMeta,
   ShowHide as ShowHidePropsMeta,
   Loop as LoopPropsMeta,
+  InputNumber as InputNumberPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -150,6 +151,9 @@ export class PropsBoxComponent {
         break;
       case 'Loop':
         this.opComponentPropsList(LoopPropsMeta)
+        break;
+      case 'InputNumber':
+        this.opComponentPropsList(InputNumberPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}

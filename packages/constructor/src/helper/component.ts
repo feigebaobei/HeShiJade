@@ -18,6 +18,7 @@ import { Button as ButtonProps,
     PageList as PageListProps,
     ShowHide as ShowHideProps,
     Loop as LoopProps,
+    InputNumber as InputNumberProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -33,6 +34,7 @@ import {
     PageList as PageListBehavior,
     ShowHide as ShowHideBehavior,
     Loop as LoopBehavior,
+    InputNumber as InputNumberBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -230,6 +232,12 @@ let Loop: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let InputNumber: ComponentDefaultConfig = {
+    props: opProps(InputNumberProps),
+    behavior: opBehavior(InputNumberBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -248,4 +256,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
 }

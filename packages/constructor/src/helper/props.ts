@@ -36,10 +36,10 @@ let Button: PropsConfigItem = {
     bsSize: {
         category: 'select',
         options: [
-            {label: 'lg', value: 'lg'},
-            {label: 'md', value: 'md'},
-            {label: 'sm', value: 'sm'},
-            {label: 'xs', value: 'xs'},
+            {label: '大', value: 'lg'},
+            {label: '中', value: 'md'},
+            {label: '小', value: 'sm'},
+            {label: '更小', value: 'xs'},
         ],
         value: 'md',
         label: '大小',
@@ -320,11 +320,11 @@ let Table: PropsConfigItem = {
     size: {
         category: 'select',
         options: [
-            { label: 'mini', value: 'mini', },
-            { label: 'xs', value: 'xs', },
-            { label: 'sm', value: 'sm', },
-            { label: 'md', value: 'md', },
-            { label: 'lg', value: 'lg', },
+            { label: '大', value: 'lg', },
+            { label: '中', value: 'md', },
+            { label: '小', value: 'sm', },
+            { label: '更小', value: 'xs', },
+            { label: '迷你', value: 'mini', },
         ],
         value: 'sm',
         label: '大小',
@@ -508,9 +508,9 @@ let Input: PropsConfigItem = {
     size: {
         category: 'select',
         options: [
-            { label: '小', value: 'sm' },
-            { label: '中', value: '' },
             { label: '大', value: 'lg' },
+            { label: '中', value: '' },
+            { label: '小', value: 'sm' },
         ],
         value: '',
         label: '尺寸',
@@ -627,9 +627,9 @@ let Select: PropsConfigItem = {
     size: {
         category: 'select',
         options: [
-            { label: '小', value: 'sm' },
-            { label: '中', value: '' },
             { label: '大', value: 'lg' },
+            { label: '中', value: '' },
+            { label: '小', value: 'sm' },
         ],
         value: '',
         label: '大小',
@@ -843,10 +843,10 @@ let Tabs: PropsConfigItem = {
     size: {
         category: 'select',
         options: [
-            { label: '超小', value: 'xs', },
-            { label: '小', value: 'sm', },
-            { label: '中', value: 'md', },
             { label: '大', value: 'lg', },
+            { label: '中', value: 'md', },
+            { label: '小', value: 'sm', },
+            { label: '更小', value: 'xs', },
         ],
         value: 'md',
         label: 'size',
@@ -952,9 +952,9 @@ let Pagination: PropsConfigItem = {
     size: {
         category: 'select',
         options: [
-            { label: '小', value: 'sm', },
-            { label: '中', value: '', },
             { label: '大', value: 'lg', },
+            { label: '中', value: '', },
+            { label: '小', value: 'sm', },
         ],
         value: '',
         label: '大小',
@@ -1640,6 +1640,58 @@ let Loop: PropsConfigItem = {
         hideCalc: true,
     },
 }
+let InputNumber: PropsConfigItem = {
+    value: {
+        category: 'number',
+        value: 0,
+        // value: Number.MAX_SAFE_INTEGER,
+        label: '值',
+        key: 'value',
+    },
+    max: {
+        category: 'number',
+        value: 10,
+        // value: Number.MAX_SAFE_INTEGER,
+        label: '最大值',
+        key: 'max',
+    },
+    min: {
+        category: 'number',
+        value: -10,
+        label: '最小值',
+        key: 'min',
+    },
+    step: {
+        category: 'number',
+        value: 1,
+        label: '步长',
+        key: 'step',
+    },
+    size: {
+        category: 'select',
+        options: [
+            { label: '大', value: 'lg', },
+            { label: '中', value: '', },
+            { label: '小', value: 'sm', },
+        ],
+        value: '',
+        label: '步长',
+        key: 'size',
+    },
+    decimalLimit: {
+        category: 'number',
+        value: 0,
+        // value: undefined,
+        label: '精度',
+        key: 'decimalLimit',
+    },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位文本',
+        key: 'icon',
+    },
+}
 export {
     Button,
     Modal,
@@ -1657,4 +1709,5 @@ export {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
 }
