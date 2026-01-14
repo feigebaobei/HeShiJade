@@ -8,7 +8,7 @@
 - 不支持xx
 
 ## 技术栈
-- angular
+- angular@17
 - dev-ui
 - express(node)
 - mongodb
