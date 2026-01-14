@@ -22,6 +22,15 @@ export class InputNumberComponent {
       this.data.props[k] = v
     })
   }
+  whileValueChangingH(n: N) {
+    pool.trigger(this.data.ulid, 'whileValueChanging', getLoopEventParams(this.loopIndex, n), this)
+  }
+  ngModelChangeH(n: N) {
+    pool.trigger(this.data.ulid, 'ngModelChange', getLoopEventParams(this.loopIndex, n), this)
+  }
+  afterValueChangedH(n: N) {
+    pool.trigger(this.data.ulid, 'afterValueChanged', getLoopEventParams(this.loopIndex, n), this)
+  }
   ngOnChanges() {
     pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }

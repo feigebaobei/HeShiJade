@@ -6,4 +6,7 @@
     [size]="data.props['size']"
     [decimalLimit]="data.props['decimalLimit']"
     [placeholder]="data.props['placeholder']"
+    (whileValueChanging)="whileValueChangingH($event)"
+    (ngModelChange)="ngModelChangeH($event)"
+    (afterValueChanged)="afterValueChangedH($event)"
 ></d-input-number>
