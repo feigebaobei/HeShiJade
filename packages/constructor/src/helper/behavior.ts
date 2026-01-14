@@ -402,7 +402,8 @@ let InputNumber: BehaviorConfigGroup = [
     category: 'select',
     options: [
       {label: '键盘输入时', value: 'whileValueChanging'},
-      // {label: '值改变时', value: 'afterValueChanged'},
+      {label: 'model改变后', value: 'ngModelChange'},
+      {label: '值改变后', value: 'afterValueChanged'},
     ],
     value: '',
     label: '事件',
