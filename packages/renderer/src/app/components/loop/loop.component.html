@@ -2,15 +2,9 @@
     [class]="['wqert', data.props['layout']]"
     [style]="styleObj"
 >
-<!-- {{objArr() | json}} -->
-<!-- <div *ngFor="let item of objArr(); let i = index" -->
-    <!-- {{dataArr | json}} -->
-     <!-- {{dataArr.length}} -->
-     <!-- {{dataArr().length}} -->
     <div *ngFor="let item of dataArr(); let i = index"
         [style]="itemStyleObj"
     >
-        <!-- <app-stack [componentList]="[item]" [loopIndex]="i"></app-stack> -->
         <app-comp-box [data]="item" [loopIndex]="i"></app-comp-box>
     </div>
 </div>

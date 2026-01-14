@@ -9,7 +9,7 @@ import { compatibleArray } from 'src/helper/index'
 import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
 import { gridLayoutDefault } from 'src/helper/gridLayout';
-
+import { text } from 'src/helper/config';
 // type
 import type { N, S, D, B, ULID, A } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
@@ -20,6 +20,7 @@ import type { Page } from 'src/types/page';
 import type { DataTableComponent } from 'ng-devui/data-table';
 // import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
+import type { Text } from 'src/types/config';
 
 // let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
 //   Button: gridLayoutButtonDefault,
@@ -69,6 +70,7 @@ AfterViewInit
   curPage: Page
   // componentList: Comp[] // 未被使用到。todo delete 2025.07.01+
   showList: B[] // 是否显示指定列的组件
+  text: Text
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
   @ViewChild('compStack') compStack!: CompStackComponent
@@ -121,6 +123,7 @@ AfterViewInit
     this.curPage = this.pageService.getCurPage()!
     // this.componentList = []
     this.showList = []
+    this.text = text
   }
   ngOnInit(): void {
     let tree = this.componentService.getTree(this.curPage.ulid)

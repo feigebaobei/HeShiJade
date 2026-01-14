@@ -25,7 +25,6 @@ export class LoopComponent {
   childComp: Comp | undefined
   styleObj: O
   itemStyleObj: O
-  // dataArr: Comp[]
   dataArr: WritableSignal<Comp[]>
   constructor(private componentService: ComponentService) {
     this.loopValue = [];
@@ -33,7 +32,6 @@ export class LoopComponent {
     this.childComp = undefined
     this.styleObj = {}
     this.itemStyleObj = {}
-    // this.dataArr = []
     this.dataArr = signal([])
   }
   setProps(o: O) {
@@ -51,16 +49,6 @@ export class LoopComponent {
     this.setDataArr()
   }
   setDataArr() {
-    // if (this.childComp) {
-    //   this.dataArr = this.loopValue.map(item => {
-    //     return {
-    //       ...this.childComp,
-    //       props: item,
-    //     } as Comp
-    //   })
-    // } else {
-    //   this.dataArr = []
-    // }
     if (this.childComp) {
       let arr = this.loopValue.map(item => {
         return {
@@ -73,42 +61,17 @@ export class LoopComponent {
       this.dataArr.set([])
     }
   }
-  // objArr = computed(() => {
-  //   clog('computed', !!this.childComp, this.loopValue)
-  //   if (this.childComp) {
-  //     return this.loopValue.map(item => {
-  //       return {
-  //         ...this.childComp,
-  //         props: item,
-  //       } as Comp
-  //     })
-  //   } else {
-  //     return []
-  //   }
-  // })
   ngOnChanges() {
     pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
     pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
-    // asyncFn(() => {}).then(() => {})
     let tree = this.componentService.getTreeByKey()
     let ulid = this.data.slots['body']
     if (ulid) {
       this.childComp = tree?.find(ulid)?.value
-      clog('childComp', this.childComp)
-      // if (compT) {
-
-      //   // this.loopValue = {
-      //   //   ...compT,
-      //   // }
-      //   // this.loopValue.forEach(item => {
-      //   //   this.compArr.push
-      //   // })
-      // }
     }
-    // clog('objArr', this.objArr())
     switch (this.data.props['layout']) {
       case 'flex':
         this.styleObj = {
@@ -118,7 +81,6 @@ export class LoopComponent {
           'flex-wrap': this.data.props['flexWrap'],
           'row-gap': this.data.props['rowGap'],
           'column-gap': this.data.props['columnGap'],
-          // height: '200px',
         }
         this.itemStyleObj = {
           'flex-grow': this.data.props['flexGrow'],

@@ -56,7 +56,8 @@
             *ngIf="showList[i]"
             #compStack (deleteComp)="deleteComponentByUlidH($event, i)"
             (change)="changeH($event, i)"
-            ></app-comp-stack>
+          ></app-comp-stack>
+          <span *ngIf="!compArr[i].length">{{text['toCreateComp']}}</span>
         </div>
       </ng-template>
     </d-cell>
