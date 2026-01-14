@@ -13,6 +13,7 @@ import { ButtonModule,
   ToggleModule,
   CheckBoxModule,
   ModalModule,
+  InputNumberModule,
   // DataTableComponent,
 } from 'ng-devui';
 import { MenuModule } from 'ng-devui/menu';
@@ -42,6 +43,7 @@ import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.co
 import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
 import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
+import { InputNumberComponent } from './input-number/input-number.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -70,6 +72,7 @@ import { LoopComponent } from './loop/loop.component';
     PageListItemComponent,
     ShowHideComponent,
     LoopComponent,
+    InputNumberComponent,
   ],
   imports: [
     CommonModule,
@@ -86,6 +89,7 @@ import { LoopComponent } from './loop/loop.component';
     CheckBoxModule,
     ModalModule,
     MenuModule,
+    InputNumberModule,
 
     FormsModule,
     GridstackModule,
