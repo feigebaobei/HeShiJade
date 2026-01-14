@@ -2,14 +2,15 @@
 |-|-|-|
 |分支|f_inputNumber||
 ||搭建侧inputNumber|done|
-||渲染侧inputNumber|todo|
-||官网侧inputNumber|todo|
+||渲染侧inputNumber|done|
+||官网侧inputNumber|done|
 |丰富组件|||
 ||radio||
 ||card||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
 |chore: 尺寸选项按从大到小排序，并且label统一使用文字。|||
+|chore: 官网的api页面中的组件名都改为大写开头。|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||

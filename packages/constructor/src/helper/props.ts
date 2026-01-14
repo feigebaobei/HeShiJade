@@ -1650,14 +1650,14 @@ let InputNumber: PropsConfigItem = {
     },
     max: {
         category: 'number',
-        value: 10,
-        // value: Number.MAX_SAFE_INTEGER,
+        // value: 10,
+        value: Number.MAX_SAFE_INTEGER,
         label: '最大值',
         key: 'max',
     },
     min: {
         category: 'number',
-        value: -10,
+        value: Number.MIN_SAFE_INTEGER,
         label: '最小值',
         key: 'min',
     },
@@ -1689,7 +1689,7 @@ let InputNumber: PropsConfigItem = {
         category: 'input',
         value: '',
         label: '占位文本',
-        key: 'icon',
+        key: 'placeholder',
     },
 }
 export {
