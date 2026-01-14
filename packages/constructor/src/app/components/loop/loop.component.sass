@@ -5,12 +5,28 @@
     padding-bottom: 48px
     margin-bottom: 4px
 
+.box
+    position: relative
+
 .flex
     display: flex
-    justify-content: space-between
-    align-items: center
+    // justify-content: space-between
+    // align-items: center
     .flex-item
-        flex-basis: 50px
-        height: 50px
+        // flex-basis: 50px
+        // height: 50px
 .grid
     display: grid
+
+.selected
+    border: 1px solid blue
+
+.toolbox
+    position: absolute
+    right: 0
+    top: 0px
+    z-index: 10
+    opacity: 0.5
+    &:hover
+        opacity: unset
+    

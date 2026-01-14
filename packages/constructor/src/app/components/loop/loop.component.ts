@@ -1,6 +1,6 @@
-import { Component, Input, } from '@angular/core';
+import { Component, effect, Input, } from '@angular/core';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
-import { createChildKey } from 'src/helper/index'
+import { asyncFn, createChildKey } from 'src/helper/index'
 import shareEvent, { creatEventName } from 'src/helper/share-event';
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
@@ -34,6 +34,7 @@ export class LoopComponent {
   mockArr: N[]
   styleObj: O
   itemStyleObj: O
+  curComponent: Comp | undefined
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
@@ -44,6 +45,9 @@ export class LoopComponent {
     this.mockArr = []
     this.styleObj = {}
     this.itemStyleObj = {}
+    effect(() => {
+      this.curComponent = this.componentService.curComponentS.get()
+    })
   }
   listen() {
     shareEvent.on(creatEventName('Loop', this.data.ulid, 'props', 'update'), (obj) => {
@@ -68,6 +72,19 @@ export class LoopComponent {
     this.componentService.mountComponent(this.childComp)
     this.componentService.reqCreateComponent(this.childComp)
   }
+  gridStackItemClickH($event: MouseEvent, item: Comp) {
+    $event.stopPropagation()
+    let curPage = this.pageService.getCurPage()
+    if (curPage) {
+      if (this.curComponent) {
+        if (item.ulid !== this.curComponent.ulid) {
+          this.componentService.setCurComponent(curPage.ulid, item.ulid)
+        }
+      } else {
+        this.componentService.setCurComponent(curPage.ulid, item.ulid)
+      }
+    }
+  }
   deleteComponentByUlidH(ulid: ULID) {
     this.childComp = null
     let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
@@ -90,6 +107,7 @@ export class LoopComponent {
           'flex-grow': this.data.props['flexGrow'],
           'flex-shrink': this.data.props['flexShrink'],
           'flex-basis': this.data.props['flexBasis'],
+          'height': this.data.props['itemHeight'],
         }
         break;
       case 'grid':
@@ -120,7 +138,7 @@ export class LoopComponent {
       this.childComp = arr[0]
     }
     this.mockArr = new Array(this.data.props['mockCount'] || 0).fill(1)
-    this.setStyle()
+    asyncFn(() => { this.setStyle() }, 0)
     this.listen()
   }
 }

@@ -14,7 +14,7 @@
     </aside>
     <aside class="left" *ngIf="!showObj['left']">
     </aside>
-    <main [class]="{main: true, 'border-inner': data.props['borderInner']}" [style]="mainStyleObj" *ngIf="showObj['main']">
+    <main [class]="{main: true, 'border-inner': data.props['borderInner']}" *ngIf="showObj['main']">
         <app-stack
             [componentList]="mainAreaCompArr"
         ></app-stack>

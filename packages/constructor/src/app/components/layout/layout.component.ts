@@ -240,7 +240,7 @@ export class LayoutComponent {
     // 这里的样式需要异步处理，否则gridstack组件不能有处理高度、浮动。
     asyncFn(() => {
       this.styleObj = {
-        'grid-template-rows': `${this.data.props['headerHeight']} 300px ${this.data.props['footerHeight']}`,
+        'grid-template-rows': `${this.data.props['headerHeight']} ${this.data.props['mainHeight']} ${this.data.props['footerHeight']}`,
         'grid-template-columns': `${this.data.props['leftWidth']} ${this.data.props['mainWidth']} ${this.data.props['rightWidth']}`,
       }
     })
