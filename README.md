@@ -67,7 +67,7 @@ npm run dr # 启动渲染侧
         |-- tsconfig.json
     |-- mock-server    模拟服务端
     |-- renderer       渲染侧
-    |-- serverc        服务端
+    |-- server         服务端
     |-- web-site       官网
 |-- packages.json
 |-- .npmrc

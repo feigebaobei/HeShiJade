@@ -144,6 +144,7 @@ let createNode = <T>(v: T): Node<T> => {
 }
 let treePrototype = Object.create({}, {
     // 根据特定ulid取得节点
+    // 经测试，此方法可以正确运行。
     find: {
         writable: false,
         enumerable: true, // 是否可枚举，即是否私有的。

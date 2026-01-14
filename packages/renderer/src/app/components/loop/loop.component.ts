@@ -1,4 +1,4 @@
-import { Component, computed, Input } from '@angular/core';
+import { Component, computed, Input, signal, WritableSignal } from '@angular/core';
 import { asyncFn, createChildKey } from 'src/helper/index'
 import { pool } from 'src/helper/pool';
 import { getLoopEventParams } from 'src/helper';
@@ -25,14 +25,14 @@ export class LoopComponent {
   childComp: Comp | undefined
   styleObj: O
   itemStyleObj: O
-  dataArr: Comp[]
+  dataArr: WritableSignal<Comp[]>
   constructor(private componentService: ComponentService) {
     this.loopValue = [];
     this.compArr = []
     this.childComp = undefined
     this.styleObj = {}
     this.itemStyleObj = {}
-    this.dataArr = []
+    this.dataArr = signal([])
   }
   setProps(o: O) {
     Object.entries(o).forEach(([k, v]) => {
@@ -42,7 +42,6 @@ export class LoopComponent {
   setLoopValue(a: componentInstanceData['props'][]) {
     this.loopValue = a
     clog('setLoopValue', this.loopValue)
-    // this.objArr. = 
     this.setDataArr()
   }
   setLoopValueByIndex(v: componentInstanceData['props'], index: N) {
@@ -51,52 +50,28 @@ export class LoopComponent {
   }
   setDataArr() {
     if (this.childComp) {
-      this.dataArr = this.loopValue.map(item => {
+      let arr = this.loopValue.map(item => {
         return {
           ...this.childComp,
-          props: item,
+          props: item
         } as Comp
       })
+      this.dataArr.set(arr)
     } else {
-      this.dataArr = []
+      this.dataArr.set([])
     }
   }
-  // objArr = computed(() => {
-  //   clog('computed', !!this.childComp, this.loopValue)
-  //   if (this.childComp) {
-  //     return this.loopValue.map(item => {
-  //       return {
-  //         ...this.childComp,
-  //         props: item,
-  //       } as Comp
-  //     })
-  //   } else {
-  //     return []
-  //   }
-  // })
   ngOnChanges() {
     pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngOnInit() {
     pool.register(this.data.ulid, this, this.data.behavior)
     pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
-    // asyncFn(() => {}).then(() => {})
     let tree = this.componentService.getTreeByKey()
     let ulid = this.data.slots['body']
     if (ulid) {
       this.childComp = tree?.find(ulid)?.value
-      clog('childComp', this.childComp)
-      // if (compT) {
-
-      //   // this.loopValue = {
-      //   //   ...compT,
-      //   // }
-      //   // this.loopValue.forEach(item => {
-      //   //   this.compArr.push
-      //   // })
-      // }
     }
-    // clog('objArr', this.objArr())
     switch (this.data.props['layout']) {
       case 'flex':
         this.styleObj = {
@@ -106,12 +81,12 @@ export class LoopComponent {
           'flex-wrap': this.data.props['flexWrap'],
           'row-gap': this.data.props['rowGap'],
           'column-gap': this.data.props['columnGap'],
-          // height: '200px',
         }
         this.itemStyleObj = {
           'flex-grow': this.data.props['flexGrow'],
           'flex-shrink': this.data.props['flexShrink'],
           'flex-basis': this.data.props['flexBasis'],
+          'height': this.data.props['itemHeight'],
         }
         break;
       case 'grid':

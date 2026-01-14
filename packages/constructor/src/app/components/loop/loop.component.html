@@ -5,18 +5,27 @@
 >
     <span *ngIf="!childComp">此区域可接收一个组件</span>
     <div
-        *ngIf="childComp" [class]="['wqert', data.props['layout']]"
+        *ngIf="childComp" [class]="['box', data.props['layout']]"
         [style]="styleObj"
     >
+        <div *ngIf="childComp.ulid === curComponent?.ulid" class="toolbox">
+            <d-button bsSize="xs" icon="icon-delete" (click)="deleteComponentByUlidH(childComp.ulid)"></d-button>
+        </div>
         <div
-        class="flex-item"
-        *ngFor="let item of mockArr"
-        [style]="itemStyleObj"
+            class="flex-item"
+            [ngClass]="{selected: childComp.ulid === curComponent?.ulid}"
+            *ngFor="let item of mockArr"
+            [style]="itemStyleObj"
+            (click)="gridStackItemClickH($event, childComp)"
         >
-            <app-comp-stack
+            <!-- <app-comp-stack
                 [componentList]="[childComp]"
                 (deleteComp)="deleteComponentByUlidH($event)"
-            ></app-comp-stack>
+            ></app-comp-stack> -->
+            <!-- loop组件内的元素不能拖动改变大小、位置。 -->
+            <app-comp-box
+                [comp]="childComp"
+            ></app-comp-box>
         </div>
     </div>
 </div>

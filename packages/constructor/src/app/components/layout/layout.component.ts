@@ -236,6 +236,17 @@ export class LayoutComponent {
     // clog('compStackChangeH', p)
   }
   ngOnInit() {
+    this.setArr()
+    // 这里的样式需要异步处理，否则gridstack组件不能有处理高度、浮动。
+    asyncFn(() => {
+      this.styleObj = {
+        'grid-template-rows': `${this.data.props['headerHeight']} ${this.data.props['mainHeight']} ${this.data.props['footerHeight']}`,
+        'grid-template-columns': `${this.data.props['leftWidth']} ${this.data.props['mainWidth']} ${this.data.props['rightWidth']}`,
+      }
+    })
+    this.listen()
+  }
+  setArr() {
     let tree = this.componentService.getTree(this.curPage.ulid)
     Object.entries(this.data.slots).forEach(([key, value]) => {
       switch (key) {
@@ -256,12 +267,7 @@ export class LayoutComponent {
           break;
       }
     })
-    this.styleObj = {
-      // 'grid-template-rows': `${this.data.props['headerHeight']} auto ${this.data.props['footerHeight']}`,
-      'grid-template-rows': `${this.data.props['headerHeight']} calc(100% - 66px) ${this.data.props['footerHeight']}`,
-      'grid-template-columns': `${this.data.props['leftWidth']} ${this.data.props['mainWidth']} ${this.data.props['rightWidth']}`,
-    }
-    this.listen()
+
   }
   // ngOnChanges() {
   //   clog('changes')

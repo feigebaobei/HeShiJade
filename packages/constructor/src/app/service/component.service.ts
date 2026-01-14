@@ -147,19 +147,23 @@ export class ComponentService {
   }
   // 作为哪种节点返回
   private mountPosition(comp: Component): N {
-    // 0 根组件
-    // 1 前组件
-    // 2 后组件
+    // 0 根组件     !comp.parentUlid !comp.prevUlid !comp.nextUlid 
+    // 1 前组件                      !comp.prevUlid  comp.nextUlid 
+    // 2 后组件                       comp.prevUlid !comp.nextUlid 
     // 3 items组件 不使用此情况了
-    // 4 slots组件
-    // 当前不支持在中间创建组件
-    let n: N = 0
-    if (!comp.prevUlid && !comp.nextUlid) {
+    // 4 slots组件   comp.parentUlid !comp.prevUlid !comp.nextUlid             
+    let n: N = -1
+    if (!comp.parentUlid && !comp.prevUlid && !comp.nextUlid ) {
       n = 0
+    } else if (comp.parentUlid && !comp.prevUlid && !comp.nextUlid) {
+      n = 4
     } else if (!comp.prevUlid && comp.nextUlid) {
       n = 1
     } else if (comp.prevUlid && !comp.nextUlid) {
       n = 2
+    }
+    if (![0, 1, 2, 4].includes(n)) {
+      console.error(new Error('mountPosition()' + '在组件树中挂载节点的位置不对'))
     }
     return n
   }

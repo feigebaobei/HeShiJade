@@ -102,6 +102,7 @@ export class CompStackComponent implements OnInit, OnDestroy {
       this.componentService.reqUpdateComponent('gridLayout', 'h', $event.nodes[0].h, curNode.comp.ulid)
     }
   }
+  // 选中当前组件
   gridStackItemClickH($event: MouseEvent, item: SuperGridItem) {
     $event.stopPropagation()
     let curPage = this.pageService.getCurPage()

@@ -104,7 +104,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     const viewContainerRef = this.compHost.viewContainerRef;
     viewContainerRef.clear();
     // let componentRef: A
-    clog('sss', this.comp.type)
+    // clog('sss', this.comp.type)
     this.componentRef = viewContainerRef.createComponent(compMap[this.comp.type]);
     switch (this.comp.type) {
       case 'Button':

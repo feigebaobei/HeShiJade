@@ -36,9 +36,6 @@
     [fixedLeft]="colOption['fixedLeft']"
     [fixedRight]="colOption['fixedRight']"
     >
-    <!-- [sortable]="colOption['sortable']" -->
-    <!-- [resizeEnabled]="colOption['resizeEnabled']" -->
-    <!-- [childUlid]="colOption['childUlid']" -->
     <d-cell>
       <!-- 不知道为什么要使用ng-template -->
       <ng-template>
@@ -50,13 +47,12 @@
           (dropEvent)="dropH($event, colOption['field'], i)"
           class="dropArea"
         >
-          <!-- <app-comp-stack [componentList]="compCompList(i)"  -->
-           <!-- {{compArr[i].length}} -->
           <app-comp-stack [componentList]="compArr[i]" 
             *ngIf="showList[i]"
             #compStack (deleteComp)="deleteComponentByUlidH($event, i)"
             (change)="changeH($event, i)"
-            ></app-comp-stack>
+          ></app-comp-stack>
+          <span *ngIf="!compArr[i].length">{{text['toCreateComp']}}</span>
         </div>
       </ng-template>
     </d-cell>

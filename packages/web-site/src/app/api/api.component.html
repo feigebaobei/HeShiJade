@@ -7,6 +7,17 @@
     <p>event: 组件本身的事件和生命周期事件。</p>
     <h1>事件的回调方法</h1>
     <p>选中组件后在“behavior”面板选择事件，设置方法体。平台已经为回调方法设置三个形式参数（utils：内置工具集合，plugins：当前应用的选中的插件集合，thirdParams：当前事件的相关入参）</p>
+    <h2>demo</h2>
+    <p>创建一个loop组件，内部再创建一个input组件。在loop组件的behavior面板中添加一项，并设置为“渲染视图后”，设置方法体为下面的代码。</p>
+    <pre>
+        let arr = [
+            {value: 'a',},
+            {value: 'b',},
+            {value: 'c',},
+        ]
+        utils.pool.getComponentInstance('01KEX37KETPC58ZW38XFC653S1').setLoopValue(arr)
+    </pre>
+    <p>渲染效果是3个input组件的值分别是'a'/'b'/'c'</p>
     <h1>下文中使用的数据类型</h1>
     <pre>
         type S = string
@@ -44,7 +55,7 @@
             </tr>
             <tr>
                 <td>postPageRender</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined
             </tr>
         </tbody>
@@ -187,7 +198,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -366,7 +377,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -508,7 +519,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -802,7 +813,7 @@
             </tr>
             <tr>
                 <td>postComponentRender</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -822,7 +833,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -947,7 +958,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1154,7 +1165,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1263,7 +1274,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1390,7 +1401,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1537,7 +1548,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1758,7 +1769,7 @@
             </tr>
             <tr>
                 <td>postComponentRender</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1778,7 +1789,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -1922,7 +1933,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -2095,7 +2106,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -2302,7 +2313,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -2409,7 +2420,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -2496,8 +2507,15 @@
                 <td>布局方式为flex时生效</td>
             </tr>
             <tr>
-                <td>项目本来的大小</td>
-                <td>mock数量</td>
+                <td>flexBasis</td>
+                <td>项目本来的宽度</td>
+                <td>-</td>
+                <td>'auto'</td>
+                <td>布局方式为flex时生效</td>
+            </tr>
+            <tr>
+                <td>itemHeight</td>
+                <td>项目本来的高度</td>
                 <td>-</td>
                 <td>'auto'</td>
                 <td>布局方式为flex时生效</td>
@@ -2628,7 +2646,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -2725,7 +2743,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>
@@ -2821,7 +2839,7 @@
             </tr>
             <tr>
                 <td>postComponentNgAfterViewInit</td>
-                <td>渲染完成后</td>
+                <td>渲染视图后</td>
                 <td>undefined</td>
             </tr>
             <tr>

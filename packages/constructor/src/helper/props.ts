@@ -1507,8 +1507,19 @@ let Loop: PropsConfigItem = {
     flexBasis: {
         category: 'input',
         value: 'auto',
-        label: '项目本来的大小',
+        label: '项目本来的宽度',
         key: 'flexBasis',
+        hide: function (p: Component['props']) {
+            return p['layout'] !== 'flex'
+        },
+        hideListenerKey: 'layout',
+        hideCalc: false,
+    },
+    itemHeight: {
+        category: 'input',
+        value: 'auto',
+        label: '项目本来的高度',
+        key: 'itemHeight',
         hide: function (p: Component['props']) {
             return p['layout'] !== 'flex'
         },

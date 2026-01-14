@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   footerAreaCompArr: Comp[]
   showObj: {[k: S]: B}
   styleObj: O
-  mainStyleObj: O
+  // mainStyleObj: O
   constructor(
     private componentService: ComponentService
   ) {
@@ -40,7 +40,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       footer: false,
     }
     this.styleObj = {}
-    this.mainStyleObj = {}
+    // this.mainStyleObj = {}
   }
   ngOnInit(): void {
     pool.register(this.data.ulid, this, this.data.behavior)
@@ -52,10 +52,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
       'grid-template-rows': `${this.data.props['headerHeight']} ${this.data.props['mainHeight']} ${this.data.props['footerHeight']}`,
       'grid-template-columns': `${this.data.props['leftWidth']} ${this.data.props['mainWidth']} ${this.data.props['rightWidth']}`,
     }
-    this.mainStyleObj = {
-      // height: this.data.props['mainHeight']
-    }
-    clog('this.styleObj', this.styleObj)
+    // this.mainStyleObj = {
+    //   // height: this.data.props['mainHeight']
+    // }
+    // clog('this.styleObj', this.styleObj)
     asyncFn(() => {
       Object.entries(this.data.slots).forEach(([area, ulid]) => {
         switch (area) {
