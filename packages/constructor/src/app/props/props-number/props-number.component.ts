@@ -23,11 +23,13 @@ export class PropsNumberComponent implements OnInit {
     this.value = 0
     this.ngModelChangeH = createDebounceFn((v: N) => {
       this.componentService.setProps(this.data.key, this.data.value)
-      this.componentService.propsS.set({
-        componentUlid: this.componentService.curComponent()!.ulid,
-        key: this.data.key,
-        value: this.data.value,
-      })
+      // todo 2027.01.01+ for delete 所有使用propsS的地方。在项目中现有props的数据传递，不需要propsS也能正常运行。
+      // 
+      // this.componentService.propsS.set({
+      //   componentUlid: this.componentService.curComponent()!.ulid,
+      //   key: this.data.key,
+      //   value: this.data.value,
+      // })
       this.componentService.reqUpdateComponent('props', this.data.key, this.data.value)
       this.change.emit(v)
     }, debounceTime)

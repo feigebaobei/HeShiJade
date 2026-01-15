@@ -261,6 +261,9 @@ export class ComponentService {
         shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
       }
     }
+    // setTimeout(() => {
+    //   clog('setProps', this._map)
+    // }, 2000)
   }
   setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()

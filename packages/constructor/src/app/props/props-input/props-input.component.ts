@@ -27,11 +27,12 @@ export class PropsInputComponent implements OnInit, OnChanges {
     this.modelChangeH = createDebounceFn((v: S) => {
       this.componentService.setProps(this.data.key, this.data.value)
       // this.componentService.setCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid)
-      this.componentService.propsS.set({
-          componentUlid: this.componentService.curComponent()!.ulid,
-          key: this.data.key,
-          value: this.data.value,
-      })
+      // clog('input change', this.data.key, this.data.value)
+      // this.componentService.propsS.set({
+      //     componentUlid: this.componentService.curComponent()!.ulid,
+      //     key: this.data.key,
+      //     value: this.data.value,
+      // })
       this.componentService.reqUpdateComponent('props', this.data.key, this.data.value)
       // clog('modelChangeH', v)
       this.change.emit(v)

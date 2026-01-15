@@ -638,13 +638,13 @@ let Select: PropsConfigItem = {
     placeholder: {
         category: 'input',
         value: '请输入',
-        label: '点位符',
+        label: '占位符',
         key: 'placeholder',
     },
     searchPlaceholder: {
         category: 'input',
         value: '',
-        label: '搜索功能的点位符',
+        label: '搜索功能的占位符',
         key: 'searchPlaceholder',
     },
     direction: {

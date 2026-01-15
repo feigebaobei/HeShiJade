@@ -207,12 +207,12 @@ export class PropsBoxComponent {
     }
   }
   itemChangeH(p: A) {
-    this.componentPropsList.forEach(item => {
-      if (item.key === p.key) {
-        item.value = p.value
-        this.componentService.setProps(item.key, item.value)
-      }
-    })
+    // this.componentPropsList.forEach(item => {
+    //   if (item.key === p.key) {
+    //     item.value = p.value
+    //     this.componentService.setProps(item.key, item.value)
+    //   }
+    // })
     this.initPropsObj()
     this.listenerChange(p.key)
   }
