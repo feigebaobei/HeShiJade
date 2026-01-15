@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { serviceUrl } from 'src/helper/config';
 import { ReqService } from './req.service';
 import { ShareSignal } from 'src/helper/shareSignal';
+import { compatiblePageData } from 'src/helper';
+// type
 import type { App } from 'src/types/app';
 import type { Page } from 'src/types/page';
 import type { S, ULID, N, A, B } from 'src/types/base';
@@ -64,7 +66,15 @@ export class PageService {
     }
   }
   reqPageList(appUlid: ULID) {
-    return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => res.data)
+    return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => {
+      let {newData, update} = compatiblePageData(res.data)
+      if (update) {
+        // this.reqUpdate(xxx)
+        // reqUpdate(ulid: ULID, type: 'meta' | 'behavior', key: Page | S, value: S, index?: N,) {
+      }
+      return newData
+      // return res.data
+    })
   }
   // todo 应用也统一使用hard参数
   // hard表示是否强制。下面的逻辑写错了。应该是为true时从后端取。

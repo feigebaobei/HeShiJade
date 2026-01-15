@@ -5,7 +5,7 @@
 ||搭建侧radio||
 ||渲染侧radio||
 ||官网侧radio||
-|搭建侧兼容旧数据|doing||
+|搭建侧兼容旧数据：应用、页面、组件|doing||
 |渲染侧兼容旧数据|||
 |官网侧描述兼容旧数据的方案|done||
 |升级props中的options setter。使其可以兼容多种选项。|done|to test|
