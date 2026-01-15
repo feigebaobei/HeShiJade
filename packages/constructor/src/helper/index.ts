@@ -293,6 +293,42 @@ let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
     return Promise.resolve(fn(...p))
   })
 }
+let compatibleAppData = <T>(data: A): {
+  newData: T
+  update: {
+    ulid: ULID
+    obj: T
+  } | null
+} => {
+  return {
+    newData: data,
+    update: null,
+  }
+}
+let compatiblePageData = <T>(data: A): {
+  newData: T
+  update: {
+    ulid: ULID
+    obj: T
+  } | null
+} => {
+  return {
+    newData: data,
+    update: null,
+  }
+}
+let compatibleComponentData = <T>(data: A): {
+  newData: T
+  update: {
+    ulid: ULID
+    obj: T
+  } | null
+} => {
+  return {
+    newData: data,
+    update: null,
+  }
+}
 
 export {
   VERSION,
@@ -314,6 +350,9 @@ export {
   compatibleArray,
   asyncFn,
   // ShareSignal,
+  compatibleAppData,
+  compatiblePageData,
+  compatibleComponentData,
 }
 export type {
   Loop,

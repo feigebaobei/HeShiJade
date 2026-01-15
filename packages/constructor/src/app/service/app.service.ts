@@ -5,6 +5,8 @@ import { createTree } from 'src/helper/tree';
 // import { initAppMeta } from 'src/helper';
 import { ReqService } from './req.service';
 import { ShareSignal } from 'src/helper/shareSignal';
+import { compatibleAppData } from 'src/helper';
+// type
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
    Email, S, ULID, N,
@@ -101,7 +103,14 @@ export class AppService {
   // 获取应用列表
   reqAppList() {
     return this.reqService.req(`${serviceUrl()}/apps`, 'get', {}).then(res => {
-      return res.data
+      let {newData, update} = compatibleAppData(res.data) // 返回新数据结构
+      if (update) { // 不用等更新接口
+        this.reqService.req(`${serviceUrl()}/apps`, 'put', {
+          appUlid: update.ulid,
+          updateObj: update.obj,
+        })
+      }
+      return newData as App[]
     })
   }
   createApp(appObj: App) {
@@ -138,15 +147,6 @@ export class AppService {
   private reqCreateApp(data: App) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'post', data)
   }
-  // 重铸
-  // 获取应用列表+设置当前应用+返回应用列表
-  // 可能用不上
-  // recast(): Promise<App[]> {
-  //   return this.reqAppList().then(() => {
-  //     this.setCurApp(this.getCurApp()?.ulid)
-  //     return this._appList
-  //   })
-  // }
   deletePageByUlid(ulid: ULID) {
     let app = this.getCurApp()
     if (app) {
