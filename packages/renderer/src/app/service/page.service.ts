@@ -12,6 +12,7 @@ import type { ResponseData, ULID, } from 'src/types'
 import type { ENV, S} from 'src/types/base';
 import type { Tree } from 'src/helper/tree';
 import { ShareSignal } from 'src/helper/shareSignal';
+import { compatiblePageData } from 'src/helper';
 
 // 根据appUlid+env请求页面
 // 根据app的第一个页面的ulid把页面列表转化为双向链表。
@@ -57,7 +58,7 @@ export class PageService {
   }
   reqList(appUlid: ULID, env: ENV) {
     return this._reqList(appUlid, env).then((pageList: Page[]) => {
-      return pageList
+      return compatiblePageData(pageList)
     }).then(pageList => {
       let app = this.appService.getCurApp()
       if (app) {

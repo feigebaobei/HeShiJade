@@ -1,7 +1,9 @@
 import type { A, N, S, F } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
-import { Component } from 'src/types/component';
+import type { Component } from 'src/types/component';
+import type { App } from 'src/types/app';
+import type { Page } from 'src/types/page';
 // import { DoublyChain } from 'data-footstone';
 
 let reqToPromise = (fn: Observable<ResponseData>): Promise<ResponseData> => {
@@ -63,6 +65,12 @@ let getLoopEventParams = (loopIndex: N, thirdParams: A) => {
     return thirdParams
   }
 }
+let compatibleAppData = (data: A): App => {
+  return data as App
+}
+let compatiblePageData = (data: A[]): Page[] => {
+  return data as Page[]
+}
 // 这个方法是从constructor复制过来再修改的。
 let compatibleComponentData = (data: A[]): Component[] => {
   // template: Options<S, S>
@@ -113,5 +121,7 @@ export {
   getLoopEventParams,
   isUndefined,
   isNull,
+  compatibleAppData,
+  compatiblePageData,
   compatibleComponentData,
 }

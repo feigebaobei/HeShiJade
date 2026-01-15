@@ -5,6 +5,7 @@ import { ResponseData } from 'src/types';
 import type { A, S, ENV } from 'src/types/base';
 import type { App } from 'src/types/app'
 import { ShareSignal } from 'src/helper/shareSignal';
+import { compatibleAppData } from 'src/helper';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class AppService {
         withCredentials: true,
       }).subscribe(res => {
         if (res.code === 0) {
-          s(res.data)
+          s(compatibleAppData(res.data))
         } else {
           j(new Error(res.message))
         }
