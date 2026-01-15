@@ -1,9 +1,17 @@
 ||||
 |-|-|-|
 |分支|f_inputNumber||
-||搭建侧inputNumber|done|
-||渲染侧inputNumber|done|
-||官网侧inputNumber|done|
+|radio|||
+||搭建侧radio||
+||渲染侧radio||
+||官网侧radio||
+|搭建侧兼容旧数据|||
+|渲染侧兼容旧数据|||
+|升级props中的options setter。使其可以兼容多种选项。|doing||
+|检查props中的options setter。是否有必要用事件传递数据|todo||
+|升级item中的options setter。使其可以兼容多种选项。|todo||
+|检查item中的options setter。是否有必要用事件传递数据|todo||
+|options setter可以删除|||
 |丰富组件|||
 ||radio||
 ||card||
@@ -11,6 +19,7 @@
 |要上生产的内容|||
 |chore: 尺寸选项按从大到小排序，并且label统一使用文字。|||
 |chore: 官网的api页面中的组件名都改为大写开头。|||
+|feat:  增加InputNumber组件。|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||

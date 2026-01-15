@@ -94,7 +94,15 @@ interface ConfigItmeOption {
   label: S
   key: S
   value: []
-  template: Options<S, S>
+  // template: Options<S, S>
+  template: Partial<{
+    label: S
+    value: S | N | B
+    valueType: 'string' | 'number' | 'boolean'
+    disabled: B
+    addButtonDisabled: B,
+    miunsButtonDisabled: B
+  }>
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B

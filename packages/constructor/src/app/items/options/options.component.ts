@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, } from '@angular/core';
 // type
-import type { S, B, Options, A, N, } from 'src/types/base';
+import type { S, B, Options, A, N, ConfigItmeOption, } from 'src/types/base';
 
 
 @Component({
@@ -12,7 +12,8 @@ export class OptionsComponent {
   // @Input() label: S = ''
   // @Input() value: B = false
   @Input() optionsList: Options<S, S>[] = []
-  @Input() optionsTemp!: Options<S, S>
+  // @Input() optionsTemp!: Options<S, S>
+  @Input() optionsTemp!: ConfigItmeOption['template']
   @Output() changeOptions = new EventEmitter<Options<S, S>[]>()
   // _label: S
   // _value: B
@@ -23,6 +24,8 @@ export class OptionsComponent {
     // this._value = this.value
     // this._optionsList = this.optionsList
   }
+  // todo 检查_optionsList
+  // 好像没有使用到_optionsList
   ngOnInit() {
     this._optionsList = this.optionsList
   }

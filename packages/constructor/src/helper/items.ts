@@ -74,7 +74,7 @@ let Form: ConfigItem[] = [
         hideListenerKey: 'category',
     },
     {
-        label: '',
+        label: '选项',
         category: 'options',
         key: 'options',
         value: [],

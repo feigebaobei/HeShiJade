@@ -30,12 +30,18 @@ export class PropsOptionComponent {
     this.optionsList = cloneDeep(this.data.value)
   }
   // todo 去抖
+  // todo 检查有必要向上传递吗？
   labelChangeH(v: S, index: N) {
     this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
     this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
     this.change.emit(this.optionsList)
   }
   valueChangeH(index: N) {
+    this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
+    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
+    this.change.emit(this.optionsList)
+  }
+  disabledChangeH() {
     this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
     this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
     this.change.emit(this.optionsList)
