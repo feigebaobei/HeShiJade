@@ -5,8 +5,9 @@
 ||搭建侧radio||
 ||渲染侧radio||
 ||官网侧radio||
-|搭建侧兼容旧数据：应用、页面、组件|doing||
-|渲染侧兼容旧数据|||
+|搭建侧兼容旧数据：应用、页面、组件|done||
+|渲染侧兼容旧数据：应用、页面、组件|done||
+|渲染侧的select组件支持新数据结构|doing||
 |官网侧描述兼容旧数据的方案|done||
 |升级props中的options setter。使其可以兼容多种选项。|done|to test|
 |检查props中的options setter。是否有必要用事件传递数据|todo||
@@ -21,6 +22,7 @@
 |chore: 尺寸选项按从大到小排序，并且label统一使用文字。|||
 |chore: 官网的api页面中的组件名都改为大写开头。|||
 |feat:  增加InputNumber组件。|||
+|feat:  渲染侧/搭建侧兼容旧数据。|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||

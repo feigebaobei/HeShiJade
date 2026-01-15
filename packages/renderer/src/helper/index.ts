@@ -91,6 +91,7 @@ let compatibleComponentData = (data: A[]): Component[] => {
             case 'string':
             default:
               subItem.valueType = 'string';
+              // subItem.disabled = true;
               break;
             case 'number':
               subItem.valueType = 'number';
