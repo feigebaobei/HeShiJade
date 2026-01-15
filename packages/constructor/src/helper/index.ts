@@ -370,6 +370,7 @@ let compatibleComponentData = (data: A[]): {
     }
     return item as Component
   })
+  // 处理其他字段再循环一次。
   return {
     newData,
     update,
