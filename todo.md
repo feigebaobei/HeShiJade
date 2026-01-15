@@ -5,9 +5,10 @@
 ||搭建侧radio||
 ||渲染侧radio||
 ||官网侧radio||
-|搭建侧兼容旧数据|||
+|搭建侧兼容旧数据|doing||
 |渲染侧兼容旧数据|||
-|升级props中的options setter。使其可以兼容多种选项。|doing||
+|官网侧描述兼容旧数据的方案|done||
+|升级props中的options setter。使其可以兼容多种选项。|done|to test|
 |检查props中的options setter。是否有必要用事件传递数据|todo||
 |升级item中的options setter。使其可以兼容多种选项。|todo||
 |检查item中的options setter。是否有必要用事件传递数据|todo||
