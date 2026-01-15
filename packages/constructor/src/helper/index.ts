@@ -283,6 +283,8 @@ let copy = (str: S): Promise<void> | Promise<boolean> => {
 }
 // 兼容的数组，常用于处理脏数据。
 let compatibleArray = <T>(a: T | T[]): T[] => Array.isArray(a) ? Array.from(a) : []
+let isUndefined = (p: A) => p === undefined
+let isNull = (p: A) => p === null
 let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
   return new Promise((s, j) => {
     setTimeout(() => {
@@ -293,7 +295,7 @@ let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
     return Promise.resolve(fn(...p))
   })
 }
-let compatibleAppData = <T>(data: A): {
+let compatibleAppData = <T>(data: A[]): {
   newData: T
   update: {
     ulid: ULID
@@ -301,11 +303,11 @@ let compatibleAppData = <T>(data: A): {
   } | null
 } => {
   return {
-    newData: data,
+    newData: data as T,
     update: null,
   }
 }
-let compatiblePageData = <T>(data: A): {
+let compatiblePageData = <T>(data: A[]): {
   newData: T
   update: {
     ulid: ULID
@@ -313,20 +315,64 @@ let compatiblePageData = <T>(data: A): {
   } | null
 } => {
   return {
-    newData: data,
+    newData: data as T,
     update: null,
   }
 }
-let compatibleComponentData = <T>(data: A): {
-  newData: T
+let compatibleComponentData = (data: A[]): {
+  newData: Component[]
   update: {
     ulid: ULID
-    obj: T
+    obj: A
   } | null
 } => {
+  // template: Options<S, S>
+  // =>
+  // template: Partial<{
+  //   label: S
+  //   value: S | N | B
+  //   valueType: 'string' | 'number' | 'boolean'
+  //   disabled: B
+  //   addButtonDisabled: B,
+  //   miunsButtonDisabled: B
+  // }>
+  let update = null
+  let newData = data.map(item => {
+    if (Array.isArray(item.props.options)) {
+      let needUpdate = false
+      item.props.options.forEach((subItem: A) => {
+        if (isUndefined(subItem.valueType)) { // valueType是必有字段
+          switch(typeof subItem.value) {
+            case 'string':
+            default:
+              subItem.valueType = 'string';
+              break;
+            case 'number':
+              subItem.valueType = 'number';
+              break;
+            case 'boolean':
+              subItem.valueType = 'boolean';
+              break;
+          }
+          needUpdate = true
+        }
+      })
+      if (needUpdate) {
+        update = {
+          ulid: item.ulid,
+          obj: {
+            type: 'props',
+            key: 'options',
+            value: item.props.options,
+          }
+        }
+      }
+    }
+    return item as Component
+  })
   return {
-    newData: data,
-    update: null,
+    newData,
+    update,
   }
 }
 
@@ -353,6 +399,8 @@ export {
   compatibleAppData,
   compatiblePageData,
   compatibleComponentData,
+  isUndefined,
+  isNull,
 }
 export type {
   Loop,

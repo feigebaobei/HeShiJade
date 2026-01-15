@@ -67,7 +67,7 @@ export class PageService {
   }
   reqPageList(appUlid: ULID) {
     return this.reqService.req(`${serviceUrl()}/pages`, 'get', {appUlid, env: 'dev'}).then(res => {
-      let {newData, update} = compatiblePageData(res.data)
+      let {newData, update} = compatiblePageData<Page[]>(res.data)
       if (update) {
         // this.reqUpdate(xxx)
         // reqUpdate(ulid: ULID, type: 'meta' | 'behavior', key: Page | S, value: S, index?: N,) {

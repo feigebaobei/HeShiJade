@@ -3,7 +3,7 @@ import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
-import { compatibleArray, createChildKey } from 'src/helper/index'
+import { compatibleArray, compatibleComponentData, createChildKey } from 'src/helper/index'
 import { shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
@@ -79,7 +79,13 @@ export class ComponentService {
     }
   }
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
-    return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => res.data)
+    return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => {
+      let {newData, update} = compatibleComponentData(res.data)
+      if (update) {
+        this.reqUpdateComponent(update.obj.type, update.obj.key, update.obj.value, update.ulid)
+      }
+      return newData
+    })
   }
   // 把组件组装成树，再做映射。
   opCompList(page: Page, componentList: Component[]): Tree<Component> {
