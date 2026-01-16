@@ -9,6 +9,8 @@ import type { N, ConfigItmeOption, F, S, A, } from 'src/types/base';
 // import type { ComponentPropsMetaItem } from 'src/types/props';
 import type { PropsValue } from 'src/types/component';
 
+let clog = console.log
+
 @Component({
   selector: 'app-props-option',
   templateUrl: './props-option.component.html',
@@ -71,7 +73,7 @@ export class PropsOptionComponent {
     this.change.emit(this.optionsList)
   }
   addH() {
-    let o = JSON.parse(JSON.stringify(this.data.template))
+    let o = cloneDeep(this.data.template)
     this.optionsList.push(o)
     this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
     this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)

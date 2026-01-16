@@ -563,7 +563,7 @@ let Select: PropsConfigItem = {
     },
     options: {
         category: 'options',
-        template: { label: '', value: '' },
+        template: { label: '', value: '', valueType: 'string', disabled: false},
         value: [],
         label: '选项',
         key: 'options',
