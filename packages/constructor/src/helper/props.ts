@@ -563,7 +563,7 @@ let Select: PropsConfigItem = {
     },
     options: {
         category: 'options',
-        template: { label: '', value: '', valueType: 'string', disabled: false},
+        template: { label: '', value: '', valueType: 'string', disabled: false, hideField: []},
         value: [],
         label: '选项',
         key: 'options',
@@ -1692,6 +1692,41 @@ let InputNumber: PropsConfigItem = {
         key: 'placeholder',
     },
 }
+let Radio: PropsConfigItem = {
+    name: {
+        category: 'input',
+        value: '',
+        label: 'name',
+        key: 'name',
+    },
+    valueList: {
+        category: 'options',
+        template: { label: '', value: '', valueType: 'string', disabled: false, hideField: ['label', 'valueType']},
+        value: [],
+        label: 'valueList',
+        key: 'valueList',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            { label: 'false', value: false },
+            { label: 'true', value: true },
+        ],
+        value: false,
+        label: '悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+}
 export {
     Button,
     Modal,
@@ -1710,4 +1745,5 @@ export {
     ShowHide,
     Loop,
     InputNumber,
+    Radio,
 }

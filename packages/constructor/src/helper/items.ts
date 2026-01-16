@@ -78,7 +78,7 @@ let Form: ConfigItem[] = [
         category: 'options',
         key: 'options',
         value: [],
-        template: {label: '', value: '', valueType: 'string', disabled: false},
+        template: {label: '', value: '', valueType: 'string', disabled: false, hideField: []},
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             // clog('o', o)

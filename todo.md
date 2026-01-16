@@ -2,19 +2,10 @@
 |-|-|-|
 |分支|f_inputNumber||
 |radio|||
-||搭建侧radio||
+||options配置项支持配置隐藏|doing|
+||搭建侧radio|todo|
 ||渲染侧radio||
 ||官网侧radio||
-|搭建侧兼容旧数据：应用、页面、组件|done||
-|渲染侧兼容旧数据：应用、页面、组件|done||
-|渲染侧的select组件支持新数据结构|done||
-|官网侧描述兼容旧数据的方案|done||
-|升级props中的options setter。使其可以兼容多种选项。|done|tested|
-|检查props中的options setter。是否有必要用事件传递数据|done||
-|升级item中的options setter。使其可以兼容多种选项。|done||
-|检查item中的options setter。是否有必要用事件传递数据|done||
-|在渲染侧检查修改options涉及的select组件、form组件|done||
-|options setter可以删除|||
 |丰富组件|||
 ||radio||
 ||card||
@@ -22,6 +13,7 @@
 |要上生产的内容|||
 |chore: 尺寸选项按从大到小排序，并且label统一使用文字。|||
 |chore: 官网的api页面中的组件名都改为大写开头。|||
+|chore: 搭建侧的组件列表使用大写开头|||
 |chore: 点位符 => 占位符|||
 |feat:  增加InputNumber组件。|||
 |feat:  渲染侧/搭建侧兼容旧数据。|||
@@ -43,7 +35,6 @@
 ||先写一个遇到脏数据报警的程序||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |丰富组件|||
-||inputNumber||
 ||radio||
 ||card||
 ||imagePreview||

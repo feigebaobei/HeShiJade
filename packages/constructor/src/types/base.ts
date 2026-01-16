@@ -96,14 +96,24 @@ interface ConfigItmeOption {
   key: S
   value: ConfigItmeOption['template'][]
   // template: Options<S, S>
-  template: Partial<{
+  // template: Partial<{
+  //   label: S
+  //   value: S | N | B
+  //   valueType: 'string' | 'number' | 'boolean'
+  //   disabled: B
+  //   hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
+  //   // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
+  //   // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+  // }>
+  template: {
     label: S
     value: S | N | B
     valueType: 'string' | 'number' | 'boolean'
     disabled: B
-    addButtonDisabled: B, // todo 检查是否使用它了。
-    miunsButtonDisabled: B // todo 检查是否使用它了。
-  }>
+    hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
+    // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
+    // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+  }
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
