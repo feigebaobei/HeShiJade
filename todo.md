@@ -2,8 +2,8 @@
 |-|-|-|
 |分支|f_inputNumber||
 |radio|||
-||options配置项支持配置隐藏|doing|
-||搭建侧radio|todo|
+||options配置项支持配置隐藏|done|
+||搭建侧radio|done|
 ||渲染侧radio||
 ||官网侧radio||
 |丰富组件|||

@@ -19,6 +19,7 @@ import { Button as ButtonProps,
     ShowHide as ShowHideProps,
     Loop as LoopProps,
     InputNumber as InputNumberProps,
+    Radio as RadioProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -35,6 +36,7 @@ import {
     ShowHide as ShowHideBehavior,
     Loop as LoopBehavior,
     InputNumber as InputNumberBehavior,
+    Radio as RadioBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -239,6 +241,13 @@ let InputNumber: ComponentDefaultConfig = {
     slots: {},
 }
 
+let Radio: ComponentDefaultConfig = {
+    props: opProps(RadioProps),
+    behavior: opBehavior(RadioBehavior),
+    items: [],
+    slots: {},
+}
+
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
     Modal,
@@ -257,4 +266,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     ShowHide,
     Loop,
     InputNumber,
+    Radio,
 }

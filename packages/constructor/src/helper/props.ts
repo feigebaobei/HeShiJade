@@ -1699,12 +1699,28 @@ let Radio: PropsConfigItem = {
         label: 'name',
         key: 'name',
     },
+    value: {
+        category: 'input',
+        value: '',
+        label: 'value',
+        key: 'value',
+    },
     valueList: {
         category: 'options',
         template: { label: '', value: '', valueType: 'string', disabled: false, hideField: ['label', 'valueType']},
         value: [],
         label: 'valueList',
         key: 'valueList',
+    },
+    direction: {
+        category: 'select',
+        options: [
+            {label: '横向', value: 'row'},
+            {label: '竖向', value: 'column'},
+        ],
+        value: 'row',
+        label: '排列方向',
+        key: 'direction',
     },
     disabled: {
         category: 'switch',

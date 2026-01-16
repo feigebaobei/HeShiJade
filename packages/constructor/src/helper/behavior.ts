@@ -416,6 +416,25 @@ let InputNumber: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let Radio: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      // {label: '键盘输入时', value: 'ngModelChange'},
+      // {label: 'model改变后', value: 'ngModelChange'},
+      {label: '值改变后', value: 'change'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -438,6 +457,7 @@ export {
     ShowHide,
     Loop,
     InputNumber,
+    Radio,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -458,5 +478,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     ShowHide,
     Loop,
     InputNumber,
+    Radio,
 }
 export default all

@@ -18,6 +18,7 @@ import { PageListComponent } from '../page-list/page-list.component';
 import { ShowHideComponent } from '../show-hide/show-hide.component';
 import { LoopComponent } from '../loop/loop.component';
 import { InputNumberComponent } from '../input-number/input-number.component';
+import { RadioComponent } from '../radio/radio.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -59,6 +60,7 @@ let compMap: Oa = {
   ShowHide: ShowHideComponent,
   Loop: LoopComponent,
   InputNumber: InputNumberComponent,
+  Radio: RadioComponent,
 }
 
 @Component({
@@ -233,6 +235,12 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'InputNumber':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Radio':
         this.componentRef.instance.data = {
           props: this.comp.props,
           ulid: this.comp.ulid,
