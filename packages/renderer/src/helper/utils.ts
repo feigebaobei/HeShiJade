@@ -1,3 +1,4 @@
+// 这是给用户使用的utils包。不能把开发的工具方法写在这里。
 import { req, } from "./req"
 import { pool, 
     // getComponentInstance

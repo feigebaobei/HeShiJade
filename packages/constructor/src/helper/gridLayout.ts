@@ -101,6 +101,16 @@ let Loop: GridLayoutDefault = {
     h: 4,
     noResize: false,
 }
+let InputNumber: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
+let Radio: GridLayoutDefault = {
+    w: 12,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -118,6 +128,8 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
+    Radio,
 }
 export {
     Button,
@@ -136,6 +148,8 @@ export {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
+    Radio,
     
     gridLayoutDefault,
 }

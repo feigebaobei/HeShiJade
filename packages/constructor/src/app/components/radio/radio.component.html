@@ -1,0 +1,12 @@
+
+<div class="radio_box" [style]="{flexDirection: data.props['direction']}">
+    <d-radio
+    *ngFor="let item of data.props['valueList']"
+    [(ngModel)]="data.props['value']"
+    [name]="data.props['name']"
+    [value]="item.value"
+    [disabled]="item['disabled']"
+    [showGlowStyle]="item['showGlowStyle']"
+    >{{ item.value }} </d-radio>
+</div>
+<!-- [beforeChange]="radioBeforeChange" -->

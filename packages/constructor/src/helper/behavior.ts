@@ -397,6 +397,44 @@ let Loop: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let InputNumber: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '键盘输入时', value: 'whileValueChanging'},
+      {label: 'model改变后', value: 'ngModelChange'},
+      {label: '值改变后', value: 'afterValueChanged'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Radio: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      // {label: '键盘输入时', value: 'ngModelChange'},
+      // {label: 'model改变后', value: 'ngModelChange'},
+      {label: '值改变后', value: 'change'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -418,6 +456,8 @@ export {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
+    Radio,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -437,5 +477,7 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
+    Radio,
 }
 export default all

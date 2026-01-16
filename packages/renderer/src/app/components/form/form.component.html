@@ -33,6 +33,7 @@
               [options]="ele.options" 
               [filterKey]="'label'" 
               [valueKey]="'value'"
+              [optionDisabledKey]="'disabled'"
               [name]="ele.key"
               [(ngModel)]="ele.value"
               [dValidateRules]="ele.required ? rules : emptyRules"

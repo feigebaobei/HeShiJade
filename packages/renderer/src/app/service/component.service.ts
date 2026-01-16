@@ -5,16 +5,16 @@ import { createTree } from 'src/helper/tree'
 import { PageService } from './page.service';
 import { ENV, } from 'src/types/base';
 import { EnvService } from './env.service';
-import { asyncFn, createChildKey } from 'src/helper/index'
+import { asyncFn, compatibleComponentData, createChildKey } from 'src/helper/index'
 import { serviceUrl } from 'src/helper/config'
 import { ShareSignal } from 'src/helper/shareSignal';
+import { pool } from 'src/helper/pool';
 // type
 import type { ResponseData, ULID } from 'src/types';
 import type { Component,
   ComponentMountItems,
   ComponentMountSlots, } from 'src/types/component';
 import type { Tree } from 'src/helper/tree';
-import { pool } from 'src/helper/pool';
 // import { trigger } from 'src/helper/utils';
 
 let clog = console.log
@@ -177,7 +177,8 @@ export class ComponentService {
         }
       }).subscribe((res) => {
         if (res.code === 0) {
-          s(res.data)
+          s(compatibleComponentData(res.data))
+          // s(res.data)
         } else {
           j(new Error(res.message))
         }

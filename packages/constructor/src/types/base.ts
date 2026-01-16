@@ -89,12 +89,31 @@ interface ConfigItemSwitch {
   hideListenerKey?: S
   hideCalc?: B
 }
+// interface ConfigItmeOption {
 interface ConfigItmeOption {
   category: 'options'
   label: S
   key: S
-  value: []
-  template: Options<S, S>
+  value: ConfigItmeOption['template'][]
+  // template: Options<S, S>
+  // template: Partial<{
+  //   label: S
+  //   value: S | N | B
+  //   valueType: 'string' | 'number' | 'boolean'
+  //   disabled: B
+  //   hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
+  //   // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
+  //   // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+  // }>
+  template: {
+    label: S
+    value: S | N | B
+    valueType: 'string' | 'number' | 'boolean'
+    disabled: B
+    hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
+    // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
+    // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+  }
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B

@@ -50,6 +50,8 @@ export class LoopComponent {
     })
   }
   listen() {
+    // 只有loop/layout组件监听了props的更新事件。
+    // todo 检查是否可以换成别的逻辑。
     shareEvent.on(creatEventName('Loop', this.data.ulid, 'props', 'update'), (obj) => {
       this.setStyle()
     })

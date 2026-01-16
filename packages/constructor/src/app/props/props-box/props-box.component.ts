@@ -27,6 +27,8 @@ import {
   PageList as PageListPropsMeta,
   ShowHide as ShowHidePropsMeta,
   Loop as LoopPropsMeta,
+  InputNumber as InputNumberPropsMeta,
+  Radio as RadioPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -151,6 +153,12 @@ export class PropsBoxComponent {
       case 'Loop':
         this.opComponentPropsList(LoopPropsMeta)
         break;
+      case 'InputNumber':
+        this.opComponentPropsList(InputNumberPropsMeta)
+        break;
+      case 'Radio':
+        this.opComponentPropsList(RadioPropsMeta)
+        break;
       default:
         this.componentPropsMeta = {}
         break
@@ -203,12 +211,12 @@ export class PropsBoxComponent {
     }
   }
   itemChangeH(p: A) {
-    this.componentPropsList.forEach(item => {
-      if (item.key === p.key) {
-        item.value = p.value
-        this.componentService.setProps(item.key, item.value)
-      }
-    })
+    // this.componentPropsList.forEach(item => {
+    //   if (item.key === p.key) {
+    //     item.value = p.value
+    //     this.componentService.setProps(item.key, item.value)
+    //   }
+    // })
     this.initPropsObj()
     this.listenerChange(p.key)
   }

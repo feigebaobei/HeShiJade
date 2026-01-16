@@ -20,6 +20,8 @@ import {
   PageList as PageListBehaviorMeta,
   ShowHide as ShowHideBehaviorMeta,
   Loop as LoopBehaviorMeta,
+  InputNumber as InputNumberBehaviorMeta,
+  Radio as RadioBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -154,6 +156,12 @@ export class BehaviorBoxComponent {
         break;
       case 'Loop':
         this.setComponentBehaviorListByType(LoopBehaviorMeta)
+        break;
+      case 'InputNumber':
+        this.setComponentBehaviorListByType(InputNumberBehaviorMeta)
+        break;
+      case 'Radio':
+        this.setComponentBehaviorListByType(RadioBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

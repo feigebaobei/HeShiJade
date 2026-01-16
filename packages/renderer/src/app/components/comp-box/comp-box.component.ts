@@ -19,6 +19,8 @@ import { LayoutComponent } from '../layout/layout.component';
 import { PageListComponent } from '../page-list/page-list.component';
 import { ShowHideComponent } from '../show-hide/show-hide.component';
 import { LoopComponent } from '../loop/loop.component';
+import { InputNumberComponent } from '../input-number/input-number.component';
+import { RadioComponent } from '../radio/radio.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -43,6 +45,8 @@ let compMap: {[k: S]: A} = {
   PageList: PageListComponent,
   ShowHide: ShowHideComponent,
   Loop: LoopComponent,
+  InputNumber: InputNumberComponent,
+  Radio: RadioComponent,
 }
 
 @Component({
@@ -235,6 +239,22 @@ export class CompBoxComponent {
           behavior: this.data.behavior,
           // items: this.data.items,
           slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'InputNumber':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Radio':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }

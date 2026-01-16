@@ -1,90 +1,100 @@
 
 let categoryList = [
     {
-      name: 'button',
+      name: 'Button',
     //   type: 'Button',
         componentCategory: 'Button',
       ulid: '12345asdfg'
     },
     {
-        name: 'modal',
+        name: 'Modal',
         // type: 'Modal',
         componentCategory: 'Modal',
         ulid: '12345asdfg2'
     },
     {
-        name: 'form',
+        name: 'Form',
         // type: 'Form',
         componentCategory: 'Form',
         ulid: '12345asdfge'
     },
     {
-        name: 'table',
+        name: 'Table',
         // type: 'Table',
         componentCategory: 'Table',
         ulid: '12345asdfgs'
     },
     {
-        name: 'input',
+        name: 'Input',
         // type: 'Input',
         componentCategory: 'Input',
         ulid: '12345asdfga'
     },
     {
-        name: 'select',
+        name: 'Select',
         // type: 'Select',
         componentCategory: 'Select',
         ulid: '12345asdfgb'
     },
     {
-        name: 'icon',
+        name: 'Icon',
         componentCategory: 'Icon',
         ulid: '01J4YEWGN8AXJKGPV4F57QD0WV'
     },
     {
-        name: 'checkbox',
+        name: 'Checkbox',
         componentCategory: 'Checkbox',
         ulid: '01J50SW599JKFBDBMKX78GAKXE'
     },
     {
-        name: 'tabs',
+        name: 'Tabs',
         componentCategory: 'Tabs',
         ulid: '01J50SWE1J1NY7KK9E6R5R9W61'
     },
     {
-        name: 'pagination',
+        name: 'Pagination',
         componentCategory: 'Pagination',
         ulid: '01J50ZGTCKEC10HWAJBZND487B'
     },
     {
-        name: 'flex',
+        name: 'Flex',
         componentCategory: 'Flex',
         ulid: '01J50ZGTCKEC10HWAJBZND487C'
     },
     {
-        name: 'grid',
+        name: 'Grid',
         componentCategory: 'Grid',
         ulid: '01J50ZGTCKEC10HWAJBZND487D'
     },
     {
-        name: 'layout',
+        name: 'Layout',
         componentCategory: 'Layout',
         ulid: '01J50ZGTCKEC10HWAJBZND487E'
     },
     {
-        name: 'pageList',
+        name: 'PageList',
         componentCategory: 'PageList',
         ulid: '01J50ZGTCKEC10HWAJBZND487F'
     },
     {
-        name: 'showHide',
+        name: 'ShowHide',
         componentCategory: 'ShowHide',
         ulid: '01J50ZGTCKEC10HWAJBZND487G'
     },
     {
-        name: 'loop',
+        name: 'Loop',
         componentCategory: 'Loop',
         ulid: '01J50ZGTCKEC10HWAJBZND487H'
+    },
+    {
+        name: 'InputNumber',
+        componentCategory: 'InputNumber',
+        ulid: '01J50ZGTCKEC10HWAJBZND487I'
+    },
+    {
+        name: 'Radio',
+        componentCategory: 'Radio',
+        ulid: '01J50ZGTCKEC10HWAJBZND487J'
     },
   ]
 export {

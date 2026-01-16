@@ -4,7 +4,7 @@ import { compatibleArray, createDebounceFn } from 'src/helper/index'
 import { debounceTime } from 'src/helper/config';
 // import { CompDirective } from '../comp.directive'
 // type
-import type { A, ConfigItem, N, B, S, Options, ConfigItemSelect, F, } from 'src/types/base';
+import type { A, ConfigItem, N, B, S, ConfigItmeOption, F, } from 'src/types/base';
 
 // interface T {
 //   key: 'label' | 'key' | 'value'
@@ -37,7 +37,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
   constructor(private componentService: ComponentService) {
     this.reqChangeItems = createDebounceFn(this.componentService.reqChangeItems, debounceTime, this.componentService)
     this.itemList = []
-    this.eventMap = new Map()
+    this.eventMap = new Map() // 保存控制显隐逻辑的事件
 
     this.inputChangeH = createDebounceFn((p: {
         key: 'label' | 'key' | 'value'
@@ -89,7 +89,9 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       }
       this.listenerChange(item)
     }, debounceTime)
-    this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
+    // this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
+    this.optionsChangeH = createDebounceFn((p: {key: 'options', value: ConfigItmeOption['template'][]}) => {
+      clog('optionsChangeH', p.key, p.value)
       this.componentService.setItems(this.index, p.key, p.value)
       // this.reqChangeItems(this.index, p.key, p.value)
       this.componentService.reqChangeItems(this.index, p.key, p.value)
@@ -102,6 +104,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     // this.compHost.viewContainerRef.clear();
   }
   initCalc() {
+    // 这里赋值
     this.itemList = this.group.map((item) => {
       let f = item.hide
       if (f) {

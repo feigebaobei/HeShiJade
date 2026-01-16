@@ -73,6 +73,14 @@ let Loop: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let InputNumber: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Radio: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -94,6 +102,8 @@ let all: {[k: S]: CompConfigAddabel} = {
     PageList,
     ShowHide,
     Loop,
+    InputNumber,
+    Radio,
 }
 
 export {

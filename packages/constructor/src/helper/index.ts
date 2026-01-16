@@ -1,5 +1,6 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
+import groupTemplate from 'src/helper/items'
 // import { ShareSignal } from './shareSignal';
 // type
 import type { A, F, N, S, Oa, B } from 'src/types/base';
@@ -283,6 +284,8 @@ let copy = (str: S): Promise<void> | Promise<boolean> => {
 }
 // 兼容的数组，常用于处理脏数据。
 let compatibleArray = <T>(a: T | T[]): T[] => Array.isArray(a) ? Array.from(a) : []
+let isUndefined = (p: A) => p === undefined
+let isNull = (p: A) => p === null
 let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
   return new Promise((s, j) => {
     setTimeout(() => {
@@ -292,6 +295,108 @@ let asyncFn = (fn: F, timing: N = 0, ...p: A) => {
   }).then((p: A) => {
     return Promise.resolve(fn(...p))
   })
+}
+let compatibleAppData = <T>(data: A[]): {
+  newData: T
+  update: {
+    ulid: ULID
+    obj: T
+  } | null
+} => {
+  return {
+    newData: data as T,
+    update: null,
+  }
+}
+let compatiblePageData = <T>(data: A[]): {
+  newData: T
+  update: {
+    ulid: ULID
+    obj: T
+  } | null
+} => {
+  return {
+    newData: data as T,
+    update: null,
+  }
+}
+let compatibleComponentData = (data: A[]): {
+  newData: Component[]
+  update: {
+    ulid: ULID
+    obj: A
+  }[]
+} => {
+  // template: Options<S, S>
+  // =>
+  // template: Partial<{
+  //   label: S
+  //   value: S | N | B
+  //   valueType: 'string' | 'number' | 'boolean'
+  //   disabled: B
+  //   addButtonDisabled: B,
+  //   miunsButtonDisabled: B
+  // }>
+  let update: {
+    ulid: ULID
+    obj: A
+  }[] = []
+  let newData = data.map(item => {
+    if (Array.isArray(item.props.options)) {
+      let needUpdate = false
+      item.props.options.forEach((subItem: A) => {
+        if (isUndefined(subItem.valueType)) { // valueType是必有字段
+          switch(typeof subItem.value) {
+            case 'string':
+            default:
+              subItem.valueType = 'string';
+              break;
+            case 'number':
+              subItem.valueType = 'number';
+              break;
+            case 'boolean':
+              subItem.valueType = 'boolean';
+              break;
+          }
+          needUpdate = true
+        }
+      })
+      if (needUpdate) {
+        update.push({
+          ulid: item.ulid,
+          obj: {
+            type: 'props',
+            key: 'options',
+            value: item.props.options,
+          }
+        })
+      }
+    }
+    return item as Component
+  })
+  // todo 检查创建有options + template的组件的创建逻辑是否使用新的template创建options
+  // components.items[index].options使用的template数据结构
+  // newData = newData.map(component => {
+  //   component.items.forEach(item => {
+  //     switch (item['category']) {
+  //       // case 'options':
+  //       case 'select':
+  //         // groupTemplate[component.type].find(ele => ele.key === item.)
+  //         let template = groupTemplate[component.type].find(ele => {
+  //           // return ele.key === item.
+  //         })
+  //         let options = item['options']
+  //         break;
+  //     }
+  //   })
+  //   return component
+  // })
+  // 这里不好处理。放在items面板中处理吧。
+  // 处理其他字段再循环一次。
+  return {
+    newData,
+    update,
+  }
 }
 
 export {
@@ -314,6 +419,11 @@ export {
   compatibleArray,
   asyncFn,
   // ShareSignal,
+  compatibleAppData,
+  compatiblePageData,
+  compatibleComponentData,
+  isUndefined,
+  isNull,
 }
 export type {
   Loop,

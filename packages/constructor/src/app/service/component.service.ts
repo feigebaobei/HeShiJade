@@ -3,7 +3,7 @@ import { createTree } from 'src/helper/tree';
 import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
-import { compatibleArray, createChildKey } from 'src/helper/index'
+import { compatibleArray, compatibleComponentData, createChildKey } from 'src/helper/index'
 import { shareEvent, creatEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
@@ -79,7 +79,15 @@ export class ComponentService {
     }
   }
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
-    return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => res.data)
+    return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => {
+      let {newData, update} = compatibleComponentData(res.data)
+      if (update.length) {
+        update.forEach(item => {
+          this.reqUpdateComponent(item.obj.type, item.obj.key, item.obj.value, item.ulid)
+        })
+      }
+      return newData
+    })
   }
   // 把组件组装成树，再做映射。
   opCompList(page: Page, componentList: Component[]): Tree<Component> {
@@ -255,6 +263,9 @@ export class ComponentService {
         shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
       }
     }
+    // setTimeout(() => {
+    //   clog('setProps', this._map)
+    // }, 2000)
   }
   setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
     let curComp: CompOrUn = this.curComponent()

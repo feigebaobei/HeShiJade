@@ -1,10 +1,13 @@
 
 import { Queue } from "data-footstone"
 import * as utils from "./utils"
-import type { ULID } from "src/types"
-import type { A, F, O, Oa, S, B } from "src/types/base"
-import type { Component } from "src/types/component"
 import { PromiseControllable, } from "./utils"
+import { getLoopEventParams } from "src/helper";
+import { Component, Directive } from "@angular/core";
+import type { ULID } from "src/types"
+import type { A, F, O, Oa, S, B, N, } from "src/types/base"
+import type { Component as Comp } from "src/types/component"
+import type { componentInstanceData } from "src/types/component";
 
 let clog = console.log
 type PageUlid = ULID
@@ -78,7 +81,7 @@ class Pool {
     unRegisterComponentInstance(ulid: ULID) {
         this.ulidComponentMap.delete(ulid)
     }
-    register(ulid: ULID, componentInstance: A, behavior: Component['behavior'] ) {
+    register(ulid: ULID, componentInstance: A, behavior: Comp['behavior'] ) {
         // 注册组件实例
         this.registerComponentInstance(ulid, componentInstance)
         // 注册事件
@@ -178,8 +181,42 @@ class Pool {
 }
 let pool = new Pool()
 // let getComponentInstance = '' // pool.getComponentInstance.bind(pool)
+
+// @Directive()
+@Component({
+    template: ''
+})
+class CompBase {
+    data!: componentInstanceData
+    loopIndex!: N
+    constructor() {}
+    setProps(o: O) {
+        Object.entries(o).forEach(([k, v]) => {
+            this.data.props[k] = v
+        })
+    }
+    ngOnChanges() {
+        pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
+    }
+    ngOnInit() {
+        pool.register(this.data.ulid, this, this.data.behavior)
+        pool.trigger(this.data.ulid, 'postComponentNgOnInit', getLoopEventParams(this.loopIndex, undefined), this)
+    }
+    ngDoCheck() {
+        pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
+    }
+    ngAfterViewInit() {
+        pool.trigger(this.data.ulid, 'postComponentNgAfterViewInit', getLoopEventParams(this.loopIndex, undefined), this)
+        pool.resolveComponentRender(this.data.pageUlid, this.data.ulid)
+    }
+    ngOnDestroy() {
+        pool.trigger(this.data.ulid, 'postComponentNgOnDestroy', getLoopEventParams(this.loopIndex, undefined), this)
+        pool.unRegister(this.data.ulid)
+    }
+}
 export {
     Pool,
     pool,
+    CompBase,
     // getComponentInstance,
 }

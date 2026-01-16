@@ -16,6 +16,8 @@ import {
   CheckBoxModule,
   // MenuModule,
   ToastModule,
+  InputNumberModule,
+  RadioModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -47,6 +49,8 @@ import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.co
 import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
 import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
+import { InputNumberComponent } from './input-number/input-number.component';
+import { RadioComponent } from './radio/radio.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -72,6 +76,8 @@ import { LoopComponent } from './loop/loop.component';
     PageListItemComponent,
     ShowHideComponent,
     LoopComponent,
+    InputNumberComponent,
+    RadioComponent,
   ],
   imports: [
     CommonModule,
@@ -92,6 +98,8 @@ import { LoopComponent } from './loop/loop.component';
     CheckBoxModule,
     MenuModule,
     ToastModule,
+    InputNumberModule,
+    RadioModule,
   ],
   providers: [],
   exports: [

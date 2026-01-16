@@ -42,6 +42,7 @@ interface ItemsMetaItemCategory {
   label: S
   value: S
 }
+// todo 考虑删除这个类型
 type ItemsMetaItem = {
   category: S
   label: S

@@ -1,8 +1,8 @@
 // import type { ComponentPropsMetaRaw } from 'src/types/props'
 import { B, Options, S, N, A, ConfigItem } from 'src/types/base';
-import type { 
-    // ComponentItem, 
-    ItemsMeta } from 'src/types/items';
+// import type { 
+//     // ComponentItem, 
+//     ItemsMeta } from 'src/types/items';
 // 指定组件的配置项
 
 let clog = console.log
@@ -74,11 +74,11 @@ let Form: ConfigItem[] = [
         hideListenerKey: 'category',
     },
     {
-        label: '',
+        label: '选项',
         category: 'options',
         key: 'options',
         value: [],
-        template: {label: '', value: ''},
+        template: {label: '', value: '', valueType: 'string', disabled: false, hideField: []},
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             // clog('o', o)
@@ -484,6 +484,8 @@ let all: {[k: S]: ConfigItem[]} = {
     PageList,
     // ShowHide, // 没有特定子元素
     // Loop, // 没有特定子元素
+    // InputNumber, // 没有特定子元素
+    // Radio, // 没有特定子元素
 }
 
 export default all
