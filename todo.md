@@ -1,15 +1,14 @@
 ||||
 |-|-|-|
 |分支|f_inputNumber||
-|radio|||
-||options配置项支持配置隐藏|done|
-||搭建侧radio|done|
-||渲染侧radio|done|
-||官网侧radio|done|
-||form组件中支持radio|todo|
+|form组件中支持radio|todo||
+||搭建侧form组件中支持radio|todo|
+||渲染侧form组件中支持radio|todo|
+||官网侧form组件中支持radio|todo|
+|搭建侧card|todo||
+|渲染侧card|todo||
+|官网侧card|todo||
 |丰富组件|||
-||radio||
-||card||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
 |feat:  增加InputNumber组件。|||
