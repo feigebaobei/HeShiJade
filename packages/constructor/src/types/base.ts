@@ -34,7 +34,6 @@ interface ConfigItemInput {
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
-  // hideConfig?: B
   placeholder?: S
 }
 type ConfigItemKeys = keyof ConfigItem

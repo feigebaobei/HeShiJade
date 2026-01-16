@@ -18,6 +18,7 @@ let Form: ConfigItem[] = [
             {label: 'input', value: 'input'},
             {label: 'select', value: 'select'},
             {label: 'switch', value: 'switch'},
+            {label: 'radio', value: 'radio'},
         ],
         key: 'category',
         value: 'input',
@@ -25,8 +26,8 @@ let Form: ConfigItem[] = [
     {
         label: 'key',      // 在配置面板中的显示的文本
         category: 'input', // 在配置面板中显示的种类
-        key: 'key',        // 配置组中项的key
-        value: '',      // 在配置面板中设置的值
+        key: 'key',        // 配置组中项的key。在渲染侧时使用。
+        value: '',         // 在配置面板中设置的值
     },
     {
         label: 'label',
@@ -43,6 +44,7 @@ let Form: ConfigItem[] = [
             let o = p.find(item => item.key === 'category')
             let r = false
             if (o && 'value' in o) {
+                // todo 改为使用includes
                 r = o.value === 'switch'
             } else {
                 r = true
@@ -54,13 +56,13 @@ let Form: ConfigItem[] = [
     {
         label: 'checked',
         category: 'switch',
-        key: 'checked',
-        // checked: false,
-        value: false,
         options: [
             {label: 'false', value: false},
             {label: 'true', value: true},
         ],
+        key: 'checked',
+        // checked: false,
+        value: false,
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             let r = false
@@ -131,7 +133,7 @@ let Form: ConfigItem[] = [
                 return true
             }
         },
-        hideListenerKey: 'hasHelp',
+        hideListenerKey: 'hasHelp', // 监听哪个key的变化触发hide方法
     },
     {
         label: '附加信息',
@@ -140,7 +142,7 @@ let Form: ConfigItem[] = [
         value: '',
     },
     {
-        label: '渲染',
+        label: '是否渲染',
         category: 'switch',
         options: [
             {label: 'false', value: false},
@@ -151,12 +153,72 @@ let Form: ConfigItem[] = [
         // checked: true,
         value: true,
     },
+    {
+        label: 'name',
+        category: 'input',
+        key: 'name',
+        value: '',
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'category')
+            // if (o) {}
+            // let r = o?.value === 'radio'
+            clog('hidddddd', o)
+            return !['radio'].includes(String(o!.value))
+        },
+        hideListenerKey: 'category',
+    },
+    {
+        label: 'valueList',
+        category: 'options',
+        key: 'valueList',
+        value: [],
+        template: {label: '', value: '', valueType: 'string', disabled: false, hideField: ['label', 'valueType']},
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'category')
+            return !['radio'].includes(String(o!.value))
+            // return o?.value !== 'radio'
+        },
+        hideListenerKey: 'category',
+    },
+    {
+        label: '排列方向',
+        category: 'select',
+        options: [
+            {label: 'row', value: 'row'},
+            {label: 'column', value: 'column'},
+        ],
+        key: 'direction',
+        value: 'row',
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'category')
+            clog('hidddddd', o)
+            return !['radio'].includes(String(o!.value))
+        },
+        hideListenerKey: 'category',
+    },
+    {
+        label: '悬浮发光效果',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        key: 'showGlowStyle',
+        value: false,
+        hide: function (p: ConfigItem[]) {
+            let o = p.find(item => item.key === 'category')
+            clog('hidddddd', o)
+            return !['radio'].includes(String(o!.value))
+        },
+        hideListenerKey: 'category',
+    },
+
 ]
-let FormItemCategory = [
-    { label: 'input', value: 'input', },
-    { label: 'select', value: 'select', },
-    { label: 'switch', value: 'switch', },
-]
+// let FormItemCategory = [
+//     { label: 'input', value: 'input', },
+//     { label: 'select', value: 'select', },
+//     { label: 'switch', value: 'switch', },
+// ]
 let Table: ConfigItem[] = [
     {
         label: '类型',
