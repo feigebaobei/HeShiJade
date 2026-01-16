@@ -89,19 +89,20 @@ interface ConfigItemSwitch {
   hideListenerKey?: S
   hideCalc?: B
 }
+// interface ConfigItmeOption {
 interface ConfigItmeOption {
   category: 'options'
   label: S
   key: S
-  value: []
+  value: ConfigItmeOption['template'][]
   // template: Options<S, S>
   template: Partial<{
     label: S
     value: S | N | B
     valueType: 'string' | 'number' | 'boolean'
     disabled: B
-    addButtonDisabled: B,
-    miunsButtonDisabled: B
+    addButtonDisabled: B, // todo 检查是否使用它了。
+    miunsButtonDisabled: B // todo 检查是否使用它了。
   }>
   hide?: FT<B>
   hideListenerKey?: S

@@ -30,13 +30,14 @@ export class ItemsBoxComponent {
     private componentService: ComponentService) {
     this.groupList = []
     this.text = text
-    effect(() => {
+    effect(() => { // 根据当前组件设置items面板的数据
       let p = this.componentService.curComponentS.get()
       if (p) {
         this.curComponent = p
         this.groupList = []
         p.items.forEach(item => {
-          let group = this.groupForConfig(p!.type)
+          let group = this.getGroupForConfig(p!.type) // 在这里深复制的
+          // 把组件的items数据处理为items配置项
           Object.entries(item).forEach(([k, v]) => {
             let gi = group.find(gi => gi.key === k)
             if (gi) {
@@ -67,7 +68,7 @@ export class ItemsBoxComponent {
   }
   addH() {
     if (this.curComponent) {
-      let group = this.groupForConfig(this.curComponent.type)
+      let group = this.getGroupForConfig(this.curComponent.type)
       this.groupList.push(group)
       // todo 检查使用ItemsMetaItem的地方
       let obj: ItemsMetaItem = {} as ItemsMetaItem
@@ -104,8 +105,8 @@ export class ItemsBoxComponent {
       this.componentService.reqRemoveItems(this.curComponent.ulid, i)
     }
   }
-  groupForConfig(type: S): ConfigItem[] {
-    let r = cloneDeep(compatibleArray(groupTemplate[type])) // .filter(t => !t.hideConfig)) // 取出要显示的
+  getGroupForConfig(type: S): ConfigItem[] {
+    let r = cloneDeep(compatibleArray(groupTemplate[type]))
     return r
   }
 }

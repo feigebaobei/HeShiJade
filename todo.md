@@ -10,8 +10,8 @@
 |渲染侧的select组件支持新数据结构|done||
 |官网侧描述兼容旧数据的方案|done||
 |升级props中的options setter。使其可以兼容多种选项。|done|tested|
-|检查props中的options setter。是否有必要用事件传递数据|doing||
-|升级item中的options setter。使其可以兼容多种选项。|todo||
+|检查props中的options setter。是否有必要用事件传递数据|done||
+|升级item中的options setter。使其可以兼容多种选项。|doing||
 |检查item中的options setter。是否有必要用事件传递数据|todo||
 |options setter可以删除|||
 |丰富组件|||

@@ -1,5 +1,6 @@
 import { ulid } from 'ulid';
 import {componentDefaultConfigAll} from 'src/helper/component'
+import groupTemplate from 'src/helper/items'
 // import { ShareSignal } from './shareSignal';
 // type
 import type { A, F, N, S, Oa, B } from 'src/types/base';
@@ -324,7 +325,7 @@ let compatibleComponentData = (data: A[]): {
   update: {
     ulid: ULID
     obj: A
-  } | null
+  }[]
 } => {
   // template: Options<S, S>
   // =>
@@ -336,7 +337,10 @@ let compatibleComponentData = (data: A[]): {
   //   addButtonDisabled: B,
   //   miunsButtonDisabled: B
   // }>
-  let update = null
+  let update: {
+    ulid: ULID
+    obj: A
+  }[] = []
   let newData = data.map(item => {
     if (Array.isArray(item.props.options)) {
       let needUpdate = false
@@ -358,18 +362,36 @@ let compatibleComponentData = (data: A[]): {
         }
       })
       if (needUpdate) {
-        update = {
+        update.push({
           ulid: item.ulid,
           obj: {
             type: 'props',
             key: 'options',
             value: item.props.options,
           }
-        }
+        })
       }
     }
     return item as Component
   })
+  // todo 检查创建有options + template的组件的创建逻辑是否使用新的template创建options
+  // components.items[index].options使用的template数据结构
+  // newData = newData.map(component => {
+  //   component.items.forEach(item => {
+  //     switch (item['category']) {
+  //       // case 'options':
+  //       case 'select':
+  //         // groupTemplate[component.type].find(ele => ele.key === item.)
+  //         let template = groupTemplate[component.type].find(ele => {
+  //           // return ele.key === item.
+  //         })
+  //         let options = item['options']
+  //         break;
+  //     }
+  //   })
+  //   return component
+  // })
+  // 这里不好处理。放在items面板中处理吧。
   // 处理其他字段再循环一次。
   return {
     newData,

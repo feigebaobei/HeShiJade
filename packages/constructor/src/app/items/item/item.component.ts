@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, Signal, OnInit, OnChanges, } from '@angular/core';
 // type
-import type { ConfigItem, S, B, Options, A, N, } from 'src/types/base';
+import type { ConfigItem, S, B, Options, A, N, ConfigItmeOption } from 'src/types/base';
 
 let clog = console.log
 
@@ -13,15 +13,16 @@ export class ItemComponent implements OnInit
 // OnChanges 
 {
   @Input() groupItem!: ConfigItem // = {} as ConfigItem
-  @Input() group!: ConfigItem[] // = {} as ConfigItem
+  @Input() group!: ConfigItem[] // = {} as ConfigItem // todo 好像没用上这个数据。考虑删除它。
   @Output() inputChange = new EventEmitter()
   @Output() numberChange = new EventEmitter()
   @Output() selectChange = new EventEmitter()
   @Output() switchChange = new EventEmitter()
-  @Output() optionsChange = new EventEmitter<{key: 'options', value: Options<S, S>[]}>()
+  @Output() optionsChange = new EventEmitter<{key: 'options', value: ConfigItmeOption['template'][]}>()
   hideOptions: B
   constructor() {
-    this.hideOptions = false
+    // todo 考虑删除它
+    this.hideOptions = false // 没发现使用此变量的地方
   }
   ngOnInit(): void {
     // console.log('groupItem', this.groupItem)
@@ -73,7 +74,8 @@ export class ItemComponent implements OnInit
     this.switchChange.emit({key: this.groupItem.key, checked: v})
     // this.hideListener(this.groupItem.key)
   }
-  optionsChangeH (v: Options<S, S>[]) {
+  // optionsChangeH (v: Options<S, S>[]) {
+  optionsChangeH (v: ConfigItmeOption['template'][]) {
     // console.log('optionsChangeH v', v)
     this.optionsChange.emit({key: this.groupItem.key as 'options', value: v})
     // this.hideListener(this.groupItem.key)

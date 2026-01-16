@@ -1,8 +1,8 @@
 // import type { ComponentPropsMetaRaw } from 'src/types/props'
 import { B, Options, S, N, A, ConfigItem } from 'src/types/base';
-import type { 
-    // ComponentItem, 
-    ItemsMeta } from 'src/types/items';
+// import type { 
+//     // ComponentItem, 
+//     ItemsMeta } from 'src/types/items';
 // 指定组件的配置项
 
 let clog = console.log
@@ -78,7 +78,7 @@ let Form: ConfigItem[] = [
         category: 'options',
         key: 'options',
         value: [],
-        template: {label: '', value: ''},
+        template: {label: '', value: '', valueType: 'string', disabled: false},
         hide: function (p: ConfigItem[]) {
             let o = p.find(item => item.key === 'category')
             // clog('o', o)

@@ -81,8 +81,10 @@ export class ComponentService {
   reqComponentListByPage(pageUlid: ULID): Promise<Component[]> {
     return this.reqService.req(`${serviceUrl()}/components`, 'get', {pageUlid, env: 'dev'}).then((res) => {
       let {newData, update} = compatibleComponentData(res.data)
-      if (update) {
-        this.reqUpdateComponent(update.obj.type, update.obj.key, update.obj.value, update.ulid)
+      if (update.length) {
+        update.forEach(item => {
+          this.reqUpdateComponent(item.obj.type, item.obj.key, item.obj.value, item.ulid)
+        })
       }
       return newData
     })
