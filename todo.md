@@ -5,20 +5,22 @@
 ||options配置项支持配置隐藏|done|
 ||搭建侧radio|done|
 ||渲染侧radio|done|
-||官网侧radio|doing|
+||官网侧radio|done|
+||form组件中支持radio|todo|
 |丰富组件|||
 ||radio||
 ||card||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
+|feat:  增加InputNumber组件。|||
+|feat:  渲染侧/搭建侧兼容旧数据。|||
+|feat:  增加Radio组件。|||
+|feat:  items面板、props面板的选项配置项支持3种数据类型string/number/boolean，支持删除，支持禁用。|||
 |chore: 尺寸选项按从大到小排序，并且label统一使用文字。|||
 |chore: 官网的api页面中的组件名都改为大写开头。|||
 |chore: 搭建侧的组件列表使用大写开头|||
 |chore: 点位符 => 占位符|||
-|feat:  增加InputNumber组件。|||
-|feat:  渲染侧/搭建侧兼容旧数据。|||
 |docs:  官网侧增加props的传递逻辑。|||
-|feat:  items面板、props面板的选项配置项支持3种数据类型string/number/boolean，支持删除，支持禁用。|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||

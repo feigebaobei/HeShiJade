@@ -3,10 +3,10 @@ import { Queue } from "data-footstone"
 import * as utils from "./utils"
 import { PromiseControllable, } from "./utils"
 import { getLoopEventParams } from "src/helper";
-import { Directive } from "@angular/core";
+import { Component, Directive } from "@angular/core";
 import type { ULID } from "src/types"
 import type { A, F, O, Oa, S, B, N, } from "src/types/base"
-import type { Component } from "src/types/component"
+import type { Component as Comp } from "src/types/component"
 import type { componentInstanceData } from "src/types/component";
 
 let clog = console.log
@@ -81,7 +81,7 @@ class Pool {
     unRegisterComponentInstance(ulid: ULID) {
         this.ulidComponentMap.delete(ulid)
     }
-    register(ulid: ULID, componentInstance: A, behavior: Component['behavior'] ) {
+    register(ulid: ULID, componentInstance: A, behavior: Comp['behavior'] ) {
         // 注册组件实例
         this.registerComponentInstance(ulid, componentInstance)
         // 注册事件
@@ -182,7 +182,10 @@ class Pool {
 let pool = new Pool()
 // let getComponentInstance = '' // pool.getComponentInstance.bind(pool)
 
-@Directive()
+// @Directive()
+@Component({
+    template: ''
+})
 class CompBase {
     data!: componentInstanceData
     loopIndex!: N
