@@ -11,8 +11,9 @@
 |官网侧描述兼容旧数据的方案|done||
 |升级props中的options setter。使其可以兼容多种选项。|done|tested|
 |检查props中的options setter。是否有必要用事件传递数据|done||
-|升级item中的options setter。使其可以兼容多种选项。|doing||
-|检查item中的options setter。是否有必要用事件传递数据|todo||
+|升级item中的options setter。使其可以兼容多种选项。|done||
+|检查item中的options setter。是否有必要用事件传递数据|done||
+|在渲染侧检查修改options涉及的select组件、form组件|done||
 |options setter可以删除|||
 |丰富组件|||
 ||radio||
@@ -25,6 +26,7 @@
 |feat:  增加InputNumber组件。|||
 |feat:  渲染侧/搭建侧兼容旧数据。|||
 |docs:  官网侧增加props的传递逻辑。|||
+|feat:  items面板、props面板的选项配置项支持3种数据类型string/number/boolean，支持删除，支持禁用。|||
 ||||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
