@@ -6,7 +6,12 @@
             [dSpace]="4"
             [dSpaceDirection]="'horizontal'"
         >
-            <d-col *ngIf="item.label !== undefined" [dSpan]="8">
+            <d-col
+                *ngIf="item.label !== undefined"
+                [dSpan]="11"
+                dTooltip
+                content="label"
+            >
                 <d-form-item>
                     <d-form-control>
                         <input dTextInput
@@ -17,7 +22,12 @@
                     </d-form-control>
                 </d-form-item>
             </d-col>
-            <d-col *ngIf="item.value !== undefined" [dSpan]="8">
+            <d-col
+                *ngIf="item.value !== undefined"
+                [dSpan]="11"
+                dTooltip
+                content="value"
+            >
                 <div [ngSwitch]="item.valueType">
                     <ng-template [ngSwitchCase]="'string'">
                         <d-form-item>
@@ -54,15 +64,39 @@
                     </ng-template>
                 </div>
             </d-col>
-            <d-col *ngIf="item.disabled !== undefined" [dSpan]="2">
+            <d-col
+                *ngIf="item.value !== undefined"
+                [dSpan]="12"
+                dTooltip
+                content="值类型"
+            >
+                <d-select
+                    [options]="options"
+                    [filterKey]="'label'"
+                    [valueKey]="'value'" 
+                    [(ngModel)]="item.valueType"
+                    (ngModelChange)="valueTypechangeH($event, i)"
+                    class="select"
+                ></d-select>
+            </d-col>
+            <d-col
+                *ngIf="item.disabled !== undefined"
+                [dSpan]="6"
+                dTooltip
+                content="是否禁用"
+            >
                 <d-toggle 
                     [(ngModel)]="item.disabled"
                     (ngModelChange)="disabledChangeH()"
                 ></d-toggle>
             </d-col>
-            <d-col [dSpan]="2">
+            <d-col
+                [dSpan]="4"
+                dTooltip
+                content="删除"
+            >
                 <d-icon-group>
-                    <d-icon [icon]="'icon-minus'"></d-icon>
+                    <d-icon [icon]="'icon-minus'"lass="pointer" (click)="deleteIconClickH($event, i)"></d-icon>
                 </d-icon-group>
             </d-col>
         </d-row>

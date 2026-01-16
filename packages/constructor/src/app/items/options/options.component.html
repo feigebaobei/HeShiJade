@@ -2,7 +2,6 @@
     <span>{{label}}</span>
     <div>
         <d-row *ngFor="let item of _optionsList; let i = index"
-            [dGutter]="4"
             [dSpace]="4"
             [dSpaceDirection]="'horizontal'"
         >
@@ -13,14 +12,14 @@
                 content="label"
             >
                 <d-form-item>
-                <d-form-control>
-                    <input
-                        dTextInput
-                        [(ngModel)]="item.label"
-                        (ngModelChange)="labelChangeH($event, i)"
-                        placeholder="label"
-                    />
-                </d-form-control>
+                    <d-form-control>
+                        <input
+                            dTextInput
+                            [(ngModel)]="item.label"
+                            (ngModelChange)="labelChangeH($event, i)"
+                            placeholder="label"
+                        />
+                    </d-form-control>
                 </d-form-item>
             </d-col>
             <d-col
@@ -95,7 +94,7 @@
                 content="删除"
             >
                 <d-icon-group>
-                    <d-icon [icon]="'icon-minus'" class="point" (click)="deleteIconClickH($event, i)"></d-icon>
+                    <d-icon [icon]="'icon-minus'" class="pointer" (click)="deleteIconClickH($event, i)"></d-icon>
                 </d-icon-group>
             </d-col>
         </d-row>

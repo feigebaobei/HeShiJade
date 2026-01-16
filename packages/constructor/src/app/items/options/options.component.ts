@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, } from '@angular/core';
 import { cloneDeep } from 'src/helper';
+import { valueType } from 'src/helper/config';
 // type
 import type { S, B, Options, A, N, ConfigItmeOption, } from 'src/types/base';
 let clog = console.log
@@ -29,20 +30,7 @@ export class OptionsComponent {
     // this._value = this.value
     // this._optionsList = this.optionsList
     this._optionsList = []
-    this.options = [
-      {
-        label: 'string',
-        value: 'string',
-      },
-      {
-        label: 'number',
-        value: 'number',
-      },
-      {
-        label: 'boolean',
-        value: 'boolean',
-      },
-    ] // 这是valueType的枚举值。改变它时需要与valueType的枚举值一起改变。
+    this.options = valueType
   }
   // todo 检查_optionsList
   // 好像没有使用到_optionsList

@@ -97,6 +97,20 @@ let text: Text = {
     noApp: '无应用',
     toCreateComp: '请创建组件',
 }
+let valueType = [
+    {
+    label: 'string',
+    value: 'string',
+    },
+    {
+    label: 'number',
+    value: 'number',
+    },
+    {
+    label: 'boolean',
+    value: 'boolean',
+    },
+] // 这是valueType的枚举值。改变它时需要与valueType的枚举值一起改变。
 
 export {
     ssoUrl,
@@ -109,4 +123,5 @@ export {
     debounceTime,
     layoutOptions,
     text,
+    valueType,
 }
