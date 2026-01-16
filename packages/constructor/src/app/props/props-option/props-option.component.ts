@@ -20,6 +20,9 @@ export class PropsOptionComponent {
   @Input() data!: ConfigItmeOption
   @Output() change = new EventEmitter()
   modelChangeH: F
+  labelChangeH: F
+  valueChangeH: F
+  disabledChangeH: F
   optionsList: ConfigItmeOption['template'][] = []
   options: {label: S, value: S}[]
   constructor(private componentService: ComponentService) {
@@ -30,27 +33,27 @@ export class PropsOptionComponent {
       this.change.emit(v)
     }, debounceTime)
     this.options = valueType
+    this.labelChangeH = createDebounceFn(() => {
+      this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
+      this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
+      this.change.emit(this.optionsList)
+    }, debounceTime)
+    this.valueChangeH = createDebounceFn(() => {
+      this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
+      this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
+      this.change.emit(this.optionsList)
+    }, debounceTime)
+    this.disabledChangeH = createDebounceFn(() => {
+      this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
+      this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
+      this.change.emit(this.optionsList)
+    }, debounceTime)
   }
   ngOnInit() {
     this.optionsList = cloneDeep(this.data.value)
   }
-  // todo 去抖
-  // todo 检查有必要向上传递吗？
-  labelChangeH(v: S, index: N) {
-    this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
-    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
-    this.change.emit(this.optionsList)
-  }
-  valueChangeH(index: N) {
-    this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
-    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
-    this.change.emit(this.optionsList)
-  }
-  disabledChangeH() {
-    this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
-    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
-    this.change.emit(this.optionsList)
-  }
+  // 检查有必要向上传递吗？
+  // 有必要。要在props-box中处理props的显隐逻辑
   valueTypechangeH(t: S, i: N) {
     switch (t) {
       case 'string':
