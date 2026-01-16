@@ -20,6 +20,7 @@
     (changeValue)="switchChangeH($event)"
 ></app-switch>
 <app-options *ngIf="groupItem.category === 'options'"
+    [label]="groupItem.label"
     [optionsList]="groupItem.value"
     [optionsTemp]="groupItem.template"
     (changeOptions)="optionsChangeH($event)"

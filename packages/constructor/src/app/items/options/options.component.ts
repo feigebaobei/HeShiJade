@@ -10,7 +10,7 @@ let clog = console.log
   styleUrls: ['./options.component.sass']
 })
 export class OptionsComponent {
-  // @Input() label: S = ''
+  @Input() label: S = ''
   // @Input() value: B = false
   // @Input() optionsList: Options<S, S>[] = []
   @Input() optionsList!: ConfigItmeOption['template'][]
@@ -23,11 +23,26 @@ export class OptionsComponent {
   // todo 修正 _optionsList optionsList
   // _optionsList: Options<S, A>[] = []
   _optionsList: ConfigItmeOption['template'][]
+  options: {label: S, value: S}[]
   constructor() {
     // this._label = this.label
     // this._value = this.value
     // this._optionsList = this.optionsList
     this._optionsList = []
+    this.options = [
+      {
+        label: 'string',
+        value: 'string',
+      },
+      {
+        label: 'number',
+        value: 'number',
+      },
+      {
+        label: 'boolean',
+        value: 'boolean',
+      },
+    ] // 这是valueType的枚举值。改变它时需要与valueType的枚举值一起改变。
   }
   // todo 检查_optionsList
   // 好像没有使用到_optionsList
@@ -61,6 +76,31 @@ export class OptionsComponent {
   }
   opLv () {
     // this._optionsList
+  }
+  disabledChangeH() {
+    this.changeOptions.emit(this._optionsList)
+    // this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
+    // this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
+    // this.change.emit(this.optionsList)
+  }
+  valueTypechangeH(t: S, i: N) {
+    switch (t) {
+      case 'string':
+      default:
+        this._optionsList[i].value = ''
+        break;
+      case 'number':
+        this._optionsList[i].value = 0
+        break;
+      case 'boolean':
+        this._optionsList[i].value = true
+        break;
+    }
+    this.changeOptions.emit(this._optionsList)
+  }
+  deleteIconClickH($event: MouseEvent, i: N) {
+    this._optionsList.splice(i, 1)
+    this.changeOptions.emit(this._optionsList)
   }
   addH() {
     let o = cloneDeep(this.optionsTemp)
