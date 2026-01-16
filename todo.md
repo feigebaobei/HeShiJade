@@ -4,7 +4,7 @@
 |radio|||
 ||options配置项支持配置隐藏|done|
 ||搭建侧radio|done|
-||渲染侧radio||
+||渲染侧radio|done|
 ||官网侧radio||
 |丰富组件|||
 ||radio||
