@@ -20,9 +20,12 @@
         <li>注释`renderer/src/app/components/new-comp/new-comp.components.ts`中的`standalone``imports`。</li>
         <li>在`renderer/src/app/components/components.module.ts`引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
         <li>在`renderer/src/app/components/comp-box/comp-box.component.ts`中引入新组件并为其传入数据</li>
-        <li>在新组件中：1. 接收数据。 2. 定义处理特定逻辑的方法。至少有`setProps()` 3. 定义这些生命周期方法`ngOnInit`,`ngOnchage`,`ngDoCheck`,`ngAfterViewInit`,`ngOnDestroy`，在其中触发相关事件。可以参考`HeShiJade`/packages/renderer/src/app/components/input/input.component.ts`</li>
+        <li>
+            <del>在新组件中：1. 接收数据。 2. 定义处理特定逻辑的方法。至少有`setProps()` 3. 定义这些生命周期方法`ngOnInit`,`ngOnchage`,`ngDoCheck`,`ngAfterViewInit`,`ngOnDestroy`，在其中触发相关事件。可以参考`HeShiJade`/packages/renderer/src/app/components/input/input.component.ts`</del>
+            引入CompBase类，再基于它开发组件。可以参考Radio组件。
+        </li>
         <li>参考搭建侧的同组件，编写渲染侧的 *.html/*.css</li>
-        <li>重新启动renderer项目</li>
+        <li><del>重新启动renderer项目</del></li>
     </ol>
     <h2>官网侧增加组件</h2>
     <ol>

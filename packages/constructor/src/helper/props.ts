@@ -1722,16 +1722,16 @@ let Radio: PropsConfigItem = {
         label: '排列方向',
         key: 'direction',
     },
-    disabled: {
-        category: 'switch',
-        options: [
-            { label: 'false', value: false },
-            { label: 'true', value: true },
-        ],
-        value: false,
-        label: '禁用',
-        key: 'disabled',
-    },
+    // disabled: {
+    //     category: 'switch',
+    //     options: [
+    //         { label: 'false', value: false },
+    //         { label: 'true', value: true },
+    //     ],
+    //     value: false,
+    //     label: '禁用',
+    //     key: 'disabled',
+    // },
     showGlowStyle: {
         category: 'switch',
         options: [
