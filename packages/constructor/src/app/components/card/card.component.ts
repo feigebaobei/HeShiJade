@@ -39,10 +39,10 @@ export class CardComponent {
     let tree = this.componentService.getTree(this.page!.ulid)
     if (tree) {
       let node = tree.find(this.data.ulid)
-      let headerNode = node?.children[createChildKey('slots', 'header', 'node')]
-      this.childrenBody = headerNode?.toArray() || []
       let bodyNode = node?.children[createChildKey('slots', 'body', 'node')]
-      this.childrenActions = bodyNode?.toArray() || []
+      this.childrenBody = bodyNode?.toArray() || []
+      let actionsNode = node?.children[createChildKey('slots', 'actions', 'node')]
+      this.childrenActions = actionsNode?.toArray() || []
     }
   }
   dropBodyH($event: A) {
@@ -55,7 +55,7 @@ export class CardComponent {
       appUlid, pageUlid,
       this.childrenBody.length ? this.childrenBody[this.childrenBody.length - 1].ulid : '',
       '', this.data.ulid,
-      {area: 'slots', slotKey: 'header'},
+      {area: 'slots', slotKey: 'body'},
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenBody.push(component)
@@ -78,7 +78,7 @@ export class CardComponent {
       appUlid, pageUlid, 
       this.childrenActions.length ? this.childrenActions[this.childrenActions.length - 1].ulid : '',
        '', this.data.ulid,
-      {area: 'slots', slotKey: 'body'},
+      {area: 'slots', slotKey: 'actions'},
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenActions.push(component)
