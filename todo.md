@@ -1,11 +1,13 @@
 ||||
 |-|-|-|
 |分支|f_card||
-|处理搭建侧对radio组件不及时响应的问题。同时排查其他组件|doing||
+|创建radio组件后提示用户创建valueList|done||
+|处理搭建侧对radio组件不及时响应的问题。同时排查其他组件|done||
 |form组件中支持radio|||
 ||搭建侧form组件中支持radio|done|
-||渲染侧form组件中支持radio|todo|
-||官网侧form组件中支持radio|todo|
+||渲染侧form组件中支持radio|done|
+||控制form组件中radio的valueList配置项|todo|
+||官网侧form组件中支持radio|doing|
 |搭建侧card|todo||
 |渲染侧card|todo||
 |官网侧card|todo||
@@ -13,6 +15,7 @@
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
 |fixed: 删除选中组件时，清空服务中的当前组件。|||
+|fixed: 处理搭建侧对radio组件不及时响应的问题。同时排查其他组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
 |服务端定期删除脏数据|||

@@ -46,6 +46,21 @@
               [checked]="ele.checked"
               (change)="toggleChangeH($event, ele.key)"
             ></d-toggle>
+            <div 
+              *ngIf="ele.category === 'radio'"
+              class="radio_box" 
+              [style]="{flexDirection: ele.direction}"
+              >
+                <d-radio
+                *ngFor="let subItemRadio of ele.valueList"
+                [(ngModel)]="ele.value"
+                [name]="ele.name"
+                [value]="subItemRadio.value"
+                [disabled]="subItemRadio.disabled"
+                [showGlowStyle]="subItemRadio.showGlowStyle"
+                (ngModelChange)="radioNgModelChangeH($event, ele.key)"
+                >{{ subItemRadio.value }}</d-radio>
+            </div>
           </div>
         </d-form-control>
       </d-form-item>
