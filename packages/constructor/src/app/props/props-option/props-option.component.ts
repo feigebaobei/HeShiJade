@@ -73,6 +73,8 @@ export class PropsOptionComponent {
   }
   deleteIconClickH($event: MouseEvent, i: N) {
     this.optionsList.splice(i, 1)
+    this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
+    this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
     this.change.emit(this.optionsList)
   }
   addH() {
