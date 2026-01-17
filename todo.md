@@ -1,8 +1,8 @@
 ||||
 |-|-|-|
 |分支|f_card||
-|搭建侧avavtar|doing||
-|渲染侧avavtar|todo||
+|搭建侧avavtar|done||
+|渲染侧avavtar|done||
 |官网侧avavtar|todo||
 |搭建侧card|需要先开发avatar组件||
 |渲染侧card|todo||
