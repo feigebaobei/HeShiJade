@@ -96,6 +96,7 @@ let text: Text = {
     noCurComp: '未选中组件',
     noApp: '无应用',
     toCreateComp: '请创建组件',
+    toCreateValueList: '请创建valueList',
 }
 let valueType = [
     {

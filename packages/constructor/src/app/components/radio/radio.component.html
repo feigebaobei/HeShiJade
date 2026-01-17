@@ -1,4 +1,6 @@
-
+<div *ngIf="!data.props['valueList'].length">
+    {{text['toCreateValueList']}}
+</div>
 <div class="radio_box" [style]="{flexDirection: data.props['direction']}">
     <d-radio
     *ngFor="let item of data.props['valueList']"
