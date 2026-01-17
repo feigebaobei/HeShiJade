@@ -85,6 +85,10 @@ let Avatar: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Card: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -109,6 +113,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     InputNumber,
     Radio,
     Avatar,
+    Card,
 }
 
 export {

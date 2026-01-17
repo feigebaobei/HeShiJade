@@ -101,6 +101,11 @@ let categoryList = [
         componentCategory: 'Avatar',
         ulid: '01J50ZGTCKEC10HWAJBZND487K'
     },
+    {
+        name: 'Card',
+        componentCategory: 'Card',
+        ulid: '01J50ZGTCKEC10HWAJBZND487L'
+    },
   ]
 export {
     categoryList

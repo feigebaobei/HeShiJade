@@ -1796,6 +1796,48 @@ let Avatar: PropsConfigItem = {
         key: 'shape',
     }
 }
+let Card: PropsConfigItem = {
+    imgSrc: {
+        category: 'input',
+        value: '',
+        label: 'imgSrc',
+        key: 'imgSrc',
+    },
+    customText: {
+        category: 'input',
+        value: '',
+        label: 'customText',
+        key: 'customText',
+    },
+    title: {
+        category: 'input',
+        value: '',
+        label: '主标题',
+        key: 'title',
+    },
+    iconName: {
+        category: 'input',
+        value: '',
+        label: 'iconName',
+        key: 'iconName',
+    },
+    subTitle: {
+        category: 'input',
+        value: '',
+        label: '副标题',
+        key: 'subTitle',
+    },
+    interactive: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '是否可交互',
+        key: 'interactive',
+    },
+}
 
 export {
     Button,
@@ -1817,4 +1859,5 @@ export {
     InputNumber,
     Radio,
     Avatar,
+    Card,
 }

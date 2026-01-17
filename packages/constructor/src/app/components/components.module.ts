@@ -19,6 +19,7 @@ import {
   InputNumberModule,
   RadioModule,
   AvatarModule,
+  CardModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -53,6 +54,7 @@ import { LoopComponent } from './loop/loop.component';
 import { InputNumberComponent } from './input-number/input-number.component';
 import { RadioComponent } from './radio/radio.component';
 import { AvatarComponent } from './avatar/avatar.component';
+import { CardComponent } from './card/card.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -81,6 +83,7 @@ import { AvatarComponent } from './avatar/avatar.component';
     InputNumberComponent,
     RadioComponent,
     AvatarComponent,
+    CardComponent,
   ],
   imports: [
     CommonModule,
@@ -104,6 +107,7 @@ import { AvatarComponent } from './avatar/avatar.component';
     InputNumberModule,
     RadioModule,
     AvatarModule,
+    CardModule,
   ],
   providers: [],
   exports: [

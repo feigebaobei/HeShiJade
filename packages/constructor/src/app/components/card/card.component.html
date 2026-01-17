@@ -1,0 +1,48 @@
+<d-card class="card-container" [interactive]="data.props['interactive']">
+  <d-card-header>
+     {{data.props['imgSrc']}}
+     {{data.props['customText']}}
+     {{data.props['name']}}
+    <d-avatar
+        dCardAvatar
+        [imgSrc]="data.props['imgSrc']"
+        [customText]="data.props['customText']"
+        [name]="data.props['name']"
+    ></d-avatar>
+        <!-- [gender]="data.props['gender']"
+        [width]="data.props['width']"
+        [height]="data.props['height']"
+        [isRound]="data.props['shape'] === 'circle'" -->
+    <d-card-title>{{data.props['title']}}</d-card-title>
+    <d-card-subtitle>
+        <!-- <i class="icon-company-member card-icon"></i> -->
+         <d-icon [icon]="data.props['iconName']">
+            <!-- [operable]="data.props['operable']"
+            [disabled]="data.props['disabled']"
+            [icon]="data.props['icon']"
+            [color]="data.props['color']" -->
+        </d-icon>
+        <span>{{data.props['subTitle']}}</span>
+    </d-card-subtitle>
+  </d-card-header>
+  <d-card-content>
+    <div dDroppable (dropEvent)="dropBodyH($event)" class="droppable">
+        <span *ngIf="!childrenBody.length">此区域可接收子组件</span>
+        <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
+        (deleteComp)="deleteComponentByUlidH($event)"
+        ></app-comp-box> -->
+        <app-comp-stack [componentList]="childrenBody" #compStackBody (deleteComp)="headerDeleteComponentByUlidH($event)"></app-comp-stack>
+    </div>
+  </d-card-content>
+  <!-- 这里不需要使用配置项 -->
+  <d-card-actions [align]="'start'">
+    <main dDroppable (dropEvent)="dropActionsH($event)" class="droppable block">
+        <span *ngIf="!childrenActions.length">此区组件</span>
+        <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
+        (deleteComp)="bodyDeleteComponentByUlidH($event)"
+        ></app-comp-box> -->
+        <app-comp-stack [componentList]="childrenActions" #compStackActions (deleteComp)="actionsDeleteComponentByUlidH($event)"></app-comp-stack>
+    </main>
+  </d-card-actions>
+</d-card>
+

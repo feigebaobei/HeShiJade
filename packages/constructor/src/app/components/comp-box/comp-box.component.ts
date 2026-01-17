@@ -20,6 +20,7 @@ import { LoopComponent } from '../loop/loop.component';
 import { InputNumberComponent } from '../input-number/input-number.component';
 import { RadioComponent } from '../radio/radio.component';
 import { AvatarComponent } from '../avatar/avatar.component';
+import { CardComponent } from '../card/card.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -54,6 +55,7 @@ let compMap: Oa = {
   InputNumber: InputNumberComponent,
   Radio: RadioComponent,
   Avatar: AvatarComponent,
+  Card: CardComponent,
 }
 
 @Component({
@@ -242,6 +244,13 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Avatar':
         this.componentRef.instance.data = {
           props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Card':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
           ulid: this.comp.ulid,
         }
         break;

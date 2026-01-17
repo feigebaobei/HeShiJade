@@ -23,6 +23,7 @@ import {
   InputNumber as InputNumberBehaviorMeta,
   Radio as RadioBehaviorMeta,
   Avatar as AvatarBehaviorMeta,
+  Card as CardBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -166,6 +167,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Avatar':
         this.setComponentBehaviorListByType(AvatarBehaviorMeta)
+        break;
+      case 'Card':
+        this.setComponentBehaviorListByType(CardBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

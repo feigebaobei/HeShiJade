@@ -1,10 +1,7 @@
 ||||
 |-|-|-|
 |分支|f_card||
-|搭建侧avavtar|done||
-|渲染侧avavtar|done||
-|官网侧avavtar|done||
-|搭建侧card|需要先开发avatar组件||
+|搭建侧card|需要先开发avatar组件|doing|
 |渲染侧card|todo||
 |官网侧card|todo||
 |丰富组件|||
@@ -18,7 +15,7 @@
 |feat:  增加avatar组件|||
 |perf:  创建radio组件后提示用户创建valueList|||
 
-|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
+|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
 |增加style面板|||
 |创建碎片平台|||
@@ -32,7 +29,8 @@
 ||先写一个遇到脏数据报警的程序||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |丰富组件|||
-||radio||
+||paragraph||
+||span||
 ||card||
 ||imagePreview||
 ||accordion||
@@ -43,7 +41,6 @@
 ||textarea||
 ||toggle||
 ||drawer||
-||avatar||
 ||badge||
 ||progress||
 ||rate||

@@ -1,42 +1,38 @@
-import { Component, Input, OnInit, ViewChild, } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { CompStackComponent } from '../comp-stack/comp-stack.component';
 import { AppService } from 'src/app/service/app.service';
-import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
-import { asyncFn, initComponentMeta } from 'src/helper'
-import { createChildKey } from 'src/helper/index'
-// 数据
+import { ComponentService } from 'src/app/service/component.service';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
+import { asyncFn, createChildKey, initComponentMeta } from 'src/helper';
 // type
 import type { A, ULID } from 'src/types/base';
-import type {Component as Comp, } from 'src/types/component'
-import type { Page } from 'src/types/page';
-import type { CompStackComponent } from '../comp-stack/comp-stack.component';
+import type { ComponentData, Component as Comp } from 'src/types/component';
+import { Page } from 'src/types/page';
 
 let clog = console.log
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.sass']
+  selector: 'app-card',
+  // standalone: true,
+  // imports: [],
+  templateUrl: './card.component.html',
+  styleUrl: './card.component.sass'
 })
-export class ModalComponent implements OnInit{
-  @Input() data: A
-  childrenHeader: Comp[]
-  childrenBody: Comp[]
-  childrenFooter: Comp[]
-  // curComponent: Comp
-  page: Page
-  @ViewChild('compStackHeader') compStackHeader!: CompStackComponent
+export class CardComponent {
+  @Input() data!: ComponentData
   @ViewChild('compStackBody') compStackBody!: CompStackComponent
+  @ViewChild('compStackActions') compStackActions!: CompStackComponent
+  childrenBody: Comp[]
+  childrenActions: Comp[]
+  page: Page
   constructor(
-    private componentService: ComponentService,
-    private pageService: PageService,
     private appService: AppService,
+    private pageService: PageService,
+    private componentService: ComponentService,
   ) {
-    this.childrenHeader = []
-    this.childrenBody = [
-    ]
-    this.childrenFooter = [] // 预留字段
+    this.childrenBody = []
+    this.childrenActions = []
     this.page = this.pageService.getCurPage()!
   }
   ngOnInit() {
@@ -44,46 +40,10 @@ export class ModalComponent implements OnInit{
     if (tree) {
       let node = tree.find(this.data.ulid)
       let headerNode = node?.children[createChildKey('slots', 'header', 'node')]
-      this.childrenHeader = headerNode?.toArray() || []
+      this.childrenBody = headerNode?.toArray() || []
       let bodyNode = node?.children[createChildKey('slots', 'body', 'node')]
-      this.childrenBody = bodyNode?.toArray() || []
-      let footerNode = node?.children[createChildKey('slots', 'footer', 'node')]
-      this.childrenFooter = footerNode?.toArray() || []
+      this.childrenActions = bodyNode?.toArray() || []
     }
-    this.listen()
-  }
-  listen() {
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'add'), () => {
-    // })
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'remove'), () => {
-    // })
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'update'), () => {
-    // })
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'reorder'), () => {
-    // })
-  }
-  dropHeaderH($event: A) {
-    let appUlid = this.appService.getCurApp()?.ulid || ''
-    let pageUlid = this.pageService.getCurPage()?.ulid || ''
-    let componentCategory = $event.dragData.item.componentCategory
-    let compGridLayout = gridLayoutDefault[componentCategory]
-    let component = initComponentMeta(
-      componentCategory, 
-      appUlid, pageUlid,
-      this.childrenHeader.length ? this.childrenHeader[this.childrenHeader.length - 1].ulid : '',
-      '', this.data.ulid,
-      {area: 'slots', slotKey: 'header'},
-      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
-    )
-    this.childrenHeader.push(component)
-    this.componentService.mountComponent(component)
-    // 请求保存组件的接口
-    this.componentService.reqCreateComponent(component).then(() => {
-      clog('成功在远端保存组件')
-    }).catch((error) => {
-      clog('error', error)
-    })
-    this.compStackHeader.init()
   }
   dropBodyH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
@@ -92,14 +52,15 @@ export class ModalComponent implements OnInit{
     let compGridLayout = gridLayoutDefault[componentCategory]
     let component = initComponentMeta(
       componentCategory, 
-      appUlid, pageUlid, 
+      appUlid, pageUlid,
       this.childrenBody.length ? this.childrenBody[this.childrenBody.length - 1].ulid : '',
-       '', this.data.ulid,
-      {area: 'slots', slotKey: 'body'},
+      '', this.data.ulid,
+      {area: 'slots', slotKey: 'header'},
       {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
     )
     this.childrenBody.push(component)
     this.componentService.mountComponent(component)
+    // 请求保存组件的接口
     this.componentService.reqCreateComponent(component).then(() => {
       clog('成功在远端保存组件')
     }).catch((error) => {
@@ -107,22 +68,44 @@ export class ModalComponent implements OnInit{
     })
     this.compStackBody.init()
   }
-  headerDeleteComponentByUlidH(ulid: ULID) {
-    this.childrenHeader = this.childrenHeader.filter(item => item.ulid !== ulid)
-    let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
-    this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
-    this.componentService.reqDeleteComponent(ulid, childrenUlid)
-    asyncFn(() => {
-      this.compStackHeader.init()
+  dropActionsH($event: A) {
+    let appUlid = this.appService.getCurApp()?.ulid || ''
+    let pageUlid = this.pageService.getCurPage()?.ulid || ''
+    let componentCategory = $event.dragData.item.componentCategory
+    let compGridLayout = gridLayoutDefault[componentCategory]
+    let component = initComponentMeta(
+      componentCategory, 
+      appUlid, pageUlid, 
+      this.childrenActions.length ? this.childrenActions[this.childrenActions.length - 1].ulid : '',
+       '', this.data.ulid,
+      {area: 'slots', slotKey: 'body'},
+      {x: 0, y: 0, w: compGridLayout.w, h: compGridLayout.h, noResize: compGridLayout.noResize},
+    )
+    this.childrenActions.push(component)
+    this.componentService.mountComponent(component)
+    this.componentService.reqCreateComponent(component).then(() => {
+      clog('成功在远端保存组件')
+    }).catch((error) => {
+      clog('error', error)
     })
+    this.compStackActions.init()
   }
-  bodyDeleteComponentByUlidH(ulid: ULID) {
+  headerDeleteComponentByUlidH(ulid: ULID) {
     this.childrenBody = this.childrenBody.filter(item => item.ulid !== ulid)
     let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
     this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
     this.componentService.reqDeleteComponent(ulid, childrenUlid)
     asyncFn(() => {
       this.compStackBody.init()
+    })
+  }
+  actionsDeleteComponentByUlidH(ulid: ULID) {
+    this.childrenActions = this.childrenActions.filter(item => item.ulid !== ulid)
+    let childrenUlid = this.componentService.getChildrenComponent(this.page.ulid, ulid).map(componentItem => componentItem.ulid)
+    this.componentService.deleteComponentByUlid(this.page.ulid, ulid)
+    this.componentService.reqDeleteComponent(ulid, childrenUlid)
+    asyncFn(() => {
+      this.compStackActions.init()
     })
   }
 }
