@@ -3,7 +3,7 @@
 |分支|f_card||
 |搭建侧avavtar|done||
 |渲染侧avavtar|done||
-|官网侧avavtar|todo||
+|官网侧avavtar|done||
 |搭建侧card|需要先开发avatar组件||
 |渲染侧card|todo||
 |官网侧card|todo||
@@ -15,6 +15,7 @@
 |feat:  items面板的options配置项支持hideField字段|||
 |feat:  form组件内支持radio组件|||
 |feat:  增加radio组件|||
+|feat:  增加avatar组件|||
 |perf:  创建radio组件后提示用户创建valueList|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
