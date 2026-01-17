@@ -97,6 +97,7 @@ let text: Text = {
     noApp: '无应用',
     toCreateComp: '请创建组件',
     toCreateValueList: '请创建valueList',
+    canReceiveChildComp: '此区域可接收子组件',
 }
 let valueType = [
     {

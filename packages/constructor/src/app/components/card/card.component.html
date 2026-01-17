@@ -27,7 +27,7 @@
   </d-card-header>
   <d-card-content>
     <div dDroppable (dropEvent)="dropBodyH($event)" class="droppable">
-        <span *ngIf="!childrenBody.length">此区域可接收子组件</span>
+        <span *ngIf="!childrenBody.length">{{text['canReceiveChildComp']}}</span>
         <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
         (deleteComp)="deleteComponentByUlidH($event)"
         ></app-comp-box> -->
@@ -37,7 +37,7 @@
   <!-- 这里不需要使用配置项 -->
   <d-card-actions [align]="'start'">
     <main dDroppable (dropEvent)="dropActionsH($event)" class="droppable block">
-        <span *ngIf="!childrenActions.length">此区组件</span>
+        <span *ngIf="!childrenActions.length">{{text['canReceiveChildComp']}}</span>
         <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
         (deleteComp)="bodyDeleteComponentByUlidH($event)"
         ></app-comp-box> -->

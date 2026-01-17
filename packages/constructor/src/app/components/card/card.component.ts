@@ -5,10 +5,11 @@ import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 import { asyncFn, createChildKey, initComponentMeta } from 'src/helper';
+import { Page } from 'src/types/page';
+import { TextBase } from 'src/helper/text';
 // type
 import type { A, ULID } from 'src/types/base';
 import type { ComponentData, Component as Comp } from 'src/types/component';
-import { Page } from 'src/types/page';
 
 let clog = console.log
 
@@ -19,7 +20,7 @@ let clog = console.log
   templateUrl: './card.component.html',
   styleUrl: './card.component.sass'
 })
-export class CardComponent {
+export class CardComponent extends TextBase {
   @Input() data!: ComponentData
   @ViewChild('compStackBody') compStackBody!: CompStackComponent
   @ViewChild('compStackActions') compStackActions!: CompStackComponent
@@ -31,6 +32,7 @@ export class CardComponent {
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.childrenBody = []
     this.childrenActions = []
     this.page = this.pageService.getCurPage()!
