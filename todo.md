@@ -6,8 +6,8 @@
 |form组件中支持radio|||
 ||搭建侧form组件中支持radio|done|
 ||渲染侧form组件中支持radio|done|
-||控制form组件中radio的valueList配置项|todo|
-||官网侧form组件中支持radio|doing|
+||控制form组件中radio的valueList配置项|doing|
+||官网侧form组件中支持radio|todo|
 |搭建侧card|todo||
 |渲染侧card|todo||
 |官网侧card|todo||

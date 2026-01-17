@@ -6,7 +6,7 @@
             [dSpaceDirection]="'horizontal'"
         >
             <d-col
-                *ngIf="item.label !== undefined"
+                *ngIf="!item.hideField.includes('label')"
                 [dSpan]="11"
                 dTooltip
                 content="label"
@@ -23,7 +23,7 @@
                 </d-form-item>
             </d-col>
             <d-col
-                *ngIf="item.value !== undefined"
+                *ngIf="!item.hideField.includes('value')"
                 [dSpan]="11"
                 dTooltip
                 content="value"
@@ -63,7 +63,7 @@
                 </div>
             </d-col>
             <d-col
-                *ngIf="item.value !== undefined"
+                *ngIf="!item.hideField.includes('valueType')"
                 [dSpan]="12"
                 dTooltip
                 content="值类型"
@@ -78,7 +78,7 @@
                 ></d-select>
             </d-col>
             <d-col
-                *ngIf="item.disabled !== undefined"
+                *ngIf="!item.hideField.includes('disabled')"
                 [dSpan]="6"
                 dTooltip
                 content="是否禁用"
