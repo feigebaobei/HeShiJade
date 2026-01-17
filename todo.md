@@ -1,8 +1,10 @@
 ||||
 |-|-|-|
-|分支|f_inputNumber||
-|form组件中支持radio|todo||
-||搭建侧form组件中支持radio|todo|
+|分支|f_card||
+|删除组件时应该清空当前组件|done||
+|处理搭建侧对radio组件不及时响应的问题。同时排查其他组件|doing||
+|form组件中支持radio|||
+||搭建侧form组件中支持radio|done|
 ||渲染侧form组件中支持radio|todo|
 ||官网侧form组件中支持radio|todo|
 |搭建侧card|todo||

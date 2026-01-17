@@ -121,6 +121,13 @@ export class CompStackComponent implements OnInit, OnDestroy {
     this._componentList = this._componentList.filter(item => item.id !== ulid)
     // 通知父组件删除
     this.deleteComp.emit(ulid)
+    // 删除选中组件时，清空服务中的当前组件。
+    if (this.curComponent?.ulid === ulid) {
+      let curPage = this.pageService.getCurPage()
+      if (curPage) {
+        this.componentService.setCurComponent(curPage.ulid, undefined)
+      }
+    }
   }
   identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
