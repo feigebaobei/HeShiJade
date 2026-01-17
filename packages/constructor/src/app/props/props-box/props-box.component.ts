@@ -29,6 +29,7 @@ import {
   Loop as LoopPropsMeta,
   InputNumber as InputNumberPropsMeta,
   Radio as RadioPropsMeta,
+  Avatar as AvatarPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -158,6 +159,9 @@ export class PropsBoxComponent {
         break;
       case 'Radio':
         this.opComponentPropsList(RadioPropsMeta)
+        break;
+      case 'Avatar':
+        this.opComponentPropsList(AvatarPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}

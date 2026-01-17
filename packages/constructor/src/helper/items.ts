@@ -548,6 +548,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Loop, // 没有特定子元素
     // InputNumber, // 没有特定子元素
     // Radio, // 没有特定子元素
+    // Avatar, // 没有特定子元素
 }
 
 export default all

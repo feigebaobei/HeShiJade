@@ -18,6 +18,7 @@ import {
   ToastModule,
   InputNumberModule,
   RadioModule,
+  AvatarModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -51,6 +52,7 @@ import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
 import { InputNumberComponent } from './input-number/input-number.component';
 import { RadioComponent } from './radio/radio.component';
+import { AvatarComponent } from './avatar/avatar.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -78,6 +80,7 @@ import { RadioComponent } from './radio/radio.component';
     LoopComponent,
     InputNumberComponent,
     RadioComponent,
+    AvatarComponent,
   ],
   imports: [
     CommonModule,
@@ -100,6 +103,7 @@ import { RadioComponent } from './radio/radio.component';
     ToastModule,
     InputNumberModule,
     RadioModule,
+    AvatarModule,
   ],
   providers: [],
   exports: [

@@ -96,6 +96,11 @@ let categoryList = [
         componentCategory: 'Radio',
         ulid: '01J50ZGTCKEC10HWAJBZND487J'
     },
+    {
+        name: 'Avatar',
+        componentCategory: 'Avatar',
+        ulid: '01J50ZGTCKEC10HWAJBZND487K'
+    },
   ]
 export {
     categoryList

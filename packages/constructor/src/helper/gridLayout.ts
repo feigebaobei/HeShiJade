@@ -111,6 +111,11 @@ let Radio: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Avatar: GridLayoutDefault = {
+    w: 4,
+    h: 4,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -130,6 +135,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Loop,
     InputNumber,
     Radio,
+    Avatar,
 }
 export {
     Button,
@@ -150,6 +156,7 @@ export {
     Loop,
     InputNumber,
     Radio,
+    Avatar,
     
     gridLayoutDefault,
 }

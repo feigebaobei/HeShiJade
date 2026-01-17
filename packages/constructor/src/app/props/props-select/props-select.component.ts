@@ -4,6 +4,8 @@ import { debounceTime } from 'src/helper/config';
 import { createDebounceFn } from 'src/helper/index'
 import { A, F, S } from 'src/types/base';
 
+let clog = console.log
+
 @Component({
   selector: 'app-props-select',
   templateUrl: './props-select.component.html',
