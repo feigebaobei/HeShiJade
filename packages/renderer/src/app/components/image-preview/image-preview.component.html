@@ -1,0 +1,7 @@
+<div dImagePreview
+    [disableDefault]="data.props['disableDefault']"
+    [zIndex]="data.props['zIndex']"
+    [backDropZIndex]="data.props['backDropZIndex']"
+>
+    <img *ngFor="let item of data.items" [attr.src]="item['src']" [style]="{width: item['width'], height: item['height']}"/>
+</div>

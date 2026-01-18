@@ -17,6 +17,7 @@ import { ButtonModule,
   RadioModule,
   AvatarModule,
   CardModule,
+  ImagePreviewModule,
   // DataTableComponent,
 } from 'ng-devui';
 import { MenuModule } from 'ng-devui/menu';
@@ -52,6 +53,7 @@ import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SpanComponent } from './span/span.component';
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -86,6 +88,7 @@ import { SpanComponent } from './span/span.component';
     CardComponent,
     ParagraphComponent,
     SpanComponent,
+    ImagePreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -106,6 +109,7 @@ import { SpanComponent } from './span/span.component';
     RadioModule,
     AvatarModule,
     CardModule,
+    ImagePreviewModule,
 
     FormsModule,
     GridstackModule,
