@@ -1830,8 +1830,8 @@ let Card: PropsConfigItem = {
     interactive: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: '是否可交互',
