@@ -1,19 +1,17 @@
 ||||
 |-|-|-|
 |分支|f_image||
-|搭建侧paragraph|done||
-|渲染侧paragraph|done||
-|官网侧paragraph|done||
 |搭建侧span|done||
-|渲染侧span|doing||
-|官网侧span|todo||
-|搭建侧imagePreview|todo||
+|渲染侧span|done||
+|官网侧span|done||
+|搭建侧imagePreview|doing||
 |渲染侧imagePreview|todo||
 |官网侧imagePreview|todo||
 |select的选项不应该被遮挡|todo||
 |丰富组件|||
 |要上生产的内容|||
 |fixed: 创建Paragraph组件|||
+|fixed: 创建Span组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
