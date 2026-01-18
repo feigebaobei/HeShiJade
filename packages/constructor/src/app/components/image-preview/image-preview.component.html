@@ -1,0 +1,10 @@
+<div dImagePreview
+    [disableDefault]="data.props['disableDefault']"
+    [zIndex]="data.props['zIndex']"
+    [backDropZIndex]="data.props['backDropZIndex']"
+>
+  <p *ngIf="!data.items.length; else imgList">{{text['toCreateItems']}}</p>
+  <ng-template #imgList> 
+    <img *ngFor="let item of data.items" [attr.src]="item['src']" [style]="{width: item['width'], height: item['height']}"/>
+  </ng-template>
+</div>

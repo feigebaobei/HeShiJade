@@ -526,6 +526,26 @@ let PageList: ConfigItem[] = [
         value: false,
     },
 ]
+let ImagePreview: ConfigItem[] = [
+    {
+        label: 'src',
+        category: 'input',
+        key: 'src',
+        value: '',
+    },
+    {
+        label: '宽度',
+        category: 'input',
+        key: 'width',
+        value: '200px',
+    },
+    {
+        label: '高度',
+        category: 'input',
+        key: 'height',
+        value: 'auto',
+    },
+]
 // let ShowHide: ConfigItem[] = []
 
 let all: {[k: S]: ConfigItem[]} = {
@@ -552,6 +572,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Card, // 没有特定子元素
     // Paragraph, // 没有特定子元素
     // Span, // 没有特定子元素
+    ImagePreview,
 }
 
 export default all

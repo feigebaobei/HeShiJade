@@ -131,6 +131,11 @@ let Span: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let ImagePreview: GridLayoutDefault = {
+    w: 6,
+    h: 6,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -154,6 +159,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Card,
     Paragraph,
     Span,
+    ImagePreview,
 }
 export {
     Button,
@@ -178,6 +184,7 @@ export {
     Card,
     Paragraph,
     Span,
+    ImagePreview,
     
     gridLayoutDefault,
 }

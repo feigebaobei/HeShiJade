@@ -97,6 +97,10 @@ let Span: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let ImagePreview: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -124,6 +128,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Card,
     Paragraph,
     Span,
+    ImagePreview,
 }
 
 export {

@@ -116,6 +116,11 @@ let categoryList = [
         componentCategory: 'Span',
         ulid: '01J50ZGTCKEC10HWAJBZND487N'
     },
+    {
+        name: 'ImagePreview',
+        componentCategory: 'ImagePreview',
+        ulid: '01J50ZGTCKEC10HWAJBZND487N'
+    },
   ]
 export {
     categoryList

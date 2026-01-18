@@ -24,6 +24,7 @@ import { Button as ButtonProps,
     Card as CardProps,
     Paragraph as ParagraphProps,
     Span as SpanProps,
+    ImagePreview as ImagePreviewProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -45,6 +46,7 @@ import {
     Card as CardBehavior,
     Paragraph as ParagraphBehavior,
     Span as SpanBehavior,
+    ImagePreview as ImagePreviewBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -278,6 +280,13 @@ let Span: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let ImagePreview: ComponentDefaultConfig = {
+    props: opProps(ImagePreviewProps),
+    behavior: opBehavior(ImagePreviewBehavior),
+    // items: ItemAll['ImagePreview'],
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -302,4 +311,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Card,
     Paragraph,
     Span,
+    ImagePreview,
 }

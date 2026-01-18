@@ -33,6 +33,7 @@ import {
   Card as CardPropsMeta,
   Paragraph as ParagraphPropsMeta,
   Span as SpanPropsMeta,
+  ImagePreview as ImagePreviewMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -174,6 +175,9 @@ export class PropsBoxComponent {
         break;
       case 'Span':
         this.opComponentPropsList(SpanPropsMeta)
+        break;
+      case 'ImagePreview':
+        this.opComponentPropsList(ImagePreviewMeta)
         break;
       default:
         this.componentPropsMeta = {}

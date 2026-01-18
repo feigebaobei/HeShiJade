@@ -1854,6 +1854,60 @@ let Span: PropsConfigItem = {
         key: 'text',
     },
 }
+let ImagePreview: PropsConfigItem = {
+    disableDefault: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '禁用点击图片时触发预览',
+        key: 'disableDefault',
+    },
+    zIndex: {
+        category: 'number',
+        value: 1050,
+        label: '预览时图片的z-index',
+        key: 'zIndex',
+    },
+    backDropZIndex: {
+        category: 'number',
+        value: 1040,
+        label: '预览时图片背景的z-index',
+        key: 'backDropZIndex',
+    },
+    // text: {
+    //     category: 'input',
+    //     value: '文本',
+    //     label: '文本',
+    //     key: 'text',
+    // },
+    // text: {
+    //     category: 'input',
+    //     value: '文本',
+    //     label: '文本',
+    //     key: 'text',
+    // },
+    // text: {
+    //     category: 'input',
+    //     value: '文本',
+    //     label: '文本',
+    //     key: 'text',
+    // },
+    // text: {
+    //     category: 'input',
+    //     value: '文本',
+    //     label: '文本',
+    //     key: 'text',
+    // },
+    // text: {
+    //     category: 'input',
+    //     value: '文本',
+    //     label: '文本',
+    //     key: 'text',
+    // },
+}
 
 export {
     Button,
@@ -1878,4 +1932,5 @@ export {
     Card,
     Paragraph,
     Span,
+    ImagePreview,
 }

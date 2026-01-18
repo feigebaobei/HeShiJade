@@ -1,10 +1,10 @@
 ||||
 |-|-|-|
 |分支|f_image||
-|搭建侧span|done||
-|渲染侧span|done||
-|官网侧span|done||
-|搭建侧imagePreview|doing||
+|搭建侧img|todo||
+|渲染侧img|todo||
+|官网侧img|todo||
+|搭建侧imagePreview|done||
 |渲染侧imagePreview|todo||
 |官网侧imagePreview|todo||
 |select的选项不应该被遮挡|todo||
