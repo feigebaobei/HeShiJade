@@ -1,9 +1,9 @@
 ||||
 |-|-|-|
 |分支|f_image||
-|搭建侧paragraph|doing||
-|渲染侧paragraph|todo||
-|官网侧paragraph|todo||
+|搭建侧paragraph|done||
+|渲染侧paragraph|done||
+|官网侧paragraph|doing||
 |搭建侧span|todo||
 |渲染侧span|todo||
 |官网侧span|todo||
