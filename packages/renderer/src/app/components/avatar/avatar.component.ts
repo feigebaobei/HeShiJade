@@ -11,8 +11,8 @@ import { componentInstanceData } from 'src/types/component';
   styleUrl: './avatar.component.sass'
 })
 export class AvatarComponent extends CompBase {
-  @Input() override data!: componentInstanceData
-  @Input() override loopIndex: N = -1;
+  // @Input() override data!: componentInstanceData
+  // @Input() override loopIndex: N = -1;
   constructor() {
     super()
   }

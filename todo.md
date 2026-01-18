@@ -1,11 +1,8 @@
 ||||
 |-|-|-|
 |分支|f_card||
-|搭建侧card|需要先开发avatar组件|done|
-|渲染侧card|done||
-|官网侧card|done||
-|搭建侧的组件基于TextBase使用text属性。|doing||
-|渲染侧的组件不用重写overview|todo||
+|搭建侧的组件基于TextBase使用text属性。|done||
+|渲染侧的组件不用重写overview|done||
 |丰富组件|||
 |行为面板的icon放在内部|待定||
 |要上生产的内容|||
@@ -13,8 +10,9 @@
 |fixed: 删除options之一后应该及时更新舞台区的组件|||
 |feat:  items面板的options配置项支持hideField字段|||
 |feat:  form组件内支持radio组件|||
-|feat:  增加radio组件|||
-|feat:  增加avatar组件|||
+|feat:  增加Radio组件|||
+|feat:  增加Avatar组件|||
+|feat:  增加Card组件|||
 |perf:  创建radio组件后提示用户创建valueList|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
