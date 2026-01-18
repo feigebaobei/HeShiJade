@@ -25,6 +25,7 @@ import {
   Avatar as AvatarBehaviorMeta,
   Card as CardBehaviorMeta,
   Paragraph as ParagraphBehaviorMeta,
+  Span as SpanBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -174,6 +175,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Paragraph':
         this.setComponentBehaviorListByType(ParagraphBehaviorMeta)
+        break;
+      case 'Span':
+        this.setComponentBehaviorListByType(SpanBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

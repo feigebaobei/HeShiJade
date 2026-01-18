@@ -551,6 +551,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Avatar, // 没有特定子元素
     // Card, // 没有特定子元素
     // Paragraph, // 没有特定子元素
+    // Span, // 没有特定子元素
 }
 
 export default all

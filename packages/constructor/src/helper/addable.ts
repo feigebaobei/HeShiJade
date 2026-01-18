@@ -93,6 +93,10 @@ let Paragraph: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Span: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -119,6 +123,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Avatar,
     Card,
     Paragraph,
+    Span,
 }
 
 export {

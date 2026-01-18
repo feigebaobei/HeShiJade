@@ -126,6 +126,11 @@ let Paragraph: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Span: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -148,6 +153,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Avatar,
     Card,
     Paragraph,
+    Span,
 }
 export {
     Button,
@@ -171,6 +177,7 @@ export {
     Avatar,
     Card,
     Paragraph,
+    Span,
     
     gridLayoutDefault,
 }

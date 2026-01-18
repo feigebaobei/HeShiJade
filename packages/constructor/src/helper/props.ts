@@ -1846,6 +1846,14 @@ let Paragraph: PropsConfigItem = {
         key: 'text',
     },
 }
+let Span: PropsConfigItem = {
+    text: {
+        category: 'input',
+        value: '文本',
+        label: '文本',
+        key: 'text',
+    },
+}
 
 export {
     Button,
@@ -1869,4 +1877,5 @@ export {
     Avatar,
     Card,
     Paragraph,
+    Span,
 }

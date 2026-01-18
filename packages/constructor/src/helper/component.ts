@@ -23,6 +23,7 @@ import { Button as ButtonProps,
     Avatar as AvatarProps,
     Card as CardProps,
     Paragraph as ParagraphProps,
+    Span as SpanProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -43,6 +44,7 @@ import {
     Avatar as AvatarBehavior,
     Card as CardBehavior,
     Paragraph as ParagraphBehavior,
+    Span as SpanBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -270,6 +272,12 @@ let Paragraph: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Span: ComponentDefaultConfig = {
+    props: opProps(SpanProps),
+    behavior: opBehavior(SpanBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -293,4 +301,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Avatar,
     Card,
     Paragraph,
+    Span,
 }

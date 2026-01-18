@@ -111,6 +111,11 @@ let categoryList = [
         componentCategory: 'Paragraph',
         ulid: '01J50ZGTCKEC10HWAJBZND487M'
     },
+    {
+        name: 'Span',
+        componentCategory: 'Span',
+        ulid: '01J50ZGTCKEC10HWAJBZND487N'
+    },
   ]
 export {
     categoryList
