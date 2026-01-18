@@ -6,7 +6,7 @@
 |官网侧img|todo||
 |搭建侧imagePreview|done||
 |渲染侧imagePreview|done||
-|官网侧imagePreview|doing||
+|官网侧imagePreview|done||
 |select的选项不应该被遮挡|todo||
 |丰富组件|||
 |要上生产的内容|||
