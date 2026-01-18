@@ -1877,35 +1877,105 @@ let ImagePreview: PropsConfigItem = {
         label: '预览时图片背景的z-index',
         key: 'backDropZIndex',
     },
-    // text: {
-    //     category: 'input',
-    //     value: '文本',
-    //     label: '文本',
-    //     key: 'text',
+    // zoomIn: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '缩小',
+    //     key: 'zoomIn',
     // },
-    // text: {
-    //     category: 'input',
-    //     value: '文本',
-    //     label: '文本',
-    //     key: 'text',
+    // zoomOut: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '放大',
+    //     key: 'zoomOut',
     // },
-    // text: {
-    //     category: 'input',
-    //     value: '文本',
-    //     label: '文本',
-    //     key: 'text',
+    // rotate: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '旋转',
+    //     key: 'rotate',
     // },
-    // text: {
-    //     category: 'input',
-    //     value: '文本',
-    //     label: '文本',
-    //     key: 'text',
+    // prev: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '前一张',
+    //     key: 'prev',
     // },
-    // text: {
-    //     category: 'input',
-    //     value: '文本',
-    //     label: '文本',
-    //     key: 'text',
+    // index: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '当前序号',
+    //     key: 'index',
+    // },
+    // next: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '下一张',
+    //     key: 'next',
+    // },
+    // scaleBest: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '最佳比例',
+    //     key: 'scaleBest',
+    // },
+    // scaleOriginal: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '原始比例',
+    //     key: 'scaleOriginal',
+    // },
+    // originnalImage: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '查看原图',
+    //     key: 'originnalImage',
+    // },
+    // download: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '下载',
+    //     key: 'download',
     // },
 }
 
