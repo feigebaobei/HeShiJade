@@ -121,6 +121,21 @@ let Card: GridLayoutDefault = {
     h: 8,
     noResize: false,
 }
+let Paragraph: GridLayoutDefault = {
+    w: 24,
+    h: 2,
+    noResize: false,
+}
+let Span: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
+let ImagePreview: GridLayoutDefault = {
+    w: 6,
+    h: 6,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -142,6 +157,9 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Radio,
     Avatar,
     Card,
+    Paragraph,
+    Span,
+    ImagePreview,
 }
 export {
     Button,
@@ -164,6 +182,9 @@ export {
     Radio,
     Avatar,
     Card,
+    Paragraph,
+    Span,
+    ImagePreview,
     
     gridLayoutDefault,
 }

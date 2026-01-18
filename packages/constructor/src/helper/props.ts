@@ -1838,6 +1838,146 @@ let Card: PropsConfigItem = {
         key: 'interactive',
     },
 }
+let Paragraph: PropsConfigItem = {
+    text: {
+        category: 'input',
+        value: '这是一个段落',
+        label: '文本',
+        key: 'text',
+    },
+}
+let Span: PropsConfigItem = {
+    text: {
+        category: 'input',
+        value: '文本',
+        label: '文本',
+        key: 'text',
+    },
+}
+let ImagePreview: PropsConfigItem = {
+    disableDefault: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '禁用点击图片时触发预览',
+        key: 'disableDefault',
+    },
+    zIndex: {
+        category: 'number',
+        value: 1050,
+        label: '预览时图片的z-index',
+        key: 'zIndex',
+    },
+    backDropZIndex: {
+        category: 'number',
+        value: 1040,
+        label: '预览时图片背景的z-index',
+        key: 'backDropZIndex',
+    },
+    // zoomIn: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '缩小',
+    //     key: 'zoomIn',
+    // },
+    // zoomOut: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '放大',
+    //     key: 'zoomOut',
+    // },
+    // rotate: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '旋转',
+    //     key: 'rotate',
+    // },
+    // prev: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '前一张',
+    //     key: 'prev',
+    // },
+    // index: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '当前序号',
+    //     key: 'index',
+    // },
+    // next: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '下一张',
+    //     key: 'next',
+    // },
+    // scaleBest: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '最佳比例',
+    //     key: 'scaleBest',
+    // },
+    // scaleOriginal: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '原始比例',
+    //     key: 'scaleOriginal',
+    // },
+    // originnalImage: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '查看原图',
+    //     key: 'originnalImage',
+    // },
+    // download: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '下载',
+    //     key: 'download',
+    // },
+}
 
 export {
     Button,
@@ -1860,4 +2000,7 @@ export {
     Radio,
     Avatar,
     Card,
+    Paragraph,
+    Span,
+    ImagePreview,
 }

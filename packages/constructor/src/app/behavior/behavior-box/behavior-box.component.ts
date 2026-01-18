@@ -24,6 +24,9 @@ import {
   Radio as RadioBehaviorMeta,
   Avatar as AvatarBehaviorMeta,
   Card as CardBehaviorMeta,
+  Paragraph as ParagraphBehaviorMeta,
+  Span as SpanBehaviorMeta,
+  ImagePreview as ImagePreviewBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -170,6 +173,15 @@ export class BehaviorBoxComponent {
         break;
       case 'Card':
         this.setComponentBehaviorListByType(CardBehaviorMeta)
+        break;
+      case 'Paragraph':
+        this.setComponentBehaviorListByType(ParagraphBehaviorMeta)
+        break;
+      case 'Span':
+        this.setComponentBehaviorListByType(SpanBehaviorMeta)
+        break;
+      case 'ImagePreview':
+        this.setComponentBehaviorListByType(ImagePreviewBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

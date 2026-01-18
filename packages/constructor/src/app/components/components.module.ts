@@ -20,6 +20,7 @@ import {
   RadioModule,
   AvatarModule,
   CardModule,
+  ImagePreviewModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -55,6 +56,9 @@ import { InputNumberComponent } from './input-number/input-number.component';
 import { RadioComponent } from './radio/radio.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
+import { ParagraphComponent } from './paragraph/paragraph.component';
+import { SpanComponent } from './span/span.component';
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -84,6 +88,9 @@ import { CardComponent } from './card/card.component';
     RadioComponent,
     AvatarComponent,
     CardComponent,
+    ParagraphComponent,
+    SpanComponent,
+    ImagePreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -108,6 +115,7 @@ import { CardComponent } from './card/card.component';
     RadioModule,
     AvatarModule,
     CardModule,
+    ImagePreviewModule,
   ],
   providers: [],
   exports: [

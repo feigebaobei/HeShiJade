@@ -21,6 +21,7 @@ import { InputNumberComponent } from '../input-number/input-number.component';
 import { RadioComponent } from '../radio/radio.component';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { CardComponent } from '../card/card.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -28,10 +29,11 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
-// 数据
+import { SpanComponent } from '../span/span.component';
+import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
-// 所有我考虑使用封装全部devui的组件来实现.
+// 所以我考虑使用封装全部devui的组件来实现.
 
 let clog = console.log
 
@@ -56,6 +58,9 @@ let compMap: Oa = {
   Radio: RadioComponent,
   Avatar: AvatarComponent,
   Card: CardComponent,
+  Paragraph: ParagraphComponent,
+  Span: SpanComponent,
+  ImagePreview: ImagePreviewComponent,
 }
 
 @Component({
@@ -251,6 +256,25 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         this.componentRef.instance.data = {
           props: this.comp.props,
           slots: this.comp.slots,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Paragraph':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Span':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'ImagePreview':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          items: this.comp.items,
           ulid: this.comp.ulid,
         }
         break;

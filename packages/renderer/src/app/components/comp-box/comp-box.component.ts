@@ -23,9 +23,12 @@ import { InputNumberComponent } from '../input-number/input-number.component';
 import { RadioComponent } from '../radio/radio.component';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { CardComponent } from '../card/card.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
+import { SpanComponent } from '../span/span.component';
+import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 
 let clog = console.log
 
@@ -51,6 +54,9 @@ let compMap: {[k: S]: A} = {
   Radio: RadioComponent,
   Avatar: AvatarComponent,
   Card: CardComponent,
+  Paragraph: ParagraphComponent,
+  Span: SpanComponent,
+  ImagePreview: ImagePreviewComponent,
 }
 
 @Component({
@@ -276,6 +282,32 @@ export class CompBoxComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Paragraph':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          // slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Span':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'ImagePreview':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }

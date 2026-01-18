@@ -22,6 +22,9 @@ import { Button as ButtonProps,
     Radio as RadioProps,
     Avatar as AvatarProps,
     Card as CardProps,
+    Paragraph as ParagraphProps,
+    Span as SpanProps,
+    ImagePreview as ImagePreviewProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -41,6 +44,9 @@ import {
     Radio as RadioBehavior,
     Avatar as AvatarBehavior,
     Card as CardBehavior,
+    Paragraph as ParagraphBehavior,
+    Span as SpanBehavior,
+    ImagePreview as ImagePreviewBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -262,6 +268,25 @@ let Card: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Paragraph: ComponentDefaultConfig = {
+    props: opProps(ParagraphProps),
+    behavior: opBehavior(ParagraphBehavior),
+    items: [],
+    slots: {},
+}
+let Span: ComponentDefaultConfig = {
+    props: opProps(SpanProps),
+    behavior: opBehavior(SpanBehavior),
+    items: [],
+    slots: {},
+}
+let ImagePreview: ComponentDefaultConfig = {
+    props: opProps(ImagePreviewProps),
+    behavior: opBehavior(ImagePreviewBehavior),
+    // items: ItemAll['ImagePreview'],
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -284,4 +309,7 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Radio,
     Avatar,
     Card,
+    Paragraph,
+    Span,
+    ImagePreview,
 }

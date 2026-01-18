@@ -89,6 +89,18 @@ let Card: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Paragraph: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Span: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let ImagePreview: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -114,6 +126,9 @@ let all: {[k: S]: CompConfigAddabel} = {
     Radio,
     Avatar,
     Card,
+    Paragraph,
+    Span,
+    ImagePreview,
 }
 
 export {

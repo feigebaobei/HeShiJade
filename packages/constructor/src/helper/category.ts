@@ -106,6 +106,21 @@ let categoryList = [
         componentCategory: 'Card',
         ulid: '01J50ZGTCKEC10HWAJBZND487L'
     },
+    {
+        name: 'Paragraph',
+        componentCategory: 'Paragraph',
+        ulid: '01J50ZGTCKEC10HWAJBZND487M'
+    },
+    {
+        name: 'Span',
+        componentCategory: 'Span',
+        ulid: '01J50ZGTCKEC10HWAJBZND487N'
+    },
+    {
+        name: 'ImagePreview',
+        componentCategory: 'ImagePreview',
+        ulid: '01J50ZGTCKEC10HWAJBZND487N'
+    },
   ]
 export {
     categoryList

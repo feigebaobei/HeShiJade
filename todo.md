@@ -1,17 +1,12 @@
 ||||
 |-|-|-|
-|分支|f_card||
+|分支|f_image||
+|select的选项不应该被遮挡|todo||
 |丰富组件|||
 |要上生产的内容|||
-|fixed: 删除选中组件时，清空服务中的当前组件。|||
-|fixed: 删除options之一后应该及时更新舞台区的组件|||
-|feat:  items面板的options配置项支持hideField字段|||
-|feat:  form组件内支持radio组件|||
-|feat:  行为面板的icon放在内部|||
-|feat:  增加Radio组件|||
-|feat:  增加Avatar组件|||
-|feat:  增加Card组件|||
-|perf:  创建radio组件后提示用户创建valueList|||
+|fixed: 创建Paragraph组件|||
+|fixed: 创建Span组件|||
+|fixed: 创建ImagePreview组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
@@ -27,9 +22,6 @@
 ||先写一个遇到脏数据报警的程序||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |丰富组件|||
-||paragraph||
-||span||
-||imagePreview||
 ||accordion||
 ||breadcrumb||
 ||cascader||
@@ -49,6 +41,8 @@
 |验证saml数据是否有效|||
 |sso官网（包括：使用方法）计划使用react 19|||
 |lc官网（包括：使用方法）计划使用angular 18|||
+|低代码项目内嵌富代码项目|||
+|富代码项目内嵌低代码项目|||
 ||||
 
 做收敛。

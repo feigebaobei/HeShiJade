@@ -31,6 +31,9 @@ import {
   Radio as RadioPropsMeta,
   Avatar as AvatarPropsMeta,
   Card as CardPropsMeta,
+  Paragraph as ParagraphPropsMeta,
+  Span as SpanPropsMeta,
+  ImagePreview as ImagePreviewMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -166,6 +169,15 @@ export class PropsBoxComponent {
         break;
       case 'Card':
         this.opComponentPropsList(CardPropsMeta)
+        break;
+      case 'Paragraph':
+        this.opComponentPropsList(ParagraphPropsMeta)
+        break;
+      case 'Span':
+        this.opComponentPropsList(SpanPropsMeta)
+        break;
+      case 'ImagePreview':
+        this.opComponentPropsList(ImagePreviewMeta)
         break;
       default:
         this.componentPropsMeta = {}
