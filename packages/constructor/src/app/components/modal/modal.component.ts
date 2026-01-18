@@ -4,27 +4,14 @@ import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { asyncFn, initComponentMeta } from 'src/helper'
 import { createChildKey } from 'src/helper/index'
-// import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
-// import {
-//   Button as gridLayoutButtonDefault,
-//   Modal as gridLayoutModalDefault,
-//   Form as gridLayoutFormDefault,
-//   Table as gridLayoutTableDefault,
-//   Input as gridLayoutInputDefault,
-//   Select as gridLayoutSelectDefault,
-//   Icon as gridLayoutIconDefault,
-//   Checkbox as gridLayoutCheckboxDefault,
-//   Tabs as gridLayoutTabsDefault,
-//   Pagination as gridLayoutPaginationDefault,
-// } from 'src/helper/gridLayout'
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 // type
-import type { A, ULID, S, N, } from 'src/types/base';
+import type { A, ULID } from 'src/types/base';
 import type {Component as Comp, } from 'src/types/component'
 import type { Page } from 'src/types/page';
-// import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
+import { TextBase } from 'src/helper/text';
 
 let clog = console.log
 
@@ -33,7 +20,7 @@ let clog = console.log
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.sass']
 })
-export class ModalComponent implements OnInit{
+export class ModalComponent extends TextBase implements OnInit{
   @Input() data: A
   childrenHeader: Comp[]
   childrenBody: Comp[]
@@ -47,6 +34,7 @@ export class ModalComponent implements OnInit{
     private pageService: PageService,
     private appService: AppService,
   ) {
+    super()
     this.childrenHeader = []
     this.childrenBody = [
     ]

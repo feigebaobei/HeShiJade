@@ -104,7 +104,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
     // this.compHost.viewContainerRef.clear();
   }
   initCalc() {
-    // 这里赋值
+    // 这里为itemList赋值
     this.itemList = this.group.map((item) => {
       let f = item.hide
       if (f) {

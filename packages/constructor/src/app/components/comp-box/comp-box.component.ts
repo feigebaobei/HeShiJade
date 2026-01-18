@@ -19,6 +19,8 @@ import { ShowHideComponent } from '../show-hide/show-hide.component';
 import { LoopComponent } from '../loop/loop.component';
 import { InputNumberComponent } from '../input-number/input-number.component';
 import { RadioComponent } from '../radio/radio.component';
+import { AvatarComponent } from '../avatar/avatar.component';
+import { CardComponent } from '../card/card.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -27,15 +29,6 @@ import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
 // 数据
-// import { Button as buttonDefaultData,
-//   Input as inputDefaultData,
-// Modal as modalDefaultData,
-// Select as selectDefaultData,
-// Form as formDefaultData,
-// Table as tableDefaultData,
-//  } from '../../../helper/component'
-// import { ResponseData } from 'src/types';
-// import { PageService } from 'src/app/service/page.service';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所有我考虑使用封装全部devui的组件来实现.
@@ -61,6 +54,8 @@ let compMap: Oa = {
   Loop: LoopComponent,
   InputNumber: InputNumberComponent,
   Radio: RadioComponent,
+  Avatar: AvatarComponent,
+  Card: CardComponent,
 }
 
 @Component({
@@ -243,6 +238,19 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Radio':
         this.componentRef.instance.data = {
           props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Avatar':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Card':
+        this.componentRef.instance.data = {
+          props: this.comp.props,
+          slots: this.comp.slots,
           ulid: this.comp.ulid,
         }
         break;

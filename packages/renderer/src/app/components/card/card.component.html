@@ -1,0 +1,28 @@
+<d-card class="card-container" [interactive]="data.props['interactive']">
+  <d-card-header>
+     {{data.props['imgSrc']}}
+     {{data.props['customText']}}
+     {{data.props['name']}}
+    <d-avatar
+        dCardAvatar
+        [imgSrc]="data.props['imgSrc']"
+        [customText]="data.props['customText']"
+        [name]="data.props['name']"
+    ></d-avatar>
+    <d-card-title>{{data.props['title']}}</d-card-title>
+    <d-card-subtitle>
+        <d-icon [icon]="data.props['iconName']"></d-icon>
+        <span>{{data.props['subTitle']}}</span>
+    </d-card-subtitle>
+  </d-card-header>
+  <d-card-content>
+    <app-stack [componentList]="childrenBody"></app-stack>
+  </d-card-content>
+  <!-- 这里不需要使用配置项 -->
+  <d-card-actions [align]="'start'">
+    <main class="block">
+      <app-stack [componentList]="childrenActions"></app-stack>
+    </main>
+  </d-card-actions>
+</d-card>
+

@@ -1,5 +1,5 @@
 // import type { ConfigItem } from 'src/types/props'
-import type { B, ConfigItem } from 'src/types/base'
+import type { B, ConfigItem, ConfigItemSelect, S } from 'src/types/base'
 import type { PropsConfigItem } from 'src/types/config'
 import type { Component } from 'src/types/component'
 // interface PropsConfigItem {
@@ -1722,16 +1722,6 @@ let Radio: PropsConfigItem = {
         label: '排列方向',
         key: 'direction',
     },
-    // disabled: {
-    //     category: 'switch',
-    //     options: [
-    //         { label: 'false', value: false },
-    //         { label: 'true', value: true },
-    //     ],
-    //     value: false,
-    //     label: '禁用',
-    //     key: 'disabled',
-    // },
     showGlowStyle: {
         category: 'switch',
         options: [
@@ -1743,6 +1733,112 @@ let Radio: PropsConfigItem = {
         key: 'showGlowStyle',
     },
 }
+let Avatar: PropsConfigItem = {
+// let Avatar: {[k: S]: ConfigItem<B | S>} = {
+    imgSrc: {
+        category: 'input',
+        value: '',
+        label: 'imgSrc',
+        key: 'imgSrc',
+    },
+    customText: {
+        category: 'input',
+        value: '',
+        label: 'customText',
+        key: 'customText',
+    },
+    name: {
+        category: 'input',
+        value: '',
+        label: 'name',
+        key: 'name',
+    },
+    gender: {
+        category: 'select',
+        options: [
+            {label: '男士', value: 'male'},
+            {label: '女士', value: 'female'},
+        ],
+        value: 'male',
+        label: '性别',
+        key: 'gender',
+    },
+    width: {
+        category: 'number',
+        value: 40,
+        label: '宽度',
+        key: 'width',
+    },
+    height: {
+        category: 'number',
+        value: 40,
+        label: '宽度',
+        key: 'height',
+    },
+    // isRound: {
+    //     category: 'select',
+    //     options: [
+    //         {label: '圆形', value: true},
+    //         {label: '方形', value: false},
+    //     ],
+    //     value: true,
+    //     label: '形状',
+    //     key: 'isRound',
+    // },
+    shape: { // 在组件内转换为 isRound
+        category: 'select',
+        options: [
+            {label: '圆形', value: 'circle'},
+            {label: '方形', value: 'rectangle'},
+        ],
+        value: 'circle',
+        label: '形状',
+        key: 'shape',
+    }
+}
+let Card: PropsConfigItem = {
+    imgSrc: {
+        category: 'input',
+        value: '',
+        label: 'imgSrc',
+        key: 'imgSrc',
+    },
+    customText: {
+        category: 'input',
+        value: '',
+        label: 'customText',
+        key: 'customText',
+    },
+    title: {
+        category: 'input',
+        value: '',
+        label: '主标题',
+        key: 'title',
+    },
+    iconName: {
+        category: 'input',
+        value: '',
+        label: 'iconName',
+        key: 'iconName',
+    },
+    subTitle: {
+        category: 'input',
+        value: '',
+        label: '副标题',
+        key: 'subTitle',
+    },
+    interactive: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '是否可交互',
+        key: 'interactive',
+    },
+}
+
 export {
     Button,
     Modal,
@@ -1762,4 +1858,6 @@ export {
     Loop,
     InputNumber,
     Radio,
+    Avatar,
+    Card,
 }

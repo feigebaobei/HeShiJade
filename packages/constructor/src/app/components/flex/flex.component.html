@@ -10,7 +10,7 @@
         'padding': data.props['padding'],
     }"
 >
-    <span *ngIf="!(compArr.length)">请先创建items</span>
+    <span *ngIf="!(compArr.length)">{{text['toCreateItems']}}</span>
     <div
         *ngFor="let ele of compArr; let i = index;"
         class="item-box"
@@ -27,7 +27,7 @@
                 dDroppable
                 class="dropArea"
                 (dropEvent)="dropH($event, i)"
-            >请创建组件</div>
+            >{{text['toCreateComp']}}</div>
         </ng-template>
     </div>
 </div>

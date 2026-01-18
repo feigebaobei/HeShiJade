@@ -10,6 +10,7 @@ import { Page } from 'src/types/page';
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, S, ULID, O, } from 'src/types/base';
 import type { DropEvent } from 'ng-devui';
+import { TextBase } from 'src/helper/text';
 
 let clog = console.log
 
@@ -26,7 +27,7 @@ interface LoopData {
   templateUrl: './loop.component.html',
   styleUrl: './loop.component.sass'
 })
-export class LoopComponent {
+export class LoopComponent extends TextBase {
   @Input() data!: LoopData
   childComp: Comp | null
   curPage: Page
@@ -39,6 +40,7 @@ export class LoopComponent {
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.childComp = null
     this.curPage = this.pageService.getCurPage()!
     this.msgs = []

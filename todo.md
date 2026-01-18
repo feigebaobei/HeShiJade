@@ -1,28 +1,19 @@
 ||||
 |-|-|-|
-|分支|f_inputNumber||
-|form组件中支持radio|todo||
-||搭建侧form组件中支持radio|todo|
-||渲染侧form组件中支持radio|todo|
-||官网侧form组件中支持radio|todo|
-|搭建侧card|todo||
-|渲染侧card|todo||
-|官网侧card|todo||
+|分支|f_card||
 |丰富组件|||
-|行为面板的icon放在内部|待定||
 |要上生产的内容|||
-|feat:  增加InputNumber组件。|||
-|feat:  渲染侧/搭建侧兼容旧数据。|||
-|feat:  增加Radio组件。|||
-|feat:  items面板、props面板的选项配置项支持3种数据类型string/number/boolean，支持删除，支持禁用。|||
-|chore: 尺寸选项按从大到小排序，并且label统一使用文字。|||
-|chore: 官网的api页面中的组件名都改为大写开头。|||
-|chore: 搭建侧的组件列表使用大写开头|||
-|chore: 点位符 => 占位符|||
-|docs:  官网侧增加props的传递逻辑。|||
-||||
+|fixed: 删除选中组件时，清空服务中的当前组件。|||
+|fixed: 删除options之一后应该及时更新舞台区的组件|||
+|feat:  items面板的options配置项支持hideField字段|||
+|feat:  form组件内支持radio组件|||
+|feat:  行为面板的icon放在内部|||
+|feat:  增加Radio组件|||
+|feat:  增加Avatar组件|||
+|feat:  增加Card组件|||
+|perf:  创建radio组件后提示用户创建valueList|||
 
-|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|||
+|增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
 |增加style面板|||
 |创建碎片平台|||
@@ -36,8 +27,8 @@
 ||先写一个遇到脏数据报警的程序||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
 |丰富组件|||
-||radio||
-||card||
+||paragraph||
+||span||
 ||imagePreview||
 ||accordion||
 ||breadcrumb||
@@ -47,7 +38,6 @@
 ||textarea||
 ||toggle||
 ||drawer||
-||avatar||
 ||badge||
 ||progress||
 ||rate||

@@ -90,6 +90,9 @@ export class FormComponent implements OnInit, OnDestroy {
     })
     pool.trigger(this.data.ulid, 'submit', getLoopEventParams(this.loopIndex, undefined), this)
   }
+  radioNgModelChangeH(v: S, k: S) {
+    pool.trigger(this.data.ulid, 'changeFormItemValue', getLoopEventParams(this.loopIndex, {key: k, value: v}), this)
+  }
   ngOnChanges() {
     pool.trigger(this.data.ulid, 'postComponentNgOnChanges', getLoopEventParams(this.loopIndex, undefined), this)
   }

@@ -20,6 +20,8 @@ import { Button as ButtonProps,
     Loop as LoopProps,
     InputNumber as InputNumberProps,
     Radio as RadioProps,
+    Avatar as AvatarProps,
+    Card as CardProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -37,6 +39,8 @@ import {
     Loop as LoopBehavior,
     InputNumber as InputNumberBehavior,
     Radio as RadioBehavior,
+    Avatar as AvatarBehavior,
+    Card as CardBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -240,10 +244,21 @@ let InputNumber: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
-
 let Radio: ComponentDefaultConfig = {
     props: opProps(RadioProps),
     behavior: opBehavior(RadioBehavior),
+    items: [],
+    slots: {},
+}
+let Avatar: ComponentDefaultConfig = {
+    props: opProps(AvatarProps),
+    behavior: opBehavior(AvatarBehavior),
+    items: [],
+    slots: {},
+}
+let Card: ComponentDefaultConfig = {
+    props: opProps(CardProps),
+    behavior: opBehavior(CardBehavior),
     items: [],
     slots: {},
 }
@@ -267,4 +282,6 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Loop,
     InputNumber,
     Radio,
+    Avatar,
+    Card,
 }

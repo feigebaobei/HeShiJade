@@ -96,6 +96,11 @@ let text: Text = {
     noCurComp: '未选中组件',
     noApp: '无应用',
     toCreateComp: '请创建组件',
+    toCreateValueList: '请创建valueList',
+    toCreateItems: '请创建items',
+    canReceiveChildComp: '此区域可接收子组件',
+    canReceiveOnlyOneChildComp: '此区域只可接收一个子组件',
+    placeholderString: '占位文本',
 }
 let valueType = [
     {

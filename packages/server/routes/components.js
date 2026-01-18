@@ -375,7 +375,6 @@ router.route('/')
                 firstComponentUlid: curComponent.nextUlid
               }
             }))
-            clog('arr.length', arr.length)
           }
           if (curComponent.nextUlid) {
             arr.push(lowcodeDb.collection(DB.dev.componentTable).updateOne({ulid: curComponent.nextUlid}, {

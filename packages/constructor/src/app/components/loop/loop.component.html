@@ -3,7 +3,7 @@
     class="dropArea"
     (dropEvent)="dropH($event)"
 >
-    <span *ngIf="!childComp">此区域可接收一个组件</span>
+    <span *ngIf="!childComp">{{text['canReceiveOnlyOneChildComp']}}</span>
     <div
         *ngIf="childComp" [class]="['box', data.props['layout']]"
         [style]="styleObj"

@@ -25,7 +25,7 @@ export class PropsInputComponent implements OnInit, OnChanges {
     // this.value = this.data.value
     this.value = ''
     this.modelChangeH = createDebounceFn((v: S) => {
-      this.componentService.setProps(this.data.key, this.data.value)
+      this.componentService.setProps(this.data.key, this.data.value) // 因为ngModel使用的data.value，所以这里可以使用v也可以使用data.value
       // this.componentService.setCurComponent(this.pageService.getCurPage()!.ulid, this.componentService.curComponent()!.ulid)
       // clog('input change', this.data.key, this.data.value)
       // this.componentService.propsS.set({

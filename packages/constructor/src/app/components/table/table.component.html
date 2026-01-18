@@ -39,9 +39,7 @@
     <d-cell>
       <!-- 不知道为什么要使用ng-template -->
       <ng-template>
-        <div *ngIf="colOption['category'] === 'fill'">
-          占位文本
-        </div>
+        <div *ngIf="colOption['category'] === 'fill'">{{text['placeholderString']}}</div>
         <div *ngIf="colOption['category'] === 'slots'"
           dDroppable
           (dropEvent)="dropH($event, colOption['field'], i)"

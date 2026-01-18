@@ -9,18 +9,16 @@ import { compatibleArray } from 'src/helper/index'
 import { shareEvent, creatEventName } from 'src/helper/share-event';
 // 数据
 import { gridLayoutDefault } from 'src/helper/gridLayout';
-import { text } from 'src/helper/config';
+// import { text } from 'src/helper/config';
 // type
 import type { N, S, D, B, ULID, A } from 'src/types/base';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { DropEvent } from 'ng-devui';
-// import type { Tree, Node } from 'src/helper/tree';
 import type { Page } from 'src/types/page';
-// import { ulid } from 'ulid';
 import type { DataTableComponent } from 'ng-devui/data-table';
-// import type { GridLayoutDefault } from "src/types/component"
 import type { CompStackComponent } from '../comp-stack/comp-stack.component'; 
-import type { Text } from 'src/types/config';
+import { TextBase } from 'src/helper/text';
+// import type { Text } from 'src/types/config';
 
 // let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
 //   Button: gridLayoutButtonDefault,
@@ -60,7 +58,7 @@ interface TableData {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.sass']
 })
-export class TableComponent implements OnInit, 
+export class TableComponent extends TextBase implements OnInit, 
 AfterViewInit
  {
   @Input() data!: TableData
@@ -70,7 +68,7 @@ AfterViewInit
   curPage: Page
   // componentList: Comp[] // 未被使用到。todo delete 2025.07.01+
   showList: B[] // 是否显示指定列的组件
-  text: Text
+  // text: Text
   // @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   @ViewChild('datatable') datatable!: DataTableComponent
   @ViewChild('compStack') compStack!: CompStackComponent
@@ -79,6 +77,7 @@ AfterViewInit
     private componentService: ComponentService,
     // private cdRef: ChangeDetectorRef
   ) {
+    super()
     // 若使用4行占位，则使用table的slots列的组件不能都响应，只能当前行可以响应。
     // 所以不得以改为一行。
     // 日后想办法改为4行占位吧。
@@ -123,7 +122,7 @@ AfterViewInit
     this.curPage = this.pageService.getCurPage()!
     // this.componentList = []
     this.showList = []
-    this.text = text
+    // this.text = text
   }
   ngOnInit(): void {
     let tree = this.componentService.getTree(this.curPage.ulid)

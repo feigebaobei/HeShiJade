@@ -80,6 +80,12 @@ interface Component {
   pageUlid: ULID
   gridLayout: GridLayout
 }
+interface ComponentData {
+  props: Component['props']
+  slots: Component['slots']
+  items: Component['items']
+  ulid: Component['ulid']
+}
 
 interface Category {
   name: S
@@ -130,4 +136,5 @@ export type {
   PropsTransfer,
   ChangeGridLayoutParams,
   ComponentItemsValue,
+  ComponentData,
 }

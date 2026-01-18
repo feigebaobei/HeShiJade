@@ -2,7 +2,7 @@ import { Component, Input, } from '@angular/core';
 import shareEvent, { creatEventName } from 'src/helper/share-event';
 import { asyncFn, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
-import { text } from 'src/helper/config';
+// import { text } from 'src/helper/config';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 // type
@@ -11,7 +11,8 @@ import type { A, B, N, O, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 import type { DropEvent } from 'ng-devui';
-import type { Text } from 'src/types/config';
+import { TextBase } from 'src/helper/text';
+// import type { Text } from 'src/types/config';
 
 let clog = console.log
 
@@ -37,7 +38,7 @@ type K = keyof ShowObj
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.sass'
 })
-export class LayoutComponent {
+export class LayoutComponent extends TextBase {
   @Input() data!: LayoutData
   headerAreaCompArr: Comp[]
   leftAreaCompArr: Comp[]
@@ -46,12 +47,13 @@ export class LayoutComponent {
   footerAreaCompArr: Comp[]
   showObj: ShowObj
   curPage: Page
-  text: Text
+  // text: Text
   styleObj: O
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.curPage = this.pageService.getCurPage()!
     this.headerAreaCompArr = []
     this.leftAreaCompArr = []
@@ -65,7 +67,7 @@ export class LayoutComponent {
       right: true,
       footer: true,
     }
-    this.text = text
+    // this.text = text
     this.styleObj = {}
   }
   listen() {

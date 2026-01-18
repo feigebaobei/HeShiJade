@@ -13,6 +13,7 @@ import type { Page } from 'src/types/page';
 import type { DropEvent } from 'ng-devui';
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 import type { KvMap } from 'src/helper/kvMap';
+import { TextBase } from 'src/helper/text';
 
 let clog = console.log
 
@@ -30,7 +31,7 @@ interface TabsData {
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.sass'
 })
-export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
+export class TabsComponent extends TextBase implements OnInit, AfterViewChecked, OnDestroy{
   @Input() data!: TabsData
   compObj: {[k: S]: Comp[]}
   compArr: Comp[][]
@@ -43,6 +44,7 @@ export class TabsComponent implements OnInit, AfterViewChecked, OnDestroy{
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.compObj = {}
     this.compArr = []
     this.curPage = this.pageService.getCurPage()!

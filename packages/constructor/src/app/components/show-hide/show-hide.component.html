@@ -2,7 +2,7 @@
 [class]="{dropArea: true}"
 (dropEvent)="dropH($event)"
 >
-    <span *ngIf="!childComp">此区域可接收一个组件</span>
+    <span *ngIf="!childComp">{{text['canReceiveOnlyOneChildComp']}}</span>
     <div *ngIf="childComp">
         <app-comp-stack [componentList]="[(childComp)]" (deleteComp)="deleteComponentByUlidH($event)"></app-comp-stack>
     </div>
