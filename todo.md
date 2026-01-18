@@ -2,12 +2,12 @@
 |-|-|-|
 |分支|f_card||
 |丰富组件|||
-|行为面板的icon放在内部|done||
 |要上生产的内容|||
 |fixed: 删除选中组件时，清空服务中的当前组件。|||
 |fixed: 删除options之一后应该及时更新舞台区的组件|||
 |feat:  items面板的options配置项支持hideField字段|||
 |feat:  form组件内支持radio组件|||
+|feat:  行为面板的icon放在内部|||
 |feat:  增加Radio组件|||
 |feat:  增加Avatar组件|||
 |feat:  增加Card组件|||
@@ -29,7 +29,6 @@
 |丰富组件|||
 ||paragraph||
 ||span||
-||card||
 ||imagePreview||
 ||accordion||
 ||breadcrumb||
