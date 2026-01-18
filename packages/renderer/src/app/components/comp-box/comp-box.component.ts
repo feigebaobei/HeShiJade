@@ -22,6 +22,7 @@ import { LoopComponent } from '../loop/loop.component';
 import { InputNumberComponent } from '../input-number/input-number.component';
 import { RadioComponent } from '../radio/radio.component';
 import { AvatarComponent } from '../avatar/avatar.component';
+import { CardComponent } from '../card/card.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -49,6 +50,7 @@ let compMap: {[k: S]: A} = {
   InputNumber: InputNumberComponent,
   Radio: RadioComponent,
   Avatar: AvatarComponent,
+  Card: CardComponent,
 }
 
 @Component({
@@ -265,6 +267,15 @@ export class CompBoxComponent {
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Card':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          slots: this.data.slots,
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }

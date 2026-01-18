@@ -16,8 +16,8 @@ let clog = console.log
   styleUrl: './radio.component.sass'
 })
 export class RadioComponent extends CompBase {
-  @Input() override data!: componentInstanceData
-  @Input() override loopIndex: N = -1
+  // @Input() override data!: componentInstanceData
+  // @Input() override loopIndex: N = -1
   constructor() {
     super()
   }

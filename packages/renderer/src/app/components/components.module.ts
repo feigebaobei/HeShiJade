@@ -16,6 +16,7 @@ import { ButtonModule,
   InputNumberModule,
   RadioModule,
   AvatarModule,
+  CardModule,
   // DataTableComponent,
 } from 'ng-devui';
 import { MenuModule } from 'ng-devui/menu';
@@ -48,6 +49,7 @@ import { LoopComponent } from './loop/loop.component';
 import { InputNumberComponent } from './input-number/input-number.component';
 import { RadioComponent } from './radio/radio.component';
 import { AvatarComponent } from './avatar/avatar.component';
+import { CardComponent } from './card/card.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -79,6 +81,7 @@ import { AvatarComponent } from './avatar/avatar.component';
     InputNumberComponent,
     RadioComponent,
     AvatarComponent,
+    CardComponent,
   ],
   imports: [
     CommonModule,
@@ -98,6 +101,7 @@ import { AvatarComponent } from './avatar/avatar.component';
     InputNumberModule,
     RadioModule,
     AvatarModule,
+    CardModule,
 
     FormsModule,
     GridstackModule,
