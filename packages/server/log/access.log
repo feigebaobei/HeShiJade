@@ -210,3 +210,5 @@
 {"level":30,"time":1768711962055,"pid":89694,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1768712039361,"pid":89694,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1768712058020,"pid":89694,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1768716358030,"pid":7810,"hostname":"localhost","name":"logname","msg":"启动服务"}
+{"level":30,"time":1768716413674,"pid":7810,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}

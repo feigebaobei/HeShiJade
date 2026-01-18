@@ -27,6 +27,7 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
+import { SpanComponent } from '../span/span.component';
 
 let clog = console.log
 
@@ -53,6 +54,7 @@ let compMap: {[k: S]: A} = {
   Avatar: AvatarComponent,
   Card: CardComponent,
   Paragraph: ParagraphComponent,
+  Span: SpanComponent,
 }
 
 @Component({
@@ -287,6 +289,14 @@ export class CompBoxComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           // slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Span':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }

@@ -51,6 +51,7 @@ import { RadioComponent } from './radio/radio.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
+import { SpanComponent } from './span/span.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -84,6 +85,7 @@ import { ParagraphComponent } from './paragraph/paragraph.component';
     AvatarComponent,
     CardComponent,
     ParagraphComponent,
+    SpanComponent,
   ],
   imports: [
     CommonModule,

@@ -4,8 +4,8 @@
 |搭建侧paragraph|done||
 |渲染侧paragraph|done||
 |官网侧paragraph|done||
-|搭建侧span|doing||
-|渲染侧span|todo||
+|搭建侧span|done||
+|渲染侧span|doing||
 |官网侧span|todo||
 |搭建侧imagePreview|todo||
 |渲染侧imagePreview|todo||
