@@ -1,17 +1,12 @@
 ||||
 |-|-|-|
 |分支|f_image||
-|搭建侧img|todo||
-|渲染侧img|todo||
-|官网侧img|todo||
-|搭建侧imagePreview|done||
-|渲染侧imagePreview|done||
-|官网侧imagePreview|done||
 |select的选项不应该被遮挡|todo||
 |丰富组件|||
 |要上生产的内容|||
 |fixed: 创建Paragraph组件|||
 |fixed: 创建Span组件|||
+|fixed: 创建ImagePreview组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
@@ -46,6 +41,8 @@
 |验证saml数据是否有效|||
 |sso官网（包括：使用方法）计划使用react 19|||
 |lc官网（包括：使用方法）计划使用angular 18|||
+|低代码项目内嵌富代码项目|||
+|富代码项目内嵌低代码项目|||
 ||||
 
 做收敛。
