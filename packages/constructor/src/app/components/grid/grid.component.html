@@ -15,7 +15,7 @@
         'margin': data.props['margin'],
     }"
 >
-    <span *ngIf="!(compArr.length)">请先创建items</span>
+    <span *ngIf="!(compArr.length)">{{text['toCreateItems']}}</span>
     <div
         *ngFor="let ele of compArr; let i = index;"
         class="item-box"

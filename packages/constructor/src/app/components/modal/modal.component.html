@@ -11,7 +11,7 @@
             <d-icon [icon]="'icon-close'"></d-icon>
         </div>
         <div dDroppable (dropEvent)="dropHeaderH($event)" class="droppable">
-            <span *ngIf="!childrenHeader.length">此区域可接收子组件</span>
+            <span *ngIf="!childrenHeader.length">{{text['canReceiveChildComp']}}</span>
             <!-- <app-comp-box *ngFor="let comp of childrenHeader" [comp]="comp"
             (deleteComp)="deleteComponentByUlidH($event)"
             ></app-comp-box> -->
@@ -20,7 +20,7 @@
     </header>
     <hr>
     <main dDroppable (dropEvent)="dropBodyH($event)" class="droppable">
-        <span *ngIf="!childrenBody.length">此区域可接收子组件</span>
+        <span *ngIf="!childrenBody.length">{{text['canReceiveChildComp']}}</span>
         <!-- <app-comp-box *ngFor="let comp of childrenBody" [comp]="comp"
         (deleteComp)="bodyDeleteComponentByUlidH($event)"
         ></app-comp-box> -->

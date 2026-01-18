@@ -10,6 +10,7 @@ import type { A, B, N, O, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
 import type { DropEvent } from 'ng-devui';
+import { TextBase } from 'src/helper/text';
 
 let clog = console.log
 
@@ -27,7 +28,7 @@ interface FlexData {
   templateUrl: './flex.component.html',
   styleUrl: './flex.component.sass'
 })
-export class FlexComponent implements OnInit, OnChanges {
+export class FlexComponent extends TextBase implements OnInit, OnChanges {
   @Input() data!: FlexData
   curPage: Page
   // compArr: Comp[]
@@ -41,6 +42,7 @@ export class FlexComponent implements OnInit, OnChanges {
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.curPage = this.pageService.getCurPage()!
     this.compArr = []
     this.show = true

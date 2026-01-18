@@ -4,13 +4,14 @@ import { gridLayoutDefault } from 'src/helper/gridLayout';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import shareEvent, { creatEventName } from 'src/helper/share-event';
-import { text } from 'src/helper/config';
+// import { text } from 'src/helper/config';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, O, S, ULID } from 'src/types/base';
 import type { DropEvent } from 'ng-devui';
 import type { Page } from 'src/types/page';
-import type { Text } from 'src/types/config';
+import { TextBase } from 'src/helper/text';
+// import type { Text } from 'src/types/config';
 
 let clog = console.log
 
@@ -28,7 +29,7 @@ interface GridData {
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.sass'
 })
-export class GridComponent {
+export class GridComponent extends TextBase {
   @Input() data!: GridData
   curPage: Page
   compArr: {
@@ -36,15 +37,16 @@ export class GridComponent {
     styleObj: O
   }[]
   show: B
-  text: Text
+  // text: Text
   constructor(
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.curPage = this.pageService.getCurPage()!
     this.show = false
     this.compArr = []
-    this.text = text
+    // this.text = text
   }
   listen() {
     shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'add'), (obj) => {

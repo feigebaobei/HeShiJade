@@ -9,6 +9,7 @@ import type { A, B, N, S, ULID, O, } from 'src/types/base';
 import { DropEvent } from 'ng-devui';
 import { asyncFn, initComponentMeta } from 'src/helper';
 import type { Page } from 'src/types/page';
+import { TextBase } from 'src/helper/text';
 
 let clog = console.log
 
@@ -25,7 +26,7 @@ interface ShowHideData {
   templateUrl: './show-hide.component.html',
   styleUrl: './show-hide.component.sass'
 })
-export class ShowHideComponent {
+export class ShowHideComponent extends TextBase {
   @Input() data!: ShowHideData
   show: B
   curPage: Page
@@ -35,6 +36,7 @@ export class ShowHideComponent {
     private pageService: PageService,
     private componentService: ComponentService,
   ) {
+    super()
     this.curPage = this.pageService.getCurPage()!
     this.show = true
     this.childComp = null

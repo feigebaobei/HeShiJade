@@ -2,9 +2,9 @@
 |-|-|-|
 |分支|f_card||
 |搭建侧card|需要先开发avatar组件|done|
-|渲染侧card|doing||
-|官网侧card|todo||
-|搭建侧的组件基于TextBase使用text属性。|todo||
+|渲染侧card|done||
+|官网侧card|done||
+|搭建侧的组件基于TextBase使用text属性。|doing||
 |渲染侧的组件不用重写overview|todo||
 |丰富组件|||
 |行为面板的icon放在内部|待定||
