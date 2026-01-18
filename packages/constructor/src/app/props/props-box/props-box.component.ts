@@ -31,6 +31,7 @@ import {
   Radio as RadioPropsMeta,
   Avatar as AvatarPropsMeta,
   Card as CardPropsMeta,
+  Paragraph as ParagraphPropsMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -166,6 +167,9 @@ export class PropsBoxComponent {
         break;
       case 'Card':
         this.opComponentPropsList(CardPropsMeta)
+        break;
+      case 'Paragraph':
+        this.opComponentPropsList(ParagraphPropsMeta)
         break;
       default:
         this.componentPropsMeta = {}

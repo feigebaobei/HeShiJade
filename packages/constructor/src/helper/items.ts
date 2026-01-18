@@ -550,6 +550,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Radio, // 没有特定子元素
     // Avatar, // 没有特定子元素
     // Card, // 没有特定子元素
+    // Paragraph, // 没有特定子元素
 }
 
 export default all

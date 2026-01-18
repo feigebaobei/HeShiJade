@@ -1838,6 +1838,14 @@ let Card: PropsConfigItem = {
         key: 'interactive',
     },
 }
+let Paragraph: PropsConfigItem = {
+    text: {
+        category: 'input',
+        value: '这是一个段落',
+        label: '文本',
+        key: 'text',
+    },
+}
 
 export {
     Button,
@@ -1860,4 +1868,5 @@ export {
     Radio,
     Avatar,
     Card,
+    Paragraph,
 }

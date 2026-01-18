@@ -22,6 +22,7 @@ import { Button as ButtonProps,
     Radio as RadioProps,
     Avatar as AvatarProps,
     Card as CardProps,
+    Paragraph as ParagraphProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -41,6 +42,7 @@ import {
     Radio as RadioBehavior,
     Avatar as AvatarBehavior,
     Card as CardBehavior,
+    Paragraph as ParagraphBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -262,6 +264,12 @@ let Card: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Paragraph: ComponentDefaultConfig = {
+    props: opProps(ParagraphProps),
+    behavior: opBehavior(ParagraphBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -284,4 +292,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Radio,
     Avatar,
     Card,
+    Paragraph,
 }
