@@ -24,12 +24,13 @@ import { RadioComponent } from '../radio/radio.component';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { CardComponent } from '../card/card.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
-// type
-import type { A, N, S } from 'src/types/base';
-import type { Component as Comp, } from 'src/types/component';
 import { SpanComponent } from '../span/span.component';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 import { AccordionComponent } from '../accordion/accordion.component';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+// type
+import type { A, N, S } from 'src/types/base';
+import type { Component as Comp, } from 'src/types/component';
 
 let clog = console.log
 
@@ -59,6 +60,7 @@ let compMap: {[k: S]: A} = {
   Span: SpanComponent,
   ImagePreview: ImagePreviewComponent,
   Accordion: AccordionComponent,
+  Breadcrumb: BreadcrumbComponent,
 }
 
 @Component({
@@ -315,6 +317,15 @@ export class CompBoxComponent {
         }
         break;
       case 'Accordion':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Breadcrumb':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
