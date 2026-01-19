@@ -26,6 +26,7 @@ import { Button as ButtonProps,
     Span as SpanProps,
     ImagePreview as ImagePreviewProps,
     Accordion as AccordionProps,
+    Breadcrumb as BreadcrumbProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -49,6 +50,7 @@ import {
     Span as SpanBehavior,
     ImagePreview as ImagePreviewBehavior,
     Accordion as AccordionBehavior,
+    Breadcrumb as BreadcrumbBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -310,6 +312,29 @@ let Accordion: ComponentDefaultConfig = {
     ],
     slots: {},
 }
+let Breadcrumb: ComponentDefaultConfig = {
+    props: opProps(BreadcrumbProps),
+    behavior: opBehavior(BreadcrumbBehavior),
+    items: [
+        {
+            // key: '',
+            // parentKey: '',
+            label: 'home',
+            link: '',
+            linkType: 'hrefLink',
+            target: '_blank',
+        },
+        {
+            // key: '',
+            // parentKey: '',
+            label: 'one',
+            link: '',
+            linkType: 'hrefLink',
+            target: '_blank',
+        },
+    ],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -336,4 +361,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
 }

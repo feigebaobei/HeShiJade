@@ -22,6 +22,7 @@ import {
   CardModule,
   ImagePreviewModule,
   AccordionModule,
+  BreadcrumbModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -61,6 +62,7 @@ import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SpanComponent } from './span/span.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { BreadcrumbComponent } from '../componnents/breadcrumb/breadcrumb.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -94,6 +96,7 @@ import { AccordionComponent } from './accordion/accordion.component';
     SpanComponent,
     ImagePreviewComponent,
     AccordionComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     CommonModule,
@@ -120,6 +123,7 @@ import { AccordionComponent } from './accordion/accordion.component';
     CardModule,
     ImagePreviewModule,
     AccordionModule,
+    BreadcrumbModule,
   ],
   providers: [],
   exports: [

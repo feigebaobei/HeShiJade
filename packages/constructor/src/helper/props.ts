@@ -2005,6 +2005,7 @@ let Accordion: PropsConfigItem = {
         category: 'select',
         options: [
             {label: '_self', value: '_self'},
+            {label: '_blank', value: '_blank'},
         ],
         value: '_self',
         label: '链接打开位置',
@@ -2051,6 +2052,14 @@ let Accordion: PropsConfigItem = {
         key: 'showNoContent',
     },
 }
+let Breadcrumb: PropsConfigItem = {
+    separatorIcon: {
+        category: 'input',
+        value: '',
+        label: '用于分割的icon',
+        key: 'separatorIcon',
+    },
+}
 
 export {
     Button,
@@ -2077,4 +2086,5 @@ export {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
 }

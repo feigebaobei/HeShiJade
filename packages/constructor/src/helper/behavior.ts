@@ -565,6 +565,32 @@ let Accordion: BehaviorConfigGroup = [
   }
 ]
 
+let Breadcrumb: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      // {label: '菜单展开时', value: 'menuToggle'},
+      // {label: '点击菜单项时', value: 'itemClick'},
+      // {label: '切换菜单项时', value: 'activeItemChange'},
+      {label: '点击时', value: 'itemClick'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+
 
 
 export {
@@ -593,6 +619,7 @@ export {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -620,5 +647,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
 }
 export default all

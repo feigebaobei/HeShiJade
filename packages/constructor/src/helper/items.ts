@@ -593,6 +593,52 @@ let Accordion: ConfigItem[] = [
         value: '',
     },
 ]
+let Breadcrumb: ConfigItem[] = [
+    // {
+    //     label: 'key',
+    //     category: 'input',
+    //     key: 'key',
+    //     value: '',
+    // },
+    // {
+    //     label: '父key',
+    //     category: 'input',
+    //     key: 'parentKey',
+    //     value: '',
+    // },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: '链接',
+        category: 'input',
+        key: 'link',
+        value: '',
+    },
+    {
+        label: '链接类型',
+        category: 'select',
+        options: [
+            {label: 'hrefLink', value: 'hrefLink',},
+            {label: 'routerLink', value: 'routerLink',},
+        ],
+        key: 'linkType',
+        value: 'hrefLink',
+    },
+    {
+        label: 'target',
+        category: 'select',
+        options: [
+            {label: '_self', value: '_self',},
+            {label: '_blank', value: '_blank',},
+        ],
+        key: 'target',
+        value: '_blank',
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -620,6 +666,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Span, // 没有特定子元素
     ImagePreview,
     Accordion,
+    Breadcrumb,
 }
 
 export default all

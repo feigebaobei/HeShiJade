@@ -78,6 +78,7 @@ export class AccordionComponent extends TextBase {
       this.menu = washMenuItemList
     }
   }
+  // todo 把它抽象到一个class中。
   listen() {
     shareEvent.on(creatEventName('Accordion', this.data.ulid, 'items', 'add'), () => {
       this.opMenu()

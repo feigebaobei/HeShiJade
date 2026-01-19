@@ -35,6 +35,7 @@ import {
   Span as SpanPropsMeta,
   ImagePreview as ImagePreviewMeta,
   Accordion as AccordionMeta,
+  Breadcrumb as BreadcrumbMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -182,6 +183,9 @@ export class PropsBoxComponent {
         break;
       case 'Accordion':
         this.opComponentPropsList(AccordionMeta)
+        break;
+      case 'Breadcrumb':
+        this.opComponentPropsList(BreadcrumbMeta)
         break;
       default:
         this.componentPropsMeta = {}

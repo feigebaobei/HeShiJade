@@ -2,8 +2,9 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|accordion|doing||
-|breadcrumb|||
+|accordion|done||
+|breadcrumb|doing||
+|according/pagelist使用ListenItems类|todo||
 |cascader|||
 |datepicker|||
 |slider|||
@@ -14,6 +15,7 @@
 |progress|||
 |rate|||
 |tag|||
+|配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
 |要上生产的内容|||
 |feat: 创建Paragraph组件|||
