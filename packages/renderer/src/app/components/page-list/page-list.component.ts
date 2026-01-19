@@ -67,24 +67,25 @@ export class PageListComponent {
   }
   opMenu() {
     if (!this.data.items.length) {
-      return
-    }
-    let washMenuItemList = (this.data.items as MenuItem[]).map(item => this.washMenuItem(item))
-    for (let i = 0; i < washMenuItemList.length;) {
-      let cur = washMenuItemList[i]
-      if (cur.parentKey) {
-        // 去挂
-        let p = this.find(washMenuItemList, cur.parentKey)
-        if (p) {
-          p.children.push(cur)
+      this.menu = []
+    } else {
+      let washMenuItemList = (this.data.items as MenuItem[]).map(item => this.washMenuItem(item))
+      for (let i = 0; i < washMenuItemList.length;) {
+        let cur = washMenuItemList[i]
+        if (cur.parentKey) {
+          // 去挂
+          let p = this.find(washMenuItemList, cur.parentKey)
+          if (p) {
+            p.children.push(cur)
+          }
+          washMenuItemList.splice(i, 1)
+        } else {
+          // 不挂
+          i++
         }
-        washMenuItemList.splice(i, 1)
-      } else {
-        // 不挂
-        i++
       }
+      this.menu = washMenuItemList
     }
-    this.menu = washMenuItemList
   }
   itemClickH(key: S) {
     this.active = key

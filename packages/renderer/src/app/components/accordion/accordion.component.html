@@ -1,0 +1,13 @@
+<d-accordion
+  [data]="menu"
+  [restrictOneOpen]="data.props['restrictOneOpen']"
+  [linkType]="data.props['linkType']"
+  [linkDefaultTarget]="data.props['linkDefaultTarget']"
+  [autoOpenActiveMenu]="data.props['autoOpenActiveMenu']"
+  [accordionType]="data.props['accordionType']"
+  [showAnimation]="data.props['showAnimation']"
+  [showNoContent]="data.props['showNoContent']"
+  (menuToggle)="menuToggleH($event)"
+  (itemClick)="itemClickH($event)"
+  (activeItemChange)="activeItemChangeH($event)"
+></d-accordion>
