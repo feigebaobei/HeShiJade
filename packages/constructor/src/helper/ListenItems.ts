@@ -6,46 +6,27 @@ import shareEvent, { creatEventName } from "./share-event";
 import type { Component as Comp } from "src/types/component";
 import { InputData } from "./InputData";
 import { Oa, S } from "src/types/base";
+import { TextBase } from "./text";
 
 let clog = console.log
-
-// @Component({
-//     template: ''
-// })
-// abstract class Wash<T> {
-//     abstract washMenuItem(): T
-// }
-
-// type washFn<T> = (p: Oa) => T
 
 @Component({
     template: ''
 })
-export class ListenItems<T extends {key: S, parentKey: S, children?: T[]}> extends 
-// Wash<T> 
-InputData
+export class ListenItems<T extends {key: S, parentKey: S, children?: T[]}> 
+extends 
+// InputData 
+TextBase
 {
-    // @Input() data!: {
-    //     props: Comp['props'],
-    //     items: Comp['items'],
-    //     slots: Comp['slots'],
-    //     ulid: Comp['ulid'],
-    // }
-    // text: Text
     menu: T[]
-    // washMenuItem: washFn<T>
     constructor(
-        // f: washFn<T>
     ) {
         super()
-        // this.text = text
         this.menu = []
-        // this.washMenuItem = f
     }
     washMenuItem(p: Oa): T {
         return p as T
     }
-    // abstract washMenuItem(): T {}
     find(arr: T[], k: S): T | undefined {
         let res = arr.find(item => item.key === k)
         if (res) {

@@ -28,7 +28,7 @@ interface LoopData {
   styleUrl: './loop.component.sass'
 })
 export class LoopComponent extends TextBase {
-  @Input() data!: LoopData
+  // @Input() data!: LoopData
   childComp: Comp | null
   curPage: Page
   msgs: O[]

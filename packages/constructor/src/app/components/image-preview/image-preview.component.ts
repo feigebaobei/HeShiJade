@@ -10,5 +10,5 @@ import type { Component as Comp } from 'src/types/component';
   styleUrl: './image-preview.component.sass'
 })
 export class ImagePreviewComponent extends TextBase {
-  @Input() data!: {props: Comp['props'], items: Comp['items']}
+  // @Input() data!: {props: Comp['props'], items: Comp['items']}
 }

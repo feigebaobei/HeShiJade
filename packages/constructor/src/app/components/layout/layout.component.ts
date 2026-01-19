@@ -39,7 +39,7 @@ type K = keyof ShowObj
   styleUrl: './layout.component.sass'
 })
 export class LayoutComponent extends TextBase {
-  @Input() data!: LayoutData
+  // @Input() data!: LayoutData
   headerAreaCompArr: Comp[]
   leftAreaCompArr: Comp[]
   mainAreaCompArr: Comp[]

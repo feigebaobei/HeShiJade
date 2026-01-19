@@ -61,7 +61,7 @@ interface TableData {
 export class TableComponent extends TextBase implements OnInit, 
 AfterViewInit
  {
-  @Input() data!: TableData
+  // @Input() data!: TableData
   basicDataSource: basicDataSourceItem[]
   compArr: Comp[][]
   createChildKey: typeof createChildKey

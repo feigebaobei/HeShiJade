@@ -27,7 +27,7 @@ interface ShowHideData {
   styleUrl: './show-hide.component.sass'
 })
 export class ShowHideComponent extends TextBase {
-  @Input() data!: ShowHideData
+  // @Input() data!: ShowHideData
   show: B
   curPage: Page
   childComp: Comp | null

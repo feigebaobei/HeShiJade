@@ -21,7 +21,7 @@ let clog = console.log
   styleUrl: './card.component.sass'
 })
 export class CardComponent extends TextBase {
-  @Input() data!: ComponentData
+  // @Input() data!: ComponentData
   @ViewChild('compStackBody') compStackBody!: CompStackComponent
   @ViewChild('compStackActions') compStackActions!: CompStackComponent
   childrenBody: Comp[]

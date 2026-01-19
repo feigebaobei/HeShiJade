@@ -29,7 +29,7 @@ interface FlexData {
   styleUrl: './flex.component.sass'
 })
 export class FlexComponent extends TextBase implements OnInit, OnChanges {
-  @Input() data!: FlexData
+  // @Input() data!: FlexData
   curPage: Page
   // compArr: Comp[]
   compArr: {
