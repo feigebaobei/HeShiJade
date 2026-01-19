@@ -3451,7 +3451,189 @@
             </tr>
         </tbody>
     </table>
-    
+    <h1>Accordion</h1>
+    <h2>props</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>key</td>
+                <td>说明</td>
+                <td>可选值</td>
+                <td>默认值</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>restrictOneOpen</td>
+                <td>同级菜单同时只能展开一个</td>
+                <td>true/false</td>
+                <td>false</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>linkType</td>
+                <td>链接类型</td>
+                <td>routerLink/hrefLink/dependOnLinkTypeKey/''</td>
+                <td>''</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>linkDefaultTarget</td>
+                <td>链接打开位置</td>
+                <td>_self</td>
+                <td>'_self'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>autoOpenActiveMenu</td>
+                <td>自动打开有活跃的子项菜单</td>
+                <td>true/false</td>
+                <td>false</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>accordionType</td>
+                <td>菜单形式</td>
+                <td>normal/embed</td>
+                <td>normal</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>showAnimation</td>
+                <td>动画</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>showNoContent</td>
+                <td>当没有数据时是否显示没有数据</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>slots</h2>
+    <h2>method</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>方法</td>
+                <td>参数说明</td>
+                <td>运行逻辑</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setProps: (o: Object) => void</td>
+                <td>由当前组件支持的props属性组成的对象</td>
+                <td>设置当前组件的props</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>event</h2>
+    <pre>
+        interface Item {
+            active: B,
+            disabled: B,
+            key: S,
+            link: S,
+            open: B,
+            parentKey: S | undefined,
+            title: S,
+        }
+    </pre>
+    <table>
+        <thead>
+            <tr>
+                <td>事件名</td>
+                <td>触发时机</td>
+                <td>第三个参数</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>menuToggle</td>
+                <td>键盘输入时</td>
+                <td>{item: Item, open: B, parent: Item, event: PointerEvent}</td>
+            </tr>
+            <tr>
+                <td>itemClick</td>
+                <td>model改变后</td>
+                <td>{item: Item, prevActiveItem: Item, parent: Item | undefined, event: PointerEvent}</td>
+            </tr>
+            <tr>
+                <td>activeItemChange</td>
+                <td>值改变后</td>
+                <td>o: Item</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnChanges</td>
+                <td>改变属性后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnInit</td>
+                <td>初始化组件后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgDoCheck</td>
+                <td>变更检测后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgAfterViewInit</td>
+                <td>渲染视图后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>postComponentNgOnDestroy</td>
+                <td>销毁组件后</td>
+                <td>undefined</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>items</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>字段</td>
+                <td>说明</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>title</td>
+                <td>title</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>禁用</td>
+            </tr>
+            <tr>
+                <td>key</td>
+                <td>key</td>
+            </tr>
+            <tr>
+                <td>父key</td>
+                <td>父key</td>
+            </tr>
+            <tr>
+                <td>打开</td>
+                <td>是否打开</td>
+            </tr>
+            <tr>
+                <td>链接</td>
+                <td>链接</td>
+            </tr>
+        </tbody>
+    </table>
+        
     <!-- 
     <h1>ComponentName</h1>
     <h2>props</h2>
@@ -3545,6 +3727,21 @@
                 <td>postComponentNgOnDestroy</td>
                 <td>销毁组件后</td>
                 <td>undefined</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>items</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>字段</td>
+                <td>说明</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>src</td>
+                <td>图片的src</td>
             </tr>
         </tbody>
     </table> -->
