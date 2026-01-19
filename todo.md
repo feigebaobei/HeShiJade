@@ -1,12 +1,24 @@
 ||||
 |-|-|-|
-|分支|f_image||
-|select的选项不应该被遮挡|todo||
+|分支|f_tag||
 |丰富组件|||
+|accordion|doing||
+|breadcrumb|||
+|cascader|||
+|datepicker|||
+|slider|||
+|textarea|||
+|toggle|||
+|drawer|||
+|badge|||
+|progress|||
+|rate|||
+|tag|||
+|select的选项不应该被遮挡|todo||
 |要上生产的内容|||
-|fixed: 创建Paragraph组件|||
-|fixed: 创建Span组件|||
-|fixed: 创建ImagePreview组件|||
+|feat: 创建Paragraph组件|||
+|feat: 创建Span组件|||
+|feat: 创建ImagePreview组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
