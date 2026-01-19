@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuConfig } from 'ng-devui';
+import { clog } from 'src/helper';
 import { CompBase } from 'src/helper/pool';
 import { Oa } from 'src/types/base';
 
@@ -26,6 +27,9 @@ export class BreadcrumbComponent extends CompBase {
   }
   opMenu() {
     this.menu = this.data.items.map(item => this.washMenuItem(item))
+  }
+  itemClickH($event: MouseEvent, item: MenuConfig) {
+    clog('ssss', $event, item)
   }
   override ngOnInit(): void {
     this.pool.register(this.data.ulid, this, this.data.behavior)
