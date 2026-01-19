@@ -1,5 +1,6 @@
 
 <div dMenu>
+    <p *ngIf="!menu.length">{{text['toCreateItems']}}</p>
     <ng-container *ngFor="let item of menu">
         <div
             *ngIf="item.children?.length"
