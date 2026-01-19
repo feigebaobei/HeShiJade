@@ -119,7 +119,12 @@ let categoryList = [
     {
         name: 'ImagePreview',
         componentCategory: 'ImagePreview',
-        ulid: '01J50ZGTCKEC10HWAJBZND487N'
+        ulid: '01J50ZGTCKEC10HWAJBZND487O'
+    },
+    {
+        name: 'Accordion',
+        componentCategory: 'Accordion',
+        ulid: '01J50ZGTCKEC10HWAJBZND487P'
     },
   ]
 export {

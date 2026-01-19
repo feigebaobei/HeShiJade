@@ -136,6 +136,11 @@ let ImagePreview: GridLayoutDefault = {
     h: 6,
     noResize: false,
 }
+let Accordion: GridLayoutDefault = {
+    w: 4,
+    h: 6,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -160,6 +165,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
 }
 export {
     Button,
@@ -185,6 +191,7 @@ export {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
     
     gridLayoutDefault,
 }

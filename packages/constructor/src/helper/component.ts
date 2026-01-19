@@ -25,6 +25,7 @@ import { Button as ButtonProps,
     Paragraph as ParagraphProps,
     Span as SpanProps,
     ImagePreview as ImagePreviewProps,
+    Accordion as AccordionProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -47,6 +48,7 @@ import {
     Paragraph as ParagraphBehavior,
     Span as SpanBehavior,
     ImagePreview as ImagePreviewBehavior,
+    Accordion as AccordionBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -287,6 +289,27 @@ let ImagePreview: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Accordion: ComponentDefaultConfig = {
+    props: opProps(AccordionProps),
+    behavior: opBehavior(AccordionBehavior),
+    items: [
+        {
+            title: 'one',
+            disabled: false,
+            key: 'one',
+            open: false,
+            link: '',
+        },
+        {
+            title: 'two',
+            disabled: false,
+            key: 'two',
+            open: false,
+            link: '',
+        }
+    ],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -312,4 +335,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
 }

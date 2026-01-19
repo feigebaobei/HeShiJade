@@ -27,6 +27,7 @@ import {
   Paragraph as ParagraphBehaviorMeta,
   Span as SpanBehaviorMeta,
   ImagePreview as ImagePreviewBehaviorMeta,
+  Accordion as AccordionBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -182,6 +183,9 @@ export class BehaviorBoxComponent {
         break;
       case 'ImagePreview':
         this.setComponentBehaviorListByType(ImagePreviewBehaviorMeta)
+        break;
+      case 'Accordion':
+        this.setComponentBehaviorListByType(AccordionBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

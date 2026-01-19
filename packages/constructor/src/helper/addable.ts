@@ -101,6 +101,10 @@ let ImagePreview: CompConfigAddabel = {
     behavior: true,
     items: true,
 }
+let Accordion: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -129,6 +133,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
 }
 
 export {

@@ -1978,6 +1978,79 @@ let ImagePreview: PropsConfigItem = {
     //     key: 'download',
     // },
 }
+let Accordion: PropsConfigItem = {
+    restrictOneOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '同级菜单同时只能展开一个',
+        key: 'restrictOneOpen',
+    },
+    linkType: {
+        category: 'select',
+        options: [
+            {label: 'routerLink', value: 'routerLink'},
+            {label: 'hrefLink', value: 'hrefLink'},
+            {label: 'dependOnLinkTypeKey', value: 'dependOnLinkTypeKey'},
+            {label: '\'\'', value: ''},
+        ],
+        value: '',
+        label: '链接类型',
+        key: 'linkType',
+    },
+    linkDefaultTarget: {
+        category: 'select',
+        options: [
+            {label: '_self', value: '_self'},
+        ],
+        value: '_self',
+        label: '链接打开位置',
+        key: 'linkDefaultTarget',
+    },
+    autoOpenActiveMenu: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '自动打开有活跃的子项菜单',
+        key: 'autoOpenActiveMenu',
+    },
+    accordionType: {
+        category: 'select',
+        options: [
+            {label: 'normal', value: 'normal'},
+            {label: 'embed', value: 'embed'},
+        ],
+        value: 'normal',
+        label: '菜单形式',
+        key: 'accordionType',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    showNoContent: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '当没有数据时是否显示没有数据',
+        key: 'showNoContent',
+    },
+}
 
 export {
     Button,
@@ -2003,4 +2076,5 @@ export {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
 }

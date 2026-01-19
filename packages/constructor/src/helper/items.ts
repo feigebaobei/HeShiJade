@@ -547,6 +547,52 @@ let ImagePreview: ConfigItem[] = [
     },
 ]
 // let ShowHide: ConfigItem[] = []
+let Accordion: ConfigItem[] = [
+    {
+        label: 'title',
+        category: 'input',
+        key: 'title',
+        value: '',
+    },
+    {
+        label: '禁用',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'disabled',
+        value: false,
+    },
+    {
+        label: 'key',
+        category: 'input',
+        key: 'key',
+        value: '',
+    },
+    {
+        label: '父key',
+        category: 'input',
+        key: 'parentKey',
+        value: '',
+    },
+    {
+        label: '打开',
+        category: 'switch',
+        options: [
+            {label: 'false', value: false,},
+            {label: 'true', value: true,},
+        ],
+        key: 'open',
+        value: false,
+    },
+    {
+        label: '链接',
+        category: 'input',
+        key: 'link',
+        value: '',
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -573,6 +619,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Paragraph, // 没有特定子元素
     // Span, // 没有特定子元素
     ImagePreview,
+    Accordion,
 }
 
 export default all

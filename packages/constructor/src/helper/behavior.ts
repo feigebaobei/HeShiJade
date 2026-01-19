@@ -540,6 +540,30 @@ let ImagePreview: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let Accordion: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '菜单展开时', value: 'menuToggle'},
+      {label: '点击菜单项时', value: 'itemClick'},
+      {label: '切换菜单项时', value: 'activeItemChange'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -568,6 +592,7 @@ export {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -594,5 +619,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Paragraph,
     Span,
     ImagePreview,
+    Accordion,
 }
 export default all

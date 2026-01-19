@@ -1,0 +1,11 @@
+<p *ngIf="!menu.length">{{text['toCreateItems']}}</p>
+<d-accordion
+  [data]="menu"
+  [restrictOneOpen]="data.props['restrictOneOpen']"
+  [linkType]="data.props['linkType']"
+  [linkDefaultTarget]="data.props['linkDefaultTarget']"
+  [autoOpenActiveMenu]="data.props['autoOpenActiveMenu']"
+  [accordionType]="data.props['accordionType']"
+  [showAnimation]="data.props['showAnimation']"
+  [showNoContent]="data.props['showNoContent']"
+></d-accordion>
