@@ -25,7 +25,7 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
 import { SpanComponent } from '../span/span.component';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 import { AccordionComponent } from '../accordion/accordion.component';
-import { BreadcrumbComponent } from 'src/app/componnents/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from 'src/app/components/breadcrumb/breadcrumb.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
