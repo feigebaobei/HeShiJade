@@ -5,7 +5,7 @@
 |according/pagelist使用ListenItems类|todo||
 |extends TextBase 改为 extends InputData|done||
 |cascader|doing||
-||cascader 调试value|doing|
+||cascader 调试value|done|
 |检查form组件的mount这个字段|||
 |使用ngModule需要import哪个module|todo||
 |尝试去掉这个属性是否可以正常运行|done||
@@ -27,6 +27,7 @@
 |feat: 创建Breadcrumb组件|||
 |feat: according/pagelist使用ListenItems类|||
 |feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
+|feat: 创建Cascader组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
