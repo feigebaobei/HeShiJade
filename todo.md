@@ -3,13 +3,9 @@
 |分支|f_tag||
 |丰富组件|||
 |according/pagelist使用ListenItems类|todo||
-|extends TextBase 改为 extends InputData|done||
-|cascader|doing||
-||cascader 调试value|done|
-|检查form组件的mount这个字段|done||
+|cascader|done||
 |使用ngModule需要import哪个module|todo||
-|尝试去掉这个属性是否可以正常运行|done||
-|处理props中的options配置项，使其只保存值。|||
+|处理props中的options配置项，使其只保存值。|doing||
 |datepicker|||
 |slider|||
 |textarea|||
@@ -312,3 +308,27 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+
+
+数据库中保存
+valueList: ['a']
+valueList: [['a']]
+搭建侧
+[
+  {
+    "label": "",
+    "value": "a,a1",
+    "valueTip": "用逗号分隔路径",
+    "valueType": "string",
+    "disabled": false,
+    "hideField": [
+      "label",
+      "valueType",
+      "disabled"
+    ]
+  }, ...
+]
+渲染则
+valueList: ['a']
+valueList: [['a']]
