@@ -44,11 +44,16 @@ MarshalItem<CascaderItemNew>
   }
   override extraMarshal() {
     // this.value = [['b'], ['a', 'a1']]
-    this.value = this.data.props['valueList'].map((item: A) => {
-      return item.value.split(',').map((subItem: S) => subItem.trim())
-    })
+    let valueList = this.data.props['valueList']
+    if (this.data.props['multiple']) {
+      this.value = valueList.map((item: A) => {
+        return item.value.split(',').map((subItem: S) => subItem.trim())
+      })
+    } else {
+      this.value = valueList[0].value.split(',').map((subItem: S) => subItem.trim())
+    }
     // [[1, 4, 8], [1, 4, 9, 81], [1, 41]]
-    clog('this.value', this.value)
+    // clog('this.value', this.value)
   }
   override washMenuItem(p: Oa): CascaderItemNew {
     return {

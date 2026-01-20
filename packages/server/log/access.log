@@ -500,3 +500,5 @@
 {"level":30,"time":1768903596604,"pid":73689,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1768903618866,"pid":73689,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1768903652853,"pid":73689,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1768903696801,"pid":73689,"hostname":"bogon","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1768904377596,"pid":98625,"hostname":"bogon","name":"logname","msg":"启动服务"}

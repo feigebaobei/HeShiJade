@@ -5,7 +5,8 @@
 |according/pagelist使用ListenItems类|todo||
 |cascader|done||
 |使用ngModule需要import哪个module|todo||
-|处理props中的options配置项，使其只保存值。|doing||
+|处理props中的options配置项，使其只保存值。|done||
+|搭建侧的cascader使用正确的valueList|todo||
 |datepicker|||
 |slider|||
 |textarea|||
