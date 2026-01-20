@@ -2063,7 +2063,9 @@ let Breadcrumb: PropsConfigItem = {
 let Cascader: PropsConfigItem = {
     valueList: { // 在组件内处理为value
         category: 'options',
-        template: { label: '', value: '', valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
+        template: { label: '', value: '',
+            valueTip: '用逗号分隔路径',
+            valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
         value: [],
         label: '值',
         key: 'valueList',

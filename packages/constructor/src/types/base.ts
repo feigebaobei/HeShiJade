@@ -107,6 +107,7 @@ interface ConfigItmeOption {
   template: {
     label: S
     value: S | N | B
+    valueTip?: S
     valueType: 'string' | 'number' | 'boolean'
     disabled: B
     hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
