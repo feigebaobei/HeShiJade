@@ -4,7 +4,7 @@ import { TextBase } from 'src/helper/text';
 import type { CascaderItem } from 'ng-devui';
 import { ListenItems } from 'src/helper/ListenItems';
 import { A, Oa, S } from 'src/types/base';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import shareEvent, { creatEventName } from 'src/helper/share-event';
 
@@ -21,7 +21,7 @@ let clog = console.log
   standalone: true,
   imports: [
     CascaderModule,
-    CommonModule,
+    // CommonModule, // todo 2026.02.01+ 去掉这个属性
     FormsModule,
   ],
   templateUrl: './cascader.component.html',
@@ -60,6 +60,7 @@ ListenItems<CascaderItemNew>
           break;
       }
     })
+    clog('value', this.value)
   }
   override ngOnInit(): void {
     this.opMenu()
