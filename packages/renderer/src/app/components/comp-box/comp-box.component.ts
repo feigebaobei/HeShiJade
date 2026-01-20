@@ -28,6 +28,7 @@ import { SpanComponent } from '../span/span.component';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 import { AccordionComponent } from '../accordion/accordion.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { CascaderComponent } from '../cascader/cascader.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -61,6 +62,7 @@ let compMap: {[k: S]: A} = {
   ImagePreview: ImagePreviewComponent,
   Accordion: AccordionComponent,
   Breadcrumb: BreadcrumbComponent,
+  Cascader: CascaderComponent,
 }
 
 @Component({
@@ -326,6 +328,15 @@ export class CompBoxComponent {
         }
         break;
       case 'Breadcrumb':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Cascader':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
