@@ -159,7 +159,6 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
           type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
-          mount: this.comp.mount, // todo 检查这个字段
           ulid: this.comp.ulid,
         }
         break

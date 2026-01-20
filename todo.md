@@ -6,7 +6,7 @@
 |extends TextBase 改为 extends InputData|done||
 |cascader|doing||
 ||cascader 调试value|done|
-|检查form组件的mount这个字段|||
+|检查form组件的mount这个字段|done||
 |使用ngModule需要import哪个module|todo||
 |尝试去掉这个属性是否可以正常运行|done||
 |处理props中的options配置项，使其只保存值。|||
