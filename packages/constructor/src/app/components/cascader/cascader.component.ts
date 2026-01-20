@@ -53,17 +53,30 @@ ListenItems<CascaderItemNew>
     this.listen()
     // 因这样的props和items改变时舞台区的组件不能用effect+component实现更新，所以使用shareEvent处理。
     shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
-      this.opMenu()
       switch (key) {
         case 'valueList':
-          this.value = value.map((item: A) => item.value)
+          this.opValue()
+          break;
+        case 'multiple':
+          this.opValue()
           break;
       }
+      // clog('value', key, value, this.value)
     })
-    clog('value', this.value)
+  }
+  opValue() {
+    let value = this.data.props['valueList']
+    if (this.data.props['multiple']) {
+      this.value = value.map((item: A) => {
+        return item.value.split(',').map((subItem: S) => subItem.trim())
+      })
+    } else {
+      this.value = value[0].value.split(',').map((subItem: S) => subItem.trim())
+    }
   }
   override ngOnInit(): void {
     this.opMenu()
     this.listenAll()
+    this.opValue()
   }
 }
