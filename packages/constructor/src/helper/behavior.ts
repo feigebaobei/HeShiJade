@@ -564,7 +564,6 @@ let Accordion: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
-
 let Breadcrumb: BehaviorConfigGroup = [
   {
     category: 'select',
@@ -573,6 +572,28 @@ let Breadcrumb: BehaviorConfigGroup = [
       // {label: '点击菜单项时', value: 'itemClick'},
       // {label: '切换菜单项时', value: 'activeItemChange'},
       {label: '点击时', value: 'itemClick'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Cascader: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '值改变时', value: 'change'},
       {label: '改变属性后', value: 'postComponentNgOnChanges'},
       {label: '初始化组件后', value: 'postComponentNgOnInit'},
       {label: '变更检测后', value: 'postComponentNgDoCheck'},
@@ -620,6 +641,7 @@ export {
     ImagePreview,
     Accordion,
     Breadcrumb,
+    Cascader,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,

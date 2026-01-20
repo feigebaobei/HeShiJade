@@ -639,6 +639,58 @@ let Breadcrumb: ConfigItem[] = [
         value: '_blank',
     },
 ]
+let Cascader: ConfigItem[] = [
+    {
+        label: 'key',
+        category: 'input',
+        key: 'key',
+        value: '',
+    },
+    {
+        label: '父key',
+        category: 'input',
+        key: 'parentKey',
+        value: '',
+    },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: 'value',
+        category: 'input',
+        key: 'value',
+        value: '',
+    },
+    // {
+    //     label: '叶子节点',
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true,},
+    //         {label: 'false', value: false,},
+    //     ],
+    //     key: 'isLeaf',
+    //     value: false,
+    // },
+    {
+        label: '禁用',
+        category: 'switch',
+        options: [
+            {label: 'true', value: true,},
+            {label: 'false', value: false,},
+        ],
+        key: 'disabled',
+        value: false,
+    },
+    {
+        label: 'icon',
+        category: 'input',
+        key: 'icon',
+        value: '',
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -667,6 +719,7 @@ let all: {[k: S]: ConfigItem[]} = {
     ImagePreview,
     Accordion,
     Breadcrumb,
+    Cascader,
 }
 
 export default all

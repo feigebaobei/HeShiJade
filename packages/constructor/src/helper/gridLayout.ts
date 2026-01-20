@@ -146,6 +146,11 @@ let Breadcrumb: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Cascader: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -172,6 +177,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     ImagePreview,
     Accordion,
     Breadcrumb,
+    Cascader,
 }
 export {
     Button,
@@ -199,6 +205,7 @@ export {
     ImagePreview,
     Accordion,
     Breadcrumb,
+    Cascader,
     
     gridLayoutDefault,
 }

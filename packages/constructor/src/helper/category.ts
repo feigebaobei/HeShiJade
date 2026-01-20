@@ -131,6 +131,11 @@ let categoryList = [
         componentCategory: 'Breadcrumb',
         ulid: '01J50ZGTCKEC10HWAJBZND487Q'
     },
+    {
+        name: 'Cascader',
+        componentCategory: 'Cascader',
+        ulid: '01J50ZGTCKEC10HWAJBZND487R'
+    },
   ]
 export {
     categoryList

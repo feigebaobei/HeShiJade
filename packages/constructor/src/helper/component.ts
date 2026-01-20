@@ -27,6 +27,7 @@ import { Button as ButtonProps,
     ImagePreview as ImagePreviewProps,
     Accordion as AccordionProps,
     Breadcrumb as BreadcrumbProps,
+    Cascader as CascaderProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -51,6 +52,7 @@ import {
     ImagePreview as ImagePreviewBehavior,
     Accordion as AccordionBehavior,
     Breadcrumb as BreadcrumbBehavior,
+    Cascader as CascaderBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -335,6 +337,20 @@ let Breadcrumb: ComponentDefaultConfig = {
     ],
     slots: {},
 }
+let Cascader: ComponentDefaultConfig = {
+    props: opProps(CascaderProps),
+    behavior: opBehavior(CascaderBehavior),
+    // items: ItemAll['ImagePreview'],
+    items: [
+        {
+            label: '请创建选项',
+            value: '请创建选项',
+            disbled: false,
+            icon: '',
+        }
+    ],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -362,4 +378,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     ImagePreview,
     Accordion,
     Breadcrumb,
+    Cascader,
 }

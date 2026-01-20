@@ -39,7 +39,7 @@ let clog = console.log
   styleUrl: './breadcrumb.component.sass'
 })
 export class BreadcrumbComponent 
-// extends ListenItems<BreadcrumbItem> 
+// extends ListenItems<BreadcrumbItem> // 这个组件不适合基于ListenItems开发
 extends
 InputData
 {

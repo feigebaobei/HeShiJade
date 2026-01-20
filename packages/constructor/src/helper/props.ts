@@ -2060,6 +2060,147 @@ let Breadcrumb: PropsConfigItem = {
         key: 'separatorIcon',
     },
 }
+let Cascader: PropsConfigItem = {
+    valueList: { // 在组件内处理为value
+        category: 'options',
+        template: { label: '', value: '', valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
+        value: [],
+        label: '值',
+        key: 'valueList',
+    },
+    trigger: {
+        category: 'select',
+        options: [
+            {label: 'hover', value: 'hover'},
+            {label: 'click', value: 'click'},
+        ],
+        value: 'hover',
+        label: '打开方式',
+        key: 'trigger',
+    },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    width: {
+        category: 'number',
+        value: 200,
+        label: '宽度',
+        key: 'width',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    showPath: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '显示路径',
+        key: 'showPath',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许清空',
+        key: 'allowClear',
+    },
+    multiple: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '多选',
+        key: 'multiple',
+    },
+    canSelectParent: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许选择父级',
+        key: 'canSelectParent',
+    },
+    fromParantToChildren: { // 由这2个属性共同生成checkboxRelation
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '多选时由父级向子级更新',
+        key: 'fromParantToChildren',
+    },
+    fromChildrenToParant: { // 由这2个属性共同生成checkboxRelation
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '多选时由子级向父级更新',
+        key: 'fromChildrenToParant',
+    },
+    allowSearch: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '开启搜索',
+        key: 'allowSearch',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '开启动画',
+        key: 'showAnimation',
+    },
+    appendToBody: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '下拉列表添加到body',
+        key: 'appendToBody',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+}
 
 export {
     Button,
@@ -2087,4 +2228,5 @@ export {
     ImagePreview,
     Accordion,
     Breadcrumb,
+    Cascader,
 }

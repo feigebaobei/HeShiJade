@@ -33,6 +33,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
+import { CascaderComponent } from '../cascader/cascader.component';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所以我考虑使用封装全部devui的组件来实现.
@@ -65,6 +66,7 @@ let compMap: Oa = {
   ImagePreview: ImagePreviewComponent,
   Accordion: AccordionComponent,
   Breadcrumb: BreadcrumbComponent,
+  Cascader: CascaderComponent,
 }
 
 @Component({
@@ -157,7 +159,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
           type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
-          mount: this.comp.mount, // 检查这个字段
+          mount: this.comp.mount, // todo 检查这个字段
           ulid: this.comp.ulid,
         }
         break
@@ -314,6 +316,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'Breadcrumb':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Cascader':
         this.componentRef.instance.data = {
           type: this.comp.type,
           props: this.comp.props,

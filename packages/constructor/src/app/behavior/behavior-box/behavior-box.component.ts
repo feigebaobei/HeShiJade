@@ -29,6 +29,7 @@ import {
   ImagePreview as ImagePreviewBehaviorMeta,
   Accordion as AccordionBehaviorMeta,
   Breadcrumb as BreadcrumbBehaviorMeta,
+  Cascader as CascaderBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -190,6 +191,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Breadcrumb':
         this.setComponentBehaviorListByType(BreadcrumbBehaviorMeta)
+        break;
+      case 'Cascader':
+        this.setComponentBehaviorListByType(CascaderBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)
