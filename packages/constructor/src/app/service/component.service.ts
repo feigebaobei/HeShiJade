@@ -359,6 +359,26 @@ export class ComponentService {
       index: itemsIndex,
     })
   }
+  removeProps(pageUlid: ULID, componentUlid: ULID, key: S) {
+    let tree = this._map.get(pageUlid)
+    let component = tree?.find(componentUlid)?.value
+    if (component) {
+      delete component.props[key]
+      shareEvent.emit(creatEventName(component.type, component.ulid, 'props', 'remove'), {key})
+    }
+    // clog('removeProps', component)
+  }
+  reqRemoveProps(key: S) {
+    let curComp = this.curComponent()
+    if (curComp) {
+      return this.reqService.req(`${serviceUrl()}/components/props`, 'delete', {
+        ulid: curComp.ulid,
+        key,
+      })
+    } else {
+      return Promise.reject('无选中组件')
+    }
+  }
   reqUpdateComponentBehavior(type: UpdateType, index: N, key: S, value: PropsValue) {
     return this.reqService.req(`${serviceUrl()}/components`, 'put', {
       ulid: this.curComponent()?.ulid || '',
