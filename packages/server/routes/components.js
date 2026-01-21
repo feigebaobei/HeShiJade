@@ -497,6 +497,58 @@ router.route('/listByPage')
   res.send('delete')
 })
 
+router.route('/props')
+.options(cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200)
+})
+.get(cors.corsWithOptions, (req, res) => {
+  res.send('get')
+})
+.post(cors.corsWithOptions, (req, res) => {
+  res.send('post')
+})
+.put(cors.corsWithOptions, (req, res) => {
+  res.send('put')
+})
+.delete(cors.corsWithOptions, (req, res) => {
+  // ulid: 组件ulid
+  // key:  key
+  // 检查参数
+  // 删除数据
+  new Promise((s, j) => {
+    if (rules.required(req.query.ulid) && rules.required(req.query.key)) {
+      s(true)
+    } else {
+      j(100100)
+    }
+  }).then(() => {
+    return lowcodeDb.collection(DB.dev.componentTable).bulkWrite([
+      {
+        updateOne: {
+          filter: {ulid: req.query.ulid},
+          update: {
+            $unset: {[`props.${req.query.key}`]: null}
+          }
+        },
+      },
+    ]).catch(() => {
+      return Promise.reject(200020)
+    })
+  }).then(() => {
+    res.status(200).json({
+      code: 0,
+      message: '',
+      data: {}
+    })
+  }).catch((code) => {
+    res.status(200).json({
+      code: 0,
+      message: errorCode[code],
+      data: {}
+    })
+  })
+})
+
 router.route('/behavior')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
