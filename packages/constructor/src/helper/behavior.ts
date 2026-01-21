@@ -615,7 +615,7 @@ let DatePicker: BehaviorConfigGroup = [
   {
     category: 'select',
     options: [
-      {label: '打开列表时', value: 'dropdownToggle'},
+      {label: '展开&收起列表时', value: 'dropdownToggle'},
       {label: '点击确定时', value: 'confirmEvent'},
       {label: '改变属性后', value: 'postComponentNgOnChanges'},
       {label: '初始化组件后', value: 'postComponentNgOnInit'},

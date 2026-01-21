@@ -3,7 +3,7 @@
 |分支|f_tag||
 |丰富组件|||
 |datepicker|doing||
-|检查datepicker的format配置项|todo||
+|检查datepicker的format配置项|不允许配置format||
 |datepicker支持ngModel|done||
 |dateRangepicker|todo||
 |timepicker|todo||
