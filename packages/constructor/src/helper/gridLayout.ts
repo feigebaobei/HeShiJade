@@ -151,6 +151,11 @@ let Cascader: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let DatePicker: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -178,6 +183,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Accordion,
     Breadcrumb,
     Cascader,
+    DatePicker,
 }
 export {
     Button,
@@ -206,6 +212,7 @@ export {
     Accordion,
     Breadcrumb,
     Cascader,
+    DatePicker,
     
     gridLayoutDefault,
 }

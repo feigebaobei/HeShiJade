@@ -2204,6 +2204,120 @@ let Cascader: PropsConfigItem = {
     },
 }
 
+let DatePicker: PropsConfigItem = {
+    // format: {
+    //     category: 'select',
+    //     options: [
+    //         {label: 'y-MM-dd', value: 'y-MM-dd'},
+    //         {label: 'y-MM-dd HH:mm:ss', value: 'y-MM-dd HH:mm:ss'},
+    //     ],
+    //     value: 'hover',
+    //     label: '日期格式',
+    //     key: 'trigger',
+    // },
+    value: {
+        category: 'date',
+        value: undefined,
+        label: '值',
+        key: 'value',
+    },
+    showTime: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否显示时分秒',
+        key: 'showTime',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否自动打开',
+        key: 'autoOpen',
+    },
+    minDate: {
+        category: 'date',
+        value: undefined,
+        label: '最小可选日期',
+        key: 'minDate',
+    },
+    maxDate: {
+        category: 'date',
+        value: undefined,
+        label: '最大可选日期',
+        key: 'maxDate',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    width: {
+        category: 'input',
+        value: '',
+        label: '选择器的宽度',
+        key: 'width',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '允许清空',
+        key: 'allowClear',
+    },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    mode: {
+        category: 'select',
+        options: [
+            {label: 'year', value: 'year'},
+            {label: 'month', value: 'month'},
+            {label: 'date', value: 'date'},
+        ],
+        value: 'date',
+        label: '模式',
+        key: 'mode',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+}
+
 export {
     Button,
     Modal,
@@ -2231,4 +2345,5 @@ export {
     Accordion,
     Breadcrumb,
     Cascader,
+    DatePicker,
 }

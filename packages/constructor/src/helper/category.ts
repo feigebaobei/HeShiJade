@@ -136,6 +136,11 @@ let categoryList = [
         componentCategory: 'Cascader',
         ulid: '01J50ZGTCKEC10HWAJBZND487R'
     },
+    {
+        name: 'DatePicker',
+        componentCategory: 'DatePicker',
+        ulid: '01J50ZGTCKEC10HWAJBZND487S'
+    },
   ]
 export {
     categoryList

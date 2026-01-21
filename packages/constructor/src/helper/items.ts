@@ -720,6 +720,7 @@ let all: {[k: S]: ConfigItem[]} = {
     Accordion,
     Breadcrumb,
     Cascader,
+    // DatePicker, // 没有特定子元素
 }
 
 export default all

@@ -1,0 +1,23 @@
+<p>date-picker works!</p>
+{{data.props['value']}}
+{{value}}
+[(ngModel)]="data.props['value']"
+<d-datepicker-pro
+  [ngModel]="value"
+  [format]="'y-MM-dd HH:mm:ss'"
+  [showTime]="data.props['showTime']"
+  [disabled]="data.props['disabled']"
+  [autoOpen]="data.props['autoOpen']"
+  [minDate]="data.props['minDate']"
+  [maxDate]="data.props['maxDate']"
+  [showAnimation]="data.props['showAnimation']"
+  [width]="data.props['width']"
+  [allowClear]="data.props['allowClear']"
+  [placeholder]="data.props['placeholder']"
+  [mode]="data.props['mode']"
+  [showGlowStyle]="data.props['showGlowStyle']"
+  >
+  <!-- [minDate]="minDate"
+  [maxDate]="maxDate" -->
+  <!-- [autoOpen]="true" -->
+</d-datepicker-pro>
