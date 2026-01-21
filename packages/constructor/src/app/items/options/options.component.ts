@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, } from '@angular/core';
 import { cloneDeep } from 'src/helper';
 import { valueType } from 'src/helper/config';
 // type
-import type { S, B, Options, A, N, ConfigItmeOption, } from 'src/types/base';
+import type { S, B, Options, A, N, ConfigItemOption, } from 'src/types/base';
 let clog = console.log
 
 @Component({
@@ -14,16 +14,16 @@ export class OptionsComponent {
   @Input() label: S = ''
   // @Input() value: B = false
   // @Input() optionsList: Options<S, S>[] = []
-  @Input() optionsList!: ConfigItmeOption['template'][]
+  @Input() optionsList!: ConfigItemOption['template'][]
   // @Input() optionsTemp!: Options<S, S>
-  @Input() optionsTemp!: ConfigItmeOption['template']
+  @Input() optionsTemp!: ConfigItemOption['template']
   // @Output() changeOptions = new EventEmitter<Options<S, S>[]>()
-  @Output() changeOptions = new EventEmitter<ConfigItmeOption['template'][]>()
+  @Output() changeOptions = new EventEmitter<ConfigItemOption['template'][]>()
   // _label: S
   // _value: B
   // todo 修正 _optionsList optionsList
   // _optionsList: Options<S, A>[] = []
-  _optionsList: ConfigItmeOption['template'][]
+  _optionsList: ConfigItemOption['template'][]
   options: {label: S, value: S}[]
   constructor() {
     // this._label = this.label

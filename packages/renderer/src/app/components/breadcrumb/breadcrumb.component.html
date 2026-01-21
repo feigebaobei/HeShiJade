@@ -1,0 +1,7 @@
+<d-breadcrumb [separatorIcon]="data.props['separatorIcon']">
+  <d-breadcrumb-item *ngFor="let item of menu" (click)="itemClickH($event, item)">
+      <span class="pointer">
+      {{item.name}}
+      </span>
+  </d-breadcrumb-item>
+</d-breadcrumb>

@@ -26,6 +26,9 @@ import { Button as ButtonProps,
     Span as SpanProps,
     ImagePreview as ImagePreviewProps,
     Accordion as AccordionProps,
+    Breadcrumb as BreadcrumbProps,
+    Cascader as CascaderProps,
+    DatePicker as DatePickerProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -49,6 +52,9 @@ import {
     Span as SpanBehavior,
     ImagePreview as ImagePreviewBehavior,
     Accordion as AccordionBehavior,
+    Breadcrumb as BreadcrumbBehavior,
+    Cascader as CascaderBehavior,
+    DatePicker as DatePickerBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -310,6 +316,48 @@ let Accordion: ComponentDefaultConfig = {
     ],
     slots: {},
 }
+let Breadcrumb: ComponentDefaultConfig = {
+    props: opProps(BreadcrumbProps),
+    behavior: opBehavior(BreadcrumbBehavior),
+    items: [
+        {
+            // key: '',
+            // parentKey: '',
+            label: 'home',
+            link: '',
+            linkType: 'hrefLink',
+            target: '_blank',
+        },
+        {
+            // key: '',
+            // parentKey: '',
+            label: 'one',
+            link: '',
+            linkType: 'hrefLink',
+            target: '_blank',
+        },
+    ],
+    slots: {},
+}
+let Cascader: ComponentDefaultConfig = {
+    props: opProps(CascaderProps),
+    behavior: opBehavior(CascaderBehavior),
+    items: [
+        {
+            label: '请创建选项',
+            value: '请创建选项',
+            disbled: false,
+            icon: '',
+        }
+    ],
+    slots: {},
+}
+let DatePicker: ComponentDefaultConfig = {
+    props: opProps(DatePickerProps),
+    behavior: opBehavior(DatePickerBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -336,4 +384,7 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
+    Cascader,
+    DatePicker,
 }

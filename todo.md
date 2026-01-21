@@ -2,10 +2,12 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|accordion|doing||
-|breadcrumb|||
-|cascader|||
-|datepicker|||
+|datepicker|done||
+|检查datepicker的format配置项|不允许配置format||
+|datepicker支持ngModel|done||
+|dateRangepicker|doing||
+|timepicker|todo||
+|官网支持独立与非独立组件的创建过程|done||
 |slider|||
 |textarea|||
 |toggle|||
@@ -14,11 +16,19 @@
 |progress|||
 |rate|||
 |tag|||
+|检查todo|todo||
+|配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
 |要上生产的内容|||
-|feat: 创建Paragraph组件|||
-|feat: 创建Span组件|||
-|feat: 创建ImagePreview组件|||
+|feat: 创建Accordion组件|||
+|feat: 创建Breadcrumb组件|||
+|feat: 创建DatePicker组件|||
+|feat: according/pagelist使用ListenItems类|||
+|feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
+|feat: 创建Cascader组件|||
+|feat: props面板支持date配置项|||
+|feat: 官网增加date配置项|||
+|perf: props中的options配置项字段，只保存值，不保存配置项。|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
@@ -303,3 +313,27 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+
+
+数据库中保存
+valueList: ['a']
+valueList: [['a']]
+搭建侧
+[
+  {
+    "label": "",
+    "value": "a,a1",
+    "valueTip": "用逗号分隔路径",
+    "valueType": "string",
+    "disabled": false,
+    "hideField": [
+      "label",
+      "valueType",
+      "disabled"
+    ]
+  }, ...
+]
+渲染则
+valueList: ['a']
+valueList: [['a']]

@@ -1,7 +1,7 @@
 import { Component, effect, ViewChild } from '@angular/core';
 import { PropsDirective } from '../props.directive';
 import { ComponentService } from 'src/app/service/component.service';
-import { copy } from 'src/helper';
+import { cloneDeep, copy } from 'src/helper';
 import { text } from 'src/helper/config';
 import { Queue } from 'data-footstone';
 // type
@@ -35,6 +35,9 @@ import {
   Span as SpanPropsMeta,
   ImagePreview as ImagePreviewMeta,
   Accordion as AccordionMeta,
+  Breadcrumb as BreadcrumbMeta,
+  Cascader as CascaderMeta,
+  DatePicker as DatePickerMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -90,11 +93,20 @@ export class PropsBoxComponent {
   }
   opComponentPropsList(meta: PropsConfigItem) {
     Object.values(meta).forEach(item => {
-      item.value = this.curComp?.props[item.key]
+      switch (item.category) {
+        case 'options':
+          item.value = this.curComp?.props[item.key].map((valueObj: A) => {
+            return Object.assign(cloneDeep(item.template), valueObj)
+          })
+          break;
+        default:
+          item.value = this.curComp?.props[item.key]
+          break;
+      }
       this.componentPropsList.push(item)
     })
     this.initPropsObj()
-    // clog('this.propsObj', JSON.stringify(this.propsObj))
+    // clog('this.propsObj', this.componentPropsList, this.propsObj, JSON.stringify(this.propsObj))
     this.componentPropsList.forEach(item => {
       if (item.hideListenerKey) {
         if (item.hide) {
@@ -183,6 +195,15 @@ export class PropsBoxComponent {
       case 'Accordion':
         this.opComponentPropsList(AccordionMeta)
         break;
+      case 'Breadcrumb':
+        this.opComponentPropsList(BreadcrumbMeta)
+        break;
+      case 'Cascader':
+        this.opComponentPropsList(CascaderMeta)
+        break;
+      case 'DatePicker':
+        this.opComponentPropsList(DatePickerMeta)
+        break;
       default:
         this.componentPropsMeta = {}
         break
@@ -201,7 +222,6 @@ export class PropsBoxComponent {
     //   //     hideCalc: false
     //   //   }
     //   // }
-
     // })
     this.componentPropsList.forEach(item => {
       if (item.hideListenerKey) {

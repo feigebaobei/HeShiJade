@@ -2005,6 +2005,7 @@ let Accordion: PropsConfigItem = {
         category: 'select',
         options: [
             {label: '_self', value: '_self'},
+            {label: '_blank', value: '_blank'},
         ],
         value: '_self',
         label: '链接打开位置',
@@ -2051,6 +2052,271 @@ let Accordion: PropsConfigItem = {
         key: 'showNoContent',
     },
 }
+let Breadcrumb: PropsConfigItem = {
+    separatorIcon: {
+        category: 'input',
+        value: '',
+        label: '用于分割的icon',
+        key: 'separatorIcon',
+    },
+}
+let Cascader: PropsConfigItem = {
+    valueList: { // 在组件内处理为value
+        category: 'options',
+        template: { label: '', value: '',
+            valueTip: '用逗号分隔路径',
+            valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
+        value: [],
+        label: '值',
+        key: 'valueList',
+    },
+    trigger: {
+        category: 'select',
+        options: [
+            {label: 'hover', value: 'hover'},
+            {label: 'click', value: 'click'},
+        ],
+        value: 'hover',
+        label: '打开方式',
+        key: 'trigger',
+    },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    width: {
+        category: 'number',
+        value: 200,
+        label: '宽度',
+        key: 'width',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    showPath: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '显示路径',
+        key: 'showPath',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许清空',
+        key: 'allowClear',
+    },
+    multiple: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '多选',
+        key: 'multiple',
+    },
+    canSelectParent: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许选择父级',
+        key: 'canSelectParent',
+    },
+    fromParantToChildren: { // 由这2个属性共同生成checkboxRelation
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '多选时由父级向子级更新',
+        key: 'fromParantToChildren',
+    },
+    fromChildrenToParant: { // 由这2个属性共同生成checkboxRelation
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '多选时由子级向父级更新',
+        key: 'fromChildrenToParant',
+    },
+    allowSearch: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '开启搜索',
+        key: 'allowSearch',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '开启动画',
+        key: 'showAnimation',
+    },
+    appendToBody: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '下拉列表添加到body',
+        key: 'appendToBody',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+}
+
+let DatePicker: PropsConfigItem = {
+    // format: {
+    //     category: 'select',
+    //     options: [
+    //         {label: 'y-MM-dd', value: 'y-MM-dd'},
+    //         {label: 'y-MM-dd HH:mm:ss', value: 'y-MM-dd HH:mm:ss'},
+    //     ],
+    //     value: 'hover',
+    //     label: '日期格式',
+    //     key: 'trigger',
+    // },
+    value: {
+        category: 'date',
+        value: undefined,
+        label: '值',
+        key: 'value',
+    },
+    showTime: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否显示时分秒',
+        key: 'showTime',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否自动打开',
+        key: 'autoOpen',
+    },
+    minDate: {
+        category: 'date',
+        value: undefined,
+        label: '最小可选日期',
+        key: 'minDate',
+    },
+    maxDate: {
+        category: 'date',
+        value: undefined,
+        label: '最大可选日期',
+        key: 'maxDate',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    width: {
+        category: 'input',
+        value: '',
+        label: '选择器的宽度',
+        key: 'width',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '允许清空',
+        key: 'allowClear',
+    },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    mode: {
+        category: 'select',
+        options: [
+            {label: 'year', value: 'year'},
+            {label: 'month', value: 'month'},
+            {label: 'date', value: 'date'},
+        ],
+        value: 'date',
+        label: '模式',
+        key: 'mode',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '悬浮发光效果',
+        key: 'showGlowStyle',
+    },
+}
 
 export {
     Button,
@@ -2077,4 +2343,7 @@ export {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
+    Cascader,
+    DatePicker,
 }

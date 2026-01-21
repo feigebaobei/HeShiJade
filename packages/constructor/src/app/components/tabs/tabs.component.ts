@@ -32,7 +32,7 @@ interface TabsData {
   styleUrl: './tabs.component.sass'
 })
 export class TabsComponent extends TextBase implements OnInit, AfterViewChecked, OnDestroy{
-  @Input() data!: TabsData
+  // @Input() data!: TabsData
   compObj: {[k: S]: Comp[]}
   compArr: Comp[][]
   curPage: Page

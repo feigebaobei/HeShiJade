@@ -593,6 +593,104 @@ let Accordion: ConfigItem[] = [
         value: '',
     },
 ]
+let Breadcrumb: ConfigItem[] = [
+    // {
+    //     label: 'key',
+    //     category: 'input',
+    //     key: 'key',
+    //     value: '',
+    // },
+    // {
+    //     label: '父key',
+    //     category: 'input',
+    //     key: 'parentKey',
+    //     value: '',
+    // },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: '链接',
+        category: 'input',
+        key: 'link',
+        value: '',
+    },
+    {
+        label: '链接类型',
+        category: 'select',
+        options: [
+            {label: 'hrefLink', value: 'hrefLink',},
+            {label: 'routerLink', value: 'routerLink',},
+        ],
+        key: 'linkType',
+        value: 'hrefLink',
+    },
+    {
+        label: 'target',
+        category: 'select',
+        options: [
+            {label: '_self', value: '_self',},
+            {label: '_blank', value: '_blank',},
+        ],
+        key: 'target',
+        value: '_blank',
+    },
+]
+let Cascader: ConfigItem[] = [
+    {
+        label: 'key',
+        category: 'input',
+        key: 'key',
+        value: '',
+    },
+    {
+        label: '父key',
+        category: 'input',
+        key: 'parentKey',
+        value: '',
+    },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: 'value',
+        category: 'input',
+        key: 'value',
+        value: '',
+    },
+    // {
+    //     label: '叶子节点',
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true,},
+    //         {label: 'false', value: false,},
+    //     ],
+    //     key: 'isLeaf',
+    //     value: false,
+    // },
+    {
+        label: '禁用',
+        category: 'switch',
+        options: [
+            {label: 'true', value: true,},
+            {label: 'false', value: false,},
+        ],
+        key: 'disabled',
+        value: false,
+    },
+    {
+        label: 'icon',
+        category: 'input',
+        key: 'icon',
+        value: '',
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -620,6 +718,9 @@ let all: {[k: S]: ConfigItem[]} = {
     // Span, // 没有特定子元素
     ImagePreview,
     Accordion,
+    Breadcrumb,
+    Cascader,
+    // DatePicker, // 没有特定子元素
 }
 
 export default all

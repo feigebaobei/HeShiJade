@@ -25,6 +25,9 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
 import { SpanComponent } from '../span/span.component';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 import { AccordionComponent } from '../accordion/accordion.component';
+import { BreadcrumbComponent } from 'src/app/components/breadcrumb/breadcrumb.component';
+import { CascaderComponent } from '../cascader/cascader.component';
+import { DatePickerComponent } from '../date-picker/date-picker.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -63,6 +66,9 @@ let compMap: Oa = {
   Span: SpanComponent,
   ImagePreview: ImagePreviewComponent,
   Accordion: AccordionComponent,
+  Breadcrumb: BreadcrumbComponent,
+  Cascader: CascaderComponent,
+  DatePicker: DatePickerComponent,
 }
 
 @Component({
@@ -117,6 +123,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         this.componentRef.instance.data = {
           // props: buttonDefaultData.props,
           // slot: buttonDefaultData.slot,
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           // items: this.comp.items,
@@ -126,6 +133,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Input':
         this.componentRef.instance.data = {
           // props: inputDefaultData.props
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
@@ -133,6 +141,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
       case 'Modal':
         this.componentRef.instance.data = {
           // props: modalDefaultData.props
+          type: this.comp.type,
           props: this.comp.props,
           // items: this.comp.items,
           slots: this.comp.slots,
@@ -142,20 +151,22 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Select':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break
       case 'Form':
         this.componentRef.instance.data = {
-          ulid: this.comp.ulid,
+          type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
-          mount: this.comp.mount,
+          ulid: this.comp.ulid,
         }
         break
       case 'Table':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
           slots: this.comp.slots,
@@ -164,12 +175,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Icon':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break
       case 'Checkbox':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           // behavior: this.comp.behavior, // 搭建侧可以不需要使用行为
           ulid: this.comp.ulid,
@@ -177,6 +190,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Tabs':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
           slots: this.comp.slots,
@@ -185,6 +199,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Pagination':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
           ulid: this.comp.ulid,
@@ -192,6 +207,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'Flex':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           items: this.comp.items,
@@ -200,6 +216,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'Grid':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           items: this.comp.items,
@@ -208,6 +225,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'Layout':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           items: this.comp.items,
@@ -216,6 +234,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'PageList':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           items: this.comp.items,
@@ -224,6 +243,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break
       case 'ShowHide':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           ulid: this.comp.ulid,
@@ -231,6 +251,7 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'Loop':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           ulid: this.comp.ulid,
@@ -238,24 +259,28 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'InputNumber':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break;
       case 'Radio':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break;
       case 'Avatar':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break;
       case 'Card':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           slots: this.comp.slots,
           ulid: this.comp.ulid,
@@ -263,18 +288,21 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'Paragraph':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break;
       case 'Span':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           ulid: this.comp.ulid,
         }
         break;
       case 'ImagePreview':
         this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
           ulid: this.comp.ulid,
@@ -282,6 +310,31 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         break;
       case 'Accordion':
         this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Breadcrumb':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Cascader':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'DatePicker':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
           props: this.comp.props,
           items: this.comp.items,
           ulid: this.comp.ulid,

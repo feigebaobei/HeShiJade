@@ -126,6 +126,21 @@ let categoryList = [
         componentCategory: 'Accordion',
         ulid: '01J50ZGTCKEC10HWAJBZND487P'
     },
+    {
+        name: 'Breadcrumb',
+        componentCategory: 'Breadcrumb',
+        ulid: '01J50ZGTCKEC10HWAJBZND487Q'
+    },
+    {
+        name: 'Cascader',
+        componentCategory: 'Cascader',
+        ulid: '01J50ZGTCKEC10HWAJBZND487R'
+    },
+    {
+        name: 'DatePicker',
+        componentCategory: 'DatePicker',
+        ulid: '01J50ZGTCKEC10HWAJBZND487S'
+    },
   ]
 export {
     categoryList

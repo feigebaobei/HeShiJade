@@ -105,6 +105,18 @@ let Accordion: CompConfigAddabel = {
     behavior: true,
     items: true,
 }
+let Breadcrumb: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
+let Cascader: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
+let DatePicker: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -134,6 +146,9 @@ let all: {[k: S]: CompConfigAddabel} = {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
+    Cascader,
+    DatePicker,
 }
 
 export {

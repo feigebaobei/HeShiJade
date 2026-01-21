@@ -8,22 +8,37 @@
         <li>在`constructor/src/helper/components.ts`中引入no.2中创建的props/behavior/items设置该组件的默认值</li>
         <li>在`constructor/src/app/props/props-box/props-box.component.ts`/`constructor/src/app/behavior/behavior-box/behavior-box.component.ts`中分别引入并处理props、behavior</li>
         <li>初始化组件。在constructor目录下执行`ng g c components/new-comp`</li>
-        <li>注释`constructor/src/app/components/new-comp/new-comp.component.ts`中的`standalone``imports`。</li>
         <li>在`constructor/src/app/components/comp-box/comp-box.component.ts`中引入新组件并传入数据</li>
-        <li>在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
-        <li>重新启动constructor项目</li>
+        <li>
+            独立组件
+            <ul>
+                <li>注释`constructor/src/app/components/new-comp/new-comp.component.ts`中的引入相关依赖的module，再选择基于InputData或TextBase或ListenItems开发。</li>
+            </ul>
+            非独立组件
+            <ul>
+                <li>注释`constructor/src/app/components/new-comp/new-comp.component.ts`中的`standalone``imports`，再选择基于InputData或TextBase或ListenItems开发。</li>
+                <li>在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
+            </ul>
+        </li>
+        <li><del>重新启动constructor项目</del></li>
         <li>在新组件中接收数据、处理逻辑、监听事件、ngOnInit。（可以参考flex组件）</li>
     </ol>
     <h2>渲染侧增加组件</h2>
     <ol>
         <li>在`renderer`目录下执行`ng g c components/new-comp`</li>
-        <li>注释`renderer/src/app/components/new-comp/new-comp.components.ts`中的`standalone``imports`。</li>
-        <li>在`renderer/src/app/components/components.module.ts`引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
-        <li>在`renderer/src/app/components/comp-box/comp-box.component.ts`中引入新组件并为其传入数据</li>
         <li>
-            <del>在新组件中：1. 接收数据。 2. 定义处理特定逻辑的方法。至少有`setProps()` 3. 定义这些生命周期方法`ngOnInit`,`ngOnchage`,`ngDoCheck`,`ngAfterViewInit`,`ngOnDestroy`，在其中触发相关事件。可以参考`HeShiJade`/packages/renderer/src/app/components/input/input.component.ts`</del>
-            引入CompBase类，再基于它开发组件。可以参考Radio组件。
+            独立组件
+            <ul>
+                <li>在`renderer/src/app/components/new-comp/new-comp.components.ts`中的引入相关依赖的module。</li>
+            </ul>
+            非独立组件
+            <ul>
+                <li>注释`renderer/src/app/components/new-comp/new-comp.components.ts`中的`standalone``imports`。</li>
+                <li>在`renderer/src/app/components/components.module.ts`引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
+            </ul>
         </li>
+        <li>在`renderer/src/app/components/comp-box/comp-box.component.ts`中引入新组件并为其传入数据</li>
+        <li>引入CompBase类，再基于它开发组件。可以参考Radio组件。</li>
         <li>参考搭建侧的同组件，编写渲染侧的 *.html/*.css</li>
         <li><del>重新启动renderer项目</del></li>
     </ol>
@@ -31,11 +46,12 @@
     <ol>
         <li>在`HeShiJade/packages/web-site/src/app/api/api.component.html`中增加新组件的api.包含props/slots/method/event/items.</li>
     </ol>
-    <h1>增加配置项（待升级）</h1>
+    <h1>增加配置项</h1>
     <ol>
         <li>在`constructor`目录下执行`ng g c props/props-xxx`</li>
         <li>在`constructor/src/app/props/props-item.component.ts`中引入新组件、传入数据、绑定事件</li>
-        <li>在`constructor/src/app/props/props.module.ts`中引入新组件并声明。</li>
+        <li>在`constructor/src/app/props/props-xxx.component.ts`中引入相关依赖module。接收data、change。定义modelChangeH方法。</li>
+        <li><del>在`constructor/src/app/props/props.module.ts`中引入新组件并声明。</del></li>
         <li>在新组件中处理传进来的数据、触发事件、去抖处理、调用接口。</li>
     </ol>
     <h1>增加导航（待升级）</h1>

@@ -28,6 +28,9 @@ import {
   Span as SpanBehaviorMeta,
   ImagePreview as ImagePreviewBehaviorMeta,
   Accordion as AccordionBehaviorMeta,
+  Breadcrumb as BreadcrumbBehaviorMeta,
+  Cascader as CascaderBehaviorMeta,
+  DatePicker as DatePickerBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -186,6 +189,15 @@ export class BehaviorBoxComponent {
         break;
       case 'Accordion':
         this.setComponentBehaviorListByType(AccordionBehaviorMeta)
+        break;
+      case 'Breadcrumb':
+        this.setComponentBehaviorListByType(BreadcrumbBehaviorMeta)
+        break;
+      case 'Cascader':
+        this.setComponentBehaviorListByType(CascaderBehaviorMeta)
+        break;
+      case 'DatePicker':
+        this.setComponentBehaviorListByType(DatePickerBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

@@ -1,0 +1,14 @@
+<div class="input_box">
+    <span>{{data.label}}</span>
+    <d-datepicker-pro
+        [format]="'y-MM-dd HH:mm:ss'"
+        [showTime]="true"
+        [width]="'192px'"
+        [ngModel]="value"
+        [allowClear]="true"
+        (confirmEvent)="confirmEventH($event)"
+        (ngModelChange)="modelChangeH($event)"
+    ></d-datepicker-pro>
+        <!-- [ngModel]="data.value" -->
+</div>
+<!-- ngModelChange 监听数据变化， -->

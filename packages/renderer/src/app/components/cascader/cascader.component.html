@@ -1,0 +1,20 @@
+<p>cascader works!</p>
+<d-cascader
+  [options]="menu"
+  [placeholder]="data.props['placeholder']"
+  [trigger]="data.props['trigger']"
+  [width]="data.props['width']"
+  [disabled]="data.props['disabled']"
+  [showPath]="data.props['showPath']"
+  [allowClear]="data.props['allowClear']"
+  [multiple]="data.props['multiple']"
+  [canSelectParent]="data.props['canSelectParent']"
+  [checkboxRelation]="{upward: data.props['fromChildrenToParant'], downward: data.props['fromParantToChildren']}"
+  [allowSearch]="data.props['allowSearch']"
+  [showAnimation]="data.props['showAnimation']"
+  [appendToBody]="data.props['appendToBody']"
+  [showGlowStyle]="data.props['showGlowStyle']"
+  [ngModel]="value"
+  (ngModelChange)="ngModelChangeH($event)"
+>
+</d-cascader>

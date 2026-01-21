@@ -1,5 +1,6 @@
 import { Component, Input, TemplateRef, ViewChild, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
+import { ListenItems } from 'src/helper/ListenItems';
 import shareEvent, { creatEventName } from 'src/helper/share-event';
 // type
 import type { A, B, S, MenuItem, ULID, Oa, } from 'src/types/base';
@@ -21,14 +22,15 @@ interface PageListData {
   templateUrl: './page-list.component.html',
   styleUrl: './page-list.component.sass'
 })
-export class PageListComponent {
-  @Input() data!: PageListData
-  menu: MenuItem[]
+export class PageListComponent extends ListenItems<MenuItem> {
+  // @Input() data!: PageListData
+  // menu: MenuItem[]
   active: S
   // @ViewChild('myTemplate', {static: true}) myTemplateRef!: TemplateRef<A>
   constructor(
     private componentService: ComponentService
   ) {
+    super()
     this.active = ''
     this.menu = []
     // this.menu = [
@@ -184,7 +186,7 @@ export class PageListComponent {
     //   },
     // ]
   }
-  washMenuItem(obj: Oa) {
+  override washMenuItem(obj: Oa) {
     return {
       key: obj['key'],
       name: obj['name'],
@@ -196,53 +198,53 @@ export class PageListComponent {
       children: [],
     }
   }
-  find(arr: MenuItem[], k: S): MenuItem | undefined {
-    let res = arr.find(item => item.key === k)
-    if (res) {
-      return res
-    } else {
-      for (let i = 0; i < arr.length; i++) {
-        let t = this.find(arr[i].children, k)
-        if (t) {
-          return t
-        }
-      }
-      return
-    }
-  }
-  opMenu() {
-    if (!this.data.items.length) {
-      this.menu = []
-    } else {
-      let washMenuItemList = (this.data.items as MenuItem[]).map(item => this.washMenuItem(item))
-      for (let i = 0; i < washMenuItemList.length;) {
-        let cur = washMenuItemList[i]
-        if (cur.parentKey) {
-          // 去挂
-          let p = this.find(washMenuItemList, cur.parentKey)
-          if (p) {
-            p.children.push(cur)
-          }
-          washMenuItemList.splice(i, 1)
-        } else {
-          // 不挂
-          i++
-        }
-      }
-      this.menu = washMenuItemList
-    }
-  }
-  listen() {
-    shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'add'), () => {
-      this.opMenu()
-    })
-    shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'update'), () => {
-      this.opMenu()
-    })
-    shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'remove'), () => {
-      this.opMenu()
-    })
-  }
+  // find(arr: MenuItem[], k: S): MenuItem | undefined {
+  //   let res = arr.find(item => item.key === k)
+  //   if (res) {
+  //     return res
+  //   } else {
+  //     for (let i = 0; i < arr.length; i++) {
+  //       let t = this.find(arr[i].children, k)
+  //       if (t) {
+  //         return t
+  //       }
+  //     }
+  //     return
+  //   }
+  // }
+  // opMenu() {
+  //   if (!this.data.items.length) {
+  //     this.menu = []
+  //   } else {
+  //     let washMenuItemList = (this.data.items as MenuItem[]).map(item => this.washMenuItem(item))
+  //     for (let i = 0; i < washMenuItemList.length;) {
+  //       let cur = washMenuItemList[i]
+  //       if (cur.parentKey) {
+  //         // 去挂
+  //         let p = this.find(washMenuItemList, cur.parentKey)
+  //         if (p) {
+  //           p.children.push(cur)
+  //         }
+  //         washMenuItemList.splice(i, 1)
+  //       } else {
+  //         // 不挂
+  //         i++
+  //       }
+  //     }
+  //     this.menu = washMenuItemList
+  //   }
+  // }
+  // listen() {
+  //   shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'add'), () => {
+  //     this.opMenu()
+  //   })
+  //   shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'update'), () => {
+  //     this.opMenu()
+  //   })
+  //   shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'remove'), () => {
+  //     this.opMenu()
+  //   })
+  // }
   itemClickH(key: S) {
     this.active = key
   }
@@ -252,7 +254,7 @@ export class PageListComponent {
   openChangeInnerH(obj: {isOpen: B, key: S}) {
     clog('openChangeInnerH', obj)
   }
-  ngOnInit() {
+  override ngOnInit() {
     this.opMenu()
     this.listen()
   }

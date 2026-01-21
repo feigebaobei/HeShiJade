@@ -141,6 +141,21 @@ let Accordion: GridLayoutDefault = {
     h: 6,
     noResize: false,
 }
+let Breadcrumb: GridLayoutDefault = {
+    w: 6,
+    h: 2,
+    noResize: false,
+}
+let Cascader: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
+let DatePicker: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -166,6 +181,9 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
+    Cascader,
+    DatePicker,
 }
 export {
     Button,
@@ -192,6 +210,9 @@ export {
     Span,
     ImagePreview,
     Accordion,
+    Breadcrumb,
+    Cascader,
+    DatePicker,
     
     gridLayoutDefault,
 }

@@ -8,7 +8,11 @@ import type {N, B, A, S, ULID,
   Options,
 } from './base'
 // 在不支持option前，暂时不使用SelectOptionsItem[]类型
-type PropsValue = S | B | N // | S[] | SelectOptionsItem[]
+type PropsValue = S | B | N 
+| {label: S, value: S | B | N, disabled: B}[] // options
+// | Date // Date类型也使用N.
+
+// | S[] // | SelectOptionsItem[]
 interface PropsMeta {
     // [k: S]: PropsValue
     [k: S]: A

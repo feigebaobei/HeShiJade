@@ -35,6 +35,7 @@ import { PropsDirective } from './props.directive';
     PropsInputComponent,
     PropsOptionComponent,
     PropsNumberComponent,
+    // PropsDateComponent, // 不需要声明独立组件
   ],
   imports: [
     CommonModule,

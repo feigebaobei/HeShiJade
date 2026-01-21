@@ -21,7 +21,7 @@ let clog = console.log
   styleUrls: ['./modal.component.sass']
 })
 export class ModalComponent extends TextBase implements OnInit{
-  @Input() data: A
+  // @Input() data: A
   childrenHeader: Comp[]
   childrenBody: Comp[]
   childrenFooter: Comp[]

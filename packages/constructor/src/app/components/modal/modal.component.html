@@ -1,13 +1,13 @@
 <div
     [class]="{
         box: true,
-        disvisible: !data.props.visible
+        disvisible: !data.props['visible']
     }">
     <header
         class="header"
     >
         <div class="title_box">
-            <h2 class="title">{{data.props.title}}</h2>
+            <h2 class="title">{{data.props['title']}}</h2>
             <d-icon [icon]="'icon-close'"></d-icon>
         </div>
         <div dDroppable (dropEvent)="dropHeaderH($event)" class="droppable">

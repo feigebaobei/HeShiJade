@@ -30,7 +30,7 @@ interface GridData {
   styleUrl: './grid.component.sass'
 })
 export class GridComponent extends TextBase {
-  @Input() data!: GridData
+  // @Input() data!: GridData
   curPage: Page
   compArr: {
     comp: Comp | undefined

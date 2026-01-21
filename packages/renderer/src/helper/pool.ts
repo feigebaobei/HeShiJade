@@ -199,13 +199,17 @@ class CompBase {
         Object.entries(o).forEach(([k, v]) => {
             this.data.props[k] = v
         })
+        this.extraSetProps()
     }
+    extraSetProps() {}
+    extraNgOnInit() {}
     ngOnChanges() {
         this.pool.trigger(this.data.ulid, 'postComponentNgOnChanges', this.getLoopEventParams(this.loopIndex, undefined), this)
     }
     ngOnInit() {
         this.pool.register(this.data.ulid, this, this.data.behavior)
         this.pool.trigger(this.data.ulid, 'postComponentNgOnInit', this.getLoopEventParams(this.loopIndex, undefined), this)
+        this.extraNgOnInit()
     }
     ngDoCheck() {
         this.pool.trigger(this.data.ulid, 'postComponentNgDoCheck', this.getLoopEventParams(this.loopIndex, undefined), this)
