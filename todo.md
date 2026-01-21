@@ -2,10 +2,10 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|datepicker|doing||
+|datepicker|done||
 |检查datepicker的format配置项|不允许配置format||
 |datepicker支持ngModel|done||
-|dateRangepicker|todo||
+|dateRangepicker|doing||
 |timepicker|todo||
 |官网支持独立与非独立组件的创建过程|done||
 |slider|||
@@ -22,6 +22,7 @@
 |要上生产的内容|||
 |feat: 创建Accordion组件|||
 |feat: 创建Breadcrumb组件|||
+|feat: 创建DatePicker组件|||
 |feat: according/pagelist使用ListenItems类|||
 |feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
 |feat: 创建Cascader组件|||
