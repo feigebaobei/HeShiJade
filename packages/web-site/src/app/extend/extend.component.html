@@ -26,8 +26,17 @@
     <h2>渲染侧增加组件</h2>
     <ol>
         <li>在`renderer`目录下执行`ng g c components/new-comp`</li>
-        <li>注释`renderer/src/app/components/new-comp/new-comp.components.ts`中的`standalone``imports`。</li>
-        <li>在`renderer/src/app/components/components.module.ts`引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
+        <li>
+            独立组件
+            <ul>
+                <li>在`renderer/src/app/components/new-comp/new-comp.components.ts`中的引入相关依赖的module。</li>
+            </ul>
+            非独立组件
+            <ul>
+                <li>注释`renderer/src/app/components/new-comp/new-comp.components.ts`中的`standalone``imports`。</li>
+                <li>在`renderer/src/app/components/components.module.ts`引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
+            </ul>
+        </li>
         <li>在`renderer/src/app/components/comp-box/comp-box.component.ts`中引入新组件并为其传入数据</li>
         <li>引入CompBase类，再基于它开发组件。可以参考Radio组件。</li>
         <li>参考搭建侧的同组件，编写渲染侧的 *.html/*.css</li>

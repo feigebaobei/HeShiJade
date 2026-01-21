@@ -42,7 +42,7 @@ MarshalItem<CascaderItemNew>
   ngModelChangeH(v: A) {
     this.pool.trigger(this.data.ulid, 'change', this.getLoopEventParams(this.loopIndex, v), this)
   }
-  override extraMarshal() {
+  override extraNgOnInit() {
     // this.value = [['b'], ['a', 'a1']]
     let valueList = this.data.props['valueList']
     if (this.data.props['multiple']) {

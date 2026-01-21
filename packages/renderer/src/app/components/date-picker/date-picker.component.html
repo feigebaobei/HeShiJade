@@ -12,5 +12,7 @@
   [placeholder]="data.props['placeholder']"
   [mode]="data.props['mode']"
   [showGlowStyle]="data.props['showGlowStyle']"
-  >
+  (confirmEvent)="confirmEventH($event)"
+  (dropdownToggle)="dropdownToggleH($event)"
+>
 </d-datepicker-pro>

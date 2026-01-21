@@ -3,12 +3,11 @@
 |分支|f_tag||
 |丰富组件|||
 |datepicker|doing||
-|props支持date|done||
-|datepicker支持ngModel|todo||
+|检查datepicker的format配置项|todo||
+|datepicker支持ngModel|done||
 |dateRangepicker|todo||
 |timepicker|todo||
-|官网增加date配置项|done||
-|官网支持独立与非独立组件的创建过程|todo||
+|官网支持独立与非独立组件的创建过程|done||
 |slider|||
 |textarea|||
 |toggle|||
@@ -26,6 +25,7 @@
 |feat: according/pagelist使用ListenItems类|||
 |feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
 |feat: 创建Cascader组件|||
+|feat: props面板支持date配置项|||
 |feat: 官网增加date配置项|||
 |perf: props中的options配置项字段，只保存值，不保存配置项。|||
 
