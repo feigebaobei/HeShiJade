@@ -6,6 +6,7 @@ import { PropsSelectComponent } from '../props-select/props-select.component';
 import { PropsSwitchComponent } from '../props-switch/props-switch.component';
 import { PropsOptionComponent } from '../props-option/props-option.component'
 import { PropsNumberComponent } from '../props-number/props-number.component';
+import { PropsDateComponent } from '../props-date/props-date.component';
 // import { PropsOptionComponent } from '../props-option/props-option.component';
 // type
 import type { A, ConfigItem, } from 'src/types/base';
@@ -75,6 +76,13 @@ export class PropsItemComponent implements OnInit, AfterContentInit {
         componentRef = viewContainerRef.createComponent(PropsNumberComponent)
         componentRef.instance.data = this.propItem
         // 绑定事件
+        componentRef.instance.change.subscribe((v: A) => {
+          this.itemChange.emit({key: this.propItem.key, value: v})
+        })
+        break;
+      case 'date':
+        componentRef = viewContainerRef.createComponent(PropsDateComponent)
+        componentRef.instance.data = this.propItem
         componentRef.instance.change.subscribe((v: A) => {
           this.itemChange.emit({key: this.propItem.key, value: v})
         })

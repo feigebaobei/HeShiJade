@@ -37,6 +37,7 @@ import {
   Accordion as AccordionMeta,
   Breadcrumb as BreadcrumbMeta,
   Cascader as CascaderMeta,
+  DatePicker as DatePickerMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -199,6 +200,9 @@ export class PropsBoxComponent {
         break;
       case 'Cascader':
         this.opComponentPropsList(CascaderMeta)
+        break;
+      case 'DatePicker':
+        this.opComponentPropsList(DatePickerMeta)
         break;
       default:
         this.componentPropsMeta = {}
