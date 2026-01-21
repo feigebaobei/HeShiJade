@@ -3537,7 +3537,7 @@
     </table>
     <h2>event</h2>
     <pre>
-        interface Item {
+        interface Item &#123;
             active: B,
             disabled: B,
             key: S,
@@ -3545,7 +3545,7 @@
             open: B,
             parentKey: S | undefined,
             title: S,
-        }
+        &#125;
     </pre>
     <table>
         <thead>
@@ -3559,12 +3559,12 @@
             <tr>
                 <td>menuToggle</td>
                 <td>键盘输入时</td>
-                <td>{item: Item, open: B, parent: Item, event: PointerEvent}</td>
+                <td>&#123;item: Item, open: B, parent: Item, event: PointerEvent&#125;</td>
             </tr>
             <tr>
                 <td>itemClick</td>
                 <td>model改变后</td>
-                <td>{item: Item, prevActiveItem: Item, parent: Item | undefined, event: PointerEvent}</td>
+                <td>&#123;item: Item, prevActiveItem: Item, parent: Item | undefined, event: PointerEvent&#125;</td>
             </tr>
             <tr>
                 <td>activeItemChange</td>
@@ -3689,7 +3689,7 @@
             <tr>
                 <td>itemClick</td>
                 <td>点击时触发。（注意：没有阻塞功能）</td>
-                <td>{link: S, linkType: S, name: S, target: S}</td>
+                <td>&#123;link: S, linkType: S, name: S, target: S&#125;</td>
             </tr>
             <tr>
                 <td>postComponentNgOnChanges</td>
