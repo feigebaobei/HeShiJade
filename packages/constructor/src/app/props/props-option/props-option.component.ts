@@ -5,7 +5,7 @@ import { createDebounceFn } from 'src/helper/index'
 import { cloneDeep } from 'src/helper/index';
 import { valueType } from 'src/helper/config';
 // type
-import type { N, ConfigItmeOption, F, S, A, } from 'src/types/base';
+import type { N, ConfigItemOption, F, S, A, } from 'src/types/base';
 // import type { ComponentPropsMetaItem } from 'src/types/props';
 import type { PropsValue } from 'src/types/component';
 
@@ -17,13 +17,13 @@ let clog = console.log
   styleUrls: ['./props-option.component.sass']
 })
 export class PropsOptionComponent {
-  @Input() data!: ConfigItmeOption
+  @Input() data!: ConfigItemOption
   @Output() change = new EventEmitter()
   // modelChangeH: F
   labelChangeH: F
   valueChangeH: F
   disabledChangeH: F
-  optionsList: ConfigItmeOption['template'][] = []
+  optionsList: ConfigItemOption['template'][] = []
   options: {label: S, value: S}[]
   constructor(private componentService: ComponentService) {
     this.optionsList = []
@@ -65,7 +65,7 @@ export class PropsOptionComponent {
       this.change.emit(this.optionsList)
     }, debounceTime)
   }
-  getValue(arr: ConfigItmeOption['template'][]): PropsValue {
+  getValue(arr: ConfigItemOption['template'][]): PropsValue {
     return arr.map(item => {
       return {
         disabled: item.disabled,

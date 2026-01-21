@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, Signal, OnInit, OnChanges, } from '@angular/core';
 // type
-import type { ConfigItem, S, B, Options, A, N, ConfigItmeOption } from 'src/types/base';
+import type { ConfigItem, S, B, Options, A, N, ConfigItemOption } from 'src/types/base';
 
 let clog = console.log
 
@@ -18,7 +18,7 @@ export class ItemComponent implements OnInit
   @Output() numberChange = new EventEmitter()
   @Output() selectChange = new EventEmitter()
   @Output() switchChange = new EventEmitter()
-  @Output() optionsChange = new EventEmitter<{key: 'options', value: ConfigItmeOption['template'][]}>()
+  @Output() optionsChange = new EventEmitter<{key: 'options', value: ConfigItemOption['template'][]}>()
   hideOptions: B
   constructor() {
     // todo 考虑删除它
@@ -75,7 +75,7 @@ export class ItemComponent implements OnInit
     // this.hideListener(this.groupItem.key)
   }
   // optionsChangeH (v: Options<S, S>[]) {
-  optionsChangeH (v: ConfigItmeOption['template'][]) {
+  optionsChangeH (v: ConfigItemOption['template'][]) {
     // console.log('optionsChangeH v', v)
     this.optionsChange.emit({key: this.groupItem.key as 'options', value: v})
     // this.hideListener(this.groupItem.key)

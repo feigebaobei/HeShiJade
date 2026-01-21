@@ -88,12 +88,12 @@ interface ConfigItemSwitch {
   hideListenerKey?: S
   hideCalc?: B
 }
-// interface ConfigItmeOption {
-interface ConfigItmeOption {
+// interface ConfigItemOption {
+interface ConfigItemOption {
   category: 'options'
   label: S
   key: S
-  value: ConfigItmeOption['template'][]
+  value: ConfigItemOption['template'][]
   // template: Options<S, S>
   // template: Partial<{
   //   label: S
@@ -118,13 +118,24 @@ interface ConfigItmeOption {
   hideListenerKey?: S
   hideCalc?: B
 }
+interface ConfigItemDate {
+  category: 'date'
+  label: S
+  // value?: Date
+  value?: N
+  key: S
+  hide?: FT<B>
+  hideListenerKey?: S
+  hideCalc?: B
+}
 // type CategoryType = Pick<ConfigItem, 'category'>
 type ConfigItem<T = S> = ConfigItemInput
   | ConfigItemTextarea
   | ConfigItemSelect<T>
   | ConfigItemNumber
   | ConfigItemSwitch
-  | ConfigItmeOption
+  | ConfigItemOption
+  | ConfigItemDate
 type ConfigItemsCategoryType = ConfigItem['category']
 
 interface MenuItem extends MenuItemType {
@@ -150,7 +161,8 @@ export type {
   ConfigItemTextarea,
   ConfigItemSelect,
   ConfigItemSwitch,
-  ConfigItmeOption,
+  ConfigItemOption,
+  ConfigItemDate,
   ConfigItemKeys,
   ConfigItemsCategoryType,
   MenuItem,

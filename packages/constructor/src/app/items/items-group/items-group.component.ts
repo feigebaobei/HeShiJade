@@ -4,7 +4,7 @@ import { compatibleArray, createDebounceFn } from 'src/helper/index'
 import { debounceTime } from 'src/helper/config';
 // import { CompDirective } from '../comp.directive'
 // type
-import type { A, ConfigItem, N, B, S, ConfigItmeOption, F, } from 'src/types/base';
+import type { A, ConfigItem, N, B, S, ConfigItemOption, F, } from 'src/types/base';
 
 // interface T {
 //   key: 'label' | 'key' | 'value'
@@ -90,7 +90,7 @@ export class ItemsGroupComponent implements OnInit, OnDestroy {
       this.listenerChange(item)
     }, debounceTime)
     // this.optionsChangeH = createDebounceFn((p: {key: 'options', value: Options<S, S>[]}) => {
-    this.optionsChangeH = createDebounceFn((p: {key: 'options', value: ConfigItmeOption['template'][]}) => {
+    this.optionsChangeH = createDebounceFn((p: {key: 'options', value: ConfigItemOption['template'][]}) => {
       clog('optionsChangeH', p.key, p.value)
       this.componentService.setItems(this.index, p.key, p.value)
       // this.reqChangeItems(this.index, p.key, p.value)
