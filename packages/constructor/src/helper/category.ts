@@ -151,11 +151,11 @@ let categoryList = [
         componentCategory: 'TimePicker',
         ulid: '01J50ZGTCKEC10HWAJBZND487P'
     },
-    // {
-    //     name: 'Slider',
-    //     componentCategory: 'Slider',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487Q'
-    // },
+    {
+        name: 'Slider',
+        componentCategory: 'Slider',
+        ulid: '01J50ZGTCKEC10HWAJBZND487Q'
+    },
     // {
     //     name: 'Textarea',
     //     componentCategory: 'Textarea',

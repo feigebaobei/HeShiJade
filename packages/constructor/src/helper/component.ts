@@ -31,6 +31,7 @@ import { Button as ButtonProps,
     DatePicker as DatePickerProps,
     DateRangePicker as DateRangePickerProps,
     TimePicker as TimePickerProps,
+    Slider as SliderProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -59,6 +60,7 @@ import {
     DatePicker as DatePickerBehavior,
     DateRangePicker as DateRangePickerBehavior,
     TimePicker as TimePickerBehavior,
+    Slider as SliderBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -374,6 +376,12 @@ let TimePicker: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Slider: ComponentDefaultConfig = {
+    props: opProps(SliderProps),
+    behavior: opBehavior(SliderBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -405,4 +413,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     DatePicker,
     DateRangePicker,
     TimePicker,
+    Slider,
 }

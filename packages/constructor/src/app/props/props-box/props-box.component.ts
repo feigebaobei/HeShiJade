@@ -40,6 +40,7 @@ import {
   DatePicker as DatePickerMeta,
   DateRangePicker as DateRangePickerMeta,
   TimePicker as TimePickerMeta,
+  Slider as SliderMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -211,6 +212,9 @@ export class PropsBoxComponent {
         break;
       case 'TimePicker':
         this.opComponentPropsList(TimePickerMeta)
+        break;
+      case 'Slider':
+        this.opComponentPropsList(SliderMeta)
         break;
       default:
         this.componentPropsMeta = {}

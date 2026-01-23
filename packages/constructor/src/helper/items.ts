@@ -723,6 +723,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // DatePicker, // 没有特定子元素
     // DateRangePicker, // 没有特定子元素
     // TimePicker, // 没有特定子元素
+    // Slider, // 没有特定子元素
 }
 
 export default all

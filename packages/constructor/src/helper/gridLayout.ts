@@ -166,6 +166,11 @@ let TimePicker: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Slider: GridLayoutDefault = {
+    w: 24,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -196,6 +201,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     DatePicker,
     DateRangePicker,
     TimePicker,
+    Slider,
 }
 export {
     Button,
@@ -227,6 +233,7 @@ export {
     DatePicker,
     DateRangePicker,
     TimePicker,
+    Slider,
     
     gridLayoutDefault,
 }
