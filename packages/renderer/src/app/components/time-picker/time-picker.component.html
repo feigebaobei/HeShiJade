@@ -1,7 +1,7 @@
-<p>time-picker works!</p>
 <div>
     <input
     class="devui-input devui-form-control"
+    [ngModel]="data.props['value']"
     dTimePicker
     (focus)="timePicker3.toggle()"
     #timePicker3="timePicker"

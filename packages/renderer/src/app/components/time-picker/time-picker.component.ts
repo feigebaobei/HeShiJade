@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TimePickerModule } from 'ng-devui';
 import { AppendToBodyDirection } from 'ng-devui/utils';
 import { CompBase } from 'src/helper/pool';
@@ -9,6 +10,7 @@ import { A, S } from 'src/types/base';
   standalone: true,
   imports: [
     TimePickerModule,
+    FormsModule,
   ],
   templateUrl: './time-picker.component.html',
   styleUrl: './time-picker.component.sass'

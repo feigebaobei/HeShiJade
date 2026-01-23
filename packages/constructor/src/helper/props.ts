@@ -2463,6 +2463,12 @@ let DateRangePicker: PropsConfigItem = {
     // },
 }
 let TimePicker: PropsConfigItem = {
+    value: {
+        category: 'input',
+        value: '00:00:00', // 不能没有默认值
+        label: '值',
+        key: 'value',
+    },
     disabled: {
         category: 'switch',
         options: [

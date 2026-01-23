@@ -4,6 +4,7 @@ import {
   TimePickerModule } from 'ng-devui';
 import { InputData } from 'src/helper/InputData';
 import { A, S } from 'src/types/base';
+import { FormsModule } from '@angular/forms';
 import type { AppendToBodyDirection } from 'ng-devui/utils';
 
 let clog = console.log
@@ -13,6 +14,7 @@ let clog = console.log
   standalone: true,
   imports: [
     TimePickerModule,
+    FormsModule,
     // IconModule,
   ],
   templateUrl: './time-picker.component.html',

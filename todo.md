@@ -3,7 +3,7 @@
 |分支|f_tag||
 |丰富组件|||
 |timepicker|doing||
-测试一个页面有多个timepicker是否正常工作    todo
+测试一个页面有多个timepicker是否正常工作    done
 添加事件    done
 添加value 默认值功能    todo
 检查多个值时是可以生效。   todo
