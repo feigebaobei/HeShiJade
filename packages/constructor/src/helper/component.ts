@@ -30,6 +30,7 @@ import { Button as ButtonProps,
     Cascader as CascaderProps,
     DatePicker as DatePickerProps,
     DateRangePicker as DateRangePickerProps,
+    TimePicker as TimePickerProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -57,6 +58,7 @@ import {
     Cascader as CascaderBehavior,
     DatePicker as DatePickerBehavior,
     DateRangePicker as DateRangePickerBehavior,
+    TimePicker as TimePickerBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -366,6 +368,12 @@ let DateRangePicker: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let TimePicker: ComponentDefaultConfig = {
+    props: opProps(TimePickerProps),
+    behavior: opBehavior(TimePickerBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -396,4 +404,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Cascader,
     DatePicker,
     DateRangePicker,
+    TimePicker,
 }

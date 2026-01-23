@@ -161,6 +161,11 @@ let DateRangePicker: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let TimePicker: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -190,6 +195,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Cascader,
     DatePicker,
     DateRangePicker,
+    TimePicker,
 }
 export {
     Button,
@@ -220,6 +226,7 @@ export {
     Cascader,
     DatePicker,
     DateRangePicker,
+    TimePicker,
     
     gridLayoutDefault,
 }

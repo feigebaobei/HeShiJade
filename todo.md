@@ -2,8 +2,9 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|dateRangepicker|doing||
-|timepicker|todo||
+|dateRangepicker|done||
+|timepicker|doing||
+检查多个值时是可以生效。   todo
 select配置支持number    todo
 |官网支持独立与非独立组件的创建过程|done||
 |slider|||

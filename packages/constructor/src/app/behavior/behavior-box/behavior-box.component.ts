@@ -32,6 +32,7 @@ import {
   Cascader as CascaderBehaviorMeta,
   DatePicker as DatePickerBehaviorMeta,
   DateRangePicker as DateRangePickerBehaviorMeta,
+  TimePicker as TimePickerBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -202,6 +203,9 @@ export class BehaviorBoxComponent {
         break;
       case 'DateRangePicker':
         this.setComponentBehaviorListByType(DateRangePickerBehaviorMeta)
+        break;
+      case 'TimePicker':
+        this.setComponentBehaviorListByType(TimePickerBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

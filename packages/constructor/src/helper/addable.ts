@@ -121,6 +121,10 @@ let DateRangePicker: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let TimePicker: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -154,6 +158,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Cascader,
     DatePicker,
     DateRangePicker,
+    TimePicker,
 }
 
 export {

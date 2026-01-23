@@ -2462,6 +2462,72 @@ let DateRangePicker: PropsConfigItem = {
     //     key: 'showGlowStyle',
     // },
 }
+let TimePicker: PropsConfigItem = {
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    timePickerWidth: {
+        category: 'number',
+        value: 250,
+        label: '下拉框的宽度',
+        key: 'timePickerWidth',
+    },
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '自动打开',
+        key: 'autoOpen',
+    },
+    minTime: {
+        category: 'input',
+        value: '00:00:00',
+        label: '最小可选时间',
+        key: 'minTime',
+    },
+    maxTime: {
+        category: 'input',
+        value: '23:59:59',
+        label: '最大可选时间',
+        key: 'maxTime',
+    },
+    // todo 检查多个值时是可以生效。
+    direction: { // 会处理为 appendToBodyDirections
+        category: 'options',
+        template: {
+            label: '', value: '',
+            valueTip: '用逗号分隔路径',
+            valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
+        value: [
+            {label: '', value: 'rightDown', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
+            {label: '', value: 'leftDown', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
+            {label: '', value: 'rightUp', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
+            {label: '', value: 'leftUp', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
+        ],
+        label: '优先展开位置',
+        key: 'direction',
+    },
+    // showAnimation: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '动画',
+    //     key: 'showAnimation',
+    // },
+}
 
 export {
     Button,
@@ -2492,4 +2558,5 @@ export {
     Cascader,
     DatePicker,
     DateRangePicker,
+    TimePicker,
 }

@@ -146,11 +146,11 @@ let categoryList = [
         componentCategory: 'DateRangePicker',
         ulid: '01J50ZGTCKEC10HWAJBZND487O'
     },
-    // {
-    //     name: 'TimePicker',
-    //     componentCategory: 'TimePicker',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487P'
-    // },
+    {
+        name: 'TimePicker',
+        componentCategory: 'TimePicker',
+        ulid: '01J50ZGTCKEC10HWAJBZND487P'
+    },
     // {
     //     name: 'Slider',
     //     componentCategory: 'Slider',
