@@ -4,6 +4,8 @@
 |丰富组件|||
 |timepicker|doing||
 测试一个页面有多个timepicker是否正常工作    todo
+添加事件    todo
+添加value 默认值功能    todo
 检查多个值时是可以生效。   todo
 select配置支持number    todo
 |官网支持独立与非独立组件的创建过程|done||

@@ -2506,7 +2506,7 @@ let TimePicker: PropsConfigItem = {
         category: 'options',
         template: {
             label: '', value: '',
-            valueTip: '用逗号分隔路径',
+            valueTip: '展开位置',
             valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
         value: [
             {label: '', value: 'rightDown', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
