@@ -31,10 +31,11 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { CascaderComponent } from '../cascader/cascader.component';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
+import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
+import { SliderComponent } from '../slider/slider.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
-import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 
 let clog = console.log
 
@@ -69,6 +70,7 @@ let compMap: {[k: S]: A} = {
   DatePicker: DatePickerComponent,
   DateRangePicker: DateRangePickerComponent,
   TimePicker: TimePickerComponent,
+  Slider: SliderComponent,
 }
 
 @Component({
@@ -370,6 +372,15 @@ export class CompBoxComponent {
         }
         break;
       case 'TimePicker':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Slider':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,

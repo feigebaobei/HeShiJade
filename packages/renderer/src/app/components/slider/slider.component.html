@@ -1,0 +1,9 @@
+<p>slider works!</p>
+<d-slider
+[ngModel]="data.props['value']"
+[min]="data.props['min']"
+[max]="data.props['max']"
+[step]="data.props['step']"
+[disabled]="data.props['disabled']"
+(afterChange)="afterChangeH($event)"
+></d-slider>
