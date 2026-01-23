@@ -23,8 +23,10 @@ export class DateRangePickerComponent extends TextBase {
   // value: D[]
   // range: N[]
   // 因底层组件在处理ngModel/calenderRange的值（它是数组）中只有一个元素时会报错，所以现阶段不支持此配置项。
+  // startIndexOfWeek: N
   constructor() {
     super()
+    // this.startIndexOfWeek = 3
     // this.value = []
     // this.range = []
   }
@@ -44,7 +46,11 @@ export class DateRangePickerComponent extends TextBase {
   // initRange() {
   //   this.range = [this.data.props['minYear'] || 1970, this.data.props['maxYear'] || 2099 ]
   // }
+  // InitStartIndexOfWeek() {
+  //   this.startIndexOfWeek = Number(this.data.props['startIndexOfWeek'])
+  // }
   ngOnInit() {
+    // this.InitStartIndexOfWeek()
     // this.initValue()
     // this.initRange()
     // shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'remove'), ({key, value}) => {
