@@ -30,6 +30,7 @@ import { AccordionComponent } from '../accordion/accordion.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { CascaderComponent } from '../cascader/cascader.component';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { TimePickerComponent } from '../time-picker/time-picker.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -67,6 +68,7 @@ let compMap: {[k: S]: A} = {
   Cascader: CascaderComponent,
   DatePicker: DatePickerComponent,
   DateRangePicker: DateRangePickerComponent,
+  TimePicker: TimePickerComponent,
 }
 
 @Component({
@@ -359,6 +361,15 @@ export class CompBoxComponent {
         }
         break;
       case 'DateRangePicker':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'TimePicker':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,

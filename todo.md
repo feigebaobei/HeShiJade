@@ -2,8 +2,8 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|dateRangepicker|done||
 |timepicker|doing||
+测试一个页面有多个timepicker是否正常工作    todo
 检查多个值时是可以生效。   todo
 select配置支持number    todo
 |官网支持独立与非独立组件的创建过程|done||
@@ -22,6 +22,7 @@ select配置支持number    todo
 |feat: 创建Accordion组件|||
 |feat: 创建Breadcrumb组件|||
 |feat: 创建DatePicker组件|||
+|feat: 创建DateRangePicker组件|||
 |feat: according/pagelist使用ListenItems类|||
 |feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
 |feat: 创建Cascader组件|||
