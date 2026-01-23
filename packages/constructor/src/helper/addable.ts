@@ -129,6 +129,10 @@ let Slider: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Textarea: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -164,6 +168,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     DateRangePicker,
     TimePicker,
     Slider,
+    Textarea,
 }
 
 export {

@@ -156,11 +156,11 @@ let categoryList = [
         componentCategory: 'Slider',
         ulid: '01J50ZGTCKEC10HWAJBZND487Q'
     },
-    // {
-    //     name: 'Textarea',
-    //     componentCategory: 'Textarea',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487R'
-    // },
+    {
+        name: 'Textarea',
+        componentCategory: 'Textarea',
+        ulid: '01J50ZGTCKEC10HWAJBZND487R'
+    },
     // {
     //     name: 'Toggle',
     //     componentCategory: 'Toggle',

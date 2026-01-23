@@ -38,6 +38,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
+import { TextareaComponent } from '../textarea/textarea.component';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所以我考虑使用封装全部devui的组件来实现.
@@ -75,6 +76,7 @@ let compMap: Oa = {
   DateRangePicker: DateRangePickerComponent,
   TimePicker: TimePickerComponent,
   Slider: SliderComponent,
+  Textarea: TextareaComponent,
 }
 
 @Component({
@@ -363,6 +365,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'Slider':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Textarea':
         this.componentRef.instance.data = {
           type: this.comp.type,
           props: this.comp.props,

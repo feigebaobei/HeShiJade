@@ -2,15 +2,8 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|timepicker|done||
-测试一个页面有多个timepicker是否正常工作    done
-添加事件    done
-添加value 默认值功能    done
-检查多个值时是可以生效。   done
-select配置支持number    done
-|官网支持独立与非独立组件的创建过程|done||
-|slider|doing||
-|textarea|||
+|slider|done||
+|textarea|doing||
 |toggle|||
 |drawer|||
 |badge|||
@@ -25,6 +18,7 @@ select配置支持number    done
 |feat: 创建Breadcrumb组件|||
 |feat: 创建DatePicker组件|||
 |feat: 创建DateRangePicker组件|||
+|feat: 创建TimePicker组件|||
 |feat: according/pagelist使用ListenItems类|||
 |feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
 |feat: 创建Cascader组件|||

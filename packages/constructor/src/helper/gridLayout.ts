@@ -171,6 +171,11 @@ let Slider: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Textarea: GridLayoutDefault = {
+    w: 24,
+    h: 4,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -202,6 +207,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     DateRangePicker,
     TimePicker,
     Slider,
+    Textarea,
 }
 export {
     Button,
@@ -234,6 +240,7 @@ export {
     DateRangePicker,
     TimePicker,
     Slider,
+    Textarea,
     
     gridLayoutDefault,
 }

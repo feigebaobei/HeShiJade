@@ -34,6 +34,7 @@ import {
   DateRangePicker as DateRangePickerBehaviorMeta,
   TimePicker as TimePickerBehaviorMeta,
   Slider as SliderBehaviorMeta,
+  Textarea as TextareaBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -210,6 +211,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Slider':
         this.setComponentBehaviorListByType(SliderBehaviorMeta)
+        break;
+      case 'Textarea':
+        this.setComponentBehaviorListByType(TextareaBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

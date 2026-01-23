@@ -2570,6 +2570,103 @@ let Slider: PropsConfigItem = {
         key: 'disabled',
     },
 }
+let Textarea: PropsConfigItem = {
+    value: {
+        category: 'input',
+        value: '',
+        label: '值',
+        key: 'value',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    error: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '是否使用出错状态',
+        key: 'error',
+    },
+    maxWidth: {
+        category: 'input',
+        value: '',
+        label: '最大宽度',
+        key: 'maxWidth',
+    },
+    maxHeight: {
+        category: 'input',
+        value: '',
+        label: '最大宽度',
+        key: 'maxHeight',
+    },
+    maxLengthBlock: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '超出最大值时是否阻止输入',
+        key: 'maxLengthBlock',
+    },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    rows: {
+        category: 'number',
+        value: 3,
+        label: '行数',
+        key: 'rows',
+    },
+    resize: {
+        category: 'select',
+        options: [
+            // none | vertical | horizontal | both | inherit
+            {label: 'none', value: 'none'},
+            {label: 'vertical', value: 'vertical'},
+            {label: 'horizontal', value: 'horizontal'},
+            {label: 'both', value: 'both'},
+            {label: 'inherit', value: 'inherit'},
+        ],
+        value: 'none',
+        label: '调整大小',
+        key: 'resize',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '是否悬浮发光',
+        key: 'showGlowStyle',
+    },
+    styleType: {
+        category: 'select',
+        options: [
+            // none | vertical | horizontal | both | inherit
+            {label: 'default 有线框白底', value: 'default'},
+            {label: 'gray 无线框灰底', value: 'gray'},
+        ],
+        value: 'default',
+        label: 'ui风格',
+        key: 'styleType',
+    },
+}
 
 export {
     Button,
@@ -2602,4 +2699,5 @@ export {
     DateRangePicker,
     TimePicker,
     Slider,
+    Textarea,
 }

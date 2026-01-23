@@ -32,6 +32,7 @@ import { Button as ButtonProps,
     DateRangePicker as DateRangePickerProps,
     TimePicker as TimePickerProps,
     Slider as SliderProps,
+    Textarea as TextareaProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -61,6 +62,7 @@ import {
     DateRangePicker as DateRangePickerBehavior,
     TimePicker as TimePickerBehavior,
     Slider as SliderBehavior,
+    Textarea as TextareaBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -382,6 +384,12 @@ let Slider: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Textarea: ComponentDefaultConfig = {
+    props: opProps(TextareaProps),
+    behavior: opBehavior(TextareaBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -414,4 +422,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     DateRangePicker,
     TimePicker,
     Slider,
+    Textarea,
 }
