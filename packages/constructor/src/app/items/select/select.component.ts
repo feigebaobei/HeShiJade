@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 // type
-import type { A, Options, S } from 'src/types/base';
+import type { A, N, Options, S } from 'src/types/base';
 
 
 @Component({
@@ -10,7 +10,7 @@ import type { A, Options, S } from 'src/types/base';
 })
 export class SelectComponent implements OnInit {
   @Input() label: S = ''
-  @Input() value: S = ''
+  @Input() value: S | N = ''
   // set value(p: A) {
   //   this._value = p
   // }
@@ -19,7 +19,7 @@ export class SelectComponent implements OnInit {
   // }
   @Input() options: Options<S, A>[] = []
   @Output() changeValue = new EventEmitter()
-  _value: S = ''
+  _value: S | N = ''
   _label: S = ''
   constructor() {
   }

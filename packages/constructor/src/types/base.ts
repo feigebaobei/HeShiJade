@@ -47,7 +47,7 @@ interface ConfigItemTextarea {
   hideListenerKey?: S
   hideCalc?: B
 }
-interface ConfigItemSelect<T> {
+interface ConfigItemSelect<T = N | S> {
   category: 'select'
   value: T
   options: SelectOptionsItem[] // 当前配置项的可选项
@@ -129,7 +129,7 @@ interface ConfigItemDate {
   hideCalc?: B
 }
 // type CategoryType = Pick<ConfigItem, 'category'>
-type ConfigItem<T = S> = ConfigItemInput
+type ConfigItem<T = N | S> = ConfigItemInput
   | ConfigItemTextarea
   | ConfigItemSelect<T>
   | ConfigItemNumber

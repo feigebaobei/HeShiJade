@@ -5,9 +5,9 @@
 |timepicker|doing||
 测试一个页面有多个timepicker是否正常工作    done
 添加事件    done
-添加value 默认值功能    todo
-检查多个值时是可以生效。   todo
-select配置支持number    todo
+添加value 默认值功能    done
+检查多个值时是可以生效。   done
+select配置支持number    done
 |官网支持独立与非独立组件的创建过程|done||
 |slider|||
 |textarea|||
