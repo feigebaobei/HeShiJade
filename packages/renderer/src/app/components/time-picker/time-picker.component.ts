@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TimePickerModule } from 'ng-devui';
 import { AppendToBodyDirection } from 'ng-devui/utils';
 import { CompBase } from 'src/helper/pool';
-import { A } from 'src/types/base';
+import { A, S } from 'src/types/base';
 
 @Component({
   selector: 'app-time-picker',
@@ -18,6 +18,9 @@ export class TimePickerComponent extends CompBase {
   constructor() {
     super()
     this.direction = []
+  }
+  selectedTimeChangeH(p: S) {
+    this.pool.trigger(this.data.ulid, 'selectedTimeChange', this.getLoopEventParams(this.loopIndex, p), this)
   }
   override extraNgOnInit(): void {
     this.direction = this.data.props['direction'].map((item: A) => item.value)

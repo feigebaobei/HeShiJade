@@ -20,9 +20,6 @@ http://heshijade.com
 
 ## 启动
 ```shell
-# 需要启动sso服务
-# 进入sso目录
-# npm run dev
 # 在多个终端窗口分别执行
 npm run ds # 启动后端服务
 npm run dc # 启动搭建侧
