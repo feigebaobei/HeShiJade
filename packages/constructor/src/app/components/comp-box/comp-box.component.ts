@@ -28,6 +28,7 @@ import { AccordionComponent } from '../accordion/accordion.component';
 import { BreadcrumbComponent } from 'src/app/components/breadcrumb/breadcrumb.component';
 import { CascaderComponent } from '../cascader/cascader.component';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -69,6 +70,7 @@ let compMap: Oa = {
   Breadcrumb: BreadcrumbComponent,
   Cascader: CascaderComponent,
   DatePicker: DatePickerComponent,
+  DateRangePicker: DateRangePickerComponent,
 }
 
 @Component({
@@ -333,6 +335,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'DatePicker':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'DateRangePicker':
         this.componentRef.instance.data = {
           type: this.comp.type,
           props: this.comp.props,

@@ -29,6 +29,7 @@ import { Button as ButtonProps,
     Breadcrumb as BreadcrumbProps,
     Cascader as CascaderProps,
     DatePicker as DatePickerProps,
+    DateRangePicker as DateRangePickerProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -55,6 +56,7 @@ import {
     Breadcrumb as BreadcrumbBehavior,
     Cascader as CascaderBehavior,
     DatePicker as DatePickerBehavior,
+    DateRangePicker as DateRangePickerBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -358,6 +360,12 @@ let DatePicker: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let DateRangePicker: ComponentDefaultConfig = {
+    props: opProps(DateRangePickerProps),
+    behavior: opBehavior(DateRangePickerBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -387,4 +395,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
 }

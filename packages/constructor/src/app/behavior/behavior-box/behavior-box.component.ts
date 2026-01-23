@@ -31,6 +31,7 @@ import {
   Breadcrumb as BreadcrumbBehaviorMeta,
   Cascader as CascaderBehaviorMeta,
   DatePicker as DatePickerBehaviorMeta,
+  DateRangePicker as DateRangePickerBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -198,6 +199,9 @@ export class BehaviorBoxComponent {
         break;
       case 'DatePicker':
         this.setComponentBehaviorListByType(DatePickerBehaviorMeta)
+        break;
+      case 'DateRangePicker':
+        this.setComponentBehaviorListByType(DateRangePickerBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

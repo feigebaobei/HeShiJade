@@ -117,6 +117,10 @@ let DatePicker: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let DateRangePicker: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -149,6 +153,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
 }
 
 export {

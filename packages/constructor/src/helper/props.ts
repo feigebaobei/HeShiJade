@@ -2317,6 +2317,151 @@ let DatePicker: PropsConfigItem = {
         key: 'showGlowStyle',
     },
 }
+let DateRangePicker: PropsConfigItem = {
+    // startDate: { // 根据 startDate 、 endDate 得到 value
+    //     category: 'date',
+    //     // todo date setter 支持 
+    //     value: undefined,
+    //     label: '开始时刻',
+    //     key: 'startDate',
+    // },
+    // endDate: { // 根据 startDate 、 endDate 得到 value
+    //     category: 'date',
+    //     value: undefined,
+    //     label: '结束时刻',
+    //     key: 'endDate',
+    // },
+    showTime: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否显示时分秒',
+        key: 'showTime',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否自动打开',
+        key: 'autoOpen',
+    },
+    // minYear: { // 根据 minYear / maxYear 得到calenderRange
+    //     category: 'number',
+    //     value: 1970,
+    //     label: '最小年份',
+    //     key: 'minYear',
+    // },
+    // maxYear: { // 根据 minYear / maxYear 得到calenderRange
+    //     category: 'number',
+    //     value: 2099,
+    //     label: '最大年份',
+    //     key: 'maxYear',
+    // },
+    minDate: {
+        category: 'date',
+        value: undefined,
+        label: '最小可选日期',
+        key: 'minDate',
+    },
+    maxDate: {
+        category: 'date',
+        value: undefined,
+        label: '最大可选日期',
+        key: 'maxDate',
+    },
+    splitter: {
+        category: 'input',
+        value: '-',
+        label: '连接符',
+        key: 'splitter',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    width: {
+        category: 'input',
+        value: '',
+        label: '选择器的宽度',
+        key: 'width',
+    },
+    // allowClear: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '允许清空',
+    //     key: 'allowClear',
+    // },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    mode: {
+        category: 'select',
+        options: [
+            {label: 'year', value: 'year'},
+            {label: 'month', value: 'month'},
+            {label: 'date', value: 'date'},
+            {label: 'week', value: 'week'},
+        ],
+        value: 'date',
+        label: '模式',
+        key: 'mode',
+    },
+    startIndexOfWeek: {
+        category: 'select',
+        options: [
+            // todo select配置支持number
+            {label: '周日', value: '0'}, // 需要转换为值
+            {label: '周一', value: '1'},
+            {label: '周二', value: '2'},
+            {label: '周三', value: '3'},
+            {label: '周四', value: '4'},
+            {label: '周五', value: '5'},
+            {label: '周六', value: '6'},
+        ],
+        value: '0',
+        label: '每周开始的时间',
+        key: 'startIndexOfWeek',
+    },
+    // showGlowStyle: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '悬浮发光效果',
+    //     key: 'showGlowStyle',
+    // },
+}
 
 export {
     Button,
@@ -2346,4 +2491,5 @@ export {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
 }

@@ -634,6 +634,29 @@ let DatePicker: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let DateRangePicker: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '展开&收起列表时', value: 'dropdownToggle'},
+      {label: '点击确定时', value: 'confirmEvent'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -666,6 +689,7 @@ export {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -696,5 +720,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
 }
 export default all
