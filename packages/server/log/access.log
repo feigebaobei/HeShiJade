@@ -686,3 +686,11 @@
 {"level":30,"time":1769143807884,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1769143855581,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1769143911726,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769144328880,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769144417226,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769144438799,"pid":310,"hostname":"localhost","name":"logname","method":"delete","originalUrl":"/apps?appUlid=01JJH9CSMWFH5H3S7HN6R0A6EA&envs=dev&envs=test&envs=pre&envs=prod","params":{"appUlid":"01JJH9CSMWFH5H3S7HN6R0A6EA","envs":["dev","test","pre","prod"]}}
+{"level":30,"time":1769144439499,"pid":310,"hostname":"localhost","name":"logname","code":100000,"originalUrl":"/apps?appUlid=01JJH9CSMWFH5H3S7HN6R0A6EA&envs=dev&envs=test&envs=pre&envs=prod"}
+{"level":30,"time":1769144441428,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769144496599,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769144921030,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769144995768,"pid":310,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
