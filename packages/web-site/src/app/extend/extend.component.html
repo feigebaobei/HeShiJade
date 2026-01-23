@@ -20,7 +20,6 @@
                 <li>在`constructor/src/app/components/components.modules.ts`中引入新组件并声明。如果新组件使用了特定的module，则需要在此文件中引入并使用。</li>
             </ul>
         </li>
-        <li><del>重新启动constructor项目</del></li>
         <li>在新组件中接收数据、处理逻辑、监听事件、ngOnInit。（可以参考flex组件）</li>
     </ol>
     <h2>渲染侧增加组件</h2>
@@ -38,9 +37,8 @@
             </ul>
         </li>
         <li>在`renderer/src/app/components/comp-box/comp-box.component.ts`中引入新组件并为其传入数据</li>
-        <li>引入CompBase类，再基于它开发组件。可以参考Radio组件。</li>
+        <li>在`renderer/src/app/components/new-comp/new-comp.components.ts`中引入CompBase类，再基于它开发组件。可以参考Radio组件。</li>
         <li>参考搭建侧的同组件，编写渲染侧的 *.html/*.css</li>
-        <li><del>重新启动renderer项目</del></li>
     </ol>
     <h2>官网侧增加组件</h2>
     <ol>
