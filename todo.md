@@ -2,8 +2,8 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|toggle|done||
 |drawer|doing||
+最大高度
 |badge|||
 |progress|||
 |rate|||
@@ -18,6 +18,7 @@
 |feat: 创建Slider组件|||
 |feat: 创建Textarea组件|||
 |feat: pool.trigger方法返回方法体的返回值组成的数组|||
+|feat: 创建Toggle组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||

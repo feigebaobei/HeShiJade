@@ -20,6 +20,7 @@ import { ButtonModule,
   ImagePreviewModule,
   AccordionModule,
   BreadcrumbModule,
+  DrawerModule,
   // DataTableComponent,
 } from 'ng-devui';
 import { MenuModule } from 'ng-devui/menu';
@@ -58,6 +59,8 @@ import { SpanComponent } from './span/span.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { DrawerComponent } from './drawer/drawer.component';
+import { DrawerCompComponent } from './drawer/drawer-comp/drawer-comp.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -95,6 +98,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     ImagePreviewComponent,
     AccordionComponent,
     BreadcrumbComponent,
+    DrawerComponent,
+    DrawerCompComponent,
   ],
   imports: [
     CommonModule,
@@ -118,6 +123,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     ImagePreviewModule,
     AccordionModule,
     BreadcrumbModule,
+    DrawerModule,
 
     FormsModule,
     GridstackModule,

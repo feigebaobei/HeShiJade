@@ -1,0 +1,16 @@
+<p>drawer-comp works!</p>
+<header class="header">
+    <h2>{{data.props['title']}}</h2>
+    <section class="btn_box">
+        <d-icon icon="icon-code-editor-fullscreen" [operable]="true"></d-icon>
+        <!-- <d-icon icon="icon-code-editor-window" [operable]="true"></d-icon> -->
+        <d-icon icon="icon-close" [operable]="true"></d-icon>
+    </section>
+</header>
+<!-- todo 最大高度 -->
+<section class="droppable">
+    <app-stack [componentList]="componentListBody"></app-stack>
+</section>
+<footer>
+    <app-stack [componentList]="componentListFooter"></app-stack>
+</footer>
