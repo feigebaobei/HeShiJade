@@ -2729,6 +2729,92 @@ let Drawer: PropsConfigItem = {
         label: '标题',
         key: 'title',
     },
+    zIndex: {
+        category: 'number',
+        value: 1000,
+        label: 'zIndex',
+        key: 'zIndex',
+    },
+    isCover: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '是否有遮罩层',
+        key: 'isCover',
+    },
+    backdropCloseable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '点击背景时关闭',
+        key: 'backdropCloseable',
+    },
+    escKeyCloseable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '按下esc时关闭',
+        key: 'escKeyCloseable',
+    },
+    destroyOnHide: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '关闭时是否销毁',
+        key: 'destroyOnHide',
+    },
+    position: {
+        category: 'select',
+        options: [
+            {label: 'left', value: 'left'},
+            {label: 'right', value: 'right'},
+        ],
+        value: 'right',
+        label: '位置',
+        key: 'position',
+    },
+    bodyScrollable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: 'drawer 打开后，body 是否可滚动',
+        key: 'bodyScrollable',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    resizable: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '调整宽度',
+        key: 'resizable',
+    },
 }
 
 export {

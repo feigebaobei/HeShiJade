@@ -4,8 +4,8 @@
 |丰富组件|||
 |drawer|doing||
 最大高度 done
-footer应该吸底
-设置最大高度
+footer应该吸底 done
+设置最大高度 默认使用最大高度
 更新props、behavior
 |badge|||
 |progress|||
@@ -306,27 +306,3 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
-
-
-
-数据库中保存
-valueList: ['a']
-valueList: [['a']]
-搭建侧
-[
-  {
-    "label": "",
-    "value": "a,a1",
-    "valueTip": "用逗号分隔路径",
-    "valueType": "string",
-    "disabled": false,
-    "hideField": [
-      "label",
-      "valueType",
-      "disabled"
-    ]
-  }, ...
-]
-渲染则
-valueList: ['a']
-valueList: [['a']]

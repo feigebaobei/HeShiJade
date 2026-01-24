@@ -31,8 +31,6 @@ export class DrawerComponent extends CompBase {
       zIndex: 1000,
       isCover: true,
       data: {
-        // props: {},
-        // ulid: '',
         data: {},
       },
       backdropCloseable: true,
@@ -58,15 +56,18 @@ export class DrawerComponent extends CompBase {
     })
   }
   initConfig() {
+    this.config['autoOpen'] = this.data.props['autoOpen']
     this.config['width'] = this.data.props['width']
+    this.config['title'] = this.data.props['title']
     this.config['zIndex'] = this.data.props['zIndex']
     this.config['isCover'] = this.data.props['isCover']
-    this.config['zIndex'] = this.data.props['zIndex']
-    this.config['zIndex'] = this.data.props['zIndex']
-    this.config['zIndex'] = this.data.props['zIndex']
-    this.config['zIndex'] = this.data.props['zIndex']
-    this.config['zIndex'] = this.data.props['zIndex']
-    this.config['zIndex'] = this.data.props['zIndex']
+    this.config['backdropCloseable'] = this.data.props['backdropCloseable']
+    this.config['escKeyCloseable'] = this.data.props['escKeyCloseable']
+    this.config['destroyOnHide'] = this.data.props['destroyOnHide']
+    this.config['position'] = this.data.props['position']
+    this.config['bodyScrollable'] = this.data.props['bodyScrollable']
+    this.config['showAnimation'] = this.data.props['showAnimation']
+    this.config['resizable'] = this.data.props['resizable']
     this.config['data'].data = this.data
   }
   override extraNgOnInit() {
