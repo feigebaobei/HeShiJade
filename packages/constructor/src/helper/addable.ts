@@ -133,6 +133,10 @@ let Textarea: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Drawer: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -169,6 +173,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     TimePicker,
     Slider,
     Textarea,
+    Drawer,
 }
 
 export {

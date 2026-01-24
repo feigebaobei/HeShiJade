@@ -166,11 +166,11 @@ let categoryList = [
         componentCategory: 'Toggle',
         ulid: '01J50ZGTCKEC10HWAJBZND487S'
     },
-    // {
-    //     name: 'Drawer',
-    //     componentCategory: 'Drawer',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487T'
-    // },
+    {
+        name: 'Drawer',
+        componentCategory: 'Drawer',
+        ulid: '01J50ZGTCKEC10HWAJBZND487T'
+    },
     // {
     //     name: 'Badge',
     //     componentCategory: 'Badge',

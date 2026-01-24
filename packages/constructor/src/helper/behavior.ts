@@ -746,6 +746,31 @@ let Toggle: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let Drawer: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '打开时', value: 'open'},
+      {label: '关闭时', value: 'close'},
+      {label: '销毁时', value: 'destroy'},
+      {label: '全屏时', value: 'fullScreen'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 
@@ -783,6 +808,7 @@ export {
     Slider,
     Textarea,
     Toggle,
+    Drawer,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -818,5 +844,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Slider,
     Textarea,
     Toggle,
+    Drawer,
 }
 export default all

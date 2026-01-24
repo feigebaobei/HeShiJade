@@ -1,0 +1,16 @@
+<header>
+    <!-- <h2>{{data.props['title']}}</h2> -->
+    <h2>data.props['title']</h2>
+    <section class="btn_box">
+        <d-icon icon="icon-code-editor-fullscreen" [operable]="true"></d-icon>
+        <d-icon icon="icon-code-editor-window" [operable]="true"></d-icon>
+        <d-icon icon="icon-close" [operable]="true"></d-icon>
+    </section>
+</header>
+<section dDroppable (dropEvent)="dropBodyH($event)" class="droppable">
+    <span *ngIf="!childrenBody.length">{{text['canReceiveChildComp']}}</span>
+    <!-- <app-comp-stack [componentList]="childrenBody" #compStackBody (deleteComp)="bodyDeleteComponentByUlidH($event)"></app-comp-stack> -->
+</section>
+<footer>
+    
+</footer>

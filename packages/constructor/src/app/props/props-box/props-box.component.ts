@@ -43,6 +43,7 @@ import {
   Slider as SliderMeta,
   Textarea as TextareaMeta,
   Toggle as ToggleMeta,
+  Drawer as DrawerMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -223,6 +224,9 @@ export class PropsBoxComponent {
         break;
       case 'Toggle':
         this.opComponentPropsList(ToggleMeta)
+        break;
+      case 'Drawer':
+        this.opComponentPropsList(DrawerMeta)
         break;
       default:
         this.componentPropsMeta = {}

@@ -7,8 +7,6 @@ import { TextBase } from "./text";
     template: ''
 })
 export class InputData {
-//  extends TextBase 
-//  {
     @Input() data!: {
         type: Comp['type'],
         // 搭建侧不需要处理behavior
@@ -17,6 +15,4 @@ export class InputData {
         slots: Comp['slots'],
         ulid: Comp['ulid'],
     }
-    // constructor() {
-    // }
 }

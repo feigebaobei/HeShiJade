@@ -36,6 +36,7 @@ import {
   Slider as SliderBehaviorMeta,
   Textarea as TextareaBehaviorMeta,
   Toggle as ToggleBehaviorMeta,
+  Drawer as DrawerBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -218,6 +219,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Toggle':
         this.setComponentBehaviorListByType(ToggleBehaviorMeta)
+        break;
+      case 'Drawer':
+        this.setComponentBehaviorListByType(DrawerBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

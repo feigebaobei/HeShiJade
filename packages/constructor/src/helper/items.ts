@@ -726,6 +726,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Slider, // 没有特定子元素
     // Textarea, // 没有特定子元素
     // Toggle, // 没有特定子元素
+    // Drawer, // 没有特定子元素
 }
 
 export default all

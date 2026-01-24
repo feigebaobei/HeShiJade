@@ -2706,7 +2706,24 @@ let Toggle: PropsConfigItem = {
         key: 'disabled',
     },
 }
-
+let Drawer: PropsConfigItem = {
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '自动打开',
+        key: 'autoOpen',
+    },
+    width: {
+        category: 'input',
+        value: '300px',
+        label: '宽度',
+        key: 'width',
+    },
+}
 
 export {
     Button,
@@ -2741,4 +2758,5 @@ export {
     Slider,
     Textarea,
     Toggle,
+    Drawer,
 }

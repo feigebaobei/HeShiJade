@@ -34,6 +34,7 @@ import { Button as ButtonProps,
     Slider as SliderProps,
     Textarea as TextareaProps,
     Toggle as ToggleProps,
+    Drawer as DrawerProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -65,6 +66,7 @@ import {
     Slider as SliderBehavior,
     Textarea as TextareaBehavior,
     Toggle as ToggleBehavior,
+    Drawer as DrawerBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -398,6 +400,12 @@ let Toggle: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Drawer: ComponentDefaultConfig = {
+    props: opProps(DrawerProps),
+    behavior: opBehavior(DrawerBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -432,4 +440,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Slider,
     Textarea,
     Toggle,
+    Drawer,
 }

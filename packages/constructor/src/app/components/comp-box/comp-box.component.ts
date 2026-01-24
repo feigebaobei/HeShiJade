@@ -31,6 +31,9 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { SliderComponent } from '../slider/slider.component';
+import { TextareaComponent } from '../textarea/textarea.component';
+import { ToggleComponent } from '../toggle/toggle.component';
+import { DrawerComponent } from '../drawer/drawer.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -38,8 +41,6 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
-import { TextareaComponent } from '../textarea/textarea.component';
-import { ToggleComponent } from '../toggle/toggle.component';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所以我考虑使用封装全部devui的组件来实现.
@@ -79,10 +80,16 @@ let compMap: Oa = {
   Slider: SliderComponent,
   Textarea: TextareaComponent,
   Toggle: ToggleComponent,
+  Drawer: DrawerComponent,
 }
 
 @Component({
   selector: 'app-comp-box',
+  // standalone: true,
+  // imports: [
+  //   // GridstackModule,
+  //   // ButtonModule,
+  // ],
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
@@ -383,6 +390,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'Toggle':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Drawer':
         this.componentRef.instance.data = {
           type: this.comp.type,
           props: this.comp.props,
