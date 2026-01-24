@@ -5,7 +5,7 @@ import { DrawerCompComponent } from './drawer-comp/drawer-comp.component';
 import { clog } from 'src/helper';
 // type
 import type { IDrawerOpenResult } from 'ng-devui';
-import type { Oa } from 'src/types/base';
+import type { B, Oa, S } from 'src/types/base';
 
 @Component({
   selector: 'app-drawer',
@@ -32,16 +32,29 @@ export class DrawerComponent extends CompBase {
       isCover: true,
       data: {
         data: {},
+        close: (event: Event) => {
+          this.result!.drawerInstance.hide();
+          this.pool.trigger(this.data.ulid, 'close', this.getLoopEventParams(this.loopIndex, undefined), this)
+        },
+        fullScreen: () => {
+          this.setFullScreen(true)
+          this.pool.trigger(this.data.ulid, 'fullScreen', this.getLoopEventParams(this.loopIndex, undefined), this)
+        }
       },
       backdropCloseable: true,
       escKeyCloseable: true,
       fullScreen: true,
-      onClose: () => {
-        console.log('on drawer closed');
+      // onClose: () => {
+      //   // console.log('on drawer closed');
+      // },
+      afterOpened: () => {
+        this.pool.trigger(this.data.ulid, 'afterOpened', this.getLoopEventParams(this.loopIndex, undefined), this)
       },
-      afterOpened: () => {},
-      beforeHidden: () => {},
-      clickDoms: () => {},
+      beforeHidden: () => {
+        let arr = this.pool.trigger(this.data.ulid, 'beforeHidden', this.getLoopEventParams(this.loopIndex, undefined), this)
+        return arr[0]
+      },
+      // clickDoms: () => {},
       destroyOnHide: true,
       position: 'right',
       bodyScrollable: true,
@@ -49,6 +62,24 @@ export class DrawerComponent extends CompBase {
       id: '',
       resizable: false,
     }
+  }
+  toggleFullScreen() {
+    this.result?.drawerInstance.toggleFullScreen()
+  }
+  setFullScreen(b: B) {
+    this.result?.drawerInstance.setFullScreen(b)
+  }
+  show() {
+    this.result?.drawerInstance.show()
+  }
+  hide() {
+    this.result?.drawerInstance.hide()
+  }
+  destroy() {
+    this.result?.drawerInstance.destroy()
+  }
+  setWidth(p: S) {
+    this.result?.drawerInstance.setWidth(p)
   }
   openDrawer() {
     this.result = this.drawerService.open({

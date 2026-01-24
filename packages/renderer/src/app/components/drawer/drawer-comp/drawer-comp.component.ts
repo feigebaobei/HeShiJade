@@ -6,6 +6,7 @@ import { ULID } from 'src/types';
 import type { Component as Comp } from 'src/types/component';
 import { ComponentsModule } from '../../components.module';
 import { IconModule } from 'ng-devui';
+import { A, F } from 'src/types/base';
 
 @Component({
   selector: 'app-drawer-comp',
@@ -18,7 +19,9 @@ import { IconModule } from 'ng-devui';
   styleUrl: './drawer-comp.component.sass'
 })
 export class DrawerCompComponent {
-  @Input() data!: {ulid: ULID, props: Comp['props']}
+  @Input() data!: A // {ulid: ULID, props: Comp['props']}
+  @Input() close!: A // {ulid: ULID, props: Comp['props']}
+  @Input() fullScreen!: F
   componentListBody: Comp[]
   componentListFooter: Comp[]
   constructor(
@@ -26,6 +29,12 @@ export class DrawerCompComponent {
   ) {
     this.componentListBody = []
     this.componentListFooter = []
+  }
+  fullScreenClickH() {
+    this.fullScreen()
+  }
+  iconClickH(event: Event) {
+    this.close(event)
   }
   ngOnInit() {
     // clog('init', this.data)
