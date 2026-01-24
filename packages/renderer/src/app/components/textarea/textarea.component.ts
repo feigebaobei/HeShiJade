@@ -16,6 +16,6 @@ import { S } from 'src/types/base';
 })
 export class TextareaComponent extends CompBase {
   valueChangeH(p: S) {
-    this.pool.trigger(this.data.ulid, 'valueChange', this.getLoopEventParams(this.loopIndex, p), this)
+    this.pool.trigger(this.data.ulid, 'change', this.getLoopEventParams(this.loopIndex, p), this)
   }
 }

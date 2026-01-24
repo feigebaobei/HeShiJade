@@ -2597,28 +2597,28 @@ let Textarea: PropsConfigItem = {
         label: '是否使用出错状态',
         key: 'error',
     },
-    maxWidth: {
-        category: 'input',
-        value: '',
-        label: '最大宽度',
-        key: 'maxWidth',
-    },
-    maxHeight: {
-        category: 'input',
-        value: '',
-        label: '最大宽度',
-        key: 'maxHeight',
-    },
-    maxLengthBlock: {
-        category: 'switch',
-        options: [
-            {label: 'false', value: false},
-            {label: 'true', value: true},
-        ],
-        value: false,
-        label: '超出最大值时是否阻止输入',
-        key: 'maxLengthBlock',
-    },
+    // maxWidth: {
+    //     category: 'input',
+    //     value: '',
+    //     label: '最大宽度',
+    //     key: 'maxWidth',
+    // },
+    // maxHeight: {
+    //     category: 'input',
+    //     value: '',
+    //     label: '最大高度',
+    //     key: 'maxHeight',
+    // },
+    // maxLengthBlock: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'false', value: false},
+    //         {label: 'true', value: true},
+    //     ],
+    //     value: false,
+    //     label: '超出最大值时是否阻止输入',
+    //     key: 'maxLengthBlock',
+    // },
     placeholder: {
         category: 'input',
         value: '',
