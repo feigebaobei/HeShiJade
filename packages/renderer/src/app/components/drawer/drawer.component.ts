@@ -45,7 +45,7 @@ export class DrawerComponent extends CompBase {
       beforeHidden: () => {},
       clickDoms: () => {},
       destroyOnHide: true,
-      position: 'left',
+      position: 'right',
       bodyScrollable: true,
       showAnimation: true,
       id: '',

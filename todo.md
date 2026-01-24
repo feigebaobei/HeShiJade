@@ -3,7 +3,10 @@
 |分支|f_tag||
 |丰富组件|||
 |drawer|doing||
-最大高度
+最大高度 done
+footer应该吸底
+设置最大高度
+更新props、behavior
 |badge|||
 |progress|||
 |rate|||
