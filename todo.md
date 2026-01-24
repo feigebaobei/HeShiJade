@@ -6,7 +6,7 @@
 最大高度 done
 footer应该吸底 done
 设置最大高度 默认使用最大高度
-更新props、behavior
+更新props、behavior done
 |badge|||
 |progress|||
 |rate|||

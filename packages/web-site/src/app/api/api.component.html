@@ -4798,6 +4798,193 @@
         </tbody>
     </table>
     <h2>items</h2>
+    <h1>Drawer</h1>
+    <h2>props</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>key</td>
+                <td>说明</td>
+                <td>可选值</td>
+                <td>默认值</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>autoOpen</td>
+                <td>自动打开</td>
+                <td>true/false</td>
+                <td>false</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>宽度</td>
+                <td>-</td>
+                <td>'300px'</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>zIndex</td>
+                <td>zIndex</td>
+                <td>-</td>
+                <td>1000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>isCover</td>
+                <td>是否有遮罩层</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>backdropCloseable</td>
+                <td>点击背景时关闭</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>escKeyCloseable</td>
+                <td>按下esc时关闭</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>destroyOnHide</td>
+                <td>关闭时是否销毁</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>position</td>
+                <td>位置</td>
+                <td>left/right</td>
+                <td>right</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>bodyScrollable</td>
+                <td>drawer 打开后，body 是否可滚动</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>showAnimation</td>
+                <td>动画</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>resizable</td>
+                <td>调整宽度</td>
+                <td>true/false</td>
+                <td>true</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>slots</h2>
+    <h2>method</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>方法</td>
+                <td>参数说明</td>
+                <td>运行逻辑</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setProps: (o: Object) => void</td>
+                <td>由当前组件支持的props属性组成的对象</td>
+                <td>设置当前组件的props</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>toggleFullScreen: () => void</td>
+                <td></td>
+                <td>切换 drawer 的全屏状态</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setFullScreen: (o: boolean) => void</td>
+                <td></td>
+                <td>设置 drawer 的全屏状态</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>show: () => void</td>
+                <td></td>
+                <td>触发打开 drawer 层</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>hide: () => void</td>
+                <td></td>
+                <td>触发关闭 drawer 层</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>destroy: () => void</td>
+                <td></td>
+                <td>触发销毁 drawer 层</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setWidth: (o: S) => void</td>
+                <td></td>
+                <td>设置宽度</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>openDrawer: () => void</td>
+                <td></td>
+                <td>打开drawer</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>event</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>事件名</td>
+                <td>触发时机</td>
+                <td>第三个参数</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>beforeHidden</td>
+                <td>关闭前</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>afterOpened</td>
+                <td>打开后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>close</td>
+                <td>关闭后</td>
+                <td>undefined</td>
+            </tr>
+            <tr>
+                <td>fullScreen</td>
+                <td>全屏时</td>
+                <td>undefined</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>items</h2>
     <!-- 
     <h1>ComponentName</h1>
     <h2>props</h2>

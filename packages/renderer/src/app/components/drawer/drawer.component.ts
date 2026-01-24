@@ -32,7 +32,7 @@ export class DrawerComponent extends CompBase {
       isCover: true,
       data: {
         data: {},
-        close: (event: Event) => {
+        close: () => {
           this.result!.drawerInstance.hide();
           this.pool.trigger(this.data.ulid, 'close', this.getLoopEventParams(this.loopIndex, undefined), this)
         },

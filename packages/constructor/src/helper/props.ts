@@ -2710,8 +2710,8 @@ let Drawer: PropsConfigItem = {
     autoOpen: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: false,
         label: '自动打开',
@@ -2738,8 +2738,8 @@ let Drawer: PropsConfigItem = {
     isCover: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: '是否有遮罩层',
@@ -2748,8 +2748,8 @@ let Drawer: PropsConfigItem = {
     backdropCloseable: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: '点击背景时关闭',
@@ -2758,8 +2758,8 @@ let Drawer: PropsConfigItem = {
     escKeyCloseable: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: '按下esc时关闭',
@@ -2768,8 +2768,8 @@ let Drawer: PropsConfigItem = {
     destroyOnHide: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: '关闭时是否销毁',
@@ -2788,8 +2788,8 @@ let Drawer: PropsConfigItem = {
     bodyScrollable: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: 'drawer 打开后，body 是否可滚动',
@@ -2798,8 +2798,8 @@ let Drawer: PropsConfigItem = {
     showAnimation: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: true,
         label: '动画',
@@ -2808,8 +2808,8 @@ let Drawer: PropsConfigItem = {
     resizable: {
         category: 'switch',
         options: [
-            {label: 'false', value: false},
             {label: 'true', value: true},
+            {label: 'false', value: false},
         ],
         value: false,
         label: '调整宽度',
