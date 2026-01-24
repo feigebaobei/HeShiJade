@@ -37,6 +37,7 @@ import { TextareaComponent } from '../textarea/textarea.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
+import { ToggleComponent } from '../toggle/toggle.component';
 
 let clog = console.log
 
@@ -73,6 +74,7 @@ let compMap: {[k: S]: A} = {
   TimePicker: TimePickerComponent,
   Slider: SliderComponent,
   Textarea: TextareaComponent,
+  Toggle: ToggleComponent,
 }
 
 @Component({
@@ -392,6 +394,15 @@ export class CompBoxComponent {
         }
         break;
       case 'Textarea':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Toggle':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
