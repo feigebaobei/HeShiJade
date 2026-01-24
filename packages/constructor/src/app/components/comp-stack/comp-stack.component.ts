@@ -76,6 +76,11 @@ export class CompStackComponent implements OnInit, OnDestroy {
     //   }[]
     //   ...
     // }
+    clog('changeCBH', $event)
+    // 拦截误判操作。如编辑在舞台区的Textarea组件的文本后再该组件的绿区，则触发此错误。
+    if (!$event.nodes) {
+      return
+    }
     let curNode = this._componentList.find(item => {
       return item.id === $event.nodes[0].id
     })
