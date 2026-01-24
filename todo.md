@@ -2,8 +2,8 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|slider|done||
 |textarea|doing||
+|解决编辑舞台区的textarea后再点击舞台时报错的问题|todo||
 |toggle|||
 |drawer|||
 |badge|||
@@ -19,6 +19,7 @@
 |feat: 创建DatePicker组件|||
 |feat: 创建DateRangePicker组件|||
 |feat: 创建TimePicker组件|||
+|feat: 创建Slider组件|||
 |feat: according/pagelist使用ListenItems类|||
 |feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
 |feat: 创建Cascader组件|||

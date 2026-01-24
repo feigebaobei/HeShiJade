@@ -33,6 +33,7 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 import { SliderComponent } from '../slider/slider.component';
+import { TextareaComponent } from '../textarea/textarea.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -71,6 +72,7 @@ let compMap: {[k: S]: A} = {
   DateRangePicker: DateRangePickerComponent,
   TimePicker: TimePickerComponent,
   Slider: SliderComponent,
+  Textarea: TextareaComponent,
 }
 
 @Component({
@@ -381,6 +383,15 @@ export class CompBoxComponent {
         }
         break;
       case 'Slider':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Textarea':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
