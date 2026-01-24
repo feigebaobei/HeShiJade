@@ -2723,6 +2723,12 @@ let Drawer: PropsConfigItem = {
         label: '宽度',
         key: 'width',
     },
+    title: {
+        category: 'input',
+        value: 'title',
+        label: '标题',
+        key: 'title',
+    },
 }
 
 export {

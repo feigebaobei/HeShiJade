@@ -184,7 +184,8 @@ let Toggle: GridLayoutDefault = {
 let Drawer: GridLayoutDefault = {
     w: 24,
     h: 12,
-    noResize: true,
+    // noResize: true,
+    noResize: false,
 }
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
