@@ -2667,6 +2667,46 @@ let Textarea: PropsConfigItem = {
         key: 'styleType',
     },
 }
+let Toggle: PropsConfigItem = {
+    value: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '值',
+        key: 'value',
+    },
+    size: {
+        category: 'select',
+        options: [
+            {label: '大', value: 'lg'},
+            {label: '中', value: ''},
+            {label: '小', value: 'sm'},
+        ],
+        value: '',
+        label: '尺寸',
+        key: 'size',
+    },
+    color: {
+        category: 'input',
+        value: '',
+        label: '颜色',
+        key: 'color',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+}
+
 
 export {
     Button,
@@ -2700,4 +2740,5 @@ export {
     TimePicker,
     Slider,
     Textarea,
+    Toggle,
 }

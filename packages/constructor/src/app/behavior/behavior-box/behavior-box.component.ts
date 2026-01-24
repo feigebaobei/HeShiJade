@@ -35,6 +35,7 @@ import {
   TimePicker as TimePickerBehaviorMeta,
   Slider as SliderBehaviorMeta,
   Textarea as TextareaBehaviorMeta,
+  Toggle as ToggleBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -214,6 +215,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Textarea':
         this.setComponentBehaviorListByType(TextareaBehaviorMeta)
+        break;
+      case 'Toggle':
+        this.setComponentBehaviorListByType(ToggleBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

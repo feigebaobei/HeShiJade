@@ -701,11 +701,33 @@ let Slider: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
-
 let Textarea: BehaviorConfigGroup = [
   {
     category: 'select',
     options: [
+      {label: '改变值后', value: 'change'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Toggle: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变值前', value: 'beforeChange'},
       {label: '改变值后', value: 'change'},
       {label: '改变属性后', value: 'postComponentNgOnChanges'},
       {label: '初始化组件后', value: 'postComponentNgOnInit'},
@@ -760,6 +782,7 @@ export {
     TimePicker,
     Slider,
     Textarea,
+    Toggle,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -794,5 +817,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     TimePicker,
     Slider,
     Textarea,
+    Toggle,
 }
 export default all

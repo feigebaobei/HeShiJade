@@ -42,6 +42,7 @@ import {
   TimePicker as TimePickerMeta,
   Slider as SliderMeta,
   Textarea as TextareaMeta,
+  Toggle as ToggleMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -219,6 +220,9 @@ export class PropsBoxComponent {
         break;
       case 'Textarea':
         this.opComponentPropsList(TextareaMeta)
+        break;
+      case 'Toggle':
+        this.opComponentPropsList(ToggleMeta)
         break;
       default:
         this.componentPropsMeta = {}

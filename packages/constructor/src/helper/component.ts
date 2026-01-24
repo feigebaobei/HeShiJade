@@ -33,6 +33,7 @@ import { Button as ButtonProps,
     TimePicker as TimePickerProps,
     Slider as SliderProps,
     Textarea as TextareaProps,
+    Toggle as ToggleProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -63,6 +64,7 @@ import {
     TimePicker as TimePickerBehavior,
     Slider as SliderBehavior,
     Textarea as TextareaBehavior,
+    Toggle as ToggleBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -390,6 +392,12 @@ let Textarea: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Toggle: ComponentDefaultConfig = {
+    props: opProps(ToggleProps),
+    behavior: opBehavior(ToggleBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -423,4 +431,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     TimePicker,
     Slider,
     Textarea,
+    Toggle,
 }

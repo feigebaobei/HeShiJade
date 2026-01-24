@@ -2,9 +2,7 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|textarea|done||
-|解决编辑舞台区的textarea后再点击舞台时报错的问题|done||
-|toggle|||
+|toggle|doing||
 |drawer|||
 |badge|||
 |progress|||
@@ -14,19 +12,10 @@
 |配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
 |要上生产的内容|||
-|feat: 创建Accordion组件|||
-|feat: 创建Breadcrumb组件|||
-|feat: 创建DatePicker组件|||
 |feat: 创建DateRangePicker组件|||
 |feat: 创建TimePicker组件|||
 |feat: 创建Slider组件|||
 |feat: 创建Textarea组件|||
-|feat: according/pagelist使用ListenItems类|||
-|feat: 搭建侧基于InputData/TextBase/ListenItems类开发组件|||
-|feat: 创建Cascader组件|||
-|feat: props面板支持date配置项|||
-|feat: 官网增加date配置项|||
-|perf: props中的options配置项字段，只保存值，不保存配置项。|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||

@@ -725,6 +725,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // TimePicker, // 没有特定子元素
     // Slider, // 没有特定子元素
     // Textarea, // 没有特定子元素
+    // Toggle, // 没有特定子元素
 }
 
 export default all
