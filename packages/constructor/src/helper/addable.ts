@@ -141,6 +141,10 @@ let Badge: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Progress: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -179,6 +183,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Textarea,
     Drawer,
     Badge,
+    Progress,
 }
 
 export {

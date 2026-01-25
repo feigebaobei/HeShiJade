@@ -4,8 +4,9 @@
 |丰富组件|||
 |badge|done||
 options配置项中支持禁用删除、禁用增加。  done
-修正badge组件的迁移配置项
-|progress|||
+修正badge组件的迁移配置项    done
+options配置项使用flex布局    todo
+|progress|doing||
 |rate|||
 |tag|||
 |检查todo|todo||

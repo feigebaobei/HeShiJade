@@ -567,6 +567,7 @@ let Select: PropsConfigItem = {
         value: [],
         label: '选项',
         key: 'options',
+        addButton: true,
     },
     isSearch: {
         category: 'switch',
@@ -1711,6 +1712,7 @@ let Radio: PropsConfigItem = {
         value: [],
         label: 'valueList',
         key: 'valueList',
+        addButton: true,
     },
     direction: {
         category: 'select',
@@ -2069,6 +2071,7 @@ let Cascader: PropsConfigItem = {
         value: [],
         label: '值',
         key: 'valueList',
+        addButton: true,
     },
     trigger: {
         category: 'select',
@@ -2521,6 +2524,7 @@ let TimePicker: PropsConfigItem = {
         ],
         label: '优先展开位置',
         key: 'direction',
+        addButton: false,
     },
     // showAnimation: {
     //     category: 'switch',
@@ -2869,7 +2873,6 @@ let Badge: PropsConfigItem = {
         template: { label: '', value: 0,
             valueType: 'number', disabled: false,
             hideField: ['label',  'valueType', 'miuns']},
-        // value: [{label: '', value: 0, disabled: false}],
         value: [
             { label: '', value: 0, disabled: false },
             { label: '', value: 2, disabled: false },
@@ -2889,6 +2892,79 @@ let Badge: PropsConfigItem = {
         value: '',
         label: '文本颜色',
         key: 'textColor',
+    },
+}
+let Progress: PropsConfigItem = {
+    type: {
+        category: 'select',
+        options: [
+            {label: 'line', value: 'line'},
+            {label: 'circle', value: 'circle'},
+        ],
+        value: 'line',
+        label: '形状',
+        key: 'type',
+    },
+    isOverlap: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '分段进度条',
+        key: 'isOverlap',
+    },
+    percentage: {
+        category: 'number',
+        value: 10,
+        label: '百分比值',
+        key: 'percentage',
+        hide: function (p: Component['props']) {
+            return p['isOverlap']
+        },
+        hideListenerKey: 'isOverlap',
+    },
+    percentageText: {
+        category: 'input',
+        value: '',
+        label: '百分比文案',
+        key: 'percentageText',
+        hide: function (p: Component['props']) {
+            return p['isOverlap']
+        },
+        hideListenerKey: 'isOverlap',
+    },
+    strokeWidth: {
+        category: 'number',
+        value: 14,
+        label: '宽度',
+        key: 'strokeWidth',
+    },
+    isDynamic: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动效',
+        key: 'isDynamic',
+    },
+    strokeColor: {
+        category: 'options',
+        template: { label: '', value: '', valueType: 'string', disabled: false, hideField: ['valueType', 'disabled',]},
+        value: [
+            {label: '#ff0099', value: '0%', disabled: false, },
+            {label: '#ff0099', value: '100%', disabled: false, },
+        ],
+        label: '前景色',
+        key: 'strokeColor',
+        hide: function (p: Component['props']) {
+            return p['isOverlap']
+        },
+        hideListenerKey: 'isOverlap',
+        addButton: true,
     },
 }
 
@@ -2927,4 +3003,5 @@ export {
     Toggle,
     Drawer,
     Badge,
+    Progress,
 }

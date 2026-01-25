@@ -38,6 +38,7 @@ import {
   Toggle as ToggleBehaviorMeta,
   Drawer as DrawerBehaviorMeta,
   Badge as BadgeBehaviorMeta,
+  Progress as ProgressBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -226,6 +227,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Badge':
         this.setComponentBehaviorListByType(BadgeBehaviorMeta)
+        break;
+      case 'Progress':
+        this.setComponentBehaviorListByType(ProgressBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

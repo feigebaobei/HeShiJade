@@ -691,6 +691,31 @@ let Cascader: ConfigItem[] = [
         value: '',
     },
 ]
+let Progress: ConfigItem[] = [
+//   color: string; // 进度条色值
+//   percentage: number; // 进度条的进度
+//   percentageText?: string; // 进度条文字信息
+//   template?: TemplateRef<any>; // 进度条内自定义模板
+//   [key: string]: any;
+    {
+        label: '颜色',
+        category: 'input',
+        key: 'color',
+        value: '',
+    },
+    {
+        label: '百分比值',
+        category: 'number',
+        key: 'percentage',
+        value: 0,
+    },
+    {
+        label: '百分比文案',
+        category: 'input',
+        key: 'percentageText',
+        value: '',
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -728,6 +753,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Toggle, // 没有特定子元素
     // Drawer, // 没有特定子元素
     // Badge, // 没有特定子元素
+    Progress,
 }
 
 export default all

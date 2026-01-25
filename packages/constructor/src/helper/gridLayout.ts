@@ -192,6 +192,11 @@ let Badge: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Progress: GridLayoutDefault = {
+    w: 24,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -227,6 +232,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Toggle,
     Drawer,
     Badge,
+    Progress,
 }
 export {
     Button,
@@ -263,6 +269,7 @@ export {
     Toggle,
     Drawer,
     Badge,
+    Progress,
     
     gridLayoutDefault,
 }

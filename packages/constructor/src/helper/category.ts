@@ -176,11 +176,11 @@ let categoryList = [
         componentCategory: 'Badge',
         ulid: '01J50ZGTCKEC10HWAJBZND487U'
     },
-    // {
-    //     name: 'Progress',
-    //     componentCategory: 'Progress',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487V'
-    // },
+    {
+        name: 'Progress',
+        componentCategory: 'Progress',
+        ulid: '01J50ZGTCKEC10HWAJBZND487V'
+    },
     // {
     //     name: 'Rate',
     //     componentCategory: 'Rate',
