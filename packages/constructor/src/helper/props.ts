@@ -2842,14 +2842,28 @@ let Badge: PropsConfigItem = {
     status: {
         category: 'select',
         options: [
+            {label: 'danger', value: 'danger'},
+            {label: 'warning', value: 'warning'},
+            {label: 'waiting', value: 'waiting'},
+            {label: 'success', value: 'success'},
+            {label: 'info', value: 'info'},
+            {label: 'common', value: 'common'},
+        ],
+        value: 'success',
+        label: '状态色',
+        key: 'status',
+    },
+    position: {
+        category: 'select',
+        options: [
             {label: 'top-left', value: 'top-left'},
             {label: 'top-right', value: 'top-right'},
             {label: 'bottom-left', value: 'bottom-left'},
             {label: 'bottom-right', value: 'bottom-right'},
         ],
         value: 'top-right',
-        label: '宽度',
-        key: 'status',
+        label: '位置',
+        key: 'position',
     },
     offset: {
         category: 'options',
@@ -2858,7 +2872,7 @@ let Badge: PropsConfigItem = {
             hideField: ['label',  'valueType']},
         // value: [{label: '', value: 0, disabled: false}],
         value: [],
-        label: '宽度',
+        label: '偏移',
         key: 'offset',
     },
     bgColor: {
