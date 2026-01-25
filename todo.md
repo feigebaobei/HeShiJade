@@ -5,6 +5,7 @@
 options配置项使用flex布局    done
 |progress|done||
 |rate|doing||
+number配置项支持精度   todo
 |tag|||
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||
