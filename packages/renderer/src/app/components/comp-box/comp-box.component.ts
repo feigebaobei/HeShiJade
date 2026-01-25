@@ -39,6 +39,7 @@ import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
 import { ToggleComponent } from '../toggle/toggle.component';
 import { DrawerComponent } from '../drawer/drawer.component';
+import { BadgeComponent } from '../badge/badge.component';
 
 let clog = console.log
 
@@ -77,6 +78,7 @@ let compMap: {[k: S]: A} = {
   Textarea: TextareaComponent,
   Toggle: ToggleComponent,
   Drawer: DrawerComponent,
+  Badge: BadgeComponent,
 }
 
 @Component({
@@ -418,6 +420,16 @@ export class CompBoxComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Badge':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }

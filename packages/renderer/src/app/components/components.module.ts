@@ -21,6 +21,7 @@ import { ButtonModule,
   AccordionModule,
   BreadcrumbModule,
   DrawerModule,
+  BadgeModule,
   // DataTableComponent,
 } from 'ng-devui';
 import { MenuModule } from 'ng-devui/menu';
@@ -61,6 +62,7 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { DrawerCompComponent } from './drawer/drawer-comp/drawer-comp.component';
+import { BadgeComponent } from './badge/badge.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
 @NgModule({
@@ -100,6 +102,7 @@ import { DrawerCompComponent } from './drawer/drawer-comp/drawer-comp.component'
     BreadcrumbComponent,
     DrawerComponent,
     DrawerCompComponent,
+    BadgeComponent,
   ],
   imports: [
     CommonModule,
@@ -124,6 +127,7 @@ import { DrawerCompComponent } from './drawer/drawer-comp/drawer-comp.component'
     AccordionModule,
     BreadcrumbModule,
     DrawerModule,
+    BadgeModule,
 
     FormsModule,
     GridstackModule,
