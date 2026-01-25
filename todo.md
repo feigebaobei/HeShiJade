@@ -2,11 +2,8 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|badge|done||
-options配置项中支持禁用删除、禁用增加。  done
-修正badge组件的迁移配置项    done
-options配置项使用flex布局    todo
-|progress|doing||
+options配置项使用flex布局    doing
+|progress|done||
 |rate|||
 |tag|||
 |检查todo|todo||
@@ -21,6 +18,8 @@ options配置项使用flex布局    todo
 |feat: pool.trigger方法返回方法体的返回值组成的数组|||
 |feat: 创建Toggle组件|||
 |feat: 创建Drawer组件|||
+|feat: 创建Badge组件|||
+|feat: options配置项支持禁用删除、禁用增加|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||

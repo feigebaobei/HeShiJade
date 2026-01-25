@@ -2953,7 +2953,10 @@ let Progress: PropsConfigItem = {
     },
     strokeColor: {
         category: 'options',
-        template: { label: '', value: '', valueType: 'string', disabled: false, hideField: ['valueType', 'disabled',]},
+        template: { label: '', value: '', valueType: 'string', disabled: false,
+            //  hideField: ['valueType', 'disabled',]
+             hideField: []
+            },
         value: [
             {label: '#ff0099', value: '0%', disabled: false, },
             {label: '#ff0099', value: '100%', disabled: false, },
