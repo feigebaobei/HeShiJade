@@ -2,9 +2,9 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-options配置项使用flex布局    doing
+options配置项使用flex布局    done
 |progress|done||
-|rate|||
+|rate|doing||
 |tag|||
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||
@@ -20,6 +20,7 @@ options配置项使用flex布局    doing
 |feat: 创建Drawer组件|||
 |feat: 创建Badge组件|||
 |feat: options配置项支持禁用删除、禁用增加|||
+|feat: options配置项使用flex布局|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||

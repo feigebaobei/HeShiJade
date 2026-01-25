@@ -37,6 +37,7 @@ import { Button as ButtonProps,
     Drawer as DrawerProps,
     Badge as BadgeProps,
     Progress as ProgressProps,
+    Rate as RateProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -71,6 +72,7 @@ import {
     Drawer as DrawerBehavior,
     Badge as BadgeBehavior,
     Progress as ProgressBehavior,
+    Rate as RateBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -422,6 +424,12 @@ let Progress: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Rate: ComponentDefaultConfig = {
+    props: opProps(RateProps),
+    behavior: opBehavior(RateBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -459,4 +467,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Drawer,
     Badge,
     Progress,
+    Rate,
 }

@@ -754,6 +754,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Drawer, // 没有特定子元素
     // Badge, // 没有特定子元素
     Progress,
+    // Rate, // 没有特定子元素
 }
 
 export default all

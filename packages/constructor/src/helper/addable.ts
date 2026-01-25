@@ -145,6 +145,10 @@ let Progress: CompConfigAddabel = {
     behavior: true,
     items: true,
 }
+let Rate: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -184,6 +188,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Drawer,
     Badge,
     Progress,
+    Rate,
 }
 
 export {

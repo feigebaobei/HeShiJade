@@ -2970,6 +2970,62 @@ let Progress: PropsConfigItem = {
         addButton: true,
     },
 }
+let Rate: PropsConfigItem = {
+    value: {
+        category: 'number',
+        value: 0,
+        label: '值',
+        key: 'value',
+    },
+    readonly: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '只读',
+        key: 'readonly',
+    },
+    count: {
+        category: 'number',
+        value: 5,
+        label: '总等级数',
+        key: 'count',
+    },
+    color: {
+        category: 'input',
+        value: '',
+        label: '选中的颜色',
+        key: 'color',
+    },
+    character: {
+        category: 'input',
+        value: '',
+        label: '代替图标的文本',
+        key: 'character',
+    },
+    allowHalf: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许半选',
+        key: 'allowHalf',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许清空',
+        key: 'allowClear',
+    },
+}
 
 export {
     Button,
@@ -3007,4 +3063,5 @@ export {
     Drawer,
     Badge,
     Progress,
+    Rate,
 }

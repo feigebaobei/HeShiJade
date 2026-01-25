@@ -197,6 +197,11 @@ let Progress: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let Rate: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -233,6 +238,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Drawer,
     Badge,
     Progress,
+    Rate,
 }
 export {
     Button,
@@ -270,6 +276,7 @@ export {
     Drawer,
     Badge,
     Progress,
+    Rate,
     
     gridLayoutDefault,
 }

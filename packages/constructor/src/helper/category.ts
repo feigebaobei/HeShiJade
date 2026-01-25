@@ -181,11 +181,11 @@ let categoryList = [
         componentCategory: 'Progress',
         ulid: '01J50ZGTCKEC10HWAJBZND487V'
     },
-    // {
-    //     name: 'Rate',
-    //     componentCategory: 'Rate',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487W'
-    // },
+    {
+        name: 'Rate',
+        componentCategory: 'Rate',
+        ulid: '01J50ZGTCKEC10HWAJBZND487W'
+    },
     // {
     //     name: 'Tag',
     //     componentCategory: 'Tag',

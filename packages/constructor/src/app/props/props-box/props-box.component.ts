@@ -46,6 +46,7 @@ import {
   Drawer as DrawerMeta,
   Badge as BadgeMeta,
   Progress as ProgressMeta,
+  Rate as RateMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -235,6 +236,9 @@ export class PropsBoxComponent {
         break;
       case 'Progress':
         this.opComponentPropsList(ProgressMeta)
+        break;
+      case 'Rate':
+        this.opComponentPropsList(RateMeta)
         break;
       default:
         this.componentPropsMeta = {}
