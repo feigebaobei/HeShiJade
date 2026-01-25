@@ -35,6 +35,7 @@ import { Button as ButtonProps,
     Textarea as TextareaProps,
     Toggle as ToggleProps,
     Drawer as DrawerProps,
+    Badge as BadgeProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -67,6 +68,7 @@ import {
     Textarea as TextareaBehavior,
     Toggle as ToggleBehavior,
     Drawer as DrawerBehavior,
+    Badge as BadgeBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -406,6 +408,12 @@ let Drawer: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Badge: ComponentDefaultConfig = {
+    props: opProps(BadgeProps),
+    behavior: opBehavior(BadgeBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -441,4 +449,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Textarea,
     Toggle,
     Drawer,
+    Badge,
 }

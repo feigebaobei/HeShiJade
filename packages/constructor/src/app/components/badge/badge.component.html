@@ -1,0 +1,31 @@
+<d-badge
+[count]="data.props['count']"
+[maxCount]="data.props['maxCount']"
+[showDot]="data.props['showDot']"
+[status]="data.props['status']"
+[offset]="data.props['offset']"
+[bgColor]="data.props['bgColor']"
+[textColor]="data.props['textColor']"
+>
+    <div dDroppable
+    class="dropArea"
+    (dropEvent)="dropH($event)"
+    *ngIf="!childComp"
+    >
+        <span>{{text['canReceiveOnlyOneChildComp']}}</span>
+    </div>
+    <div
+        *ngIf="childComp"
+        class="box"
+    >
+        <div *ngIf="childComp.ulid === curComponent?.ulid" class="toolbox">
+            <d-button bsSize="xs" icon="icon-delete" (click)="deleteComponentByUlidH(childComp.ulid)"></d-button>
+        </div>
+        <div
+            [ngClass]="{selected: childComp.ulid === curComponent?.ulid}"
+            (click)="subCompClickH($event, childComp)"
+        >
+            <app-comp-box [comp]="childComp"></app-comp-box>
+        </div>
+    </div>
+</d-badge>

@@ -187,6 +187,11 @@ let Drawer: GridLayoutDefault = {
     // noResize: true,
     noResize: false,
 }
+let Badge: GridLayoutDefault = {
+    w: 2,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -221,6 +226,7 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Textarea,
     Toggle,
     Drawer,
+    Badge,
 }
 export {
     Button,
@@ -256,6 +262,7 @@ export {
     Textarea,
     Toggle,
     Drawer,
+    Badge,
     
     gridLayoutDefault,
 }

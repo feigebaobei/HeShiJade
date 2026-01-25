@@ -2816,6 +2816,64 @@ let Drawer: PropsConfigItem = {
         key: 'resizable',
     },
 }
+let Badge: PropsConfigItem = {
+    count: {
+        category: 'number',
+        value: 0,
+        label: '数目',
+        key: 'count',
+    },
+    maxCount: {
+        category: 'number',
+        value: 99,
+        label: '最大数目',
+        key: 'maxCount',
+    },
+    showDot: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否点状',
+        key: 'showDot',
+    },
+    status: {
+        category: 'select',
+        options: [
+            {label: 'top-left', value: 'top-left'},
+            {label: 'top-right', value: 'top-right'},
+            {label: 'bottom-left', value: 'bottom-left'},
+            {label: 'bottom-right', value: 'bottom-right'},
+        ],
+        value: 'top-right',
+        label: '宽度',
+        key: 'status',
+    },
+    offset: {
+        category: 'options',
+        template: { label: '', value: 0,
+            valueType: 'number', disabled: false,
+            hideField: ['label',  'valueType']},
+        // value: [{label: '', value: 0, disabled: false}],
+        value: [],
+        label: '宽度',
+        key: 'offset',
+    },
+    bgColor: {
+        category: 'input',
+        value: '',
+        label: '背景颜色',
+        key: 'bgColor',
+    },
+    textColor: {
+        category: 'input',
+        value: '',
+        label: '文本颜色',
+        key: 'textColor',
+    },
+}
 
 export {
     Button,
@@ -2851,4 +2909,5 @@ export {
     Textarea,
     Toggle,
     Drawer,
+    Badge,
 }

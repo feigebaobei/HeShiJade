@@ -137,6 +137,10 @@ let Drawer: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Badge: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
 
 
 
@@ -174,6 +178,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Slider,
     Textarea,
     Drawer,
+    Badge,
 }
 
 export {

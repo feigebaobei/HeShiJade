@@ -4,7 +4,7 @@
 >
     <span *ngIf="!childComp">{{text['canReceiveOnlyOneChildComp']}}</span>
     <div *ngIf="childComp">
-        <app-comp-stack [componentList]="[(childComp)]" (deleteComp)="deleteComponentByUlidH($event)"></app-comp-stack>
+        <app-comp-stack [componentList]="[childComp]" (deleteComp)="deleteComponentByUlidH($event)"></app-comp-stack>
     </div>
 </div>
 

@@ -2,12 +2,13 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|drawer|doing||
+|drawer|done||
 最大高度 done
 footer应该吸底 done
 设置最大高度 默认使用最大高度
 更新props、behavior done
-|badge|||
+|badge|doing||
+options配置项中支持禁用删除、禁用增加。
 |progress|||
 |rate|||
 |tag|||
