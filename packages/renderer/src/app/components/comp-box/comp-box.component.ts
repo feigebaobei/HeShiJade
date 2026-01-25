@@ -40,6 +40,7 @@ import type { Component as Comp, } from 'src/types/component';
 import { ToggleComponent } from '../toggle/toggle.component';
 import { DrawerComponent } from '../drawer/drawer.component';
 import { BadgeComponent } from '../badge/badge.component';
+import { ProgressComponent } from '../progress/progress.component';
 
 let clog = console.log
 
@@ -79,6 +80,7 @@ let compMap: {[k: S]: A} = {
   Toggle: ToggleComponent,
   Drawer: DrawerComponent,
   Badge: BadgeComponent,
+  Progress: ProgressComponent,
 }
 
 @Component({
@@ -425,6 +427,16 @@ export class CompBoxComponent {
         }
         break;
       case 'Badge':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Progress':
         this.componentRef.instance.data = {
           props: this.data.props,
           behavior: this.data.behavior,
