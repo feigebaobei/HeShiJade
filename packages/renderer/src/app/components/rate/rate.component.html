@@ -1,0 +1,10 @@
+<d-rate
+[ngModel]="data.props['value']"
+[readonly]="data.props['readonly']"
+[count]="data.props['count']"
+[color]="data.props['color']"
+[character]="data.props['character']"
+[allowHalf]="data.props['allowHalf']"
+[allowClear]="data.props['allowClear']"
+(ngModelChange)="ngModelChangeH($event)"
+></d-rate>
