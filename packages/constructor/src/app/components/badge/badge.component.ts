@@ -2,10 +2,11 @@ import { Component, effect } from '@angular/core';
 import { DropEvent } from 'ng-devui';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
-import { createChildKey, initComponentMeta } from 'src/helper';
+import { clog, createChildKey, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
+import shareEvent, { creatEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
-import { O, ULID } from 'src/types/base';
+import { A, N, O, ULID } from 'src/types/base';
 // type
 import type { Component as Comp } from 'src/types/component';
 import { Page } from 'src/types/page';
@@ -21,6 +22,7 @@ export class BadgeComponent extends TextBase {
   childComp: Comp | null
   curPage: Page
   curComponent: Comp | undefined
+  offset: [N, N]
   constructor(
     private componentService: ComponentService,
     private pageService: PageService,
@@ -28,6 +30,7 @@ export class BadgeComponent extends TextBase {
     super()
     this.childComp = null
     this.curPage = this.pageService.getCurPage()!
+    this.offset = [0, 0]
     effect(() => {
       this.curComponent = this.componentService.curComponentS.get()
     })
@@ -70,6 +73,9 @@ export class BadgeComponent extends TextBase {
       }
     }
   }
+  initOffset() {
+    this.offset = this.data.props['offset'].map((item: A) => item.value)
+  }
   ngOnInit() {
     let tree = this.componentService.getTree(this.curPage.ulid)
     let node = tree?.find(this.data.ulid)
@@ -78,5 +84,13 @@ export class BadgeComponent extends TextBase {
     if (arr?.length) {
       this.childComp = arr[0]
     }
+    this.initOffset()
+    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
+      switch (key) {
+        case 'offset':
+          this.initOffset()
+          break;
+      }
+    })
   }
 }

@@ -425,6 +425,7 @@ export {
   compatibleComponentData,
   isUndefined,
   isNull,
+  clog,
 }
 export type {
   Loop,

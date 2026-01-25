@@ -2868,11 +2868,15 @@ let Badge: PropsConfigItem = {
         category: 'options',
         template: { label: '', value: 0,
             valueType: 'number', disabled: false,
-            hideField: ['label',  'valueType']},
+            hideField: ['label',  'valueType', 'miuns']},
         // value: [{label: '', value: 0, disabled: false}],
-        value: [],
+        value: [
+            { label: '', value: 0, disabled: false },
+            { label: '', value: 2, disabled: false },
+        ],
         label: '偏移',
         key: 'offset',
+        addButton: false,
     },
     bgColor: {
         category: 'input',

@@ -3,7 +3,8 @@
 |分支|f_tag||
 |丰富组件|||
 |badge|done||
-options配置项中支持禁用删除、禁用增加。  doing
+options配置项中支持禁用删除、禁用增加。  done
+修正badge组件的迁移配置项
 |progress|||
 |rate|||
 |tag|||
