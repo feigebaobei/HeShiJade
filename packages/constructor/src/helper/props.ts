@@ -2507,18 +2507,17 @@ let TimePicker: PropsConfigItem = {
         label: '最大可选时间',
         key: 'maxTime',
     },
-    // todo 检查多个值时是可以生效。
     direction: { // 会处理为 appendToBodyDirections
         category: 'options',
         template: {
             label: '', value: '',
             valueTip: '展开位置',
-            valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', ]},
+            valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', 'miuns']},
         value: [
-            {label: '', value: 'rightDown', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
-            {label: '', value: 'leftDown', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
-            {label: '', value: 'rightUp', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
-            {label: '', value: 'leftUp', valueType: 'string', valueTip: '展开位置', disabled: false, hideField: ['label', 'valueType', 'disabled']},
+            {label: '', value: 'rightDown', disabled: false},
+            {label: '', value: 'leftDown', disabled: false},
+            {label: '', value: 'rightUp', disabled: false},
+            {label: '', value: 'leftUp', disabled: false},
         ],
         label: '优先展开位置',
         key: 'direction',

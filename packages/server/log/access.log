@@ -1027,3 +1027,13 @@
 {"level":30,"time":1769311773258,"pid":55652,"hostname":"localhost","name":"logname","componentUpdateArr":[{"updateOne":{"filter":{"ulid":"01KFSK5WN7ZXPCKA6V2P2WX6XP"},"update":{"$set":{"slots.body":"01KFSK680J9CB6YTQ4MAVVD14F"}}}},{"insertOne":{"document":{"ulid":"01KFSK680J9CB6YTQ4MAVVD14F","type":"Paragraph","prevUlid":"","nextUlid":"","parentUlid":"01KFSK5WN7ZXPCKA6V2P2WX6XP","mount":{"area":"slots","slotKey":"body"},"props":{"text":"这是一个段落"},"behavior":[{"event":"","fnBody":""}],"items":[],"slots":{},"appUlid":"01KFMM2G5QQ3ZV2PHENRP00MVS","gridLayout":{"x":0,"y":0,"w":24,"h":2,"noResize":false},"pageUlid":"01KFMKMGESTXS1K0X55ZFRZWF1"}}}]}
 {"level":30,"time":1769311787466,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1769313007196,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769315728722,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769315781551,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769315825954,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769316037200,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769316076244,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769316718837,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769316830548,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769317326889,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769317522724,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769317553211,"pid":55652,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}

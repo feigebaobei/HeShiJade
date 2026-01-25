@@ -2,13 +2,8 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-|drawer|done||
-最大高度 done
-footer应该吸底 done
-设置最大高度 默认使用最大高度
-更新props、behavior done
-|badge|doing||
-options配置项中支持禁用删除、禁用增加。
+|badge|done||
+options配置项中支持禁用删除、禁用增加。  doing
 |progress|||
 |rate|||
 |tag|||
@@ -23,6 +18,7 @@ options配置项中支持禁用删除、禁用增加。
 |feat: 创建Textarea组件|||
 |feat: pool.trigger方法返回方法体的返回值组成的数组|||
 |feat: 创建Toggle组件|||
+|feat: 创建Drawer组件|||
 
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||

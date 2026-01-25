@@ -102,6 +102,7 @@
                 ></d-toggle>
             </d-col>
             <d-col
+                *ngIf="!item.hideField.includes('miuns')"
                 [dSpan]="4"
                 dTooltip
                 content="删除"
@@ -114,7 +115,9 @@
     </div>
 </div>
 
- <div class="button_box">
+<div 
+*ngIf="data.addButton"
+ class="button_box">
      <d-button
          bsStyle="common"
          circled="true"

@@ -93,7 +93,8 @@ interface ConfigItemOption {
   category: 'options'
   label: S
   key: S
-  value: ConfigItemOption['template'][]
+  // value: ConfigItemOption['template'][]
+  value: Pick<ConfigItemOption['template'], 'label' | 'value' | 'disabled'>[]
   // template: Options<S, S>
   // template: Partial<{
   //   label: S
@@ -101,8 +102,8 @@ interface ConfigItemOption {
   //   valueType: 'string' | 'number' | 'boolean'
   //   disabled: B
   //   hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
-  //   // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
-  //   // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+  //   // addButton: B, // 这是保留字段。2027.01.01+删除
+  //   // miuns: B // 这是保留字段。2027.01.01+删除
   // }>
   template: {
     label: S
@@ -110,10 +111,10 @@ interface ConfigItemOption {
     valueTip?: S
     valueType: 'string' | 'number' | 'boolean'
     disabled: B
-    hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
-    // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
-    // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+    hideField: ('label' | 'value' | 'valueType' | 'disabled' | 'miuns')[]
+    miuns?: B,
   }
+  addButton?: B,
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B

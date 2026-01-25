@@ -334,8 +334,8 @@ let compatibleComponentData = (data: A[]): {
   //   value: S | N | B
   //   valueType: 'string' | 'number' | 'boolean'
   //   disabled: B
-  //   addButtonDisabled: B,
-  //   miunsButtonDisabled: B
+  //   addButton: B,
+  //   miuns: B
   // }>
   let update: {
     ulid: ULID
