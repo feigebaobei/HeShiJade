@@ -156,6 +156,57 @@ let DatePicker: GridLayoutDefault = {
     h: 2,
     noResize: false,
 }
+let DateRangePicker: GridLayoutDefault = {
+    w: 10,
+    h: 2,
+    noResize: false,
+}
+let TimePicker: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
+let Slider: GridLayoutDefault = {
+    w: 24,
+    h: 2,
+    noResize: false,
+}
+let Textarea: GridLayoutDefault = {
+    w: 24,
+    h: 4,
+    noResize: false,
+}
+let Toggle: GridLayoutDefault = {
+    w: 2,
+    h: 2,
+    noResize: false,
+}
+let Drawer: GridLayoutDefault = {
+    w: 24,
+    h: 12,
+    // noResize: true,
+    noResize: false,
+}
+let Badge: GridLayoutDefault = {
+    w: 2,
+    h: 2,
+    noResize: false,
+}
+let Progress: GridLayoutDefault = {
+    w: 24,
+    h: 2,
+    noResize: false,
+}
+let Rate: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
+let Tag: GridLayoutDefault = {
+    w: 4,
+    h: 2,
+    noResize: false,
+}
 let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Button,
     Modal,
@@ -184,6 +235,16 @@ let gridLayoutDefault: {[k: S]: GridLayoutDefault} = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Toggle,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
 }
 export {
     Button,
@@ -213,6 +274,16 @@ export {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Toggle,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
     
     gridLayoutDefault,
 }

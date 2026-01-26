@@ -5,7 +5,7 @@ import type { Component as Comp, } from 'src/types/component';
 import type { MenuConfig, SourceConfig, } from 'ng-devui';
 import { ListenItems } from 'src/helper/ListenItems';
 import { InputData } from 'src/helper/InputData';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 
 // interface BreadcrumbItem extends MenuConfig {
 interface BreadcrumbItem extends SourceConfig {
@@ -62,13 +62,13 @@ InputData
     this.menu = this.data.items.map(item => this.washMenuItem(item))
   }
   listen() {
-      shareEvent.on(creatEventName('Breadcrumb', this.data.ulid, 'items', 'add'), () => {
+      shareEvent.on(createEventName('Breadcrumb', this.data.ulid, 'items', 'add'), () => {
       this.opMenu()
       })
-      shareEvent.on(creatEventName('Breadcrumb', this.data.ulid, 'items', 'update'), () => {
+      shareEvent.on(createEventName('Breadcrumb', this.data.ulid, 'items', 'update'), () => {
       this.opMenu()
       })
-      shareEvent.on(creatEventName('Breadcrumb', this.data.ulid, 'items', 'remove'), () => {
+      shareEvent.on(createEventName('Breadcrumb', this.data.ulid, 'items', 'remove'), () => {
       this.opMenu()
       })
   }

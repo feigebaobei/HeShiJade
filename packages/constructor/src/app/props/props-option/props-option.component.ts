@@ -27,32 +27,14 @@ export class PropsOptionComponent {
   options: {label: S, value: S}[]
   constructor(private componentService: ComponentService) {
     this.optionsList = []
-    // 未使用这个方法
-    // todo for delete 2016.02.01+
-    // this.modelChangeH = createDebounceFn(() => {
-    //   // this.componentService.setProps(this.data.key, this.data.value as unknown as PropsValue)
-    //   // this.componentService.reqUpdateComponent('props', this.data.key, this.data.value as unknown as PropsValue)
-    //   let v = this.getValue(this.optionsList)
-    //   this.componentService.setProps(this.data.key, v)
-    //   this.componentService.reqUpdateComponent('props', this.data.key, v)
-    //   this.change.emit(v)
-    // }, debounceTime)
     this.options = valueType
     this.labelChangeH = createDebounceFn(() => {
       let v = this.getValue(this.optionsList)
       this.componentService.setProps(this.data.key, v)
       this.componentService.reqUpdateComponent('props', this.data.key, v)
-      // this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
-      // this.componentService.reqUpdateComponent('props', this.data.key, 
-      //   // this.optionsList as unknown as PropsValue
-      //   this.getValue(this.optionsList)
-      // )
-      // this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
       this.change.emit(this.optionsList)
     }, debounceTime)
     this.valueChangeH = createDebounceFn(() => {
-      // this.componentService.setProps(this.data.key, this.optionsList as unknown as PropsValue)
-      // this.componentService.reqUpdateComponent('props', this.data.key, this.optionsList as unknown as PropsValue)
       let v = this.getValue(this.optionsList)
       this.componentService.setProps(this.data.key, v)
       this.componentService.reqUpdateComponent('props', this.data.key, v)

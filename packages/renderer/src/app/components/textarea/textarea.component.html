@@ -1,0 +1,12 @@
+<textarea 
+dTextarea 
+[ngModel]="data.props['value']"
+[disabled]="data.props['disabled']"
+[placeholder]="data.props['placeholder']"
+[rows]="data.props['rows']"
+[error]="data.props['error']"
+[resize]="data.props['resize']"
+[styleType]="data.props['styleType']"
+[showGlowStyle]="data.props['showGlowStyle']"
+(ngModelChange)="valueChangeH($event)"
+></textarea>

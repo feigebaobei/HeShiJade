@@ -28,6 +28,13 @@ import { AccordionComponent } from '../accordion/accordion.component';
 import { BreadcrumbComponent } from 'src/app/components/breadcrumb/breadcrumb.component';
 import { CascaderComponent } from '../cascader/cascader.component';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
+import { TimePickerComponent } from '../time-picker/time-picker.component';
+import { SliderComponent } from '../slider/slider.component';
+import { TextareaComponent } from '../textarea/textarea.component';
+import { ToggleComponent } from '../toggle/toggle.component';
+import { DrawerComponent } from '../drawer/drawer.component';
+import { BadgeComponent } from '../badge/badge.component';
 // service
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -35,6 +42,9 @@ import { ComponentService } from 'src/app/service/component.service';
 import type { A, S, Oa, ULID } from 'src/types/base';
 import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
+import { ProgressComponent } from '../progress/progress.component';
+import { RateComponent } from '../rate/rate.component';
+import { TagComponent } from '../tag/tag.component';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所以我考虑使用封装全部devui的组件来实现.
@@ -69,10 +79,25 @@ let compMap: Oa = {
   Breadcrumb: BreadcrumbComponent,
   Cascader: CascaderComponent,
   DatePicker: DatePickerComponent,
+  DateRangePicker: DateRangePickerComponent,
+  TimePicker: TimePickerComponent,
+  Slider: SliderComponent,
+  Textarea: TextareaComponent,
+  Toggle: ToggleComponent,
+  Drawer: DrawerComponent,
+  Badge: BadgeComponent,
+  Progress: ProgressComponent,
+  Rate: RateComponent,
+  Tag: TagComponent,
 }
 
 @Component({
   selector: 'app-comp-box',
+  // standalone: true,
+  // imports: [
+  //   // GridstackModule,
+  //   // ButtonModule,
+  // ],
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
@@ -333,6 +358,86 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'DatePicker':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'DateRangePicker':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'TimePicker':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Slider':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Textarea':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Toggle':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Drawer':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Badge':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Progress':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Rate':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Tag':
         this.componentRef.instance.data = {
           type: this.comp.type,
           props: this.comp.props,

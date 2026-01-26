@@ -14,7 +14,8 @@ export class OptionsComponent {
   @Input() label: S = ''
   // @Input() value: B = false
   // @Input() optionsList: Options<S, S>[] = []
-  @Input() optionsList!: ConfigItemOption['template'][]
+  // @Input() optionsList!: ConfigItemOption['template'][]
+  @Input() optionsList!: ConfigItemOption['value']
   // @Input() optionsTemp!: Options<S, S>
   @Input() optionsTemp!: ConfigItemOption['template']
   // @Output() changeOptions = new EventEmitter<Options<S, S>[]>()

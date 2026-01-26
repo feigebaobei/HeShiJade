@@ -1,0 +1,16 @@
+<div>
+    <input
+    class="devui-input devui-form-control"
+    [ngModel]="data.props['value']"
+    dTimePicker
+    (focus)="timePicker3.toggle()"
+    #timePicker3="timePicker"
+    [disabled]="data.props['disabled']"
+    [timePickerWidth]="data.props['timePickerWidth']"
+    [autoOpen]="data.props['autoOpen']"
+    [minTime]="data.props['minTime']"
+    [maxTime]="data.props['maxTime']"
+    [appendToBodyDirections]="direction"
+    (selectedTimeChange)="selectedTimeChangeH($event)"
+    />
+</div>

@@ -58,6 +58,8 @@ export class ModalComponent implements OnInit, OnDestroy{
       // dMoveable: true,
       // maxHeight: '600px',
     };
+    // todo delete 2026.03.01+
+    // 子组件的数据已经在子组件中取得了。所以不需要这里再取一次。
     this.childrenHeader = []
     this.childrenBody = []
     this.childrenFooter = []

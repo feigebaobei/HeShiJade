@@ -141,6 +141,56 @@ let categoryList = [
         componentCategory: 'DatePicker',
         ulid: '01J50ZGTCKEC10HWAJBZND487S'
     },
+    {
+        name: 'DateRangePicker',
+        componentCategory: 'DateRangePicker',
+        ulid: '01J50ZGTCKEC10HWAJBZND487O'
+    },
+    {
+        name: 'TimePicker',
+        componentCategory: 'TimePicker',
+        ulid: '01J50ZGTCKEC10HWAJBZND487P'
+    },
+    {
+        name: 'Slider',
+        componentCategory: 'Slider',
+        ulid: '01J50ZGTCKEC10HWAJBZND487Q'
+    },
+    {
+        name: 'Textarea',
+        componentCategory: 'Textarea',
+        ulid: '01J50ZGTCKEC10HWAJBZND487R'
+    },
+    {
+        name: 'Toggle',
+        componentCategory: 'Toggle',
+        ulid: '01J50ZGTCKEC10HWAJBZND487S'
+    },
+    {
+        name: 'Drawer',
+        componentCategory: 'Drawer',
+        ulid: '01J50ZGTCKEC10HWAJBZND487T'
+    },
+    {
+        name: 'Badge',
+        componentCategory: 'Badge',
+        ulid: '01J50ZGTCKEC10HWAJBZND487U'
+    },
+    {
+        name: 'Progress',
+        componentCategory: 'Progress',
+        ulid: '01J50ZGTCKEC10HWAJBZND487V'
+    },
+    {
+        name: 'Rate',
+        componentCategory: 'Rate',
+        ulid: '01J50ZGTCKEC10HWAJBZND487W'
+    },
+    {
+        name: 'Tag',
+        componentCategory: 'Tag',
+        ulid: '01J50ZGTCKEC10HWAJBZND487X'
+    },
   ]
 export {
     categoryList

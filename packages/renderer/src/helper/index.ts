@@ -80,8 +80,8 @@ let compatibleComponentData = (data: A[]): Component[] => {
   //   value: S | N | B
   //   valueType: 'string' | 'number' | 'boolean'
   //   disabled: B
-  //   addButtonDisabled: B,
-  //   miunsButtonDisabled: B
+  //   addButton: B,
+  //   miuns: B
   // }>
   let newData = data.map(item => {
     if (Array.isArray(item.props.options)) {

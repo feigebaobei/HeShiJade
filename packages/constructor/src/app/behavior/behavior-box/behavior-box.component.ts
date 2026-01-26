@@ -31,6 +31,16 @@ import {
   Breadcrumb as BreadcrumbBehaviorMeta,
   Cascader as CascaderBehaviorMeta,
   DatePicker as DatePickerBehaviorMeta,
+  DateRangePicker as DateRangePickerBehaviorMeta,
+  TimePicker as TimePickerBehaviorMeta,
+  Slider as SliderBehaviorMeta,
+  Textarea as TextareaBehaviorMeta,
+  Toggle as ToggleBehaviorMeta,
+  Drawer as DrawerBehaviorMeta,
+  Badge as BadgeBehaviorMeta,
+  Progress as ProgressBehaviorMeta,
+  Rate as RateBehaviorMeta,
+  Tag as TagBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -198,6 +208,36 @@ export class BehaviorBoxComponent {
         break;
       case 'DatePicker':
         this.setComponentBehaviorListByType(DatePickerBehaviorMeta)
+        break;
+      case 'DateRangePicker':
+        this.setComponentBehaviorListByType(DateRangePickerBehaviorMeta)
+        break;
+      case 'TimePicker':
+        this.setComponentBehaviorListByType(TimePickerBehaviorMeta)
+        break;
+      case 'Slider':
+        this.setComponentBehaviorListByType(SliderBehaviorMeta)
+        break;
+      case 'Textarea':
+        this.setComponentBehaviorListByType(TextareaBehaviorMeta)
+        break;
+      case 'Toggle':
+        this.setComponentBehaviorListByType(ToggleBehaviorMeta)
+        break;
+      case 'Drawer':
+        this.setComponentBehaviorListByType(DrawerBehaviorMeta)
+        break;
+      case 'Badge':
+        this.setComponentBehaviorListByType(BadgeBehaviorMeta)
+        break;
+      case 'Progress':
+        this.setComponentBehaviorListByType(ProgressBehaviorMeta)
+        break;
+      case 'Rate':
+        this.setComponentBehaviorListByType(RateBehaviorMeta)
+        break;
+      case 'Tag':
+        this.setComponentBehaviorListByType(TagBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

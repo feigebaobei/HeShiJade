@@ -149,10 +149,9 @@ class Pool {
     // Map<componentUlid: Promise<B>>
     trigger(ulid: ULID, eventName: S, thirdParams: A, self?: A) {
         let fnArr = this.getEventArray(ulid, eventName)
-        fnArr.forEach(f => {
+        return fnArr.map(f => {
             f.bind(self)
-            // clog(f)
-            f(utils, pool.getPluginFn(), thirdParams,)
+            return f(utils, pool.getPluginFn(), thirdParams,)
         })
     }
     registerComponentRender(pageUlid: ULID, componentUlidList: ULID[]) {

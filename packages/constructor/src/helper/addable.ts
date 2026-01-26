@@ -117,6 +117,42 @@ let DatePicker: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let DateRangePicker: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let TimePicker: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Slider: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Textarea: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Drawer: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Badge: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Progress: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
+let Rate: CompConfigAddabel = {
+    behavior: true,
+    items: false,
+}
+let Tag: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -149,6 +185,15 @@ let all: {[k: S]: CompConfigAddabel} = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
 }
 
 export {

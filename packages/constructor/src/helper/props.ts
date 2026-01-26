@@ -1,5 +1,5 @@
 // import type { ConfigItem } from 'src/types/props'
-import type { B, ConfigItem, ConfigItemSelect, S } from 'src/types/base'
+import type { B, ConfigItem, ConfigItemNumber, ConfigItemSelect, S } from 'src/types/base'
 import type { PropsConfigItem } from 'src/types/config'
 import type { Component } from 'src/types/component'
 // interface PropsConfigItem {
@@ -117,14 +117,6 @@ let Modal: PropsConfigItem = {
         label: '宽度',
         key: 'width',
     },
-    // zIndex: {
-    //     category: 'number',
-    //     value: 150,
-    //     // maxLength
-    //     // minLength
-    //     label: 'zIndex',
-    //     key: 'zIndex',
-    // },
     visible: {
         category: 'switch',
         options: [
@@ -567,6 +559,7 @@ let Select: PropsConfigItem = {
         value: [],
         label: '选项',
         key: 'options',
+        addButton: true,
     },
     isSearch: {
         category: 'switch',
@@ -903,12 +896,18 @@ let Pagination: PropsConfigItem = {
     pageSize: {
         category: 'number',
         value: 10,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '分页容量',
         key: 'pageSize',
     },
     total: {
         category: 'number',
         value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '总条目数',
         key: 'total',
     },
@@ -928,12 +927,18 @@ let Pagination: PropsConfigItem = {
     pageIndex: {
         category: 'number',
         value: 1,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '初始化页码',
         key: 'pageIndex',
     },
     maxItems: {
         category: 'number',
         value: 10,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '分页最多显示按钮数',
         key: 'maxItems',
     },
@@ -1396,6 +1401,9 @@ let Loop: PropsConfigItem = {
     mockCount: {
         category: 'number',
         value: 3,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: 'mock数量',
         key: 'mockCount',
     },
@@ -1485,6 +1493,9 @@ let Loop: PropsConfigItem = {
     flexGrow: {
         category: 'number',
         value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '项目的放大比例',
         key: 'flexGrow',
         hide: function (p: Component['props']) {
@@ -1496,6 +1507,9 @@ let Loop: PropsConfigItem = {
     flexShrink: {
         category: 'number',
         value: 1,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '项目的缩小比例',
         key: 'flexShrink',
         hide: function (p: Component['props']) {
@@ -1645,6 +1659,9 @@ let InputNumber: PropsConfigItem = {
         category: 'number',
         value: 0,
         // value: Number.MAX_SAFE_INTEGER,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '值',
         key: 'value',
     },
@@ -1652,18 +1669,27 @@ let InputNumber: PropsConfigItem = {
         category: 'number',
         // value: 10,
         value: Number.MAX_SAFE_INTEGER,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '最大值',
         key: 'max',
     },
     min: {
         category: 'number',
         value: Number.MIN_SAFE_INTEGER,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '最小值',
         key: 'min',
     },
     step: {
         category: 'number',
         value: 1,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '步长',
         key: 'step',
     },
@@ -1682,6 +1708,9 @@ let InputNumber: PropsConfigItem = {
         category: 'number',
         value: 0,
         // value: undefined,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '精度',
         key: 'decimalLimit',
     },
@@ -1711,6 +1740,7 @@ let Radio: PropsConfigItem = {
         value: [],
         label: 'valueList',
         key: 'valueList',
+        addButton: true,
     },
     direction: {
         category: 'select',
@@ -1766,12 +1796,18 @@ let Avatar: PropsConfigItem = {
     width: {
         category: 'number',
         value: 40,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '宽度',
         key: 'width',
     },
     height: {
         category: 'number',
         value: 40,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '宽度',
         key: 'height',
     },
@@ -1868,12 +1904,18 @@ let ImagePreview: PropsConfigItem = {
     zIndex: {
         category: 'number',
         value: 1050,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '预览时图片的z-index',
         key: 'zIndex',
     },
     backDropZIndex: {
         category: 'number',
         value: 1040,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '预览时图片背景的z-index',
         key: 'backDropZIndex',
     },
@@ -2069,6 +2111,7 @@ let Cascader: PropsConfigItem = {
         value: [],
         label: '值',
         key: 'valueList',
+        addButton: true,
     },
     trigger: {
         category: 'select',
@@ -2089,6 +2132,9 @@ let Cascader: PropsConfigItem = {
     width: {
         category: 'number',
         value: 200,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
         label: '宽度',
         key: 'width',
     },
@@ -2317,6 +2363,802 @@ let DatePicker: PropsConfigItem = {
         key: 'showGlowStyle',
     },
 }
+let DateRangePicker: PropsConfigItem = {
+    // startDate: { // 根据 startDate 、 endDate 得到 value
+    //     category: 'date',
+    //     // todo date setter 支持 
+    //     value: undefined,
+    //     label: '开始时刻',
+    //     key: 'startDate',
+    // },
+    // endDate: { // 根据 startDate 、 endDate 得到 value
+    //     category: 'date',
+    //     value: undefined,
+    //     label: '结束时刻',
+    //     key: 'endDate',
+    // },
+    showTime: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否显示时分秒',
+        key: 'showTime',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否自动打开',
+        key: 'autoOpen',
+    },
+    // minYear: { // 根据 minYear / maxYear 得到calenderRange
+    //     category: 'number',
+    //     value: 1970,
+    //     label: '最小年份',
+    //     key: 'minYear',
+    // },
+    // maxYear: { // 根据 minYear / maxYear 得到calenderRange
+    //     category: 'number',
+    //     value: 2099,
+    //     label: '最大年份',
+    //     key: 'maxYear',
+    // },
+    minDate: {
+        category: 'date',
+        value: undefined,
+        label: '最小可选日期',
+        key: 'minDate',
+    },
+    maxDate: {
+        category: 'date',
+        value: undefined,
+        label: '最大可选日期',
+        key: 'maxDate',
+    },
+    splitter: {
+        category: 'input',
+        value: '-',
+        label: '连接符',
+        key: 'splitter',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    width: {
+        category: 'input',
+        value: '',
+        label: '选择器的宽度',
+        key: 'width',
+    },
+    // allowClear: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '允许清空',
+    //     key: 'allowClear',
+    // },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    mode: {
+        category: 'select',
+        options: [
+            {label: 'year', value: 'year'},
+            {label: 'month', value: 'month'},
+            {label: 'date', value: 'date'},
+            {label: 'week', value: 'week'},
+        ],
+        value: 'date',
+        label: '模式',
+        key: 'mode',
+    },
+    // 底层组件不支持此属性
+    // startIndexOfWeek: {
+    //     category: 'select',
+    //     options: [
+    //         {label: '周日', value: 0}, // 需要转换为值
+    //         {label: '周一', value: 1},
+    //         {label: '周二', value: 2},
+    //         {label: '周三', value: 3},
+    //         {label: '周四', value: 4},
+    //         {label: '周五', value: 5},
+    //         {label: '周六', value: 6},
+    //     ],
+    //     value: 6,
+    //     label: '每周开始的时间',
+    //     key: 'startIndexOfWeek',
+    // },
+    // showGlowStyle: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '悬浮发光效果',
+    //     key: 'showGlowStyle',
+    // },
+}
+let TimePicker: PropsConfigItem = {
+    value: {
+        category: 'input',
+        value: '00:00:00', // 不能没有默认值
+        label: '值',
+        key: 'value',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    timePickerWidth: {
+        category: 'number',
+        value: 250,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '下拉框的宽度',
+        key: 'timePickerWidth',
+    },
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '自动打开',
+        key: 'autoOpen',
+    },
+    minTime: {
+        category: 'input',
+        value: '00:00:00',
+        label: '最小可选时间',
+        key: 'minTime',
+    },
+    maxTime: {
+        category: 'input',
+        value: '23:59:59',
+        label: '最大可选时间',
+        key: 'maxTime',
+    },
+    direction: { // 会处理为 appendToBodyDirections
+        category: 'options',
+        template: {
+            label: '', value: '',
+            valueTip: '展开位置',
+            valueType: 'string', disabled: false, hideField: ['label', 'valueType', 'disabled', 'miuns']},
+        value: [
+            {label: '', value: 'rightDown', disabled: false},
+            {label: '', value: 'leftDown', disabled: false},
+            {label: '', value: 'rightUp', disabled: false},
+            {label: '', value: 'leftUp', disabled: false},
+        ],
+        label: '优先展开位置',
+        key: 'direction',
+        addButton: false,
+    },
+    // showAnimation: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'true', value: true},
+    //         {label: 'false', value: false},
+    //     ],
+    //     value: true,
+    //     label: '动画',
+    //     key: 'showAnimation',
+    // },
+}
+let Slider: PropsConfigItem = {
+    value: {
+        category: 'number',
+        value: 10,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '值',
+        key: 'value',
+    },
+    min: {
+        category: 'number',
+        value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '最小值',
+        key: 'min',
+    },
+    max: {
+        category: 'number',
+        value: 100,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '最大值',
+        key: 'max',
+    },
+    step: {
+        category: 'number',
+        value: 1,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '步长',
+        key: 'step',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+}
+let Textarea: PropsConfigItem = {
+    value: {
+        category: 'input',
+        value: '',
+        label: '值',
+        key: 'value',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+    error: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '是否使用出错状态',
+        key: 'error',
+    },
+    // maxWidth: {
+    //     category: 'input',
+    //     value: '',
+    //     label: '最大宽度',
+    //     key: 'maxWidth',
+    // },
+    // maxHeight: {
+    //     category: 'input',
+    //     value: '',
+    //     label: '最大高度',
+    //     key: 'maxHeight',
+    // },
+    // maxLengthBlock: {
+    //     category: 'switch',
+    //     options: [
+    //         {label: 'false', value: false},
+    //         {label: 'true', value: true},
+    //     ],
+    //     value: false,
+    //     label: '超出最大值时是否阻止输入',
+    //     key: 'maxLengthBlock',
+    // },
+    placeholder: {
+        category: 'input',
+        value: '',
+        label: '占位符',
+        key: 'placeholder',
+    },
+    rows: {
+        category: 'number',
+        value: 3,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '行数',
+        key: 'rows',
+    },
+    resize: {
+        category: 'select',
+        options: [
+            // none | vertical | horizontal | both | inherit
+            {label: 'none', value: 'none'},
+            {label: 'vertical', value: 'vertical'},
+            {label: 'horizontal', value: 'horizontal'},
+            {label: 'both', value: 'both'},
+            {label: 'inherit', value: 'inherit'},
+        ],
+        value: 'none',
+        label: '调整大小',
+        key: 'resize',
+    },
+    showGlowStyle: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: true,
+        label: '是否悬浮发光',
+        key: 'showGlowStyle',
+    },
+    styleType: {
+        category: 'select',
+        options: [
+            // none | vertical | horizontal | both | inherit
+            {label: 'default 有线框白底', value: 'default'},
+            {label: 'gray 无线框灰底', value: 'gray'},
+        ],
+        value: 'default',
+        label: 'ui风格',
+        key: 'styleType',
+    },
+}
+let Toggle: PropsConfigItem = {
+    value: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '值',
+        key: 'value',
+    },
+    size: {
+        category: 'select',
+        options: [
+            {label: '大', value: 'lg'},
+            {label: '中', value: ''},
+            {label: '小', value: 'sm'},
+        ],
+        value: '',
+        label: '尺寸',
+        key: 'size',
+    },
+    color: {
+        category: 'input',
+        value: '',
+        label: '颜色',
+        key: 'color',
+    },
+    disabled: {
+        category: 'switch',
+        options: [
+            {label: 'false', value: false},
+            {label: 'true', value: true},
+        ],
+        value: false,
+        label: '禁用',
+        key: 'disabled',
+    },
+}
+let Drawer: PropsConfigItem = {
+    autoOpen: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '自动打开',
+        key: 'autoOpen',
+    },
+    width: {
+        category: 'input',
+        value: '300px',
+        label: '宽度',
+        key: 'width',
+    },
+    title: {
+        category: 'input',
+        value: 'title',
+        label: '标题',
+        key: 'title',
+    },
+    zIndex: {
+        category: 'number',
+        value: 1000,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: 'zIndex',
+        key: 'zIndex',
+    },
+    isCover: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '是否有遮罩层',
+        key: 'isCover',
+    },
+    backdropCloseable: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '点击背景时关闭',
+        key: 'backdropCloseable',
+    },
+    escKeyCloseable: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '按下esc时关闭',
+        key: 'escKeyCloseable',
+    },
+    destroyOnHide: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '关闭时是否销毁',
+        key: 'destroyOnHide',
+    },
+    position: {
+        category: 'select',
+        options: [
+            {label: 'left', value: 'left'},
+            {label: 'right', value: 'right'},
+        ],
+        value: 'right',
+        label: '位置',
+        key: 'position',
+    },
+    bodyScrollable: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: 'drawer 打开后，body 是否可滚动',
+        key: 'bodyScrollable',
+    },
+    showAnimation: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动画',
+        key: 'showAnimation',
+    },
+    resizable: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '调整宽度',
+        key: 'resizable',
+    },
+}
+let Badge: PropsConfigItem = {
+    count: {
+        category: 'number',
+        value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '数目',
+        key: 'count',
+    },
+    maxCount: {
+        category: 'number',
+        value: 99,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '最大数目',
+        key: 'maxCount',
+    },
+    showDot: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否点状',
+        key: 'showDot',
+    },
+    status: {
+        category: 'select',
+        options: [
+            {label: 'danger', value: 'danger'},
+            {label: 'warning', value: 'warning'},
+            {label: 'waiting', value: 'waiting'},
+            {label: 'success', value: 'success'},
+            {label: 'info', value: 'info'},
+            {label: 'common', value: 'common'},
+        ],
+        value: 'success',
+        label: '状态色',
+        key: 'status',
+    },
+    position: {
+        category: 'select',
+        options: [
+            {label: 'top-left', value: 'top-left'},
+            {label: 'top-right', value: 'top-right'},
+            {label: 'bottom-left', value: 'bottom-left'},
+            {label: 'bottom-right', value: 'bottom-right'},
+        ],
+        value: 'top-right',
+        label: '位置',
+        key: 'position',
+    },
+    offset: {
+        category: 'options',
+        template: { label: '', value: 0,
+            valueType: 'number', disabled: false,
+            hideField: ['label',  'valueType', 'miuns']},
+        value: [
+            { label: '', value: 0, disabled: false },
+            { label: '', value: 2, disabled: false },
+        ],
+        label: '偏移',
+        key: 'offset',
+        addButton: false,
+    },
+    bgColor: {
+        category: 'input',
+        value: '',
+        label: '背景颜色',
+        key: 'bgColor',
+    },
+    textColor: {
+        category: 'input',
+        value: '',
+        label: '文本颜色',
+        key: 'textColor',
+    },
+}
+let Progress: PropsConfigItem = {
+    type: {
+        category: 'select',
+        options: [
+            {label: 'line', value: 'line'},
+            {label: 'circle', value: 'circle'},
+        ],
+        value: 'line',
+        label: '形状',
+        key: 'type',
+    },
+    isOverlap: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '分段进度条',
+        key: 'isOverlap',
+    },
+    percentage: {
+        category: 'number',
+        value: 10,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '百分比值',
+        key: 'percentage',
+        hide: function (p: Component['props']) {
+            return p['isOverlap']
+        },
+        hideListenerKey: 'isOverlap',
+    },
+    percentageText: {
+        category: 'input',
+        value: '',
+        label: '百分比文案',
+        key: 'percentageText',
+        hide: function (p: Component['props']) {
+            return p['isOverlap']
+        },
+        hideListenerKey: 'isOverlap',
+    },
+    strokeWidth: {
+        category: 'number',
+        value: 14,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '宽度',
+        key: 'strokeWidth',
+    },
+    isDynamic: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: true,
+        label: '动效',
+        key: 'isDynamic',
+    },
+    strokeColor: {
+        category: 'options',
+        template: { label: '', value: '', valueType: 'string', disabled: false,
+            //  hideField: ['valueType', 'disabled',]
+             hideField: []
+            },
+        value: [
+            {label: '#ff0099', value: '0%', disabled: false, },
+            {label: '#ff0099', value: '100%', disabled: false, },
+        ],
+        label: '前景色',
+        key: 'strokeColor',
+        hide: function (p: Component['props']) {
+            return p['isOverlap']
+        },
+        hideListenerKey: 'isOverlap',
+        addButton: true,
+    },
+}
+let Rate: PropsConfigItem = {
+    value: {
+        category: 'number',
+        value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 0.5,
+        label: '值',
+        key: 'value',
+        listenKey: ['count'],
+        listenCb: (curConfigItem, listenConfigItem, configItemList) => {
+            (curConfigItem as ConfigItemNumber).max = (listenConfigItem as ConfigItemNumber).value
+        }
+    },
+    readonly: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '只读',
+        key: 'readonly',
+    },
+    count: {
+        category: 'number',
+        value: 5,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '总等级数',
+        key: 'count',
+    },
+    color: {
+        category: 'input',
+        value: '',
+        label: '选中的颜色',
+        key: 'color',
+    },
+    character: {
+        category: 'input',
+        value: '',
+        label: '代替图标的文本',
+        key: 'character',
+    },
+    allowHalf: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许半选',
+        key: 'allowHalf',
+    },
+    allowClear: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '允许清空',
+        key: 'allowClear',
+    },
+}
+
+let Tag: PropsConfigItem = {
+    // 由items算出tags
+    mode: {
+        category: 'select',
+        options: [
+            {label: 'default', value: 'default'},
+            {label: 'checkable', value: 'checkable'},
+            {label: 'closeable', value: 'closeable'},
+        ],
+        value: 'default',
+        label: '类型',
+        key: 'mode',
+    },
+    size: {
+        category: 'select',
+        options: [
+            {label: '大', value: 'lg'},
+            {label: '中', value: 'md'},
+        ],
+        value: 'md',
+        label: '尺寸',
+        key: 'size',
+    },
+    // displayProperty = 'label'
+    deletable: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否可删除',
+        key: 'deletable',
+    },
+    // titleProperty = 'tip'
+    hideBeyondTags: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '超出时溢出',
+        key: 'hideBeyondTags',
+    },
+}
 
 export {
     Button,
@@ -2346,4 +3188,14 @@ export {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Toggle,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
 }

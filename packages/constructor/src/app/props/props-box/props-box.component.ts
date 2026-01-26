@@ -38,6 +38,16 @@ import {
   Breadcrumb as BreadcrumbMeta,
   Cascader as CascaderMeta,
   DatePicker as DatePickerMeta,
+  DateRangePicker as DateRangePickerMeta,
+  TimePicker as TimePickerMeta,
+  Slider as SliderMeta,
+  Textarea as TextareaMeta,
+  Toggle as ToggleMeta,
+  Drawer as DrawerMeta,
+  Badge as BadgeMeta,
+  Progress as ProgressMeta,
+  Rate as RateMeta,
+  Tag as TagMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -68,14 +78,16 @@ export class PropsBoxComponent {
   }
   componentPropsList: ConfigItem[]
   msg: {}[]
-  propsMap: Map<S, relationTargetKey>
+  propsHideMap: Map<S, relationTargetKey>
+  propsListenMap: Map<S, relationTargetKey>
   text: Text
   propsObj: Comp['props']
   constructor(private componentService: ComponentService) {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    this.propsMap = new Map()
+    this.propsHideMap = new Map()
+    this.propsListenMap = new Map()
     this.text = text
     this.propsObj = {}
     effect(() => {
@@ -204,34 +216,60 @@ export class PropsBoxComponent {
       case 'DatePicker':
         this.opComponentPropsList(DatePickerMeta)
         break;
+      case 'DateRangePicker':
+        this.opComponentPropsList(DateRangePickerMeta)
+        break;
+      case 'TimePicker':
+        this.opComponentPropsList(TimePickerMeta)
+        break;
+      case 'Slider':
+        this.opComponentPropsList(SliderMeta)
+        break;
+      case 'Textarea':
+        this.opComponentPropsList(TextareaMeta)
+        break;
+      case 'Toggle':
+        this.opComponentPropsList(ToggleMeta)
+        break;
+      case 'Drawer':
+        this.opComponentPropsList(DrawerMeta)
+        break;
+      case 'Badge':
+        this.opComponentPropsList(BadgeMeta)
+        break;
+      case 'Progress':
+        this.opComponentPropsList(ProgressMeta)
+        break;
+      case 'Rate':
+        this.opComponentPropsList(RateMeta)
+        break;
+      case 'Tag':
+        this.opComponentPropsList(TagMeta)
+        break;
       default:
         this.componentPropsMeta = {}
         break
     }
-    // this.componentPropsList
-    //  = this.componentPropsList.map(item => {
-    //   // let f = item.hide
-    //   // if (f) {
-    //   //   return {
-    //   //     ...item,
-    //   //     hideCalc: f(this.componentPropsList)
-    //   //   }
-    //   // } else {
-    //   //   return {
-    //   //     ...item,
-    //   //     hideCalc: false
-    //   //   }
-    //   // }
-    // })
     this.componentPropsList.forEach(item => {
       if (item.hideListenerKey) {
-        if (this.propsMap.has(item.hideListenerKey)) {
-          this.propsMap.get(item.hideListenerKey)?.enqueue(item)
+        if (this.propsHideMap.has(item.hideListenerKey)) {
+          this.propsHideMap.get(item.hideListenerKey)?.enqueue(item)
         } else {
           let q: relationTargetKey = new Queue()
           q.enqueue(item)
-          this.propsMap.set(item.hideListenerKey, q)
+          this.propsHideMap.set(item.hideListenerKey, q)
         }
+      }
+      if (item.listenKey) {
+        item.listenKey.forEach(listenKey => {
+          if (this.propsListenMap.has(listenKey)) {
+            this.propsListenMap.get(listenKey)?.enqueue(item)
+          } else {
+            let q: relationTargetKey = new Queue()
+            q.enqueue(item)
+            this.propsListenMap.set(listenKey, q)
+          }
+        })
       }
     })
   }
@@ -241,7 +279,7 @@ export class PropsBoxComponent {
     })
   }
   listenerChange(listenerKey: S) {
-    let q = this.propsMap.get(listenerKey)
+    let q = this.propsHideMap.get(listenerKey)
     if (q) {
       q.toArray().forEach(item => {
         let b: B
@@ -253,14 +291,17 @@ export class PropsBoxComponent {
         }
       })
     }
+    let listenQ = this.propsListenMap.get(listenerKey)
+    if (listenQ) {
+      listenQ.toArray().forEach(item => {
+        if (item.listenCb) {
+          let listenConfigItem = this.componentPropsList.find(item => item.key === listenerKey)!
+          item.listenCb(item, listenConfigItem, this.componentPropsList)
+        }
+      })
+    }
   }
-  itemChangeH(p: A) {
-    // this.componentPropsList.forEach(item => {
-    //   if (item.key === p.key) {
-    //     item.value = p.value
-    //     this.componentService.setProps(item.key, item.value)
-    //   }
-    // })
+  itemChangeH(p: {key: S, value: A}) {
     this.initPropsObj()
     this.listenerChange(p.key)
   }

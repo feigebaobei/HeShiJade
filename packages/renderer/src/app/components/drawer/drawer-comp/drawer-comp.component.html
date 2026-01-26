@@ -1,0 +1,16 @@
+<section class="box">
+    <header class="header">
+        <h2>{{data.props['title']}}</h2>
+        <section class="btn_box">
+            <d-icon icon="icon-code-editor-fullscreen" [operable]="true" (click)="fullScreenClickH()"></d-icon>
+            <!-- <d-icon icon="icon-code-editor-window" [operable]="true"></d-icon> -->
+            <d-icon icon="icon-close" [operable]="true" (click)="iconClickH($event)"></d-icon>
+        </section>
+    </header>
+    <section class="body">
+        <app-stack [componentList]="componentListBody"></app-stack>
+    </section>
+    <footer>
+        <app-stack [componentList]="componentListFooter"></app-stack>
+    </footer>
+</section>

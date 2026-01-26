@@ -1,0 +1,18 @@
+<d-range-datepicker-pro
+  [ngModel]="value"
+  [format]="'y-MM-dd HH:mm:ss'"
+  [showTime]="data.props['showTime']"
+  [disabled]="data.props['disabled']"
+  [autoOpen]="data.props['autoOpen']"
+  [minDate]="data.props['minDate']"
+  [maxDate]="data.props['maxDate']"
+  [splitter]="data.props['splitter']"
+  [width]="data.props['width']"
+  [placeholder]="data.props['placeholder']"
+  [mode]="data.props['mode']"
+  [showGlowStyle]="data.props['showGlowStyle']"
+  (confirmEvent)="confirmEventH($event)"
+  (dropdownToggle)="dropdownToggleH($event)"
+  >
+</d-range-datepicker-pro>
+<!-- [startIndexOfWeek]="data.props['startIndexOfWeek']" -->

@@ -40,7 +40,7 @@ class ShareEventService {
     return this._map.get(eventName)
   }
 }
-let creatEventName = (
+let createEventName = (
   // 组件类型_组件的ulid_组件内的字段_动作
   componentType: S,
   ulid: ULID,
@@ -52,7 +52,7 @@ let creatEventName = (
 let shareEvent = new ShareEventService()
 export {
   ShareEventService,
-  creatEventName,
+  createEventName,
   shareEvent,
 }
 export default shareEvent

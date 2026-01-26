@@ -12,17 +12,16 @@ http://heshijade.com
 
 ## 技术栈
 - angular@17
-- dev-ui
+- dev-ui()
+  - "@devui-design/icons": "1.4.0",
+  - "ng-devui": "18.0.0",
 - express(node)
 - mongodb
-- pnpm@9.15.x
+- pnpm@10.10.0
 - node@20
 
 ## 启动
 ```shell
-# 需要启动sso服务
-# 进入sso目录
-# npm run dev
 # 在多个终端窗口分别执行
 npm run ds # 启动后端服务
 npm run dc # 启动搭建侧

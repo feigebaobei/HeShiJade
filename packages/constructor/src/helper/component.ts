@@ -29,6 +29,16 @@ import { Button as ButtonProps,
     Breadcrumb as BreadcrumbProps,
     Cascader as CascaderProps,
     DatePicker as DatePickerProps,
+    DateRangePicker as DateRangePickerProps,
+    TimePicker as TimePickerProps,
+    Slider as SliderProps,
+    Textarea as TextareaProps,
+    Toggle as ToggleProps,
+    Drawer as DrawerProps,
+    Badge as BadgeProps,
+    Progress as ProgressProps,
+    Rate as RateProps,
+    Tag as TagProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -55,6 +65,16 @@ import {
     Breadcrumb as BreadcrumbBehavior,
     Cascader as CascaderBehavior,
     DatePicker as DatePickerBehavior,
+    DateRangePicker as DateRangePickerBehavior,
+    TimePicker as TimePickerBehavior,
+    Slider as SliderBehavior,
+    Textarea as TextareaBehavior,
+    Toggle as ToggleBehavior,
+    Drawer as DrawerBehavior,
+    Badge as BadgeBehavior,
+    Progress as ProgressBehavior,
+    Rate as RateBehavior,
+    Tag as TagBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -358,6 +378,66 @@ let DatePicker: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let DateRangePicker: ComponentDefaultConfig = {
+    props: opProps(DateRangePickerProps),
+    behavior: opBehavior(DateRangePickerBehavior),
+    items: [],
+    slots: {},
+}
+let TimePicker: ComponentDefaultConfig = {
+    props: opProps(TimePickerProps),
+    behavior: opBehavior(TimePickerBehavior),
+    items: [],
+    slots: {},
+}
+let Slider: ComponentDefaultConfig = {
+    props: opProps(SliderProps),
+    behavior: opBehavior(SliderBehavior),
+    items: [],
+    slots: {},
+}
+let Textarea: ComponentDefaultConfig = {
+    props: opProps(TextareaProps),
+    behavior: opBehavior(TextareaBehavior),
+    items: [],
+    slots: {},
+}
+let Toggle: ComponentDefaultConfig = {
+    props: opProps(ToggleProps),
+    behavior: opBehavior(ToggleBehavior),
+    items: [],
+    slots: {},
+}
+let Drawer: ComponentDefaultConfig = {
+    props: opProps(DrawerProps),
+    behavior: opBehavior(DrawerBehavior),
+    items: [],
+    slots: {},
+}
+let Badge: ComponentDefaultConfig = {
+    props: opProps(BadgeProps),
+    behavior: opBehavior(BadgeBehavior),
+    items: [],
+    slots: {},
+}
+let Progress: ComponentDefaultConfig = {
+    props: opProps(ProgressProps),
+    behavior: opBehavior(ProgressBehavior),
+    items: [],
+    slots: {},
+}
+let Rate: ComponentDefaultConfig = {
+    props: opProps(RateProps),
+    behavior: opBehavior(RateBehavior),
+    items: [],
+    slots: {},
+}
+let Tag: ComponentDefaultConfig = {
+    props: opProps(TagProps),
+    behavior: opBehavior(TagBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -387,4 +467,14 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Toggle,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { Text } from "src/types/config";
 import { text } from "./config";
-import shareEvent, { creatEventName } from "./share-event";
+import shareEvent, { createEventName } from "./share-event";
 // type
 import type { Component as Comp } from "src/types/component";
 import { InputData } from "./InputData";
@@ -66,13 +66,13 @@ TextBase
         }
     }
     listen() {
-        shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'add'), () => {
+        shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'add'), () => {
         this.opMenu()
         })
-        shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'update'), () => {
+        shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'update'), () => {
         this.opMenu()
         })
-        shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'remove'), () => {
+        shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'remove'), () => {
         this.opMenu()
         })
     }

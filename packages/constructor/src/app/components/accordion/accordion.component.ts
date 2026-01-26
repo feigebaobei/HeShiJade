@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TextBase } from 'src/helper/text';
 import { Oa, S } from 'src/types/base';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 // type
 import type { Component as Comp } from 'src/types/component';
 import type { AccordionMenuItem } from 'ng-devui';
@@ -95,13 +95,13 @@ ListenItems<AccordionMenuItemNew>
   // }
   // // todo 把它抽象到一个class中。
   // listen() {
-  //   shareEvent.on(creatEventName('Accordion', this.data.ulid, 'items', 'add'), () => {
+  //   shareEvent.on(createEventName('Accordion', this.data.ulid, 'items', 'add'), () => {
   //     this.opMenu()
   //   })
-  //   shareEvent.on(creatEventName('Accordion', this.data.ulid, 'items', 'update'), () => {
+  //   shareEvent.on(createEventName('Accordion', this.data.ulid, 'items', 'update'), () => {
   //     this.opMenu()
   //   })
-  //   shareEvent.on(creatEventName('Accordion', this.data.ulid, 'items', 'remove'), () => {
+  //   shareEvent.on(createEventName('Accordion', this.data.ulid, 'items', 'remove'), () => {
   //     this.opMenu()
   //   })
   // }

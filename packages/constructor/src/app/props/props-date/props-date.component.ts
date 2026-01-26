@@ -58,6 +58,5 @@ export class PropsDateComponent {
     if (this.data.value !== undefined) {
       this.value = new Date(this.data.value)
     }
-    clog('innit', this.value, this.data.value)
   }
 }

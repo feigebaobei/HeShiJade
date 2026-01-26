@@ -6,6 +6,9 @@ import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/compon
 import type { GridStackOptions, GridStackWidget } from 'gridstack/dist/types';
 import type { A, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
+import { GridstackComponent, GridstackItemComponent, GridstackModule } from 'gridstack/dist/angular';
+import { ButtonModule } from 'ng-devui';
+import { CompBoxComponent } from '../comp-box/comp-box.component';
 
 let clog = console.log
 
@@ -17,7 +20,13 @@ interface SuperGridItem extends GridStackWidget {
 @Component({
   selector: 'app-comp-stack',
   // standalone: true,
-  // imports: [],
+  // imports: [
+  //   GridstackModule,
+  //   ButtonModule,
+  //   CompBoxComponent,
+  //   // GridstackItemComponent,
+  //   // GridstackComponent,
+  // ],
   templateUrl: './comp-stack.component.html',
   styleUrl: './comp-stack.component.sass'
 })
@@ -76,6 +85,11 @@ export class CompStackComponent implements OnInit, OnDestroy {
     //   }[]
     //   ...
     // }
+    clog('changeCBH', $event)
+    // 拦截误判操作。如编辑在舞台区的Textarea组件的文本后再该组件的绿区，则触发此错误。
+    if (!$event.nodes) {
+      return
+    }
     let curNode = this._componentList.find(item => {
       return item.id === $event.nodes[0].id
     })

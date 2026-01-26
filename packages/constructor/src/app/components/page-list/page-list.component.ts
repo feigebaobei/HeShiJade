@@ -1,7 +1,7 @@
 import { Component, Input, TemplateRef, ViewChild, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { ListenItems } from 'src/helper/ListenItems';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 // type
 import type { A, B, S, MenuItem, ULID, Oa, } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
@@ -235,13 +235,13 @@ export class PageListComponent extends ListenItems<MenuItem> {
   //   }
   // }
   // listen() {
-  //   shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'add'), () => {
+  //   shareEvent.on(createEventName('PageList', this.data.ulid, 'items', 'add'), () => {
   //     this.opMenu()
   //   })
-  //   shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'update'), () => {
+  //   shareEvent.on(createEventName('PageList', this.data.ulid, 'items', 'update'), () => {
   //     this.opMenu()
   //   })
-  //   shareEvent.on(creatEventName('PageList', this.data.ulid, 'items', 'remove'), () => {
+  //   shareEvent.on(createEventName('PageList', this.data.ulid, 'items', 'remove'), () => {
   //     this.opMenu()
   //   })
   // }

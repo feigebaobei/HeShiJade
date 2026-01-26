@@ -1,0 +1,12 @@
+<d-tags
+[tags]="tags"
+[mode]="data.props['mode']"
+[size]="data.props['size']"
+[deletable]="data.props['deletable']"
+[hideBeyondTags]="data.props['hideBeyondTags']"
+displayProperty="label"
+titleProperty="tip"
+[beforeDelete]="beforeDeleteH"
+(tagDelete)="tagDeleteH($event)"
+(checkedChange)="checkedChangeH($event)"
+></d-tags>

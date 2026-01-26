@@ -23,6 +23,8 @@ import {
   ImagePreviewModule,
   AccordionModule,
   BreadcrumbModule,
+  DrawerModule,
+  BadgeModule,
 } from 'ng-devui'
 import { MenuModule } from 'ng-devui/menu';
 import { FormsModule } from '@angular/forms';
@@ -63,6 +65,8 @@ import { SpanComponent } from './span/span.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { DrawerComponent } from './drawer/drawer.component';
+import { BadgeComponent } from './badge/badge.component';
 @NgModule({
   declarations: [
     // AdDirective,
@@ -97,6 +101,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     ImagePreviewComponent,
     AccordionComponent,
     BreadcrumbComponent,
+    DrawerComponent,
+    BadgeComponent,
   ],
   imports: [
     CommonModule,
@@ -124,6 +130,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     ImagePreviewModule,
     AccordionModule,
     BreadcrumbModule,
+    DrawerModule,
+    BadgeModule,
   ],
   providers: [],
   exports: [

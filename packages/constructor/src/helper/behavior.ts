@@ -634,7 +634,227 @@ let DatePicker: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
-
+let DateRangePicker: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '展开&收起列表时', value: 'dropdownToggle'},
+      {label: '点击确定时', value: 'confirmEvent'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let TimePicker: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变值时', value: 'selectedTimeChange'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Slider: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变值后', value: 'afterChange'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Textarea: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变值后', value: 'change'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Toggle: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变值前', value: 'beforeChange'},
+      {label: '改变值后', value: 'change'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Drawer: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '关闭前', value: 'beforeHidden'},
+      {label: '打开后', value: 'afterOpened'},
+      {label: '关闭后', value: 'close'},
+      // {label: '销毁时', value: 'destroy'},
+      {label: '全屏时', value: 'fullScreen'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Badge: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Progress: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Rate: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '改变值后', value: 'change'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
+let Tag: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '删除前', value: 'beforeDelete'},
+      {label: '删除后', value: 'tagDelete'},
+      {label: '改变值后', value: 'checkedChange'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 export {
@@ -666,6 +886,16 @@ export {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Toggle,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -696,5 +926,15 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Breadcrumb,
     Cascader,
     DatePicker,
+    DateRangePicker,
+    TimePicker,
+    Slider,
+    Textarea,
+    Toggle,
+    Drawer,
+    Badge,
+    Progress,
+    Rate,
+    Tag,
 }
 export default all

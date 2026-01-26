@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatepickerModule, DatepickerProModule } from 'ng-devui';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
 import { N, S } from 'src/types/base';
 
@@ -32,10 +32,10 @@ export class DatePickerComponent extends TextBase {
       this.value = undefined
     }
     // 监听&设置
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), (({key, value}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'update'), (({key, value}) => {
       this.value = new Date(value)
     }))
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'remove'), (({key}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'remove'), (({key}) => {
       switch (key) {
         case 'value':
           this.value = undefined

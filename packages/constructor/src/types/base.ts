@@ -26,7 +26,11 @@ interface Options<T, G> {
     value: G,
     disabled?: B
 }
-interface ConfigItemInput {
+interface ConfigItemBase {
+  listenKey?: S[]
+  listenCb?: (curConfigItem: ConfigItem, listenConfigItem: ConfigItem, configItemList: ConfigItem[]) => void
+}
+interface ConfigItemInput extends ConfigItemBase {
   category: 'input'
   value: S
   label: S
@@ -37,7 +41,7 @@ interface ConfigItemInput {
   placeholder?: S
 }
 type ConfigItemKeys = keyof ConfigItem
-interface ConfigItemTextarea {
+interface ConfigItemTextarea extends ConfigItemBase {
   category: 'textarea'
   value: S
   label: S
@@ -47,7 +51,7 @@ interface ConfigItemTextarea {
   hideListenerKey?: S
   hideCalc?: B
 }
-interface ConfigItemSelect<T> {
+interface ConfigItemSelect<T = N | S> extends ConfigItemBase {
   category: 'select'
   value: T
   options: SelectOptionsItem[] // 当前配置项的可选项
@@ -66,18 +70,20 @@ interface ConfigItemSelect<T> {
   hideCalc?: B
   allowClear?: B
 }
-interface ConfigItemNumber {
+interface ConfigItemNumber extends ConfigItemBase {
   category: 'number'
   value: N
   label: S
   key: S
-  maxLength?: N
-  minLength?: N
+  max: N
+  min: N
+  step: N
   hide?: FT<B>
-  hideListenerKey?: S
+  hideListenerKey?: S // todo S => S[]
   hideCalc?: B
+  listenKey?: S[]
 }
-interface ConfigItemSwitch {
+interface ConfigItemSwitch extends ConfigItemBase {
   category: 'switch'
   options: SelectOptionsItem[]
   value: B
@@ -89,11 +95,12 @@ interface ConfigItemSwitch {
   hideCalc?: B
 }
 // interface ConfigItemOption {
-interface ConfigItemOption {
+interface ConfigItemOption extends ConfigItemBase {
   category: 'options'
   label: S
   key: S
-  value: ConfigItemOption['template'][]
+  // value: ConfigItemOption['template'][]
+  value: Pick<ConfigItemOption['template'], 'label' | 'value' | 'disabled'>[]
   // template: Options<S, S>
   // template: Partial<{
   //   label: S
@@ -101,8 +108,8 @@ interface ConfigItemOption {
   //   valueType: 'string' | 'number' | 'boolean'
   //   disabled: B
   //   hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
-  //   // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
-  //   // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+  //   // addButton: B, // 这是保留字段。2027.01.01+删除
+  //   // miuns: B // 这是保留字段。2027.01.01+删除
   // }>
   template: {
     label: S
@@ -110,15 +117,15 @@ interface ConfigItemOption {
     valueTip?: S
     valueType: 'string' | 'number' | 'boolean'
     disabled: B
-    hideField: ('label' | 'value' | 'valueType' | 'disabled')[]
-    // addButtonDisabled: B, // 这是保留字段。2027.01.01+删除
-    // miunsButtonDisabled: B // 这是保留字段。2027.01.01+删除
+    hideField: ('label' | 'value' | 'valueType' | 'disabled' | 'miuns')[]
+    miuns?: B,
   }
+  addButton?: B,
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B
 }
-interface ConfigItemDate {
+interface ConfigItemDate extends ConfigItemBase {
   category: 'date'
   label: S
   // value?: Date
@@ -129,7 +136,7 @@ interface ConfigItemDate {
   hideCalc?: B
 }
 // type CategoryType = Pick<ConfigItem, 'category'>
-type ConfigItem<T = S> = ConfigItemInput
+type ConfigItem<T = N | S> = ConfigItemInput
   | ConfigItemTextarea
   | ConfigItemSelect<T>
   | ConfigItemNumber

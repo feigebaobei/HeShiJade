@@ -52,18 +52,19 @@ export class ModalComponent extends TextBase implements OnInit{
       let footerNode = node?.children[createChildKey('slots', 'footer', 'node')]
       this.childrenFooter = footerNode?.toArray() || []
     }
-    this.listen()
+    // this.listen()
   }
-  listen() {
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'add'), () => {
-    // })
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'remove'), () => {
-    // })
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'update'), () => {
-    // })
-    // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'reorder'), () => {
-    // })
-  }
+  // todo 2026.06.01+ delete
+  // listen() {
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'add'), () => {
+  //   // })
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'remove'), () => {
+  //   // })
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'update'), () => {
+  //   // })
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'reorder'), () => {
+  //   // })
+  // }
   dropHeaderH($event: A) {
     let appUlid = this.appService.getCurApp()?.ulid || ''
     let pageUlid = this.pageService.getCurPage()?.ulid || ''

@@ -376,18 +376,27 @@ let Flex: ConfigItem[] = [
         category: 'number',
         key: 'order',
         value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
     },
     {
         label: '项目的放大比例',
         category: 'number',
         key: 'flexGrow',
         value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
     },
     {
         label: '项目的缩小比例',
         category: 'number',
         key: 'flexShrink',
         value: 1,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
     },
     {
         label: '项目本来的大小',
@@ -691,6 +700,81 @@ let Cascader: ConfigItem[] = [
         value: '',
     },
 ]
+let Progress: ConfigItem[] = [
+//   color: string; // 进度条色值
+//   percentage: number; // 进度条的进度
+//   percentageText?: string; // 进度条文字信息
+//   template?: TemplateRef<any>; // 进度条内自定义模板
+//   [key: string]: any;
+    {
+        label: '颜色',
+        category: 'input',
+        key: 'color',
+        value: '',
+    },
+    {
+        label: '百分比值',
+        category: 'number',
+        key: 'percentage',
+        value: 0,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+    },
+    {
+        label: '百分比文案',
+        category: 'input',
+        key: 'percentageText',
+        value: '',
+    },
+]
+let Tag: ConfigItem[] = [
+    {
+        label: 'id',
+        category: 'input',
+        key: 'id',
+        value: '',
+    },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: 'tip',
+        category: 'input',
+        key: 'tip',
+        value: '',
+    },
+    {
+        label: '样式',
+        category: 'select',
+        options: [
+            {label: 'blue-w98', value: 'blue-w98'},
+            {label: 'aqua-w98', value: 'aqua-w98'},
+            {label: 'olivine-w98', value: 'olivine-w98'},
+            {label: 'green-w98', value: 'green-w98'},
+            {label: 'yellow-w98', value: 'yellow-w98'},
+            {label: 'orange-w98', value: 'orange-w98'},
+            {label: 'pink-w98', value: 'pink-w98'},
+            {label: 'red-w98', value: 'red-w98'},
+            {label: 'purple-w98', value: 'purple-w98'},
+        ],
+        key: 'labelStyle',
+        value: 'blue-w98',
+    },
+    {
+        label: '是否选中',
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        key: 'checked',
+        value: false,
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -721,6 +805,16 @@ let all: {[k: S]: ConfigItem[]} = {
     Breadcrumb,
     Cascader,
     // DatePicker, // 没有特定子元素
+    // DateRangePicker, // 没有特定子元素
+    // TimePicker, // 没有特定子元素
+    // Slider, // 没有特定子元素
+    // Textarea, // 没有特定子元素
+    // Toggle, // 没有特定子元素
+    // Drawer, // 没有特定子元素
+    // Badge, // 没有特定子元素
+    Progress,
+    // Rate, // 没有特定子元素
+    Tag,
 }
 
 export default all

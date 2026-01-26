@@ -30,6 +30,16 @@ import { AccordionComponent } from '../accordion/accordion.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { CascaderComponent } from '../cascader/cascader.component';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { TimePickerComponent } from '../time-picker/time-picker.component';
+import { DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
+import { SliderComponent } from '../slider/slider.component';
+import { TextareaComponent } from '../textarea/textarea.component';
+import { ToggleComponent } from '../toggle/toggle.component';
+import { DrawerComponent } from '../drawer/drawer.component';
+import { BadgeComponent } from '../badge/badge.component';
+import { ProgressComponent } from '../progress/progress.component';
+import { RateComponent } from '../rate/rate.component';
+import { TagComponent } from '../tag/tag.component';
 // type
 import type { A, N, S } from 'src/types/base';
 import type { Component as Comp, } from 'src/types/component';
@@ -65,6 +75,16 @@ let compMap: {[k: S]: A} = {
   Breadcrumb: BreadcrumbComponent,
   Cascader: CascaderComponent,
   DatePicker: DatePickerComponent,
+  DateRangePicker: DateRangePickerComponent,
+  TimePicker: TimePickerComponent,
+  Slider: SliderComponent,
+  Textarea: TextareaComponent,
+  Toggle: ToggleComponent,
+  Drawer: DrawerComponent,
+  Badge: BadgeComponent,
+  Progress: ProgressComponent,
+  Rate: RateComponent,
+  Tag: TagComponent,
 }
 
 @Component({
@@ -352,6 +372,100 @@ export class CompBoxComponent {
           props: this.data.props,
           behavior: this.data.behavior,
           items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'DateRangePicker':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'TimePicker':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Slider':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Textarea':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Toggle':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Drawer':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Badge':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Progress':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Rate':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
+          ulid: this.data.ulid,
+          pageUlid: this.data.pageUlid,
+        }
+        break;
+      case 'Tag':
+        this.componentRef.instance.data = {
+          props: this.data.props,
+          behavior: this.data.behavior,
+          items: this.data.items,
+          slots: this.data.slots,
           ulid: this.data.ulid,
           pageUlid: this.data.pageUlid,
         }

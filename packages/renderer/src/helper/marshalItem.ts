@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 // import { Text } from "src/types/config";
 // import { text } from "./config";
-// import shareEvent, { creatEventName } from "./share-event";
+// import shareEvent, { createEventName } from "./share-event";
 // type
 import type { Component as Comp } from "src/types/component";
 // import { InputData } from "./InputData";

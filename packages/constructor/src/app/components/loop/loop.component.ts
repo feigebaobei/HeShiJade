@@ -1,7 +1,7 @@
 import { Component, effect, Input, } from '@angular/core';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 import { asyncFn, createChildKey } from 'src/helper/index'
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -54,7 +54,7 @@ export class LoopComponent extends TextBase {
   listen() {
     // 只有loop/layout组件监听了props的更新事件。
     // todo 检查是否可以换成别的逻辑。
-    shareEvent.on(creatEventName('Loop', this.data.ulid, 'props', 'update'), (obj) => {
+    shareEvent.on(createEventName('Loop', this.data.ulid, 'props', 'update'), (obj) => {
       this.setStyle()
     })
   }
