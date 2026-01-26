@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { TagsModule } from 'ng-devui';
-import { ListenItems } from 'src/helper/ListenItems';
+import { TagsModule } from 'ng-devui/tags';
 import shareEvent, { creatEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
 import { S } from 'src/types/base';
@@ -8,7 +7,9 @@ import { S } from 'src/types/base';
 @Component({
   selector: 'app-tag',
   standalone: true,
-  imports: [TagsModule],
+  imports: [
+    TagsModule,
+  ],
   templateUrl: './tag.component.html',
   styleUrl: './tag.component.sass'
 })
@@ -28,6 +29,7 @@ TextBase
         label: item['label'],
         tip: item['tip'],
         labelStyle: item['labelStyle'],
+        checked: item['checked']
       }
     })
   }
@@ -43,7 +45,7 @@ TextBase
         })
   }
   ngOnInit() {
-    this.initTags() 
+    this.initTags()
     this.listen()
   }
 }

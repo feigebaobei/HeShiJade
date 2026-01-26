@@ -764,6 +764,16 @@ let Tag: ConfigItem[] = [
         key: 'labelStyle',
         value: 'blue-w98',
     },
+    {
+        label: '是否选中',
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        key: 'checked',
+        value: false,
+    },
 ]
 
 let all: {[k: S]: ConfigItem[]} = {

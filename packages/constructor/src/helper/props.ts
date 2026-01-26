@@ -3114,6 +3114,7 @@ let Rate: PropsConfigItem = {
 }
 
 let Tag: PropsConfigItem = {
+    // 由items算出tags
     mode: {
         category: 'select',
         options: [
@@ -3136,15 +3137,6 @@ let Tag: PropsConfigItem = {
         key: 'size',
     },
     // displayProperty = 'label'
-    count: {
-        category: 'number',
-        value: 5,
-        max: Number.MAX_SAFE_INTEGER,
-        min: Number.MIN_SAFE_INTEGER,
-        step: 1,
-        label: '总等级数',
-        key: 'count',
-    },
     deletable: {
         category: 'switch',
         options: [
@@ -3156,7 +3148,7 @@ let Tag: PropsConfigItem = {
         key: 'deletable',
     },
     // titleProperty = 'tip'
-    hideBeyongTags: {
+    hideBeyondTags: {
         category: 'switch',
         options: [
             {label: 'true', value: true},
@@ -3164,7 +3156,7 @@ let Tag: PropsConfigItem = {
         ],
         value: false,
         label: '超出时溢出',
-        key: 'hideBeyongTags',
+        key: 'hideBeyondTags',
     },
 }
 
