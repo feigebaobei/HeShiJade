@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TagsModule } from 'ng-devui/tags';
 import shareEvent, { createEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
-import { S } from 'src/types/base';
+import { B, S } from 'src/types/base';
 
 @Component({
   selector: 'app-tag',
@@ -17,7 +17,7 @@ export class TagComponent extends
 TextBase
 // ListenItems 
 {
-  tags: {id: S, label: S, tip: S, labelStyle: S}[]
+  tags: {id: S, label: S, tip: S, labelStyle: S, checked: B}[]
   constructor() {
     super()
     this.tags = []

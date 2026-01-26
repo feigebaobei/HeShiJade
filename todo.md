@@ -2,10 +2,7 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-number 配置项能不能处理成监听其他props设置最大值   done
 |tag|doing||
-creatEventName => createEventName      done
-|升级devui组件库|done||
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
@@ -25,6 +22,7 @@ creatEventName => createEventName      done
 |feat: number配置项支持精度|||
 |feat: props配置项支持监听配置项改变时触发回调方法|||
 |feat: 创建Rate组件|||
+|chore: 升级devui组件库（"@devui-design/icons": "1.4.0", "ng-devui": "18.0.0",）|||
 
 修正curd应用时出现脏数据的问题   todo
 |propsHideMap & propsListenMap 合并成一个|||
