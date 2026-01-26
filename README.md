@@ -12,10 +12,12 @@ http://heshijade.com
 
 ## 技术栈
 - angular@17
-- dev-ui
+- dev-ui()
+  - "@devui-design/icons": "1.4.0",
+  - "ng-devui": "18.0.0",
 - express(node)
 - mongodb
-- pnpm@9.15.x
+- pnpm@10.10.0
 - node@20
 
 ## 启动

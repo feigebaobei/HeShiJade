@@ -5,6 +5,7 @@
 number 配置项能不能处理成监听其他props设置最大值   done
 |tag|doing||
 creatEventName => createEventName      todo
+|升级devui组件库|doing||
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
