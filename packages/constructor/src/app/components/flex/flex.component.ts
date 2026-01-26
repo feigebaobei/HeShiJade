@@ -3,7 +3,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { asyncFn, compatibleArray, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, O, S, ULID } from 'src/types/base';
@@ -48,7 +48,7 @@ export class FlexComponent extends TextBase implements OnInit, OnChanges {
     this.show = true
   }
   listen() {
-    shareEvent.on(creatEventName('Flex', this.data.ulid, 'items', 'add'), (obj) => {
+    shareEvent.on(createEventName('Flex', this.data.ulid, 'items', 'add'), (obj) => {
       let key = this.createSlotsKey(this.data.items.length - 1)
       this.data.slots[key] = ''
       this.compArr.push({
@@ -63,7 +63,7 @@ export class FlexComponent extends TextBase implements OnInit, OnChanges {
       })
       this.componentService.reqUpdateComponent('slots', key, '', this.data.ulid)
     })
-    shareEvent.on(creatEventName('Flex', this.data.ulid, 'items', 'remove'), ({index}) => {
+    shareEvent.on(createEventName('Flex', this.data.ulid, 'items', 'remove'), ({index}) => {
       let [{comp}] = this.compArr.splice(index, 1)
       this.componentService.removeSlots(this.createSlotsKey(index))
       this.componentService.reqRemoveSlots(this.createSlotsKey(index))
@@ -73,7 +73,7 @@ export class FlexComponent extends TextBase implements OnInit, OnChanges {
         this.componentService.reqDeleteComponent(comp.ulid, childrenUlid)
       }
     })
-    shareEvent.on(creatEventName('Flex', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+    shareEvent.on(createEventName('Flex', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
       let item = this.data.items[index]
       this.compArr[index].styleObj = {
         'order': item['order'],

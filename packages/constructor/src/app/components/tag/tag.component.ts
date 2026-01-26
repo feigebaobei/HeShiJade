@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TagsModule } from 'ng-devui/tags';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
 import { S } from 'src/types/base';
 
@@ -34,13 +34,13 @@ TextBase
     })
   }
   listen() {
-        shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'add'), () => {
+        shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'add'), () => {
           this.initTags()
         })
-        shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'update'), () => {
+        shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'update'), () => {
           this.initTags()
         })
-        shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'remove'), () => {
+        shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'remove'), () => {
           this.initTags()
         })
   }

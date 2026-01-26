@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatepickerProModule } from 'ng-devui';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
 import { D, N } from 'src/types/base';
 
@@ -53,7 +53,7 @@ export class DateRangePickerComponent extends TextBase {
     // this.InitStartIndexOfWeek()
     // this.initValue()
     // this.initRange()
-    // shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'remove'), ({key, value}) => {
+    // shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'remove'), ({key, value}) => {
     //   clog('key', key)
     //   switch (key) {
     //     case 'startDate':
@@ -62,7 +62,7 @@ export class DateRangePickerComponent extends TextBase {
     //       break;
     //   }
     // })
-    // shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
+    // shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
     //   clog('key', key)
     //   switch (key) {
     //     case 'startDate':

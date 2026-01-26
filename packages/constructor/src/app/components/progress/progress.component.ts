@@ -4,7 +4,7 @@ import { InputData } from 'src/helper/InputData';
 // type
 import type { IGradientColor, IProgressItem } from 'ng-devui/progress/progress.types';
 import { A, B, N } from 'src/types/base';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { asyncFn, clog } from 'src/helper';
 import { CommonModule } from '@angular/common';
 
@@ -54,7 +54,7 @@ export class ProgressComponent extends InputData {
     }
   }
   listen() {
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
       this.show = false
       // 因底层组件不能正确渲染变动后的props。又懒得排查具体哪些属性组合不能正常更新视图。所以全都处理为用销毁后再创建。
       asyncFn(() => {
@@ -70,7 +70,7 @@ export class ProgressComponent extends InputData {
         this.show = true
       })
     })
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'update'), ({key, value, index}) => {
       this.show = false
       asyncFn(() => {
         this.initMultiProgressConfig()
@@ -78,7 +78,7 @@ export class ProgressComponent extends InputData {
         this.show = true
       })
     })
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'items', 'remove'), ({key, value, index}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'items', 'remove'), ({key, value, index}) => {
       this.show = false
       asyncFn(() => {
         this.initMultiProgressConfig()

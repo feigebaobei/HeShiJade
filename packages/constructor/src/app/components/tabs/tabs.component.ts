@@ -4,7 +4,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { asyncFn, createChildKey as cck, initComponentMeta } from 'src/helper';
 import { compatibleArray } from 'src/helper'
 import { createKvMap } from 'src/helper/kvMap';
-import {shareEvent, creatEventName} from 'src/helper/share-event';
+import {shareEvent, createEventName} from 'src/helper/share-event';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
@@ -166,11 +166,11 @@ export class TabsComponent extends TextBase implements OnInit, AfterViewChecked,
   ngOnDestroy(): void {
   }
   listen() {
-    shareEvent.on(creatEventName('Tabs', this.data.ulid, 'items', 'add'), () => {
+    shareEvent.on(createEventName('Tabs', this.data.ulid, 'items', 'add'), () => {
       this.compArr.push([])
     })
     shareEvent.on(
-      creatEventName('Tabs', this.data.ulid, 'items', 'remove'),
+      createEventName('Tabs', this.data.ulid, 'items', 'remove'),
       (options) => {
         let childComponentArr = this.compArr.splice(options.index, 1)[0]
         // 删除当前组件的相关子组件
@@ -205,7 +205,7 @@ export class TabsComponent extends TextBase implements OnInit, AfterViewChecked,
         }
       }
     )
-    shareEvent.on(creatEventName('Tabs', this.data.ulid, 'items', 'update'), (options) => {
+    shareEvent.on(createEventName('Tabs', this.data.ulid, 'items', 'update'), (options) => {
       if (options.key === 'id') {
         let slotsKeyForDelete = Object.keys(this.data.slots).find((slotsKey) => {
           return slotsKey.split('_')[0] === String(options.index)
@@ -223,7 +223,7 @@ export class TabsComponent extends TextBase implements OnInit, AfterViewChecked,
       }
     })
     shareEvent.on(
-      creatEventName('Tabs', this.data.ulid, 'items', 'reorder'),
+      createEventName('Tabs', this.data.ulid, 'items', 'reorder'),
       (index: N) => {
         clog('reorder', index)
       }

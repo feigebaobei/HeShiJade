@@ -6,7 +6,7 @@ import { asyncFn, createChildKey } from 'src/helper/index'
 import { initComponentMeta } from 'src/helper';
 import { PageService } from 'src/app/service/page.service';
 import { compatibleArray } from 'src/helper/index'
-import { shareEvent, creatEventName } from 'src/helper/share-event';
+import { shareEvent, createEventName } from 'src/helper/share-event';
 // 数据
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 // import { text } from 'src/helper/config';
@@ -147,11 +147,11 @@ AfterViewInit
     })
   }
   listen() {
-    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'add'), (_obj) => {
+    shareEvent.on(createEventName('Table', this.data.ulid, 'items', 'add'), (_obj) => {
       this.showList.push(true)
       this.compArr.push([])
     })
-    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'remove'), ({index, item}) => {
+    shareEvent.on(createEventName('Table', this.data.ulid, 'items', 'remove'), ({index, item}) => {
       // 处理当前组件内的是否显示
       this.showList.splice(index, 1)
       let childComponentArr = this.compArr[index]
@@ -182,7 +182,7 @@ AfterViewInit
       // 删除远端的slots
       this.componentService.reqRemoveSlots(`${index}_${item.field}`)
     })
-    shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+    shareEvent.on(createEventName('Table', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
       // {key, value, index}
       if (key === 'field') {
         let slotsKeyForDelete = Object.keys(this.data.slots).find((slotsKey) => {
@@ -197,7 +197,7 @@ AfterViewInit
         }
       }
     })
-    // shareEvent.on(creatEventName('Table', this.data.ulid, 'items', 'reorder'), () => {
+    // shareEvent.on(createEventName('Table', this.data.ulid, 'items', 'reorder'), () => {
     // })
   }
   dropH(e: DropEvent, field: S, itemIndex: N) {

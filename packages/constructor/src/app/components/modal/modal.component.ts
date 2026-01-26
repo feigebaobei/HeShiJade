@@ -56,13 +56,13 @@ export class ModalComponent extends TextBase implements OnInit{
   }
   // todo 2026.06.01+ delete
   // listen() {
-  //   // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'add'), () => {
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'add'), () => {
   //   // })
-  //   // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'remove'), () => {
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'remove'), () => {
   //   // })
-  //   // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'update'), () => {
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'update'), () => {
   //   // })
-  //   // shareEvent.on(creatEventName('Modal', this.data.ulid, 'items', 'reorder'), () => {
+  //   // shareEvent.on(createEventName('Modal', this.data.ulid, 'items', 'reorder'), () => {
   //   // })
   // }
   dropHeaderH($event: A) {

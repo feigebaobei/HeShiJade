@@ -1,5 +1,5 @@
 import { Component, Input, } from '@angular/core';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { asyncFn, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 // import { text } from 'src/helper/config';
@@ -71,7 +71,7 @@ export class LayoutComponent extends TextBase {
     this.styleObj = {}
   }
   listen() {
-    shareEvent.on(creatEventName('Layout', this.data.ulid, 'props', 'update'), (obj) => {
+    shareEvent.on(createEventName('Layout', this.data.ulid, 'props', 'update'), (obj) => {
       asyncFn(() => {
         this.showObj[obj.key as K] = obj.value
       })

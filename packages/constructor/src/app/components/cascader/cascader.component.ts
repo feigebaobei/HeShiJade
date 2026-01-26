@@ -6,7 +6,7 @@ import { ListenItems } from 'src/helper/ListenItems';
 import { A, Oa, S } from 'src/types/base';
 // import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 
 interface CascaderItemNew extends CascaderItem {
   key: S,
@@ -52,7 +52,7 @@ ListenItems<CascaderItemNew>
   listenAll() {
     this.listen()
     // 因这样的props和items改变时舞台区的组件不能用effect+component实现更新，所以使用shareEvent处理。
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
       switch (key) {
         case 'valueList':
           this.opValue()

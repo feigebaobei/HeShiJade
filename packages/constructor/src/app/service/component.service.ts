@@ -4,7 +4,7 @@ import { PageService } from './page.service';
 import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, compatibleComponentData, createChildKey } from 'src/helper/index'
-import { shareEvent, creatEventName} from 'src/helper/share-event';
+import { shareEvent, createEventName} from 'src/helper/share-event';
 // 数据
 import {categoryList} from 'src/helper/category'
 import { serviceUrl } from 'src/helper/config';
@@ -260,7 +260,7 @@ export class ComponentService {
     if (curComp) {
       curComp.props[key] = value
       if (isEmit) {
-        shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
+        shareEvent.emit(createEventName(curComp.type, curComp.ulid, 'props', 'update'), {key, value})
       }
     }
     // setTimeout(() => {
@@ -303,14 +303,14 @@ export class ComponentService {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items[index][key] = value
-      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'update'), {key, value, index})
+      shareEvent.emit(createEventName(curComp.type, curComp.ulid, 'items', 'update'), {key, value, index})
     }
   }
   addItems(obj: ItemsMetaItem) {
     let curComp = this.curComponent()
     if (curComp) {
       curComp.items.push(obj)
-      shareEvent.emit(creatEventName(curComp.type, curComp.ulid, 'items', 'add'), obj)
+      shareEvent.emit(createEventName(curComp.type, curComp.ulid, 'items', 'add'), obj)
     }
   }
   addSlots(key: S, value: S) {
@@ -341,7 +341,7 @@ export class ComponentService {
     let component = tree?.find(componentUlid)?.value
     if (component) {
       let [item] = component.items.splice(index, 1)
-      shareEvent.emit(creatEventName(component.type, component.ulid, 'items', 'remove'), {item, index}) // 触发事件
+      shareEvent.emit(createEventName(component.type, component.ulid, 'items', 'remove'), {item, index}) // 触发事件
     }
   }
   // 更新组件
@@ -364,7 +364,7 @@ export class ComponentService {
     let component = tree?.find(componentUlid)?.value
     if (component) {
       delete component.props[key]
-      shareEvent.emit(creatEventName(component.type, component.ulid, 'props', 'remove'), {key})
+      shareEvent.emit(createEventName(component.type, component.ulid, 'props', 'remove'), {key})
     }
     // clog('removeProps', component)
   }

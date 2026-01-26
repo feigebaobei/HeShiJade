@@ -3,7 +3,7 @@ import { asyncFn, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 // import { text } from 'src/helper/config';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
@@ -49,7 +49,7 @@ export class GridComponent extends TextBase {
     // this.text = text
   }
   listen() {
-    shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'add'), (obj) => {
+    shareEvent.on(createEventName('Grid', this.data.ulid, 'items', 'add'), (obj) => {
       let key = this.createSlotsKey(this.data.items.length - 1)
       this.data.slots[key] = ''
       this.compArr.push({
@@ -65,7 +65,7 @@ export class GridComponent extends TextBase {
       })
       this.componentService.reqUpdateComponent('slots', key, '', this.data.ulid)
     })
-    shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'remove'), ({item, index}) => {
+    shareEvent.on(createEventName('Grid', this.data.ulid, 'items', 'remove'), ({item, index}) => {
       // this.compArr[index] = undefined
       // this.compArr[index] = {
       //   comp: undefined,
@@ -80,7 +80,7 @@ export class GridComponent extends TextBase {
         this.componentService.reqDeleteComponent(comp.ulid, childrenUlid)
       }
     })
-    shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
+    shareEvent.on(createEventName('Grid', this.data.ulid, 'items', 'update'), ({key, value, index}) => {
       let item = this.data.items[index]
       this.compArr[index].styleObj = {
         'grid-column-start': item['gridColumnStart'],
@@ -91,7 +91,7 @@ export class GridComponent extends TextBase {
         'align-self': item['alignSelf'],
       }
     })
-    // shareEvent.on(creatEventName('Grid', this.data.ulid, 'items', 'reorder'), (obj) => {
+    // shareEvent.on(createEventName('Grid', this.data.ulid, 'items', 'reorder'), (obj) => {
     // })
   }
   createSlotsKey(index: N) {

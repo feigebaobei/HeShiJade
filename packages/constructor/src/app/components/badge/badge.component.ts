@@ -4,7 +4,7 @@ import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 import { clog, createChildKey, initComponentMeta } from 'src/helper';
 import { gridLayoutDefault } from 'src/helper/gridLayout';
-import shareEvent, { creatEventName } from 'src/helper/share-event';
+import shareEvent, { createEventName } from 'src/helper/share-event';
 import { TextBase } from 'src/helper/text';
 import { A, N, O, ULID } from 'src/types/base';
 // type
@@ -85,7 +85,7 @@ export class BadgeComponent extends TextBase {
       this.childComp = arr[0]
     }
     this.initOffset()
-    shareEvent.on(creatEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
+    shareEvent.on(createEventName(this.data.type, this.data.ulid, 'props', 'update'), ({key, value}) => {
       switch (key) {
         case 'offset':
           this.initOffset()
