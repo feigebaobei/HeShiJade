@@ -1,29 +1,14 @@
 ||||
 |-|-|-|
 |分支|f_tag||
-|丰富组件|||
-|tag|done||
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
 |所有组件改为独立组件|todo||
 |要上生产的内容|||
-|feat: 创建DateRangePicker组件|||
-|feat: 创建TimePicker组件|||
-|feat: 创建Slider组件|||
-|feat: 创建Textarea组件|||
-|feat: pool.trigger方法返回方法体的返回值组成的数组|||
-|feat: 创建Toggle组件|||
-|feat: 创建Drawer组件|||
-|feat: 创建Badge组件|||
-|feat: options配置项支持禁用删除、禁用增加|||
-|feat: 创建Progress组件|||
-|feat: options配置项使用flex布局|||
-|feat: number配置项支持精度|||
-|feat: props配置项支持监听配置项改变时触发回调方法|||
-|feat: 创建Rate组件|||
-|chore: 升级devui组件库（"@devui-design/icons": "1.4.0", "ng-devui": "18.0.0",）|||
-|feat: 创建Tag组件|||
+||||
+||||
+||||
 
 修正curd应用时出现脏数据的问题   todo
 |propsHideMap & propsListenMap 合并成一个|||
