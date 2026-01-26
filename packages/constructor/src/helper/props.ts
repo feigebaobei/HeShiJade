@@ -3133,7 +3133,7 @@ let Tag: PropsConfigItem = {
             {label: '中', value: 'md'},
         ],
         value: 'md',
-        label: '类型',
+        label: '尺寸',
         key: 'size',
     },
     // displayProperty = 'label'
