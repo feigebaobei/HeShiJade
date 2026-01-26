@@ -26,7 +26,11 @@ interface Options<T, G> {
     value: G,
     disabled?: B
 }
-interface ConfigItemInput {
+interface ConfigItemBase {
+  listenKey?: S[]
+  listenCb?: (curConfigItem: ConfigItem, listenConfigItem: ConfigItem, configItemList: ConfigItem[]) => void
+}
+interface ConfigItemInput extends ConfigItemBase {
   category: 'input'
   value: S
   label: S
@@ -37,7 +41,7 @@ interface ConfigItemInput {
   placeholder?: S
 }
 type ConfigItemKeys = keyof ConfigItem
-interface ConfigItemTextarea {
+interface ConfigItemTextarea extends ConfigItemBase {
   category: 'textarea'
   value: S
   label: S
@@ -47,7 +51,7 @@ interface ConfigItemTextarea {
   hideListenerKey?: S
   hideCalc?: B
 }
-interface ConfigItemSelect<T = N | S> {
+interface ConfigItemSelect<T = N | S> extends ConfigItemBase {
   category: 'select'
   value: T
   options: SelectOptionsItem[] // 当前配置项的可选项
@@ -66,21 +70,20 @@ interface ConfigItemSelect<T = N | S> {
   hideCalc?: B
   allowClear?: B
 }
-interface ConfigItemNumber {
+interface ConfigItemNumber extends ConfigItemBase {
   category: 'number'
   value: N
   label: S
   key: S
-  // maxLength?: N
-  // minLength?: N
   max: N
   min: N
   step: N
   hide?: FT<B>
-  hideListenerKey?: S
+  hideListenerKey?: S // todo S => S[]
   hideCalc?: B
+  listenKey?: S[]
 }
-interface ConfigItemSwitch {
+interface ConfigItemSwitch extends ConfigItemBase {
   category: 'switch'
   options: SelectOptionsItem[]
   value: B
@@ -92,7 +95,7 @@ interface ConfigItemSwitch {
   hideCalc?: B
 }
 // interface ConfigItemOption {
-interface ConfigItemOption {
+interface ConfigItemOption extends ConfigItemBase {
   category: 'options'
   label: S
   key: S
@@ -122,7 +125,7 @@ interface ConfigItemOption {
   hideListenerKey?: S
   hideCalc?: B
 }
-interface ConfigItemDate {
+interface ConfigItemDate extends ConfigItemBase {
   category: 'date'
   label: S
   // value?: Date

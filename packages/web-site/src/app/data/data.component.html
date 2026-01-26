@@ -26,14 +26,19 @@
 
         EnvKey = 'dev' | 'test' | 'pre' | 'prod'
 
+        ConfigItemBase
+            listenKey?: S[]
+            listenCb?: (curConfigItem: ConfigItem, listenConfigItem: ConfigItem, configItemList: ConfigItem[]) => void
+
         type ConfigItem&gt;T = S&gt; = ConfigItemInput
             | ConfigItemTextarea
             | ConfigItemSelect&lt;T&gt;
             | ConfigItemNumber
             | ConfigItemSwitch
             | ConfigItemOption
+            | ConfigItemDate
 
-        ConfigItemInput     // 以它为例
+        ConfigItemInput extends ConfigItemBase     // 以它为例
             category: 'input'       用哪种表单元素渲染
             value: S                默认值
             label: S                文本
@@ -42,7 +47,8 @@
             hideListenerKey?: S     当哪个key变动时重新计算显隐逻辑
             hideCalc?: B            它是由hide方法算出来的。默认值为false。它是控制是否显示的最直接字段。
         
-        type PropsValue = S | B | N    props的值类型
+        type PropsValue = S | B | N    // props的值类型
+        | {label: S, value: S | B | N, disabled: B}[] // options
 
         BehaviorMetaItem           行为
             <!-- 

@@ -5,7 +5,7 @@
 options配置项使用flex布局    done
 |progress|done||
 |rate|done||
-number配置项支持精度   doing
+number配置项支持精度   done
 修正curd应用时出现脏数据的问题   todo
 number 配置项能不能处理成监听基本props设置最大值   todo
 |tag|||

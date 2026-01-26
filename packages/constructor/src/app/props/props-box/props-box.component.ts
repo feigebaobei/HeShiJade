@@ -78,6 +78,7 @@ export class PropsBoxComponent {
   componentPropsList: ConfigItem[]
   msg: {}[]
   propsMap: Map<S, relationTargetKey>
+  propsListenMap: Map<S, relationTargetKey>
   text: Text
   propsObj: Comp['props']
   constructor(private componentService: ComponentService) {
@@ -85,6 +86,7 @@ export class PropsBoxComponent {
     this.componentPropsList = []
     this.msg = []
     this.propsMap = new Map()
+    this.propsListenMap = new Map()
     this.text = text
     this.propsObj = {}
     effect(() => {
@@ -244,21 +246,6 @@ export class PropsBoxComponent {
         this.componentPropsMeta = {}
         break
     }
-    // this.componentPropsList
-    //  = this.componentPropsList.map(item => {
-    //   // let f = item.hide
-    //   // if (f) {
-    //   //   return {
-    //   //     ...item,
-    //   //     hideCalc: f(this.componentPropsList)
-    //   //   }
-    //   // } else {
-    //   //   return {
-    //   //     ...item,
-    //   //     hideCalc: false
-    //   //   }
-    //   // }
-    // })
     this.componentPropsList.forEach(item => {
       if (item.hideListenerKey) {
         if (this.propsMap.has(item.hideListenerKey)) {
@@ -268,6 +255,17 @@ export class PropsBoxComponent {
           q.enqueue(item)
           this.propsMap.set(item.hideListenerKey, q)
         }
+      }
+      if (item.listenKey) {
+        item.listenKey.forEach(listenKey => {
+          if (this.propsListenMap.has(listenKey)) {
+            this.propsListenMap.get(listenKey)?.enqueue(item)
+          } else {
+            let q: relationTargetKey = new Queue()
+            q.enqueue(item)
+            this.propsListenMap.set(listenKey, q)
+          }
+        })
       }
     })
   }
@@ -289,14 +287,17 @@ export class PropsBoxComponent {
         }
       })
     }
+    let listenQ = this.propsListenMap.get(listenerKey)
+    if (listenQ) {
+      listenQ.toArray().forEach(item => {
+        if (item.listenCb) {
+          let listenConfigItem = this.componentPropsList.find(item => item.key === listenerKey)!
+          item.listenCb(item, listenConfigItem, this.componentPropsList)
+        }
+      })
+    }
   }
-  itemChangeH(p: A) {
-    // this.componentPropsList.forEach(item => {
-    //   if (item.key === p.key) {
-    //     item.value = p.value
-    //     this.componentService.setProps(item.key, item.value)
-    //   }
-    // })
+  itemChangeH(p: {key: S, value: A}) {
     this.initPropsObj()
     this.listenerChange(p.key)
   }

@@ -1,5 +1,5 @@
 // import type { ConfigItem } from 'src/types/props'
-import type { B, ConfigItem, ConfigItemSelect, S } from 'src/types/base'
+import type { B, ConfigItem, ConfigItemNumber, ConfigItemSelect, S } from 'src/types/base'
 import type { PropsConfigItem } from 'src/types/config'
 import type { Component } from 'src/types/component'
 // interface PropsConfigItem {
@@ -117,14 +117,6 @@ let Modal: PropsConfigItem = {
         label: '宽度',
         key: 'width',
     },
-    // zIndex: {
-    //     category: 'number',
-    //     value: 150,
-    //     // maxLength
-    //     // minLength
-    //     label: 'zIndex',
-    //     key: 'zIndex',
-    // },
     visible: {
         category: 'switch',
         options: [
@@ -3060,9 +3052,13 @@ let Rate: PropsConfigItem = {
         value: 0,
         max: Number.MAX_SAFE_INTEGER,
         min: Number.MIN_SAFE_INTEGER,
-        step: 1,
+        step: 0.5,
         label: '值',
         key: 'value',
+        listenKey: ['count'],
+        listenCb: (curConfigItem, listenConfigItem, configItemList) => {
+            (curConfigItem as ConfigItemNumber).max = (listenConfigItem as ConfigItemNumber).value
+        }
     },
     readonly: {
         category: 'switch',
