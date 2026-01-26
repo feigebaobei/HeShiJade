@@ -4,8 +4,10 @@
 |丰富组件|||
 options配置项使用flex布局    done
 |progress|done||
-|rate|doing||
-number配置项支持精度   todo
+|rate|done||
+number配置项支持精度   doing
+修正curd应用时出现脏数据的问题   todo
+number 配置项能不能处理成监听基本props设置最大值   todo
 |tag|||
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||

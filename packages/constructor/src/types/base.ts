@@ -71,8 +71,11 @@ interface ConfigItemNumber {
   value: N
   label: S
   key: S
-  maxLength?: N
-  minLength?: N
+  // maxLength?: N
+  // minLength?: N
+  max: N
+  min: N
+  step: N
   hide?: FT<B>
   hideListenerKey?: S
   hideCalc?: B

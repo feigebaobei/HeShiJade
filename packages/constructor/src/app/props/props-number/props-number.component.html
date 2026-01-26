@@ -1,7 +1,11 @@
 <div class="number_box">
     <span>{{data.label}}</span>
+    <!-- {{max}},{{min}} -->
     <d-input-number 
         [(ngModel)]="data.value"
+        [max]="data.max"
+        [min]="data.min"
+        [step]="data.step"
         (ngModelChange)="ngModelChangeH($event)"
     >
     </d-input-number>
