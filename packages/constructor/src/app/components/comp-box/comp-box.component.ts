@@ -44,6 +44,7 @@ import type {Component as Comp} from 'src/types/component'
 import type { Page } from 'src/types/page';
 import { ProgressComponent } from '../progress/progress.component';
 import { RateComponent } from '../rate/rate.component';
+import { TagComponent } from '../tag/tag.component';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所以我考虑使用封装全部devui的组件来实现.
@@ -87,6 +88,7 @@ let compMap: Oa = {
   Badge: BadgeComponent,
   Progress: ProgressComponent,
   Rate: RateComponent,
+  Tag: TagComponent,
 }
 
 @Component({
@@ -428,6 +430,14 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
         }
         break;
       case 'Rate':
+        this.componentRef.instance.data = {
+          type: this.comp.type,
+          props: this.comp.props,
+          items: this.comp.items,
+          ulid: this.comp.ulid,
+        }
+        break;
+      case 'Tag':
         this.componentRef.instance.data = {
           type: this.comp.type,
           props: this.comp.props,

@@ -831,6 +831,30 @@ let Rate: BehaviorConfigGroup = [
     key: 'fnBody',
   }
 ]
+let Tag: BehaviorConfigGroup = [
+  {
+    category: 'select',
+    options: [
+      {label: '删除前', value: 'beforeDelete'},
+      {label: '删除后', value: 'tagDelete'},
+      {label: '改变值后', value: 'checkedChange'},
+      {label: '改变属性后', value: 'postComponentNgOnChanges'},
+      {label: '初始化组件后', value: 'postComponentNgOnInit'},
+      {label: '变更检测后', value: 'postComponentNgDoCheck'},
+      {label: '渲染视图后', value: 'postComponentNgAfterViewInit'},
+      {label: '销毁组件后', value: 'postComponentNgOnDestroy'},
+    ],
+    value: '',
+    label: '事件',
+    key: 'event',
+  },
+  {
+    category: 'textarea',
+    value: '',
+    label: '方法体',
+    key: 'fnBody',
+  }
+]
 
 
 export {
@@ -871,6 +895,7 @@ export {
     Badge,
     Progress,
     Rate,
+    Tag,
 }
 let all: {[k: S]: BehaviorConfigGroup} = {
     Button,
@@ -910,5 +935,6 @@ let all: {[k: S]: BehaviorConfigGroup} = {
     Badge,
     Progress,
     Rate,
+    Tag,
 }
 export default all

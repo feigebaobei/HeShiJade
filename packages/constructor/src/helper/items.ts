@@ -728,6 +728,43 @@ let Progress: ConfigItem[] = [
         value: '',
     },
 ]
+let Tag: ConfigItem[] = [
+    {
+        label: 'id',
+        category: 'input',
+        key: 'id',
+        value: '',
+    },
+    {
+        label: 'label',
+        category: 'input',
+        key: 'label',
+        value: '',
+    },
+    {
+        label: 'tip',
+        category: 'input',
+        key: 'tip',
+        value: '',
+    },
+    {
+        label: '样式',
+        category: 'select',
+        options: [
+            {label: 'blue-w98', value: 'blue-w98'},
+            {label: 'aqua-w98', value: 'aqua-w98'},
+            {label: 'olivine-w98', value: 'olivine-w98'},
+            {label: 'green-w98', value: 'green-w98'},
+            {label: 'yellow-w98', value: 'yellow-w98'},
+            {label: 'orange-w98', value: 'orange-w98'},
+            {label: 'pink-w98', value: 'pink-w98'},
+            {label: 'red-w98', value: 'red-w98'},
+            {label: 'purple-w98', value: 'purple-w98'},
+        ],
+        key: 'labelStyle',
+        value: 'blue-w98',
+    },
+]
 
 let all: {[k: S]: ConfigItem[]} = {
     Input,
@@ -767,6 +804,7 @@ let all: {[k: S]: ConfigItem[]} = {
     // Badge, // 没有特定子元素
     Progress,
     // Rate, // 没有特定子元素
+    Tag,
 }
 
 export default all

@@ -186,11 +186,11 @@ let categoryList = [
         componentCategory: 'Rate',
         ulid: '01J50ZGTCKEC10HWAJBZND487W'
     },
-    // {
-    //     name: 'Tag',
-    //     componentCategory: 'Tag',
-    //     ulid: '01J50ZGTCKEC10HWAJBZND487X'
-    // },
+    {
+        name: 'Tag',
+        componentCategory: 'Tag',
+        ulid: '01J50ZGTCKEC10HWAJBZND487X'
+    },
   ]
 export {
     categoryList

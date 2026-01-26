@@ -149,6 +149,10 @@ let Rate: CompConfigAddabel = {
     behavior: true,
     items: false,
 }
+let Tag: CompConfigAddabel = {
+    behavior: true,
+    items: true,
+}
 
 
 
@@ -189,6 +193,7 @@ let all: {[k: S]: CompConfigAddabel} = {
     Badge,
     Progress,
     Rate,
+    Tag,
 }
 
 export {

@@ -2,13 +2,9 @@
 |-|-|-|
 |分支|f_tag||
 |丰富组件|||
-options配置项使用flex布局    done
-|progress|done||
-|rate|done||
-number配置项支持精度   done
-修正curd应用时出现脏数据的问题   todo
-number 配置项能不能处理成监听基本props设置最大值   todo
-|tag|||
+number 配置项能不能处理成监听其他props设置最大值   done
+|tag|doing||
+creatEventName => createEventName      todo
 |检查todo|todo||
 |配置面板icon使用下拉选择|todo||
 |select的选项不应该被遮挡|todo||
@@ -23,8 +19,14 @@ number 配置项能不能处理成监听基本props设置最大值   todo
 |feat: 创建Drawer组件|||
 |feat: 创建Badge组件|||
 |feat: options配置项支持禁用删除、禁用增加|||
+|feat: 创建Progress组件|||
 |feat: options配置项使用flex布局|||
+|feat: number配置项支持精度|||
+|feat: props配置项支持监听配置项改变时触发回调方法|||
+|feat: 创建Rate组件|||
 
+修正curd应用时出现脏数据的问题   todo
+|propsHideMap & propsListenMap 合并成一个|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
 |增加style面板|||

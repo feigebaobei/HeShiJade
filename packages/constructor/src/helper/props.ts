@@ -3113,6 +3113,61 @@ let Rate: PropsConfigItem = {
     },
 }
 
+let Tag: PropsConfigItem = {
+    mode: {
+        category: 'select',
+        options: [
+            {label: 'default', value: 'default'},
+            {label: 'checkable', value: 'checkable'},
+            {label: 'closeable', value: 'closeable'},
+        ],
+        value: 'default',
+        label: '类型',
+        key: 'mode',
+    },
+    size: {
+        category: 'select',
+        options: [
+            {label: '大', value: 'lg'},
+            {label: '中', value: 'md'},
+        ],
+        value: 'md',
+        label: '类型',
+        key: 'size',
+    },
+    // displayProperty = 'label'
+    count: {
+        category: 'number',
+        value: 5,
+        max: Number.MAX_SAFE_INTEGER,
+        min: Number.MIN_SAFE_INTEGER,
+        step: 1,
+        label: '总等级数',
+        key: 'count',
+    },
+    deletable: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '是否可删除',
+        key: 'deletable',
+    },
+    // titleProperty = 'tip'
+    hideBeyongTags: {
+        category: 'switch',
+        options: [
+            {label: 'true', value: true},
+            {label: 'false', value: false},
+        ],
+        value: false,
+        label: '超出时溢出',
+        key: 'hideBeyongTags',
+    },
+}
+
 export {
     Button,
     Modal,
@@ -3150,4 +3205,5 @@ export {
     Badge,
     Progress,
     Rate,
+    Tag,
 }

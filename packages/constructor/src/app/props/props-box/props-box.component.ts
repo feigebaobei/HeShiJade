@@ -47,6 +47,7 @@ import {
   Badge as BadgeMeta,
   Progress as ProgressMeta,
   Rate as RateMeta,
+  Tag as TagMeta,
 } from '../../../helper/props'
 
 let clog = console.log
@@ -77,7 +78,7 @@ export class PropsBoxComponent {
   }
   componentPropsList: ConfigItem[]
   msg: {}[]
-  propsMap: Map<S, relationTargetKey>
+  propsHideMap: Map<S, relationTargetKey>
   propsListenMap: Map<S, relationTargetKey>
   text: Text
   propsObj: Comp['props']
@@ -85,7 +86,7 @@ export class PropsBoxComponent {
     this.curComp = null
     this.componentPropsList = []
     this.msg = []
-    this.propsMap = new Map()
+    this.propsHideMap = new Map()
     this.propsListenMap = new Map()
     this.text = text
     this.propsObj = {}
@@ -242,18 +243,21 @@ export class PropsBoxComponent {
       case 'Rate':
         this.opComponentPropsList(RateMeta)
         break;
+      case 'Tag':
+        this.opComponentPropsList(TagMeta)
+        break;
       default:
         this.componentPropsMeta = {}
         break
     }
     this.componentPropsList.forEach(item => {
       if (item.hideListenerKey) {
-        if (this.propsMap.has(item.hideListenerKey)) {
-          this.propsMap.get(item.hideListenerKey)?.enqueue(item)
+        if (this.propsHideMap.has(item.hideListenerKey)) {
+          this.propsHideMap.get(item.hideListenerKey)?.enqueue(item)
         } else {
           let q: relationTargetKey = new Queue()
           q.enqueue(item)
-          this.propsMap.set(item.hideListenerKey, q)
+          this.propsHideMap.set(item.hideListenerKey, q)
         }
       }
       if (item.listenKey) {
@@ -275,7 +279,7 @@ export class PropsBoxComponent {
     })
   }
   listenerChange(listenerKey: S) {
-    let q = this.propsMap.get(listenerKey)
+    let q = this.propsHideMap.get(listenerKey)
     if (q) {
       q.toArray().forEach(item => {
         let b: B

@@ -40,6 +40,7 @@ import {
   Badge as BadgeBehaviorMeta,
   Progress as ProgressBehaviorMeta,
   Rate as RateBehaviorMeta,
+  Tag as TagBehaviorMeta,
 } from 'src/helper/behavior'
 import behaviorTemplate from 'src/helper/behavior'
 import { PageService } from 'src/app/service/page.service';
@@ -234,6 +235,9 @@ export class BehaviorBoxComponent {
         break;
       case 'Rate':
         this.setComponentBehaviorListByType(RateBehaviorMeta)
+        break;
+      case 'Tag':
+        this.setComponentBehaviorListByType(TagBehaviorMeta)
         break;
       default:
         this.setPageBehaviorListByType(PageBehaviorMeta)

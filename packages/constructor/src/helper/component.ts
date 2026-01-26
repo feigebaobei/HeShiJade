@@ -38,6 +38,7 @@ import { Button as ButtonProps,
     Badge as BadgeProps,
     Progress as ProgressProps,
     Rate as RateProps,
+    Tag as TagProps,
  } from 'src/helper/props'
 import {
     Button as ButtonBehavior,
@@ -73,6 +74,7 @@ import {
     Badge as BadgeBehavior,
     Progress as ProgressBehavior,
     Rate as RateBehavior,
+    Tag as TagBehavior,
 } from 'src/helper/behavior'
 import ItemAll from 'src/helper/items'
 
@@ -430,6 +432,12 @@ let Rate: ComponentDefaultConfig = {
     items: [],
     slots: {},
 }
+let Tag: ComponentDefaultConfig = {
+    props: opProps(TagProps),
+    behavior: opBehavior(TagBehavior),
+    items: [],
+    slots: {},
+}
 
 export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Button,
@@ -468,4 +476,5 @@ export let componentDefaultConfigAll: ComponentDefaultConfigAll = {
     Badge,
     Progress,
     Rate,
+    Tag,
 }
