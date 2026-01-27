@@ -129,7 +129,7 @@ export class ListComponent implements OnInit {
               // 操作service中的数据
               this.userService.appendApp(appObj.ulid)
               this.appService.createApp(appObj)
-              this.pageService.createApp(appObj.ulid)
+              this.pageService.createPageTree(appObj.ulid)
             })
             results.modalInstance.hide();
           },

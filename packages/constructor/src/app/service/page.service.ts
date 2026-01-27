@@ -221,7 +221,7 @@ export class PageService {
   deletePageByAppUlid(appUlid: ULID) {
     this._map.delete(appUlid)
   }
-  createApp(appUlid: ULID) {
+  createPageTree(appUlid: ULID) {
     this._map.set(appUlid, createTree<Page>())
   }
   // setComponentsBehavior( index: N, key: BehaviorItemKey, value: S ) {
