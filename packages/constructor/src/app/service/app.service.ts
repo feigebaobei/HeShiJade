@@ -114,34 +114,34 @@ export class AppService {
     })
   }
   createApp(appObj: App) {
-    this.userService.getUser().then(user => {
-      // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
-      if (this._appList.length) {
-        let last = this._appList[this._appList.length - 1]
-        last.nextUlid = appObj.ulid
-        appObj.prevUlid = last.ulid
-      }
-      this._appList.push(appObj)
-      // this.userService.appendApp(appObj.ulid)
-      // this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
-      this.tree.mountNext(appObj, appObj.prevUlid)
-      clog('appObj', appObj)
-      // return
-      this.reqCreateApp({
-        key: appObj.key,
-        name: appObj.name,
-        ulid: appObj.ulid,
-        theme: appObj.theme,
-        version: appObj.version,
-        layout: appObj.layout,
-        owner: appObj.owner,
-        collaborator: appObj.collaborator,
-        firstPageUlid: appObj.firstPageUlid,
-        prevUlid: appObj.prevUlid,
-        nextUlid: appObj.nextUlid,
-        pluginsKey: appObj.pluginsKey,
-      })
+    // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
+    if (this._appList.length) {
+      let last = this._appList[this._appList.length - 1]
+      last.nextUlid = appObj.ulid
+      appObj.prevUlid = last.ulid
+    }
+    this._appList.push(appObj)
+    // this.userService.appendApp(appObj.ulid)
+    // this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
+    this.tree.mountNext(appObj, appObj.prevUlid)
+    clog('appObj', appObj)
+    // return
+    this.reqCreateApp({
+      key: appObj.key,
+      name: appObj.name,
+      ulid: appObj.ulid,
+      theme: appObj.theme,
+      version: appObj.version,
+      layout: appObj.layout,
+      owner: appObj.owner,
+      collaborator: appObj.collaborator,
+      firstPageUlid: appObj.firstPageUlid,
+      prevUlid: appObj.prevUlid,
+      nextUlid: appObj.nextUlid,
+      pluginsKey: appObj.pluginsKey,
     })
+    // this.userService.getUser().then(user => {
+    // })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
   private reqCreateApp(data: App) {
