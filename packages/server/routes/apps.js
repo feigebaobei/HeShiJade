@@ -174,6 +174,7 @@ router.route('/')
 .delete(cors.corsWithOptions, (req, res) => { // 未做到原子性
   logger.info({method: 'delete', originalUrl: req.originalUrl, params: req.query})
   new Promise((s, j) => {
+    // 检查必要数据
     if (rules.isArray(req.query.envs) && rules.required(req.query.appUlid)) {
       s(true)
     } else {
@@ -181,6 +182,7 @@ router.route('/')
     }
   }).then(() => {
     // 当前用户是否可删除
+    // 当前用户是否拥有当前应用
     return lowcodeDb.collection(DB.dev.appTable).find({owner: req.session.user.ulid}).toArray().then((appList) => {
       if (appList.some(app => app.ulid === req.query.appUlid)) {
         return true
@@ -193,6 +195,7 @@ router.route('/')
   }).then(() => {
     // let envObj = dbArr.find(item => item.env === 'dev')
     // let envObj = DB.dev
+    // 取出当前用户、当前应用
     let pu = lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
       return user
     }).catch(() => Promise.reject(200010))
@@ -208,7 +211,7 @@ router.route('/')
     req.query.envs.forEach(env => {
       let envObj = dbArr.find(item => item.env === env)
       if (env === 'dev') {
-        if (user.firstApplicationUlid === req.query.appUlid) {
+        if (user.firstApplicationUlid === req.query.appUlid) { // 删除dev环境的第一个应用
           pArr.push(lowcodeDb.collection('users').updateOne({ ulid: app.owner }, {$set: {firstApplicationUlid: app.nextUlid}}))
         }
         stepRecorder.add('user_update')

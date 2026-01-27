@@ -5,7 +5,7 @@ import { createTree } from 'src/helper/tree';
 // import { initAppMeta } from 'src/helper';
 import { ReqService } from './req.service';
 import { ShareSignal } from 'src/helper/shareSignal';
-import { compatibleAppData } from 'src/helper';
+import { compatibleAppData, spliceObjByKey } from 'src/helper';
 // type
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
@@ -114,17 +114,13 @@ export class AppService {
     })
   }
   createApp(appObj: App) {
-    // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
     if (this._appList.length) {
       let last = this._appList[this._appList.length - 1]
       last.nextUlid = appObj.ulid
       appObj.prevUlid = last.ulid
     }
     this._appList.push(appObj)
-    // this.userService.appendApp(appObj.ulid)
-    // this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
     this.tree.mountNext(appObj, appObj.prevUlid)
-    clog('appObj', appObj)
     // return
     this.reqCreateApp({
       key: appObj.key,
@@ -212,6 +208,9 @@ export class AppService {
     return this.reqService.req(`${serviceUrl()}/apps/process`, 'get', {key: `${ulid}_${env}`})
   }
   deleteApp(appUlid: ULID) {
+    spliceObjByKey(this._appList, 'ulid', appUlid)
+    // 改变_appList后，appListS会一起改变。
+    // clog('applist', this._appList, this.appListS.get())
     this.tree.unmount(appUlid)
   }
   addPage(pageUlid: ULID) {
