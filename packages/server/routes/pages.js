@@ -5,11 +5,11 @@ let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
 let {pagesDb, appsDb, lowcodeDb} = require('../mongodb');
-const { rules, resParamsError } = require('../helper');
+const { rules, resParamsError, washPage, send } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 // let md5 = require('md5');
 const { logger } = require('../helper/log')
-const { DB } = require('../helper/config')
+const { DB, adminEmail } = require('../helper/config')
 let clog = console.log
 
 router.use(bodyParser.json())
@@ -19,6 +19,7 @@ router.route('/')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
+  let app
   new Promise((s, j) => {
     if (rules.required(req.query.appUlid) && rules.required(req.query.env)) {
       s(true)
@@ -26,13 +27,31 @@ router.route('/')
       j(100100)
     }
   }).then(() => {
+    // app = 
+    return lowcodeDb.collection(DB.dev.appTable).findOne({ulid: req.query.appUlid}).then((p) => {
+      app = p
+      return
+    })
+  }).then(() => {
     let p
     // 分别在4个库中查数据
     switch (req.query.env) {
       case 'dev':
         p = lowcodeDb.collection('pages_dev').find({
           appUlid: req.query.appUlid
-        }).toArray()
+        }).toArray().then((pageList) => {
+          let arr = washPage(pageList, app.firstPageUlid)
+          if (arr.length) {
+            send({
+              to: adminEmail,
+              subject: 'HeShiJade_脏数据',
+              text: `这些页面：
+${arr.map(item => item.ulid).join('\n')}
+是脏数据`
+            })
+          }
+          return pageList
+        })
         .catch(() => {
           return Promise.reject(200010)
         })

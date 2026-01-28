@@ -205,19 +205,45 @@ let washApp = (appList, firstApplicationUlid) => {
     // 返回脏数据
     let linkArr = []
     let curUlid = firstApplicationUlid
-    // let app // = appList.find(item => item.ulid === curUlid)
     let app = appList.find(item => item.ulid === curUlid)
     while (app) {
         linkArr.push(app.ulid)
         app = appList.find(item => item.ulid === app.nextUlid)
-        // if (app) {
-        //     curUlid = app.nextUlid
-        // }
     }
-    clog('linkArr', linkArr, appList.length)
-
     if (linkArr.length < appList.length) {
         return appList.filter(item => !linkArr.includes(item.ulid))
+    } else {
+        return []
+    }
+}
+let washPage = (pageList, firstPageUlid) => {
+    // 取出当前用户的全部应用（s1）和可以成链应用（s2）。删除存在于s1且不存在于s2的数据。
+    // 返回脏数据
+    let linkArr = []
+    let curUlid = firstPageUlid
+    let page = pageList.find(item => item.ulid === curUlid)
+    while (page) {
+        linkArr.push(page.ulid)
+        page = pageList.find(item => item.ulid === page.nextUlid)
+    }
+    if (linkArr.length < pageList.length) {
+        return pageList.filter(item => !linkArr.includes(item.ulid))
+    } else {
+        return []
+    }
+}
+let washComponent = (componentList, firstComponentUlid) => {
+    // 取出当前用户的全部应用（s1）和可以成链应用（s2）。删除存在于s1且不存在于s2的数据。
+    // 返回脏数据
+    let linkArr = []
+    let curUlid = firstComponentUlid
+    let app = componentList.find(item => item.ulid === curUlid)
+    while (app) {
+        linkArr.push(app.ulid)
+        app = componentList.find(item => item.ulid === app.nextUlid)
+    }
+    if (linkArr.length < componentList.length) {
+        return componentList.filter(item => !linkArr.includes(item.ulid))
     } else {
         return []
     }
@@ -241,4 +267,6 @@ module.exports = {
     compatibleCode,
     washApp,
     send,
+    washPage,
+    washComponent,
 }
