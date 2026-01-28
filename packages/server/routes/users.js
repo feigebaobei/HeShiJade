@@ -5,7 +5,7 @@ let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
 let {lowcodeDb} = require('../mongodb')
-let { rules, instance, auth } = require('../helper/index')
+let { rules, instance } = require('../helper/index')
 let md5 = require('md5');
 const { errorCode } = require('../helper/errorCode');
 let clog = console.log
@@ -103,30 +103,42 @@ router.route('/sign')
   // 请求sso注册，会得到token
   // 创建新用户
   // 返回token*2 + 种cookie
+  // new Promise((s, j) => {
+  //   if (rules.required(req.body.account) && rules.required(req.body.password)) {
+  //     s(true)
+  //   } else {
+  //     j(100100)
+  //   }
+  // })
+  // .then(() => {
+  //   return instance({
+  //     url: '/users/sign',
+  //     method: 'post',
+  //     data: {
+  //       account: req.body.account,
+  //       password: req.body.password,
+  //     }
+  //   }).then(response => {
+  //     if (response.code === 0) {
+  //       return response.data
+  //     } else {
+  //       return Promise.reject(100200)
+  //     }
+  //   }).catch(() => {
+  //     return Promise.reject(100200)
+  //   })
+  // })
+
   new Promise((s, j) => {
-    if (rules.required(req.body.account) && rules.required(req.body.password)) {
-      s(true)
+    if (rules.required(req.body.ulid) && rules.required(req.body.profile)) {
+      // s(true)
+      s(req.body)
     } else {
       j(100100)
     }
-  }).then(() => {
-    return instance({
-      url: '/users/sign',
-      method: 'post',
-      data: {
-        account: req.body.account,
-        password: req.body.password,
-      }
-    }).then(response => {
-      if (response.code === 0) {
-        return response.data
-      } else {
-        return Promise.reject(100200)
-      }
-    }).catch(() => {
-      return Promise.reject(100200)
-    })
-  }).then((result) => {
+  })
+  .then((result) => {
+    clog('reulst', result)
     return lowcodeDb.collection('users').insertOne({
       ulid: result.ulid,
       firstApplicationUlid: '',
@@ -134,8 +146,8 @@ router.route('/sign')
       let obj = {
         ulid: result.ulid,
         profile: result.profile,
-        accessToken: result.accessToken,
-        refreshToken: result.refreshToken,
+        // accessToken: result.accessToken,
+        // refreshToken: result.refreshToken,
         firstApplicationUlid: '',
       }
       req.session.user = obj
@@ -149,7 +161,6 @@ router.route('/sign')
     }).catch(() => {
       return Promise.reject(200000)
     })
-  }).then(() => {
   }).catch((code) => {
     return res.status(200).json({
       code,

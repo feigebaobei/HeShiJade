@@ -95,7 +95,9 @@ interface SsoClient<T = ResponseData> {
     loginSp: (p: A) => Promise<T>
     login: (p: A) => Promise<{idpRes: A, spRes: A}>
     logoutSp: (p?: A) => Promise<T>
+    logoutIdp: (p?: A) => Promise<T>
     signIdp: (p: A) => Promise<T>
+    signSp: (p: A) => Promise<T>
     sendVerification: (p: A) => Promise<ResponseData>
 }
 let obj = Object.create({}, {
@@ -134,9 +136,19 @@ let obj = Object.create({}, {
             return req(opReqObj((this as unknown as SsoClient).sp.logoutUrl, (this as unknown as SsoClient).sp.logoutMethod, data))
         }
     },
+    logoutIdp: {
+        value: function (data: A): Promise<ResponseData> {
+            return req(opReqObj(this.idp.logoutUrl, this.idp.loginMethod, data))
+        }
+    },
     signIdp: {
         value: function (data: A): Promise<ResponseData> {
             return req(opReqObj((this as unknown as SsoClient).idp.signUrl, (this as unknown as SsoClient).idp.signMethod, data))
+        }
+    },
+    signSp: {
+        value: function (data: A): Promise<ResponseData> {
+            return req(opReqObj(this.sp.signUrl, this.sp.signMethod, data))
         }
     },
     sendVerification: {

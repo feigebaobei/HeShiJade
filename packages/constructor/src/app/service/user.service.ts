@@ -27,7 +27,7 @@ export class UserService {
   ssoClient: SsoClient
   constructor() {
     this.user = undefined
-    this.userS = new ShareSignal(undefined)
+    this.userS = new ShareSignal(this.user)
     let v = window.sessionStorage.getItem('lc-user')
     if (v) {
       this.user = JSON.parse(v || '{}')
@@ -45,8 +45,8 @@ export class UserService {
     }
   }
   setUser(u?: User) {
+    clog('setUser', u)
     this.user = u
-    this.userS.set(this.user)
     let user: S
     if (u) {
       user = JSON.stringify(u)
@@ -57,7 +57,6 @@ export class UserService {
   }
   clearUser() {
     this.user = undefined
-    this.userS.set(this.user)
     window.sessionStorage.removeItem('lc-user')
   }
   logout() {
@@ -65,9 +64,31 @@ export class UserService {
   }
   // 注册sso
   sign(data: {account: S, password: S, confirmPassword: S, verification: S}) {
-    return this.ssoClient.signIdp({email: data.account, password: data.password, verification: data.verification}).then((idpRes) => {
+    return this.ssoClient.signIdp({email: data.account, password: data.password, verification: data.verification}).then((idpRes) => { // 1. 得到idp的数据
       if (idpRes.code === 0) {
-        return this.ssoClient.loginSp(idpRes.data)
+        // return this.ssoClient.loginSp(idpRes.data)
+        // idpRes.data: {
+        //   ulid: _ulid,
+        //   profile: {
+        //     email: req.body.email,
+        //   },
+        //   systems: [],
+        //   roles: [],
+        //   routes: [],
+        // }
+        return this.ssoClient.signSp(idpRes.data).then((spRes) => { // 2. 得到sp的数据
+          // spRes.data: {
+          //   ulid: result.ulid,
+          //   profile: result.profile,
+          //   firstApplicationUlid: '',
+          // }
+          this.setUser({
+            ...idpRes.data,
+            ...spRes.data,
+          })
+        })
+        // 3. 把这2块数据缓存起来。
+
       } else {
         return Promise.reject()
       }
@@ -82,9 +103,9 @@ export class UserService {
     this.setUser(u)
   }
   login(account: S, password: S) {
-    return this.ssoClient.login({email: account, password}).then((res) => {
+    return this.ssoClient.login({email: account, password}).then((res) => { // 1. 得到idp、sp的数据。
       // clog('res', res)
-      this.setUser({
+      this.setUser({ // 2. 把这2块数据缓存起来。
         ...res.idpRes.data,
         ...res.spRes.data,
       })
