@@ -13,7 +13,7 @@ const { rules, auth, sqlVersion, createStepRecorder, sleep,
   send,
  } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
-const { DB, dbArr } = require('../helper/config')
+const { DB, dbArr, adminEmail } = require('../helper/config')
 const { logger } = require('../helper/log')
 
 let clog = console.log
@@ -42,20 +42,20 @@ router.route('/')
       owner: req.session.user.ulid
     }).toArray().then((appList) => {
       let arr = washApp(appList, req.session.user.firstApplicationUlid)
-      clog('脏应用列表', arr)
-//       clog('send', send)
-//       if (arr.length) {
-//         // 发邮件
-//         // send()
-//         send({to: req.body.email, subject: 'HeShiJade_脏数据', 
-//           text: `这此应用：
-// ${arr.map(item => item.ulid).join('\n')}
-// 是脏数据`
-//         })
-//         // .then(() => {
-//         //   clog()
-//         // })
-//       }
+      // clog('脏应用列表', arr)
+      // clog('send', send)
+      if (arr.length) {
+        // 发邮件
+        // send()
+        send({to: adminEmail, subject: 'HeShiJade_脏数据', 
+          text: `这些应用：
+${arr.map(item => item.ulid).join('\n')}
+是脏数据`
+        })
+        // .then(() => {
+        //   clog()
+        // })
+      }
       return res.status(200).json({
         code: 0,
         message: '',
