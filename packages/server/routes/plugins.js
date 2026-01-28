@@ -4,7 +4,7 @@ var router = express.Router();
 let bodyParser = require('body-parser');
 let multer = require('multer');
 let {fragmentDb} = require('../mongodb')
-let { rules, instance } = require('../helper/index');
+let { rules, instance, auth } = require('../helper/index');
 const { sizeObj, DB } = require('../helper/config');
 const { errorCode } = require('../helper/errorCode');
 let clog = console.log
@@ -47,7 +47,7 @@ router.route('/')
     })
   })
 })
-.post(cors.corsWithOptions, upload.single('pluginFile'), (req, res) => {
+.post(cors.corsWithOptions, auth, upload.single('pluginFile'), (req, res) => {
   // 校验参数
   // 检查是否重复
   // 存

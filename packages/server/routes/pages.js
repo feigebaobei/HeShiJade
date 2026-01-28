@@ -11,6 +11,7 @@ const { errorCode } = require('../helper/errorCode');
 const { logger } = require('../helper/log')
 const { DB, adminEmail } = require('../helper/config')
 let clog = console.log
+let { auth } = require('../helper');
 
 router.use(bodyParser.json())
 
@@ -18,7 +19,7 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, (req, res) => {
+.get(cors.corsWithOptions, auth, (req, res) => {
   let app
   new Promise((s, j) => {
     if (rules.required(req.query.appUlid) && rules.required(req.query.env)) {

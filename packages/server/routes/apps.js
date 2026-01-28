@@ -75,7 +75,7 @@ ${arr.map(item => item.ulid).join('\n')}
   
 })
 // 创建应用
-.post(cors.corsWithOptions, (req, res) => {
+.post(cors.corsWithOptions, auth, (req, res) => {
   // 检查参数
   // 取session.user
   // 为user设置first/last
@@ -156,7 +156,7 @@ ${arr.map(item => item.ulid).join('\n')}
   })
 })
 // 修改应用
-.put(cors.corsWithOptions, (req, res) => {
+.put(cors.corsWithOptions, auth, (req, res) => {
   // res.send('put')
   // req.body.appUlid
   // req.body.key
@@ -188,7 +188,7 @@ ${arr.map(item => item.ulid).join('\n')}
   })
 })
 // 删除指定应用
-.delete(cors.corsWithOptions, (req, res) => { // 未做到原子性
+.delete(cors.corsWithOptions, auth, (req, res) => { // 未做到原子性
   logger.info({method: 'delete', originalUrl: req.originalUrl, params: req.query})
   new Promise((s, j) => {
     // 检查必要数据
@@ -305,7 +305,7 @@ router.route('/detail')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, (req, res) => {
+.get(cors.corsWithOptions, auth, (req, res) => {
   // res.send('put')
   // 校验参数
   // 取出数据
@@ -376,7 +376,7 @@ router.route('/versions')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, (req, res) => {
+.get(cors.corsWithOptions, auth, (req, res) => {
   // 校验参数
   // 取出数据
   new Promise((s, j) => {
@@ -428,11 +428,11 @@ router.route('/versions')
   })
 })
 // 设置dev环境的版本
-.post(cors.corsWithOptions, (req, res) => {
+.post(cors.corsWithOptions, auth, (req, res) => {
   res.send('post')
 })
 // 此方法只支持设置dev环境的版本号
-.put(cors.corsWithOptions, (req, res) => {
+.put(cors.corsWithOptions, auth, (req, res) => {
   new Promise((s, j) => {
     if (rules.required(req.body.appUlid) && rules.isNumber(req.body.newVersion)) {
       return true
@@ -481,6 +481,7 @@ router.route('/publish')
 })
 .post(
   cors.corsWithOptions, 
+  auth,
   (req, res) => {
   let fromEnv
   let toEnv

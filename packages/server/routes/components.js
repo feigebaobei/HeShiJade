@@ -3,7 +3,7 @@ var cors = require('./cors')
 var router = express.Router();
 let bodyParser = require('body-parser');
 let { componentsDb, lowcodeDb } = require('../mongodb');
-const { rules, compatibleArray, washComponent, send } = require('../helper');
+const { rules, compatibleArray, washComponent, send, auth } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 const { DB, adminEmail } = require('../helper/config');
 const { logger } = require('../helper/log')
@@ -15,7 +15,7 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, (req, res) => {
+.get(cors.corsWithOptions, auth, (req, res) => {
   // 校验参数
   // 从相应表中取数据
   let page
@@ -93,7 +93,7 @@ ${arr.map(item => item.ulid).join('\n')}
   })
 })
 // 创建组件
-.post(cors.corsWithOptions, (req, res) => {
+.post(cors.corsWithOptions, auth, (req, res) => {
   // 校验参数
   // 创建+更新组件
   // 更新页面
@@ -239,7 +239,7 @@ ${arr.map(item => item.ulid).join('\n')}
   })
 })
 // 更新组件
-.put(cors.corsWithOptions, (req, res) => {
+.put(cors.corsWithOptions, auth, (req, res) => {
   // 校验参数
   // 更新数据
   // 返回值
@@ -336,7 +336,7 @@ ${arr.map(item => item.ulid).join('\n')}
 // 做接口重载
 // ulid: ULID        // 删除一个组件
 // children: ULID[]  // 删除多个组件
-.delete(cors.corsWithOptions, (req, res) => {
+.delete(cors.corsWithOptions, auth, (req, res) => {
   // 校验参数：必填+存在
   // 处理页面级数据
   // 处理组件级数据
@@ -464,7 +464,7 @@ router.route('/listByPage')
   //   })
   // }
 })
-.post(cors.corsWithOptions, (req, res) => {
+.post(cors.corsWithOptions, auth, (req, res) => {
   // res.send('post')
   // 先做成保存到数据库的。
   // 插入当前组件
@@ -528,7 +528,7 @@ router.route('/props')
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })
-.delete(cors.corsWithOptions, (req, res) => {
+.delete(cors.corsWithOptions, auth, (req, res) => {
   // ulid: 组件ulid
   // key:  key
   // 检查参数
@@ -574,7 +574,7 @@ router.route('/behavior')
 .get(cors.corsWithOptions, (req, res) => {
   res.send('get')
 })
-.post(cors.corsWithOptions, (req, res) => {
+.post(cors.corsWithOptions, auth, (req, res) => {
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && rules.required(req.body.value)) {
       s(true)
@@ -606,7 +606,7 @@ router.route('/behavior')
 .put(cors.corsWithOptions, (req, res) => {
   res.send('put')
 })
-.delete(cors.corsWithOptions, (req, res) => {
+.delete(cors.corsWithOptions, auth, (req, res) => {
   // res.send('delete')
   let index = -1
   new Promise((s, j) => {
@@ -663,7 +663,7 @@ router.route('/items')
 .get(cors.corsWithOptions, (req, res) => {
   res.send('get')
 })
-.post(cors.corsWithOptions, (req, res) => {
+.post(cors.corsWithOptions, auth, (req, res) => {
   // 检验参数
   // 取出相关组件
   // 增加items
@@ -699,7 +699,7 @@ router.route('/items')
     })
   })
 })
-.put(cors.corsWithOptions, (req, res) => {
+.put(cors.corsWithOptions, auth, (req, res) => {
   // 校验参数
   // 修改数据
   // 返回结果
@@ -736,7 +736,7 @@ router.route('/items')
     })
   })
 })
-.delete(cors.corsWithOptions, (req, res) => {
+.delete(cors.corsWithOptions, auth, (req, res) => {
   // ulid, index
   let index = -1
   new Promise((s, j) => {
@@ -801,7 +801,7 @@ router.route('/slots')
 .post(cors.corsWithOptions, (req, res) => {
   res.send('post')
 })
-.put(cors.corsWithOptions, (req, res) => {
+.put(cors.corsWithOptions, auth, (req, res) => {
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) &&
       rules.required(req.body.oldSlotKey) && 
@@ -850,7 +850,7 @@ router.route('/slots')
       })
   })
 })
-.delete(cors.corsWithOptions, (req, res) => {
+.delete(cors.corsWithOptions, auth, (req, res) => {
   // ulid,slotKey
   new Promise((s, j) => {
     if (rules.unEmpty(req.query.ulid) && rules.unEmpty(req.query.slotKey)) {

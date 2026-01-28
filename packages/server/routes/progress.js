@@ -6,7 +6,7 @@ let bodyParser = require('body-parser');
 // const fsPromises = require('fs/promises')
 // const path = require('path')
 let {pagesDb, appsDb, lowcodeDb} = require('../mongodb');
-const { rules, resParamsError } = require('../helper');
+const { rules, resParamsError, auth } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 // let md5 = require('md5');
 let clog = console.log
@@ -17,7 +17,7 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, (req, res) => {
+.get(cors.corsWithOptions, auth, (req, res) => {
   new Promise((s, j) => {
     if (rules.required(req.query.key)) {
       s(true)
