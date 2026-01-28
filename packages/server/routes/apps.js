@@ -9,6 +9,8 @@ let {appsDb, usersDb,
 } = require('../mongodb');
 const { rules, auth, sqlVersion, createStepRecorder, sleep,
   compatibleCode,
+  washApp,
+  send,
  } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
 const { DB, dbArr } = require('../helper/config')
@@ -39,6 +41,21 @@ router.route('/')
     return lowcodeDb.collection('apps_dev').find({
       owner: req.session.user.ulid
     }).toArray().then((appList) => {
+      let arr = washApp(appList, req.session.user.firstApplicationUlid)
+      clog('脏应用列表', arr)
+//       clog('send', send)
+//       if (arr.length) {
+//         // 发邮件
+//         // send()
+//         send({to: req.body.email, subject: 'HeShiJade_脏数据', 
+//           text: `这此应用：
+// ${arr.map(item => item.ulid).join('\n')}
+// 是脏数据`
+//         })
+//         // .then(() => {
+//         //   clog()
+//         // })
+//       }
       return res.status(200).json({
         code: 0,
         message: '',

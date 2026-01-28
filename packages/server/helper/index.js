@@ -2,6 +2,7 @@ let {
     lowcodeDb,
 } = require('../mongodb');
 let {instance} = require('./req')
+let { send } = require('./sendEmail')
 let {auth} = require('./auth')
 let { envs } = require('./config')
 // const winston = require('winston')
@@ -199,6 +200,28 @@ let compatibleCode = (p) => {
 //         data: obj,
 //     })
 // }
+let washApp = (appList, firstApplicationUlid) => {
+    // 取出当前用户的全部应用（s1）和可以成链应用（s2）。删除存在于s1且不存在于s2的数据。
+    // 返回脏数据
+    let linkArr = []
+    let curUlid = firstApplicationUlid
+    // let app // = appList.find(item => item.ulid === curUlid)
+    let app = appList.find(item => item.ulid === curUlid)
+    while (app) {
+        linkArr.push(app.ulid)
+        app = appList.find(item => item.ulid === app.nextUlid)
+        // if (app) {
+        //     curUlid = app.nextUlid
+        // }
+    }
+    clog('linkArr', linkArr, appList.length)
+
+    if (linkArr.length < appList.length) {
+        return appList.filter(item => !linkArr.includes(item.ulid))
+    } else {
+        return []
+    }
+}
 
 
 
@@ -216,4 +239,6 @@ module.exports = {
     compatibleArray,
     // log,
     compatibleCode,
+    washApp,
+    send,
 }
