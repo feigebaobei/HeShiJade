@@ -3,9 +3,9 @@ var cors = require('./cors')
 var router = express.Router();
 let bodyParser = require('body-parser');
 let { componentsDb, lowcodeDb } = require('../mongodb');
-const { rules, compatibleArray } = require('../helper');
+const { rules, compatibleArray, washComponent, send } = require('../helper');
 const { errorCode } = require('../helper/errorCode');
-const { DB } = require('../helper/config');
+const { DB, adminEmail } = require('../helper/config');
 const { logger } = require('../helper/log')
 let clog = console.log
 
@@ -18,6 +18,7 @@ router.route('/')
 .get(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 从相应表中取数据
+  let page
   new Promise((s, j) => {
     if (rules.required(req.query.pageUlid) && rules.required(req.query.env)) {
       s(true)
@@ -25,12 +26,29 @@ router.route('/')
       j()
     }
   }).then(() => {
+    return lowcodeDb.collection(DB.dev.pageTable).findOne({ulid: req.query.pageUlid}).then((p) => {
+      page = p
+      return
+    })
+  }).then(() => {
     let p
     switch (req.query.env) {
       case 'dev':
         p = lowcodeDb.collection('components_dev').find({
           pageUlid: req.query.pageUlid
-        }).toArray().catch(() => {
+        }).toArray().then((componentList) => {
+          let arr = washComponent(componentList, page.firstComponentUlid)
+          if (arr) {
+            send({
+              to: adminEmail,
+              subject: 'HeShiJade_脏数据',
+              text: `这些组件：
+${arr.map(item => item.ulid).join('\n')}
+是脏数据`
+            })
+          }
+          return componentList
+        }).catch(() => {
           return Promise.reject(200010)
         })
         break
