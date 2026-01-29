@@ -5,11 +5,10 @@
 |配置面板icon使用下拉选择|观察中||
 |select的选项不应该被遮挡|观察中||
 |搭建侧的样式。含badge全部显示出来|||
-|修正tabs组件在搭建侧看不到子元素的问题|todo||
+|修正tabs组件在搭建侧看不到子元素的问题|doing||
 |所有组件改为独立组件|todo||
-|setup页面删除componentByPage或componentList|||
+|setup页面删除componentByPage或componentList|观察中||
 |解决报应用脏数据的问题|done||
-|不缓存app列表|除了list页面，setup页面也要使用appList。就应该缓存。||
 |点击注册应该有loading|done||
 // todo 测试这个方法
 |要上生产的内容|||
@@ -19,6 +18,7 @@
 |fead:  修正应用树不能挂载第一个应用的问题|||
 |feat:  兼容在idp中已经存在且在sp中不存在的注册|||
 |feat:  注册时检查是否存在|||
+|feat:  注册按钮增加loading效果|||
 ||||
 ||||
 
