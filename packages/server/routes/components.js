@@ -38,7 +38,7 @@ router.route('/')
           pageUlid: req.query.pageUlid
         }).toArray().then((componentList) => {
           let arr = washComponent(componentList, page.firstComponentUlid)
-          if (arr) {
+          if (arr.length) {
             send({
               to: adminEmail,
               subject: 'HeShiJade_脏数据',

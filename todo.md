@@ -12,8 +12,8 @@
   删除应用时未处理后应用的prevUlid   观察中
   第一个应用不应该有prevUlid        done
     原因：前端错误传递了prevUlid字段
-|检查发现脏数据的方法|doing||
-出现了不能选中的情况。    doing
+|检查发现脏数据的方法|done||
+出现了不能选中的情况。    done
 |setup页面删除componentByPage或componentList|||
 |测试切换账号时应用列表是否正确|done||
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|观察管理员是否收到脏数据||
