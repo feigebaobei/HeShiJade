@@ -64,35 +64,38 @@ export class UserService {
   }
   // 注册sso
   sign(data: {account: S, password: S, confirmPassword: S, verification: S}) {
-    return this.ssoClient.signIdp({email: data.account, password: data.password, verification: data.verification}).then((idpRes) => { // 1. 得到idp的数据
-      if (idpRes.code === 0) {
-        // return this.ssoClient.loginSp(idpRes.data)
-        // idpRes.data: {
-        //   ulid: _ulid,
-        //   profile: {
-        //     email: req.body.email,
-        //   },
-        //   systems: [],
-        //   roles: [],
-        //   routes: [],
-        // }
-        return this.ssoClient.signSp(idpRes.data).then((spRes) => { // 2. 得到sp的数据
-          // spRes.data: {
-          //   ulid: result.ulid,
-          //   profile: result.profile,
-          //   firstApplicationUlid: '',
-          // }
-          this.setUser({
-            ...idpRes.data,
-            ...spRes.data,
-          })
-        })
-        // 3. 把这2块数据缓存起来。
+    let idpRes: ResponseData, spRes: ResponseData
+    return this.ssoClient.signIdp({email: data.account, password: data.password, verification: data.verification})
+      // 1. 得到idp的数据
+      .then((_idpRes) => {
+        idpRes = _idpRes
+      })
+      .catch((_idpRes) => {
+        switch (_idpRes.code) {
+          case 100120:
+            idpRes = _idpRes
+            break;
+          default:
 
-      } else {
-        return Promise.reject()
-      }
-    })
+            break;
+        }
+      })
+      .then(() => {
+        // 2. 得到sp的数据
+        return this.ssoClient.signSp(idpRes.data).then((_spRes) => {
+          spRes = _spRes
+          return
+        })
+        // .then((spRes) => {
+      })
+      // 3. 把这2块数据缓存起来。
+      .then(() => {
+        this.setUser({
+          ...idpRes.data,
+          ...spRes.data,
+        })
+        return
+      })
   }
   appendApp(appUlid: ULID) {
     let u = this.user!
