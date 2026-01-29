@@ -58,9 +58,12 @@ export class HomeComponent implements OnInit {
     // account: '123@qq.com', // for dev
     // password: '123456',
     // confirmPassword: '123456',
-    account: window.location.hostname === 'heshijade.com' ? '' : '123@qq.com',
-    password:  window.location.hostname === 'heshijade.com' ? '' : '123456',
-    confirmPassword:  window.location.hostname === 'heshijade.com' ? '' : '123456',
+    // account: window.location.hostname === 'heshijade.com' ? '' : '123@qq.com',
+    // password:  window.location.hostname === 'heshijade.com' ? '' : '123456',
+    // confirmPassword:  window.location.hostname === 'heshijade.com' ? '' : '123456',
+    account: '',
+    password: '',
+    confirmPassword: '',
     verification: '',
   }
 

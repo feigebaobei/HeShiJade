@@ -15,6 +15,8 @@
 |检查发现脏数据的方法|done||
 出现了不能选中的情况。    done
 |setup页面删除componentByPage或componentList|||
+|删除默认账号、密码|done||
+|注册时兼容idp成功，sp失败的情况|doing||
 |测试切换账号时应用列表是否正确|done||
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|观察管理员是否收到脏数据||
 |接口应该增加auth检查|done||
@@ -303,3 +305,4 @@ pnpm publish.
 
 baobeifeige@gmail.com
 18515195415@163.com
+18710175207@163.com
