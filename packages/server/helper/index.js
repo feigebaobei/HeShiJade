@@ -237,16 +237,37 @@ let washComponent = (componentList, firstComponentUlid) => {
     // 返回脏数据
     let linkArr = []
     let curUlid = firstComponentUlid
-    let app = componentList.find(item => item.ulid === curUlid)
-    while (app) {
-        linkArr.push(app.ulid)
-        app = componentList.find(item => item.ulid === app.nextUlid)
+    let comp = componentList.find(item => item.ulid === curUlid)
+    let dirtyArr = []
+    if (comp.prevUlid) {
+        dirtyArr.push(comp.ulid)
+    }
+    if (comp) {
+        let queue = [comp]
+        linkArr.push(comp.ulid)
+        while (queue.length) {
+            let [curComp] = queue.splice(0, 1)
+            let nextComp = componentList.find(item => item.ulid === curComp.nextUlid)
+            if (nextComp) {
+                linkArr.push(curComp.ulid)
+                queue.push(nextComp)
+            }
+            Object.values(curComp.slots).forEach(value => {
+                let t = componentList.find(item => item.ulid === value)
+                if (t) {
+                    queue.push(t)
+                    linkArr.push(value)
+                }
+            })
+        }
     }
     if (linkArr.length < componentList.length) {
-        return componentList.filter(item => !linkArr.includes(item.ulid))
-    } else {
-        return []
+        let t = componentList.filter(item => {
+            return !(linkArr.includes(item.ulid))
+        }).map(item => item.ulid)
+        dirtyArr.push(...t)
     }
+    return dirtyArr
 }
 
 

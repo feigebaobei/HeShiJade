@@ -56,7 +56,7 @@ export class AppService {
   }
   getAppList() {
     let al = this.tree.root?.toArray()
-    clog('getAppList', al, al?.length)
+    // clog('getAppList', al, al?.length)
     if (al?.length) {
       return Promise.resolve(al)
     } else {

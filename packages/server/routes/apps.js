@@ -42,7 +42,7 @@ router.route('/')
       owner: req.session.user.ulid
     }).toArray().then((appList) => {
       let arr = washApp(appList, firstApplicationUlid)
-      clog('脏应用列表', arr, firstApplicationUlid)
+      // clog('脏应用列表', arr, firstApplicationUlid)
       if (arr.length) {
         // 发邮件
         send({to: adminEmail, subject: 'HeShiJade_脏数据', 
