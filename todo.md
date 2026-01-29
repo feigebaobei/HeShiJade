@@ -6,15 +6,16 @@
 |select的选项不应该被遮挡|观察中||
 |搭建侧的样式。含badge全部显示出来|||
 |考虑在sso服务中支持发邮件的接口|||
-|修正新用户不能创建应用|done||
 |修正tabs组件在搭建侧看不到子元素的问题|todo||
 |所有组件改为独立组件|todo||
 修正curd应用时出现脏数据的问题   观察中
   删除应用时未处理后应用的prevUlid   观察中
   第一个应用不应该有prevUlid        done
     原因：前端错误传递了prevUlid字段
-|检查发现脏数据的方法|todo||
+|检查发现脏数据的方法|doing||
+出现了不能选中的情况。    doing
 |setup页面删除componentByPage或componentList|||
+|测试切换账号时应用列表是否正确|done||
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|观察管理员是否收到脏数据||
 |接口应该增加auth检查|done||
 |不缓存app列表|除了list页面，setup页面也要使用appList。就应该缓存。||
@@ -301,3 +302,4 @@ pnpm publish.
 
 
 baobeifeige@gmail.com
+18515195415@163.com

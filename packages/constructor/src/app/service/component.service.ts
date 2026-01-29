@@ -151,6 +151,7 @@ export class ComponentService {
     }
     console.dir(tree)
     this._map.set(page.ulid, tree)
+    // clog('copmonentntree', tree)
     return tree
   }
   // 作为哪种节点返回
@@ -178,6 +179,7 @@ export class ComponentService {
   mountComponent(comp: Component,): B {
     let pageUlid = comp.pageUlid
     let tree = this._map.get(pageUlid)
+    debugger
     if (tree) {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
@@ -214,6 +216,7 @@ export class ComponentService {
           b = !!curNode
           break;
       }
+      // clog('tree', tree)
       return b
     } else {
       return false
@@ -249,10 +252,10 @@ export class ComponentService {
   setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
       this._curComponent = this._find(pageUlid, compUlid)
-      // this.curComponentS.set(this._curComponent)
+      this.curComponentS.set(this._curComponent) // 这里不能删除。用它实现响应式。
     } else {
       this._curComponent = undefined
-      // this.curComponentS.set(undefined)
+      this.curComponentS.set(undefined) // 这里不能删除。用它实现响应式。
     }
   }
   // 改变属性
