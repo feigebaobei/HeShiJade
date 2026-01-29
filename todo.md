@@ -14,6 +14,7 @@
     原因：前端错误传递了prevUlid字段
 |setup页面删除componentByPage或componentList|||
 |注册时兼容idp成功，sp失败的情况|done||
+|解决报应用脏数据的问题|doing||
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|观察管理员是否收到脏数据||
 |不缓存app列表|除了list页面，setup页面也要使用appList。就应该缓存。||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||

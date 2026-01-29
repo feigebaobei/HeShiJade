@@ -31,19 +31,23 @@ router.route('/')
   // 是否登录
   // 是否有权限（暂不做）
   // 取数据
-  new Promise((s, j) => {
-    if (req.session.isAuth) {
-      s(true)
-    } else {
-      j(100130)
-    }
+  new Promise((s, _j) => {
+    // if (req.session.isAuth) {
+    //   s(true)
+    // } else {
+    //   j(100130)
+    // }
+    s(true)
   }).then(() => {
+    return lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then(user => {
+      return user.firstApplicationUlid
+    })
+  }).then((firstApplicationUlid) => {
     return lowcodeDb.collection('apps_dev').find({
       owner: req.session.user.ulid
     }).toArray().then((appList) => {
-      let arr = washApp(appList, req.session.user.firstApplicationUlid)
-      // clog('脏应用列表', arr)
-      // clog('send', send)
+      let arr = washApp(appList, firstApplicationUlid)
+      clog('脏应用列表', arr, firstApplicationUlid)
       if (arr.length) {
         // 发邮件
         // send()

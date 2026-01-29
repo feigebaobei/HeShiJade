@@ -179,7 +179,6 @@ export class ComponentService {
   mountComponent(comp: Component,): B {
     let pageUlid = comp.pageUlid
     let tree = this._map.get(pageUlid)
-    debugger
     if (tree) {
       let b: B = false // 是否挂载成功
       let node: Node<Component> | undefined
