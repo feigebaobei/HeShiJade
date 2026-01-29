@@ -15,7 +15,7 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, auth, (req, res) => {
+.get(cors.corsWithOptions, (req, res) => {
   // 校验参数
   // 从相应表中取数据
   let page

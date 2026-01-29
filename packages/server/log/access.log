@@ -1602,3 +1602,4 @@
 {"level":30,"time":1769698153794,"pid":59972,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
 {"level":30,"time":1769698252220,"pid":61990,"hostname":"localhost","name":"logname","msg":"启动服务"}
 {"level":30,"time":1769698254589,"pid":62105,"hostname":"localhost","name":"logname","msg":"启动服务"}
+{"level":30,"time":1769699572091,"pid":71339,"hostname":"localhost","name":"logname","msg":"启动服务"}
