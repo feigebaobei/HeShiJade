@@ -6,7 +6,7 @@
 |select的选项不应该被遮挡|观察中||
 |搭建侧的样式。含badge全部显示出来|||
 |考虑在sso服务中支持发邮件的接口|||
-|修正新用户不能创建应用|todo||
+|修正新用户不能创建应用|doing||
 |修正tabs组件在搭建侧看不到子元素的问题|todo||
 |所有组件改为独立组件|todo||
 修正curd应用时出现脏数据的问题   观察中
@@ -15,12 +15,16 @@
     原因：前端错误传递了prevUlid字段
 |setup页面删除componentByPage或componentList|||
 |可能会有脏数据。写一个检查脏数据的程序，定时运行。|观察管理员是否收到脏数据||
-|接口应该增加auth检查|||
-|不缓存app列表|todo||
+|接口应该增加auth检查|done||
+|不缓存app列表|除了list页面，setup页面也要使用appList。就应该缓存。||
 |在指定时机，如进入搭建页面时，清洗脏数据。|||
+|点击注册应该有loading|todo||
+|修正应用树不能挂载第一个应用的问题|done||
+// todo 测试这个方法
 |要上生产的内容|||
 |fixed: 修正删除最后一个应用后再创建新应用时prevUlid赋值错误的问题|||
 |fead:  当搭建侧请求应用列表、页面列表、组件列表时，若发现脏数据，则邮件通知管理员|||
+|fead:  接口增加登录校验|||
 ||||
 ||||
 ||||
@@ -293,3 +297,6 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+
+baobeifeige@gmail.com

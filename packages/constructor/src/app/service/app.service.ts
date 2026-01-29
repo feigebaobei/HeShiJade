@@ -121,7 +121,11 @@ export class AppService {
       appObj.prevUlid = last.ulid
     }
     this._appList.push(appObj)
-    this.tree.mountNext(appObj, appObj.prevUlid)
+    if (appObj.prevUlid) {
+      this.tree.mountNext(appObj, appObj.prevUlid)
+    } else {
+      this.tree.mountRoot(appObj)
+    }
     // return
     this.reqCreateApp({
       key: appObj.key,
@@ -237,6 +241,6 @@ export class AppService {
   clear() {
     this._appList = []
     this.tree = createTree()
-    this._versionMap = new Map()    
+    this._versionMap = new Map()
   }
 }
