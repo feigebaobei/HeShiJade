@@ -5,11 +5,8 @@
 |配置面板icon使用下拉选择|观察中||
 |select的选项不应该被遮挡|观察中||
 |搭建侧的样式。含badge全部显示出来|||
-|修正tabs组件在搭建侧看不到子元素的问题|done||
 |所有组件改为独立组件|todo||
 |setup页面删除componentByPage或componentList|观察中||
-|解决报应用脏数据的问题|done||
-|点击注册应该有loading|done||
 // todo 测试这个方法
 |要上生产的内容|||
 |fixed: 修正删除最后一个应用后再创建新应用时prevUlid赋值错误的问题|||
