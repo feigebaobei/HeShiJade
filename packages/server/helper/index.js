@@ -2,6 +2,7 @@ let {
     lowcodeDb,
 } = require('../mongodb');
 let {instance} = require('./req')
+let { send } = require('./sendEmail')
 let {auth} = require('./auth')
 let { envs } = require('./config')
 // const winston = require('winston')
@@ -199,6 +200,75 @@ let compatibleCode = (p) => {
 //         data: obj,
 //     })
 // }
+let washApp = (appList, firstApplicationUlid) => {
+    // 取出当前用户的全部应用（s1）和可以成链应用（s2）。删除存在于s1且不存在于s2的数据。
+    // 返回脏数据
+    let linkArr = []
+    let curUlid = firstApplicationUlid
+    let app = appList.find(item => item.ulid === curUlid)
+    while (app) {
+        linkArr.push(app.ulid)
+        app = appList.find(item => item.ulid === app.nextUlid)
+    }
+    if (linkArr.length < appList.length) {
+        return appList.filter(item => !linkArr.includes(item.ulid))
+    } else {
+        return []
+    }
+}
+let washPage = (pageList, firstPageUlid) => {
+    // 取出当前用户的全部应用（s1）和可以成链应用（s2）。删除存在于s1且不存在于s2的数据。
+    // 返回脏数据
+    let linkArr = []
+    let curUlid = firstPageUlid
+    let page = pageList.find(item => item.ulid === curUlid)
+    while (page) {
+        linkArr.push(page.ulid)
+        page = pageList.find(item => item.ulid === page.nextUlid)
+    }
+    if (linkArr.length < pageList.length) {
+        return pageList.filter(item => !linkArr.includes(item.ulid))
+    } else {
+        return []
+    }
+}
+let washComponent = (componentList, firstComponentUlid) => {
+    // 取出当前用户的全部应用（s1）和可以成链应用（s2）。删除存在于s1且不存在于s2的数据。
+    // 返回脏数据
+    let linkArr = []
+    let curUlid = firstComponentUlid
+    let comp = componentList.find(item => item.ulid === curUlid)
+    let dirtyArr = []
+    if (comp.prevUlid) {
+        dirtyArr.push(comp.ulid)
+    }
+    if (comp) {
+        let queue = [comp]
+        linkArr.push(comp.ulid)
+        while (queue.length) {
+            let [curComp] = queue.splice(0, 1)
+            let nextComp = componentList.find(item => item.ulid === curComp.nextUlid)
+            if (nextComp) {
+                linkArr.push(curComp.ulid)
+                queue.push(nextComp)
+            }
+            Object.values(curComp.slots).forEach(value => {
+                let t = componentList.find(item => item.ulid === value)
+                if (t) {
+                    queue.push(t)
+                    linkArr.push(value)
+                }
+            })
+        }
+    }
+    if (linkArr.length < componentList.length) {
+        let t = componentList.filter(item => {
+            return !(linkArr.includes(item.ulid))
+        }).map(item => item.ulid)
+        dirtyArr.push(...t)
+    }
+    return dirtyArr
+}
 
 
 
@@ -216,4 +286,8 @@ module.exports = {
     compatibleArray,
     // log,
     compatibleCode,
+    washApp,
+    send,
+    washPage,
+    washComponent,
 }

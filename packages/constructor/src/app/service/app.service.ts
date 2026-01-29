@@ -5,7 +5,7 @@ import { createTree } from 'src/helper/tree';
 // import { initAppMeta } from 'src/helper';
 import { ReqService } from './req.service';
 import { ShareSignal } from 'src/helper/shareSignal';
-import { compatibleAppData } from 'src/helper';
+import { compatibleAppData, spliceObjByKey } from 'src/helper';
 // type
 import type { App, SyntheticVersion, } from 'src/types/app';
 import type { 
@@ -56,6 +56,7 @@ export class AppService {
   }
   getAppList() {
     let al = this.tree.root?.toArray()
+    // clog('getAppList', al, al?.length)
     if (al?.length) {
       return Promise.resolve(al)
     } else {
@@ -114,34 +115,35 @@ export class AppService {
     })
   }
   createApp(appObj: App) {
-    this.userService.getUser().then(user => {
-      // let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email)
-      if (this._appList.length) {
-        let last = this._appList[this._appList.length - 1]
-        last.nextUlid = appObj.ulid
-        appObj.prevUlid = last.ulid
-      }
-      this._appList.push(appObj)
-      // this.userService.appendApp(appObj.ulid)
-      // this.tree.mountNext(appObj, this._appList[this._appList.length - 1].ulid)
+    if (this._appList.length) {
+      let last = this._appList[this._appList.length - 1]
+      last.nextUlid = appObj.ulid
+      appObj.prevUlid = last.ulid
+    }
+    this._appList.push(appObj)
+    if (appObj.prevUlid) {
       this.tree.mountNext(appObj, appObj.prevUlid)
-      clog('appObj', appObj)
-      // return
-      this.reqCreateApp({
-        key: appObj.key,
-        name: appObj.name,
-        ulid: appObj.ulid,
-        theme: appObj.theme,
-        version: appObj.version,
-        layout: appObj.layout,
-        owner: appObj.owner,
-        collaborator: appObj.collaborator,
-        firstPageUlid: appObj.firstPageUlid,
-        prevUlid: appObj.prevUlid,
-        nextUlid: appObj.nextUlid,
-        pluginsKey: appObj.pluginsKey,
-      })
+    } else {
+      this.tree.mountRoot(appObj)
+    }
+    // return
+    this.reqCreateApp({
+      key: appObj.key,
+      name: appObj.name,
+      ulid: appObj.ulid,
+      theme: appObj.theme,
+      version: appObj.version,
+      layout: appObj.layout,
+      owner: appObj.owner,
+      collaborator: appObj.collaborator,
+      firstPageUlid: appObj.firstPageUlid,
+      prevUlid: appObj.prevUlid,
+      nextUlid: appObj.nextUlid,
+      pluginsKey: appObj.pluginsKey,
     })
+    clog('appTree', this.tree)
+    // this.userService.getUser().then(user => {
+    // })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
   private reqCreateApp(data: App) {
@@ -212,6 +214,9 @@ export class AppService {
     return this.reqService.req(`${serviceUrl()}/apps/process`, 'get', {key: `${ulid}_${env}`})
   }
   deleteApp(appUlid: ULID) {
+    spliceObjByKey(this._appList, 'ulid', appUlid)
+    // 改变_appList后，appListS会一起改变。
+    // clog('applist', this._appList, this.appListS.get())
     this.tree.unmount(appUlid)
   }
   addPage(pageUlid: ULID) {
@@ -232,5 +237,10 @@ export class AppService {
       appUlid: ulid,
       updateObj
     })
+  }
+  clear() {
+    this._appList = []
+    this.tree = createTree()
+    this._versionMap = new Map()
   }
 }

@@ -1,16 +1,26 @@
 ||||
 |-|-|-|
-|分支|f_tag||
+|分支|f_data||
 |检查todo|todo||
-|配置面板icon使用下拉选择|todo||
-|select的选项不应该被遮挡|todo||
+|配置面板icon使用下拉选择|观察中||
+|select的选项不应该被遮挡|观察中||
+|搭建侧的样式。含badge全部显示出来|||
 |所有组件改为独立组件|todo||
+|setup页面删除componentByPage或componentList|观察中||
+// todo 测试这个方法
 |要上生产的内容|||
-||||
-||||
+|fixed: 修正删除最后一个应用后再创建新应用时prevUlid赋值错误的问题|||
+|fixed: 修正tabs组件在搭建侧看不到子元素的问题|||
+|fead:  当搭建侧请求应用列表、页面列表、组件列表时，若发现脏数据，则邮件通知管理员|||
+|fead:  接口增加登录校验|||
+|fead:  修正应用树不能挂载第一个应用的问题|||
+|feat:  兼容在idp中已经存在且在sp中不存在的注册|||
+|feat:  注册时检查是否存在|||
+|feat:  注册按钮增加loading效果|||
 ||||
 
-修正curd应用时出现脏数据的问题   todo
+|在指定时机，如进入搭建页面时，清洗脏数据。|观察中||
+|考虑在sso服务中支持发邮件的接口|||
 |propsHideMap & propsListenMap 合并成一个|||
 |增加meta面板。是否渲染，宽度、高度、x坐标、y坐标|宽度坐标会影响到坐标。是否渲染由showhide组件控制。所以不需要meta面板||
 |服务端定期删除脏数据|||
@@ -19,25 +29,9 @@
 |官网增加助手函数子导航|待定||
 |整理升级的要求|||
 |table组件在与items时的操作逻辑子组件|todo||
-|setup页面删除componentByPage或componentList|||
 |table组件的打开事件应该事件名+ulid|todo||
-||可能需要增加一个layout配置面板|todo|
-|可能会有脏数据。写一个检查脏数据的程序，定时运行。|||
+|可能需要增加一个layout配置面板|todo||
 ||先写一个遇到脏数据报警的程序||
-|在指定时机，如进入搭建页面时，清洗脏数据。|||
-|丰富组件|||
-||accordion||
-||breadcrumb||
-||cascader||
-||datepicker||
-||slider||
-||textarea||
-||toggle||
-||drawer||
-||badge||
-||progress||
-||rate||
-||tag||
 |应用把非dev环境的版本回退到dev环境|||
 |丰富配置面板的setter|||
 |“注销用户”功能|||
@@ -295,3 +289,8 @@ save-workspace-protocol=true
 or
 pnpm publish.
 有人说是npm的bug
+
+
+baobeifeige@gmail.com
+18515195415@163.com
+18710175207@163.com

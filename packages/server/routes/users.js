@@ -8,6 +8,7 @@ let {lowcodeDb} = require('../mongodb')
 let { rules, instance } = require('../helper/index')
 let md5 = require('md5');
 const { errorCode } = require('../helper/errorCode');
+const { DB } = require('../helper/config');
 let clog = console.log
 
 
@@ -103,39 +104,61 @@ router.route('/sign')
   // 请求sso注册，会得到token
   // 创建新用户
   // 返回token*2 + 种cookie
+  // new Promise((s, j) => {
+  //   if (rules.required(req.body.account) && rules.required(req.body.password)) {
+  //     s(true)
+  //   } else {
+  //     j(100100)
+  //   }
+  // })
+  // .then(() => {
+  //   return instance({
+  //     url: '/users/sign',
+  //     method: 'post',
+  //     data: {
+  //       account: req.body.account,
+  //       password: req.body.password,
+  //     }
+  //   }).then(response => {
+  //     if (response.code === 0) {
+  //       return response.data
+  //     } else {
+  //       return Promise.reject(100200)
+  //     }
+  //   }).catch(() => {
+  //     return Promise.reject(100200)
+  //   })
+  // })
+  let errorData = {}
   new Promise((s, j) => {
-    if (rules.required(req.body.account) && rules.required(req.body.password)) {
-      s(true)
+    if (rules.required(req.body.ulid) && rules.required(req.body.profile)) {
+      // s(true)
+      s(req.body)
     } else {
       j(100100)
     }
-  }).then(() => {
-    return instance({
-      url: '/users/sign',
-      method: 'post',
-      data: {
-        account: req.body.account,
-        password: req.body.password,
-      }
-    }).then(response => {
-      if (response.code === 0) {
-        return response.data
+  })
+  .then(() => {
+    // return usersDb.collection('users').findOne({'profile.email': req.body.email}).then((user) => {
+    return lowcodeDb.collection('users').findOne({'ulid': req.body.ulid}).then((user) => {
+      if (user) {
+        errorData = user       
+        return Promise.reject(100120) // 已经存在
       } else {
-        return Promise.reject(100200)
+        return true
       }
-    }).catch(() => {
-      return Promise.reject(100200)
     })
-  }).then((result) => {
+  })
+  .then(() => {
     return lowcodeDb.collection('users').insertOne({
-      ulid: result.ulid,
+      ulid: req.body.ulid,
       firstApplicationUlid: '',
     }).then(() => {
       let obj = {
-        ulid: result.ulid,
-        profile: result.profile,
-        accessToken: result.accessToken,
-        refreshToken: result.refreshToken,
+        ulid: req.body.ulid,
+        profile: req.body.profile,
+        // accessToken: req.body.accessToken,
+        // refreshToken: req.body.refreshToken,
         firstApplicationUlid: '',
       }
       req.session.user = obj
@@ -149,12 +172,11 @@ router.route('/sign')
     }).catch(() => {
       return Promise.reject(200000)
     })
-  }).then(() => {
   }).catch((code) => {
     return res.status(200).json({
       code,
       message: errorCode[code],
-      data: {}
+      data: errorData,
     })
   })
 })

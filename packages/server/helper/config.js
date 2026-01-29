@@ -49,10 +49,12 @@ sizeObj['b'] = sizeObj['1b']
 sizeObj['1k'] = sizeObj['k'] = sizeObj['1kb']
 sizeObj['1m'] = sizeObj['m'] = sizeObj['1mb']
 sizeObj['1g'] = sizeObj['g'] = sizeObj['1gb']
+let adminEmail = '18515195415@163.com'
 
 module.exports = {
     DB,
     dbArr: Array.from(Object.values(DB)),
     envs: Array.from(Object.keys(DB)),
     sizeObj,
+    adminEmail,
 }

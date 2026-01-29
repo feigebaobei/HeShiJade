@@ -72,6 +72,9 @@ export class ListComponent implements OnInit {
   }
   logoutBtClickH()  {
     this.userService.logout().then(() => {
+      this.appService.clear()
+      this.pageService.clear()
+      this.componentService.clear()
       this.router.navigate(['/'])
     }).catch(error => {
       clog('登出失败')
@@ -129,7 +132,7 @@ export class ListComponent implements OnInit {
               // 操作service中的数据
               this.userService.appendApp(appObj.ulid)
               this.appService.createApp(appObj)
-              this.pageService.createApp(appObj.ulid)
+              this.pageService.createPageTree(appObj.ulid)
             })
             results.modalInstance.hide();
           },

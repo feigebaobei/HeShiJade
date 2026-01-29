@@ -95,10 +95,11 @@ export class TabsComponent extends TextBase implements OnInit, AfterViewChecked,
     // clog('ngDoCheck', this.data)
   }
   dropH(e: DropEvent, itemIndex: N) {
-    new Promise((s, _j) => {
-      s(true)
-    }).then(() => {
-      this.show = false
+    this.show = false
+    asyncFn(() => {
+      return Promise.resolve()
+    })
+    .then(() => {
       let comp: Comp
       let key = this.createChildKey({itemIndex})
       let componentCategory = e.dragData.item.componentCategory
@@ -141,11 +142,12 @@ export class TabsComponent extends TextBase implements OnInit, AfterViewChecked,
     })
   }
   deleteComponentByUlidH(ulid: ULID, index : N) {
-    new Promise((s, j) => {
-      this.show = false
-      s(true)
-    }).then(() => {
-      let key = this.createChildKey({itemIndex: index})
+    this.show = false
+    asyncFn(() => {
+      return Promise.resolve()
+    })
+    .then(() => {
+      // let key = this.createChildKey({itemIndex: index})
       this.compArr[index] = this.compArr[index].filter(item => item.ulid !== ulid)
       let childrenUlid = this.componentService.getChildrenComponent(this.curPage.ulid, ulid).map(componentItem => componentItem.ulid)
       this.componentService.deleteComponentByUlid(this.curPage.ulid, ulid)
@@ -223,8 +225,7 @@ export class TabsComponent extends TextBase implements OnInit, AfterViewChecked,
       }
     })
     shareEvent.on(
-      createEventName('Tabs', this.data.ulid, 'items', 'reorder'),
-      (index: N) => {
+      createEventName('Tabs', this.data.ulid, 'items', 'reorder'), (index: N) => {
         clog('reorder', index)
       }
     )

@@ -13,6 +13,9 @@ import { ButtonModule,
 // pipe
 // service
 import { UserService } from '../service/user.service';
+import { AppService } from '../service/app.service';
+import { PageService } from '../service/page.service';
+import { ComponentService } from '../service/component.service';
 // type
 import type { ResponseData, User } from 'src/types';
 import type { B, A, } from 'src/types/base';
@@ -39,36 +42,45 @@ export class HomeComponent implements OnInit {
   msg: {}[]
   user?: User
   logining: B
+  signLogining: B
   constructor(private router: Router, private http: HttpClient,
-    private userService: UserService) {
+    private userService: UserService,
+    private appService: AppService,
+    private pageService: PageService,
+    private componentService: ComponentService,
+  ) {
     this.isCollapsed = false
     this.status = 1 // 0 注册 1 登录
     this.msg = []
     this.user = this.userService.user
     this.logining = false
+    this.signLogining = false
   }
   formData = {
     // account: '123@qq.com', // for dev
     // password: '123456',
     // confirmPassword: '123456',
-    account: window.location.hostname === 'heshijade.com' ? '' : '123@qq.com',
-    password:  window.location.hostname === 'heshijade.com' ? '' : '123456',
-    confirmPassword:  window.location.hostname === 'heshijade.com' ? '' : '123456',
+    // account: window.location.hostname === 'heshijade.com' ? '' : '123@qq.com',
+    // password:  window.location.hostname === 'heshijade.com' ? '' : '123456',
+    // confirmPassword:  window.location.hostname === 'heshijade.com' ? '' : '123456',
+    account: '',
+    password: '',
+    confirmPassword: '',
     verification: '',
   }
 
   gotoList() {
-    this.router.navigate(['/list' ]);
+    this.appService.clear()
+    this.pageService.clear()
+    this.componentService.clear()
+    this.router.navigate(['/list']);
   }
   // 登录
   submitForm(a: any) {
     this.logining = true
     this.userService.clearUser()
-    // login(ssoClientParams({account: this.formData.account, password: this.formData.password}) as SsoClientParams).then(() => {
-    //   this.router.navigate(['/list'])
-    //   this.user = this.userService.getUser()
     this.userService.login(this.formData.account, this.formData.password).then(() => {
-      this.router.navigate(['/list'])
+      this.gotoList()
     }).catch((error: A) => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {
@@ -77,6 +89,7 @@ export class HomeComponent implements OnInit {
   }
   // 注册
   submitSignForm(e: Event) {
+    this.signLogining = true
     if (!this.formData.account || !this.formData.password || !this.formData.verification || !this.formData.confirmPassword) {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '不能为空' }];
       return
@@ -92,6 +105,8 @@ export class HomeComponent implements OnInit {
       }).catch((error) => {
         clog('errror', error)
         this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }];
+      }).finally(() => {
+        this.signLogining = false
       })
     } else {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '二次输入的password不一致' }];

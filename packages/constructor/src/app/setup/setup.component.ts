@@ -185,7 +185,8 @@ export class SetupComponent implements OnInit {
           this.pageService.setCurPage(this.curApp!.ulid, pl[0].ulid)
           return true
         } else {
-          return Promise.reject('无页面')
+          // return Promise.reject('无页面sss')
+          return false
         }
       })
     })

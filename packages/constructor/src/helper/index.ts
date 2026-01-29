@@ -3,7 +3,7 @@ import {componentDefaultConfigAll} from 'src/helper/component'
 import groupTemplate from 'src/helper/items'
 // import { ShareSignal } from './shareSignal';
 // type
-import type { A, F, N, S, Oa, B } from 'src/types/base';
+import type { A, F, N, S, Oa, B, O } from 'src/types/base';
 import type { ResponseData, ULID } from '../types';
 import type { Observable } from 'rxjs';
 import type { Component, GridLayout} from 'src/types/component';
@@ -398,6 +398,15 @@ let compatibleComponentData = (data: A[]): {
     update,
   }
 }
+let spliceObjByKey = (arr: Oa[], key: S, value: A, ...rest: A[]) => {
+  let index = arr.findIndex(item => item[key] === value)
+  if (index > -1) {
+    return arr.splice(index, 1, ...rest)
+  } else {
+    return undefined
+  }
+}
+
 
 
 export {
@@ -426,6 +435,7 @@ export {
   isUndefined,
   isNull,
   clog,
+  spliceObjByKey,
 }
 export type {
   Loop,
