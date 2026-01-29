@@ -56,6 +56,7 @@ export class AppService {
   }
   getAppList() {
     let al = this.tree.root?.toArray()
+    clog('getAppList', al, al?.length)
     if (al?.length) {
       return Promise.resolve(al)
     } else {
@@ -136,6 +137,7 @@ export class AppService {
       nextUlid: appObj.nextUlid,
       pluginsKey: appObj.pluginsKey,
     })
+    clog('appTree', this.tree)
     // this.userService.getUser().then(user => {
     // })
     // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
@@ -231,5 +233,10 @@ export class AppService {
       appUlid: ulid,
       updateObj
     })
+  }
+  clear() {
+    this._appList = []
+    this.tree = createTree()
+    this._versionMap = new Map()    
   }
 }

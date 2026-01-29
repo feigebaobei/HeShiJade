@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createTree } from 'src/helper/tree';
-import { PageService } from './page.service';
-import { AppService } from './app.service';
+// import { PageService } from './page.service';
+// import { AppService } from './app.service';
 import { Queue } from "data-footstone"
 import { compatibleArray, compatibleComponentData, createChildKey } from 'src/helper/index'
 import { shareEvent, createEventName} from 'src/helper/share-event';
@@ -41,23 +41,23 @@ export class ComponentService {
   // 组件类型的类型不应该使用组件的类型
   private categoryList: Category[] // 这里应该使用组件种类的类型
   curComponentS: ShareSignal<CompOrUn>
-  _curCompUlid: S
+  // _curCompUlid: S
   _curComponent: CompOrUn
   private _map: Map<ULID, Tree<Component>> // key: appUlid+pageUlid+componentUlid 后来改为pageUlid
-  propsS: ShareSignal<PropsTransfer | undefined>
+  // propsS: ShareSignal<PropsTransfer | undefined>
 
   constructor(
-    private pageService: PageService,
-    private appService: AppService,
+    // private pageService: PageService,
+    // private appService: AppService,
     private reqService: ReqService,
   ) {
     this.categoryList = categoryList
     // 组件种类应该从前端取得，不应该从后端接口取得。
-    this.curComponentS = new ShareSignal<CompOrUn>(undefined)
-    this._curCompUlid = ''
+    // this._curCompUlid = ''
     this._curComponent = undefined
     this._map = new Map()
-    this.propsS = new ShareSignal<PropsTransfer | undefined>(undefined)
+    this.curComponentS = new ShareSignal<CompOrUn>(this._curComponent)
+    // this.propsS = new ShareSignal<PropsTransfer | undefined>(undefined)
   }
   getCategoryList() {
     return new Promise<Category[]>((s, j) => {
@@ -245,13 +245,14 @@ export class ComponentService {
   curComponent() {
     return this._curComponent
   }
+  // todo 测试这个方法
   setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
       this._curComponent = this._find(pageUlid, compUlid)
-      this.curComponentS.set(this._curComponent)
+      // this.curComponentS.set(this._curComponent)
     } else {
       this._curComponent = undefined
-      this.curComponentS.set(undefined)
+      // this.curComponentS.set(undefined)
     }
   }
   // 改变属性
@@ -441,5 +442,10 @@ export class ComponentService {
     return this.reqService.req(`${serviceUrl()}/components/slots`, 'put', {
       ulid, newSlotKey, oldSlotKey
     })
+  }
+  clear() {
+    // this._curCompUlid = ''
+    this._curComponent = undefined
+    this._map = new Map()
   }
 }

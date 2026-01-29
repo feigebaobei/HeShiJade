@@ -30,7 +30,7 @@ export class PageService {
   private _find: (appUlid: ULID, pageUlid: ULID) => PageOrUn
   pageS: ShareSignal<PageOrUn>
   _curPage: PageOrUn
-  pageListS: ShareSignal<Page[]>
+  // pageListS: ShareSignal<Page[]> // 发现没使用它。2026.03.01+ delete
   private _map: Map<ULID, Tree<Page>>
   constructor(
     private appService: AppService,
@@ -42,7 +42,7 @@ export class PageService {
       let treePage = this._map.get(appUlid)
       return treePage?.find(pageUlid)?.value
     }
-    this.pageListS = new ShareSignal<Page[]>([])
+    // this.pageListS = new ShareSignal<Page[]>([])
     this._map = new Map()
   }
   storePageList(app: App, pagsList: Page[]) {
@@ -160,7 +160,7 @@ export class PageService {
     let appUlid = String(this.appService.getCurApp()?.ulid)
     let tree = this._map.get(appUlid)
     tree?.unmount(ulid)
-    this.pageListS.set(tree?.root?.toArray() || [])
+    // this.pageListS.set(tree?.root?.toArray() || [])
     // 在应用树中删除
     this.appService.deletePageByUlid(ulid)
   }
@@ -273,5 +273,11 @@ export class PageService {
       ulid,
       index,
     })
+  }
+  clear() {
+    this._pageList = []
+    this._curPage = undefined
+    this._map = new Map()
+
   }
 }
