@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   msg: {}[]
   user?: User
   logining: B
+  signLogining: B
   constructor(private router: Router, private http: HttpClient,
     private userService: UserService,
     private appService: AppService,
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit {
     this.msg = []
     this.user = this.userService.user
     this.logining = false
+    this.signLogining = false
   }
   formData = {
     // account: '123@qq.com', // for dev
@@ -77,11 +79,7 @@ export class HomeComponent implements OnInit {
   submitForm(a: any) {
     this.logining = true
     this.userService.clearUser()
-    // login(ssoClientParams({account: this.formData.account, password: this.formData.password}) as SsoClientParams).then(() => {
-    //   this.router.navigate(['/list'])
-    //   this.user = this.userService.getUser()
     this.userService.login(this.formData.account, this.formData.password).then(() => {
-      // this.router.navigate(['/list'])
       this.gotoList()
     }).catch((error: A) => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
@@ -91,6 +89,7 @@ export class HomeComponent implements OnInit {
   }
   // 注册
   submitSignForm(e: Event) {
+    this.signLogining = true
     if (!this.formData.account || !this.formData.password || !this.formData.verification || !this.formData.confirmPassword) {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '不能为空' }];
       return
@@ -106,6 +105,8 @@ export class HomeComponent implements OnInit {
       }).catch((error) => {
         clog('errror', error)
         this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }];
+      }).finally(() => {
+        this.signLogining = false
       })
     } else {
       this.msg = [{ severity: 'error', summary: 'Summary', content: '二次输入的password不一致' }];

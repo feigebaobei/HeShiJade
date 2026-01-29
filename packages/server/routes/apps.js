@@ -32,11 +32,6 @@ router.route('/')
   // 是否有权限（暂不做）
   // 取数据
   new Promise((s, _j) => {
-    // if (req.session.isAuth) {
-    //   s(true)
-    // } else {
-    //   j(100130)
-    // }
     s(true)
   }).then(() => {
     return lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then(user => {
@@ -50,15 +45,11 @@ router.route('/')
       clog('脏应用列表', arr, firstApplicationUlid)
       if (arr.length) {
         // 发邮件
-        // send()
         send({to: adminEmail, subject: 'HeShiJade_脏数据', 
           text: `这些应用：
 ${arr.map(item => item.ulid).join('\n')}
 是脏数据`
         })
-        // .then(() => {
-        //   clog()
-        // })
       }
       return res.status(200).json({
         code: 0,
