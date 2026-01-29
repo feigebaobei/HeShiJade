@@ -8,6 +8,7 @@ let {lowcodeDb} = require('../mongodb')
 let { rules, instance } = require('../helper/index')
 let md5 = require('md5');
 const { errorCode } = require('../helper/errorCode');
+const { DB } = require('../helper/config');
 let clog = console.log
 
 
@@ -128,7 +129,7 @@ router.route('/sign')
   //     return Promise.reject(100200)
   //   })
   // })
-
+  let errorData = {}
   new Promise((s, j) => {
     if (rules.required(req.body.ulid) && rules.required(req.body.profile)) {
       // s(true)
@@ -137,17 +138,27 @@ router.route('/sign')
       j(100100)
     }
   })
-  .then((result) => {
-    clog('reulst', result)
+  .then(() => {
+    // return usersDb.collection('users').findOne({'profile.email': req.body.email}).then((user) => {
+    return lowcodeDb.collection('users').findOne({'ulid': req.body.ulid}).then((user) => {
+      if (user) {
+        errorData = user       
+        return Promise.reject(100120) // 已经存在
+      } else {
+        return true
+      }
+    })
+  })
+  .then(() => {
     return lowcodeDb.collection('users').insertOne({
-      ulid: result.ulid,
+      ulid: req.body.ulid,
       firstApplicationUlid: '',
     }).then(() => {
       let obj = {
-        ulid: result.ulid,
-        profile: result.profile,
-        // accessToken: result.accessToken,
-        // refreshToken: result.refreshToken,
+        ulid: req.body.ulid,
+        profile: req.body.profile,
+        // accessToken: req.body.accessToken,
+        // refreshToken: req.body.refreshToken,
         firstApplicationUlid: '',
       }
       req.session.user = obj
@@ -165,7 +176,7 @@ router.route('/sign')
     return res.status(200).json({
       code,
       message: errorCode[code],
-      data: {}
+      data: errorData,
     })
   })
 })
