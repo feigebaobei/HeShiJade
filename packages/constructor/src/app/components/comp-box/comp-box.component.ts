@@ -127,12 +127,12 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
     //     this.init()
     //   }
     // })
-    effect(() => {
-      let v = this.componentService.propsS.get()
-      if (this.comp.ulid === v?.componentUlid) {
-        this.init()
-      }
-    })
+    // effect(() => { // 没有用于propsS
+    //   let v = this.componentService.propsS.get()
+    //   if (this.comp.ulid === v?.componentUlid) {
+    //     this.init()
+    //   }
+    // })
   }
   ngOnInit() {
   }

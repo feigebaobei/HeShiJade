@@ -72,6 +72,9 @@ export class ListComponent implements OnInit {
   }
   logoutBtClickH()  {
     this.userService.logout().then(() => {
+      this.appService.clear()
+      this.pageService.clear()
+      this.componentService.clear()
       this.router.navigate(['/'])
     }).catch(error => {
       clog('登出失败')

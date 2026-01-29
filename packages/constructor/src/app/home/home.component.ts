@@ -13,6 +13,9 @@ import { ButtonModule,
 // pipe
 // service
 import { UserService } from '../service/user.service';
+import { AppService } from '../service/app.service';
+import { PageService } from '../service/page.service';
+import { ComponentService } from '../service/component.service';
 // type
 import type { ResponseData, User } from 'src/types';
 import type { B, A, } from 'src/types/base';
@@ -40,7 +43,11 @@ export class HomeComponent implements OnInit {
   user?: User
   logining: B
   constructor(private router: Router, private http: HttpClient,
-    private userService: UserService) {
+    private userService: UserService,
+    private appService: AppService,
+    private pageService: PageService,
+    private componentService: ComponentService,
+  ) {
     this.isCollapsed = false
     this.status = 1 // 0 注册 1 登录
     this.msg = []
@@ -58,7 +65,10 @@ export class HomeComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/list' ]);
+    this.appService.clear()
+    this.pageService.clear()
+    this.componentService.clear()
+    this.router.navigate(['/list']);
   }
   // 登录
   submitForm(a: any) {
@@ -68,7 +78,8 @@ export class HomeComponent implements OnInit {
     //   this.router.navigate(['/list'])
     //   this.user = this.userService.getUser()
     this.userService.login(this.formData.account, this.formData.password).then(() => {
-      this.router.navigate(['/list'])
+      // this.router.navigate(['/list'])
+      this.gotoList()
     }).catch((error: A) => {
       this.msg = [{ severity: 'error', summary: 'Summary', content: error.message }]
     }).finally(() => {
