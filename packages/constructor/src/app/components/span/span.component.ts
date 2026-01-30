@@ -5,8 +5,8 @@ import type { Component as Comp } from 'src/types/component';
 
 @Component({
   selector: 'app-span',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [],
   templateUrl: './span.component.html',
   styleUrl: './span.component.sass'
 })
