@@ -4,8 +4,9 @@ import { Oa, S } from 'src/types/base';
 import shareEvent, { createEventName } from 'src/helper/share-event';
 // type
 import type { Component as Comp } from 'src/types/component';
-import type { AccordionMenuItem } from 'ng-devui';
+import { AccordionModule, type AccordionMenuItem } from 'ng-devui';
 import { ListenItems } from 'src/helper/ListenItems';
+import { CommonModule } from '@angular/common';
 
 interface AccordionMenuItemNew extends AccordionMenuItem {
   key: S
@@ -23,15 +24,14 @@ let D = class C extends ListenItems<AccordionMenuItemNew> {}
 
 @Component({
   selector: 'app-accordion',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    AccordionModule,
+    CommonModule,
+  ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.sass'
 })
-// let f = (a: F, b: F) => {
-//   retur a extends b
-// }
-
 export class AccordionComponent extends
 //  TextBase extends ListenItems 
 // D
