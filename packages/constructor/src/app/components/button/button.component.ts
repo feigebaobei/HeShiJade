@@ -1,10 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import type { A, S, B } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
-import type { IButtonSize, IButtonType } from 'ng-devui';
+import { ButtonModule, type IButtonSize, type IButtonType } from 'ng-devui';
 
 @Component({
   selector: 'app-button',
+  standalone: true,
+  imports: [
+    // CompPacketComponent,
+    ButtonModule,
+  ],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.sass']
 })

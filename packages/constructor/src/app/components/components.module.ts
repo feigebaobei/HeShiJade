@@ -36,7 +36,7 @@ import { GridstackModule } from 'gridstack/dist/angular'
 
 // component
 import { CompBoxComponent } from './comp-box/comp-box.component';
-import { ButtonComponent } from './button/button.component';
+// import { ButtonComponent } from './button/button.component';
 import { FormComponent } from './form/form.component';
 import { InputComponent } from './input/input.component';
 import { ModalComponent } from './modal/modal.component';
@@ -47,7 +47,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CompStackComponent } from './comp-stack/comp-stack.component';
-import { FlexComponent } from './flex/flex.component';
+import { FlexComponent } from './flex/flex.component'; // flex/grid等组件需要使用dDroppable接收后代组件。但是这些组件的dDroppable与setup中的dDroppable有冲突，造成这些组件的dDroppable无效，会触发setup的dDroppable。
 import { GridComponent } from './grid/grid.component';
 import { CompPacketComponent } from './comp-packet/comp-packet.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -72,7 +72,7 @@ import { BadgeComponent } from './badge/badge.component';
     // AdDirective,
     // CompDirective, // 独立指令不需要引入
     // CompBoxComponent, // 独立组件不再这里引入
-    ButtonComponent,
+    // ButtonComponent,
     FormComponent,
     InputComponent,
     ModalComponent,
