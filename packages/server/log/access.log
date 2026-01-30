@@ -1603,3 +1603,8 @@
 {"level":30,"time":1769698252220,"pid":61990,"hostname":"localhost","name":"logname","msg":"启动服务"}
 {"level":30,"time":1769698254589,"pid":62105,"hostname":"localhost","name":"logname","msg":"启动服务"}
 {"level":30,"time":1769699572091,"pid":71339,"hostname":"localhost","name":"logname","msg":"启动服务"}
+{"level":30,"time":1769734537327,"pid":6664,"hostname":"localhost","name":"logname","msg":"启动服务"}
+{"level":30,"time":1769734607357,"pid":6664,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}
+{"level":30,"time":1769734615673,"pid":6664,"hostname":"localhost","name":"logname","code":100120,"originalUrl":"/apps"}
+{"level":30,"time":1769734648149,"pid":6664,"hostname":"localhost","name":"logname","code":100120,"originalUrl":"/apps"}
+{"level":30,"time":1769734833135,"pid":6664,"hostname":"localhost","name":"logname","method":"get","originalUrl":"/apps","params":{}}

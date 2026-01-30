@@ -127,14 +127,32 @@ export class ListComponent implements OnInit {
             this.userService.getUser().then(user => {
               let appObj = initAppMeta(data.key, data.name, data.theme, user.profile.email as Email, 
                 undefined, layout, pluginsKey)
+              // 创建应用时不能在前端缓存后再请求后端。因需要保持key惟一。
+              // 需要在后端创建应用成功后，再处理前端的逻辑。
+              return this.appService.createApp(appObj).then(() => {
+                return appObj
+              }).catch((obj) => {
+                let r
+                switch (obj.code) {
+                  case 100120:
+                    this.msg = [{ severity: 'error', summary: '提示', content: 'key不能重复' }]
+                    r = Promise.reject()
+                    break;
+                  default:
+                    r = appObj
+                    break;
+                }
+                return r
+              })
+            }).then((appObj) => {
               // 操作本组件的数据
               this.appList.push(appObj)
               // 操作service中的数据
               this.userService.appendApp(appObj.ulid)
-              this.appService.createApp(appObj)
               this.pageService.createPageTree(appObj.ulid)
+              results.modalInstance.hide();
             })
-            results.modalInstance.hide();
+            // .then()
           },
         },
         {

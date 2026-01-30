@@ -120,14 +120,7 @@ export class AppService {
       last.nextUlid = appObj.ulid
       appObj.prevUlid = last.ulid
     }
-    this._appList.push(appObj)
-    if (appObj.prevUlid) {
-      this.tree.mountNext(appObj, appObj.prevUlid)
-    } else {
-      this.tree.mountRoot(appObj)
-    }
-    // return
-    this.reqCreateApp({
+    return this.reqCreateApp({
       key: appObj.key,
       name: appObj.name,
       ulid: appObj.ulid,
@@ -140,11 +133,15 @@ export class AppService {
       prevUlid: appObj.prevUlid,
       nextUlid: appObj.nextUlid,
       pluginsKey: appObj.pluginsKey,
+    }).then(() => {
+      this._appList.push(appObj)
+      if (appObj.prevUlid) {
+        this.tree.mountNext(appObj, appObj.prevUlid)
+      } else {
+        this.tree.mountRoot(appObj)
+      }
+      return
     })
-    clog('appTree', this.tree)
-    // this.userService.getUser().then(user => {
-    // })
-    // 在这里缓存调用接口失败的请求。在网络畅通时请求依次请求接口。
   }
   private reqCreateApp(data: App) {
     return this.reqService.req(`${serviceUrl()}/apps`, 'post', data)
