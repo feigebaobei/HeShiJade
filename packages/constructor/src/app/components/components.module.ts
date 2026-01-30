@@ -22,7 +22,7 @@ import {
   CardModule,
   // ImagePreviewModule,
   // AccordionModule,
-  BreadcrumbModule,
+  // BreadcrumbModule,
   DrawerModule,
   BadgeModule,
 } from 'ng-devui'
@@ -64,7 +64,7 @@ import { CardComponent } from './card/card.component';
 // import { SpanComponent } from './span/span.component';
 // import { ImagePreviewComponent } from './image-preview/image-preview.component';
 // import { AccordionComponent } from './accordion/accordion.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+// import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { BadgeComponent } from './badge/badge.component';
 @NgModule({
@@ -101,7 +101,7 @@ import { BadgeComponent } from './badge/badge.component';
     // SpanComponent,
     // ImagePreviewComponent,
     // AccordionComponent,
-    BreadcrumbComponent,
+    // BreadcrumbComponent,
     DrawerComponent,
     BadgeComponent,
   ],
@@ -130,7 +130,7 @@ import { BadgeComponent } from './badge/badge.component';
     CardModule,
     // ImagePreviewModule,
     // AccordionModule,
-    BreadcrumbModule,
+    // BreadcrumbModule,
     DrawerModule,
     BadgeModule,
     

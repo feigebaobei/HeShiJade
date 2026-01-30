@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { B, Oa, S } from 'src/types/base';
 // type
 import type { Component as Comp, } from 'src/types/component';
-import type { MenuConfig, SourceConfig, } from 'ng-devui';
+import { BreadcrumbModule, type MenuConfig, type SourceConfig, } from 'ng-devui';
 import { ListenItems } from 'src/helper/ListenItems';
 import { InputData } from 'src/helper/InputData';
 import shareEvent, { createEventName } from 'src/helper/share-event';
+import { CommonModule } from '@angular/common';
 
 // interface BreadcrumbItem extends MenuConfig {
 interface BreadcrumbItem extends SourceConfig {
@@ -33,8 +34,11 @@ let clog = console.log
 
 @Component({
   selector: 'app-breadcrumb',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    BreadcrumbModule,
+    CommonModule,
+  ],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.sass'
 })
