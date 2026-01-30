@@ -91,6 +91,16 @@ ${arr.map(item => item.ulid).join('\n')}
     } else {
       return Promise.reject(100130)
     }
+  })
+  // 检查key惟一
+  .then(() => {
+    return lowcodeDb.collection(DB.dev.appTable).findOne({key: req.body.key}).then((app) => {
+      if (app) {
+        return Promise.reject(100120)
+      } else {
+        return
+      }
+    })
   }).then(() => {
     return lowcodeDb.collection('users').findOne({ulid: req.session.user.ulid}).then((user) => {
       return user
@@ -300,7 +310,7 @@ router.route('/detail')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, auth, (req, res) => {
+.get(cors.corsWithOptions, (req, res) => {
   // res.send('put')
   // 校验参数
   // 取出数据
