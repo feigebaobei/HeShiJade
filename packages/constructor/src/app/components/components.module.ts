@@ -38,7 +38,7 @@ import { GridstackModule } from 'gridstack/dist/angular'
 import { CompBoxComponent } from './comp-box/comp-box.component';
 // import { ButtonComponent } from './button/button.component';
 // import { FormComponent } from './form/form.component';
-import { InputComponent } from './input/input.component';
+// import { InputComponent } from './input/input.component';
 import { ModalComponent } from './modal/modal.component';
 import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
@@ -74,7 +74,7 @@ import { BadgeComponent } from './badge/badge.component';
     // CompBoxComponent, // 独立组件不再这里引入
     // ButtonComponent,
     // FormComponent,
-    InputComponent,
+    // InputComponent,
     ModalComponent,
     SelectComponent,
     TableComponent,
