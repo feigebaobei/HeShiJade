@@ -9,8 +9,10 @@ import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/compon
 import type { A, B, N, O, S, ULID } from 'src/types/base';
 import type { Page } from 'src/types/page';
 import type { CompStackComponent } from '../comp-stack/comp-stack.component';
-import type { DropEvent } from 'ng-devui';
+import { DragDropModule, type DropEvent } from 'ng-devui';
 import { TextBase } from 'src/helper/text';
+import { CompPacketComponent } from '../comp-packet/comp-packet.component';
+import { CommonModule } from '@angular/common';
 
 let clog = console.log
 
@@ -23,8 +25,12 @@ interface FlexData {
 
 @Component({
   selector: 'app-flex',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    CompPacketComponent,
+    DragDropModule,
+    CommonModule,
+  ],
   templateUrl: './flex.component.html',
   styleUrl: './flex.component.sass'
 })

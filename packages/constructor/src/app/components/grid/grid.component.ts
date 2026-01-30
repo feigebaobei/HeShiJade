@@ -8,9 +8,10 @@ import shareEvent, { createEventName } from 'src/helper/share-event';
 // type
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { A, B, N, O, S, ULID } from 'src/types/base';
-import type { DropEvent } from 'ng-devui';
+import { DragDropModule, type DropEvent } from 'ng-devui';
 import type { Page } from 'src/types/page';
 import { TextBase } from 'src/helper/text';
+import { CompPacketComponent } from '../comp-packet/comp-packet.component';
 // import type { Text } from 'src/types/config';
 
 let clog = console.log
@@ -24,8 +25,11 @@ interface GridData {
 
 @Component({
   selector: 'app-grid',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    CompPacketComponent,
+    DragDropModule,
+  ],
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.sass'
 })

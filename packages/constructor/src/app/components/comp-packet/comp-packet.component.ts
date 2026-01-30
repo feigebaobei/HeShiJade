@@ -1,4 +1,4 @@
-import { Component, effect, Input, Output, EventEmitter, } from '@angular/core';
+import { Component, effect, Input, Output, EventEmitter, forwardRef, } from '@angular/core';
 import { ComponentService } from 'src/app/service/component.service';
 import { PageService } from 'src/app/service/page.service';
 // import { CompBoxComponent } from '../comp-box/comp-box.component';
@@ -6,12 +6,19 @@ import { PageService } from 'src/app/service/page.service';
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { Page } from 'src/types/page';
 import type { ULID } from 'src/types';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'ng-devui';
+import { CompBoxComponent } from '../comp-box/comp-box.component';
 
 @Component({
   selector: 'app-comp-packet',
   standalone: true,
   imports: [
     // CompBoxComponent,
+    CommonModule,
+    ButtonModule,
+    // CompBoxComponent,
+    forwardRef(() => CompBoxComponent),
   ],
   templateUrl: './comp-packet.component.html',
   styleUrl: './comp-packet.component.sass'
