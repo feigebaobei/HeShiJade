@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CheckBoxModule } from 'ng-devui';
 import type { ULID } from 'src/types';
 import type { B } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
@@ -10,8 +12,11 @@ interface CheckboxData {
 
 @Component({
   selector: 'app-checkbox',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    CheckBoxModule,
+    FormsModule,
+  ],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.sass'
 })

@@ -7,13 +7,13 @@ import {
   ButtonModule,
   LayoutModule, 
   DataTableModule,
-  SelectModule,
+  // SelectModule,
   PaginationModule,
   IconModule,
   // TextInputModule,
   ToggleModule,
   // FormModule,
-  CheckBoxModule,
+  // CheckBoxModule,
   // MenuModule,
   ToastModule,
   InputNumberModule,
@@ -42,8 +42,8 @@ import { CompBoxComponent } from './comp-box/comp-box.component';
 import { ModalComponent } from './modal/modal.component';
 // import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
-import { IconComponent } from './icon/icon.component';
-import { CheckboxComponent } from './checkbox/checkbox.component';
+// import { IconComponent } from './icon/icon.component';
+// import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CompStackComponent } from './comp-stack/comp-stack.component';
@@ -69,6 +69,7 @@ import { DrawerComponent } from './drawer/drawer.component';
 import { BadgeComponent } from './badge/badge.component';
 @NgModule({
   declarations: [
+    // 注册保留到 2026.03.01+
     // AdDirective,
     // CompDirective, // 独立指令不需要引入
     // CompBoxComponent, // 独立组件不再这里引入
@@ -78,8 +79,8 @@ import { BadgeComponent } from './badge/badge.component';
     ModalComponent,
     // SelectComponent,
     TableComponent,
-    IconComponent,
-    CheckboxComponent,
+    // IconComponent,
+    // CheckboxComponent,
     TabsComponent,
     PaginationComponent,
     CompStackComponent,
@@ -114,13 +115,13 @@ import { BadgeComponent } from './badge/badge.component';
     ButtonModule,
     LayoutModule,
     DataTableModule,
-    SelectModule,
+    // SelectModule,
     PaginationModule,
     IconModule,
     // TextInputModule,
     ToggleModule,
     // FormModule,
-    CheckBoxModule,
+    // CheckBoxModule,
     MenuModule,
     ToastModule,
     InputNumberModule,
