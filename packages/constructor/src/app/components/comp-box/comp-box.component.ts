@@ -1,4 +1,4 @@
-import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked, computed, effect } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit, AfterViewInit, OnDestroy, EventEmitter, AfterContentInit, AfterViewChecked, effect, } from '@angular/core';
 import { CompDirective } from '../comp.directive'
 // 组件
 import { ButtonComponent } from '../button/button.component';
@@ -45,6 +45,7 @@ import type { Page } from 'src/types/page';
 import { ProgressComponent } from '../progress/progress.component';
 import { RateComponent } from '../rate/rate.component';
 import { TagComponent } from '../tag/tag.component';
+// import { CommonModule } from '@angular/common';
 // 我看到实现动态组件功能时都是引入组件的。
 // IconModule应该是引入了一个模块。
 // 所以我考虑使用封装全部devui的组件来实现.
@@ -93,11 +94,10 @@ let compMap: Oa = {
 
 @Component({
   selector: 'app-comp-box',
-  // standalone: true,
-  // imports: [
-  //   // GridstackModule,
-  //   // ButtonModule,
-  // ],
+  standalone: true,
+  imports: [
+    CompDirective,
+  ],
   templateUrl: './comp-box.component.html',
   styleUrls: ['./comp-box.component.sass']
 })
@@ -111,13 +111,12 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   // propsSReadonly: A
   constructor(
     private componentService: ComponentService,
-    private pageService: PageService
-    // private http: HttpClient,
+    private pageService: PageService,
   ) {
     this.curComp = null
     this.componentRef
     effect(() => {
-      let p = this.componentService.curComponentS.get()
+      let p = this.componentService.curComponentS.get() // todo 没有用到这个变量
       this.curComp = p
     })
     this.curPage = this.pageService.getCurPage()!

@@ -31,7 +31,7 @@ import { FormsModule } from '@angular/forms';
 import { GridstackModule } from 'gridstack/dist/angular'
 // import { CompBoxModule } from 'src/app/comp-box/comp-box.module';
 // directive
-import { CompDirective } from './comp.directive'
+// import { CompDirective } from './comp.directive'
 // import { AdDirective } from 'src/app/ad.directive';
 
 // component
@@ -70,8 +70,8 @@ import { BadgeComponent } from './badge/badge.component';
 @NgModule({
   declarations: [
     // AdDirective,
-    CompDirective,
-    CompBoxComponent,
+    // CompDirective, // 独立指令不需要引入
+    // CompBoxComponent, // 独立组件不再这里引入
     ButtonComponent,
     FormComponent,
     InputComponent,
@@ -132,6 +132,8 @@ import { BadgeComponent } from './badge/badge.component';
     BreadcrumbModule,
     DrawerModule,
     BadgeModule,
+    
+    CompBoxComponent,
   ],
   providers: [],
   exports: [

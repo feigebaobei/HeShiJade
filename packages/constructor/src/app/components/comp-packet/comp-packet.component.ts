@@ -5,11 +5,14 @@ import { PageService } from 'src/app/service/page.service';
 import type { Component as Comp, ChangeGridLayoutParams } from 'src/types/component';
 import type { Page } from 'src/types/page';
 import type { ULID } from 'src/types';
+// import { CompBoxComponent } from '../comp-box/comp-box.component';
 
 @Component({
   selector: 'app-comp-packet',
   // standalone: true,
-  // imports: [],
+  // imports: [
+  //   // CompBoxComponent,
+  // ],
   templateUrl: './comp-packet.component.html',
   styleUrl: './comp-packet.component.sass'
 })

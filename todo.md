@@ -2,19 +2,18 @@
 |-|-|-|
 |分支|f_indep||
 |检查todo|todo||
-|做应用key不重复的限制|done||
-|配置面板icon使用下拉选择|观察中||
-|select的选项不应该被遮挡|观察中||
 |搭建侧的样式。含badge全部显示出来|||
 |所有组件改为独立组件|todo||
-|setup页面删除componentByPage或componentList|观察中||
-// todo 测试这个方法
+||comp-box||
+||comp-packet||
 |要上生产的内容|||
 ||||
 ||||
 ||||
-||||
 
+|配置面板icon使用下拉选择|观察中||
+|select的选项不应该被遮挡|观察中||
+|setup页面删除componentByPage或componentList|观察中||
 |在指定时机，如进入搭建页面时，清洗脏数据。|观察中||
 |考虑在sso服务中支持发邮件的接口|||
 |propsHideMap & propsListenMap 合并成一个|||

@@ -247,7 +247,6 @@ export class ComponentService {
   curComponent() {
     return this._curComponent
   }
-  // todo 测试这个方法
   setCurComponent(pageUlid: ULID, compUlid?: ULID) {
     if (compUlid) {
       this._curComponent = this._find(pageUlid, compUlid)
