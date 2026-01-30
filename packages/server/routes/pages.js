@@ -19,7 +19,7 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200)
 })
-.get(cors.corsWithOptions, auth, (req, res) => {
+.get(cors.corsWithOptions, (req, res) => {
   let app
   new Promise((s, j) => {
     if (rules.required(req.query.appUlid) && rules.required(req.query.env)) {
