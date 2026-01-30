@@ -1,13 +1,20 @@
 import { Component, EventEmitter, Input, Output, } from '@angular/core';
+import { MenuModule } from 'ng-devui/menu';
 // type
 import type { A, B, S, MenuItem } from 'src/types/base';
+import { PageListItemComponent } from '../page-list-item/page-list-item.component';
+import { CommonModule } from '@angular/common';
 
 let clog = console.log
 
 @Component({
   selector: 'app-page-sub-list',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    MenuModule,
+    PageListItemComponent,
+    CommonModule,
+  ],
   templateUrl: './page-sub-list.component.html',
   styleUrl: './page-sub-list.component.sass'
 })

@@ -51,9 +51,9 @@ import { FlexComponent } from './flex/flex.component'; // flex/grid等组件需�
 import { GridComponent } from './grid/grid.component';
 import { CompPacketComponent } from './comp-packet/comp-packet.component';
 import { LayoutComponent } from './layout/layout.component';
-import { PageListComponent } from './page-list/page-list.component';
-import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.component';
-import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
+// import { PageListComponent } from './page-list/page-list.component';
+// import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.component';
+// import { PageListItemComponent } from './page-list/page-list-item/page-list-item.component';
 import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
 import { InputNumberComponent } from './input-number/input-number.component';
@@ -88,9 +88,9 @@ import { BadgeComponent } from './badge/badge.component';
     GridComponent,
     CompPacketComponent,
     LayoutComponent,
-    PageListComponent,
-    PageSubListComponent,
-    PageListItemComponent,
+    // PageListComponent,
+    // PageSubListComponent,
+    // PageListItemComponent,
     ShowHideComponent,
     LoopComponent,
     InputNumberComponent,

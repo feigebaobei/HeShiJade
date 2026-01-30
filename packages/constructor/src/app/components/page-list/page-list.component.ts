@@ -1,10 +1,14 @@
 import { Component, Input, TemplateRef, ViewChild, } from '@angular/core';
+import { MenuModule } from 'ng-devui/menu';
 import { ComponentService } from 'src/app/service/component.service';
 import { ListenItems } from 'src/helper/ListenItems';
 import shareEvent, { createEventName } from 'src/helper/share-event';
 // type
 import type { A, B, S, MenuItem, ULID, Oa, } from 'src/types/base';
 import type { Component as Comp } from 'src/types/component';
+import { PageSubListComponent } from './page-sub-list/page-sub-list.component';
+import { PageListItemComponent } from './page-list-item/page-list-item.component';
+import { CommonModule } from '@angular/common';
 
 let clog = console.log
 
@@ -17,8 +21,13 @@ interface PageListData {
 
 @Component({
   selector: 'app-page-list',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    MenuModule,
+    PageSubListComponent,
+    PageListItemComponent,
+    CommonModule,
+  ],
   templateUrl: './page-list.component.html',
   styleUrl: './page-list.component.sass'
 })
