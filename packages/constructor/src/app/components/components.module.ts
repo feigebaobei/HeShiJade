@@ -12,7 +12,7 @@ import {
   IconModule,
   TextInputModule,
   ToggleModule,
-  FormModule,
+  // FormModule,
   CheckBoxModule,
   // MenuModule,
   ToastModule,
@@ -37,7 +37,7 @@ import { GridstackModule } from 'gridstack/dist/angular'
 // component
 import { CompBoxComponent } from './comp-box/comp-box.component';
 // import { ButtonComponent } from './button/button.component';
-import { FormComponent } from './form/form.component';
+// import { FormComponent } from './form/form.component';
 import { InputComponent } from './input/input.component';
 import { ModalComponent } from './modal/modal.component';
 import { SelectComponent } from './select/select.component';
@@ -73,7 +73,7 @@ import { BadgeComponent } from './badge/badge.component';
     // CompDirective, // 独立指令不需要引入
     // CompBoxComponent, // 独立组件不再这里引入
     // ButtonComponent,
-    FormComponent,
+    // FormComponent,
     InputComponent,
     ModalComponent,
     SelectComponent,
@@ -119,7 +119,7 @@ import { BadgeComponent } from './badge/badge.component';
     IconModule,
     TextInputModule,
     ToggleModule,
-    FormModule,
+    // FormModule,
     CheckBoxModule,
     MenuModule,
     ToastModule,
