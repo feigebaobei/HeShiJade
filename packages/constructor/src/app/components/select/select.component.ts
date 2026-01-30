@@ -1,8 +1,15 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { SelectModule } from 'ng-devui';
 import type { A, S } from 'src/types/base';
 
 @Component({
   selector: 'app-select',
+  standalone: true,
+  imports: [
+    SelectModule,
+    FormsModule,
+  ],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.sass']
 })
