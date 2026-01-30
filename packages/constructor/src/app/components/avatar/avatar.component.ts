@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AvatarModule } from 'ng-devui';
 // type
 import type { ULID } from 'src/types';
 import type { B } from 'src/types/base';
@@ -8,8 +9,10 @@ let clog = console.log
 
 @Component({
   selector: 'app-avatar',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    AvatarModule,
+  ],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.sass'
 })
