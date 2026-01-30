@@ -12,14 +12,14 @@ import { CompBoxComponent } from '../comp-box/comp-box.component';
 
 @Component({
   selector: 'app-comp-packet',
-  standalone: true,
-  imports: [
-    // CompBoxComponent,
-    CommonModule,
-    ButtonModule,
-    // CompBoxComponent,
-    forwardRef(() => CompBoxComponent),
-  ],
+  // standalone: true,
+  // imports: [
+  //   // CompBoxComponent,
+  //   CommonModule,
+  //   ButtonModule,
+  //   // CompBoxComponent,
+  //   forwardRef(() => CompBoxComponent),
+  // ],
   templateUrl: './comp-packet.component.html',
   styleUrl: './comp-packet.component.sass'
 })

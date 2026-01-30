@@ -25,12 +25,12 @@ interface FlexData {
 
 @Component({
   selector: 'app-flex',
-  standalone: true,
-  imports: [
-    CompPacketComponent,
-    DragDropModule,
-    CommonModule,
-  ],
+  // standalone: true,
+  // imports: [
+  //   CompPacketComponent,
+  //   DragDropModule,
+  //   CommonModule,
+  // ],
   templateUrl: './flex.component.html',
   styleUrl: './flex.component.sass'
 })

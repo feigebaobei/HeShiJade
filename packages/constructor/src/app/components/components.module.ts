@@ -47,9 +47,9 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CompStackComponent } from './comp-stack/comp-stack.component';
-// import { FlexComponent } from './flex/flex.component';
-// import { GridComponent } from './grid/grid.component';
-// import { CompPacketComponent } from './comp-packet/comp-packet.component';
+import { FlexComponent } from './flex/flex.component';
+import { GridComponent } from './grid/grid.component';
+import { CompPacketComponent } from './comp-packet/comp-packet.component';
 import { LayoutComponent } from './layout/layout.component';
 import { PageListComponent } from './page-list/page-list.component';
 import { PageSubListComponent } from './page-list/page-sub-list/page-sub-list.component';
@@ -83,9 +83,9 @@ import { BadgeComponent } from './badge/badge.component';
     TabsComponent,
     PaginationComponent,
     CompStackComponent,
-    // FlexComponent,
-    // GridComponent,
-    // CompPacketComponent,
+    FlexComponent,
+    GridComponent,
+    CompPacketComponent,
     LayoutComponent,
     PageListComponent,
     PageSubListComponent,

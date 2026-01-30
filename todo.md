@@ -4,6 +4,7 @@
 |检查todo|todo||
 |搭建侧的样式。含badge全部显示出来|||
 |所有组件改为独立组件|doing||
+当2个嵌套的独立组件都使用dDroppable指令时。内层会失效，外层有效。
 ||comp-box|done|
 ||comp-packet||
 |要上生产的内容|||

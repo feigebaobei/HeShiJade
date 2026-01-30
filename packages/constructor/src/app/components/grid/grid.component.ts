@@ -25,11 +25,11 @@ interface GridData {
 
 @Component({
   selector: 'app-grid',
-  standalone: true,
-  imports: [
-    CompPacketComponent,
-    DragDropModule,
-  ],
+  // standalone: true,
+  // imports: [
+  //   CompPacketComponent,
+  //   DragDropModule,
+  // ],
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.sass'
 })
