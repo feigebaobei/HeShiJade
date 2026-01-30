@@ -115,10 +115,10 @@ export class CompBoxComponent implements OnInit, OnDestroy, AfterViewInit, After
   ) {
     this.curComp = null
     this.componentRef
-    effect(() => {
-      let p = this.componentService.curComponentS.get() // todo 没有用到这个变量
-      this.curComp = p
-    })
+    // effect(() => {
+    //   let p = this.componentService.curComponentS.get() // todo 没有用到这个变量
+    //   this.curComp = p
+    // })
     this.curPage = this.pageService.getCurPage()!
     // this.propsSReadonly = this.componentService.propsSReadonly
     // this.componentService.props$.subscribe((v) => {

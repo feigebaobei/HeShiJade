@@ -3,13 +3,19 @@
 |分支|f_indep||
 |检查todo|todo||
 |搭建侧的样式。含badge全部显示出来|||
-|所有组件改为独立组件|todo||
-||comp-box||
+|所有组件改为独立组件|doing||
+||comp-box|done|
 ||comp-packet||
 |要上生产的内容|||
 ||||
 ||||
 ||||
+
+
+非独立组件 => 独立组件
+1. 在组件的ts文件中设置standalone: true,
+2. 在components.module.ts中declarations中不引用组件。也不引入组件。
+
 
 |配置面板icon使用下拉选择|观察中||
 |select的选项不应该被遮挡|观察中||
