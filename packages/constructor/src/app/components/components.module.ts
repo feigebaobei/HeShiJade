@@ -17,7 +17,7 @@ import {
   // MenuModule,
   ToastModule,
   // InputNumberModule,
-  RadioModule,
+  // RadioModule,
   AvatarModule,
   CardModule,
   ImagePreviewModule,
@@ -57,7 +57,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
 // import { InputNumberComponent } from './input-number/input-number.component';
-import { RadioComponent } from './radio/radio.component';
+// import { RadioComponent } from './radio/radio.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
@@ -94,7 +94,7 @@ import { BadgeComponent } from './badge/badge.component';
     ShowHideComponent,
     LoopComponent,
     // InputNumberComponent,
-    RadioComponent,
+    // RadioComponent,
     AvatarComponent,
     CardComponent,
     ParagraphComponent,
@@ -125,7 +125,7 @@ import { BadgeComponent } from './badge/badge.component';
     MenuModule,
     ToastModule,
     // InputNumberModule,
-    RadioModule,
+    // RadioModule,
     AvatarModule,
     CardModule,
     ImagePreviewModule,

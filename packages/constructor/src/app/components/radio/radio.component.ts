@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RadioModule } from 'ng-devui';
 import { asyncFn } from 'src/helper';
 import { text } from 'src/helper/config';
 // type
@@ -10,8 +13,12 @@ let clog = console.log
 
 @Component({
   selector: 'app-radio',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    RadioModule,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './radio.component.html',
   styleUrl: './radio.component.sass'
 })
