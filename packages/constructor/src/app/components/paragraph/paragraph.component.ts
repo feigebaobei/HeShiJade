@@ -4,8 +4,8 @@ import { Component as Comp } from 'src/types/component';
 
 @Component({
   selector: 'app-paragraph',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [],
   templateUrl: './paragraph.component.html',
   styleUrl: './paragraph.component.sass'
 })
