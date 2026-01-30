@@ -8,7 +8,7 @@ import {
   LayoutModule, 
   DataTableModule,
   // SelectModule,
-  PaginationModule,
+  // PaginationModule,
   IconModule,
   // TextInputModule,
   ToggleModule,
@@ -45,7 +45,7 @@ import { TableComponent } from './table/table.component';
 // import { IconComponent } from './icon/icon.component';
 // import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { PaginationComponent } from './pagination/pagination.component';
+// import { PaginationComponent } from './pagination/pagination.component';
 import { CompStackComponent } from './comp-stack/comp-stack.component';
 import { FlexComponent } from './flex/flex.component'; // flex/grid等组件需要使用dDroppable接收后代组件。但是这些组件的dDroppable与setup中的dDroppable有冲突，造成这些组件的dDroppable无效，会触发setup的dDroppable。
 import { GridComponent } from './grid/grid.component';
@@ -82,7 +82,7 @@ import { BadgeComponent } from './badge/badge.component';
     // IconComponent,
     // CheckboxComponent,
     TabsComponent,
-    PaginationComponent,
+    // PaginationComponent,
     CompStackComponent,
     FlexComponent,
     GridComponent,
@@ -116,7 +116,7 @@ import { BadgeComponent } from './badge/badge.component';
     LayoutModule,
     DataTableModule,
     // SelectModule,
-    PaginationModule,
+    // PaginationModule,
     IconModule,
     // TextInputModule,
     ToggleModule,

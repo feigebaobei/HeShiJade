@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import type { Component as Comp, ComponentMountItems } from 'src/types/component';
 import type { ULID } from 'src/types';
 import type { N, S } from 'src/types/base';
+import { PaginationModule } from 'ng-devui';
 
 interface PaginationData {
   props: Comp['props']
@@ -11,8 +12,10 @@ interface PaginationData {
 
 @Component({
   selector: 'app-pagination',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    PaginationModule,
+  ],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.sass'
 })
