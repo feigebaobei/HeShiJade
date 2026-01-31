@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TextInputModule } from 'ng-devui';
 import { getLoopEventParams } from 'src/helper';
 import { pool } from 'src/helper/pool';
 import type { A, N, O } from 'src/types/base';
@@ -8,6 +10,11 @@ let clog = console.log
 
 @Component({
   selector: 'app-input',
+  standalone: true,
+  imports: [
+    TextInputModule,
+    FormsModule,
+  ],
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.sass']
 })

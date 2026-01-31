@@ -10,7 +10,7 @@ import {
   PaginationModule,
   FormModule,
   IconModule,
-  TextInputModule,
+  // TextInputModule,
   ToggleModule,
   CheckBoxModule,
   ModalModule,
@@ -36,7 +36,7 @@ import { CompBoxComponent } from './comp-box/comp-box.component';
 // import { ButtonComponent } from './button/button.component';
 import { FormComponent } from './form/form.component';
 import { ModalComponent } from './modal/modal.component';
-import { InputComponent } from './input/input.component';
+// import { InputComponent } from './input/input.component';
 import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
 import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
@@ -74,7 +74,7 @@ import { BadgeComponent } from './badge/badge.component';
     // ButtonComponent,
     FormComponent,
     ModalComponent,
-    InputComponent,
+    // InputComponent,
     SelectComponent,
     TableComponent,
     ModalCompComponent,
@@ -115,7 +115,7 @@ import { BadgeComponent } from './badge/badge.component';
     PaginationModule,
     FormModule,
     IconModule,
-    TextInputModule,
+    // TextInputModule,
     ToggleModule,
     CheckBoxModule,
     ModalModule,
