@@ -6,9 +6,9 @@ import {
   TabsModule,
   LayoutModule,
   DataTableModule,
-  SelectModule,
+  // SelectModule,
   PaginationModule,
-  FormModule,
+  // FormModule,
   IconModule,
   // TextInputModule,
   ToggleModule,
@@ -34,10 +34,10 @@ import { StackDirective } from './stack.directive';
 import { StackComponent } from './stack/stack.component';
 import { CompBoxComponent } from './comp-box/comp-box.component';
 // import { ButtonComponent } from './button/button.component';
-import { FormComponent } from './form/form.component';
+// import { FormComponent } from './form/form.component';
 import { ModalComponent } from './modal/modal.component';
 // import { InputComponent } from './input/input.component';
-import { SelectComponent } from './select/select.component';
+// import { SelectComponent } from './select/select.component';
 import { TableComponent } from './table/table.component';
 import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
 import { IconComponent } from './icon/icon.component';
@@ -66,16 +66,17 @@ import { DrawerCompComponent } from './drawer/drawer-comp/drawer-comp.component'
 import { BadgeComponent } from './badge/badge.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
+// todo 检查不需要的模块、组件
 @NgModule({
   declarations: [
     StackDirective,
     StackComponent,
     CompBoxComponent,
     // ButtonComponent,
-    FormComponent,
+    // FormComponent,
     ModalComponent,
     // InputComponent,
-    SelectComponent,
+    // SelectComponent,
     TableComponent,
     ModalCompComponent,
     IconComponent,
@@ -111,9 +112,9 @@ import { BadgeComponent } from './badge/badge.component';
     TabsModule,
     LayoutModule,
     DataTableModule,
-    SelectModule,
+    // SelectModule,
     PaginationModule,
-    FormModule,
+    // FormModule,
     IconModule,
     // TextInputModule,
     ToggleModule,

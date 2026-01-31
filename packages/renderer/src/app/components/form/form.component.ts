@@ -4,11 +4,26 @@ import { pool } from 'src/helper/pool';
 import { getLoopEventParams } from 'src/helper';
 import type { A, O, Oa, S, B, N, } from 'src/types/base';
 import type { componentInstanceData } from 'src/types/component'
+import { ButtonModule, FormModule, InputNumberModule, RadioModule, SelectModule, TextInputModule, ToggleModule } from 'ng-devui';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 let clog = console.log
 
 @Component({
   selector: 'app-form',
+  standalone: true,
+  imports: [
+    FormModule,
+    // InputNumberModule,
+    TextInputModule,
+    RadioModule,
+    SelectModule,
+    FormsModule,
+    ToggleModule,
+    ButtonModule,
+    CommonModule,
+  ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.sass']
 })

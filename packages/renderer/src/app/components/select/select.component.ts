@@ -4,8 +4,15 @@ import { getLoopEventParams } from 'src/helper';
 // type
 import type { A, S, O, N, } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
+import { SelectModule } from 'ng-devui';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-select',
+  standalone: true,
+  imports: [
+    SelectModule,
+    FormsModule,
+  ],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.sass']
 })
