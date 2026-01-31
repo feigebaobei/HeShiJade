@@ -2,24 +2,18 @@
 |-|-|-|
 |分支|f_indep||
 |检查todo|todo||
-|搭建侧的样式。含badge全部显示出来|||
-|所有组件改为独立组件|doing||
-  当2个嵌套的独立组件都使用dDroppable指令时。内层会失效，外层有效。
-  把没有后代组件的组件处理为独立组件。 doing
-  处理完组件后检查全量组件   todo
-||comp-box|done|
-||comp-packet||
+|搭建侧的样式。含badge全部显示出来|即处理渲染侧的样式||
+|所有组件改为独立组件|done||
+  把没有后代组件的组件处理为独立组件。 done
+  处理完组件后检查全量组件   done
 |要上生产的内容|||
+|refactor: 搭建侧不能创建后代组件的组件改为独立组件|||
 ||||
 ||||
 ||||
+||||
 
-
-非独立组件 => 独立组件
-1. 在组件的ts文件中设置standalone: true,
-2. 在components.module.ts中declarations中不引用组件。也不引入组件。
-
-
+|当2个嵌套的独立组件都使用dDroppable指令时。内层会失效，外层有效。|可能有解决方案||
 |配置面板icon使用下拉选择|观察中||
 |select的选项不应该被遮挡|观察中||
 |setup页面删除componentByPage或componentList|观察中||

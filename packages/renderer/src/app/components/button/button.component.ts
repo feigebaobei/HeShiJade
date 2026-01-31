@@ -5,12 +5,17 @@ import { getLoopEventParams } from 'src/helper';
 // type
 import type { A, O, S, N, } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
+import { ButtonModule } from 'ng-devui';
 
 let clog = console.log
 
 
 @Component({
   selector: 'app-button',
+  standalone: true,
+  imports: [
+    ButtonModule,
+  ],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.sass']
 })

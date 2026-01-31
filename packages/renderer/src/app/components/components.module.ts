@@ -1,7 +1,8 @@
 // 模块
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule,
+import { 
+  ButtonModule,
   TabsModule,
   LayoutModule,
   DataTableModule,
@@ -32,7 +33,7 @@ import { StackDirective } from './stack.directive';
 // 组件
 import { StackComponent } from './stack/stack.component';
 import { CompBoxComponent } from './comp-box/comp-box.component';
-import { ButtonComponent } from './button/button.component';
+// import { ButtonComponent } from './button/button.component';
 import { FormComponent } from './form/form.component';
 import { ModalComponent } from './modal/modal.component';
 import { InputComponent } from './input/input.component';
@@ -70,7 +71,7 @@ import { BadgeComponent } from './badge/badge.component';
     StackDirective,
     StackComponent,
     CompBoxComponent,
-    ButtonComponent,
+    // ButtonComponent,
     FormComponent,
     ModalComponent,
     InputComponent,
