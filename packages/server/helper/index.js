@@ -239,10 +239,10 @@ let washComponent = (componentList, firstComponentUlid) => {
     let curUlid = firstComponentUlid
     let comp = componentList.find(item => item.ulid === curUlid)
     let dirtyArr = []
-    if (comp.prevUlid) {
-        dirtyArr.push(comp.ulid)
-    }
     if (comp) {
+        if (comp.prevUlid) {
+            dirtyArr.push(comp.ulid)
+        }
         let queue = [comp]
         linkArr.push(comp.ulid)
         while (queue.length) {
