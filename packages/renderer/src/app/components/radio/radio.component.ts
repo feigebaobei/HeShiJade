@@ -5,13 +5,20 @@ import type { componentInstanceData } from 'src/types/component';
 import { pool } from 'src/helper/utils';
 import { CompBase } from 'src/helper/pool';
 import { getLoopEventParams } from 'src/helper';
+import { RadioModule } from 'ng-devui';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 let clog = console.log
 
 @Component({
   selector: 'app-radio',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    RadioModule,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './radio.component.html',
   styleUrl: './radio.component.sass'
 })

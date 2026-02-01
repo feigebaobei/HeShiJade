@@ -15,7 +15,7 @@ import {
   // CheckBoxModule,
   ModalModule,
   // InputNumberModule,
-  RadioModule,
+  // RadioModule,
   AvatarModule,
   CardModule,
   ImagePreviewModule,
@@ -53,7 +53,7 @@ import { PageListItemComponent } from './page-list/page-list-item/page-list-item
 import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
 // import { InputNumberComponent } from './input-number/input-number.component';
-import { RadioComponent } from './radio/radio.component';
+// import { RadioComponent } from './radio/radio.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
@@ -94,7 +94,7 @@ import { BadgeComponent } from './badge/badge.component';
     ShowHideComponent,
     LoopComponent,
     // InputNumberComponent,
-    RadioComponent,
+    // RadioComponent,
     AvatarComponent,
     CardComponent,
     ParagraphComponent,
@@ -122,7 +122,7 @@ import { BadgeComponent } from './badge/badge.component';
     ModalModule,
     MenuModule,
     // InputNumberModule,
-    RadioModule,
+    // RadioModule,
     AvatarModule,
     CardModule,
     ImagePreviewModule,
