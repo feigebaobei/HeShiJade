@@ -18,7 +18,7 @@ import {
   // RadioModule,
   AvatarModule,
   CardModule,
-  ImagePreviewModule,
+  // ImagePreviewModule,
   AccordionModule,
   BreadcrumbModule,
   DrawerModule,
@@ -58,7 +58,7 @@ import { LoopComponent } from './loop/loop.component';
 import { CardComponent } from './card/card.component';
 // import { ParagraphComponent } from './paragraph/paragraph.component';
 // import { SpanComponent } from './span/span.component';
-import { ImagePreviewComponent } from './image-preview/image-preview.component';
+// import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DrawerComponent } from './drawer/drawer.component';
@@ -99,7 +99,7 @@ import { BadgeComponent } from './badge/badge.component';
     CardComponent,
     // ParagraphComponent,
     // SpanComponent,
-    ImagePreviewComponent,
+    // ImagePreviewComponent,
     AccordionComponent,
     BreadcrumbComponent,
     DrawerComponent,
@@ -125,7 +125,7 @@ import { BadgeComponent } from './badge/badge.component';
     // RadioModule,
     AvatarModule,
     CardModule,
-    ImagePreviewModule,
+    // ImagePreviewModule,
     AccordionModule,
     BreadcrumbModule,
     DrawerModule,
