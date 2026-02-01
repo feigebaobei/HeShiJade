@@ -56,7 +56,7 @@ import { LoopComponent } from './loop/loop.component';
 // import { RadioComponent } from './radio/radio.component';
 // import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
-import { ParagraphComponent } from './paragraph/paragraph.component';
+// import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SpanComponent } from './span/span.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { AccordionComponent } from './accordion/accordion.component';
@@ -97,7 +97,7 @@ import { BadgeComponent } from './badge/badge.component';
     // RadioComponent,
     // AvatarComponent,
     CardComponent,
-    ParagraphComponent,
+    // ParagraphComponent,
     SpanComponent,
     ImagePreviewComponent,
     AccordionComponent,
