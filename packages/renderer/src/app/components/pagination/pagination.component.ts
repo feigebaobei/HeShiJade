@@ -5,6 +5,7 @@ import { getLoopEventParams } from 'src/helper';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
 import type { N, S, O, Oa, } from 'src/types/base';
+import { PaginationModule } from 'ng-devui';
 
 let clog = console.log
 
@@ -20,8 +21,8 @@ interface PaginationData {
 
 @Component({
   selector: 'app-pagination',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [PaginationModule],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.sass'
 })

@@ -43,7 +43,7 @@ import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
 // import { IconComponent } from './icon/icon.component';
 // import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { PaginationComponent } from './pagination/pagination.component';
+// import { PaginationComponent } from './pagination/pagination.component';
 import { FlexComponent } from './flex/flex.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -82,7 +82,7 @@ import { BadgeComponent } from './badge/badge.component';
     // IconComponent,
     // CheckboxComponent,
     TabsComponent,
-    PaginationComponent,
+    // PaginationComponent,
     // DataTableComponent,
     FlexComponent,
     GridComponent,
