@@ -4,11 +4,16 @@ import { pool } from 'src/helper/pool';
 // type
 import type { componentInstanceData } from 'src/types/component';
 import type { N, O } from 'src/types/base';
+import { InputNumberModule } from 'ng-devui';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input-number',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    InputNumberModule,
+    FormsModule,
+  ],
   templateUrl: './input-number.component.html',
   styleUrl: './input-number.component.sass'
 })
