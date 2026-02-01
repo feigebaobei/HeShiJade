@@ -96,16 +96,8 @@ export class TableComponent implements OnInit {
       this.compObj = {}
       let tree = this.componentService.getTreeByKey()
       this.data.items.forEach((item, index) => {
-        // if (item['category'] === 'slots') {
-        //   let node = tree?.find(item['childUlid'] || '')
-        //   if (node) {
-        //     this.compObj[createChildKey('items', index, 'component')] = node.toArray()
-        //   }
-        // }
         if (item['category'] === 'slots') {
-          // this.data.slots[`${index}_${item['field']}`]
           let node = tree?.find(this.data.slots[`${index}_${item['field']}`] || '')
-          // clog('node', node)
           if (node) {
             this.compObj[createChildKey('items', index, 'component')] = node.toArray()
           }

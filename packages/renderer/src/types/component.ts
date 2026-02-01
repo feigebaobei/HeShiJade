@@ -34,7 +34,6 @@ interface Component {
     // key: S
     // value: A
     // options?: Options<S, S>
-    // childUlid?: S
     [k: S]: A
   }[]
   slots: {[k: S]: ULID}

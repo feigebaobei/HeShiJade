@@ -126,7 +126,6 @@ AfterViewInit
   }
   ngOnInit(): void {
     let tree = this.componentService.getTree(this.curPage.ulid)
-    // todo 删除所有使用childUlid的地方
     this.data.items.forEach((item, index) => {
       let slotsKey = this.data.slots[`${index}_${item['field']}`]
       if (slotsKey) {

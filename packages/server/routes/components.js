@@ -167,25 +167,6 @@ ${arr.map(item => item.ulid).join('\n')}
     if (req.body.parentUlid) {
       return lowcodeDb.collection(DB.dev.componentTable).findOne({ulid: req.body.parentUlid}).then(parentComponent => {
         switch(req.body.mount.area) {
-          // 不再这里挂载了
-          // case 'items': // 已测试
-          //   if (parentComponent.items[req.body.mount.itemIndex].childUlid) {
-          //     // 当父组件的items[index]中存在子组件信息时，无操作。
-          //   } else {
-          //     componentUpdateArr.unshift({
-          //       updateOne: {
-          //         filter: {ulid: req.body.parentUlid},
-          //         update: {
-          //           $set: {
-          //             [`items.${req.body.mount.itemIndex}.childUlid`]: req.body.ulid
-          //           }
-          //         }
-          //       }
-  
-          //     })
-          //     logger.info({componentUpdateArr})
-          //   }
-          //   break;
           case 'slots': // 已测试
             if (parentComponent.slots[req.body.mount.slotKey]) {
               // 当父组件的slots[slotKey]中存在子组件信息时，无操作。

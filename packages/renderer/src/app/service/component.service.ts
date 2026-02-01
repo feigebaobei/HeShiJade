@@ -67,19 +67,12 @@ export class ComponentService {
       if (curComp) {
         tree.mountRoot(curComp)
         let q = new Queue<{
-          // position: 'next' | 'child'
-          // slot?: S
-          // component: Component
-          // ulid: ULID
           component: Component
           mountMethod: 'next' | 'items' | 'slots'
         }>()
         let nextComp = componentList.find(item => item.ulid === curComp?.nextUlid)
         if (nextComp) {
           q.enqueue({
-            // position: 'next',
-            // component: nextComp,
-            // ulid: curComp.ulid,
             component: nextComp,
             mountMethod: 'next',
           })
@@ -88,24 +81,21 @@ export class ComponentService {
           let comp = componentList.find(item => item.ulid === value)
           if (comp) {
             q.enqueue({
-              // position: 'child',
-              // component: comp,
-              // ulid: curComp!.ulid,
-              // slot: key,
               component: comp,
               mountMethod: 'slots',
             })
           }
         })
-        curComp.items.forEach((item) => {
-          let comp = componentList.find(ele => ele.ulid === item['childUlid'])
-          if (comp) {
-            q.enqueue({
-              component: comp,
-              mountMethod: 'items',
-            })
-          }
-        })
+        // curComp.items.forEach((item) => {
+        //   let comp = componentList.find(ele => ele.ulid === item['childUlid'])
+        //   clog('comp', comp)
+        //   if (comp) {
+        //     q.enqueue({
+        //       component: comp,
+        //       mountMethod: 'items',
+        //     })
+        //   }
+        // })
         let i = 0 // 为了开发时安全
         while (!q.isEmpty() && i < 100) {
           i++
@@ -128,9 +118,6 @@ export class ComponentService {
           let nextComp = componentList.find(item => item.ulid === cur.component.nextUlid)
           if (nextComp) {
             q.enqueue({
-              // position: 'next',
-              // component: nextComp,
-              // ulid: cur.component.ulid
               component: nextComp,
               mountMethod: 'next',
             })
@@ -139,24 +126,21 @@ export class ComponentService {
             let comp = componentList.find(item => item.ulid === value)
             if (comp) {
               q.enqueue({
-                // position: 'child',
-                // slot: key,
-                // component: comp,
-                // ulid: cur.component.ulid
                 component: comp,
                 mountMethod: 'slots',
               })
             }
           })
-          cur.component.items.forEach((item) => {
-            let comp = componentList.find((ele) => ele.ulid === item['childUlid'])
-            if (comp) {
-              q.enqueue({
-                component: comp,
-                mountMethod: 'items',
-              })
-            }
-          })
+          // cur.component.items.forEach((item) => {
+          //   let comp = componentList.find((ele) => ele.ulid === item['childUlid'])
+          //   clog('comp', comp)
+          //   if (comp) {
+          //     q.enqueue({
+          //       component: comp,
+          //       mountMethod: 'items',
+          //     })
+          //   }
+          // })
         }
         clog('tree', tree)
         this._map.set(page?.ulid || '', tree)

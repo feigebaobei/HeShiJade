@@ -9,7 +9,8 @@
 |搭建侧基于CompBase开发组件|todo||
 // todo 检查不需要的模块、组件    done
 |新创建的页面，在请求数据时报错。|done||
-|渲染侧table组件应该渲染出内嵌的button组件|doing||
+todo 删除所有使用childUlid的地方   done
+|渲染侧table组件应该渲染出内嵌的button组件|done||
 |要上生产的内容|||
 |refactor: 搭建侧不能创建后代组件的组件改为独立组件|||
 |fixed:    修正请求新创建的页面的组件时报错的问题|||
