@@ -54,7 +54,7 @@ import { ShowHideComponent } from './show-hide/show-hide.component';
 import { LoopComponent } from './loop/loop.component';
 // import { InputNumberComponent } from './input-number/input-number.component';
 // import { RadioComponent } from './radio/radio.component';
-import { AvatarComponent } from './avatar/avatar.component';
+// import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SpanComponent } from './span/span.component';
@@ -95,7 +95,7 @@ import { BadgeComponent } from './badge/badge.component';
     LoopComponent,
     // InputNumberComponent,
     // RadioComponent,
-    AvatarComponent,
+    // AvatarComponent,
     CardComponent,
     ParagraphComponent,
     SpanComponent,
