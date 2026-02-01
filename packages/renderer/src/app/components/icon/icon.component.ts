@@ -3,10 +3,13 @@ import { pool } from 'src/helper/pool';
 import { getLoopEventParams } from 'src/helper';
 import type { A, O, N, } from 'src/types/base';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
+import { IconModule } from 'ng-devui';
 @Component({
   selector: 'app-icon',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    IconModule,
+  ],
   templateUrl: './icon.component.html',
   styleUrl: './icon.component.sass'
 })

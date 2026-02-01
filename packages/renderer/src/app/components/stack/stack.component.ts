@@ -48,7 +48,6 @@ export class StackComponent {
   }
   init() {
     this._componentList = []
-    // clog('init', this.componentList)
     // todo 解决这里为什么有时为undefined的问题
     compatibleArray(this.componentList).forEach(item => {
       this._componentList.push({

@@ -33,6 +33,7 @@ router.route('/table')
   res.sendStatus(200)
 })
 .get(cors.corsWithOptions, (req, res) => {
+  // http://localhost:5030/components/table?page=1&pageSize=10
   let data = staticData.arr.slice((req.query.page - 1) * req.query.pageSize, req.query.page * req.query.pageSize)
   res.status(200).json({
     code: 0,

@@ -6,6 +6,7 @@ import { getLoopEventParams } from 'src/helper';
 import type { MenuItem, ULID, S, Oa, O, N, B, } from 'src/types/base';
 // import { Component } from 'src/types/component';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
+// import { IconModule } from 'ng-devui';
 
 let clog = console.log
 
@@ -20,7 +21,9 @@ interface PageListData {
 @Component({
   selector: 'app-page-list',
   // standalone: true,
-  // imports: [],
+  // imports: [
+  //   // IconModule,
+  // ],
   templateUrl: './page-list.component.html',
   styleUrl: './page-list.component.sass'
 })
