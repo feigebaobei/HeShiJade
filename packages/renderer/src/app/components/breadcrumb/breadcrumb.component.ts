@@ -1,13 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MenuConfig } from 'ng-devui';
+import { BreadcrumbModule, MenuConfig } from 'ng-devui';
 import { clog } from 'src/helper';
 import { CompBase } from 'src/helper/pool';
 import { Oa } from 'src/types/base';
 
 @Component({
   selector: 'app-breadcrumb',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    BreadcrumbModule,
+    CommonModule,
+  ],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.sass'
 })
