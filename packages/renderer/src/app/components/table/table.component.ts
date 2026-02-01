@@ -92,7 +92,7 @@ export class TableComponent implements OnInit {
     new Promise((s, _j) => {
       s(true)
     }).then(() => {
-      // this.req()
+      this.req()
       this.compObj = {}
       let tree = this.componentService.getTreeByKey()
       this.data.items.forEach((item, index) => {
@@ -106,7 +106,6 @@ export class TableComponent implements OnInit {
       })
       return true
     })
-    // pool.trigger(this.data.ulid, 'postComponentRenderer', getLoopEventParams(this.loopIndex, undefined), this)
   }
   ngDoCheck() {
     pool.trigger(this.data.ulid, 'postComponentNgDoCheck', getLoopEventParams(this.loopIndex, undefined), this)
