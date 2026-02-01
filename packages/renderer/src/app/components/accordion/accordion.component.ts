@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CompBase } from 'src/helper/pool';
 // type
+import { AccordionModule } from 'ng-devui';
 import type { AccordionMenuItem } from 'ng-devui';
 import type { Oa, S, A, } from 'src/types/base';
 interface AccordionMenuItemNew extends AccordionMenuItem {
@@ -13,8 +14,10 @@ let clog = console.log
 
 @Component({
   selector: 'app-accordion',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    AccordionModule,
+  ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.sass'
 })
