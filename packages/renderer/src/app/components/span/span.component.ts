@@ -3,8 +3,8 @@ import { CompBase } from 'src/helper/pool';
 
 @Component({
   selector: 'app-span',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [],
   templateUrl: './span.component.html',
   styleUrl: './span.component.sass'
 })

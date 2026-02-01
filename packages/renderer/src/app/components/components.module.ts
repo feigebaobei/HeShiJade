@@ -57,7 +57,7 @@ import { LoopComponent } from './loop/loop.component';
 // import { AvatarComponent } from './avatar/avatar.component';
 import { CardComponent } from './card/card.component';
 // import { ParagraphComponent } from './paragraph/paragraph.component';
-import { SpanComponent } from './span/span.component';
+// import { SpanComponent } from './span/span.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -98,7 +98,7 @@ import { BadgeComponent } from './badge/badge.component';
     // AvatarComponent,
     CardComponent,
     // ParagraphComponent,
-    SpanComponent,
+    // SpanComponent,
     ImagePreviewComponent,
     AccordionComponent,
     BreadcrumbComponent,
