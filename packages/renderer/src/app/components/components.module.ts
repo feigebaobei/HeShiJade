@@ -12,7 +12,7 @@ import {
   IconModule,
   // TextInputModule,
   ToggleModule,
-  CheckBoxModule,
+  // CheckBoxModule,
   ModalModule,
   InputNumberModule,
   RadioModule,
@@ -41,7 +41,7 @@ import { ModalComponent } from './modal/modal.component';
 import { TableComponent } from './table/table.component';
 import { ModalCompComponent } from './modal/modal-comp/modal-comp.component';
 // import { IconComponent } from './icon/icon.component';
-import { CheckboxComponent } from './checkbox/checkbox.component';
+// import { CheckboxComponent } from './checkbox/checkbox.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FlexComponent } from './flex/flex.component';
@@ -80,7 +80,7 @@ import { BadgeComponent } from './badge/badge.component';
     TableComponent,
     ModalCompComponent,
     // IconComponent,
-    CheckboxComponent,
+    // CheckboxComponent,
     TabsComponent,
     PaginationComponent,
     // DataTableComponent,
@@ -118,7 +118,7 @@ import { BadgeComponent } from './badge/badge.component';
     IconModule, // todo 检查这否必须引入module
     // TextInputModule,
     ToggleModule,
-    CheckBoxModule,
+    // CheckBoxModule,
     ModalModule,
     MenuModule,
     InputNumberModule,

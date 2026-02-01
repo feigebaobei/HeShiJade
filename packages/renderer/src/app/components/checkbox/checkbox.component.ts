@@ -5,6 +5,8 @@ import { getLoopEventParams } from 'src/helper';
 import type { Component as Comp, componentInstanceData } from 'src/types/component'
 import type { ULID } from 'src/types';
 import type { B, O, N, } from 'src/types/base';
+import { CheckBoxModule } from 'ng-devui';
+import { FormsModule } from '@angular/forms';
 
 let clog = console.log
 
@@ -16,8 +18,11 @@ let clog = console.log
 
 @Component({
   selector: 'app-checkbox',
-  // standalone: true,
-  // imports: [],
+  standalone: true,
+  imports: [
+    CheckBoxModule,
+    FormsModule,
+  ],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.sass'
 })
