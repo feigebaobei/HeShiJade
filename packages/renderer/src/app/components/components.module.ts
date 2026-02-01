@@ -11,7 +11,7 @@ import {
   // FormModule,
   IconModule,
   // TextInputModule,
-  ToggleModule,
+  // ToggleModule,
   // CheckBoxModule,
   ModalModule,
   // InputNumberModule,
@@ -66,7 +66,6 @@ import { DrawerCompComponent } from './drawer/drawer-comp/drawer-comp.component'
 import { BadgeComponent } from './badge/badge.component';
 // import { CompPacketComponent } from './comp-packet/comp-packet.component';
 
-// todo 检查不需要的模块、组件
 @NgModule({
   declarations: [
     StackDirective,
@@ -115,9 +114,9 @@ import { BadgeComponent } from './badge/badge.component';
     // SelectModule,
     PaginationModule,
     // FormModule,
-    IconModule, // todo 检查这否必须引入module
+    IconModule,
     // TextInputModule,
-    ToggleModule,
+    // ToggleModule,
     // CheckBoxModule,
     ModalModule,
     MenuModule,
